@@ -303,7 +303,7 @@ public class AttackManager {
 //			result = lTypeAttackWithTwoOrThreeBombs(myAI.getOwnHeroTile(), normalAttackTile);
 //		if(attackType == AttackType.NORMAL)
 		result = normalAttack(myAI.getOwnHeroTile(), heroToAttack.getTile());
-		System.out.println("direction attack : "+result.toString());
+//		System.out.println("direction attack : "+result.toString());
 		//si on ne peut pas atteindre a un hero sans exploser de murs
 		
 		//null olup olmadna bakcaz sonra

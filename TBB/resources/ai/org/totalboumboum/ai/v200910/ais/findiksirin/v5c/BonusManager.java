@@ -9,10 +9,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiBlock;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -35,12 +31,6 @@ public class BonusManager
 		this.ai = ai;
 		zone = ai.getZone();
 			
-		// initialisation de A*
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator = new MatrixCostCalculator(costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
-		
 		// init destinations
 		arrived = false;
 		if(noBonusReachable())
@@ -94,7 +84,7 @@ public class BonusManager
 			return true;
 		else
 		{
-		AiPath shortestBonusPath=astar.processShortestPath(zone.getOwnHero().getTile(), bonusDestinations());		
+		AiPath shortestBonusPath = ai.astar.processShortestPath(zone.getOwnHero().getTile(), bonusDestinations());		
 		return shortestBonusPath.isEmpty();
 		}
 	}
@@ -166,12 +156,6 @@ public class BonusManager
 	
 /////////////////////////////////////////////////////////////////////////////////////////
 //L'ALGORITHME ASTAR POUR CALCULER LE COUTS DES CHEMINS
-	/** classe implémentant l'algorithme A* */
-	private Astar astar;
-	/** classe implémentant la fonction heuristique */
-	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
-	private MatrixCostCalculator costCalculator;
 	
 	/**
 	 * 
@@ -189,7 +173,7 @@ public class BonusManager
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				double cost = -safetyMatrix[line][col];
-				costCalculator.setCost(line,col,cost);
+				ai.costCalculator.setCost(line,col,cost);
 			}
 		}
 	}	
@@ -252,7 +236,7 @@ public class BonusManager
 	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();		
-		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
+		path = ai.astar.processShortestPath(ai.getCurrentTile(),possibleDest);
 		tileDest = path.getLastTile();
 	}
 	

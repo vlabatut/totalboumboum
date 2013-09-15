@@ -83,31 +83,31 @@ public class BonusManager {
 		List<AiTile> availibleTilesDirect = pathManager.getAvailibleTilesDirectToCollectBonus();
 		List<AiTile> availibleTilesIndirect = pathManager.getAvailibleTilesIndirectToCollectBonus();
 		path = pathManager.getBestPathToCollectBonus(availibleTilesDirect, availibleTilesIndirect);
-		lastTile = path.getLastTile();
+		if(path!=null)
+		{	lastTile = path.getLastTile();
 		
-		lastTile = path.getLastTile();
-		//system.out.println(path.toString());
-		AiTile tempTile = null;
-		
-		if(!finishedPath())
-		{
-			checkIsOnPath();
-			if(path.isEmpty() || modifiedPath())
-				path = pathManager.getBestPathToCollectBonus(availibleTilesDirect, availibleTilesIndirect);
+			//system.out.println(path.toString());
+			AiTile tempTile = null;
 			
-			if(path.getLength()>1)
-				tempTile = path.getTile(1);
-			else if(path.getLength()>0)
-				tempTile = path.getTile(0);
-			result = percepts.getDirection(myAI.getOwnHero(), tempTile);
+			if(!finishedPath())
+			{
+				checkIsOnPath();
+				if(path.isEmpty() || modifiedPath())
+					path = pathManager.getBestPathToCollectBonus(availibleTilesDirect, availibleTilesIndirect);
+				
+				if(path.getLength()>1)
+					tempTile = path.getTile(1);
+				else if(path.getLength()>0)
+					tempTile = path.getTile(0);
+				result = percepts.getDirection(myAI.getOwnHero(), tempTile);
+				
+				//system.out.println("getDirection.escman" + result.name());
+			}
 			
-			//system.out.println("getDirection.escman" + result.name());
+			////destructible olup olmamaya bakp ya bonusu direk al ya da bomba koyup al!!! bu direction da yaplrm???
 		}
 		
-		////destructible olup olmamaya bakp ya bonusu direk al ya da bomba koyup al!!! bu direction da yaplrm???
-		
 		return result;
-		
 	}
 	
 	/**

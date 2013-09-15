@@ -119,7 +119,10 @@ public class PathManager {
 		HeuristicCalculator heuristicCalculator = new BasicHeuristicCalculator();
 		//on cree une instance de Astar qui va nous donner le chemin plus court
 		aStar = new Astar(myAI,ownHero, costCalculator, heuristicCalculator);
-		shortestPath = aStar.processShortestPath(startTile, endTile);
+		if(endTile!=null)
+			shortestPath = aStar.processShortestPath(startTile, endTile);
+		else
+			shortestPath = new AiPath();
 		
 //		System.out.println("getshortestpathTOESCAPE.patman");
 //		System.out.println(shortestPath.toString());

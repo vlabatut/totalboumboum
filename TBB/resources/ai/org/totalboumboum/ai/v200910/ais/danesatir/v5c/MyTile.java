@@ -14,7 +14,7 @@ import org.totalboumboum.ai.v200910.adapter.data.AiTile;
  *
  */
 @SuppressWarnings("deprecation")
-public class MonTile {
+public class MyTile {
 	/** */
 	private AiTile tile;
 	/** */
@@ -33,7 +33,7 @@ public class MonTile {
 	 * @throws StopRequestException
 	 * 		Description manquante !
 	 */
-	MonTile(AiTile tile, int iter, ArtificialIntelligence ai) throws StopRequestException {
+	MyTile(AiTile tile, int iter, ArtificialIntelligence ai) throws StopRequestException {
 		ai.checkInterruption();
 		this.ai = ai;
 		this.setTile(tile);

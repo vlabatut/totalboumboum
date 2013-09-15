@@ -8,7 +8,6 @@ package org.totalboumboum.ai.v200910.ais.aksoytangay.v5_2c;
  * 
  * @author Cihan Aksoy
  * @author Necmi Murat Tangay
- *
  */
 public enum State
 {	/** */

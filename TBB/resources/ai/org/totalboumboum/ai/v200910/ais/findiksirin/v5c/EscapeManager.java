@@ -8,10 +8,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -33,12 +29,6 @@ public class EscapeManager
 	
 		this.ai = ai;
 		zone = ai.getZone();
-			
-		// init A*
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator = new MatrixCostCalculator(costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
 		
 		// init destinations
 		arrived = false;
@@ -50,13 +40,7 @@ public class EscapeManager
 	
 /////////////////////////////////////////////////////////////////////////////////////////
 //L'ALGORITHME ASTAR POUR CALCULER LE COUTS DES CHEMINS
-	/** classe implémentant l'algorithme A* */
-	private Astar astar;
-	/** classe implémentant la fonction heuristique */
-	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
-	private MatrixCostCalculator costCalculator;
-	
+
 	/**
 	 * 
 	 * @throws StopRequestException
@@ -73,7 +57,7 @@ public class EscapeManager
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				double cost = -safetyMatrix[line][col];
-				costCalculator.setCost(line,col,cost);
+				ai.costCalculator.setCost(line,col,cost);
 			}
 		}
 	}	
@@ -118,7 +102,7 @@ public class EscapeManager
 	 */
 	private void updatePath() throws StopRequestException
 	{	ai.checkInterruption();		
-		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
+		path = ai.astar.processShortestPath(ai.getCurrentTile(),possibleDest);
 		tileDest = path.getLastTile();
 	}
 	

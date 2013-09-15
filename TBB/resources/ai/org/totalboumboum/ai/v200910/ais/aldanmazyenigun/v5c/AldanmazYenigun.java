@@ -31,6 +31,10 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
+import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
+import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
+import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -66,7 +70,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 	private WallController putBombController = null;
 
 	/** */
-	private AbstractBombController abstractBombController = null;
+	private BombController abstractBombController = null;
 
 	/** */
 	private HeroController abstractHeroController = null;
@@ -313,7 +317,7 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 					}
 					start = false;
 				} else if (!findAbstractSafeTiles(caseActuelle).isEmpty()) {
-					abstractBombController = new AbstractBombController(this);
+					abstractBombController = new BombController(this);
 					start = false;
 				}
 			}
@@ -331,6 +335,15 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 
 		zone = getPercepts();
 		ownHero = zone.getOwnHero();
+
+		// init A*
+		if(astar==null)
+		{	double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
+			costCalculator = new MatrixCostCalculator(costMatrix);
+			heuristicCalculator = new BasicHeuristicCalculator();
+			astar = new Astar(this, getOwnHero(), costCalculator, heuristicCalculator);
+			astar.setMaxNodes(125);
+		}
 
 		updateLocation();
 
@@ -865,5 +878,13 @@ public class AldanmazYenigun extends ArtificialIntelligence {
 		return targetHero;
 	}
 
-
+	// ///////////////////////////////////////////////////////////////
+	// A STAR /////////////////////////////////////
+	// ///////////////////////////////////////////////////////////////
+	/** classe implémentant l'algorithme A* */
+	public Astar astar = null;
+	/** classe implémentant la fonction heuristique */
+	public HeuristicCalculator heuristicCalculator = null;
+	/** classe implémentant la fonction de coût */
+	public MatrixCostCalculator costCalculator = null;
 }

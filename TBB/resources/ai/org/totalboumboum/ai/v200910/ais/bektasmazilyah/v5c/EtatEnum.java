@@ -6,7 +6,6 @@ package org.totalboumboum.ai.v200910.ais.bektasmazilyah.v5c;
  * 
  * @author Erdem Bektaş
  * @author Nedim Mazilyah
- *
  */
 public enum EtatEnum {
 	/** */

@@ -8,10 +8,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -38,13 +34,6 @@ public class ItemController {
 
 		this.ai = ai;
 		zone = ai.getZone();
-
-		// init A*
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator = new MatrixCostCalculator(costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai, ai.getOwnHero(), costCalculator,
-				heuristicCalculator);
 
 		// init destinations
 		arrived = false;
@@ -108,7 +97,7 @@ public class ItemController {
 	private void updatePath() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		path = astar.processShortestPath(ai.getActualTile(), possibleDest);
+		path = ai.astar.processShortestPath(ai.getActualTile(), possibleDest);
 		tileDest = path.getLastTile();
 	}
 
@@ -158,15 +147,8 @@ public class ItemController {
 	}
 
 	// ///////////////////////////////////////////////////////////////
-	// A STAR /////////////////////////////////////
+	// COST CALCULATOR			 /////////////////////////////////////
 	// ///////////////////////////////////////////////////////////////
-	/** classe implémentant l'algorithme A* */
-	private Astar astar;
-	/** classe implémentant la fonction heuristique */
-	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
-	private MatrixCostCalculator costCalculator;
-
 	/**
 	 * @throws StopRequestException
 	 *             Description manquante !
@@ -183,7 +165,7 @@ public class ItemController {
 			for (int col = 0; col < zone.getWidth(); col++) {
 				ai.checkInterruption(); // APPEL OBLIGATOIRE
 				double cost = ai.getZoneFormee().getCaseLevel(line, col);
-				costCalculator.setCost(line, col, cost);
+				ai.costCalculator.setCost(line, col, cost);
 			}
 		}
 	}

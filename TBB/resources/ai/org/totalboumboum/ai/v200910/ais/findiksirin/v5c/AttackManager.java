@@ -8,10 +8,6 @@ import org.totalboumboum.ai.v200910.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -38,12 +34,6 @@ public class AttackManager
 		this.ai = ai;
 		zone = ai.getZone();
 			
-		// initialisation de A*
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator = new MatrixCostCalculator(costMatrix);
-		heuristicCalculator = new BasicHeuristicCalculator();
-		astar = new Astar(ai,ai.getOwnHero(),costCalculator,heuristicCalculator);
-		
 		// init destinations
 		arrived = false;
 			setBombingPath(posTarget,posWalkable);
@@ -76,12 +66,6 @@ public class AttackManager
 	
 /////////////////////////////////////////////////////////////////////////////////////////
 //L'ALGORITHME ASTAR POUR CALCULER LE COUTS DES CHEMINS
-	/** classe implémentant l'algorithme A* */
-	private Astar astar;
-	/** classe implémentant la fonction heuristique */
-	private HeuristicCalculator heuristicCalculator;
-	/** classe implémentant la fonction de coût */
-	private MatrixCostCalculator costCalculator;
 	
 	/**
 	 * 
@@ -99,7 +83,7 @@ public class AttackManager
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 				double cost = -safetyMatrix[line][col];
-				costCalculator.setCost(line,col,cost);
+				ai.costCalculator.setCost(line,col,cost);
 			}
 		}
 	}	
@@ -298,7 +282,7 @@ public class AttackManager
 		bomb1Pos=currentTile;		
 		bomb2Pos=firstStop;
 		bomb3Pos=secondStop;
-		path = astar.processShortestPath(currentTile,bomb2Pos);
+		path = ai.astar.processShortestPath(currentTile,bomb2Pos);
 		path.addTile(firstStop.getNeighbor(posTarget));
 		path.addTile(secondStop);		
 	}

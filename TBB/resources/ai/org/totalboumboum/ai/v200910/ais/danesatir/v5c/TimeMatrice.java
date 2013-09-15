@@ -212,13 +212,13 @@ public class TimeMatrice {
 	public AiTile mostSafeCase(AiTile a, boolean justZero) throws StopRequestException {
 		// avant tout : test d'interruption
 		ai.checkInterruption();
-		MonTile mostSafe = new MonTile(a,0,ai);
-		Stack<MonTile> stack = new Stack<MonTile>();
+		MyTile mostSafe = new MyTile(a,0,ai);
+		Stack<MyTile> stack = new Stack<MyTile>();
 		Stack<AiTile> processed = new Stack<AiTile>();
 		stack.push(mostSafe);
 		while(!stack.isEmpty()) {
 			ai.checkInterruption();
-			MonTile temp = stack.pop();
+			MyTile temp = stack.pop();
 			processed.push(temp.getTile());
 			for(AiTile i : temp.getTile().getNeighbors()) {
 				ai.checkInterruption();
@@ -227,9 +227,9 @@ public class TimeMatrice {
 					if(getTime(i) == 0)
 						return i;
 					if( getTime(i) > (temp.getIter()+1)*Limits.tileDistance ) { 
-						stack.push(new MonTile(i,temp.getIter()+1,ai));
+						stack.push(new MyTile(i,temp.getIter()+1,ai));
 						if(isSaferThan(i,mostSafe.getTile()) && justZero == false)
-							mostSafe = new MonTile(i,temp.getIter()+1,ai);
+							mostSafe = new MyTile(i,temp.getIter()+1,ai);
 					}
 				}
 			}

@@ -9,10 +9,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiHero;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.HeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -38,7 +34,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  */
 @SuppressWarnings("deprecation")
-public class Enemie_Manager {
+public class EnemyManager {
 
 	/**
 	 * 
@@ -47,26 +43,19 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public Enemie_Manager(DemirciDuzokErgok ai) throws StopRequestException {
+	public EnemyManager(DemirciDuzokErgok ai) throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		this.ai = ai;
 		zone = ai.getPercepts();
-		safe_map = new Safety_Map(zone, ai);
-		esc = new Can_escape_Manager(ai);
-
-		// init A*:
-		double costMatrix[][] = new double[zone.getHeight()][zone.getWidth()];
-		costCalculator_b = new MatrixCostCalculator(costMatrix);
-		hcalcul_b = new BasicHeuristicCalculator();
-		star_b = new Astar(ai, ai.getPercepts().getOwnHero(), costCalculator_b,
-				hcalcul_b);
+		safeMap = new SafetyMap(zone, ai);
+		esc = new CanEscapeManager(ai);
 
 		// init destinations:
-		arrived_b = false;
+		arrivedB = false;
 		AiHero our_bomberman = zone.getOwnHero();
-		possibleDest_b = destinations_possibles_b(our_bomberman.getTile());
-		updatePath_b();
+		possibleDestB = destinationsPossiblesB(our_bomberman.getTile());
+		updatePathB();
 	}
 
 	/**
@@ -78,28 +67,28 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public Direction direcition_updt_b() throws StopRequestException {
+	public Direction direcitionUpdtB() throws StopRequestException {
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		updateCostCalculator_b();
+		updateCostCalculatorB();
 
 		Direction result = Direction.NONE;
-		if (hasArrived_b() == false) {
-			checkIsOnPath_b();
+		if (hasArrivedB() == false) {
+			checkIsOnPathB();
 
-			if (path_b.isEmpty() || !checkPathValidity_b()) {
-				updatePath_b();
+			if (pathB.isEmpty() || !checkPathValidityB()) {
+				updatePathB();
 			} else {
 
 				AiTile tile = null;
 
-				if (path_b.getLength() > 1) {
-					if (safe_map.returnMatrix()[path_b.getTile(1).getLine()][path_b
+				if (pathB.getLength() > 1) {
+					if (safeMap.returnMatrix()[pathB.getTile(1).getLine()][pathB
 							.getTile(1).getCol()] <= 0)
-						tile = path_b.getTile(1);
+						tile = pathB.getTile(1);
 
-				} else if (path_b.getLength() > 0) {
-					tile = path_b.getTile(0);
+				} else if (pathB.getLength() > 0) {
+					tile = pathB.getTile(0);
 
 				}
 
@@ -120,12 +109,12 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public boolean checkPathValidity_b() throws StopRequestException {
+	public boolean checkPathValidityB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		boolean result = true;
-		Iterator<AiTile> it = path_b.getTiles().iterator();
+		Iterator<AiTile> it = pathB.getTiles().iterator();
 		while (it.hasNext() && result) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -142,15 +131,15 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void checkIsOnPath_b() throws StopRequestException {
+	public void checkIsOnPathB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 		AiTile currentTile = zone.getOwnHero().getTile();
-		while (!path_b.isEmpty() && path_b.getTile(0) != currentTile) {
+		while (!pathB.isEmpty() && pathB.getTile(0) != currentTile) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-			path_b.removeTile(0);
+			pathB.removeTile(0);
 		}
 	}
 
@@ -163,35 +152,35 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public boolean hasArrived_b() throws StopRequestException {
+	public boolean hasArrivedB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 		int x, y;
-		safe_map = new Safety_Map(zone, ai);
-		if (arrived_tile_b != null) {
-			x = arrived_tile_b.getCol() - zone.getOwnHero().getCol();
-			y = arrived_tile_b.getLine() - zone.getOwnHero().getLine();
+		safeMap = new SafetyMap(zone, ai);
+		if (arrivedTileB != null) {
+			x = arrivedTileB.getCol() - zone.getOwnHero().getCol();
+			y = arrivedTileB.getLine() - zone.getOwnHero().getLine();
 			if (x < 0)
 				x = -x;
 			if (y < 0)
 				y = -y;
 			if (x == 0) {
 				if (y <= 3) {
-					arrived_b = true;
+					arrivedB = true;
 				}
 
 			} else if (y == 0) {
 				if (x <= 3) {
-					arrived_b = true;
+					arrivedB = true;
 				}
 
 			}
 
-		} else if (safe_map.returnMatrix()[zone.getOwnHero().getLine()][zone
-				.getOwnHero().getCol()] == safe_map.ENEMIE)
-			arrived_b = true;
+		} else if (safeMap.returnMatrix()[zone.getOwnHero().getLine()][zone
+				.getOwnHero().getCol()] == safeMap.ENEMIE)
+			arrivedB = true;
 
-		return arrived_b;
+		return arrivedB;
 
 	}
 
@@ -207,14 +196,14 @@ public class Enemie_Manager {
 	public boolean canPass() throws StopRequestException {
 		ai.checkInterruption();
 		int m = 0;
-		safe_map = new Safety_Map(zone, ai);
+		safeMap = new SafetyMap(zone, ai);
 		int stop = 1;
-		while (m < path_b.getLength() && path_b.isEmpty() == false && stop == 1) {
+		while (m < pathB.getLength() && pathB.isEmpty() == false && stop == 1) {
 			ai.checkInterruption();
-			if (safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b
-					.getTile(m).getCol()] != safe_map.SAFE_CASE
-					&& safe_map.returnMatrix()[path_b.getTile(m).getLine()][path_b
-							.getTile(m).getCol()] != safe_map.ENEMIE) {
+			if (safeMap.returnMatrix()[pathB.getTile(m).getLine()][pathB
+					.getTile(m).getCol()] != safeMap.SAFE_CASE
+					&& safeMap.returnMatrix()[pathB.getTile(m).getLine()][pathB
+							.getTile(m).getCol()] != safeMap.ENEMIE) {
 				stop = 0;
 			}
 			m++;
@@ -235,7 +224,7 @@ public class Enemie_Manager {
 	 */
 	public int getPathLength() throws StopRequestException {
 		ai.checkInterruption();
-		return path_b.getLength();
+		return pathB.getLength();
 
 	}
 
@@ -245,19 +234,19 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void updateCostCalculator_b() throws StopRequestException {
+	public void updateCostCalculatorB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		double safetyMatrix_b[][] = safe_map.returnMatrix();
+		double safetyMatrix_b[][] = safeMap.returnMatrix();
 		for (int line = 0; line < zone.getHeight(); line++) {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
 
 			for (int col = 0; col < zone.getWidth(); col++) {
 				ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-				double cost_b = safetyMatrix_b[line][col];
-				costCalculator_b.setCost(line, col, cost_b);
+				double costB = safetyMatrix_b[line][col];
+				ai.costCalculator.setCost(line, col, Math.abs(costB));
 
 			}
 		}
@@ -272,13 +261,13 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public void updatePath_b() throws StopRequestException {
+	public void updatePathB() throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-		path_b = star_b.processShortestPath(zone.getOwnHero().getTile(),
-				possibleDest_b);
-		arrived_tile_b = path_b.getLastTile();
+		pathB = ai.aStar.processShortestPath(zone.getOwnHero().getTile(),possibleDestB);
+		ai.updateAstarQueueSize();
+		arrivedTileB = pathB.getLastTile();
 
 	}
 
@@ -292,10 +281,10 @@ public class Enemie_Manager {
 	public boolean accessiblePath() throws StopRequestException {
 		ai.checkInterruption();
 
-		safe_map = new Safety_Map(zone, ai);
-		if (safe_map.returnMatrix()[zone.getOwnHero().getLine()][zone
-				.getOwnHero().getCol()] == safe_map.ENEMIE
-				|| path_b.isEmpty() == false)
+		safeMap = new SafetyMap(zone, ai);
+		if (safeMap.returnMatrix()[zone.getOwnHero().getLine()][zone
+				.getOwnHero().getCol()] == safeMap.ENEMIE
+				|| pathB.isEmpty() == false)
 			return true;
 		else
 			return false;
@@ -312,7 +301,7 @@ public class Enemie_Manager {
 	public boolean canesc() throws StopRequestException {
 		ai.checkInterruption();
 		boolean res = false;
-		esc = new Can_escape_Manager(ai);
+		esc = new CanEscapeManager(ai);
 		// We choose the numbers here as 3 and 7 because the normal explosion of
 		// the bomb is 6 cases of movement and when we are stucked by both
 		// sides of walls,we need at least 3 safe cases to escape.
@@ -334,7 +323,7 @@ public class Enemie_Manager {
 	 * @throws StopRequestException
 	 *             Description manquante !
 	 */
-	public List<AiTile> destinations_possibles_b(AiTile tile)
+	public List<AiTile> destinationsPossiblesB(AiTile tile)
 			throws StopRequestException {
 
 		ai.checkInterruption(); // APPEL OBLIGATOIRE
@@ -349,7 +338,7 @@ public class Enemie_Manager {
 			for (int pos_x = 0; pos_x < zone.getWidth(); pos_x++) {
 				ai.checkInterruption(); // APPEL OBLIGATOIRE
 
-				if (safe_map.returnMatrix()[pos_y][pos_x] == safe_map.ENEMIE) {
+				if (safeMap.returnMatrix()[pos_y][pos_x] == safeMap.ENEMIE) {
 					tile_dest_b = zone.getTile(pos_y, pos_x);
 					result_b.add(tile_dest_b);
 				}
@@ -367,23 +356,15 @@ public class Enemie_Manager {
 	/** */
 	private AiZone zone;
 	/** */
-	private Safety_Map safe_map;
+	private SafetyMap safeMap;
 	/** */
-	private Can_escape_Manager esc;
+	private CanEscapeManager esc;
 	/** */
-	private AiTile arrived_tile_b;
+	private AiTile arrivedTileB;
 	/** */
-	private List<AiTile> possibleDest_b;
+	private List<AiTile> possibleDestB;
 	/** */
-	private boolean arrived_b;
+	private boolean arrivedB;
 	/** */
-	private AiPath path_b;
-
-	/** */
-	private Astar star_b;
-	/** */
-	private HeuristicCalculator hcalcul_b;
-	/** */
-	private MatrixCostCalculator costCalculator_b;
-
+	private AiPath pathB;
 }

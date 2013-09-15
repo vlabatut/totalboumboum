@@ -17,9 +17,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiStateName;
 import org.totalboumboum.ai.v200910.adapter.data.AiTile;
 import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
-import org.totalboumboum.ai.v200910.adapter.path.astar.Astar;
-import org.totalboumboum.ai.v200910.adapter.path.astar.cost.MatrixCostCalculator;
-import org.totalboumboum.ai.v200910.adapter.path.astar.heuristic.BasicHeuristicCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -56,8 +53,6 @@ public class AiEscape
 	/** */
 	private List<AiBlock> destBlocks;
 	/** */
-	private double costArray[][];
-	/** */
 	private static double SAFE = 10;
 	/** */
 	private static double NOT_SAFE = 0;
@@ -86,7 +81,6 @@ public class AiEscape
 		safeArray = new double[zone.getHeight()][zone.getWidth()];
 		destBlocks = new ArrayList<AiBlock>();
 		indestBlocks = new ArrayList<AiBlock>();
-		costArray = new double[zone.getHeight()][zone.getWidth()];
 		initArrays();
 		
 		bombs = zone.getBombs();
@@ -832,8 +826,10 @@ public class AiEscape
 			
 			for(int col=0;col<zone.getWidth();col++)
 			{	ownAi.checkInterruption(); //APPEL OBLIGATOIRE
-				costArray[line][col] = -safeArray[line][col];
+				ownAi.costArray[line][col] = Math.abs(safeArray[line][col]);
+//				System.out.print("\t"+(Math.abs(safeArray[line][col])));
 			}
+//			System.out.println();
 		}
 	}
 	
@@ -1517,19 +1513,17 @@ public class AiEscape
 	public AiPath calculateNewPath(AiTile tileToGo) throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		Astar astar = new Astar(ownAi,OWN_HERO, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 		
-		AiPath localpath = astar.processShortestPath(CURRENT_TILE, tileToGo);
+		AiPath localpath = ownAi.astar.processShortestPath(CURRENT_TILE, tileToGo);
 		for(AiTile tileToPass : localpath.getTiles())
-		{
-			ownAi.checkInterruption();
+		{	ownAi.checkInterruption();
 			Debug.write(tileToPass.toString()+" ",ownAi);
 		}
 
 		if(localpath.getTiles().size() > 0)
-		{
-			return localpath;
-		}	
+		{	return localpath;
+		}
+		
 		return null;
 	}
 	
@@ -1561,10 +1555,9 @@ public class AiEscape
 	public boolean calculateNewPath() throws StopRequestException
 	{
 		ownAi.checkInterruption();
-		Astar astar = new Astar(ownAi,OWN_HERO, new MatrixCostCalculator(costArray),new BasicHeuristicCalculator());
 		
 		List<AiTile> safeTiles = getSafeTiles();
-		AiPath localpath = astar.processShortestPath(CURRENT_TILE, safeTiles);
+		AiPath localpath = ownAi.astar.processShortestPath(CURRENT_TILE, safeTiles);
 		for(AiTile tileToPass : localpath.getTiles())
 		{
 			ownAi.checkInterruption();
