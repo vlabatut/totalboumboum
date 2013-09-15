@@ -63,13 +63,13 @@ public class OzdokerOzen extends ArtificialIntelligence
 	int special=1;
 	
 	/** */
-	List<AiTile> bomBom=new ArrayList<AiTile>();
+	List<AiTile> bomBom = new ArrayList<AiTile>();
 	/** tiles pour fuir! */
-	List<AiTile> tilesFuir=new ArrayList<AiTile>(); 
+	List<AiTile> tilesFuir = new ArrayList<AiTile>(); 
 	/** tiles pour attaquer adversaire */
-	List<AiTile> tilesAttaqueAdv =new ArrayList<AiTile>();
+	List<AiTile> tilesAttaqueAdv = new ArrayList<AiTile>();
 	/** l'index de notre cible dans cette list */
-	int indexCibleAdversaire=0;
+	int indexCibleAdversaire = 0;
 	
 	/** wait */
 	boolean wait=false;
@@ -260,12 +260,17 @@ public class OzdokerOzen extends ArtificialIntelligence
 						collecteBonus=true;
 						attackAdversaire=false;
 						permissionPoseBombe=true;
-						AiTile bombMur=outilesAttaque.bombBomMur( outilesAttaque.adversaireCible().getTile());
-						//on precise le mur
-						AiTile cibleDeAstar=outilesMur.cibleAstar(bombMur, tilesPossible);
-						//on calcule le path
-						pathAmeliorer=tileControleur.calculateShortestPath(notreHero, debut, cibleDeAstar);
-						result=collecteAction(pathAmeliorer,notreHero,matrice);
+						AiHero cible = outilesAttaque.adversaireCible();
+						if(cible!=null)
+						{	AiTile bombMur = outilesAttaque.bombBomMur(cible.getTile());
+							//on precise le mur
+							AiTile cibleDeAstar=outilesMur.cibleAstar(bombMur, tilesPossible);
+							//on calcule le path
+							pathAmeliorer=tileControleur.calculateShortestPath(notreHero, debut, cibleDeAstar);
+							result = collecteAction(pathAmeliorer,notreHero,matrice);
+						}
+						else
+							result = new AiAction(AiActionName.NONE);
 					}
 				}else{	//System.out.println("7");
 					risk=true;
@@ -287,7 +292,7 @@ public class OzdokerOzen extends ArtificialIntelligence
 					collecteBonus=false;
 					attackAdversaire=true;
 					permissionPoseBombe=true;
-					tilesFuir=null;
+					tilesFuir.clear();
 					AiHero enemy=adversairePlusProche();
 					
 					if(enemy!=null){ //System.out.println("9");

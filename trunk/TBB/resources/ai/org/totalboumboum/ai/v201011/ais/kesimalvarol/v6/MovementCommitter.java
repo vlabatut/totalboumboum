@@ -112,7 +112,7 @@ public class MovementCommitter {
 	 */
 	private class KesimalVarolSuccessor extends SuccessorCalculator {
 		/** */
-		private HashMap<AiTile, ArrayList<AiTile>> discoveredByCases;
+		private HashMap<AiTile, ArrayList<AiTile>> discoveredByCases = new HashMap<AiTile, ArrayList<AiTile>>();
 		/** */
 		private Matrix m;
 
@@ -560,13 +560,11 @@ public class MovementCommitter {
 															// meme raison que
 															// celui pour
 															// "chemin aux adversaires"
-					pathToFollow = astar.processShortestPath(monIA
-							.getSelfHero().getTile(), target);
+					pathToFollow = astar.processShortestPath(monIA.getSelfHero().getTile(), target);
 					sc.initNodeHack();
 				}
 				short retY = 2;
-				if (PathSafetyDeterminators
-						.isThisPathDangerous(pathToFollow, m))
+				if (pathToFollow==null || PathSafetyDeterminators.isThisPathDangerous(pathToFollow, m))
 					retY = 0;
 
 				if (monIA.verbose)

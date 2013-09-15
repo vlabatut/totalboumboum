@@ -154,7 +154,7 @@ public class Astar {
 		{
 			if(gidilenTur==Matris.DESTRUCTIBLE)
 			{
-				if(matris.getVarlikMatrisi()[sonuc.parent.own.getLine()][sonuc.parent.own.getCol()]>Matris.BONUS)
+				if(sonuc.parent!=null && matris.getVarlikMatrisi()[sonuc.parent.own.getLine()][sonuc.parent.own.getCol()]>Matris.BONUS)
 					return false;
 			}
 			while(sonuc.parent!=null)
@@ -376,12 +376,18 @@ public class Astar {
 		if(yaz)
 			System.err.println(path.toString());
 		AiAction result=new AiAction(AiActionName.NONE);
-		AiTile next=path.getTile(1);
-		double zaman=1000*(next.getSize()/ky.getOwnHero().getWalkingSpeed());
+		AiTile next;
+		if(path.getLength()>1)
+		{	next = path.getTile(1);
+			double zaman=1000*(next.getSize()/ky.getOwnHero().getWalkingSpeed());
 
-		if(matris.getVarlikMatrisi()[next.getLine()][next.getCol()]<Matris.DESTRUCTIBLE)
-			if(sictin || matris.getKalanZamanMatrisi()[next.getLine()][next.getCol()]>zaman)
-				result=new AiAction(AiActionName.MOVE,ky.getPercepts().getDirection(path.getTile(0), next));
+			if(matris.getVarlikMatrisi()[next.getLine()][next.getCol()]<Matris.DESTRUCTIBLE)
+				if(sictin || matris.getKalanZamanMatrisi()[next.getLine()][next.getCol()]>zaman)
+					result=new AiAction(AiActionName.MOVE,ky.getPercepts().getDirection(path.getTile(0), next));
+		}
+		else
+			result = new AiAction(AiActionName.NONE);
+		
 		return result;
 	}
 	

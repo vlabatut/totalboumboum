@@ -279,7 +279,7 @@ public class DeplacementCommune {
 				tile = new ArrayList<AiTile>();
 				tile.add(voisines.get(i));
 				path = cheminLePlusCourt(ai.ourHero, ai.ourHero.getTile(), tile);
-				if (!path.isEmpty()) {
+				if (path!=null && !path.isEmpty()) {
 					tile2.add(voisines.get(i));
 					break;
 				} else

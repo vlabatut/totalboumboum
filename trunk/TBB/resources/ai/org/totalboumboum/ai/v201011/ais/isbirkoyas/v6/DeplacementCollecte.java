@@ -82,7 +82,7 @@ public class DeplacementCollecte {
 
 					ai.nextMove = deplacementCommune.cheminLePlusCourt(
 							ai.ourHero, startPoint, endPoints);
-				if (ai.nextMove.getLength() == 0)
+				if (ai.nextMove!=null && ai.nextMove.getLength() == 0)
 					ai.nextMove = null;
 				if (ai.print)
 					System.out.println("NextMove1:" + ai.nextMove);

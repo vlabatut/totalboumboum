@@ -326,7 +326,7 @@ public class ModeCollecte
 			monia.checkInterruption();
 			tiless.add(blockss.get(i).getTile());
 		}
-		if (monia.nextMoveBonus == null) 
+		if (monia.nextMoveBonus == null && !tiless.isEmpty()) 
 		{
 			List<AiItem> itemList = zone.getItems();
 			if (spath.shortestPath(monia.ourHero, monia.ourHero.getTile(), tiless)==null) 
