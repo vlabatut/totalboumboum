@@ -20,25 +20,25 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="1" rounds="5" />
-	<dates start="2013-09-03T07:45:32" save="2013-09-03T07:50:15" />
+	<played matches="6" rounds="4" />
+	<dates start="2013-09-15T13:59:27" save="2013-09-15T14:32:15" />
 	<players>
-		<player name="1011.Kaya+Yerinde" />
-		<player name="0809.Altay+Basaranoğlu" />
-		<player name="0809.Tırtıl+Tomruk" />
-		<player name="0910.Adatape+Özbek" />
-		<player name="0910.Mançuhan+Pınarer" />
-		<player name="0910.Fındık+Şırın" />
-		<player name="1112.Demir+Sazan" />
-		<player name="1011.Akbulut+Küpelioğlu" />
-		<player name="Suiveur" />
-		<player name="0809.Günalp+Yürtsever" />
-		<player name="0910.Çalışır+Güner" />
-		<player name="0809.Bilgin+Karabağ" />
-		<player name="Simplet" />
-		<player name="0910.Bektaş+Mazilyah" />
+		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="0708.Hanci+Toprak" />
+		<player name="0809.Demirağ+Şagar" />
 		<player name="1112.Bal+Çetin" />
-		<player name="0809.Devecioğlu+Korkmaz" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="1213.Gergin+Özkanoğlu" />
+		<player name="1213.Sağlam+Seven" />
+		<player name="0809.Medeni+Uluer" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="1112.Ünlü+Yıldırım" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="1213.Çıplak+Erakyol" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="1112.Cap+Munavarov" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="0708.Baydar+Camcı" />
 	</players>
 </archive>
 
