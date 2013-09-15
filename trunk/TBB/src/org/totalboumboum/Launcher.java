@@ -1700,10 +1700,3 @@ public class Launcher
 
 
 //TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
-//TODO décider à l'avance de la répartition de tous joueurs dans le tournoi auto ? (pb si des profils sont supprimés/ajoutés)
-//TODO stats confrontations: sélectionner les victoires par défaut
-//TODO rajouter options tournoi auto
-//TODO dans API, tester que les couts sont toujours positifs (illegalargExc)
-//TODO compléter (si besoin) le code source de démo, même si fake faut que ça soit complet
-//TODO auto: sélection copmplètement aléatoire de joueurs
-//TODO auto: sélection de manière à homogénéiser le nombre de matches joués. et on n'est pas 10 près, et on met du hasard
