@@ -1698,5 +1698,33 @@ public class Launcher
 //	- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
 
+// TODO auto-advance: 
+//	- faire dessiner systématiquement un dessin en surimpression
+//	- le thread d'auto advance ne fait que changer l'état de ce dessin (masqué par défaut)
 
-//TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
+// TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
+//		>> comment savoir quand on lieu les màj glicko-2 ?
+// TODO stats >> cumuler les victoires/nul/défaites dans un même plot? pareil pour tueur/tué ?
+
+// TODO agent
+//	- on pourrait blacklister certaines cases temporairement
+//		ex: case dans un tunnel peut permettre d'éliminer adversaire 1
+//		mais adversaire 2 est en embuscade derrière
+//		>> vaut mieux se retourner contre lui
+// 	- stratégie d'attaque :
+//		poser plein de bombes à la file, comme joey
+//		ex: cul de sac, on bloque l'adversaire
+//		on va se faire sauter en s'enfuyant du cul de sac (trop long)
+//		en posant une série de bombes, on ralentit l'explosion suffisament pour gagner
+//		(s'il ne reste qu'un seul adversaire)
+
+// TODO situation
+//	faut garder le cache avec les bombes, car leur blast sera important plusieurs fois
+//	et ils coutent cher à calculer dans le sens où il faut un modèle
+// 	mais c'est pas forcément une bonne idée d'utiliser un modèle: si la case contient du
+// feu, la bombe exploserait desuite alors qu'en réalité, il faudrait du temps pour y
+// aller, et donc elle n'exploserait p-ê pas si vite. donc en terme de recherche de chemin,
+// ça peut être la galère... ou pas. peut être qu'il faut simplifier, à ce niveau si prospectif.
+
+// TODO créer un niveau de test: normal, mais sans blocs destructibles
+// TODO voir le pb, ie pq une combinaison est soit disant manquante alors qu'elle semble être présente dans la table
