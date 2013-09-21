@@ -44,7 +44,7 @@
 		</case>
 	</locations>
 	<items>
-		<item name="extrabomb" number="2" />
+		<item name="extrabomb" number="3" />
 		<item name="extraflame" number="2" />
 	</items>
 </players>
