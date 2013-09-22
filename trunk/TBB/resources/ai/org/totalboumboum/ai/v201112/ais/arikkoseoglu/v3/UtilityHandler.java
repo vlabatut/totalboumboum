@@ -58,13 +58,13 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 	// CRITERIA					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** noms des cas, utilisés dans {@link #initCriteria} */
-	private final String collecteModeCase = "COLLECTECASE";
+	private final String collecteModeCase = "COLLECTE_CASE";
 	/** */
-	private final String collecteModeCaseVisibleBonus = "COLLECTECASE_VISIBLE_BONUS";
+	private final String collecteModeCaseVisibleBonus = "COLLECTE_CASE_VISIBLE_BONUS";
 	/** */
-	private final String attaqueModeCaseVisibleAdv = "ATTAQUECASE_VISIBLE_ADV";
+	private final String attaqueModeCaseVisibleAdv = "ATTAQUE_CASE_VISIBLE_ADV";
 	/** */
-	private final String attaqueModeCaseMur = "ATTAQUECASE_MUR";
+	private final String attaqueModeCaseMur = "ATTAQUE_CASE_MUR";
 	
 	/** cases sélectionnées */
 	public List<AiTile> selectedTiles= ai.getZone().getTiles(); 
@@ -249,12 +249,14 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 		Set<AiUtilityCriterion<?>> criteria = new TreeSet<AiUtilityCriterion<?>>();
 
 		//Creer mon case 1 ---> pour collecte Mode
+		criteria= new TreeSet<AiUtilityCriterion<?>>();
 		//criteria.add(bonusCriter);
 		criteria.add(tempsCriter);
 		criteria.add(murCriter);
 		AiUtilityCase collecteCase = new AiUtilityCase(collecteModeCase, criteria);
 		
 		//Creer mon case 1 ---> pour collecte Mode
+		criteria= new TreeSet<AiUtilityCriterion<?>>();
 		//criteria.add(bonusCriter);
 		criteria.add(tempsCriter);
 		criteria.add(bonusCriter);
@@ -278,6 +280,7 @@ public class UtilityHandler extends AiUtilityHandler<ArikKoseoglu>
 		// ceci permettra de les retrouver facilement plus tard,
 		// en particulier dans la méthode identifyCase()
 		cases.put(collecteModeCase, collecteCase);
+		cases.put(collecteModeCaseVisibleBonus, collecteCaseBonus);
 		cases.put(attaqueModeCaseVisibleAdv, attaqueCaseVisibleAdversaire);
 		cases.put(attaqueModeCaseMur, attaqueCaseMur);
 		
