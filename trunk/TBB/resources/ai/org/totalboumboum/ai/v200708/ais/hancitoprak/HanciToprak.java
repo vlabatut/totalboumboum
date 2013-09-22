@@ -93,7 +93,7 @@ public class HanciToprak extends ArtificialIntelligence {
 //		costMatrix_ = costMatrix;
 		costMatrix = getZoneMatrix();//initialisation du costMatrix(matrix à utiliser pour prendre décision)
 		
-		Decision();//pour chaque itération on renouvele le costMatrix (les couts)
+		decision();//pour chaque itération on renouvele le costMatrix (les couts)
 		
 
 		if (condition_1) {
@@ -561,7 +561,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	 * grâce auxquels AI prends décision. 
 	 * 
 	 */
-	private void Decision() {//  initialisation de costMatrix pour prendre decision 
+	private void decision() {//  initialisation de costMatrix pour prendre decision 
         boolean notendleftx1=true;
         boolean notendleftx2=true;
         boolean notendrightx1=true;
@@ -583,7 +583,7 @@ public class HanciToprak extends ArtificialIntelligence {
 					costMatrix[k][j] = 400;
 					int portee = getBombPowerAt(k, j);
 					for (int i = 1; i <= portee; i++) {
-						if (k - i > 0) {//controle  cote gauche de costMatrix
+						if (k - i >= 0) {//controle  cote gauche de costMatrix
 							if((getZoneMatrix()[k-i][j]==0 ||getZoneMatrix()[k-i][j]==5 || getZoneMatrix()[k-i][j]==6)&&controleleftx){
 							costMatrix[k - i][j] = 300;
 							}
@@ -599,7 +599,7 @@ public class HanciToprak extends ArtificialIntelligence {
 								controleleftx=false;
 							}
 						}
-						if (k + i < 16){//controle  cote droite de costMatrix
+						if (k + i < costMatrix.length){//controle  cote droite de costMatrix
 							if((getZoneMatrix()[k+i][j]==0 || getZoneMatrix()[k+i][j]==5 || getZoneMatrix()[k+i][j]==6) && controlerightx)
 							costMatrix[k + i][j] = 300;
 							else if(getZoneMatrix()[k+i][j]==1 && notendrightx1){
@@ -613,7 +613,7 @@ public class HanciToprak extends ArtificialIntelligence {
 									controlerightx=false;
 								}	
 							}
-						if (j - i > 0) {//controle le dessus de getzonematrix
+						if (j - i >= 0) {//controle le dessus de getzonematrix
 							if((getZoneMatrix()[k][j-i]==0 || getZoneMatrix()[k][j-i]==5 ||getZoneMatrix()[k][j-i]==6) && controletopy)
 								costMatrix[k][j-i] = 300;
 							else if(getZoneMatrix()[k][j-i]==1 && notendtopy1){
@@ -629,7 +629,7 @@ public class HanciToprak extends ArtificialIntelligence {
 							
 							
 							}
-						if (j + i < 14) {//controle le dessous de getzonematrix
+						if (j + i < costMatrix[0].length) {//controle le dessous de getzonematrix
 							costMatrix[k][j + i] = 300;
 							
 							if((getZoneMatrix()[k][j+i]==0 || getZoneMatrix()[k][j+i]==5 || getZoneMatrix()[k][j+i]==6) && controlebottomy)

@@ -601,31 +601,23 @@ public class GokselMenges extends ArtificialIntelligence {
 
 		List<Point> points = new ArrayList<Point>();
 
-		try {
+		if(x>=0 && x<oldSituation.length && y-1>=0 && y-1<oldSituation[0].length)
 			direction[0] = oldSituation[x][y - 1]; // UP
-		} catch (RuntimeException e) {
+		else
 			direction[0] = -1;
-
-		}
-		try {
+		if(x>=0 && x<oldSituation.length && y+1>=0 && y+1<oldSituation[0].length)
 			direction[1] = oldSituation[x][y + 1]; // DOWN
-		} catch (RuntimeException e) {
+		else
 			direction[1] = -1;
-
-		}
-		try {
+		if(x-1>=0 && x-1<oldSituation.length && y>=0 && y<oldSituation[0].length)
 			direction[2] = oldSituation[x - 1][y]; // LEFT
-		} catch (RuntimeException e) {
+		else
 			direction[2] = -1;
-
-		}
-		try {
+		if(x+1>=0 && x+1<oldSituation.length && y>=0 && y<oldSituation[0].length)
 			direction[3] = oldSituation[x + 1][y]; // RIGHT
-		} catch (RuntimeException e) {
+		else
 			direction[3] = -1;
-
-		}
-
+		
 		if (!zone.contains(new Point(x, y - 1))) {
 			if ((direction[0] == 0) || (direction[0] == 5)
 					|| (direction[0] == 6) || (direction[0] == 7))
