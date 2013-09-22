@@ -27,9 +27,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -100,7 +98,8 @@ public class AiMain extends AiManager
 	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
 	 */
 	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, URISyntaxException
-	{	AiMain aiMain = new AiMain();
+	{	@SuppressWarnings("unused")
+		AiMain aiMain = new AiMain();
 		
 		// on applique le parser
 //		aiMain.parseSourceCode();
@@ -113,13 +112,22 @@ public class AiMain extends AiManager
 		generateXmlPreferences();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// CONCEPTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Permet de faciliter l'écriture du fichier
 	 * de préférences en automatisant la génération
-	 * d'éléments xml, quand c'est possible.
+	 * d'éléments XML, quand c'est possible.
+	 * <br/>
+	 * Il faut modifier directement les variables
+	 * initialisées au début de la méthode pour les
+	 * adapter à vos propres critères et catégories.
 	 */
 	private static void generateXmlPreferences()
-	{	String cat = "ATTACK_OPEN";
+	{	// nom de la catégorie
+		String cat = "ATTACK_OPEN";
+		// noms des critères, par ordre de préférence
 		List<String> critNames = Arrays.asList(
 			"RETREAT",
 			"THREAT",
@@ -127,6 +135,8 @@ public class AiMain extends AiManager
 			"DISTARG",
 			"CHAIN",
 			"DISTANCE");
+		// domaines complets des critères, dans le même ordre que ci-dessus
+		// les valeurs de chaque domaine sont rangées par ordre de préférence
 		List<List<String>> critDomains = Arrays.asList(
 			Arrays.asList("true ","false"),
 			Arrays.asList("true ","false"),
@@ -134,8 +144,12 @@ public class AiMain extends AiManager
 			Arrays.asList("2","1","3","0"),
 			Arrays.asList("true ","false"),
 			Arrays.asList("0","1","2","3","4"));
-		int critIndx[] = new int[critNames.size()];
 		
+		// cette boucle va afficher dans la console le code xml correspondant
+		// vous pouvez ensuite le copier-coller dans votre fichier de préférences
+		// bien sûr, il peut être nécessaire de faire des modifications, en
+		// particulier dans l'ordre des combinaisons produites.
+		int critIndx[] = new int[critNames.size()];
 		boolean goOn = true;
 		while(goOn)
 		{	// print current values
