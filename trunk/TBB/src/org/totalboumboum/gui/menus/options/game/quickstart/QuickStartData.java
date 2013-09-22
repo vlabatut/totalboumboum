@@ -46,6 +46,8 @@ import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
+import org.totalboumboum.gui.common.structure.subpanel.content.Line;
+import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import org.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
@@ -120,28 +122,39 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getMenuContainer(),container,quickStartConfiguration);
-		getMenuContainer().replaceWith(selectRoundPanel);
+	{	if(e.getSource() instanceof MyLabel)
+		{	MyLabel label = (MyLabel)e.getSource();
+			if(label.getParent() instanceof Line)
+			{	Line line = (Line)label.getParent();
+				if(line.getParent() instanceof TableContentPanel)
+				{	TableContentPanel tcp = (TableContentPanel)line.getParent();
+					if(tcp.getParent()==roundPanel)
+					{	SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getMenuContainer(),container,quickStartConfiguration);
+						getMenuContainer().replaceWith(selectRoundPanel);
+					}
+				}
+			}
+		}
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -306,16 +319,16 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 
 	@Override
 	public void playerSelectionPlayersAdded()
-	{	// TODO Auto-generated method stub
+	{	// 
 	}
 
 	@Override
 	public void playerSelectionColorSet(int index)
-	{	// TODO Auto-generated method stub
+	{	// 
 	}
 
 	@Override
 	public void playerSelectionControlsSet(int index)
-	{	// TODO Auto-generated method stub
+	{	// 
 	}
 }
