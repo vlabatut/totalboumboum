@@ -21,7 +21,9 @@ public class Agent extends ArtificialIntelligence
 	 * Instancie la classe principale de l'agent.
 	 */
 	public Agent()
-	{	// active/désactive la sortie texte
+	{	checkInterruption();
+		
+		// active/désactive la sortie texte
 		verbose = true;
 	}
 	
@@ -34,9 +36,6 @@ public class Agent extends ArtificialIntelligence
 		 *  particuliers pour réaliser votre traitement, et qui
 		 *  ne sont ni des gestionnaires (initialisés dans initHandlers)
 		 *  ni des percepts (initialisés dans initPercepts).
-		 *  Par exemple, ici on surcharge initOthers() pour initialiser
-		 *  verbose, qui est la variable controlant la sortie 
-		 *  texte de l'agent (true -> debug, false -> pas de sortie).
 		 *  
 		 *  Remarque : ce commentaire est à effacer, comme tous les autres marqueurs TODO
 		 */

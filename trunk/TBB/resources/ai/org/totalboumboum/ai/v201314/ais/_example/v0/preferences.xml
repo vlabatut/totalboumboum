@@ -40,9 +40,9 @@
 			Table définissant les préférences du mode collecte
 		 -->
 		<table mode="COLLECTING">
-			<combination category="FIRST_CATEGORY" values="false 1" />
-			<combination category="FIRST_CATEGORY" values="false 2" />
-			<combination category="FIRST_CATEGORY" values="false 3" />
+			<combination category="FIRST_CATEGORY" values="true 1" />
+			<combination category="FIRST_CATEGORY" values="true 3" />
+			<combination category="FIRST_CATEGORY" values="true 2" />
 			<combination category="SECOND_CATEGORY" values="1 VALUE1" />
 			<combination category="SECOND_CATEGORY" values="1 VALUE2" />
 			<combination category="SECOND_CATEGORY" values="1 VALUE3" />
@@ -58,9 +58,9 @@
 			<combination category="SECOND_CATEGORY" values="3 VALUE3" />
 			<combination category="SECOND_CATEGORY" values="3 VALUE4" />
 			<combination category="SECOND_CATEGORY" values="3 VALUE5" />
-			<combination category="FIRST_CATEGORY" values="true 1" />
-			<combination category="FIRST_CATEGORY" values="true 2" />
-			<combination category="FIRST_CATEGORY" values="true 3" />
+			<combination category="FIRST_CATEGORY" values="false 1" />
+			<combination category="FIRST_CATEGORY" values="false 3" />
+			<combination category="FIRST_CATEGORY" values="false 2" />
 		</table>
 		
 		<!-- 
