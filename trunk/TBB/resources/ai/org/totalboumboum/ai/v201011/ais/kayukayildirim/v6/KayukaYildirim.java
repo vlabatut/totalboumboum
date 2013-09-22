@@ -618,7 +618,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 				blast = gameMap.getHeight();
 			if (hero != gameMap.getOwnHero()) {
 				matriceAttaque[hero.getLine()][hero.getCol()] += 0;
-				for (i = 1; i < blast + 1; i++) {
+				for (i = 1; i<blast+1 && x>=0 && x<matriceAttaque.length && y+i>=0 && y<matriceAttaque[0].length; i++) {
 					checkInterruption();
 					if (matriceAttaque[x][y + i] != -400) {
 						if (gameMap.getPixelDistance(ourOwnHero.getLine(),
@@ -639,7 +639,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 					} else
 						i = blast;
 				}
-				for (i = 1; i < blast + 1; i++) {
+				for (i = 1; i<blast+1 && x>=0 && x<matriceAttaque.length && y-i>=0 && y-i<matriceAttaque[0].length; i++) {
 					checkInterruption();
 					if (matriceAttaque[x][y - i] != -400) {
 						if (gameMap.getPixelDistance(ourOwnHero.getLine(),
@@ -660,7 +660,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 					} else
 						i = blast;
 				}
-				for (i = 1; i < blast + 1; i++) {
+				for (i = 1; i<blast+1 && x+i>=0 && x+i<matriceAttaque.length && y>=0 && y<matriceAttaque[0].length; i++) {
 					checkInterruption();
 					if (matriceAttaque[x + i][y] != -400) {
 						if (gameMap.getPixelDistance(ourOwnHero.getLine(),
@@ -681,7 +681,7 @@ public class KayukaYildirim extends ArtificialIntelligence {
 					} else
 						i = blast;
 				}
-				for (i = 1; i < blast + 1; i++) {
+				for (i = 1; i<blast+1 && x-i>=0 && x-i<matriceAttaque.length && y>=0 && y<matriceAttaque[0].length; i++) {
 					checkInterruption();
 
 					if (matriceAttaque[x - i][y] != -400) {

@@ -118,28 +118,28 @@ public class TraitementAttaque {
 			int y1 = y, y2 = y, y3 = y, y4 = y;
 
 			// controle le bas
-			if (matrice[x1 + 1][y1 + 1] == 1 && matrice[x1 + 1][y1 - 1] == 1
+			if (x1+2<matrice.length && y1+1<matrice[0].length && y1-1>=0 && matrice[x1 + 1][y1 + 1] == 1 && matrice[x1 + 1][y1 - 1] == 1
 					&& matrice[x1 + 1][y1] != 1) {
 
 				matrice[x1 + 2][y1] = valeur + 2;
 				x1 = x1 + 1;
 			}
 			// controle le haut
-			if (matrice[x2 - 1][y2 + 1] == 1 && matrice[x2 - 1][y2 - 1] == 1
+			if (x2-2>=0 && y2-1>=0 && y2+1<matrice[0].length && matrice[x2 - 1][y2 + 1] == 1 && matrice[x2 - 1][y2 - 1] == 1
 					&& matrice[x2 - 1][y2] != 1) {
 
 				matrice[x2 - 2][y2] = valeur + 2;
 				x2 = x2 - 1;
 			}
 			// controle le droite
-			if (matrice[x3 + 1][y3 + 1] == 1 && matrice[x3 - 1][y3 + 1] == 1
+			if (x3-1>=0 && x3+1<matrice.length && y3+2<matrice[0].length && matrice[x3 + 1][y3 + 1] == 1 && matrice[x3 - 1][y3 + 1] == 1
 					&& matrice[x3][y3 + 1] != 1) {
 
 				matrice[x3][y3 + 2] = valeur + 2;
 				y3 = y3 + 1;
 			}
 			// controle la gauche
-			if (matrice[x4 + 1][y4 - 1] == 1 && matrice[x4 - 1][y4 - 1] == 1
+			if (x4-1>=0 && x4+1<matrice.length && y4-2>=0 && matrice[x4 + 1][y4 - 1] == 1 && matrice[x4 - 1][y4 - 1] == 1
 					&& matrice[x4][y4 - 1] != 1) {
 
 				matrice[x4][y4 - 2] = valeur + 2;
