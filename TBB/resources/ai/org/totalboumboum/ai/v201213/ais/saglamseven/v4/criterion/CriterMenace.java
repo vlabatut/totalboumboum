@@ -1,6 +1,8 @@
 package org.totalboumboum.ai.v201213.ais.saglamseven.v4.criterion;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -48,7 +50,7 @@ public class CriterMenace extends AiUtilityCriterionBoolean<SaglamSeven>
 		int range = ownHero.getBombRange()
 		, posX = tile.getCol()
 		, posY = tile.getRow();
-		List<AiHero> heros = gameZone.getHeroes();
+		List<AiHero> heros = new ArrayList<AiHero>(gameZone.getHeroes());
 		heros.remove(ownHero);
 		if(heros!=null){
 			for(int i = 0 ; i< heros.size(); i++){
