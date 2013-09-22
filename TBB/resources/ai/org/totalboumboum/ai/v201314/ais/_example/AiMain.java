@@ -25,6 +25,9 @@ import japa.parser.ParseException;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -55,18 +58,19 @@ public class AiMain extends AiManager
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// VERIFICATION		/////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * L'exécution de cette méthode permet
-	 * de faire une vérification du code source
-	 * de cet agent.
+	 * de faire diverses vérifications du code source
+	 * de cet agent, ou bien effectue différentes
+	 * tâches liées à sa conceptions.
 	 * <br/>
-	 * Ici, on teste automatiquement certains des 
-	 * points mentionnés dans le manuel de l'API.
-	 * Mais <b>tous ne peuvent pas être testés depuis
-	 * un programme</b> Reportez-vous au manuel pour
-	 * plus d'informations.
+	 * Ici, à titre d'exemple, on teste automatiquement 
+	 * certains des points mentionnés dans le manuel de 
+	 * l'API. Mais <b>tous ne peuvent pas être testés 
+	 * depuis un programme</b> Reportez-vous au manuel 
+	 * pour plus d'informations.
 	 * 
 	 * @param args
 	 *		Aucun argument n'est nécessaire. 
@@ -91,14 +95,83 @@ public class AiMain extends AiManager
 	 * 		Problème lors de l'accès aux classes représentant des critères.
 	 * @throws NoSuchMethodException 
 	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws URISyntaxException 
+	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
 	 */
-	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException
-	{	AiMain aiMain = new AiMain();
+	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, URISyntaxException
+	{	
+		//// VERIFICATIONS ////
+		AiMain aiMain = new AiMain();
 		
-		// on applique le parser
+		// on applique le parser pour vérifier le code source
 		aiMain.parseSourceCode();
 		
 		// on vérifie si les préférences se chargent normalement
 //		aiMain.loadPreferences();
+		
+		
+		//// CONCEPTION ////
+		// on affiche des combinaisons, utile pour créer le fichier de préférence
+//		generateXmlPreferences();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONCEPTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Permet de faciliter l'écriture du fichier
+	 * de préférences en automatisant la génération
+	 * d'éléments XML, quand c'est possible.
+	 * <br/>
+	 * Il faut modifier directement les variables
+	 * initialisées au début de la méthode pour les
+	 * adapter à vos propres critères et catégories.
+	 */
+	@SuppressWarnings("unused")
+	private static void generateXmlPreferences()
+	{	// nom de la catégorie
+		String cat = "FIRST_CATEGORY";
+		// noms des critères, par ordre de préférence
+		List<String> critNames = Arrays.asList(
+			"FIRST_CRITERION",
+			"SECOND_CRITERION"
+		);
+		// domaines complets des critères, dans le même ordre que ci-dessus
+		// les valeurs de chaque domaine sont rangées par ordre de préférence
+		List<List<String>> critDomains = Arrays.asList(
+			Arrays.asList("true ","false"),
+			Arrays.asList("1","3","2")
+		);
+		
+		// cette boucle va afficher dans la console le code xml correspondant
+		// vous pouvez ensuite le copier-coller dans votre fichier de préférences
+		// bien sûr, il peut être nécessaire de faire des modifications, en
+		// particulier dans l'ordre des combinaisons produites.
+		int critIndx[] = new int[critNames.size()];
+		boolean goOn = true;
+		while(goOn)
+		{	// print current values
+			System.out.print("<combination category=\""+cat+"\" values=\"");
+			for(int i=0;i<critNames.size();i++)
+				System.out.print(critDomains.get(i).get(critIndx[i])+" ");
+			System.out.println("\" />");
+			
+			// increment indices
+			boolean car = true;
+			int i = critNames.size()-1;
+			while(i>=0 && car)
+			{	int idx = critIndx[i] + 1;
+				int d = critDomains.get(i).size();
+				if(idx==d)
+				{	car = true;
+					idx = 0;
+				}
+				else
+					car = false;
+				critIndx[i] = idx;
+				i--;
+			}
+			goOn = !(i<0 && car);
+		}
 	}
 }
