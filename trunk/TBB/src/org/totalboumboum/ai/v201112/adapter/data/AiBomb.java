@@ -214,7 +214,7 @@ public interface AiBomb extends AiSprite
 	 * compte à rebours).
 	 * <br/>
 	 * <b>Attention :</b> certaines actions spéciales comme le fait de lancer
-	 * la bombe sont susceptibles de réinitialiser le compte à rebours.
+	 * la bombe en l'air sont susceptibles de réinitialiser le compte à rebours.
 	 * 
 	 * @return	
 	 * 		Temps exprimé en ms.

@@ -700,9 +700,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			rCoeff = 0;
 		else if(mode==AiMode.COLLECTING)
 			bCoeff = 0;
-		Integer limit = referencePreferences.get(mode).size();
+		float limit = referencePreferences.get(mode).size();
 		if(limit==0)
-			limit = 50;
+			limit = 1;
 		AiOutput output = ai.getOutput();
 		
 		for(Entry<AiTile,Integer> entry: preferencesByTile.entrySet())
@@ -712,8 +712,12 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			
 			// text
 			if(outputText)
-			{	String text = "-\u221E";
-				if(value!=Integer.MAX_VALUE)
+			{	String text = null;
+				if(value==Integer.MAX_VALUE)
+					text = "+\u221E";
+				else if(value==Integer.MIN_VALUE)
+					text = "-\u221E";
+				else
 					text = Integer.toString(value);
 				output.setTileText(tile,text);
 			}
@@ -723,10 +727,11 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			{	if(value<0)
 					value = 0;
 				else if(value>limit)
-					value = limit;
-				int r = 255 - rCoeff*(int)((limit-value)/limit*255);
-				int g = 255 - gCoeff*(int)((limit-value)/limit*255);
-				int b = 255 - bCoeff*(int)((limit-value)/limit*255);
+					value = (int)limit;
+				int r = (int)(255*(1 - rCoeff * (limit-value)/limit));
+				int g = (int)(255*(1 - gCoeff * (limit-value)/limit));
+				int b = (int)(255*(1 - bCoeff * (limit-value)/limit));
+//				ai.print("value="+value+" r="+r+" g="+g+" b="+b);
 				Color color = new Color(r,g,b);
 				output.addTileColor(tile,color);
 			}

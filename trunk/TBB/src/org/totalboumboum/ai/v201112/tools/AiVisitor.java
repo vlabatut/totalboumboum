@@ -98,14 +98,15 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	private final static String CHECK_INTERRUPTION_METHOD = "checkInterruption";
 	/** Méthodes ignorées lors de l'analyse */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
-	{	"AiMain",			
-		"compare",
-		"equals",
-		"toString"
+	{	"AiMain"
+//		"compare",
+//		"equals",
+//		"toString"
 	});
 	/** Exceptions à ne pas couvrir dans un bloc {@code try-catch} */
 	private final static List<String> FORBIDDEN_EXCEPTIONS = Arrays.asList(new String[]
- 	{	"Exception",			
+ 	{	"Exception",
+	 	"RuntimeException",
  		"StopRequestException"
  	});
 
