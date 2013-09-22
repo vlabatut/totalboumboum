@@ -66,11 +66,11 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** à titre d'exemple, je stocke la zone de jeu, car on en a souvent besoin */
+	/** A titre d'exemple, je stocke la zone de jeu, car on en a souvent besoin */
 	private AiZone zone = null; 
-	/** à titre d'exemple, je stocke le sprite controlé par cet agent, car on en a aussi souvent besoin */
+	/** A titre d'exemple, je stocke le sprite controlé par cet agent, car on en a aussi souvent besoin */
 	private AiHero ownHero = null; 
-	/** il est nécessaire de stocker l'objet Astar, si on ne veut pas devoir le re-créer à chaque itération */
+	/** Il est nécessaire de stocker l'objet Astar, si on ne veut pas devoir le re-créer à chaque itération */
 	private Astar astar = null;
 	
 	/////////////////////////////////////////////////////////////////
