@@ -428,10 +428,10 @@ public class ProfilesConfiguration
 	/////////////////////////////////////////////////////////////////
 	/** List of players to be excluded from automatic selections */
 	private static List<String> BLACK_LIST = Arrays.asList(
-		"bbe5482b-6fa0-4204-a5a6-43c4efff917c",	// 0910.Fındık+Şırın
-		"3c898e42-a3e2-4b6d-866e-f672ec19d326",	// 0910.Mançuhan+Pınarer
-		"309ac62f-8346-4281-83ab-086902e9e39c",	// 0910.Demirci+Düzok+Ergök
-		"ac0853de-bb8f-4141-8fa9-4a3b2708d331"	// 0910.Dane+Şatır
+//		"bbe5482b-6fa0-4204-a5a6-43c4efff917c",	// 0910.Fındık+Şırın
+//		"3c898e42-a3e2-4b6d-866e-f672ec19d326",	// 0910.Mançuhan+Pınarer
+//		"309ac62f-8346-4281-83ab-086902e9e39c",	// 0910.Demirci+Düzok+Ergök
+//		"ac0853de-bb8f-4141-8fa9-4a3b2708d331"	// 0910.Dane+Şatır
 		);
 	
 	/**
