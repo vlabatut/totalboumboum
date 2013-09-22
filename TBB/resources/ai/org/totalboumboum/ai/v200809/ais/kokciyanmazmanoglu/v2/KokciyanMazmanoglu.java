@@ -242,54 +242,56 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	public  AiAction algoAEtoile(AiTile startTile, AiTile targetTile) throws StopRequestException{
 		checkInterruption();
 		AiAction result = new AiAction(AiActionName.NONE);
-		Node startNode = tree.convertToNode(startTile);
+		if(tree!=null)
+		{	Node startNode = tree.convertToNode(startTile);
 
-		Node endNode = tree.convertToNode(targetTile);
-
-
-		boolean control = false; //test si le noeud est final.
-
-		NodeComparator nc = new NodeComparator(startNode, endNode);
-		PriorityQueue<Node> qNode = new PriorityQueue<Node>(1,nc);
-		qNode.offer(startNode);
-		while(!control && !qNode.isEmpty()){
-			checkInterruption();
-			Node nActual = qNode.poll();
-			if((nActual.getLine() == endNode.getLine()) && (nActual.getCol() == endNode.getCol())){
-				Vector<Link> path = tree.getPath(nActual);
-				//System.out.println("N "  + nActual.getName());
-				if(!path.isEmpty()){
-					//System.out.println(path.size());
-					//for(int i = 0; i < path.size() ; i++){
-					//checkInterruption();
-					//System.out.println("P "  + path.elementAt(i).getAction().getDirection().name());
-
-					//}
-
-					result =  path.elementAt(0).getAction();	
-					this.nextTile = path.elementAt(0).getChild().convertToTile();
+			Node endNode = tree.convertToNode(targetTile);
+	
+	
+			boolean control = false; //test si le noeud est final.
+	
+			NodeComparator nc = new NodeComparator(startNode, endNode);
+			PriorityQueue<Node> qNode = new PriorityQueue<Node>(1,nc);
+			qNode.offer(startNode);
+			while(!control && !qNode.isEmpty()){
+				checkInterruption();
+				Node nActual = qNode.poll();
+				if((nActual.getLine() == endNode.getLine()) && (nActual.getCol() == endNode.getCol())){
+					Vector<Link> path = tree.getPath(nActual);
+					//System.out.println("N "  + nActual.getName());
+					if(!path.isEmpty()){
+						//System.out.println(path.size());
+						//for(int i = 0; i < path.size() ; i++){
+						//checkInterruption();
+						//System.out.println("P "  + path.elementAt(i).getAction().getDirection().name());
+	
+						//}
+	
+						result =  path.elementAt(0).getAction();	
+						this.nextTile = path.elementAt(0).getChild().convertToTile();
+					}
+					control = true;
 				}
-				control = true;
-			}
-			else{
-				Iterator<Link> isl =  tree.developNode(nActual);
-				while(isl.hasNext()){
-					checkInterruption();
-					Node nextNode = isl.next().getChild();
-					qNode.offer(nextNode);
+				else{
+					Iterator<Link> isl =  tree.developNode(nActual);
+					while(isl.hasNext()){
+						checkInterruption();
+						Node nextNode = isl.next().getChild();
+						qNode.offer(nextNode);
+					}
 				}
 			}
+	
+			this.previousTile = this.currentTile;
+			this.currentTile = this.nextTile;
+	
+			/*
+			System.out.println("Startnode : " + startNode.getCol() + " " + startNode.getLine());
+			System.out.println("Endnode : " + endNode.getCol() + " " + endNode.getLine());
+			System.out.println(result.getDirection().name());
+			System.out.println();
+			 */
 		}
-
-		this.previousTile = this.currentTile;
-		this.currentTile = this.nextTile;
-
-		/*
-		System.out.println("Startnode : " + startNode.getCol() + " " + startNode.getLine());
-		System.out.println("Endnode : " + endNode.getCol() + " " + endNode.getLine());
-		System.out.println(result.getDirection().name());
-		System.out.println();
-		 */
 		return result;
 	}
 
