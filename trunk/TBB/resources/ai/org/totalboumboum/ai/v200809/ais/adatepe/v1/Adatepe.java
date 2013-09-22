@@ -152,7 +152,7 @@ public class Adatepe extends ArtificialIntelligence
 		while(itBombes.hasNext())
 		{
 			AiBomb temp = itBombes.next();
-			boardTiles[temp.getCol()][temp.getLine()] = 2;
+			boardTiles[temp.getLine()][temp.getCol()] = 2;
 			int y1 = temp.getCol();
 			int x1 = temp.getLine();
 			while (x1<boardTiles.length-1 && boardTiles[x1+1][y1] != 1 && (x1 < (temp.getLine() + temp.getRange())))
@@ -181,7 +181,7 @@ public class Adatepe extends ArtificialIntelligence
 		while(itFire.hasNext())
 		{
 			AiFire temp = itFire.next();
-			boardTiles[temp.getCol()][temp.getLine()] = 4;
+			boardTiles[temp.getLine()][temp.getCol()] = 4;
 		}
 	}
 	

@@ -1270,10 +1270,11 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		else
 		{
 			
-			if(caractere.getTile().equals(hero.getTile()))
-				dropBombe = true;
-			else
-				targetDeplacement = hero.getTile();
+			if(hero!=null)
+				if(caractere.getTile().equals(hero.getTile()))
+					dropBombe = true;
+				else
+					targetDeplacement = hero.getTile();
 		}
 	}
 	

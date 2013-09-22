@@ -422,11 +422,11 @@ public class DemiragSagar extends ArtificialIntelligence {
 		int i,j;
 		boolean resultat=false;
 //		long nouveauTime [][]= new long[17][15];
-		long nouveauTime [][]= new long[zone.getWidth()][zone.getHeight()]; //adjustment
+		long nouveauTime [][]= new long[zone.getHeight()][zone.getWidth()]; //adjustment
 //		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
+		for (i = 0; i < zone.getHeight(); i++) //adjustment
 //			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (j = 0; j < zone.getWidth(); j++) //adjustment
 			{
 				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
 			}
@@ -434,9 +434,9 @@ public class DemiragSagar extends ArtificialIntelligence {
 		if(this.seCacher(true))
 			resultat=true;
 //		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
+		for (i = 0; i < zone.getHeight(); i++) //adjustment
 //			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
+			for (j = 0; j < zone.getWidth(); j++) //adjustment
 			{
 				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
 			}
@@ -558,16 +558,16 @@ public class DemiragSagar extends ArtificialIntelligence {
 		boolean fuir = false;
 		int min = 10000, temp, i, j;
 //		for (j = 0; j < 15; j++)
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
+		for (i = 0; i < zone.getHeight(); i++) //adjustment
 //			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
-				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant))
+			for (j = 0; j < zone.getWidth(); j++) //adjustment
+				if(!Functions.memeCordonnes(zone.getTile(i,j), this.caseCourant))
 					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
-						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i));
+						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(i, j));
 						if (temp > 0 && min > temp) 
-							if(!dangerOnTheTrack(this.zone.getTile(j, i),poserBombe)) {
+							if(!dangerOnTheTrack(this.zone.getTile(i, j),poserBombe)) {
 								min = temp;
-								petit = this.zone.getTile(j, i);
+								petit = this.zone.getTile(i, j);
 								fuir = true;
 							}
 					}
@@ -638,13 +638,13 @@ public class DemiragSagar extends ArtificialIntelligence {
 		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
 		int sommeHardWall = 0;
 //		for (j = 0; j < 15; j++)
-		for (int j = 0; j < zone.getHeight(); j++) //adjustment
+		for (int i = 0; i < zone.getHeight(); i++) //adjustment
 //			for (i = 0; i < 17; i++)
-			for (int i = 0; i < zone.getWidth(); i++) //adjustment
+			for (int j = 0; j < zone.getWidth(); j++) //adjustment
 //				if (mat[j][i] == -1) {
 				if (mat[i][j] == -1) { //adjustment
 //					AiTile temp = this.zone.getTile(i, j);
-					AiTile temp = this.zone.getTile(j, i); //adjustment
+					AiTile temp = this.zone.getTile(i, j); //adjustment
 					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}

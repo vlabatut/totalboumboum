@@ -43,7 +43,7 @@ public class TimeMatrice {
 	public TimeMatrice(DemiragSagar ai, AiZone zone,int defaultPortee) {
 		this.ai = ai;
 		this.zone=zone;
-		this.timeMatrice=new long[20][20];
+		this.timeMatrice = new long[zone.getHeight()][zone.getWidth()];
 		this.defaultPortee=defaultPortee;
 		this.extendTime=100;
 		this.durationNormale=2400;
@@ -67,8 +67,8 @@ public class TimeMatrice {
 	 * @param time 
 	 * 		Description manquante !
 	 */
-	public void putTime(int col,int line,long time) {
-		this.timeMatrice[col][line]=time;
+	public void putTime(int line,int col,long time) {
+		this.timeMatrice[line][col]=time;
 	};
 	/**
 	 * ça nous donne la matrice du temps
@@ -81,8 +81,8 @@ public class TimeMatrice {
 	 * @return
 	 * 		Description manquante !
 	 */
-	public long getTime(int col,int line) {
-		return this.timeMatrice[col][line];
+	public long getTime(int line,int col) {
+		return this.timeMatrice[line][col];
 	}
 	/**
 	 * 
@@ -92,7 +92,7 @@ public class TimeMatrice {
 	 * 		Description manquante !
 	 */
 	public void putTime(AiTile tile,long time) {
-		this.putTime(tile.getCol(),tile.getLine(),time);
+		this.putTime(tile.getLine(),tile.getCol(),time);
 	}
 	/**
 	 * 
@@ -102,7 +102,7 @@ public class TimeMatrice {
 	 * 		Description manquante !
 	 */
 	public long getTime(AiTile tile) {
-		return this.getTime(tile.getCol(),tile.getLine());
+		return this.getTime(tile.getLine(),tile.getCol());
 	}
 	/**
 	 * Création de la matrice du temps
@@ -111,10 +111,10 @@ public class TimeMatrice {
 		// ajout des murs dans la matrice pour une seule fois
 		int i, j;
 //		for (j = 0; j < 15; j++) {
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
+		for (j = 0; j < zone.getWidth(); j++) //adjustment
 //			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
-				if (Functions.hasWall(this.zone.getTile(j, i)))
+			for (i = 0; i < zone.getHeight(); i++) //adjustment
+				if (Functions.hasWall(this.zone.getTile(i, j)))
 					this.putTime(i,j,-1);
 				else
 					this.putTime(i,j,0);
@@ -128,41 +128,41 @@ public class TimeMatrice {
 	 * 		Description manquante !
 	 */
 	public int[][] getBombMatrice(AiZone zone) {
-		int[][] maMatrice = new int[17][16];
+		int[][] maMatrice = new int[zone.getHeight()][zone.getWidth()];
 		int etki;
 		int i, j;
 //		for (j = 0; j < 15; j++) {
-		for (j = 0; j < zone.getHeight(); j++) //adjustment
+		for (j = 0; j < zone.getWidth(); j++) //adjustment
 //			for (i = 0; i < 17; i++)
-			for (i = 0; i < zone.getWidth(); i++) //adjustment
-				if (Functions.hasWall(zone.getTile(j, i)))
+			for (i = 0; i < zone.getHeight(); i++) //adjustment
+				if (Functions.hasWall(zone.getTile(i, j)))
 					maMatrice[i][j] = -1;
 				else
 					maMatrice[i][j] = 0;
 		if(caseBombes!=null)
 		{	for (AiTile t : this.caseBombes) 
 			{
-				int x = t.getCol();
-				int y = t.getLine();
+				int x = t.getLine();
+				int y = t.getCol();
 				boolean up = false, down = false, left = false, right = false;
 				maMatrice[x][y]++;
 				for (etki = 1; etki <= 5; etki++) {
-					if (x + etki < 16)
+					if (x + etki < maMatrice.length)
 						if (maMatrice[x + etki][y] != -1 && right == false)
 							maMatrice[x + etki][y]++;
 						else
 							right = true;
-					if (x - etki > 0)
+					if (x - etki >= 0)
 						if (maMatrice[x - etki][y] != -1 && left == false)
 							maMatrice[x - etki][y]++;
 						else
 							left = true;
-					if (y + etki < 14)
+					if (y + etki < maMatrice[0].length)
 						if (maMatrice[x][y + etki] != -1 && down == false)
 							maMatrice[x][y + etki]++;
 						else
 							down = true;
-					if (y - etki > 0)
+					if (y - etki >= 0)
 						if (maMatrice[x][y - etki] != -1 && up == false)
 							maMatrice[x][y - etki]++;
 						else
@@ -198,10 +198,10 @@ public class TimeMatrice {
 			System.out.println("Elapsed time : "+elapsedTime);
 		if (elapsedTime > 0) {
 //			for (j = 0; j < 15; j++) {
-			for (j = 0; j < zone.getHeight(); j++) //adjustment
+			for (i = 0; i < zone.getHeight(); i++) //adjustment
 //				for (i = 0; i < 17; i++)
-				for (i = 0; i < zone.getWidth(); i++) //adjustment
-					if(zone.getTile(j, i).getFires().isEmpty())
+				for (j = 0; j < zone.getWidth(); j++) //adjustment
+					if(zone.getTile(i, j).getFires().isEmpty())
 					{						
 						if(this.getTime(i,j)==0 && this.caseBombes!=null)
 						{
@@ -223,16 +223,16 @@ public class TimeMatrice {
 							
 							this.putTime(i, j, this.getTime(i,j) - elapsedTime);
 							if (this.getTime(i,j) < 0) {
-								if (this.zone.getTile(j,i).getItem()==null) {
+								if (this.zone.getTile(i,j).getItem()==null) {
 									this.putTime(i,j,0);
 								}
-								if(zone.getTile(j, i).getBombs().isEmpty())
+								if(zone.getTile(i, j).getBombs().isEmpty())
 									this.putTime(i,j,0);
 								else{
-									if(!zone.getTile(j, i).getBombs().iterator().next().isWorking()){
+									if(!zone.getTile(i, j).getBombs().iterator().next().isWorking()){
 										this.putTime(i,j,this.extendTime);
 										try
-										{	this.diffuseEffetMatrice(zone.getTile(j, i), zone.getTile(j, i).getBombs().iterator().next().getRange(),this.extendTime);
+										{	this.diffuseEffetMatrice(zone.getTile(i, j), zone.getTile(i, j).getBombs().iterator().next().getRange(),this.extendTime);
 										}
 										catch(StackOverflowError e)
 										{	//
@@ -242,10 +242,10 @@ public class TimeMatrice {
 								}
 							}
 						}
-						else if (this.getTime(i,j) == -1 && Functions.hasWall(this.zone.getTile(j, i))){
+						else if (this.getTime(i,j) == -1 && Functions.hasWall(this.zone.getTile(i, j))){
 							this.putTime(i,j,-1);;
 						}
-						else if(this.getTime(i,j) == -1 && !Functions.hasWall(this.zone.getTile(j, i)))
+						else if(this.getTime(i,j) == -1 && !Functions.hasWall(this.zone.getTile(i, j)))
 							this.putTime(i,j,0);;
 					}
 					else
@@ -263,7 +263,7 @@ public class TimeMatrice {
 						// avant la bas il n'y avait pas de bombe 
 						// ou quelque chose qui affecte cette case
 						// Il ya une nouvelle bombe! 
-						if (!this.caseBombes.contains(temp) || this.caseBombes.isEmpty())
+						if (caseBombes!=null && (!this.caseBombes.contains(temp) || this.caseBombes.isEmpty()))
 							// if(this.firstBomb)
 							// this.firstBomb=false;
 							this.placerNouvelleBombe(temp);
@@ -277,7 +277,7 @@ public class TimeMatrice {
 	 * Controle si les effets des bombes sont vrais
 	 * @param col 
 	 * 		Description manquante !
-	 * @param lig 
+	 * @param line 
 	 * 		Description manquante !
 	 * @param temp2 
 	 * 		Description manquante !
@@ -286,18 +286,18 @@ public class TimeMatrice {
 	 * @param nombre 
 	 * 		Description manquante !
 	 */
-	private void corrigeEffetMatrice(int col,int lig,AiTile temp2,int port,long nombre) {
+	private void corrigeEffetMatrice(int line, int col, AiTile temp2, int port, long nombre) {
 		boolean up=true,down=true,left=true,right=true;
 		int step=1;
 		while(up && step<=port)
 		{
-			if(this.timeMatrice[temp2.getCol()][temp2.getLine()-step]==-1)
+			if(this.timeMatrice[temp2.getLine()][temp2.getCol()-step]==-1)
 				up=false;
 				else
 				{
-					if(temp2.getCol()==col && temp2.getLine()-step==lig)
-						if (nombre < this.timeMatrice[temp2.getCol()][temp2.getLine()-step]|| this.timeMatrice[temp2.getCol()][temp2.getLine()-step] == 0)
-							this.timeMatrice[temp2.getCol()][temp2.getLine()-step] = nombre;
+					if(temp2.getLine()==line && temp2.getCol()-step==col)
+						if (nombre < this.timeMatrice[temp2.getLine()][temp2.getCol()-step]|| this.timeMatrice[temp2.getLine()][temp2.getCol()-step] == 0)
+							this.timeMatrice[temp2.getLine()][temp2.getCol()-step] = nombre;
 	
 				}
 			step++;
@@ -305,39 +305,39 @@ public class TimeMatrice {
 		step=1;
 		while(down && step<=port)
 		{
-			if(this.timeMatrice[temp2.getCol()][temp2.getLine()+step]==-1)
+			if(this.timeMatrice[temp2.getLine()][temp2.getCol()+step]==-1)
 				down=false;
 				else
 				{	
-					if(temp2.getCol()==col && temp2.getLine()+step==lig)
-						if (nombre < this.timeMatrice[temp2.getCol()][temp2.getLine()+step]|| this.timeMatrice[temp2.getCol()][temp2.getLine()+step] == 0)
-							this.timeMatrice[temp2.getCol()][temp2.getLine()+step] = nombre;
+					if(temp2.getLine()==line && temp2.getCol()+step==col)
+						if (nombre < this.timeMatrice[temp2.getLine()][temp2.getCol()+step]|| this.timeMatrice[temp2.getLine()][temp2.getCol()+step] == 0)
+							this.timeMatrice[temp2.getLine()][temp2.getCol()+step] = nombre;
 				}
 			step++;
 		}
 		step=1;
 		while(left && step<=port)
 		{
-			if(this.timeMatrice[temp2.getCol()-step][temp2.getLine()]==-1)
+			if(this.timeMatrice[temp2.getLine()-step][temp2.getCol()]==-1)
 				left=false;
 				else
 				{
-					if(temp2.getCol()-step==col && temp2.getLine()==lig)
-						if (nombre < this.timeMatrice[temp2.getCol()-step][temp2.getLine()]|| this.timeMatrice[temp2.getCol()-step][temp2.getLine()] == 0)
-							this.timeMatrice[temp2.getCol()-step][temp2.getLine()] = nombre;
+					if(temp2.getLine()-step==line && temp2.getCol()==col)
+						if (nombre < this.timeMatrice[temp2.getLine()-step][temp2.getCol()]|| this.timeMatrice[temp2.getLine()-step][temp2.getCol()] == 0)
+							this.timeMatrice[temp2.getLine()-step][temp2.getCol()] = nombre;
 				}
 			step++;
 		}
 		step=1;
 		while(right && step<=port)
 		{
-			if(this.timeMatrice[temp2.getCol()+step][temp2.getLine()]==-1)
+			if(this.timeMatrice[temp2.getLine()+step][temp2.getCol()]==-1)
 				right=false;
 				else
 				{	
-					if(temp2.getCol()+step==col && temp2.getLine()==lig)
-						if (nombre < this.timeMatrice[temp2.getCol()+step][temp2.getLine()]|| this.timeMatrice[temp2.getCol()+step][temp2.getLine()] == 0)
-							this.timeMatrice[temp2.getCol()+step][temp2.getLine()] = nombre;
+					if(temp2.getLine()+step==line && temp2.getCol()==col)
+						if (nombre < this.timeMatrice[temp2.getLine()+step][temp2.getCol()]|| this.timeMatrice[temp2.getLine()+step][temp2.getCol()] == 0)
+							this.timeMatrice[temp2.getLine()+step][temp2.getCol()] = nombre;
 				}
 			step++;
 		}
@@ -361,7 +361,7 @@ public class TimeMatrice {
 		int portee = this.defaultPortee;
 		if(!temp.getBombs().isEmpty())
 			portee=temp.getBombs().iterator().next().getRange();
-		if (this.timeMatrice[temp.getCol()][temp.getLine()] == 0) {
+		if (this.timeMatrice[temp.getLine()][temp.getCol()] == 0) {
 			//Dans la case ou on va poser une bombe ,il n'ya pas de bombe ni un effet
 			// posez la bombe(2400)
 			this.putTime(temp,this.durationNormale);
@@ -371,61 +371,64 @@ public class TimeMatrice {
 			//Regardez les effets :Si il ya un -1 dans un des 4 directions
 			// stop
 			while (up && step <= portee) {
-				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == -1 || zone.getTile(temp.getLine()-step, temp.getCol()).getItem()!=null)
+				if (temp.getCol() - step>=0 && this.timeMatrice[temp.getLine()][temp.getCol() - step] == -1 
+						|| temp.getLine()-step>=0 && zone.getTile(temp.getLine()-step, temp.getCol()).getItem()!=null)
 					// stop
 					up = false;
 				else // Si 0 alors durationNormale
 				// dolu ise kucuk olan
 				// Si plein ,la petite 
-				if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == 0)
-					this.timeMatrice[temp.getCol()][temp.getLine() - step] = this.durationNormale;
+				if (this.timeMatrice[temp.getLine()][temp.getCol() - step] == 0)
+					this.timeMatrice[temp.getLine()][temp.getCol() - step] = this.durationNormale;
 				step++;
 			}
 			step = 1;
 			while (down && step <= portee) {
-				if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == -1 || zone.getTile(temp.getLine()+step, temp.getCol()).getItem()!=null)
+				if (temp.getCol() + step<timeMatrice[0].length && this.timeMatrice[temp.getLine()][temp.getCol() + step] == -1 
+						|| temp.getLine()+step<zone.getHeight() && zone.getTile(temp.getLine()+step, temp.getCol()).getItem()!=null)
 					// stop
 					down = false;
 				else // Si 0 durationNormale
 				// si plein,la petite
-				if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == 0)
-					this.timeMatrice[temp.getCol()][temp.getLine() + step] = this.durationNormale;
+				if (this.timeMatrice[temp.getLine()][temp.getCol() + step] == 0)
+					this.timeMatrice[temp.getLine()][temp.getCol() + step] = this.durationNormale;
 				step++;
 			}
 			step = 1;
 			while (left && step <= portee) {
-				if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == -1 || zone.getTile(temp.getLine(), temp.getCol()-step).getItem()!=null)
+				if (temp.getLine() - step>=0 && this.timeMatrice[temp.getLine() - step][temp.getCol()] == -1 
+						|| temp.getCol()-step>=0 && zone.getTile(temp.getLine(), temp.getCol()-step).getItem()!=null)
 					// stop
 					left = false;
 				else //  Si 0 durationNormale
 				// si plein,la petite
-				if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == 0)
-					this.timeMatrice[temp.getCol() - step][temp.getLine()] = this.durationNormale;
+				if (this.timeMatrice[temp.getLine() - step][temp.getCol()] == 0)
+					this.timeMatrice[temp.getLine() - step][temp.getCol()] = this.durationNormale;
 				step++;
 			}
 			step = 1;
 			while (right && step <= portee) {
-				if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == -1 || zone.getTile(temp.getLine(), temp.getCol()+step).getItem()!=null)
+				if (temp.getLine() + step<timeMatrice.length && this.timeMatrice[temp.getLine() + step][temp.getCol()] == -1 
+						|| temp.getCol()+step<zone.getWidth() && zone.getTile(temp.getLine(), temp.getCol()+step).getItem()!=null)
 					// stop
 					right = false;
 				else // Si 0 durationNormale
 				// si plein,la petite
-				if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == 0)
-					this.timeMatrice[temp.getCol() + step][temp.getLine()] = this.durationNormale;
+				if (this.timeMatrice[temp.getLine() + step][temp.getCol()] == 0)
+					this.timeMatrice[temp.getLine() + step][temp.getCol()] = this.durationNormale;
 				step++;
 			}
 
 		} 
-		else if (this.timeMatrice[temp.getCol()][temp.getLine()] > 0)
+		else if (this.timeMatrice[temp.getLine()][temp.getCol()] > 0)
 		{	try
-			{	this.diffuseEffetMatrice(temp, portee, this.timeMatrice[temp.getCol()][temp.getLine()]);
+			{	this.diffuseEffetMatrice(temp, portee, this.timeMatrice[temp.getLine()][temp.getCol()]);
 				//	this.printTimeMatrice(this.timeMatrice);
 			}
 			catch(StackOverflowError e)
 			{	//
 			}
 		}
-
 	}
 	
 	/**
@@ -446,89 +449,89 @@ public class TimeMatrice {
 		int step = 1;
 		while (up && step <= portee) {			
 			ai.checkInterruption();
-			if (this.timeMatrice[temp.getCol()][temp.getLine() - step] == -1)
+			if (this.timeMatrice[temp.getLine()][temp.getCol() - step] == -1)
 				// stop
 				up = false;
-			else if (this.caseBombes.contains(this.zone.getTile(temp.getLine() // Est-ce qu'il ya une bombe?
+			else if (temp.getLine()-step>=0 && this.caseBombes.contains(this.zone.getTile(temp.getLine() // Est-ce qu'il ya une bombe?
 					- step, temp.getCol()))) {
-				if (min < this.timeMatrice[temp.getCol()][temp.getLine() - step]) {
+				if (min < this.timeMatrice[temp.getLine()][temp.getCol() - step]) {
 					this.diffuseEffetMatrice(this.zone.getTile(temp.getLine() - step, temp.getCol()), 5, min);
 					up = false;
 				}
 			}
-			else if (this.timeMatrice[temp.getCol()][temp.getLine() - step] > 0) { 
+			else if (this.timeMatrice[temp.getLine()][temp.getCol() - step] > 0) { 
 				// pas de bombe
 				// est-ce qu'il ya un effet?
-					if (this.timeMatrice[temp.getCol()][temp.getLine() - step] > min)
-						this.timeMatrice[temp.getCol()][temp.getLine() - step] = min;
+					if (this.timeMatrice[temp.getLine()][temp.getCol() - step] > min)
+						this.timeMatrice[temp.getLine()][temp.getCol() - step] = min;
 			}
-			else if (this.timeMatrice[temp.getCol()][temp.getLine()	- step] == 0)
-					this.timeMatrice[temp.getCol()][temp.getLine() - step] = min;
+			else if (this.timeMatrice[temp.getLine()][temp.getCol()	- step] == 0)
+					this.timeMatrice[temp.getLine()][temp.getCol() - step] = min;
 			step++;
 		}
 		step = 1;
 		while (down && step <= portee) {
 			ai.checkInterruption();
-			if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == -1)
+			if (this.timeMatrice[temp.getLine()][temp.getCol() + step] == -1)
 				down = false;
-			else if (this.caseBombes.contains(this.zone.getTile(temp.getLine()
+			else if (temp.getLine()+step<zone.getHeight() && this.caseBombes.contains(this.zone.getTile(temp.getLine()
 					+ step, temp.getCol()))) {
-				if (min < this.timeMatrice[temp.getCol()][temp.getLine() + step]) {
+				if (min < this.timeMatrice[temp.getLine()][temp.getCol() + step]) {
 					this.diffuseEffetMatrice(this.zone.getTile(temp.getLine()
 							+ step, temp.getCol()), 5, min);
 					down = false;
 				}
 			} 
-			else if (this.timeMatrice[temp.getCol()][temp.getLine() + step] > 0) {
-					if (this.timeMatrice[temp.getCol()][temp.getLine() + step] > min)
-						this.timeMatrice[temp.getCol()][temp.getLine() + step] = min;
+			else if (this.timeMatrice[temp.getLine()][temp.getCol() + step] > 0) {
+					if (this.timeMatrice[temp.getLine()][temp.getCol() + step] > min)
+						this.timeMatrice[temp.getLine()][temp.getCol() + step] = min;
 			}
-			else if (this.timeMatrice[temp.getCol()][temp.getLine() + step] == 0)
-					this.timeMatrice[temp.getCol()][temp.getLine() + step] = min;
+			else if (this.timeMatrice[temp.getLine()][temp.getCol() + step] == 0)
+					this.timeMatrice[temp.getLine()][temp.getCol() + step] = min;
 			step++;
 		}
 		step = 1;
 		while (left && step <= portee) {
 			ai.checkInterruption();
-			if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == -1)
+			if (this.timeMatrice[temp.getLine() - step][temp.getCol()] == -1)
 				// stop
 				left = false;
 			else // Est-ce qu'il ya une bombe?
-			if (this.caseBombes.contains(this.zone.getTile(temp.getLine(), temp.getCol() - step))) {
-				if (min < this.timeMatrice[temp.getCol() - step][temp.getLine()]) {
+			if (temp.getCol() - step>=0 && this.caseBombes.contains(this.zone.getTile(temp.getLine(), temp.getCol() - step))) {
+				if (min < this.timeMatrice[temp.getLine() - step][temp.getCol()]) {
 					this.diffuseEffetMatrice(this.zone.getTile(temp.getLine(),temp.getCol() - step), 5, min);
 					left = false;
 				}
 			}
 				// Pas de bombe
 				// Est-ce qu'il ya un effet
-			else if (this.timeMatrice[temp.getCol() - step][temp.getLine()] > 0) {
-					if (this.timeMatrice[temp.getCol() - step][temp.getLine()] > min)
-						this.timeMatrice[temp.getCol() - step][temp.getLine()] = min;
+			else if (this.timeMatrice[temp.getLine() - step][temp.getCol()] > 0) {
+					if (this.timeMatrice[temp.getLine() - step][temp.getCol()] > min)
+						this.timeMatrice[temp.getLine() - step][temp.getCol()] = min;
 			}
-			else if (this.timeMatrice[temp.getCol() - step][temp.getLine()] == 0)
-					this.timeMatrice[temp.getCol() - step][temp.getLine()] = min;			
+			else if (this.timeMatrice[temp.getLine() - step][temp.getCol()] == 0)
+					this.timeMatrice[temp.getLine() - step][temp.getCol()] = min;			
 			step++;
 		}
 		step = 1;
 		while (right && step <= portee) {
 			ai.checkInterruption();
-			if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == -1)
+			if (this.timeMatrice[temp.getLine() + step][temp.getCol()] == -1)
 				right = false;
 			else // Est-ce qu'il ya une bombe?
-			if (this.caseBombes.contains(this.zone.getTile(temp.getLine(), temp.getCol() + step))) {
-				if (min < this.timeMatrice[temp.getCol() + step][temp.getLine()]) {					
+			if (temp.getCol() + step<zone.getWidth() && this.caseBombes.contains(this.zone.getTile(temp.getLine(), temp.getCol() + step))) {
+				if (min < this.timeMatrice[temp.getLine() + step][temp.getCol()]) {					
 					this.diffuseEffetMatrice(this.zone.getTile(temp.getLine(),
 							temp.getCol() + step), 5, min);
 					right = false;
 				}
 			} 
-			else if (this.timeMatrice[temp.getCol() + step][temp.getLine()] > 0) {
-					if (this.timeMatrice[temp.getCol() + step][temp.getLine()] > min)
-						this.timeMatrice[temp.getCol() + step][temp.getLine()] = min;
+			else if (this.timeMatrice[temp.getLine() + step][temp.getCol()] > 0) {
+					if (this.timeMatrice[temp.getLine() + step][temp.getCol()] > min)
+						this.timeMatrice[temp.getLine() + step][temp.getCol()] = min;
 			}
-			else if (this.timeMatrice[temp.getCol() + step][temp.getLine()] == 0)
-					this.timeMatrice[temp.getCol() + step][temp.getLine()] = min;
+			else if (this.timeMatrice[temp.getLine() + step][temp.getCol()] == 0)
+					this.timeMatrice[temp.getLine() + step][temp.getCol()] = min;
 			
 			step++;
 		}
