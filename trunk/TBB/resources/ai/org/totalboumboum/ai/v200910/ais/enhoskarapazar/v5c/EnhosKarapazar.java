@@ -523,7 +523,7 @@ public class EnhosKarapazar extends ArtificialIntelligence {
 						} else {
 							for (int i = rivalLine - 1; i > ownHeroLine; i--) {
 								checkInterruption(); // APPEL OBLIGATOIRE
-									if (dZone.getEnum(ownHeroCol, i) == ZoneEnum.BONUSBOMBE
+									if (dZone.getEnum(i, ownHeroCol) == ZoneEnum.BONUSBOMBE
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.BONUSRANGE
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.DESTRUCTIBLES
 											|| dZone.getEnum(i, ownHeroCol) == ZoneEnum.INDESTRUCTIBLES) {
