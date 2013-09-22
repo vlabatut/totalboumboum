@@ -284,7 +284,8 @@ public class UtilityHandler extends AiUtilityHandler<SaglamSeven> {
 			} else if (destKont) { // count > HERO_COUNT){
 				result = caseMap.get(MurDestructibles);
 			}
-
+			else
+				result = caseMap.get(ItemVisibleMALUS);
 		}
 		// mode attaque
 		else if (ai.modeHandler.getMode() == AiMode.ATTACKING) {
