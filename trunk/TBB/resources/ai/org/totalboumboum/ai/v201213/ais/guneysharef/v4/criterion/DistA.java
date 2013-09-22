@@ -47,7 +47,7 @@ public class DistA extends AiUtilityCriterionInteger<GuneySharef>
 	 */
 	public Integer processValue(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
-		int result = 0;
+		int result = 1;
 		AiZone z=this.ai.getZone();
 		AiHero h=z.getOwnHero();
 		
@@ -55,16 +55,11 @@ public class DistA extends AiUtilityCriterionInteger<GuneySharef>
 			ai.checkInterruption();
 			if(this.ai.getDist(h2.getTile(), tile)<=Proche)
 				result=3;
-			if(this.ai.getDist(h2.getTile(), tile) > Proche && this.ai.getDist(h.getTile(), tile) < Loins )
+			else if(this.ai.getDist(h2.getTile(), tile) > Proche && this.ai.getDist(h.getTile(), tile) < Loins )
 				result=2;
-			if(this.ai.getDist(h2.getTile(), tile) >= Loins)
+			else if(this.ai.getDist(h2.getTile(), tile) >= Loins)
 				result=1;
 		}
-				
-		
-		
-		
-		
 		
 		return result;
 	}
