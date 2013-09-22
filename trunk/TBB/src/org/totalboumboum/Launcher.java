@@ -1726,5 +1726,3 @@ public class Launcher
 // aller, et donc elle n'exploserait p-ê pas si vite. donc en terme de recherche de chemin,
 // ça peut être la galère... ou pas. peut être qu'il faut simplifier, à ce niveau si prospectif.
 
-// TODO créer un niveau de test: normal, mais sans blocs destructibles
-// TODO voir le pb, ie pq une combinaison est soit disant manquante alors qu'elle semble être présente dans la table
