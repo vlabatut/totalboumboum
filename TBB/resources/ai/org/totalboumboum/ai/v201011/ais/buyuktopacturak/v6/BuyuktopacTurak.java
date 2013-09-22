@@ -475,7 +475,7 @@ public class BuyuktopacTurak extends ArtificialIntelligence
 		//on trouve la chemine plus proche
 		if(tile1!=tile2){
 			path = aStarPath(tile1,tile2);
-			if(path.getTiles().size()!=0){
+			if(path!=null && path.getTiles().size()!=0){
 				distance=path.getLength()-1;
 			}
 			else{

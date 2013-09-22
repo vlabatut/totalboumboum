@@ -727,13 +727,16 @@ public class OzdokerOzen extends ArtificialIntelligence
 
 		}
 		else{ //Oui il y a de path,mais est-ce que on est arrivé à notre cible? 
-			if(nextMove.getTiles().size()==1){// oui, on l'est arrive
+			if(nextMove.getTiles().size()==1)
+			{	// oui, on l'est arrive
 				if(!collecteBonus){
 					permissionPoseBombe=true;
 				}
 				arriverACible=true;
 				check=false;
-			}else{//Non, on n'est pas arrivé à notre cible
+			}
+			else if(nextMove!=null && nextMove.getLength()>1)
+			{	//Non, on n'est pas arrivé à notre cible
 				@SuppressWarnings("unused")
 				AiTile cible=nextMove.getLastTile();
 				//on prend le tile avant pour controler des dangeurs

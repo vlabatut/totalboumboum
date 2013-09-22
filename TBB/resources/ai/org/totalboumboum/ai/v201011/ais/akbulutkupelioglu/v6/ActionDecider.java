@@ -141,13 +141,15 @@ public class ActionDecider
 					StrategyStep nextStep = previousStrategy.waypoints.peek();
 					AiTile nextTile = nextStep.getTile();
 					AiPath pathToNextTile = new AiPath();
-					try
-					{
-						pathToNextTile = astar.processShortestPath(ownTile, nextTile);
-						pathToNextTile.checkStartingPoint();
-					}catch(LimitReachedException e)
-					{
-						//e.printStackTrace();
+					if(nextTile!=null)
+					{	try
+						{
+							pathToNextTile = astar.processShortestPath(ownTile, nextTile);
+							pathToNextTile.checkStartingPoint();
+						}catch(LimitReachedException e)
+						{
+							//e.printStackTrace();
+						}
 					}
 					int distanceToNextTile = pathToNextTile.getLength();
 					double pixelDistanceToNextTile = distanceToNextTile * ownTile.getSize();
@@ -235,7 +237,7 @@ public class ActionDecider
 				}else
 				{
 					StrategyStep step = previousStrategy.waypoints.peek();
-					if(step.getTile().equals(ownTile))
+					if(step.getTile()!=null && step.getTile().equals(ownTile))
 					{
 						//goal!
 						if(!ownTile.getItems().isEmpty())
@@ -323,14 +325,16 @@ public class ActionDecider
 		if(newStrategy.waypoints.isEmpty())
 			return new AiAction(AiActionName.NONE); 
 		AiTile endTile = newStrategy.waypoints.peek().getTile();
-		try
-		{
-			path = astar.processShortestPath(zone.getOwnHero().getTile(), endTile);
-			path.checkStartingPoint();
-		}catch(LimitReachedException e)
-		{
-			// 
-			//e.printStackTrace();
+		if(endTile!=null)
+		{	try
+			{
+				path = astar.processShortestPath(zone.getOwnHero().getTile(), endTile);
+				path.checkStartingPoint();
+			}catch(LimitReachedException e)
+			{
+				// 
+				//e.printStackTrace();
+			}
 		}
 		if(path.getLength()<=1)
 			return new AiAction(AiActionName.NONE);
@@ -400,8 +404,17 @@ public class ActionDecider
 	 */
 	private List<AiTile> getSafeTiles(AiHero ownHero) throws StopRequestException
 	{
-		monIa.checkInterruption();	
-		return getSafeTilesCustom(ownHero.getTile(), ownHero, null, interest);
+		monIa.checkInterruption();
+		List<AiTile> result = new ArrayList<AiTile>();
+		try
+		{
+			result = getSafeTilesCustom(ownHero.getTile(), ownHero, null, interest);
+		}
+		catch(StackOverflowError e)
+		{
+			//
+		}
+		return result;
 	}
 	
 	/**
@@ -417,16 +430,21 @@ public class ActionDecider
 	{
 		monIa.checkInterruption();
 		Matrix customMatrix = mode.getCustom(ownHero); //MOFO duzgun. v2: oldu gibi?
-		List<AiTile> result = getSafeTilesCustom(ownHero.getTile(), ownHero, null, customMatrix);
+		List<AiTile> result = null;
+		try
+		{	result = getSafeTilesCustom(ownHero.getTile(), ownHero, null, customMatrix);
+		}
+		catch(StackOverflowError e)
+		{
+			//
+		}
 		if(result!=null)
 		{
 			return result;
-		}else
+		}
+		else
 		{
 			return new ArrayList<AiTile>();
 		}
 	}
-	
-	
-	
 }
