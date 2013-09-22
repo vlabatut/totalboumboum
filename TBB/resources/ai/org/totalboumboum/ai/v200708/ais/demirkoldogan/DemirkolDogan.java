@@ -699,9 +699,10 @@ public class DemirkolDogan extends ArtificialIntelligence{
 		}
 		//supprimer les block qui sont des possible "dead-end"s.
 		boolean deadEnd = false;
-		for (int i=1; i<=getBombPowerAt(ownPosition[0], ownPosition[1]) && (ownPosition[0]+i <16); i++)
+		for (int i=1; (ownPosition[0]+i <matrix.length) && i<=getBombPowerAt(ownPosition[0], ownPosition[1]); i++)
 		{
-			if (matrix[ownPosition[0]+i][ownPosition[1]] == DD_DANGER_POINT)
+			if (	//ownPosition[0]+i>=0 && ownPosition[0]+i<matrix.length && ownPosition[1]>=0 && ownPosition[1]<matrix[0].length &&
+					matrix[ownPosition[0]+i][ownPosition[1]] == DD_DANGER_POINT)
 				if (isSurroundedBy(new Block(ownPosition[0]+i, ownPosition[1]), AI_BLOCK_EMPTY, matrix))
 					deadEnd = false;
 				else
@@ -711,7 +712,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 			adjacentBlocks.remove(rightBlock); 
 		
 		deadEnd = false;
-		for (int i=1; i<=getBombPowerAt(ownPosition[0], ownPosition[1]) && (ownPosition[0]-i > 0); i++)
+		for (int i=1; (ownPosition[0]-i >= 0) && i<=getBombPowerAt(ownPosition[0], ownPosition[1]); i++)
 		{
 			if (matrix[ownPosition[0]-i][ownPosition[1]] == DD_DANGER_POINT)
 				if (isSurroundedBy(new Block(ownPosition[0]-i, ownPosition[1]), AI_BLOCK_EMPTY, matrix))
@@ -723,7 +724,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 			adjacentBlocks.remove(leftBlock);
 		
 		deadEnd = false;
-		for (int i=1; i<=getBombPowerAt(ownPosition[0], ownPosition[1]) && (ownPosition[1]-i > 0); i++)
+		for (int i=1; (ownPosition[1]-i >= 0) && i<=getBombPowerAt(ownPosition[0], ownPosition[1]); i++)
 		{
 			if (matrix[ownPosition[0]][ownPosition[1]-i] == DD_DANGER_POINT)
 				if (isSurroundedBy(new Block(ownPosition[0], ownPosition[1]-i), AI_BLOCK_EMPTY, matrix))
@@ -735,7 +736,7 @@ public class DemirkolDogan extends ArtificialIntelligence{
 			adjacentBlocks.remove(upBlock);
 		
 		deadEnd = false;
-		for (int i=1; i<=getBombPowerAt(ownPosition[0], ownPosition[1]) && (ownPosition[1]+i < 14); i++)
+		for (int i=1; (ownPosition[1]+i < matrix[0].length) && i<=getBombPowerAt(ownPosition[0], ownPosition[1]); i++)
 		{
 			if (matrix[ownPosition[0]][ownPosition[1]+i] == DD_DANGER_POINT)
 				if (isSurroundedBy(new Block(ownPosition[0], ownPosition[1]+i), AI_BLOCK_EMPTY, matrix))

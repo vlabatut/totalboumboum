@@ -87,8 +87,8 @@ public class ErenGokce extends ArtificialIntelligence {
 		right=isMovePossible(own[0],own[1],AI_ACTION_GO_RIGHT);
 		whereDidIStart(up, down, left, right);
 		//bombe dans l'environnement
-		for(int i=0;i<=16;i++)
-			for(int j=0;j<=14;j++)
+		for(int i=0;i<zoneMatrix.length;i++)
+			for(int j=0;j<zoneMatrix[0].length;j++)
 				if(zoneMatrix[i][j]==AI_BLOCK_BOMB)
 				{
 					bombpos[0]=i;
