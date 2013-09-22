@@ -22,7 +22,7 @@
 	<ups value="50" />
 	<autoAdvance value="TOURNAMENT" delay="3000" tournament="RANKS" pack="v200910" />
 	<hideAllAis value="false" />
-	<bombUselessAis value="3000" />
+	<bombUselessAis value="0" />
 	<displayExceptions value="true" />
 	<logExceptions value="false" />
 </ais>
