@@ -1726,3 +1726,4 @@ public class Launcher
 // aller, et donc elle n'exploserait p-ê pas si vite. donc en terme de recherche de chemin,
 // ça peut être la galère... ou pas. peut être qu'il faut simplifier, à ce niveau si prospectif.
 
+//TODO écrire un agent très simple, Direct, qui pose une bombe le plus loin possible de l'adversaire
