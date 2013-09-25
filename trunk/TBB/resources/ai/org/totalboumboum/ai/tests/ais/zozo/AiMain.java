@@ -126,23 +126,19 @@ public class AiMain extends AiManager
 	 */
 	private static void generateXmlPreferences()
 	{	// nom de la catégorie
-		String cat = "ATTACK_OPEN";
+		String cat = "ATTACK_CLOSED";
 		// noms des critères, par ordre de préférence
 		List<String> critNames = Arrays.asList(
 			"RETREAT",
 			"THREAT",
-			"PIVOTAL",
 			"DISTARG",
-			"CHAIN",
 			"DISTANCE");
 		// domaines complets des critères, dans le même ordre que ci-dessus
 		// les valeurs de chaque domaine sont rangées par ordre de préférence
 		List<List<String>> critDomains = Arrays.asList(
 			Arrays.asList("true ","false"),
 			Arrays.asList("true ","false"),
-			Arrays.asList("true ","false"),
-			Arrays.asList("2","1","3","0"),
-			Arrays.asList("true ","false"),
+			Arrays.asList("3","2","1","0"),
 			Arrays.asList("0","1","2","3","4"));
 		
 		// cette boucle va afficher dans la console le code xml correspondant
