@@ -322,9 +322,9 @@ public abstract class AiTile implements Comparable<AiTile>
 
 	@Override
     public int compareTo(AiTile tile)
-    {	int result = col - tile.getCol();
+    {	int result = row - tile.getRow();
     	if(result==0)
-    		result = - (row - tile.getRow());
+    		result = col - tile.getCol();
     	return result;
     }
 
