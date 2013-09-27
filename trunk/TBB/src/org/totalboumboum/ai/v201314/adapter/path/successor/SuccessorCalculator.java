@@ -23,12 +23,19 @@ package org.totalboumboum.ai.v201314.adapter.path.successor;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201314.adapter.data.AiHero;
+import org.totalboumboum.ai.v201314.adapter.data.AiItem;
+import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201314.adapter.data.AiState;
+import org.totalboumboum.ai.v201314.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
+import org.totalboumboum.ai.v201314.adapter.path.cost.CostCalculator;
 
 /**
  * Permet de définir une fonction successeur utilisée par un algorithme
@@ -69,6 +76,102 @@ public abstract class SuccessorCalculator
 	/** Agent utilisant cette classe */
 	protected ArtificialIntelligence ai = null;
 	
+	/////////////////////////////////////////////////////////////////
+	// OBSTACLES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Considérer les adversaires comme des obstacles */
+	protected boolean considerOpponents = false;
+	/** Considérer les malus comme des obstacles */
+	protected boolean considerMaluses = false;
+	
+	/**
+	 * Change le statut des joueurs adverses. Par défaut,
+	 * ils ne sont pas considérés comme des obstacles
+	 * infranchissables. Il est possible de changer ça
+	 * grâce à cette méthode
+	 * <br/>
+	 * Bien sûr, utiliser cette méthode en même temps que
+	 * {@link CostCalculator#setOpponentCost(double)} n'aurait
+	 * absolument aucun sens, puisque le coût supplémentaire
+	 * serait ignoré.
+	 * 
+	 * @param considerOpponents
+	 * 		{@@code true} pour considérer les adversaires comme des obstacles.
+	 */
+	public void setConsiderOpponents(boolean considerOpponents)
+	{	this.considerOpponents = considerOpponents;
+	}
+	
+	/**
+	 * Indique si la case passée en paramètre contient
+	 * au moins un adversaire pouvant être un obstacle.
+	 * L'adversaire doit être encore en jeu.
+	 * 
+	 * @param tile
+	 * 		Case à traiter.
+	 * @return
+	 * 		{@code true} ssi la case contient un adversaire encore en jeu.
+	 */
+	protected boolean containsOpponent(AiTile tile)
+	{	boolean result = false;
+		AiHero ownHero = ai.getZone().getOwnHero();
+		List<AiHero> heroes = tile.getHeroes();
+		Iterator<AiHero> it = heroes.iterator();
+		while(!result && it.hasNext())
+		{	AiHero hero = it.next();
+			if(!hero.equals(ownHero))
+			{	AiState state = hero.getState();
+				AiStateName name = state.getName();
+				result = name==AiStateName.STANDING || name==AiStateName.MOVING;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Change le statut des items malus. Par défaut,
+	 * ils ne sont pas considérés comme des obstacles
+	 * infranchissables. Il est possible de changer ça
+	 * grâce à cette méthode
+	 * <br/>
+	 * Bien sûr, utiliser cette méthode en même temps que
+	 * {@link CostCalculator#setMalusCost(double)} n'aurait
+	 * absolument aucun sens, puisque le coût supplémentaire
+	 * serait ignoré.
+	 * 
+	 * @param considerMaluses
+	 * 		{@@code true} pour considérer les malus comme des obstacles.
+	 */
+	public void setConsiderMaluses(boolean considerMaluses)
+	{	this.considerMaluses = considerMaluses;
+	}
+	
+	/**
+	 * Indique si la case passée en paramètre contient
+	 * au moins un malus pouvant être un obstacle.
+	 * Le malus doit être encore en jeu.
+	 * 
+	 * @param tile
+	 * 		Case à traiter.
+	 * @return
+	 * 		{@code true} ssi la case contient un adversaire encore en jeu.
+	 */
+	protected boolean containsMalus(AiTile tile)
+	{	boolean result = false;
+		List<AiItem> items = tile.getItems();
+		Iterator<AiItem> it = items.iterator();
+		while(!result && it.hasNext())
+		{	AiItem item = it.next();
+			AiItemType type = item.getType();
+			if(!type.isBonus())
+			{	AiState state = item.getState();
+				AiStateName name = state.getName();
+				result =  name==AiStateName.STANDING || name==AiStateName.MOVING;
+			}
+		}
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

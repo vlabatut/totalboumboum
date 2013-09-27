@@ -137,14 +137,26 @@ public class ApproximateSuccessorCalculator extends SuccessorCalculator
 			// pour chaque case voisine :
 			for(Direction direction: Direction.getPrimaryValues())
 			{	AiTile neighbor = tile.getNeighbor(direction);
+				
 				// on teste si elle est contient un mur indestructible :
 				// tout autre obstacle est considéré comme traversable
+				// (sauf options considerXxxxx)
 				List<AiBlock> blocks = neighbor.getBlocks();
 				boolean noProcess = false;
-				Iterator<AiBlock> it = blocks.iterator();
-				while(!noProcess && it.hasNext())
-				{	AiBlock block = it.next();
+				Iterator<AiBlock> itB = blocks.iterator();
+				while(!noProcess && itB.hasNext())
+				{	AiBlock block = itB.next();
 					noProcess = !block.isDestructible();
+				}
+				
+				// on considère éventuellement les adversaires comme des obstacles
+				if(!noProcess && considerOpponents)
+				{	noProcess = containsOpponent(neighbor);
+				}
+				
+				// on considère éventuellement les malus comme des obstacles
+				if(!noProcess && considerMaluses)
+				{	noProcess = containsMalus(neighbor);
 				}
 				
 				// si la case ne contient pas de mur indestructible et
