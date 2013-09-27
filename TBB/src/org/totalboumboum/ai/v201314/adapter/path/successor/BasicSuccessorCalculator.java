@@ -137,12 +137,16 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 			// pour chaque case voisine :
 			for(Direction direction: Direction.getPrimaryValues())
 			{	AiTile neighbor = tile.getNeighbor(direction);
-				
-				// on teste si elle est traversable et n'a pas déjà été explorée
-				if(neighbor.isCrossableBy(hero) && processedTilesMap.get(neighbor)==null)
-				{	AiLocation location = new AiLocation(neighbor);
-					AiSearchNode child = new AiSearchNode(location,node);
-					result.add(child);
+
+				// on teste si la case n'est pas considérée comme un obstacle
+				if((!considerOpponents || !containsOpponent(neighbor)) && 
+					(!considerMaluses || !containsMalus(neighbor)))
+				{	// on teste si elle est traversable et n'a pas déjà été explorée
+					if(neighbor.isCrossableBy(hero) && processedTilesMap.get(neighbor)==null)
+					{	AiLocation location = new AiLocation(neighbor);
+						AiSearchNode child = new AiSearchNode(location,node);
+						result.add(child);
+					}
 				}
 			}
 		}

@@ -245,7 +245,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	// on récupère la case cible
-			AiTile targetTile = tile.getNeighbor(direction);
+			AiTile neighbor = tile.getNeighbor(direction);
 			
 			// on teste si on a le droit de la traiter,
 			// en fonction du mode de recherche sélectionné
@@ -256,10 +256,10 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 			}
 			else if(searchMode==MODE_NOBRANCH)
 			{	// case pas déjà traitée dans la même branche
-				process = procTiles.get(targetTile)==null;
+				process = procTiles.get(neighbor)==null;
 			}
 			else //if(searchMode==MODE_NOTREE)
-			{	AiSearchNode n = procTiles.get(targetTile);
+			{	AiSearchNode n = procTiles.get(neighbor);
 				// case pas déjà traitée
 				if(n==null)
 					process = true;
@@ -275,6 +275,10 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 				}
 			}
 
+			// on teste s'il y a un obstacle "artificiel" (adversaire ou malus)
+			process = process && (!considerOpponents || !containsOpponent(neighbor)) && 
+					(!considerMaluses || !containsMalus(neighbor));
+			
 			// si on a le droit de traiter la case
 			if(process)
 			{	// on applique le modèle pour obtenir la zone résultant de l'action
@@ -295,7 +299,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 					AiLocation futureLocation = new AiLocation(futureHero.getPosX(),futureHero.getPosY(),futureZone);
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
-					if(futureTile.equals(targetTile))
+					if(futureTile.equals(neighbor))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AiSearchNode child = new AiSearchNode(futureLocation,node);
 						result.add(child);

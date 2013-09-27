@@ -247,7 +247,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		List<Direction> directions = Direction.getPrimaryValues();
 		for(Direction direction: directions)
 		{	// on récupère la case cible
-			AiTile targetTile = tile.getNeighbor(direction);
+			AiTile neighbor = tile.getNeighbor(direction);
 			
 			// on teste si on a le droit de la traiter,
 			// en fonction du mode de recherche sélectionné
@@ -258,10 +258,10 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 			}
 			else if(searchMode==MODE_NOBRANCH)
 			{	// case pas déjà traitée dans la même branche
-				process = procTiles.get(targetTile)==null;
+				process = procTiles.get(neighbor)==null;
 			}
 			else //if(searchMode==MODE_NOTREE)
-			{	AiSearchNode n = procTiles.get(targetTile);
+			{	AiSearchNode n = procTiles.get(neighbor);
 				// case pas déjà traitée
 				if(n==null)
 					process = true;
@@ -276,6 +276,10 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 					}
 				}
 			}
+
+			// on teste s'il y a un obstacle "artificiel" (adversaire ou malus)
+			process = process && (!considerOpponents || !containsOpponent(neighbor)) && 
+					(!considerMaluses || !containsMalus(neighbor));
 
 			// si on a le droit de traiter la case
 			if(process)
@@ -294,7 +298,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 					AiTile futureTile = futureLocation.getTile();
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
-					if(futureTile.equals(targetTile))
+					if(futureTile.equals(neighbor))
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AiSearchNode child = new AiSearchNode(futureLocation,node);
 						// on l'ajoute au noeud courant
