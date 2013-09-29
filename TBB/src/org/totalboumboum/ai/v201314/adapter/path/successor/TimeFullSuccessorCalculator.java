@@ -66,7 +66,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * le paramètre {@link #searchMode} permet de limiter l'exploration de l'arbre 
  * de recherche :
  * <ul>
- * 		<li>{@link #MODE_NOTREE} : quand on retombe sur une case déjà explorée,
+ * 		<li>{@link SearchMode#MODE_NOTREE} : quand on retombe sur une case déjà explorée,
  * 			on ne la traite de nouveau que si le nouveau chemin est meilleur
  * 			(en termes de coût) que l'ancien. Cette limite est celle employée
  * 			dans les versions non-temporelles des fonctions successeurs proposées
@@ -75,11 +75,15 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 			ne seront pas forcément optimaux, puisqu'elle entraine que des chemins
  * 			différents ne peuvent pas se croiser. En fait, ça concerne surtout les
  * 			chemins assez longs et/ou compliqués (boucles, attentes, etc.).</li>
- * 		<li>{@link #MODE_NOBRANCH} : quand on retombe sur une case déjà explorée
+ * 		<li>{@link SearchMode#MODE_NOBRANCH} : quand on retombe sur une case déjà explorée
  * 			dans la même branche, on ne la traite pas. La limite est moins forte
  * 			que la précédente, donc le gain de temps sera moins important. Par 
  * 			contre, les chemins longs/compliqués seront mieux traités.</li>
- * 		<li>{@link #MODE_ALL} : aucune limite, la recherche est effectuée sans
+ * 		<li>{@link SearchMode#MODE_ONEBRANCH} : quand on retombe sur une case déjà explorée
+ * 			deux fois dans la même branche, on ne la traite plus. C'est la même
+ * 			chose que {@code MODE_NOBRANCH}, en un peu moins strict. Ce mode est recommandé
+ * 			lors de la recherche de cycle avec A*.</li>
+ * 		<li>{@link SearchMode#MODE_ALL} : aucune limite, la recherche est effectuée sans
  * 			restriction. C'est donc dans ce cas que les calculs seront les plus
  * 			longs. Par contre, l'optimalité des chemins obtenus est garantie.</li>
  * </ul>
@@ -113,9 +117,9 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * @param hero
 	 * 		Personnage de référence pour calculer la durée des déplacements.
 	 * @param searchMode 
-	 * 		Le type de recherche à effectuer (cf. les champs de cette classe).
+	 * 		Le type de recherche à effectuer (cf. le type interne {@link SearchMode}).
 	 */
-	public TimeFullSuccessorCalculator(ArtificialIntelligence ai, AiHero hero, int searchMode)
+	public TimeFullSuccessorCalculator(ArtificialIntelligence ai, AiHero hero, SearchMode searchMode)
 	{	super(ai);
 		this.hero = hero;
 		this.searchMode = searchMode;
@@ -129,14 +133,20 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// SEARCH MODE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Mode de recherche : toutes les cases sont considérées (lent) */
-	public final static int MODE_ALL = 0;
-	/** Mode de recherche : seules les cases pas encore traitées dans la branche courante sont considérées */
-	public final static int MODE_NOBRANCH = 1;
-	/** Mode de recherche : seules les cases pas encore traitées du tout son considérées (rapide) */
-	public final static int MODE_NOTREE = 2;
 	/** Mode de recherche courant de cette fonction successeur */
-	private int searchMode;
+	private SearchMode searchMode = SearchMode.MODE_ALL;
+
+	/**
+	 * Renvoie le mode
+	 * de recherche 
+	 * actuel.
+	 * 
+	 * @return
+	 * 		Mode de recherche courant.
+	 */
+	public SearchMode getSearchMode()
+	{	return searchMode;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// HERO						/////////////////////////////////////
@@ -175,11 +185,11 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 */
 	private Map<AiTile,AiSearchNode> getProcessedTiles(AiSearchNode localRoot)
 	{	Map<AiTile,AiSearchNode> result;
-		if(searchMode==MODE_ALL)
+		if(searchMode==SearchMode.MODE_ALL)
 			// pas de limite, donc pas de map
 			result = new HashMap<AiTile, AiSearchNode>();
 		else
-		{	if(searchMode==MODE_NOTREE)
+		{	if(searchMode==SearchMode.MODE_NOTREE)
 				// une seule map pour tout l'arbre
 				// (et sinon une map par branche)
 				localRoot = null;
@@ -187,6 +197,40 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 			if(result==null)
 			{	result = new HashMap<AiTile,AiSearchNode>();
 				processedTiles.put(localRoot,result);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Renvoie la map correspondant au noeud
+	 * de recherche passé en paramètre. La map
+	 * est créée et ajoutée dans la map principale si elle 
+	 * n'existe pas déjà.
+	 * <br/>
+	 * La map renvoyée dépend également du mode de recherche
+	 * courant.
+	 * 
+	 * @param localRoot
+	 * 		La racine locale dont on veut la matrice.
+	 * @return
+	 * 		La map associée à la racine locale spécifiée
+	 * 		(qui peut avoir été créée pour l'occasion).
+	 */
+	private Map<AiTile,Integer> getProcessedTilesCounts(AiSearchNode localRoot)
+	{	Map<AiTile,Integer> result;
+		if(searchMode==SearchMode.MODE_ALL)
+			// pas de limite, donc pas de map
+			result = new HashMap<AiTile, Integer>();
+		else
+		{	if(searchMode==SearchMode.MODE_NOTREE)
+				// une seule map pour tout l'arbre
+				// (et sinon une map par branche)
+				localRoot = null;
+			result = processedTilesCounts.get(localRoot);
+			if(result==null)
+			{	result = new HashMap<AiTile,Integer>();
+				processedTilesCounts.put(localRoot,result);
 			}
 		}
 		return result;
@@ -225,8 +269,9 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		// on màj la map des cases visitées
 		AiSearchNode localRoot = node.getLocalRoot();
 		Map<AiTile,AiSearchNode> procTiles = getProcessedTiles(localRoot);
+		Map<AiTile,Integer> procTilesCounts = getProcessedTilesCounts(localRoot);
 		// pour la restriction sur l'arbre, on compare les coûts
-		if(searchMode==MODE_NOTREE)
+		if(searchMode==SearchMode.MODE_NOTREE)
 		{	AiSearchNode n = procTiles.get(tile);
 			if(n==null)
 				procTiles.put(tile,node);
@@ -239,7 +284,13 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		}
 		// sinon, on met à jour la map systématiquement
 		else
-			procTiles.put(tile,node);
+		{	procTiles.put(tile,node);
+			Integer val = procTilesCounts.get(tile);
+			if(val==null)
+				val = 0;
+			val++;
+			procTilesCounts.put(tile, val);
+		}
 
 		// on considère chaque déplacement possible
 		List<Direction> directions = Direction.getPrimaryValues();
@@ -250,11 +301,16 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 			// on teste si on a le droit de la traiter,
 			// en fonction du mode de recherche sélectionné
 			boolean process = false;
-			if(searchMode==MODE_ALL)
+			if(searchMode==SearchMode.MODE_ALL)
 			{	// pas de limite
 				process = true;
 			}
-			else if(searchMode==MODE_NOBRANCH)
+			else if(searchMode==SearchMode.MODE_ONEBRANCH)
+			{	// case pas déjà traitée plus d'une fois dans la même branche
+				Integer val = procTilesCounts.get(neighbor);
+				process = val==null || val<=1;
+			}
+			else if(searchMode==SearchMode.MODE_NOBRANCH)
 			{	// case pas déjà traitée dans la même branche
 				process = procTiles.get(neighbor)==null;
 			}
