@@ -38,7 +38,12 @@ import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201314.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201314.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.ApproximateSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.TimeFullSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.SearchMode;
+import org.totalboumboum.ai.v201314.adapter.path.successor.TimePartialSuccessorCalculator;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -47,7 +52,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * cette implémentation correspond à peu près à un A* classique.
  * <br>
  * Il y a quand même une modification implémentée dans les fonctions successeurs,
- * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
+ * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtres sont
  * écartés lorsqu'un noeud de recherche est développé. En d'autres termes, l'algorithme évite
  * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
  * boucler à l'infini. La notion de 'noeud déjà exploré' est spécifiée par la fonction successeur
@@ -67,7 +72,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
  * rapport au coût défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est d'introduire une part de hasard dans les agents, de manière à les rendre moins prévisibles.
+ * Le but est de forcer l'introduction d'une part de hasard dans les agents, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  */
@@ -114,24 +119,38 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	/////////////////////////////////////////////////////////////////
 	/** Cases d'arrivée pour la recherche de chemin */
 	private Set<AiTile> endTiles = new TreeSet<AiTile>();
+	/** Indique si on est en train d'essayer de revenir au point de départ */
+	private boolean searchLoop = false;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Calcule le plus court chemin pour aller de la case {@code startTile} à 
-	 * la case {@code endTile}, en utilisant l'algorithme A*. Si jamais aucun
-	 * chemin n'est trouvé, alors un chemin vide est renvoyé. Si jamais
-	 * l'algorithme atteint une limite de coût/taille, une {@link LimitReachedException}
-	 * est levée. Dans ce cas là, c'est qu'il y a généralement un problème
-	 * dans le façon dont A* est employé (mauvaise fonction de coût, par exemple). 
+	 * Calcule le plus court chemin pour aller de la position {@code startLocation} et 
+	 * allant à la case {@code endTile}, en utilisant l'algorithme A*. La méthode
+	 * peut avoir 3 comportement différents, en fonction du résultat de la recherche :
+	 * <ul>
+	 * 		<li>Si un chemin optimal peut être trouvé entre les cases de départ et de destination,
+	 * 			alors ce chemin est renvoyé. Si plusieurs chemins optimaux existent, seulement l'un
+	 * 			d'entre eux est renvoyé.</li>
+	 * 		<li>S'il n'y a aucun chemin entre les cases de départ et de destination, alors
+	 * 			c'est la valeur {@code null} qui est renvoyée.</li>
+	 * 		<li>Si jamais l'algorithme atteint une limite de coût/taille, une {@link LimitReachedException}
+	 * 			est levée. Cela ne signifie pas forcément qu'aucun chemin n'existe entre les cases.
+	 * 			Cela veut simplement dire que l'algorithme n'a pas été capable de trouver ce chemin,
+	 * 			ni de montrer qu'il n'en existait aucun. Il a été interrompu avant par un méchanisme
+	 * 			déclenché quand l'algorithme consomme trop de mémoire. Cette surconsommation est
+	 * 			généralement due à une mauvaise utilisation de A* (une mauvaise fonction de coût, par exemple).</li>
+	 * </ul>
+	 * Il est nécessaire de définir un traitement spécifique lorsque A* lève une {@code LimitReachedException}.
+	 * En effet, dans ce cas là, il faut généralement relancer une recherche, en utilisant d'autres paramètres.
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ
 	 * @param endTile	
 	 * 		La case d'arrivée
 	 * @return 
-	 * 		Un chemin pour aller de {@code startTile} à {@code endTile}, ou un chemin vide, ou la valeur {@code null}.
+	 * 		Un chemin pour aller de {@code startTile} à {@code endTile}, ou la valeur {@code null}.
 	 * 
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
@@ -147,12 +166,16 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	/**
 	 * Calcule le plus court chemin pour aller de la case {@code startTile} à 
 	 * l'une des cases contenues dans la liste {@code endTiles} (n'importe laquelle),
-	 * en utilisant l'algorithme A*. Si jamais aucun chemin n'est trouvé 
-	 * alors un chemin vide est renvoyé. Si jamais l'algorithme atteint 
-	 * une limite de coût/taille, une {@link LimitReachedException} est levée
-	 * Dans ce cas-là, c'est qu'il y a généralement un problème dans le façon 
-	 * dont A* est employé (mauvaise fonction de coût, par exemple).
-	 * La fonction renvoie {@code null} si la liste {@code endTiles} est vide.
+	 * en utilisant l'algorithme A*. En raison du caractère optimal de la solution
+	 * recherchée, il s'agira de la case la plus proche (ou rapide à atteindre,
+	 * suivant la fonction de coût utilisée). 
+	 * <br/>
+	 * Si jamais aucun chemin n'est trouvé, alors c'est {@code null} qui est renvoyé. 
+	 * Si jamais l'algorithme atteint une limite de coût/taille, une {@link LimitReachedException} 
+	 * est levée. Dans ce cas-là, c'est qu'il y a généralement un problème dans le façon 
+	 * dont A* est employé (mauvaise fonction de coût, par exemple). Voir la documentation
+	 * de la méthode {@link #startProcess(AiLocation, AiTile)} pour plus de détails.
+	 * A noter qu'une {@code IllegalArgumentException} est levée si la liste {@code endTiles} est vide.
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ.
@@ -164,7 +187,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
-	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés).
+	 * @throws IllegalArgumentException
+	 * 		Si la liste des cases de destination est vide.
 	 */
 	public AiPath startProcess(AiLocation startLocation, Set<AiTile> endTiles) throws LimitReachedException
 	{	// on réinitialise la case de départ
@@ -186,7 +211,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * Autrement dit, on n'a pas besoin de préciser la case de départ, car elle 
 	 * a déjà été initialisée précédemment. On va réutiliser ce travail fait
 	 * lors d'un précédent appel (ou de plusieurs appels précédents) afin de 
-	 * calculer plus vite le résultat.
+	 * calculer plus vite le résultat de ce nouvel appel.
 	 * <br/>
 	 * Cette méthode est également utilisable quand cet objet a été construit
 	 * à partir d'un arbre existant avec {@link #Astar(AiSearchNode)},
@@ -199,8 +224,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @param endTile	
 	 * 		La case d'arrivée
 	 * @return 
-	 * 		Un chemin pour aller à {@code endTile}, 
-	 * 		ou un chemin vide, ou la valeur {@code null}.
+	 * 		Un chemin pour aller à {@code endTile}, ou la valeur {@code null}
+	 * 		si aucun chemin n'a pu être trouvé.
 	 * 
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
@@ -233,11 +258,13 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		L'ensemble des cases d'arrivée possibles.
 	 * @return 
 	 * 		Un chemin pour aller à l'une des cases de {@code endTiles},
-	 * 		ou un chemin vide, ou la valeur {@code null}.
+	 * 		ou la valeur {@code null}, si aucun chemin n'existe.
 	 * 
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 * @throws IllegalArgumentException
+	 * 		Si la liste des cases de destination est vide.
 	 */
 	public AiPath startProcess(Set<AiTile> endTiles) throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
@@ -249,7 +276,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		this.endTiles = endTiles;
 		treeHeight = 0;
 		treeCost = 0;
-		treeSize = 0;
+		fringeSize = 0;
 		lastSearchNode = null;
 		
 		// heuristique
@@ -267,11 +294,67 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				return result;
 			}
 		};
-		queue = new PriorityQueue<AiSearchNode>(1,comparator);
-		queue.offer(root);
+		fringe = new PriorityQueue<AiSearchNode>(1,comparator);
+		fringe.offer(root);
 		
 		// traitement
 		AiPath result = continueProcess();
+		return result;
+	}
+	
+	/**
+	 * Calcule le plus court chemin partant de la position {@code startLocation} 
+	 * et retournant à la même case, en utilisant l'algorithme A*. Comme pour les
+	 * autres méthodes, on peut obtenir trois résultats différents : un chemin
+	 * commençant et finissant par la case de départ, la valeur {@code null} si aucun
+	 * chemin n'existe, et enfin la méthode peut lever une {@link LimitReachedException}
+	 * si A* consomme trop de mémoire lors de la recherche. Cf. la documentation de
+	 * {@link #startProcess(AiLocation, AiTile)} pour plus de détails.
+	 * <br/>
+	 * Cette méthode est particulièrement utile quand l'agent se trouve déjà dans sa case
+	 * de destination préférée, mais que celle-ci est menacée. Il est alors nécessaire
+	 * qu'il se déplace, selon un chemin qui lui permettra finalement de revenir dans
+	 * cette case.
+	 * <br/>
+	 * A noter que la configuration de la fonction successeur a un rôle important, ici. 
+	 * En effet, si vous sélectionnez par exemple {@link TimeFullSuccessorCalculator}
+	 * ou {@link TimePartialSuccessorCalculator} avec un mode restrictif (MODE_NOTREE 
+	 * ou MODE_NOBRANCH), il est peu probable que cette méthode trouve un chemin. En effet, 
+	 * ces modes restrictifs interdise la construction de chemins contenant plusieurs fois 
+	 * la même case. Or, puisqu'on cherche ici à revenir sur la case de départ, il est 
+	 * probable qu'on doive réutiliser certaines cases, ou au moins la toute première. La 
+	 * même remarque s'applique aux successeurs qui ne tiennent pas compte du temps 
+	 * ({@link ApproximateSuccessorCalculator} et {@link BasicSuccessorCalculator}).
+	 * 
+	 * @param startLocation	
+	 * 		La position de départ
+	 * @return 
+	 * 		Un chemin pour sortir de la case de départ puis y revenir.
+	 * 
+	 * @throws LimitReachedException
+	 * 		L'algorithme a développé un arbre trop grand (il y a
+	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 */
+	public AiPath processLoopPath(AiLocation startLocation) throws LimitReachedException
+	{	// avertissements possibles
+		SearchMode mode = null;
+		if(successorCalculator instanceof TimeFullSuccessorCalculator)
+			mode =  ((TimeFullSuccessorCalculator)successorCalculator).getSearchMode();
+		else if(successorCalculator instanceof TimePartialSuccessorCalculator)
+			mode = ((TimePartialSuccessorCalculator)successorCalculator).getSearchMode();
+		if(mode!=null && mode!=SearchMode.MODE_ALL && mode!=SearchMode.MODE_ONEBRANCH)
+			print("WARNING: a time-based successor function is used with the "+mode+" search mode, when looking for a loop path. These are very certainly not appropriate settings.");
+		if(successorCalculator instanceof BasicSuccessorCalculator || successorCalculator instanceof ApproximateSuccessorCalculator)
+			print("WARNING: a time-based successor function is necessary when looking for a loop path (so no ApproximateSuccessorCalculator or BasicSuccessorCalculator.");
+		
+		// on indique qu'on recherche un cycle
+		searchLoop = true;
+		
+		// on recherche le chemin
+		Set<AiTile> endTiles = new TreeSet<AiTile>();
+		AiTile endTile = startLocation.getTile();
+		endTiles.add(endTile);
+		AiPath result = startProcess(startLocation,endTiles);
 		return result;
 	}
 	
@@ -305,21 +388,22 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		// on remet le dernier noeud (fautif) dans la file,
 		// pour permettre éventuellement de continuer le traitement
 		if(limitReached && lastSearchNode!=null)
-		{	queue.offer(lastSearchNode);
-			print("           Queue length: "+queue.size());
-			printQueue("             + ",queue);
+		{	fringe.offer(lastSearchNode);
+			print("           Fringe length: "+fringe.size());
+			printQueue("             + ",fringe);
 		}
 	
 		// initialisation
 		int it = 0;
-		AiPath result = new AiPath();
+		AiPath result = null;
 		AiSearchNode finalNode = null;
 		lastSearchNode = null;
 		boolean found = false;
 		limitReached = false;
+		boolean firstIteration = true;
 
 		// traitement
-		if(!endTiles.isEmpty() && !queue.isEmpty())
+		if(!endTiles.isEmpty() && !fringe.isEmpty())
 		{	do
 			{	ai.checkInterruption();
 				
@@ -328,26 +412,35 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				long before1 = print("         -- starting iteration #" + it + " --");
 				
 				// on prend le noeud situé en tête de file
-				lastSearchNode = queue.poll();
+				lastSearchNode = fringe.poll();
 				// verbose : noeud courant
 				print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
 				print("           Visiting : "+lastSearchNode);
 				
+				// mise à jour des données décrivant l'arbre
+				//if(lastSearchNode.getDepth()>treeHeight)
+					treeHeight = lastSearchNode.getDepth();
+				//if(lastSearchNode.getCost()>treeCost)
+					treeCost = lastSearchNode.getCost();
+				//if(fringe.size()>fringeSize)
+					fringeSize = fringe.size();
+				
 				// on teste si on est arrivé à la fin de la recherche
-				if(endTiles.contains(lastSearchNode.getLocation().getTile()))
+				if((!firstIteration || !searchLoop)	// cas particulier : premier noeud d'une recherche de cycle = noeud d'arrivée et de départ 
+					&& endTiles.contains(lastSearchNode.getLocation().getTile()))
 				{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 					finalNode = lastSearchNode;
 					found = true;
 				}
 				
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
-				else if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
+				else if(maxHeight>0 && treeHeight>=maxHeight)
 					limitReached = true;
 				// si le noeud courant a atteint le coût maximal, on s'arrête
-				else if(maxCost>0 && lastSearchNode.getCost()>=maxCost)
+				else if(maxCost>0 && treeCost>=maxCost)
 					limitReached = true;
 				// si le nombre de noeuds dans la file est trop grand, on s'arrête
-				else if(maxNodes>0 && queue.size()>=maxNodes)
+				else if(maxNodes>0 && fringeSize>=maxNodes)
 					limitReached = true;
 				
 				// sinon on récupére les noeuds suivants
@@ -370,28 +463,22 @@ public final class Astar extends AiAbstractSearchAlgorithm
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité
 					for(AiSearchNode node: successors)
-						queue.offer(node);
+						fringe.offer(node);
 				}
 				
-				// mise à jour des données décrivant l'arbre
-				if(lastSearchNode.getDepth()>treeHeight)
-					treeHeight = lastSearchNode.getDepth();
-				if(lastSearchNode.getCost()>treeCost)
-					treeCost = lastSearchNode.getCost();
-				if(queue.size()>treeSize)
-					treeSize = queue.size();
-				
 				// verbose : file
-				{	print("           Queue length: "+queue.size());
-					printQueue("             + ",queue);
+				{	print("           Fringe length: "+fringeSize);
+					printQueue("             + ",fringe);
 				}
 				//  verbose : iteration
 				{	long after1 = ai.getCurrentTime();
 					long elapsed1 = after1 - before1;
 					print("         -- iteration #" + it + " finished, duration=" + elapsed1 + " --");
 				}
+				
+				firstIteration = false;
 			}
-			while(!queue.isEmpty() && !found && !limitReached);
+			while(!fringe.isEmpty() && !found && !limitReached);
 		
 			// on construit le chemin solution
 			if(found)
@@ -419,7 +506,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 			print(msg);
 		}
 		// verbose : limites
-		{	msg = "         height="+treeHeight+" cost="+treeCost+" size="+treeSize;
+		{	msg = "         height="+treeHeight+" cost="+treeCost+" size="+fringeSize;
 			msg = msg + " src="+root.getLocation();
 			msg = msg + " trgt={";
 			for(AiTile tile: endTiles) 
@@ -430,14 +517,14 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
 		}
 		// verbose : fin
-		{	if(result!=null) 
+		{	//if(result!=null) 
 				print("         result="+result);
 			print("      < A* finished +++++++++++++++++++++");
 		}
 		
 		// exceptions
 		if(limitReached)
-			throw new LimitReachedException(startLocation,endTiles,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
+			throw new LimitReachedException(startLocation,endTiles,treeHeight,treeCost,fringeSize,maxCost,maxHeight,maxNodes,fringe);
 		else if(endTiles.isEmpty())
 		{	PredefinedColor color = ai.getZone().getOwnHero().getColor();
 			throw new IllegalArgumentException("endTiles list must not be empty ("+color+" player)");

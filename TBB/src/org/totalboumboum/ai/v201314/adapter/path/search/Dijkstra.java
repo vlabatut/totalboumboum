@@ -50,9 +50,9 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
  * <br/>
  * Le résultat n'est donc pas un simple chemin  allant d'une case à une autre, mais l'ensemble des 
  * chemins optimaux allant d'une case source à toutes les cases accessibles dans la zone de jeu. 
- * Bien sûr, ce résultat varie en fonction des fonctions successeur et de coût utilisées. Aucune 
- * fonction heuristique n'est nécessaire, puisqu'on réalise un parcours exhaustif de l'arbre de 
- * recherche. 
+ * Bien sûr, ce résultat varie en fonction des fonctions successeur et de coût utilisées. A la
+ * différence de A* (cf. la classe {@link Astar}), aucune fonction heuristique n'est nécessaire, 
+ * puisqu'on réalise un parcours exhaustif de l'arbre de recherche. 
  * <br/>
  * Le résultat du traitement prend la forme d'une map associant un noeud de recherche à chaque 
  * case accessible. Ce noeud permet de retrouver le chemin optimal pour aller à cette case,
@@ -62,7 +62,8 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
  * rapport au coût défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
  * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est d'introduire une part de hasard dans les agents, de manière à les rendre moins prévisibles.
+ * Le but est de forcer l'introduction d'une part de hasard dans les agents, de manière à les 
+ * rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  */
@@ -76,7 +77,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * initialisée à {@link NoHeuristicCalculator}.
 	 * 
 	 * @param ai
-	 * 		L'agent invoquant A*.
+	 * 		L'agent invoquant Dijkstra.
 	 * @param hero
 	 * 		Le personnage à considérer pour les déplacements.
 	 * @param costCalculator
@@ -116,9 +117,9 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * un noeud de recherche correspondant à la dernière étape du chemin permettant
 	 * de se déplacer sur la case concernée. Ce chemin peut être récupéré en utilisant
 	 * la méthode {@link AiSearchNode#processPath()}. Si jamais l'algorithme atteint 
-	 * une limite de cout/taille, une exception de type {@link LimitReachedException} 
+	 * une limite de coût/taille, une exception de type {@link LimitReachedException} 
 	 * est levée. Dans ce cas-là, c'est qu'il y a généralement un problème dans le façon 
-	 * dont A* est employé (mauvaise fonction de coût, par exemple).
+	 * dont Dijkstra est employé (mauvaise fonction de coût, par exemple).
 	 * 
 	 * @param startLocation	
 	 * 		La case de départ.
@@ -168,7 +169,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		// initialisation
 		treeHeight = 0;
 		treeCost = 0;
-		treeSize = 0;
+		fringeSize = 0;
 		lastSearchNode = null;
 		
 		// queue
@@ -179,8 +180,8 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				return result;
 			}
 		};
-		queue = new PriorityQueue<AiSearchNode>(1,comparator);
-		queue.offer(root);
+		fringe = new PriorityQueue<AiSearchNode>(1,comparator);
+		fringe.offer(root);
 		
 		// process
 		Map<AiTile,AiSearchNode> result = continueProcess();
@@ -188,12 +189,26 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	}
 	
 	/**
-	 * Calcule un chemin de fuite.
+	 * Utilise Dijkstra pour calcule un chemin de fuite. Il s'agit
+	 * ici de faire un parcours en largeur tenant compte des coûts,
+	 * comme dans la méthode de Dijkstra classique. La différence
+	 * est que la méthode classique va développer au maximum l'arbre
+	 * de recherche. Au contraire, ici on s'arrête dès qu'on rencontre
+	 * une case sûre (i.e. sans danger).
+	 * <br/>
+	 * La question est de savoir ce qui signifie, pour une case, "être
+	 * sans danger". Cette notion est implémentée dans la méthode 
+	 * {@link SuccessorCalculator#isThreatened(AiSearchNode) SuccessorCalculator.isThreatened} 
+	 * de la fonction successeur utilisée par Dijkstra.
+	 * Les classes fournies dans l'API possèdent donc chacune leur propre
+	 * définition de ce qu'est une "case sûre", cette définition étant compatible avec
+	 * l'approche implémentée par la fonction successeur. Et bien entendu,
+	 * vous pouvez définir votre propre version, en fonction de vos besoins.
 	 * 
 	 * @param startLocation
-	 * 		Position de départ.
+	 * 		La position de départ.
 	 * @return
-	 * 		Le chemin calculé.
+	 * 		Le chemin calculé, ou {@code null} si aucun n'a pu être trouvé.
 	 * 
 	 * @throws LimitReachedException
 	 * 		L'algorithme de recherche a atteint les limites fixées.
@@ -202,11 +217,13 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	{	// on indique la condition de fin pour l'exploration de la zone
 		stopWhenSafe = true;
 		
-		// on applique dijkstra
+		// on applique Dijkstra (avec arrêt à la première case sûre)
 		startProcess(startLocation);
 		
-		// on construit le chemin à partir du dernier noeud de recherche traité
-		AiPath result = lastSearchNode.processPath();
+		AiPath result = null; 
+		// si le noeud sur lequel on s'est arrêté est sûr, alors on a trouvé un chemin
+		if(!successorCalculator.isThreatened(lastSearchNode))
+			result = lastSearchNode.processPath();
 		return result;
 	}
 	
@@ -231,9 +248,9 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		// on remet le dernier noeud (fautif) dans la file,
 		// pour permettre éventuellement de continuer le traitement
 		if(limitReached && lastSearchNode!=null)
-		{	queue.offer(lastSearchNode);
-			print("           Queue length: "+queue.size());
-			printQueue("             + ",queue);
+		{	fringe.offer(lastSearchNode);
+			print("           Fringe length: "+fringe.size());
+			printQueue("             + ",fringe);
 		}
 	
 		// initialisation
@@ -243,7 +260,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		boolean safeStop = false;
 			
 		// traitement
-		if(!queue.isEmpty())
+		if(!fringe.isEmpty())
 		{	do
 			{	ai.checkInterruption();
 				
@@ -252,19 +269,27 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				long before1 = print("         -- starting iteration #" + it + " --");
 				
 				// on prend le noeud situé en tête de file
-				lastSearchNode = queue.poll();
+				lastSearchNode = fringe.poll();
 				// verbose : noeud courant
 				print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
 				print("           Visiting : "+lastSearchNode);
 				
+				// mise à jour des données décrivant l'arbre
+				//if(lastSearchNode.getDepth()>treeHeight)
+					treeHeight = lastSearchNode.getDepth();
+				//if(lastSearchNode.getCost()>treeCost)
+					treeCost = lastSearchNode.getCost();
+				//if(fringe.size()>fringeSize)
+					fringeSize = fringe.size();
+				
 				// si l'arbre a atteint la hauteur maximale, on s'arrête
-				if(maxHeight>0 && lastSearchNode.getDepth()>=maxHeight)
+				if(maxHeight>0 && treeHeight>=maxHeight)
 					limitReached = true;
 				// si le noeud courant a atteint le coût maximal, on s'arrête
-				else if(maxCost>0 && lastSearchNode.getCost()>=maxCost)
+				else if(maxCost>0 && treeCost>=maxCost)
 					limitReached = true;
 				// si le nombre de noeuds dans la file est trop grand, on s'arrête
-				else if(maxNodes>0 && queue.size()>=maxNodes)
+				else if(maxNodes>0 && fringeSize>=maxNodes)
 					limitReached = true;
 				
 				// sinon on récupére les noeuds suivants
@@ -282,29 +307,21 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 					}
 					
 					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
-					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
+					// pour cette raison, cette implémentation de Dijkstra ne renverra pas forcément toujours le même résultat :
 					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
 					Collections.shuffle(successors);
 					// puis on les rajoute dans la file de priorité
 					for(AiSearchNode node: successors)
-						queue.offer(node);
+						fringe.offer(node);
 				}
-				
-				// mise à jour des données décrivant l'arbre
-				if(lastSearchNode.getDepth()>treeHeight)
-					treeHeight = lastSearchNode.getDepth();
-				if(lastSearchNode.getCost()>treeCost)
-					treeCost = lastSearchNode.getCost();
-				if(queue.size()>treeSize)
-					treeSize = queue.size();
 				
 				// mise à jour de la condition d'arrêt
 				if(stopWhenSafe)
 					safeStop = !successorCalculator.isThreatened(lastSearchNode);
 				
 				// verbose : file
-				{	print("           Queue length: "+queue.size());
-					printQueue("             + ",queue);
+				{	print("           Fringe length: "+fringeSize);
+					printQueue("             + ",fringe);
 				}
 				// verbose : itération
 				{	long after1 = ai.getCurrentTime();
@@ -312,7 +329,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 					print("         -- iteration #" + it + " finished, duration=" + elapsed1 + " --");
 				}
 			}
-			while(!queue.isEmpty() && !safeStop);
+			while(!fringe.isEmpty() && !safeStop);
 		}
 		
 		// verbose : temps
@@ -327,7 +344,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				print("         Search finished");
 		}
 		// verbose : limites
-		{	print("         height="+treeHeight+" cost="+treeCost+" size="+treeSize+" src="+root.getLocation());
+		{	print("         height="+treeHeight+" cost="+treeCost+" size="+fringeSize+" src="+root.getLocation());
 			if(limitReached)
 				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
 		}
@@ -336,7 +353,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 
 		// exceptions
 		if(limitReached)
-			throw new LimitReachedException(startLocation,null,treeHeight,treeCost,treeSize,maxCost,maxHeight,maxNodes,queue);
+			throw new LimitReachedException(startLocation,null,treeHeight,treeCost,fringeSize,maxCost,maxHeight,maxNodes,fringe);
 		
 		// on construit le résultat
 		Map<AiTile,AiSearchNode> result = integrateMaps();
