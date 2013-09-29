@@ -50,7 +50,7 @@ public final class PartialModelSimulation
 	 */
 	public static void main(String args[])
 	{	// utilisation de base
-//		example1();
+		example1();
 		// mort subite
 		example2();
 	}

@@ -44,6 +44,7 @@ import org.totalboumboum.ai.v201314.adapter.path.heuristic.TileHeuristicCalculat
 import org.totalboumboum.ai.v201314.adapter.path.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.search.Astar;
 import org.totalboumboum.ai.v201314.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.SearchMode;
 import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.TimeFullSuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.TimePartialSuccessorCalculator;
@@ -78,6 +79,8 @@ public final class AstarUse
 		example5();
 		// fonctions à base de temps + modèle partiel
 		example6();
+		// recherche de chemin cyclique avec A* 
+		example7();
 	}
 	
 	/**
@@ -88,6 +91,7 @@ public final class AstarUse
 	private static void example1()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -121,7 +125,7 @@ public final class AstarUse
 		System.out.println("+++ Ré-utilisation d'un arbre de recherche existant +++");
 		// on peut relancer la recherche pour une autre destination
 		// en ré-utilisant l'arbre déjà développé par A* lors de l'appel
-		// précédent. ça permet de gagner (un peu) du temps.
+		// précédent. ça permet de gagner (un peu) de temps.
 		endTile = zone.getTile(2,5);
 		try
 		{	AiPath path = astar.startProcess(endTile);
@@ -161,9 +165,9 @@ public final class AstarUse
 		// si pour une raison quelconque le résultat trouvé ne vous plait
 		// pas, il est possible de reprendre la recherche. notez que le
 		// résultat suivant ne sera pas forcément optimal relativement à
-		// la fonction de coût (seule la première solution trouvée l'est).
-		// cette approche est utilisée dans l'exemple3, à la suite d'une
-		// exception.
+		// la fonction de coût (ceci n'est garanti que pour la première 
+		// solution trouvée). cette approche est utilisée dans l'exemple3, 
+		// à la suite d'une exception.
 		try
 		{	AiPath path = astar.continueProcess();
 			System.out.println("+++ path="+path);
@@ -184,6 +188,7 @@ public final class AstarUse
 	private static void example2()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -223,6 +228,7 @@ public final class AstarUse
 	private static void example3()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -238,12 +244,12 @@ public final class AstarUse
 		Astar astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		
-		System.out.println("+++ Utilisation de A* dépassant une des 3 limites (cout/hauteur/nombre de noeud de l'arbre de recherche) +++");
+		System.out.println("+++ Utilisation de A* dépassant une des 3 limites (cout/hauteur/nombre de noeuds) +++");
 		// on modifie la limite de hauteur de l'arbre de manière à ne
 		// pas chercher des chemins plus longs que 4 déplacements.
 		astar.setMaxHeight(4);
 		AiLocation startLocation = new AiLocation(hero);
-		// on choisit pour l'exemple une destination est accessible, 
+		// on choisit pour l'exemple une destination accessible, 
 		// mais avec un chemin minimal de longueur supérieure à 4
 		AiTile endTile = zone.getTile(3,4);
 		AiPath path = null;
@@ -260,41 +266,41 @@ public final class AstarUse
 			// peut-être une solution, mais elle n'a pas été trouvée.
 			System.out.println("+++ path="+path);
 			System.out.println(e.getSummary());
-		}
-		
-		System.out.println("+++ On relance la recherche en augmentant la limite +++");
-		// on augmente la limite à 5 et on continue la recherche.
-		astar.setMaxHeight(5);
-		try
-		{	// on continue le traitement en utilisant le même
-			// arbre, pour les mêmes points de départ et de destination.
-			path = astar.continueProcess();
 
-			// remarque 1 : en réalisant l'appel
-			// 		path = astar.processShortestPath(endTile);
-			// on aurait aussi le même résultat, sauf que la recherche
-			// serait repartie de la racine de l'arbre. on aurait quand
-			// même réutilisé l'arbre existant, mais le traitement aurait
-			// nécessité plus d'itérations.
+			System.out.println("+++ On relance la recherche en augmentant la limite +++");
+			// on augmente la limite à 5 et on continue la recherche.
+			astar.setMaxHeight(5);
+			try
+			{	// on continue le traitement en utilisant le même
+				// arbre, pour les mêmes points de départ et de destination.
+				path = astar.continueProcess();
 
-			// remarque 2 : en réalisant l'appel
-			// 		path = astar.processShortestPath(startLocation,endTile);
-			// on aurait le même résultat, la recherche aurait aussi
-			// recommencé depuis le début, mais cette fois sans réutiliser
-			// l'arbre existant. on aurait construit un nouvel arbre,
-			// donc le traitement aurait été encore plus long
-			
-			// remarque 3 : l'exemple donné ici n'est pas du tout
-			// équivalent à un approfondissement itératif, qui n'est
-			// pas implément dans l'API.
-			
-			System.out.println("+++ path="+path);
-		}
-		catch (StopRequestException e)
-		{	e.printStackTrace();
-		}
-		catch (LimitReachedException e)
-		{	e.printStackTrace();
+				// remarque 1 : en réalisant l'appel
+				// 		path = astar.processShortestPath(endTile);
+				// on aurait aussi le même résultat, sauf que la recherche
+				// serait repartie de la racine de l'arbre. on aurait quand
+				// même réutilisé l'arbre existant, mais le traitement aurait
+				// nécessité plus d'itérations.
+
+				// remarque 2 : en réalisant l'appel
+				// 		path = astar.processShortestPath(startLocation,endTile);
+				// on aurait le même résultat, la recherche aurait aussi
+				// recommencé depuis le début, mais cette fois sans réutiliser
+				// l'arbre existant. on aurait construit un nouvel arbre,
+				// donc le traitement aurait été encore plus long
+				
+				// remarque 3 : l'exemple donné ici n'est pas du tout
+				// équivalent à la méthode de l'approfondissement itératif 
+				// vue en cours, qui n'est pas implémentée dans l'API.
+				
+				System.out.println("+++ path="+path);
+			}
+			catch (StopRequestException ex)
+			{	ex.printStackTrace();
+			}
+			catch (LimitReachedException ex)
+			{	ex.printStackTrace();
+			}
 		}
 	}
 	
@@ -306,6 +312,7 @@ public final class AstarUse
 	private static void example4()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -350,19 +357,20 @@ public final class AstarUse
 	 * supposent que la zone est statique, par exemple elles 
 	 * ne tiennent pas compte du fait que la bombe va exploser.
 	 * pour celà, il est nécessaire d'avoir un modèle permettant 
-	 * de prédire ce qui va se passer. l'api propose deux 
+	 * de prédire ce qui va se passer. L'API propose deux 
 	 * modèles : l'un ({@link AiFullModel}) permet d'avoir une 
 	 * représentation complète de la zone, mais cela demande un 
-	 * traitement plus lourd. l'autre ({@link AiPartialModel}) 
+	 * traitement plus lourd. L'autre ({@link AiPartialModel}) 
 	 * utilise une représentation simplifiée de la zone, mais 
 	 * suffisante pour y chercher un chemin, ce qui permet d'alléger 
-	 * les calculs. il existe des fonctions successeur basées sur 
+	 * les calculs. Il existe des fonctions successeur basées sur 
 	 * ces deux modèles, et des fonctions heuristique et de coût 
 	 * basées sur le temps plutôt que sur la distance.
 	 */
 	private static void example5()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -396,7 +404,7 @@ public final class AstarUse
 		// 		- MODE_ALL ne fixe aucune limite : une déjà explorée sera
 		//		  ré-explorée si nécessaire, ce qui permet d'envisager
 		//		  absolument tous les chemins possibles.
-		SuccessorCalculator successorCalculator = new TimeFullSuccessorCalculator(ai,hero,TimeFullSuccessorCalculator.MODE_ALL);
+		SuccessorCalculator successorCalculator = new TimeFullSuccessorCalculator(ai,hero,SearchMode.MODE_ALL);
 		Astar astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		
@@ -445,7 +453,7 @@ public final class AstarUse
 		// aussi que le chemin contient un temps d'attente (à la fin) dû au fait que
 		// la bombe bloque le passage, et qu'il est nécessaire d'attendre qu'elle
 		// explose pour pouvoir atteindre la case de destination.
-		successorCalculator = new TimeFullSuccessorCalculator(ai,hero,TimeFullSuccessorCalculator.MODE_NOBRANCH);
+		successorCalculator = new TimeFullSuccessorCalculator(ai,hero,SearchMode.MODE_NOBRANCH);
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
@@ -467,7 +475,7 @@ public final class AstarUse
 		// Par conséquent, le traitement est plus court, mais le résultat est moins
 		// précis : des chemins peut-être valides seront écartés. Comparez le nombre
 		// d'itérations nécessaires à ceux observés pour les deux autres modes.
-		successorCalculator = new TimeFullSuccessorCalculator(ai,hero,TimeFullSuccessorCalculator.MODE_NOTREE);
+		successorCalculator = new TimeFullSuccessorCalculator(ai,hero,SearchMode.MODE_NOTREE);
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
@@ -505,6 +513,7 @@ public final class AstarUse
 	private static void example6()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -518,7 +527,7 @@ public final class AstarUse
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
 		HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,hero);
 		// les paramètres sont les mêmes que pour le modèle complet
-		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_ALL);
+		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_ALL);
 		Astar astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		
@@ -540,7 +549,7 @@ public final class AstarUse
 		}
 		
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle partiel, MODE_NOBRANCH +++");
-		successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOBRANCH);
+		successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOBRANCH);
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
@@ -554,8 +563,8 @@ public final class AstarUse
 		{	e.printStackTrace();
 		}
 		
-		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOTREE +++");
-		successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
+		System.out.println("+++ Utilisation des fonctions à base de temps, modèle partiel, MODE_NOTREE +++");
+		successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
 		astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 		astar.setVerbose(true); // pour afficher les détails du traitement
 		try
@@ -567,6 +576,73 @@ public final class AstarUse
 		}
 		catch (LimitReachedException e)
 		{	e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Il est possible d'utiliser A* pour rechercher un chemin cyclique,
+	 * i.e. partant de et arrivant à la même case. Ce type de chemin est
+	 * utile quand l'agent est déjà sur sa case de destination, mais que
+	 * celle-ci est menacée par une bombe : il faut alors en partir puis
+	 * y revenir. A noter que cette utilisation de A* ne peut être faite
+	 * que si la fonction successeur tient compte du temps, (donc seules
+	 * les classes {@link TimeFullSuccessorCalculator} et {@link TimePartialSuccessorCalculator}
+	 * sont utilisables), et de plus le mode de recherche ne doit pas être
+	 * restrictif ({@link SearchMode#MODE_ALL}). Ces deux conditions sont
+	 * nécessaires pour pouvoir découvrir un chemin dans lequel la même
+	 * case figure plusieurs fois (ce qui est au moins le cas de la case
+	 * de départ/destination, qui sera à la fois la première et dernière
+	 * case du chemin).
+	 */
+	private static void example7()
+	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
+		
+		// on initialise la zone
+		AiSimZone zone = InitData.initZone5();
+		ai.setZone(zone);
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// recherche d'un cycle permettant de revenir à la case de départ
+		System.out.println("\n\n-------- EXEMPLE 7 --------");
+		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
+		HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,hero);
+		// les paramètres sont les mêmes que pour le modèle complet
+		System.out.println("+++ Recherche en mode MODE_ALL +++");
+		TimePartialSuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_ALL);
+		successorCalculator.setDetailedOutput(true); // on active la sortie détaillée, pour afficher les temps des explosions
+		Astar astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
+		astar.setVerbose(true); // pour afficher les détails du traitement
+		
+		AiLocation startLocation = new AiLocation(hero);
+		AiPath path = null;
+		try
+		{	path = astar.processLoopPath(startLocation);
+			System.out.println("+++ path="+path);
+		}
+		catch (StopRequestException e)
+		{	e.printStackTrace();
+		}
+		catch (LimitReachedException e)
+		{	// on recommence avec un mode de recherche plus restrictif
+			System.out.println("+++ path="+path);
+			System.out.println(e.getSummary());
+			System.out.println("+++ On recommence en mode MODE_ONEBRANCH, cette fois +++");
+			successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_ONEBRANCH);
+			successorCalculator.setDetailedOutput(true);
+			astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
+			astar.setVerbose(true);
+			try
+			{	path = astar.processLoopPath(startLocation);
+				System.out.println("+++ path="+path);
+			}
+			catch (StopRequestException ex)
+			{	ex.printStackTrace();
+			}
+			catch (LimitReachedException ex)
+			{	ex.printStackTrace();
+			}
 		}
 	}
 }

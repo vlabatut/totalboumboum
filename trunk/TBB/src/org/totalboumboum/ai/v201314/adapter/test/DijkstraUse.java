@@ -41,6 +41,7 @@ import org.totalboumboum.ai.v201314.adapter.path.cost.TimeCostCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.search.Dijkstra;
 import org.totalboumboum.ai.v201314.adapter.path.successor.ApproximateSuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.SearchMode;
 import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.TimeFullSuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.TimePartialSuccessorCalculator;
@@ -75,6 +76,8 @@ public final class DijkstraUse
 		example4();
 		// fonctions approximatives
 		example5();
+		// chercher un chemin de fuite
+		example6();
 	}
 	
 	/**
@@ -117,6 +120,7 @@ public final class DijkstraUse
 	private static void example1()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -184,6 +188,7 @@ public final class DijkstraUse
 	private static void example2()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -229,6 +234,7 @@ public final class DijkstraUse
 	private static void example3()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -240,7 +246,7 @@ public final class DijkstraUse
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
 		// pour l'exemple on prend MODE_NOTREE (le plus restrictif), 
 		// mais les autres modes sont aussi utilisables ici.
-		SuccessorCalculator successorCalculator = new TimeFullSuccessorCalculator(ai,hero,TimeFullSuccessorCalculator.MODE_NOTREE);
+		SuccessorCalculator successorCalculator = new TimeFullSuccessorCalculator(ai,hero,SearchMode.MODE_NOTREE);
 		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
 		dijkstra.setVerbose(true); // pour afficher les détails du traitement
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
@@ -273,6 +279,7 @@ public final class DijkstraUse
 	private static void example4()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -283,7 +290,7 @@ public final class DijkstraUse
 		// avec modèle partiel
 		System.out.println("\n\n-------- EXEMPLE 4 --------");
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
-		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
+		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
 		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
 		dijkstra.setVerbose(true); // pour afficher les détails du traitement
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
@@ -319,6 +326,7 @@ public final class DijkstraUse
 	private static void example5()
 	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
 		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
 		
 		// on initialise la zone
 		AiSimZone zone = InitData.initZone1();
@@ -344,6 +352,55 @@ public final class DijkstraUse
 			AiTile tile = zone.getTile(3,4);
 			AiSearchNode leaf = paths.get(tile);
 			AiPath path = leaf.processPath();
+			System.out.println("+++ path="+path);
+		}
+		catch (StopRequestException e)
+		{	e.printStackTrace();
+		}
+		catch (LimitReachedException e)
+		{	e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Dans cet exemple, on veut quitter la case courante, qui est
+	 * menacée. On n'a pas de destination particulière, on veut juste
+	 * que l'agent se mette à l'abri n'importe où. En l'absence de
+	 * destination, c'est bien sur Dijkstra qui est le plus adapté.
+	 * La différence avec la version classique est qu'ici, on s'arrête
+	 * dès qu'on rencontre une case sûre (par opposition, on cherche
+	 * les chemins vers toutes les destinations possibles dans la version
+	 * classique de Dijkstra). La notion de "case sûre" est définie dans
+	 * la fonction successeur choisie.
+	 * <br/>
+	 * Notez que ce n'est pas forcément une bonne idée d'utiliser cette 
+	 * fonction : il est généralement plus efficace de ne pas fuir n'importe
+	 * où, mais dans une case bien sélectionnée. Sinon, on peut tomber
+	 * facilement dans un piège.
+	 */
+	private static void example6()
+	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+		ArtificialIntelligence ai = InitData.initAi();
+		ai.setVerbose(true);
+		
+		// on initialise la zone
+		AiSimZone zone = InitData.initZone5();
+		ai.setZone(zone);
+		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
+		
+		// utilisation de la fonction de fuite dans Dijkstra 
+		System.out.println("\n\n-------- EXEMPLE 6 --------");
+		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
+		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
+		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
+		dijkstra.setVerbose(true); // pour afficher les détails du traitement
+//		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
+		
+		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOTREE +++");
+		AiLocation startLocation = new AiLocation(hero);
+		try
+		{	// application de l'algo
+			AiPath path = dijkstra.processEscapePath(startLocation);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)

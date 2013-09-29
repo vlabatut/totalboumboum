@@ -50,9 +50,9 @@ public final class FullModelSimulation
 	 */
 	public static void main(String args[])
 	{	// utilisation de base
-//		example1();
+		example1();
 		// mort subite
-//		example2();
+		example2();
 		// items contagieux à durée limitée
 		example3();
 	}
