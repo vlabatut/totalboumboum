@@ -73,10 +73,11 @@ import org.xml.sax.SAXException;
 public class ProfilesConfiguration
 {
 	/**
-	 * Makes a copy of the current configuration.
+	 * Copy the current configuration,
+	 * to be able to restore it later.
 	 * 
 	 * @return
-	 * 		The copy of this selection.
+	 * 		A copy of this object.
 	 */
 	public ProfilesConfiguration copy()
 	{	ProfilesConfiguration result = new ProfilesConfiguration();

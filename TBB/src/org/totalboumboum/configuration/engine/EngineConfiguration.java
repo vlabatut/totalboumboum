@@ -39,12 +39,20 @@ import org.totalboumboum.tools.files.FileTools;
 import org.totalboumboum.tools.images.ImageCache;
 
 /**
+ * This class handles all options regarding
+ * the advanced engine aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class EngineConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public EngineConfiguration copy()
 	{	EngineConfiguration result = new EngineConfiguration();
 	
@@ -66,14 +74,15 @@ public class EngineConfiguration
 	/////////////////////////////////////////////////////////////////
 	// TIMING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Automatic tuning of FPS */
 	private boolean autoFps;
-	/** frames per second */
+	/** Frames per second */
 	private int fps;
-	/** engine update persiod in milliseconds */
+	/** Engine update persiod in milliseconds */
 	private long milliPeriod;
-	/** engine update persiod in nanoseconds */
+	/** Engine update persiod in nanoseconds */
 	private long nanoPeriod;
-	/** speed coefficient */
+	/** Speed coefficient */
 	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
 
 	public void setAutoFps(boolean autoFps)

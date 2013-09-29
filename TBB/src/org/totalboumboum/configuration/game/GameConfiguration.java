@@ -26,44 +26,87 @@ import org.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 
 /**
+ * This class handles all options regarding
+ * the game and gameplay aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class GameConfiguration
 {
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Settings related to tournaments */
 	private TournamentConfiguration tournamentConfiguration;
 	
+	/**
+	 * Changes the settings related to tournaments.
+	 * 
+	 * @param tournamentConfiguration
+	 * 		New settings.
+	 */
 	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
 	{	this.tournamentConfiguration = tournamentConfiguration;
 	}
+	
+	/**
+	 * Returns the settings related to tournaments.
+	 * 
+	 * @return
+	 * 		Current settings.
+	 */
 	public TournamentConfiguration getTournamentConfiguration()
 	{	return tournamentConfiguration;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// QUICKMATCH			/////////////////////////////////////////
+	// QUICK MATCH			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Settings related to the quick match mode */
 	private QuickMatchConfiguration quickMatchConfiguration;
 	
+	/**
+	 * Changes the settings related to the quick match mode.
+	 * 
+	 * @param quickMatchConfiguration
+	 * 		New settings.
+	 */
 	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
 	{	this.quickMatchConfiguration = quickMatchConfiguration;
 	}
+	
+	/**
+	 * Returns the settings related to the quick match mode.
+	 * 
+	 * @return
+	 * 		Current settings.
+	 */
 	public QuickMatchConfiguration getQuickMatchConfiguration()
 	{	return quickMatchConfiguration;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT	/////////////////////////////////////////
+	// QUICK START			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Settings related to the quick start mode */
 	private QuickStartConfiguration quickStartConfiguration;
 	
+	/**
+	 * Changes the settings related to quick start mode.
+	 * 
+	 * @param quickStartConfiguration
+	 * 		New settings.
+	 */
 	public void setQuickStartConfiguration(QuickStartConfiguration quickStartConfiguration)
 	{	this.quickStartConfiguration = quickStartConfiguration;
 	}
+	
+	/**
+	 * Returns the settings related to the quick start mode.
+	 * 
+	 * @return
+	 * 		Current settings.
+	 */
 	public QuickStartConfiguration getQuickStartConfiguration()
 	{	return quickStartConfiguration;
 	}

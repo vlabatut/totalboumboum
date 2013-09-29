@@ -43,12 +43,20 @@ import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.xml.sax.SAXException;
 
 /**
+ * This class handles all options regarding
+ * the quickstart mode aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class QuickStartConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public QuickStartConfiguration copy()
 	{	QuickStartConfiguration result = new QuickStartConfiguration();
 
@@ -60,6 +68,15 @@ public class QuickStartConfiguration
 		return result;
 	}
 	
+	/**
+	 * Indicates if this configuration has changed,
+	 * compared to the specified copy.
+	 * 
+	 * @param copy
+	 * 		Reference copy of this configuration.
+	 * @return
+	 * 		{@code true} iff there is at least one difference between the configurations.
+	 */
 	public boolean hasChanged(QuickStartConfiguration copy)
 	{	boolean result = false;
 		// round
