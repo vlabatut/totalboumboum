@@ -148,15 +148,15 @@ public abstract class AiAbstractSearchAlgorithm
 	/** Emplacement de départ pour la recherche de chemin */
 	protected AiLocation startLocation = null;
 	/** Frange courante */
-	protected PriorityQueue<AiSearchNode> queue = null;
+	protected PriorityQueue<AiSearchNode> fringe = null;
 	/** Indique si l'algorithme a atteint une des 3 limites définies (hauteur/coût/taille) */
 	protected boolean limitReached = false;
 	/** Indique la hauteur courante de l'arbre de recherche */
 	protected int treeHeight = 0;
 	/** Indique le coût maximal courant des chemins contenus dans l'arbre de recherche */
 	protected double treeCost = 0;
-	/** Indique la taille courante (en noeuds) de l'arbre de recherche */
-	protected int treeSize = 0;
+	/** Indique la taille courante (en noeuds) de la frange */
+	protected int fringeSize = 0;
 	
 	/**
 	 * Initialise cet objet en utilisant un arbre de recherche existant.
@@ -184,7 +184,7 @@ public abstract class AiAbstractSearchAlgorithm
 	 * 		La frange courante de l'algorithme.
 	 */
 	public PriorityQueue<AiSearchNode> getQueue()
-	{	return queue;
+	{	return fringe;
 	}
 
 	/**
@@ -221,13 +221,13 @@ public abstract class AiAbstractSearchAlgorithm
 
 	/** 
 	 * Renvoie la taille courante (en noeuds) 
-	 * de l'arbre de recherche.
+	 * de la frange.
 	 * 
 	 * @return
-	 * 		La taille courante (en noeuds) de l'arbre de recherche.
+	 * 		La taille courante (en noeuds) de la frange.
 	 */
-	public int getTreeSize()
-	{	return treeSize;
+	public int getFringeSize()
+	{	return fringeSize;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -279,13 +279,13 @@ public abstract class AiAbstractSearchAlgorithm
 	/////////////////////////////////////////////////////////////////
 	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Limite de hauteur (négatif = pas de limite) */
+	/** Limite de hauteur de l'arbre de recherche (négatif = pas de limite) */
 	protected int maxHeight = -1;
-	/** Limite de coût (négatif = pas de limite) */
+	/** Limite de coût de l'arbre de recherche (négatif = pas de limite) */
 	protected double maxCost = -1;
-	/** Limite de nombre de noeuds par défaut */
+	/** Limite de nombre de noeuds par défaut de la frange */
 	public int MAX_NODES = 200;
-	/** Limite de nombre de noeuds (négatif = pas de limite) */
+	/** Limite de nombre de noeuds de la frange (négatif = pas de limite) */
 	protected int maxNodes = MAX_NODES;
 	
 	/**
@@ -354,7 +354,7 @@ public abstract class AiAbstractSearchAlgorithm
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** permet d'activer/désactiver la sortie texte lors du débogage */
+	/** Permet d'activer/désactiver la sortie texte lors du débogage */
 	private boolean verbose = false;
 
 	/**
