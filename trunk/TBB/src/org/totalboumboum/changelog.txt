@@ -565,6 +565,7 @@
 		- Évolution des stats sur l'ensemble des joueurs, pour l'ensemble des manches et des types de stats
 		- Enregistrement de l'historique des joueurs, pour chaque manche jouée
 	- ia :
+		- quelques bugs corrigés dans l'API, en particulier le modèle partiel (gros bug sur la fin des explosions)
 		- tous les anciens agents ont été débogués
 		- possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
 		- correction d'un bug dans les anciens agents : ils affichaient certaines exceptions (malgré l'option du jeu)
