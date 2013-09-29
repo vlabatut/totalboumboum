@@ -47,6 +47,7 @@ import org.totalboumboum.ai.v201314.adapter.path.heuristic.TimeHeuristicCalculat
 import org.totalboumboum.ai.v201314.adapter.path.search.Astar;
 import org.totalboumboum.ai.v201314.adapter.path.search.Dijkstra;
 import org.totalboumboum.ai.v201314.adapter.path.successor.ApproximateSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.SearchMode;
 import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.TimePartialSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -113,7 +114,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 			costCalculator.setOpponentCost(1000); // on assimile la traversée d'un adversaire à un détour de 1 seconde
 			costCalculator.setMalusCost(1000); // on assimile la traversée d'un malus à un détour de 1 seconde
 			HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,ownHero);
-			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
+			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
 			astarPrecise = new Astar(ai,ownHero, costCalculator, heuristicCalculator, successorCalculator);
 //			astarPrecise.setVerbose(true);
 		}
@@ -126,7 +127,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 		// dijkstra
 		{	CostCalculator costCalculator = new TimeCostCalculator(ai,ownHero);
 			costCalculator.setOpponentCost(1000); // on assimile la traversée d'un adversaire à un détour de 1 seconde
-			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOBRANCH);
+			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOBRANCH);
 			dijkstra = new Dijkstra(ai,ownHero, costCalculator,successorCalculator);
 		}
 		long after = ai.getCurrentTime();
