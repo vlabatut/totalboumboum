@@ -88,7 +88,7 @@ public abstract class SuccessorCalculator
 	 * Change le statut des joueurs adverses. Par défaut,
 	 * ils ne sont pas considérés comme des obstacles
 	 * infranchissables. Il est possible de changer ça
-	 * grâce à cette méthode
+	 * grâce à cette méthode.
 	 * <br/>
 	 * Bien sûr, utiliser cette méthode en même temps que
 	 * {@link CostCalculator#setOpponentCost(double)} n'aurait
@@ -132,7 +132,7 @@ public abstract class SuccessorCalculator
 	 * Change le statut des items malus. Par défaut,
 	 * ils ne sont pas considérés comme des obstacles
 	 * infranchissables. Il est possible de changer ça
-	 * grâce à cette méthode
+	 * grâce à cette méthode.
 	 * <br/>
 	 * Bien sûr, utiliser cette méthode en même temps que
 	 * {@link CostCalculator#setMalusCost(double)} n'aurait
@@ -177,6 +177,8 @@ public abstract class SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	/** Cases déjà traitées */
 	protected final Map<AiSearchNode,Map<AiTile,AiSearchNode>> processedTiles = new HashMap<AiSearchNode,Map<AiTile,AiSearchNode>>();
+	/** Nombre de fois qu'une case a été traitée */
+	protected final Map<AiSearchNode,Map<AiTile,Integer>> processedTilesCounts = new HashMap<AiSearchNode,Map<AiTile,Integer>>();
 	/** Version immuable de la map contenant les cases déjà traitées */
 	protected final Map<AiSearchNode,Map<AiTile,AiSearchNode>> externalProcessedTiles = Collections.unmodifiableMap(processedTiles);
 
