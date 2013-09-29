@@ -1018,7 +1018,9 @@ public class AiPartialModel
 				
 				// si l'explosion s'achève avant la limite
 				if(endTime<=limit)
-				{	// elle est carrément supprimée de la liste de la map
+				{	// on màj la matrice d'obstacles, car le contenu éventuel de la case disparait
+					obstacles[row][col] = false;
+					// elle est carrément supprimée de la liste de la map
 					itExp.remove();
 					// et aussi de la liste de la matrice
 					explosions[row][col].remove(explosion);
