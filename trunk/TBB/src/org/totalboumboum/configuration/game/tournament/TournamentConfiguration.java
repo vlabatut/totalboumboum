@@ -35,12 +35,20 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * This class handles all options regarding
+ * the tournament aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamentConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public TournamentConfiguration copy()
 	{	TournamentConfiguration result = new TournamentConfiguration();
 		
@@ -63,6 +71,15 @@ public class TournamentConfiguration
 		return result;
 	}
 	
+	/**
+	 * Indicates if this configuration has changed,
+	 * compared to the specified copy.
+	 * 
+	 * @param copy
+	 * 		Reference copy of this configuration.
+	 * @return
+	 * 		{@code true} iff there is at least one difference between the configurations.
+	 */
 	public boolean hasChanged(TournamentConfiguration copy)
 	{	boolean result = false;
 		// use last players

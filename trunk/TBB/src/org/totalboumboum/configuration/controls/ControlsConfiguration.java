@@ -24,21 +24,37 @@ package org.totalboumboum.configuration.controls;
 import java.util.HashMap;
 
 /**
+ * This class handles all options regarding
+ * the game controls aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class ControlsConfiguration
 {
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Map of all control settings */ 
 	private HashMap<Integer,ControlSettings> controlSettings = new HashMap<Integer,ControlSettings>();
 	
+	/**
+	 * Returns all control settings.
+	 * 
+	 * @return
+	 * 		Map of control settings.
+	 */
 	public HashMap<Integer,ControlSettings> getControlSettings()
 	{	return controlSettings;	
 	}
 	
+	/**
+	 * Change one of the control settings.
+	 * 
+	 * @param index
+	 * 		Index of the settings.
+	 * @param controlSetting
+	 * 		New controls for the specified index.
+	 */
 	public void putControlSettings(int index, ControlSettings controlSetting)
 	{	controlSettings.put(index,controlSetting);
 	}

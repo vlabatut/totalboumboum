@@ -28,12 +28,20 @@ import org.totalboumboum.configuration.profiles.ProfilesSelection;
 import org.totalboumboum.tools.GameData;
 
 /**
+ * This class handles all options regarding
+ * the quick matche mode aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class QuickMatchConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public QuickMatchConfiguration copy()
 	{	QuickMatchConfiguration result = new QuickMatchConfiguration();
 
@@ -64,6 +72,15 @@ public class QuickMatchConfiguration
 		return result;
 	}
 	
+	/**
+	 * Indicates if this configuration has changed,
+	 * compared to the specified copy.
+	 * 
+	 * @param copy
+	 * 		Reference copy of this configuration.
+	 * @return
+	 * 		{@code true} iff there is at least one difference between the configurations.
+	 */
 	public boolean hasChanged(QuickMatchConfiguration copy)
 	{	boolean result = false;
 		// use last players

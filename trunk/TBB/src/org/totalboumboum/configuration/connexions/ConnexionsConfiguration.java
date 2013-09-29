@@ -39,12 +39,20 @@ import org.totalboumboum.tools.event.UpdateListener;
 import org.xml.sax.SAXException;
 
 /**
+ * This class handles all options regarding
+ * the network communication aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class ConnexionsConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public ConnexionsConfiguration copy()
 	{	ConnexionsConfiguration result = new ConnexionsConfiguration();
 	

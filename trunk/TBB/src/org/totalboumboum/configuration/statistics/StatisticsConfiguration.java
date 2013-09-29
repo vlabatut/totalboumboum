@@ -22,12 +22,20 @@ package org.totalboumboum.configuration.statistics;
  */
  
 /**
+ * This class handles all options regarding
+ * the statistics aspects.
  * 
  * @author Vincent Labatut
- *
  */
 public class StatisticsConfiguration
 {
+	/**
+	 * Copy the current configuration,
+	 * to be able to restore it later.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public StatisticsConfiguration copy()
 	{	StatisticsConfiguration result = new StatisticsConfiguration();
 
