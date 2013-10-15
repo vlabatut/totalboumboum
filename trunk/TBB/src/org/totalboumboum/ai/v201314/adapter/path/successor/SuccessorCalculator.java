@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.path.successor;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -34,8 +35,10 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201314.adapter.data.AiState;
 import org.totalboumboum.ai.v201314.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201314.adapter.path.cost.CostCalculator;
+import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Permet de définir une fonction successeur utilisée par un algorithme
@@ -56,6 +59,8 @@ public abstract class SuccessorCalculator
 	 */
 	public SuccessorCalculator(ArtificialIntelligence ai)
 	{	this.ai = ai;
+	
+		initDirectionOrder();
 	}
 	
 	/**
@@ -75,6 +80,39 @@ public abstract class SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	/** Agent utilisant cette classe */
 	protected ArtificialIntelligence ai = null;
+	
+	/////////////////////////////////////////////////////////////////
+	// NEIGHBOR ORDER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Ordre dans lequel les directions doivent être considérées */
+	protected Direction orderedDirections[] = new Direction[4];
+	
+	/**
+	 * Initialise l'ordre dans lequel les directions
+	 * doivent être prises pour l'agent considéré.
+	 * Cela permet de varier le comportement d'un
+	 * agent à l'autre.
+	 */
+	private void initDirectionOrder()
+	{	AiZone zone = ai.getZone();
+		AiHero hero = zone.getOwnHero();
+		String uuid = hero.getUuid();
+		int value = Math.abs(uuid.hashCode());
+		List<Direction> remainingDirs = new ArrayList<Direction>();
+		for(Direction d: Direction.getPrimaryValues())
+			remainingDirs.add(d);
+		for(int i=0;i<4;i++)
+		{	int idx = value % (4-i);
+			orderedDirections[i] = remainingDirs.get(idx);
+			remainingDirs.remove(idx);
+		}
+		
+// TODO forcing normal order		
+orderedDirections[0] = Direction.DOWN;
+orderedDirections[1] = Direction.LEFT;
+orderedDirections[2] = Direction.RIGHT;
+orderedDirections[3] = Direction.UP;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OBSTACLES		/////////////////////////////////////////////

@@ -295,8 +295,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		}
 
 		// on considère chaque déplacement possible
-		List<Direction> directions = Direction.getPrimaryValues();
-		for(Direction direction: directions)
+		for(Direction direction: orderedDirections)
 		{	// on récupère la case cible
 			AiTile neighbor = tile.getNeighbor(direction);
 			
@@ -416,11 +415,11 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	{	// init
 		long result = Long.MAX_VALUE;
 		AiTile tile = model.getCurrentLocation().getTile();
-		List<AiTile> neighbors = tile.getNeighbors();
 		
 		// on considère chaque case voisine une par une
-		for(AiTile neighbor: neighbors)
-		{	// si une explosion menace cette case
+		for(Direction direction: orderedDirections)
+		{	AiTile neighbor = tile.getNeighbor(direction);
+			// si une explosion menace cette case
 			AiExplosion explosion = model.getExplosion(neighbor);
 			if(explosion!=null)
 			{	long duration = explosion.getEnd();

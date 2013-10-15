@@ -135,7 +135,7 @@ public class ApproximateSuccessorCalculator extends SuccessorCalculator
 			processedTilesMap.put(tile,node);
 			
 			// pour chaque case voisine :
-			for(Direction direction: Direction.getPrimaryValues())
+			for(Direction direction: orderedDirections)
 			{	AiTile neighbor = tile.getNeighbor(direction);
 				
 				// on teste si elle est contient un mur indestructible :
