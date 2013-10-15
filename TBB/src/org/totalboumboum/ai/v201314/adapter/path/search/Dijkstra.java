@@ -22,13 +22,10 @@ package org.totalboumboum.ai.v201314.adapter.path.search;
  */
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
@@ -57,13 +54,6 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
  * Le résultat du traitement prend la forme d'une map associant un noeud de recherche à chaque 
  * case accessible. Ce noeud permet de retrouver le chemin optimal pour aller à cette case,
  * en utilisant sa méthode {@link AiSearchNode#processPath()}.
- * <br/>
- * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
- * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
- * rapport au coût défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
- * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est de forcer l'introduction d'une part de hasard dans les agents, de manière à les 
- * rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  */
@@ -172,16 +162,9 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		fringeSize = 0;
 		lastSearchNode = null;
 		
-		// queue
-		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
-		{	@Override
-			public int compare(AiSearchNode o1, AiSearchNode o2)
-			{	int result = o1.compareScoreTo(o2);
-				return result;
-			}
-		};
-		fringe = new PriorityQueue<AiSearchNode>(1,comparator);
-		fringe.offer(root);
+		// frange et racine
+		resetFringe();
+		insertNodeInFringe(root);
 		
 		// process
 		Map<AiTile,AiSearchNode> result = continueProcess();
@@ -248,7 +231,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		// on remet le dernier noeud (fautif) dans la file,
 		// pour permettre éventuellement de continuer le traitement
 		if(limitReached && lastSearchNode!=null)
-		{	fringe.offer(lastSearchNode);
+		{	insertNodeInFringe(lastSearchNode);
 			print("           Fringe length: "+fringe.size());
 			printQueue("             + ",fringe);
 		}
@@ -306,13 +289,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 							print("             + " + c);
 					}
 					
-					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
-					// pour cette raison, cette implémentation de Dijkstra ne renverra pas forcément toujours le même résultat :
-					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
-					Collections.shuffle(successors);
-					// puis on les rajoute dans la file de priorité
+//					Collections.shuffle(successors);
+					// on rajoute les fils dans la file de priorité
 					for(AiSearchNode node: successors)
-						fringe.offer(node);
+						insertNodeInFringe(node);
 				}
 				
 				// mise à jour de la condition d'arrêt

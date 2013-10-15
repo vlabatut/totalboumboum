@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.path.search;
  * 
  */
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
@@ -136,7 +137,57 @@ public abstract class AiAbstractSearchAlgorithm
 	{	return successorCalculator;
 	}
 	
-    /////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// FRANGE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Frange courante */
+	protected PriorityQueue<AiSearchNode> fringe = null; //TODO renvoyer une version immuable
+	/** Compteur pour l'ordre d'insertion des noeuds dans la frange */
+	private int insertionOrderCount = 0;
+	
+	/**
+	 * Insère le noeud de recherche spécifié
+	 * dans la frange, en mettant à jour les
+	 * variables nécessaires.
+	 * 
+	 * @param node
+	 * 		Le noeud de recherche à insérer.
+	 */
+	protected void insertNodeInFringe(AiSearchNode node)
+	{	node.setInsertionOrder(insertionOrderCount);
+		fringe.offer(node);
+		insertionOrderCount++;
+	}
+	
+	/**
+	 * Réinitialise la frange ainsi
+	 * que les variables qui lui sont
+	 * liées.
+	 */
+	protected void resetFringe()
+	{	// comparateur de noeuds
+		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
+		{	@Override
+			public int compare(AiSearchNode o1, AiSearchNode o2)
+			{	// premier critère : cout du noeud de recherche
+				int result = o1.compareScoreTo(o2);
+				
+				// en cas d'égalité : ordre d'insertion (pas considéré dans les files, par défaut)
+				if(result==0)
+				{	int n1 = o1.getInsertionOrder();
+					int n2 = o2.getInsertionOrder();
+					result = n1 - n2;
+				}
+				return result;
+			}
+		};
+		
+		// création de la frange
+		fringe = new PriorityQueue<AiSearchNode>(1,comparator);
+		insertionOrderCount = 0;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Racine de l'arbre de recherche */
@@ -147,8 +198,6 @@ public abstract class AiAbstractSearchAlgorithm
 	protected ArtificialIntelligence ai = null;
 	/** Emplacement de départ pour la recherche de chemin */
 	protected AiLocation startLocation = null;
-	/** Frange courante */
-	protected PriorityQueue<AiSearchNode> fringe = null;
 	/** Indique si l'algorithme a atteint une des 3 limites définies (hauteur/coût/taille) */
 	protected boolean limitReached = false;
 	/** Indique la hauteur courante de l'arbre de recherche */
@@ -183,7 +232,7 @@ public abstract class AiAbstractSearchAlgorithm
 	 * @return
 	 * 		La frange courante de l'algorithme.
 	 */
-	public PriorityQueue<AiSearchNode> getQueue()
+	public PriorityQueue<AiSearchNode> getFringe()
 	{	return fringe;
 	}
 
