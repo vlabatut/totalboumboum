@@ -1383,7 +1383,8 @@ public final class AiSimZone extends AiZone
 				bombPrototype,bombNumber,bombCount,bombNumberLimit,rangeLimit,
 				throughBlocks,throughBombs,throughFires, 
 				color,walkingSpeedIndex,walkingSpeeds,
-				contagiousItems);
+				contagiousItems,
+				"UUID/"+color.toString());
 		
 		// update zone
 		if(tile!=null)
