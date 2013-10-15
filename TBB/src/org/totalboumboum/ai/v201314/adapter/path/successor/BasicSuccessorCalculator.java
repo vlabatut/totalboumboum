@@ -135,7 +135,7 @@ public class BasicSuccessorCalculator extends SuccessorCalculator
 			processedTilesMap.put(tile,node);
 			
 			// pour chaque case voisine :
-			for(Direction direction: Direction.getPrimaryValues())
+			for(Direction direction: orderedDirections)
 			{	AiTile neighbor = tile.getNeighbor(direction);
 
 				// on teste si la case n'est pas considérée comme un obstacle

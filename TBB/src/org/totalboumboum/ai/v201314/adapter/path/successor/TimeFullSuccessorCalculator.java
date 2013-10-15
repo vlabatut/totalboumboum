@@ -293,8 +293,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		}
 
 		// on considère chaque déplacement possible
-		List<Direction> directions = Direction.getPrimaryValues();
-		for(Direction direction: directions)
+		for(Direction direction: orderedDirections)
 		{	// on récupère la case cible
 			AiTile neighbor = tile.getNeighbor(direction);
 			
@@ -430,7 +429,11 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	{	// init
 		AiZone zone = tile.getZone();
 		long result = Long.MAX_VALUE;
-		List<AiTile> neighbors = tile.getNeighbors();
+		List<AiTile> neighbors = new ArrayList<AiTile>();
+		for(Direction direction: orderedDirections)
+		{	AiTile neighbor = tile.getNeighbor(direction);
+			neighbors.add(neighbor);
+		}
 		
 		// on s'intéresse d'abord aux obstacles concrets
 		// on considère chaque case voisine une par une
