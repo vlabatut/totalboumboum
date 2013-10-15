@@ -199,27 +199,27 @@ public abstract class AiMoveHandler<T extends ArtificialIntelligence> extends Ai
 	{	ai.checkInterruption();
 	
 		// si nécessaire, on change la destination courante
-		{	long before = print("    > entering updateCurrentDestination");
+		{	long before = print("    > entering updateCurrentDestination (currentDestination="+currentDestination+")");
 			currentDestination = processCurrentDestination();
 			long after = ai.getCurrentTime();
 			long elapsed = after - before;
-			print("    < exiting updateCurrentDestination duration="+elapsed);
+			print("    < exiting updateCurrentDestination duration="+elapsed+" currentDestination="+currentDestination);
 		}
 		
 		// on cherche un chemin vers cette destination
-		{	long before = print("    > entering updateCurrentPath");
+		{	long before = print("    > entering updateCurrentPath (currentPath="+currentPath+")");
 			currentPath = processCurrentPath();
 			long after = ai.getCurrentTime();
 			long elapsed = after - before;
-			print("    < exiting updateCurrentPath duration="+elapsed);
+			print("    < exiting updateCurrentPath duration="+elapsed+" currentPath="+currentPath);
 		}
 		
 		// on utilise le chemin pour déterminer la direction de déplacement
-		{	long before = print("    > entering updateCurrentDirection");
+		{	long before = print("    > entering updateCurrentDirection (currentDirection="+currentDirection+")");
 			currentDirection = processCurrentDirection();
 			long after = ai.getCurrentTime();
 			long elapsed = after - before;
-			print("    < exiting updateCurrentDirection duration="+elapsed);
+			print("    < exiting updateCurrentDirection duration="+elapsed+" currentDirection="+currentDirection);
 		}
 		
 		return currentDirection;
