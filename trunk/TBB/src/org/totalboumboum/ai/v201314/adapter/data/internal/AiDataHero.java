@@ -42,6 +42,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
+import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -65,6 +66,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 	{	super(tile,sprite);
 		
 		initColor();
+		initUuid();
 		initSpeed();
 		updateBombParam();
 		updateSpeed();
@@ -202,6 +204,26 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		color = sprite.getColor();	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// UUID				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Identifiant unique du joueur controlant ce personnage */
+	private String uuid;
+	
+	@Override
+	public String getUuid()
+	{	return uuid;	
+	}
+	
+	/**
+	 * Initialise l'UUID de ce personnage.
+	 */
+	private void initUuid()
+	{	Hero sprite = getSprite();
+		AbstractPlayer player = sprite.getPlayer();
+		uuid = player.getId();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SPEED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
