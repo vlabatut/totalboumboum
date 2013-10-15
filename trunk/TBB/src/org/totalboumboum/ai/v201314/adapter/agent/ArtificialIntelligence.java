@@ -491,8 +491,8 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	{	VisibleLoop loop = RoundVariables.loop;
 		long result = 0;
 		if(loop!=null)
-//			loop.getTotalEngineTime();
-			loop.getTotalRealTime(); // otherwise, agents with short process times appear to have zero durations
+//			result = loop.getTotalEngineTime();
+			result = loop.getTotalRealTime(); // otherwise, agents with short process times appear to have zero durations
 		return result;
 	}
 	
