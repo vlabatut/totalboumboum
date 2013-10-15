@@ -369,83 +369,43 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// EXPLORED			/////////////////////////////////////////////
+	// INSERTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map contenant les noeuds ancêtres présent dans la branche courante de l'arbre de recherche */
-//	private Map<AiTile,AiSearchNode> exploredNodes;
-
+	/** Ordre d'insertion du noeud dans la frange */
+	private int insertionOrder = -1;
+	
 	/**
-	 * Renvoie la map des noeud explorés,
-	 * i.e. situés dans la même branche que ce noeud.
+	 * Renvoie le numéro d'insertion
+	 * dans la frange.
+	 * <br/>
+	 * <b>Note :</b> cette méthode est destinée
+	 * à être utilisée par un algorithme de recherche,
+	 * et non pas directement par un agent. 
 	 * 
 	 * @return
-	 * 		La map contenant les noeuds déjà explorés
+	 * 		Ordre dans lequel ce noeud
+	 * 		a été inséré dans la frange.
 	 */
-/*	public Map<AiTile,AiSearchNode> getExploredNodes()
-	{	return exploredNodes;
+	public int getInsertionOrder() {
+		return insertionOrder;
 	}
-*/	
+
 	/**
-	 * Détermine si la case passée en paramètre a déjà été traitée,
-	 * i.e. si elle apparait dans la branche courante de l'arbre de recherche.
-	 * La racine de la branche n'est pas forcément celle de l'arbre,
-	 * mais plutôt celle datant de la dernière pause.
-	 * L'idée est qu'à la suite d'une pause, il est possible de re-visiter
-	 * des cases par lesquelles on est déjà passé, car la pause
-	 * correspond à l'attente de la disparition d'un obstacle
-	 * tel qu'une explosion (ou un mur mobile, etc.).
+	 * Change le numéro d'insertion
+	 * dans la frange.
+	 * <br/>
+	 * <b>Note :</b> cette méthode est destinée
+	 * à être utilisée par un algorithme de recherche,
+	 * et non pas directement par un agent. 
 	 * 
-	 * @param tile	
-	 * 		Case à tester
-	 * @return	
-	 * 		{@code true} ssi la case a déjà été traitée.
+	 * @param insertionOrder
+	 * 		Ordre dans lequel ce noeud
+	 * 		a été inséré dans la frange.
 	 */
-/*	public boolean hasBeenExplored(AiTile tile)
-	{	boolean result = exploredNodes.containsKey(tile);
-		return result;
-	}
-*/
-	/**
-	 * Détermine si la case passée en paramètre a déjà été traitée,
-	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
-	 * 
-	 * @param tile	
-	 * 		Case à tester
-	 * @return	
-	 * 		{@code true} ssi la case a déjà été traitée.
-	 */
-/*	public boolean hasBeenExplored(AiTile tile)
-	{	ai.checkInterruption();
-		
-		boolean result = location.getTile().equals(tile);
-		if(!result && parent!=null)
-			result = parent.hasBeenExplored(tile);
-		return result;
-	}
-*/	
-	/**
-	 * Détermine si la case passée en paramètre a déjà été traitée,
-	 * i.e. si elle apparait dans les noeuds de recherche ancêtres.
-	 * On s'arrête dès qu'on rencontre une pause : l'idée est
-	 * qu'à la suite d'une pause, il est possible de re-visiter
-	 * des cases par lesquelles on est déjà passé, car la pause
-	 * correspond à l'attente de la disparition d'un obstacle
-	 * tel qu'une explosion (ou un mur mobile, etc.).
-	 * 
-	 * @param tile	
-	 * 		Case à tester
-	 * @return	
-	 * 		{@code true} ssi la case a déjà été traitée.
-	 */
-/*	public boolean hasBeenExploredSincePause(AiTile tile)
-	{	ai.checkInterruption();
-		
-		boolean result = location.getTile().equals(tile);
-		if(!result && parent!=null && !parent.getLocation().equals(location))
-			result = parent.hasBeenExploredSincePause(tile);
-		return result;
-	}
-*/	
+	public void setInsertionOrder(int insertionOrder) {
+		this.insertionOrder = insertionOrder;
+	}	
+	
    /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
