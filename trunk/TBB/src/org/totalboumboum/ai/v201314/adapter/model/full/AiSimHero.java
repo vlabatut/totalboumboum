@@ -87,13 +87,16 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	 * 		Vitesses de déplacement au sol du personnage.
 	 * @param contagiousItems 
 	 * 		Liste des items contagieux.
+	 * @param uuid 
+	 * 		Identifiant unique du joueur contrôlant ce personnage.
 	 */
 	protected AiSimHero(int id, AiSimTile tile, double posX, double posY, double posZ,
 			AiSimState state, long burningDuration, double currentSpeed,
 			AiSimBomb bombPrototype, int bombNumberMax, int bombNumberCurrent, int bombNumberLimit, int rangeLimit,
 			boolean throughBlocks, boolean throughBombs, boolean throughFires,
 			PredefinedColor color, int walkingSpeedIndex, Map<Integer,Double> walkingSpeeds,
-			List<AiItem> contagiousItems)
+			List<AiItem> contagiousItems,
+			String uuid)
 	{	super(id,tile,posX,posY,posZ,state,burningDuration,currentSpeed);
 		AiSimZone zone = tile.getZone();
 		
@@ -126,6 +129,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 		
 		// misc
 		this.color = color;
+		this.uuid = uuid;
 	}	
 
 	/**
@@ -170,6 +174,7 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 
 		// misc
 		color = hero.getColor();
+		uuid = hero.getUuid();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -352,6 +357,17 @@ public final class AiSimHero extends AiSimSprite implements AiHero
 	@Override
 	public PredefinedColor getColor()
 	{	return color;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// UUID				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Identifiant unique du joueur controlant ce personnage */
+	private String uuid;
+	
+	@Override
+	public String getUuid()
+	{	return uuid;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
