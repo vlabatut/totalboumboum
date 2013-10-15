@@ -22,10 +22,7 @@ package org.totalboumboum.ai.v201314.adapter.path.search;
  */
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -67,12 +64,6 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 		<li> Une fonction de coût, qui permet de définir combien coûte une action (ici : le fait de passer d'une case à l'autre).</li>
  * 		<li> Une fonction heuristique, qui permet d'estimer le coût du chemin restant à parcourir.</li>
  * </ul>
- * 
- * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
- * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
- * rapport au coût défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
- * renverra pas forcément toujours la même (il en choisira une au hasard).
- * Le but est de forcer l'introduction d'une part de hasard dans les agents, de manière à les rendre moins prévisibles.
  * 
  * @author Vincent Labatut
  */
@@ -286,16 +277,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 			root.updateHeuristic();
 		}
 
-		// comparateur de noeuds
-		Comparator<AiSearchNode> comparator = new Comparator<AiSearchNode>()
-		{	@Override
-			public int compare(AiSearchNode o1, AiSearchNode o2)
-			{	int result = o1.compareScoreTo(o2);
-				return result;
-			}
-		};
-		fringe = new PriorityQueue<AiSearchNode>(1,comparator);
-		fringe.offer(root);
+		// frange et racine
+		resetFringe();
+		insertNodeInFringe(root);
 		
 		// traitement
 		AiPath result = continueProcess();
@@ -388,7 +372,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		// on remet le dernier noeud (fautif) dans la file,
 		// pour permettre éventuellement de continuer le traitement
 		if(limitReached && lastSearchNode!=null)
-		{	fringe.offer(lastSearchNode);
+		{	insertNodeInFringe(lastSearchNode);
 			print("           Fringe length: "+fringe.size());
 			printQueue("             + ",fringe);
 		}
@@ -457,13 +441,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 							print("             + " + c);
 					}
 					
-					// on introduit du hasard en permuttant aléatoirement les noeuds suivants
-					// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
-					// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
-					Collections.shuffle(successors);
-					// puis on les rajoute dans la file de priorité
+//					Collections.shuffle(successors);
+					// on rajoute les fils dans la file de priorité
 					for(AiSearchNode node: successors)
-						fringe.offer(node);
+						insertNodeInFringe(node);
 				}
 				
 				// verbose : file
