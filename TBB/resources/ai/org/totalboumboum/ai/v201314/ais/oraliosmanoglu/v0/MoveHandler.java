@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais.asilizeryuce.v0;
+package org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v0;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,9 +27,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
- * @author Emre Asıl
- * @author Tülin İzer
- * @author Miray Yüce
+ * @author Selen Oralı
+ * @author Arman Osmanoğlu
  */
 public class MoveHandler extends AiMoveHandler<Agent>
 {	
