@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais.asilizeryuce.v0;
+package org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v0;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
@@ -12,9 +12,8 @@ import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  *
- * @author Emre Asıl
- * @author Tülin İzer
- * @author Miray Yüce
+ * @author Selen Oralı
+ * @author Arman Osmanoğlu
  */
 public class Agent extends ArtificialIntelligence
 {

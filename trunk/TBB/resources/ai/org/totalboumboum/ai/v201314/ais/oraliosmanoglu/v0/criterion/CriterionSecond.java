@@ -1,8 +1,8 @@
-package org.totalboumboum.ai.v201314.ais.asilizeryuce.v0.criterion;
+package org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v0.criterion;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.ais.asilizeryuce.v0.Agent;
+import org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v0.Agent;
 
 /**
  * Cette classe est un simple exemple de 
@@ -11,9 +11,8 @@ import org.totalboumboum.ai.v201314.ais.asilizeryuce.v0.Agent;
  * du domaine de définition sont spécifiées dans
  * l'appel au constructeur ({@code super(nom,inf,sup)}).
  * 
- * @author Emre Asıl
- * @author Tülin İzer
- * @author Miray Yüce
+ * @author Selen Oralı
+ * @author Arman Osmanoğlu
  */
 public class CriterionSecond extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */

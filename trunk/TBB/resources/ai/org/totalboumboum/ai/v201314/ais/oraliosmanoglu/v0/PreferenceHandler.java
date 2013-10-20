@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais.asilizeryuce.v0;
+package org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v0;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,9 +21,8 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
- * @author Emre Asıl
- * @author Tülin İzer
- * @author Miray Yüce
+ * @author Selen Oralı
+ * @author Arman Osmanoğlu
  */
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	

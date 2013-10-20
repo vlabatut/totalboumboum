@@ -1,17 +1,17 @@
-package org.totalboumboum.ai.v201314.ais.asilizeryuce.v0.criterion;
+package org.totalboumboum.ai.v201314.ais.arikgunaydinkochan.v0.criterion;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.ais.asilizeryuce.v0.Agent;
+import org.totalboumboum.ai.v201314.ais.arikgunaydinkochan.v0.Agent;
 
 /**
  * Cette classe est un simple exemple de 
  * critère binaire. Copiez-la, renommez-la, modifiez-la
  * pour l'adapter à vos besoin.
  * 
- * @author Emre Asıl
- * @author Tülin İzer
- * @author Miray Yüce
+ * @author İsmail Arık
+ * @author Tuğba Günaydın
+ * @author Çağdaş Kochan
  */
 public class CriterionFirst extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */

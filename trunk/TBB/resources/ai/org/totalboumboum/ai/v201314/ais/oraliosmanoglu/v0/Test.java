@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais.asilizeryuce.v0;
+package org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v0;
 
 /*
  * Total Boum Boum
@@ -30,7 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201314.adapter.test.InitData;
-import org.totalboumboum.ai.v201314.ais.asilizeryuce.AiMain;
+import org.totalboumboum.ai.v201314.ais.oraliosmanoglu.AiMain;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -47,9 +47,8 @@ import org.xml.sax.SAXException;
  * pour ça on a besoin du moteur du jeu, bien sûr. Donc ce genre
  * de test doit passer par le jeu complet, pas seulement l'API.
  *
- * @author Emre Asıl
- * @author Tülin İzer
- * @author Miray Yüce
+ * @author Selen Oralı
+ * @author Arman Osmanoğlu
  */
 public class Test
 {

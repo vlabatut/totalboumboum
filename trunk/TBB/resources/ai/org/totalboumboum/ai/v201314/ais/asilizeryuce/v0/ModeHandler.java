@@ -8,7 +8,7 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
  * 
- * @author Emre Asil
+ * @author Emre Asıl
  * @author Tülin İzer
  * @author Miray Yüce
  */
