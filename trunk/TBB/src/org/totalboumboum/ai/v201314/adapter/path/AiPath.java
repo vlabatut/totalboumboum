@@ -454,10 +454,10 @@ public class AiPath implements Comparable<AiPath>
 	{	StringBuffer result = new StringBuffer();
 		result.append("{");
 		for(int i=0;i<locations.size();i++)
-		{	AiLocation tile = locations.get(i);
+		{	AiLocation location = locations.get(i);
 			long pause = pauses.get(i);
 			result.append(" [");
-			result.append(tile);
+			result.append(location);
 			result.append(";");
 			result.append(pause);
 			result.append("]");
