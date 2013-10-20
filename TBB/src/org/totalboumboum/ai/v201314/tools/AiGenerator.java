@@ -67,6 +67,49 @@ public class AiGenerator
 		List<List<String>> newNames = Arrays.asList(
 			Arrays.asList("Prénom1","Nom1"),
 			Arrays.asList("Prénom2","Nom2")
+			
+//			Arrays.asList("Emre","Asil"),
+//			Arrays.asList("Tülin","İzer"),
+//			Arrays.asList("Miray","Yüce")
+			
+//			Arrays.asList("Neşe","Güneş"),
+//			Arrays.asList("Esra","Sağlam"),
+//			Arrays.asList("Siyabend","Turgut")
+			
+//			Arrays.asList("Hakan","Çetin"),
+//			Arrays.asList("Yiğit","Özel")
+
+//			Arrays.asList("İsmail","Arık"),
+//			Arrays.asList("Tuğba","Günaydın"),
+//			Arrays.asList("Çağdaş","Kochan")
+			
+//			Arrays.asList("Gözde","Engin"),
+//			Arrays.asList("Barış","Serhan"),
+//			Arrays.asList("Garip","Tipici")
+			
+//			Arrays.asList("Selen","Oralı"),
+//			Arrays.asList("Arman","Osmanoğlu")
+
+//			Arrays.asList("Fırat","Akyol"),
+//			Arrays.asList("Mustafa","Kaptan"),
+//			Arrays.asList("Gökberk","Koçak")
+
+//			Arrays.asList("Özkan","Çiftçi"),
+//			Arrays.asList("Akın","Kaplanoğlu"),
+//			Arrays.asList("Erol","Köseoğlu")
+
+//			Arrays.asList("Emre","Acar"),
+//			Arrays.asList("Yankı","Sesyılmaz")
+
+//			Arrays.asList("Berrenur","Saylam"),
+//			Arrays.asList("Kübra","Sönmez")
+			
+//			Arrays.asList("Emre","Derin"),
+//			Arrays.asList("Oktay","Koçak"),
+//			Arrays.asList("Emin Can","Zorluoğlu")
+
+//			Arrays.asList("Mustafa","Dönmez"),
+//			Arrays.asList("Charlotte","Labat Camy")
 		);
 		
 		// on lance la copie
