@@ -141,7 +141,7 @@ public abstract class AiAbstractSearchAlgorithm
 	// FRANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Frange courante */
-	protected PriorityQueue<AiSearchNode> fringe = null; //TODO renvoyer une version immuable
+	protected PriorityQueue<AiSearchNode> fringe = null; //NOTE j'aimerais renvoyer une version immuable, mais ça ne semble pas possible
 	/** Compteur pour l'ordre d'insertion des noeuds dans la frange */
 	private int insertionOrderCount = 0;
 	
