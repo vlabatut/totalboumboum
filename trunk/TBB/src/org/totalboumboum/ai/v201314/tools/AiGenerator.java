@@ -68,7 +68,7 @@ public class AiGenerator
 			Arrays.asList("Prénom1","Nom1"),
 			Arrays.asList("Prénom2","Nom2")
 			
-//			Arrays.asList("Emre","Asil"),
+//			Arrays.asList("Emre","Asıl"),
 //			Arrays.asList("Tülin","İzer"),
 //			Arrays.asList("Miray","Yüce")
 			
@@ -148,7 +148,9 @@ public class AiGenerator
 		String newPackageName = "";
 		for(List<String> name: newNames)
 		{	String lastName = name.get(name.size()-1);
+			lastName = lastName.toUpperCase(Locale.ENGLISH);
 			lastName = lastName.toLowerCase(Locale.ENGLISH);
+			lastName = lastName.replace(" ","");
 			lastName = Normalizer.normalize(lastName, Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 			newPackageName = newPackageName + lastName;
 		}
