@@ -1727,3 +1727,8 @@ public class Launcher
 // ça peut être la galère... ou pas. peut être qu'il faut simplifier, à ce niveau si prospectif.
 
 //TODO écrire un agent très simple, Direct, qui pose une bombe le plus loin possible de l'adversaire
+
+// TODO faire détecter les motifs répétitifs par le jeu lui-même
+// 		casser le motif en balançant des bombes
+// TODO corolaire : lorsque les IA sont menacées par le jeu, la bombe
+// 		doit tomber et non pas apparaitre (comme c'est surement le cas)
