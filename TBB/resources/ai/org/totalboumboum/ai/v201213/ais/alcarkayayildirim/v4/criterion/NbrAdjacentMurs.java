@@ -139,6 +139,8 @@ public class NbrAdjacentMurs extends AiUtilityCriterionInteger<AlcarKayaYildirim
 		}
 		if (result > 3)
 			result = 3;
+		if(result==0)
+			result = 1;
 		
 		return result;	
 	}
