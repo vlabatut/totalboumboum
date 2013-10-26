@@ -566,7 +566,7 @@
 		- Enregistrement de l'historique des joueurs, pour chaque manche jouée
 	- ia :
 		- quelques bugs corrigés dans l'API, en particulier le modèle partiel (gros bug sur la fin des explosions)
-		- tous les anciens agents ont été débogués
+		- tous les anciens agents ont été débogués (du moins les bugs d'exécution ont été masqués)
 		- possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
 		- correction d'un bug dans les anciens agents : ils affichaient certaines exceptions (malgré l'option du jeu)
 		- ajout dans le checker de code source de l'API : ne pas utiliser printStackTrace
