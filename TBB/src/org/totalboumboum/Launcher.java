@@ -1732,3 +1732,7 @@ public class Launcher
 // 		casser le motif en balançant des bombes
 // TODO corolaire : lorsque les IA sont menacées par le jeu, la bombe
 // 		doit tomber et non pas apparaitre (comme c'est surement le cas)
+
+// TODO pb avec les graphiques de manche : quand un joueur meurt, il faudrait afficher deux points :
+//		- un à la même hauteur que le précédent
+//		- l'autre à zéro (pour avoir une droite verticale au moment de l'éliminiation)
