@@ -29,6 +29,7 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
@@ -183,7 +184,15 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		Si la liste des cases de destination est vide.
 	 */
 	public AiPath startProcess(AiLocation startLocation, Set<AiTile> endTiles) throws LimitReachedException
-	{	// on réinitialise la case de départ
+	{	// on vérifie que les cases/emplacement sont bien définies dans les mêmes instances de zones
+		AiZone zone1 = startLocation.getZone();
+		for(AiTile endTile: endTiles)
+		{	AiZone zone2 = endTile.getZone();
+			if(zone1!=zone2)
+				throw new IllegalArgumentException("The starting and ending points do not belong to the same zone instance (which they should): "+startLocation+" vs. "+endTile);
+		}
+				
+		// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		heuristicCalculator.setEndTiles(endTiles);
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
@@ -262,6 +271,14 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
 			throw new NullPointerException("The algorithm must be called at least once with processShortestPath(AiLocation,...) for init purposes");
+		
+		// on vérifie que les cases/emplacements sont bien définies dans les mêmes instances de zones
+		AiZone zone1 = startLocation.getZone();
+		for(AiTile endTile: endTiles)
+		{	AiZone zone2 = endTile.getZone();
+			if(zone1!=zone2)
+				throw new IllegalArgumentException("The starting and ending points do not belong to the same zone instance (which they should): "+startLocation+" vs. "+endTile);
+		}
 		
 		// initialisation
 		this.endTiles = endTiles;
