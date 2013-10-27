@@ -286,12 +286,13 @@ public class AiPreferenceLoader
 					}
 
 					// insert criterion in agent
+					AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
 					try
-					{	AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
-						handler.insertCriterion(criterion);
+					{	handler.insertCriterion(criterion);
 					}
 					catch(IllegalArgumentException e)
-					{	throw new IllegalArgumentException(errMsg+e.getMessage());
+					{	handler.displayPreferencesProblem();
+						throw new IllegalArgumentException(errMsg+e.getMessage());
 					}
 				}
 			}
@@ -404,7 +405,8 @@ public class AiPreferenceLoader
 			handler.insertCategory(category);
 		}
 		catch(IllegalArgumentException e)
-		{	throw new IllegalArgumentException(errMsg+e.getMessage());
+		{	handler.displayPreferencesProblem();
+			throw new IllegalArgumentException(errMsg+e.getMessage());
 		}
 	}
 	
@@ -463,7 +465,9 @@ public class AiPreferenceLoader
 		AiPreferenceHandler<T> handler = (AiPreferenceHandler<T>)getHandler(ai);
 		Set<AiCombination> missingCombinations = handler.checkPreferences(mode);
 		if(!missingCombinations.isEmpty())
+		{	handler.displayPreferencesProblem();
 			throw new IllegalArgumentException(errMsg+"some combinations are missing in the "+mode+" preference table:"+missingCombinations.toString());
+		}
 	}
 
 	/**
@@ -492,7 +496,9 @@ public class AiPreferenceLoader
 		String categoryStr = root.getAttributeValue(XmlNames.CATEGORY);
 		AiCategory category = handler.getCategory(categoryStr);
 		if(category==null)
+		{	handler.displayPreferencesProblem();
 			throw new IllegalArgumentException(errMsg+"category '"+categoryStr+"' is used in a combination, but is is undefined (you must first define the category in the preference XML file).");
+		}
 		AiCombination combination = new AiCombination(category);
 		
 		// get the criterion values
@@ -505,7 +511,8 @@ public class AiPreferenceLoader
 			{	combination.setCriterionValue(i, valueStr);
 			}
 			catch(IllegalArgumentException e)
-			{	throw new IllegalArgumentException(errMsg+e.getMessage());
+			{	handler.displayPreferencesProblem();
+				throw new IllegalArgumentException(errMsg+e.getMessage());
 			}
 		}
 		
@@ -514,7 +521,8 @@ public class AiPreferenceLoader
 		{	handler.insertCombination(mode,combination);
 		}
 		catch(IllegalArgumentException e)
-		{	throw new IllegalArgumentException(errMsg+e.getMessage());
+		{	handler.displayPreferencesProblem();
+			throw new IllegalArgumentException(errMsg+e.getMessage());
 		}
 	}
 }

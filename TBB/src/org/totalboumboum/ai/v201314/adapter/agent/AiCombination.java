@@ -177,13 +177,16 @@ public final class AiCombination
 	{	boolean result = false;
 		if(o!=null && o instanceof AiCombination)
 		{	AiCombination combination = (AiCombination)o;
-			result = criteria.size()==combination.criteria.size();
-			Iterator<AiCriterion<?,?>> it = criteria.iterator();
-			while(it.hasNext() && result)
-			{	AiCriterion<?,?> criterion = it.next();
-				Object value1 = values.get(criterion);
-				Object value2 = combination.getCriterionValue(criterion);
-				result = value1.equals(value2);
+			result = category.equals(combination.category);
+			if(result)
+			{	result = criteria.size()==combination.criteria.size();
+				Iterator<AiCriterion<?,?>> it = criteria.iterator();
+				while(it.hasNext() && result)
+				{	AiCriterion<?,?> criterion = it.next();
+					Object value1 = values.get(criterion);
+					Object value2 = combination.getCriterionValue(criterion);
+					result = value1.equals(value2);
+				}
 			}
 		}
 		return result;

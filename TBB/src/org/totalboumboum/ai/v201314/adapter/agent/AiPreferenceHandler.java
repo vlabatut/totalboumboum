@@ -139,6 +139,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	{	// le cache des critères
 		criterionCache.clear();
 		
+		// les combinaisons précédemment associées aux cases
+		lastCombinations.clear();
+		
 		// les valeurs de préférence précédemment calculées.
 		preferencesByTile.clear();
 		preferencesByValue.clear();
@@ -259,6 +262,9 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			if(combination == null)
 				throw new NullPointerException("The value returned by the method processCombination@"+color+" (for category "+category.getName()+") is null. It should not.");
 			print("        < combination="+combination);
+			
+			// on associe la case et sa combinaison dans la map définie à cet effet
+			lastCombinations.put(tile,combination);
 			
 			// on calcule la valeur de préférence correspondant à cette combinaison (en fonction de son rang)
 			int preference = retrievePreferenceValue(mode, combination);
@@ -457,7 +463,32 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// REFERENCE		/////////////////////////////////////////////
+	// COMBINAISONS	/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map associant la dernière combinaison calculée pour chaque case traitée */
+	private final Map<AiTile,AiCombination> lastCombinations = new HashMap<AiTile, AiCombination>();
+	
+	/**
+	 * Renvoie la dernière combinaison calculée pour la case
+	 * spécifiée (lors de la dernière mise à jour des préférences)
+	 * ou bien {@code null} si la case ne faisait pas partie
+	 * des cases sélectionnées (auquel cas aucune combinaison n'a
+	 * été calculée pour elle).
+	 * 
+	 * @param tile
+	 * 		Case considérée.
+	 * @return
+	 * 		Dernière combinaison calculée pour cette case, ou {@code null}
+	 * 		si aucune combinaison n'a été calculée lors de la denrière mise
+	 * 		à jour des préférences.
+	 */
+	public AiCombination getCombinationForTile(AiTile tile)
+	{	AiCombination result = lastCombinations.get(tile);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PREFERENCES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map contenant la préférence de chaque combinaison, , à ne surtout pas modifier manuellement */
 	private final Map<AiMode, List<AiCombination>> referencePreferences = new HashMap<AiMode, List<AiCombination>>();
@@ -536,7 +567,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	final void insertCombination(AiMode mode, AiCombination combination) throws IllegalArgumentException
 	{	List<AiCombination> list = referencePreferences.get(mode);
 		if(list.contains(combination))
-			throw new IllegalArgumentException("Trying to insert combination '"+combination+"' for mode '"+mode+"', but this combination is already present (a combination cannot appear twice in the preferences for a give mode).");
+			throw new IllegalArgumentException("Trying to insert combination '"+combination+"' for mode '"+mode+"', but this combination is already present (a combination cannot appear twice in the preferences for a given mode).");
 		list.add(combination);
 	}
 	
@@ -755,5 +786,21 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			print("      < Mode " + mode + " done");
 		}
 		print("    < Preferences done.");
+	}
+	
+	/**
+	 * La même que {@link #displayPreferences()} mais
+	 * pour une exception.
+	 */
+	public final void displayPreferencesProblem()
+	{	System.err.println("Current preferences :");
+		
+		for(AiMode mode: AiMode.values())
+		{	System.err.println("> Mode: ----- " + mode + " -------------------------------");
+			final List<AiCombination> list = referencePreferences.get(mode);
+			for(int i=0;i<list.size();i++)
+				System.err.println("  "+i+"."+list.get(i));
+			System.err.println("< Mode " + mode + " done");
+		}
 	}
 }
