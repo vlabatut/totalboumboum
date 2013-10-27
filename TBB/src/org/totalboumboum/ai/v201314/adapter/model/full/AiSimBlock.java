@@ -131,11 +131,33 @@ if(state.getName()==null || state.getName()==AiStateName.FLYING)
 	{	return stopHeroes;
 	}
 	
+	/**
+	 * Modifie la façon dont ce bloc interagit
+	 * avec les joueurs en termes de collisions.
+	 * 
+	 * @param stopHeroes
+	 * 		Comportement du bloc vis à vis des collisions avec les joueurs.
+	 */
+	public void setStopHeroes(AiStopType stopHeroes)
+	{	this.stopHeroes = stopHeroes;
+	}
+	
 	@Override
 	public AiStopType hasStopFires()
 	{	return stopFires;
 	}
 
+	/**
+	 * Modifie la façon dont ce bloc interagit
+	 * avec les explosions en termes de collisions.
+	 * 
+	 * @param stopFires
+	 * 		Comportement du bloc vis à vis des collisions avec les explosions.
+	 */
+	public void setStopFires(AiStopType stopFires)
+	{	this.stopFires = stopFires;
+	}
+	
 	@Override
 	public boolean isCrossableBy(AiSprite sprite)
 	{	// par défaut, on bloque
