@@ -107,8 +107,6 @@ public class AiMain extends AiManager
 		// on vérifie si les préférences se chargent normalement
 //		aiMain.loadPreferences();
 	
-	
-	
 		generateXmlPreferences();
 	}
 	
@@ -130,14 +128,14 @@ public class AiMain extends AiManager
 		// noms des critères, par ordre de préférence
 		List<String> critNames = Arrays.asList(
 			"RETREAT",
-			"THREAT",
+			"SUPERTHREAT",
 			"DISTARG",
 			"DISTANCE");
 		// domaines complets des critères, dans le même ordre que ci-dessus
 		// les valeurs de chaque domaine sont rangées par ordre de préférence
 		List<List<String>> critDomains = Arrays.asList(
 			Arrays.asList("true ","false"),
-			Arrays.asList("true ","false"),
+			Arrays.asList("2","1","0"),
 			Arrays.asList("3","2","1","0"),
 			Arrays.asList("0","1","2","3","4"));
 		
