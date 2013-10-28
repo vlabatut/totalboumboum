@@ -45,7 +45,7 @@
 	</locations>
 	<items>
 		<item name="extrabomb" number="3" />
-		<item name="extraflame" number="2" />
+		<item name="extraflame" number="3" />
 	</items>
 </players>
 
