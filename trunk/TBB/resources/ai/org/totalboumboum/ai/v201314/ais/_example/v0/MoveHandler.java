@@ -106,6 +106,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	protected AiPath processCurrentPath()
 	{	ai.checkInterruption();
 		AiPath result = null;
+		AiLocation startLocation = new AiLocation(ownHero);
 		
 		/*
 		 *  TODO à compléter.
@@ -118,7 +119,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 		AiTile endTile = getCurrentDestination();		// cette case correspond à celle sélectionnée dans la méthode processCurrentDestination
 		try
 		{	// on doit OBLIGATOIREMENT exécuter astar dans un bloc try/catch
-			result = astar.startProcess(endTile);
+			result = astar.startProcess(startLocation,endTile);
 		}
 		catch (LimitReachedException e)
 		{	//e.printStackTrace();		// il ne faut PAS afficher la trace (cf. le manuel de l'API, la partie sur les contraintes de programmation)
@@ -153,7 +154,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 		// la direction de la case suivante, ce qui n'est pas forcément la meilleure chose à faire.
 		// là encore, il s'agit d'un exemple de programmation, et non d'un exemple de conception.
 		AiPath path = getCurrentPath();
-		if(path.getLength()<2)		// cas où le chemin est vide, ou bien ne contient que la case courante
+		if(path==null || path.getLength()<2)		// cas où le chemin est vide, ou bien ne contient que la case courante
 			result = Direction.NONE;
 		else
 		{	AiLocation nextLocation = path.getLocation(1);		// un chemin est une séquence de AiLocation (position en pixel), chaque AiLocation contient la AiTile correspondant à la position.
