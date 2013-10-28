@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais.acarsesyılmaz;
+package org.totalboumboum.ai.v201314.ais.acarsesyilmaz;
 
 /*
  * Total Boum Boum
@@ -33,7 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.ais.acarsesyılmaz.v0.Agent;
+import org.totalboumboum.ai.v201314.ais.acarsesyilmaz.v0.Agent;
 import org.xml.sax.SAXException;
 
 /**
