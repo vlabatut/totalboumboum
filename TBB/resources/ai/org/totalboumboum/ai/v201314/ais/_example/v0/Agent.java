@@ -5,6 +5,7 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
 
 /**
  * Classe principale de votre agent, que vous devez compléter.
@@ -143,6 +144,11 @@ public class Agent extends ArtificialIntelligence
 	@Override
 	protected void updateOutput()
 	{	checkInterruption();
+		
+		// vous pouvez changer la taille du texte affiché, si nécessaire
+		// attention: il s'agit d'un coefficient multiplicateur
+		AiOutput output = getOutput();
+		output.setTextSize(2);
 
 		/*
 		 *  TODO à compléter si vous voulez modifier l'affichage.
