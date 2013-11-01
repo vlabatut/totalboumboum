@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.model.partial;
  * 
  */
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -1138,7 +1139,12 @@ public class AiPartialModel
 	 */
 	@Override
 	public String toString()
-	{	StringBuffer result = new StringBuffer();
+	{	boolean details = true; // permet d'afficher les délais d'explosions en plus de la zone elle-même
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(4);
+		nf.setMaximumFractionDigits(0);
+		nf.setGroupingUsed(false);
+		StringBuffer result = new StringBuffer();
 		AiTile ownTile = currentLocation.getTile();
 		int ownRow = ownTile.getRow();
 		int ownCol = ownTile.getCol();
@@ -1152,6 +1158,15 @@ public class AiPartialModel
 			{	result.append(" ");
 				result.append(i/10);
 			}
+			if(details)
+			{	result.append("\t");
+				for(int i=0;i<10;i++)
+					result.append("     ");
+				for(int i=10;i<width;i++)
+				{	result.append("    ");
+					result.append(i/10);
+				}
+			}
 			result.append("\n");
 		}
 		result.append("  ");
@@ -1159,13 +1174,27 @@ public class AiPartialModel
 		{	result.append(" ");
 			result.append(i%10);
 		}
+		if(details)
+		{	result.append("\t");
+			for(int i=0;i<width;i++)
+			{	result.append("    ");
+				result.append(i%10);
+			}
+		}
 		result.append("\n");
 		
 		// top row
 		result.append("  ╔");
 		for(int col=0;col<width-1;col++)
 			result.append("═╦");
-		result.append("═╗\n");
+		result.append("═╗");
+		if(details)
+		{	result.append("\t╔");
+			for(int col=0;col<width-1;col++)
+				result.append("════╦");
+			result.append("════╗");
+		}
+		result.append("\n");
 		
 		// content
 		for(int row=0;row<height;row++)
@@ -1204,12 +1233,36 @@ public class AiPartialModel
 						result.append("▲");
 				}
 			}
-			result.append("║\n");
+			result.append("║");
+			if(details)
+			{	result.append("\t");
+				for(int col=0;col<width;col++)
+				{	AiExplosionList list = explosions[row][col];
+					
+					result.append("║");
+					if(list!=null)
+					{	long time = list.first().getStart();
+						result.append(nf.format(time));
+					}
+					else
+						result.append("    ");
+				}
+				result.append("║");
+			}
+			result.append("\n");
+			
 			if(row<height-1)
 			{	result.append("  ╠");
 				for(int col=0;col<width-1;col++)
 					result.append("═╬");
-				result.append("═╣\n");
+				result.append("═╣");
+				if(details)
+				{	result.append("\t╠");
+					for(int col=0;col<width-1;col++)
+						result.append("════╬");
+					result.append("════╣");
+				}
+				result.append("\n");
 			}
 		}
 		
@@ -1217,7 +1270,14 @@ public class AiPartialModel
 		result.append("  ╚");
 		for(int col=0;col<width-1;col++)
 			result.append("═╩");
-		result.append("═╝\n");
+		result.append("═╝");
+		if(details)
+		{	result.append("\t╚");
+			for(int col=0;col<width-1;col++)
+				result.append("════╩");
+			result.append("════╝");
+		}
+		result.append("\n");
 		
 		return result.toString();
 	}
