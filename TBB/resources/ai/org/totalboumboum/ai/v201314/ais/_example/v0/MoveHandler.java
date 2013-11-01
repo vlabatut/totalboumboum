@@ -92,8 +92,8 @@ public class MoveHandler extends AiMoveHandler<Agent>
 		// c'est seulement pour montrer un exemple en termes de programmation (et non pas de conception d'agent)
 		AiPreferenceHandler<Agent> preferenceHandler = ai.getPreferenceHandler();
 		Map<Integer, List<AiTile>> preferences = preferenceHandler.getPreferencesByValue();
-		int maxPref = Collections.max(preferences.keySet());	// ATTENTION : ici il faudrait tester qu'il y a au moins une valeur dans la map (sinon : NullPointerException !)
-		List<AiTile> tiles = preferences.get(maxPref);			// on récupère la liste de cases qui ont la préférence maximale
+		int minPref = Collections.min(preferences.keySet());	// ATTENTION : ici il faudrait tester qu'il y a au moins une valeur dans la map (sinon : NullPointerException !)
+		List<AiTile> tiles = preferences.get(minPref);			// on récupère la liste de cases qui ont la meilleure préférence
 		result = tiles.get(0);									// on prend la première de la liste (arbitrairement)
 		
 		return result;
