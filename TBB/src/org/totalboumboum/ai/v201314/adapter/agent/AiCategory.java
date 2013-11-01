@@ -216,7 +216,7 @@ public final class AiCategory implements Comparable<AiCategory>
 	 * @return
 	 * 		Combinaison décrivant la case. 
 	 */
-	public AiCombination processCombination(AiTile tile)
+	protected AiCombination processCombination(AiTile tile)
 	{	AiCombination result = new AiCombination(this);
 		for(AiCriterion<?,?> criterion: criteria)
 			processCombinationCriterion(criterion,tile,result);
