@@ -1703,6 +1703,37 @@ public final class AiSimZone extends AiZone
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// DIRECTIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Force toutes les directions courantes des sprites
+	 * composant cette zone à être simple, i.e. pas de
+	 * directions composites. Cette propriété de simplicité
+	 * est recquise par le modèle complet. 
+	 */
+	public void simplifyDirections()
+	{	List<AiSimSprite> sprites = new ArrayList<AiSimSprite>();
+		sprites.addAll(blocks);
+		sprites.addAll(bombs);
+//		sprites.addAll(fires);
+//		sprites.addAll(floors);
+		sprites.addAll(heroes);
+//		sprites.addAll(items);
+		
+		for(AiSimSprite sprite: sprites)
+		{	AiSimState state = sprite.getState();
+			Direction direction = state.getDirection();
+			if(direction.isComposite())
+			{	direction = direction.getHorizontalPrimary(); //	on prend arbitrairement la composante horizontale
+				AiStateName name = state.getName();
+				long time = state.getTime();
+				state = new AiSimState(name, direction, time);
+				sprite.setState(state);
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
