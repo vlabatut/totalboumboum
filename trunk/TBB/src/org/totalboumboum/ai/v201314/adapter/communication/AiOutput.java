@@ -233,8 +233,10 @@ public class AiOutput
 	/////////////////////////////////////////////////////////////////
 	// TEXTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Détermine si le texte sera affiché en normalement ou en gras */
+	/** Détermine si le texte sera affiché normalement ou en gras */
 	private boolean bold = false;
+	/** Controle la taille du texte affiché */
+	private float textSize = 1;
 	/**Texte à afficher sur les cases de la zone de jeu */
 	private List<String> tileTexts[][];
 
@@ -242,7 +244,7 @@ public class AiOutput
 	 * Change le mode d'affichage du texte : gras ou pas.
 	 * 
 	 * @param bold
-	 * 		La valeur vrai indique que l'affichage sera effectué en gras.
+	 * 		La valeur {@code true} indique que l'affichage sera effectué en gras.
 	 */
 	public void setBold(boolean bold)
 	{	this.bold = bold;
@@ -257,6 +259,29 @@ public class AiOutput
 	 */
 	public boolean isBold()
 	{	return bold;
+	}
+	
+	/**
+	 * Change la taille du texte, exprimé en proportion de
+	 * la taille normale. Donc : 2=deux fois plus grand,
+	 * 0.5=deux fois plus petit, etc.
+	 * 
+	 * @param textSize
+	 * 		Nouvelle taille du texte, en proportion du texte normal.
+	 */
+	public void setTextSize(float textSize)
+	{	this.textSize = textSize;
+	}
+	
+	/**
+	 * Renvoie la taille du texte, exprimé en
+	 * proportion de la taille normale.
+	 * 
+	 * @return
+	 * 		Taille courante du texte.
+	 */
+	public float getTextSize()
+	{	return textSize;
 	}
 	
 	/**
