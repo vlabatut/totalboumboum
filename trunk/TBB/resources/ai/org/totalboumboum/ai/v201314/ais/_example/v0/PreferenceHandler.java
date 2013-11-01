@@ -36,9 +36,6 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
     {	super(ai);
 		ai.checkInterruption();
 		
-		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
-	
 		/*
 		 *  TODO à compléter (si nécessaire).
 		 *  

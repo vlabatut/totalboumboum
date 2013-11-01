@@ -23,9 +23,6 @@ public class BombHandler extends AiBombHandler<Agent>
     {	super(ai);
     	ai.checkInterruption();
 		
-		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
-   	
 		/*
 		 *  TODO à compléter.
 		 *  
