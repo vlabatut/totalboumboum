@@ -23,7 +23,7 @@
 	<settings>
 		<levels randomOrder="true" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="16" time="60000" />
+		<limits points="0" rounds="16" time="0" />
 		<points share="true" draw="NONE">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -34,28 +34,11 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="e346d333-bbba-4dc8-bfd0-31de94a3dbae" color="RUST" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="40b32bca-16e3-4421-90bd-466e42c2c18a" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="11626f33-86fe-4408-ac80-96cc025aa25b" color="YELLOW" controls="1" spritePack="superbomberman3" spriteFolder="pretty" />
 	</players>
 	<levels>
-		<level pack="tournament201314" folder="bombfest" allowedPlayers="2 3 4" />
-		<level pack="tournament201314" folder="carrefour" allowedPlayers="2 3 4" />
-		<level pack="tournament201314" folder="classic" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201314" folder="compromis" allowedPlayers="1 2 3 4" />
 		<level pack="tournament201314" folder="croix" allowedPlayers="2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201314" folder="entrance" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314" folder="goldrush" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314" folder="horizontal" allowedPlayers="2 3 4 5 6 7 8 9 10" />
-		<level pack="tournament201314" folder="hurry" allowedPlayers="2 3 4" />
-		<level pack="tournament201314" folder="items" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314" folder="limitsiz" allowedPlayers="2 3 4" />
-		<level pack="tournament201314" folder="line" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201314" folder="pasaj" allowedPlayers="2 3 4 5 6" />
-		<level pack="tournament201314" folder="power" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201314" folder="readysetgo" allowedPlayers="2 3 4 5" />
-		<level pack="tournament201314" folder="vite" allowedPlayers="1 2 3 4" />
 	</levels>
 </gameQuickmatch>
 
