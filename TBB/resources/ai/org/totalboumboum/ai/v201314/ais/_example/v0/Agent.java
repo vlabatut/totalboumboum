@@ -22,9 +22,6 @@ public class Agent extends ArtificialIntelligence
 	 */
 	public Agent()
 	{	checkInterruption();
-		
-		// active/désactive la sortie texte
-		verbose = true;
 	}
 	
 	@Override
@@ -65,6 +62,13 @@ public class Agent extends ArtificialIntelligence
 	@Override
 	protected void updatePercepts()
 	{	checkInterruption();
+		
+		// active/désactive la sortie texte
+		verbose = true;
+		modeHandler.verbose = false;
+		preferenceHandler.verbose = true;
+		bombHandler.verbose = false;
+		moveHandler.verbose = false;
 		
 		/*
 		 *  TODO à compléter si vous avez des objets 

@@ -42,9 +42,6 @@ public class MoveHandler extends AiMoveHandler<Agent>
     {	super(ai);
 		ai.checkInterruption();
 		
-		// on règle la sortie texte pour ce gestionnaire
-		verbose = true;
-		
 		/*
 		 *  TODO à compléter, si nécessaire.
 		 *  
