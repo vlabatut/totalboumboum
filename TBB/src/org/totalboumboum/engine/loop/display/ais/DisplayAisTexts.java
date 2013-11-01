@@ -145,9 +145,10 @@ public class DisplayAisTexts extends Display
 				if(getShow(i))
 				{	int type = Font.PLAIN;
 					boolean bold = aiMgr.isBold();
+					float textSize = aiMgr.getTextSize();
 					if(bold)
 						type = Font.BOLD;
-					Font font = new Font("Dialog",type,9);//TODO was 15
+					Font font = new Font("Dialog",type,Math.round(9*textSize));// was 15
 					g.setFont(font);
 					FontMetrics metrics = g.getFontMetrics(font);
 					List<String>[][] texts = aiMgr.getTileTexts();
