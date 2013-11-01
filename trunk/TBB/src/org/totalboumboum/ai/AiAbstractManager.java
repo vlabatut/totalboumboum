@@ -487,6 +487,16 @@ public abstract class AiAbstractManager<V>
 	}
 	
 	/**
+	 * Change le mode d'affichage du texte : gras ou pas.
+	 * 
+	 * @param bold
+	 * 		La valeur {@code true} indique que l'affichage sera effectué en gras.
+	 */
+	public void setBold(boolean bold)
+	{	this.bold = bold;
+	}
+	
+	/**
 	 * Renvoie la taille du texte, exprimé en
 	 * proportion de la taille normale.
 	 * 
@@ -495,6 +505,18 @@ public abstract class AiAbstractManager<V>
 	 */
 	public float getTextSize()
 	{	return textSize;
+	}
+
+	/**
+	 * Change la taille du texte, exprimé en proportion de
+	 * la taille normale. Donc : 2=deux fois plus grand,
+	 * 0.5=deux fois plus petit, etc.
+	 * 
+	 * @param textSize
+	 * 		Nouvelle taille du texte, en proportion du texte normal.
+	 */
+	public void setTextSize(float textSize)
+	{	this.textSize = textSize;
 	}
 
 	/**

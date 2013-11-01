@@ -352,6 +352,13 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 					engineMatrix[row][col] = new ArrayList<String>(aiMatrix[row][col]);
 		}
 		
+		// text parameters
+		{	boolean bold = output.isBold();
+			setBold(bold);
+			float textSize = output.getTextSize();
+			setTextSize(textSize);
+		}
+		
 		// paths
 		{	Map<AiPath,Color> aiPaths = output.getPaths();
 			List<List<Tile>> enginePaths = getPaths();
