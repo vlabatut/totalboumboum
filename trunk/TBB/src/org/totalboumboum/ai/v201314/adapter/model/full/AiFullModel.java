@@ -105,6 +105,7 @@ public class AiFullModel
 		
 		// initialise le modèle avec une copie de la zone passée en paramètre
 		this.current = new AiSimZone(currentZone);
+		current.simplifyDirections();
 		
 		// pas de zone précédente pour l'instant
 		previous = null;
