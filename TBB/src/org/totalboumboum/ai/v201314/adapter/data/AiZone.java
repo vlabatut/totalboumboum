@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.data;
  * 
  */
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -2074,7 +2075,12 @@ public abstract class AiZone
 	 */
 	@Override
 	public String toString()
-	{	StringBuffer result = new StringBuffer();
+	{	boolean displayBombs = true;	// permet d'activer/désactiver l'affichage des temps des bombes
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(4);
+		nf.setMaximumFractionDigits(0);
+		nf.setGroupingUsed(false);
+		StringBuffer result = new StringBuffer();
 	
 		// col numbers
 		if(width>10)
@@ -2085,6 +2091,15 @@ public abstract class AiZone
 			{	result.append(" ");
 				result.append(i/10);
 			}
+			if(displayBombs)
+			{	result.append("\t");
+				for(int i=0;i<10;i++)
+					result.append("      ");
+				for(int i=10;i<width;i++)
+				{	result.append("     ");
+					result.append(i/10);
+				}
+			}
 			result.append("\n");
 		}
 		result.append("  ");
@@ -2092,13 +2107,27 @@ public abstract class AiZone
 		{	result.append(" ");
 			result.append(i%10);
 		}
+		if(displayBombs)
+		{	result.append("\t");
+			for(int i=0;i<width;i++)
+			{	result.append("     ");
+				result.append(i%10);
+			}
+		}
 		result.append("\n");
 		
 		// top row
 		result.append("  ┌");
 		for(int col=0;col<width-1;col++)
 			result.append("─┬");
-		result.append("─┐\n");
+		result.append("─┐");
+		if(displayBombs)
+		{	result.append("\t┌");
+			for(int col=0;col<width-1;col++)
+				result.append("─────┬");
+			result.append("─────┐");
+		}
+		result.append("\n");
 		
 		// content
 		for(int row=0;row<height;row++)
@@ -2108,13 +2137,14 @@ public abstract class AiZone
 			result.append(row);
 			// actual content
 			for(int col=0;col<width;col++)
-			{	result.append("│");
-				AiTile tile = getTile(row,col);
+			{	AiTile tile = getTile(row,col);
 				List<AiBlock> blocks = tile.getBlocks();
 				List<AiHero> heroes = tile.getHeroes();
 				List<AiItem> items = tile.getItems();
 				List<AiBomb> bombs = tile.getBombs();
 				List<AiFire> fires = tile.getFires();
+			
+				result.append("│");
 				if(blocks.size()>0)
 				{	AiBlock block = blocks.get(0);
 					if(block.isDestructible())
@@ -2137,12 +2167,40 @@ public abstract class AiZone
 				else
 					result.append(" ");
 			}
-			result.append("│\n");
+			result.append("│");
+			if(displayBombs)
+			{	result.append("\t");
+				for(int col=0;col<width;col++)
+				{	AiTile tile = getTile(row,col);
+					List<AiBomb> bombs = tile.getBombs();
+					
+					result.append("│");
+					if(bombs.size()>0)
+					{	AiBomb bomb = bombs.get(0);
+						long time = bomb.getNormalDuration() - bomb.getElapsedTime();
+						if(time>=0)
+							result.append(" ");
+						result.append(nf.format(time));
+					}
+					else
+						result.append("     ");
+				}
+				result.append("│");
+			}
+			result.append("\n");
+
 			if(row<height-1)
 			{	result.append("  ├");
 				for(int col=0;col<width-1;col++)
 					result.append("─┼");
-				result.append("─┤\n");
+				result.append("─┤");
+				if(displayBombs)
+				{	result.append("\t├");
+					for(int col=0;col<width-1;col++)
+						result.append("─────┼");
+					result.append("─────┤");
+				}
+				result.append("\n");
 			}
 		}
 		
@@ -2150,8 +2208,97 @@ public abstract class AiZone
 		result.append("  └");
 		for(int col=0;col<width-1;col++)
 			result.append("─┴");
-		result.append("─┘\n");
+		result.append("─┘");
+		if(displayBombs)
+		{	result.append("\t└");
+			for(int col=0;col<width-1;col++)
+				result.append("─────┴");
+			result.append("─────┘");
+		}
+		result.append("\n");
 		
 		return result.toString();
 	}
+
+//	public String toString()
+//	{	StringBuffer result = new StringBuffer();
+//	
+//		// col numbers
+//		if(width>10)
+//		{	result.append("  ");
+//			for(int i=0;i<10;i++)
+//				result.append("  ");
+//			for(int i=10;i<width;i++)
+//			{	result.append(" ");
+//				result.append(i/10);
+//			}
+//			result.append("\n");
+//		}
+//		result.append("  ");
+//		for(int i=0;i<width;i++)
+//		{	result.append(" ");
+//			result.append(i%10);
+//		}
+//		result.append("\n");
+//		
+//		// top row
+//		result.append("  ┌");
+//		for(int col=0;col<width-1;col++)
+//			result.append("─┬");
+//		result.append("─┐\n");
+//		
+//		// content
+//		for(int row=0;row<height;row++)
+//		{	// row number
+//			if(row<10)
+//				result.append(" ");
+//			result.append(row);
+//			// actual content
+//			for(int col=0;col<width;col++)
+//			{	result.append("│");
+//				AiTile tile = getTile(row,col);
+//				List<AiBlock> blocks = tile.getBlocks();
+//				List<AiHero> heroes = tile.getHeroes();
+//				List<AiItem> items = tile.getItems();
+//				List<AiBomb> bombs = tile.getBombs();
+//				List<AiFire> fires = tile.getFires();
+//				if(blocks.size()>0)
+//				{	AiBlock block = blocks.get(0);
+//					if(block.isDestructible())
+//						result.append("▒");
+//					else
+//						result.append("█");
+//				}
+//				else if(heroes.size()>0)
+//				{	if(bombs.size()>0)
+//						result.append("☻");
+//					else
+//						result.append("☺");
+//				}
+//				else if(items.size()>0)
+//					result.append("□");
+//				else if(bombs.size()>0)
+//					result.append("●");
+//				else if(fires.size()>0)
+//					result.append("░");
+//				else
+//					result.append(" ");
+//			}
+//			result.append("│\n");
+//			if(row<height-1)
+//			{	result.append("  ├");
+//				for(int col=0;col<width-1;col++)
+//					result.append("─┼");
+//				result.append("─┤\n");
+//			}
+//		}
+//		
+//		// bottom row
+//		result.append("  └");
+//		for(int col=0;col<width-1;col++)
+//			result.append("─┴");
+//		result.append("─┘\n");
+//		
+//		return result.toString();
+//	}
 }
