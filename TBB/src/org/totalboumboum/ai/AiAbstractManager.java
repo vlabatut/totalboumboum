@@ -437,15 +437,17 @@ public abstract class AiAbstractManager<V>
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** couleurs associées aux cases (ou null pour aucune couleur */
+	/** Couleurs associées aux cases (ou null pour aucune couleur */
 	private List<Color>[][] tileColors;
-	/** textes à afficher sur les cases (liste vide pour aucun texte) */
+	/** Textes à afficher sur les cases (liste vide pour aucun texte) */
 	private List<String>[][] tileTexts;
-	/** mode d'affichage du texte : gras ou pas */
+	/** Mode d'affichage du texte : gras ou pas */
 	private boolean bold = false;
-	/** chemins à afficher */
+	/** Taille du texte affiché */
+	private float textSize = 1;
+	/** Chemins à afficher */
 	private final List<List<Tile>> paths = new ArrayList<List<Tile>>();
-	/** couleurs des chemins à afficher */
+	/** Couleurs des chemins à afficher */
 	private final List<Color> pathColors = new ArrayList<Color>();
 	
 	/**
@@ -484,6 +486,17 @@ public abstract class AiAbstractManager<V>
 	{	return bold;
 	}
 	
+	/**
+	 * Renvoie la taille du texte, exprimé en
+	 * proportion de la taille normale.
+	 * 
+	 * @return
+	 * 		Taille courante du texte.
+	 */
+	public float getTextSize()
+	{	return textSize;
+	}
+
 	/**
 	 * renvoie la liste de chemins à afficher
 	 * 
