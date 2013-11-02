@@ -26,13 +26,13 @@ import javax.xml.parsers.DocumentBuilder;
  */
 
 /**
+ * List of strings used to access XML files.
  * 
  * @author Vincent Labatut
- *
  */
+@SuppressWarnings("javadoc")
 public class XmlNames
 {
-
 	public static final String ABILITY = "ability";
 	public static final String ABILITIES = "abilities";
 	public static final String ABSTRACT_BLOCKS = "abstractBlocks";
