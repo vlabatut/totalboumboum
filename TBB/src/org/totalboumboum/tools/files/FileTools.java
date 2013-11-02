@@ -30,15 +30,23 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
+ * Sets of methods related to file managment.
  * 
  * @author Vincent Labatut
- *
  */
 public class FileTools
 {
 	/**
-	 * parse an array of file object and returns the one corresponding
-	 * to the specified filename
+	 * Parses an array of file objects and returns the one corresponding
+	 * to the specified filename.
+	 * 
+	 * @param fileName 
+	 * 		File name to look for.
+	 * @param list 
+	 * 		List of files.
+	 * @return 
+	 * 		The corresponding file object, or {@code null} if it does not
+	 * 		appear in the list.
 	 */
 	public static File getFile(String fileName, File[] list)
 	{	File result = null;
@@ -53,6 +61,12 @@ public class FileTools
 		return result;
 	}
 	
+	/**
+	 * Removes a directory (folder), even if it is not empty.
+	 * 
+	 * @param dir
+	 * 		Directory to be removed.
+	 */
 	public static void deleteDirectory(File dir)
 	{	if(dir.exists() && dir.isDirectory())
 		{	File[] files = dir.listFiles();
@@ -66,6 +80,19 @@ public class FileTools
 		}		
 	}
 	
+	/**
+	 * Make a copy of an existing directory (folder),
+	 * including all the files it contains. The
+	 * process is recursive.
+	 * 
+	 * @param source
+	 * 		Existing directory.
+	 * @param target
+	 * 		Copy to be created.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the original directory or its copy.
+	 */
 	public static void copyDirectory(File source, File target) throws IOException
 	{	if(!source.getAbsolutePath().contains(".svn"))
 		{	// recursively copy a directory
@@ -87,6 +114,17 @@ public class FileTools
 		}
 	}
 	
+	/**
+	 * Copy a file.
+	 * 
+	 * @param source
+	 * 		Original file.
+	 * @param target
+	 * 		Target file.
+	 * 
+	 * @throws IOException
+	 * 		Problem while reading the original file or writing the copy.
+	 */
 	public static void copyFile(File source, File target) throws IOException
 	{	FileInputStream in = new FileInputStream(source);
 		FileOutputStream out = new FileOutputStream(target);
@@ -100,12 +138,30 @@ public class FileTools
         out.close();
 	}
 
+	/**
+	 * Copy a file.
+	 * 
+	 * @param source
+	 * 		Path of the original file.
+	 * @param target
+	 * 		Path of the target file.
+	 * 
+	 * @throws IOException
+	 * 		Problem while reading the original file or writing the copy.
+	 */
 	public static void copyFile(String source, String target) throws IOException
 	{	File fileSource = new File(source);
 		File fileTarget = new File(target);
 		copyFile(fileSource,fileTarget);
 	}
 	
+	/**
+	 * Returns a string representing current time as a file name,
+	 * therefore using only compatible characters.
+	 * 
+	 * @return
+	 * 		String representing the current time and date.
+	 */
 	public static String getFilenameCompatibleCurrentTime()
 	{	Calendar cal = new GregorianCalendar();
 		NumberFormat nf = NumberFormat.getInstance();

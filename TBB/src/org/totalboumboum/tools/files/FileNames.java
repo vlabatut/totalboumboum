@@ -27,12 +27,14 @@ package org.totalboumboum.tools.files;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("javadoc")
 public class FileNames
 {	
 	/////////////////////////////////////////////////////////////////
 	// FILE EXTENSIONS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static final String EXTENSION_BACKUP = ".backup";
+	public static final String EXTENSION_BMP = ".bmp";
 	public static final String EXTENSION_CLASS = ".class";
 	public static final String EXTENSION_DATA = ".data";
 	public static final String EXTENSION_FONT = ".ttf";
@@ -65,6 +67,7 @@ public class FileNames
 	public static final String FILE_BOMBSET = "bombset";
 	public static final String FILE_BOMBSETS = "bombsets";
 	public static final String FILE_CACHE = "cache";
+	public static final String FILE_CAPTURES = "captures";
 	public static final String FILE_CHARACTERS = "characters";
 	public static final String FILE_COLORMAP = "colormap";
 	public static final String FILE_COLORMAPS = "colormaps";
