@@ -48,23 +48,34 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
+ * Set of methods related to XML managment.
  * 
  * @author Vincent Labatut
- *
  */
 public class XmlTools
 {	
+	/**
+	 * Initializes all objects used when loading/recording XML files.
+	 * 
+	 * @throws SAXException
+	 * 		Problem while loading XML schemas.
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading XML schemas.
+	 */
 	public static void init() throws SAXException, ParserConfigurationException
 	{	// init
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 	    schemaFactory.setErrorHandler(new ErrorHandler()
-	    {	public void error(SAXParseException e) throws SAXException
+	    {	@Override
+	    	public void error(SAXParseException e) throws SAXException
 	    	{   throw e;
 	    	}
-			public void fatalError(SAXParseException e) throws SAXException
+	    	@Override
+    		public void fatalError(SAXParseException e) throws SAXException
 	    	{   throw e;
 	    	}
-			public void warning(SAXParseException e) throws SAXException
+	    	@Override
+	    	public void warning(SAXParseException e) throws SAXException
 	    	{   throw e;
 	    	}
 	    });
@@ -85,13 +96,16 @@ public class XmlTools
 		        documentBuilderfactory.setSchema(schema);
 		        DocumentBuilder builder = documentBuilderfactory.newDocumentBuilder();
 		        builder.setErrorHandler(new ErrorHandler()
-		        {   public void fatalError(SAXParseException e) throws SAXException
+		        {   @Override
+			    	public void fatalError(SAXParseException e) throws SAXException
 		        	{   throw e;
 		        	}
-			        public void error(SAXParseException e) throws SAXParseException
+		        	@Override
+		        	public void error(SAXParseException e) throws SAXParseException
 			    	{   throw e;
 			    	}
-			        public void warning(SAXParseException e) throws SAXParseException
+		        	@Override
+			    	public void warning(SAXParseException e) throws SAXParseException
 			        {   throw e;
 			        }
 				});
@@ -100,6 +114,23 @@ public class XmlTools
 		}
 	}
 	
+	/**
+	 * Opens the specified XML file, checks it using
+	 * the specified XSD file, and returns the root element
+	 * of the loaded data.
+	 *  
+	 * @param dataFile
+	 * 		Data file (XML).
+	 * @param schemaFile
+	 * 		Schema file (XSD).
+	 * @return
+	 * 		Root of the XML document.
+	 * 
+	 * @throws SAXException
+	 * 		Problem while parsing the XML file.
+	 * @throws IOException
+	 * 		Problem while loading the XML file or its schema.
+	 */
 	public static Element getRootFromFile(File dataFile, File schemaFile) throws SAXException, IOException
 	{	// init
 		FileInputStream in = new FileInputStream(dataFile);
@@ -130,6 +161,21 @@ public class XmlTools
 		return result;
 	}
 
+	/**
+	 * Records an XML file containing the data described
+	 * in the specified element. That element is considered
+	 * as the root of the new document.
+	 *  
+	 * @param dataFile
+	 * 		XML file to be created.
+	 * @param schemaFile
+	 * 		Associated schema file.
+	 * @param root
+	 * 		Root element of the XML file.
+	 * 
+	 * @throws IOException
+	 * 		Problem while creating the XML file.
+	 */
 	public static void makeFileFromRoot(File dataFile, File schemaFile, Element root) throws IOException
 	{	// open file stream
 		FileOutputStream out = new FileOutputStream(dataFile);
