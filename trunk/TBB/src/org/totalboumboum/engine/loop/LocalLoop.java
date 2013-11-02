@@ -75,6 +75,7 @@ import org.totalboumboum.engine.loop.display.ais.DisplayAisTexts;
 import org.totalboumboum.engine.loop.display.game.DisplayCancel;
 import org.totalboumboum.engine.loop.display.game.DisplayFPS;
 import org.totalboumboum.engine.loop.display.game.DisplayMessage;
+import org.totalboumboum.engine.loop.display.misc.DisplayScreenCapture;
 import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
 import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
 import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
@@ -471,6 +472,10 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		
 		// cancel
 		display = new DisplayCancel();
+		displayManager.addDisplay(display);
+		
+		// screen capture
+		display = new DisplayScreenCapture();
 		displayManager.addDisplay(display);
 	}
 	

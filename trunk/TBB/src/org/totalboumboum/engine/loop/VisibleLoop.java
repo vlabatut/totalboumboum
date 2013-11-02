@@ -69,14 +69,24 @@ import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
+ * Loop object associated to all game mode requiring
+ * graphical display, i.e. all of them except the
+ * simulated mode.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class VisibleLoop extends Loop
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Whether details should be displayed in the console, or not */
 	protected final static boolean VERBOSE = false;
 	
+	/**
+	 * Builds a new loop.
+	 * 
+	 * @param round
+	 * 		Round displayed in this loop.
+	 */
 	public VisibleLoop(Round round)
 	{	super(round);
 	}	
@@ -84,8 +94,15 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// LEVEL 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Level currently played */
 	protected Level level;
 	
+	/**
+	 * Returns the level currently played.
+	 * 
+	 * @return
+	 * 		Current level. 
+	 */
 	public Level getLevel()
 	{	return level;	
 	}
@@ -93,33 +110,97 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Players involved in the current game */
 	protected List<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
 	
+	/**
+	 * Returns the current players.
+	 * 
+	 * @return
+	 * 		List of players involved in the current game.
+	 */
 	public List<AbstractPlayer> getPlayers()
 	{	return players;
 	}
 
+	/**
+	 * Indicates the specified player is out
+	 * of the game.
+	 * 
+	 * @param player
+	 * 		Concerned player.
+	 */
 	public void playerOut(AbstractPlayer player)
 	{	int index = players.indexOf(player);
 		round.playerOut(index);
 		panel.playerOut(index);	
 	}
 	
+	/**
+	 * Initialize a player involved in this game.
+	 * 
+	 * @param profile
+	 * 		Profile of the concerned player.
+	 * @param base
+	 * 		Sprite base.
+	 * @param tile
+	 * 		Starting tile.
+	 * @return
+	 * 		Corresponding initialized player.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading an agent.
+	 * @throws SecurityException
+	 * 		Problem while loading a file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading an XML file.
+	 * @throws SAXException
+	 * 		Problem while loading an XML file.
+	 * @throws IOException
+	 * 		Problem while loading a file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading an agent.
+	 * @throws InstantiationException
+	 * 		Problem while loading an agent.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading an agent.
+	 * @throws InvocationTargetException
+	 * 		Problem while loading an agent.
+	 * @throws NoSuchMethodException
+	 * 		Problem while loading an agent.
+	 * @throws URISyntaxException
+	 * 		Problem while loading an XML file.
+	 */
 	public abstract AbstractPlayer initPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, URISyntaxException;
 
 	/////////////////////////////////////////////////////////////////
 	// CANCELATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indicates if the game has been canceled */
+	/** Indicates if the game has been canceled */
 	protected boolean isCanceled = false;
+	/** Lock associated to game cancelation */
 	protected Lock cancelLock = new ReentrantLock();
 
+	/**
+	 * Changes the canceled state of the current game
+	 * (canceled or not).
+	 * 
+	 * @param isCanceled
+	 * 		If {@code true}, the game is canceled.
+	 */
 	protected void setCanceled(boolean isCanceled)
 	{	cancelLock.lock();
 		this.isCanceled = isCanceled;
 		cancelLock.unlock();
 	}
 	
+	/**
+	 * Checks whether the current game
+	 * is canceled, or not.
+	 * 
+	 * @return
+	 * 		{@code true} iff the game was canceled.
+	 */
 	public boolean isCanceled()
 	{	boolean result;
 		cancelLock.lock();
@@ -128,29 +209,65 @@ public abstract class VisibleLoop extends Loop
 		return result;
 	}
 	
+	/**
+	 * Update the cancel status of the current game.
+	 */
 	protected abstract void updateCancel();
 
 	/////////////////////////////////////////////////////////////////
 	// INITIALIZING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Lock associated to the load step */
 	protected Lock loadLock = new ReentrantLock();
+	/** Condition associated to the load lock */
 	protected Condition cond = loadLock.newCondition();
-
+	
+	/**
+	 * Loads all the data required to start playing.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading XML data.
+	 * @throws SAXException
+	 * 		Problem while loading XML data.
+	 * @throws IOException
+	 * 		Problem while loading some file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading agents.
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading agents.
+	 * @throws SecurityException
+	 * 		Problem while loading some file.
+	 * @throws IllegalAccessException
+	 * 		Loading problem.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading agents.
+	 * @throws InstantiationException
+	 * 		Problem while loading agents.
+	 * @throws InvocationTargetException
+	 * 		Problem while loading agents.
+	 * @throws NoSuchMethodException
+	 * 		Problem while loading agents.
+	 * @throws URISyntaxException
+	 * 		Problem while loading XML data.
+	 */
 	protected abstract void load() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException, URISyntaxException;
-
+	
+	/**
+	 * Indicate the loading step is finished.
+	 */
 	public void loadStepOver()
 	{	round.loadStepOver();
 	}
 	
 	/**
-	 * stuff not needing the panel to be initialized
+	 * Stuff not needing the panel to be initialized.
 	 */
 	protected void startLoopInit()
 	{	initLogs();
 	}
 
 	/**
-	 * stuff to be initialized once the panel is set
+	 * Stuff to be initialized once the panel is set
 	 */
 	protected void finishLoopInit()
 	{	initEntries();
@@ -160,7 +277,9 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// GAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if the game has started yet */
 	protected boolean gameStarted = false;
+	/** Indicates if the game is considered over */
 	protected boolean gameOver = false;
 
 	/////////////////////////////////////////////////////////////////
@@ -245,6 +364,9 @@ public abstract class VisibleLoop extends Loop
 		loadLock.unlock();
 	}
 	
+	/**
+	 * Performs one loop iteration.
+	 */
 	public void process()
 	{	long beforeTime,afterTime,timeDiff,sleepTime,lastTime;
 		long overSleepTime = 0L;
@@ -327,7 +449,10 @@ public abstract class VisibleLoop extends Loop
 		round.loopOver();
 		panel.loopOver();
 	}
-
+	
+	/**
+	 * Updates the game state.
+	 */
 	protected abstract void update();
 
 	/////////////////////////////////////////////////////////////////
@@ -391,7 +516,7 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE STATS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** number of values stored to get an average */
+    /** Number of values stored to get an average */
 	protected static int NUM_VALUES = 10;   
 	protected static long MAX_STATS_INTERVAL = 1000L;
 	protected long prevStatsTime;   
@@ -625,8 +750,15 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// CONTROL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object in charge of controls (keys) related to the system */
 	protected SystemControl systemControl;
 
+	/**
+	 * Receives and treats a system-related event.
+	 * 
+	 * @param event
+	 * 		Event to be processed.
+	 */
 	public void processEvent(SystemControlEvent event)
 	{	
 //		String name = event.getName();
@@ -639,8 +771,15 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// GRAPHICS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to display this loop */
 	protected transient LoopRenderPanel panel;
 
+	/**
+	 * Changes the panel used to display this loop.
+	 * 
+	 * @param panel
+	 * 		New panel used to display this loop.
+	 */
 	public void setPanel(LoopRenderPanel panel)
 	{	loadLock.lock();
 		this.panel = panel;
@@ -661,23 +800,94 @@ public abstract class VisibleLoop extends Loop
 		loadLock.unlock();	
 	}
 	
+	/**
+	 * Returns the panel used to display this loop.
+	 * 
+	 * @return
+	 * 		Panel used to display this loop.
+	 */
 	public LoopRenderPanel getPanel()
 	{	return panel;
 	}
 	
-	public void draw(Graphics g)
-	{	// level
+	/**
+	 * Draws graphics in the specified object,
+	 * and returns {@code true} if a capture
+	 * was planned.
+	 * 
+	 * @param g
+	 * 		Graphics object in which the loop must draw.
+	 * @return
+	 * 		{@code true} iff a capture must be peformed.
+	 */
+	public boolean draw(Graphics g)
+	{	// level: always display
 		level.draw(g);
-
-		// display manager
-		displayManager.draw(g);
+		
+		// check for possible capture
+		boolean result = mustScreenCapture();
+		if(result)
+			setScreenCapture(false);
+		// display manager (possibly not feedback messages)
+		displayManager.draw(g, result);
+		
+		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PRINT SCREEN		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indicates if a capture must be performed */
+	protected boolean screenCapture = false;
+	/** Lock associated to screen capture */
+	protected Lock screenCaptureLock = new ReentrantLock();
 
+	/**
+	 * Asks the loop to perform
+	 * a screen capture (or disable it).
+	 * 
+	 * @param screenCapture
+	 * 		{@code true} to make a screen capture.
+	 */
+	protected void setScreenCapture(boolean screenCapture)
+	{	screenCaptureLock.lock();
+		this.screenCapture = screenCapture;
+		screenCaptureLock.unlock();
+	}
+	
+	/**
+	 * Checks if a screen capture should be performed.
+	 * 
+	 * @return
+	 * 		{@code true} iff a screen capture is currently planned.
+	 */
+	public boolean mustScreenCapture()
+	{	boolean result;
+		screenCaptureLock.lock();
+		result = screenCapture;
+		screenCaptureLock.unlock();
+		return result;
+	}
+	
+	public void performScreenCapture()
+	{	boolean sc = mustScreenCapture();
+		if(sc)
+		{	setScreenCapture(false);
+			panel.captureScreen();
+		}
+
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY MANAGER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object used to display additional information over the actuall game graphics */
 	DisplayManager displayManager = new DisplayManager();
 	
+	/**
+	 * Initializes the object used to display additional information 
+	 * over the actuall game graphics.
+	 */
 	protected abstract void initDisplayManager();
 	
 	/////////////////////////////////////////////////////////////////
