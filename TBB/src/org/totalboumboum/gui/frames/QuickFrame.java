@@ -21,6 +21,7 @@ package org.totalboumboum.gui.frames;
  * 
  */
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
@@ -40,9 +41,9 @@ import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.round.results.QuickResults;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
-
-
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
@@ -55,8 +56,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -186,13 +193,22 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 
 	@Override
 	public void paintScreen()
-	{	Graphics g = bufferStrategy.getDrawGraphics();
+	{	// retrieve the graphical object
+		Graphics g = bufferStrategy.getDrawGraphics();
+		
+		//possibly perform screen capture
+		boolean sc = loop.mustScreenCapture();
+		if(sc)
+			captureScreen();
+		
 		// draw stuff in the buffer
-//NOTE: draw background?	
+		//NOTE: draw background?	
 		loop.draw(g);
 		g.dispose();
-		// copy the buffer on the panel
+		
+		// copy the buffer on the canvas
 		bufferStrategy.show();
+		
 		//Tell the System to do the drawing now
 		Toolkit.getDefaultToolkit().sync();
 	}
@@ -205,6 +221,32 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 			{	//
 			}
 		});	
+	}
+
+	@Override
+	public void captureScreen()
+	{	// re-draw the game panel, this time in a new image
+		BufferedImage copy = new BufferedImage(canvas.getWidth(),canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics g = copy.getGraphics();
+		loop.draw(g);
+		
+		// get current date and time
+		Calendar cal = new GregorianCalendar();
+		Date currentTime = cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+		String currentStr = sdf.format(currentTime);
+		
+		// set up file name
+		String path = FilePaths.getScreenCapturePath() + File.separator + currentStr + FileNames.EXTENSION_BMP;
+		File file = new File(path);
+		
+		// record image as bmp
+		try
+		{	ImageIO.write(copy, "bmp", file);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -242,11 +284,13 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 				    add(canvas);
 					validate();
 					repaint();
-				    // loop
+				    
+					// loop
 			        requestFocus();					
 				    loop = (RegularLoop)round.getLoop();
 				    loop.setPanel(this);
-					// init the BufferStrategy
+					
+				    // init the BufferStrategy
 					canvas.createBufferStrategy(2);
 					bufferStrategy = canvas.getBufferStrategy();
 				}
