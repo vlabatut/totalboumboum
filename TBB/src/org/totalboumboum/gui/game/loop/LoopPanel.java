@@ -34,9 +34,16 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
 
 import org.totalboumboum.configuration.Configuration;
@@ -49,6 +56,8 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
 
 /**
  * This class is used to paint the actual game
@@ -101,7 +110,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	private VisibleLoop loop;
 	/** Color used to fill the screen before drawing the game (in the end: the border color) */
 	private Color backgroundColor;
-	/** if we want to draw an image instead of a plain (black) background */
+	/** If we want to draw an image instead of a plain (black) background */
 	private BufferedImage backgroundImage;
 	/**
 	 * Various types of buffering I tried:
@@ -157,6 +166,33 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		return result;
 	}
 
+	@Override
+	public void captureScreen()
+	{	// build image copy
+		BufferedImage copy = new BufferedImage(getWidth(),getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics g = copy.getGraphics();
+		g.drawImage(image, 0, 0, null);
+		g.dispose();
+		
+		// get current date and time
+		Calendar cal = new GregorianCalendar();
+		Date currentTime = cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+		String currentStr = sdf.format(currentTime);
+		
+		// set up file name
+		String path = FilePaths.getScreenCapturePath() + File.separator + currentStr + FileNames.EXTENSION_BMP;
+		File file = new File(path);
+		
+		// record image as bmp
+		try
+		{	ImageIO.write(copy, "bmp", file);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LOOP RENDER PANEL	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -194,9 +230,13 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 					Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 					g.fillRect(0,0,dim.width,dim.height);				
 				}
-				loop.draw(g);
+				boolean cs = loop.draw(g);
 				g.dispose();
 
+				// possibly make a screen capture
+				if(cs)
+					captureScreen();
+				
 				// copy the buffer on the panel
 				if(mode==0 ||mode==1)
 				{	Graphics gp = getGraphics();
