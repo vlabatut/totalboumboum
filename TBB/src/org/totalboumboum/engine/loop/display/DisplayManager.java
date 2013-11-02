@@ -118,11 +118,13 @@ public class DisplayManager
 	 * 
 	 * @param g
 	 * 		Object used for drawing.
+	 * @param capture
+	 * 		Indicates whether a capture is performed or not.
 	 */
-	public void draw(Graphics g)
+	public void draw(Graphics g, boolean capture)
 	{	for(Display d: displaysList)
 			d.draw(g);
-		if(!displaysList.isEmpty())
+		if(!capture && !displaysList.isEmpty())
 			feedback.draw(g);
 	}
 }
