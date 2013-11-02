@@ -71,13 +71,21 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used on the server side of
+ * a network game.
  * 
  * @author Vincent Labatut
- *
  */
 public class ServerLoop extends LocalLoop
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new server loop.
+	 * 
+	 * @param round
+	 * 		Round to be played.
+	 */
 	public ServerLoop(Round round)
 	{	super(round);
 	}	
@@ -224,6 +232,10 @@ public class ServerLoop extends LocalLoop
 		displayManager.removeDisplay(waitMessage);
 	}
 	
+	/**
+	 * Updates the message display to warn the
+	 * users they have to wait.
+	 */
 	private void updateWaitMessage()
 	{
 		//TODO not used for now
@@ -276,6 +288,9 @@ public class ServerLoop extends LocalLoop
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
+		else if(name.equals(SystemControlEvent.REQUIRE_PRINT_SCREEN))
+		{	setScreenCapture(true);
+		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
 			switchAiPause(index);
@@ -285,5 +300,6 @@ public class ServerLoop extends LocalLoop
 	/////////////////////////////////////////////////////////////////
 	// REMOTE CONTROLS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Remote controls */
 	private RemotePlayerControl remoteControls;
 }

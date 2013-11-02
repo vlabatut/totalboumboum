@@ -245,6 +245,9 @@ public class RegularLoop extends LocalLoop
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
 		}
+		else if(name.equals(SystemControlEvent.REQUIRE_PRINT_SCREEN))
+		{	setScreenCapture(true);
+		}
 		else if(name.equals(SystemControlEvent.REQUIRE_ENGINE_STEP))
 		{	switchEngineStep(true);
 		}

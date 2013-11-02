@@ -45,6 +45,7 @@ import org.totalboumboum.engine.loop.display.game.DisplayEnginePause;
 import org.totalboumboum.engine.loop.display.game.DisplayEngineStep;
 import org.totalboumboum.engine.loop.display.game.DisplayFPS;
 import org.totalboumboum.engine.loop.display.game.DisplayMessage;
+import org.totalboumboum.engine.loop.display.misc.DisplayScreenCapture;
 import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
 import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
 import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
@@ -342,6 +343,10 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		// cancel
 		display = new DisplayCancel();
 		displayManager.addDisplay(display);
+		
+		// screen capture
+		display = new DisplayScreenCapture();
+		displayManager.addDisplay(display);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -394,6 +399,9 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_PRINT_SCREEN))
+		{	setScreenCapture(true);
 		}
 		else if(name.equals(SystemControlEvent.REQUIRE_SLOW_DOWN))
 		{	slowDown();

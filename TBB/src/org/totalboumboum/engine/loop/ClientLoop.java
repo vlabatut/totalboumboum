@@ -59,6 +59,7 @@ import org.totalboumboum.engine.loop.display.ais.DisplayAisTexts;
 import org.totalboumboum.engine.loop.display.game.DisplayCancel;
 import org.totalboumboum.engine.loop.display.game.DisplayFPS;
 import org.totalboumboum.engine.loop.display.game.DisplayMessage;
+import org.totalboumboum.engine.loop.display.misc.DisplayScreenCapture;
 import org.totalboumboum.engine.loop.display.player.DisplayPlayersNames;
 import org.totalboumboum.engine.loop.display.sprites.DisplaySprites;
 import org.totalboumboum.engine.loop.display.sprites.DisplaySpritesPositions;
@@ -306,7 +307,6 @@ System.out.println(hero+" "+hero.getId());
 			updateEvents();
 			updateAis();
 			updateStats();
-//System.err.println("XXXXXXXXXXXXXXXXXXXXXXX update");
 		}
 	}
 
@@ -464,6 +464,10 @@ System.out.println(hero+" "+hero.getId());
 		// cancel
 		display = new DisplayCancel();
 		displayManager.addDisplay(display);
+		
+		// screen capture
+		display = new DisplayScreenCapture();
+		displayManager.addDisplay(display);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -535,6 +539,9 @@ System.out.println(hero+" "+hero.getId());
 		String name = event.getName();
 		if(name.equals(SystemControlEvent.REQUIRE_CANCEL_ROUND))
 		{	setCanceled(true);
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_PRINT_SCREEN))
+		{	setScreenCapture(true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
