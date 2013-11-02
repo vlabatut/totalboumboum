@@ -146,6 +146,17 @@ public class FilePaths
 
 	/**
 	 * Returns the path of the folder
+	 * used to store screen captures.
+	 * 
+	 * @return
+	 * 		Path of the screen capture folder.
+	 */
+	public static String getScreenCapturePath()
+	{	return getResourcesPath()+File.separator+FileNames.FILE_CAPTURES;		
+	}
+	
+	/**
+	 * Returns the path of the folder
 	 * containing hero data.
 	 * 
 	 * @return
