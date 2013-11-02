@@ -64,6 +64,12 @@ public class ReplaySytemControl extends SystemControl
 				loop.processEvent(controlEvent);
 			}
 			
+			// print screen
+//			else if(keyCode == KeyEvent.VK_PRINTSCREEN)	// TODO this key works on release only!
+//			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN);
+//				loop.processEvent(controlEvent);
+//			}
+			
 			// replay: fast forward
 			else if(keyCode == KeyEvent.VK_RIGHT)
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_FAST_FORWARD);
@@ -158,8 +164,14 @@ public class ReplaySytemControl extends SystemControl
 	{	int keyCode = e.getKeyCode();
 		keysPressed.put(keyCode, false);
 		
+		// print screen
+		if(keyCode == KeyEvent.VK_PRINTSCREEN)
+		{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN);
+			loop.processEvent(controlEvent);
+		}
+
 		// replay: fast forward
-		if(keyCode == KeyEvent.VK_RIGHT)
+		else if(keyCode == KeyEvent.VK_RIGHT)
 		{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_FAST_FORWARD);
 			loop.processEvent(controlEvent);
 		}
