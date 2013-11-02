@@ -39,7 +39,7 @@ public class CriterionThird extends AiCriterionString<Agent>
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public String processValue(AiTile tile)
+	protected String processValue(AiTile tile)
 	{	ai.checkInterruption();
 		String result = DOMAIN.iterator().next(); // on renvoie une valeur arbitraire, pour l'exemple
 		
