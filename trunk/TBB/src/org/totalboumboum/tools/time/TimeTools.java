@@ -27,12 +27,21 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
+ * Methods related to time managment.
  * 
  * @author Vincent Labatut
- *
  */
 public class TimeTools
 {
+	/**
+	 * Converts a string representing an XML date
+	 * to a Java object. 
+	 * 
+	 * @param xmlStr
+	 * 		XML date.
+	 * @return
+	 * 		Java date.
+	 */
 	public static Date dateXmlToJava(String xmlStr)
 	{	// 2008-12-05T09:30:10.5
 		String tab[] = xmlStr.split("[-T:.]");
@@ -48,6 +57,15 @@ public class TimeTools
 		return result;
 	}
 
+	/**
+	 * Converts an object representing a Java date
+	 * to an XML string date. 
+	 * 
+	 * @param date
+	 * 		Java date.
+	 * @return
+	 * 		XML date.
+	 */
 	public static String dateJavaToXml(Date date)
 	{	// 2008-12-05T09:30:10.5
 		Calendar calendar = GregorianCalendar.getInstance();
@@ -64,6 +82,21 @@ public class TimeTools
 		return result;
 	}
 
+	/**
+	 * Formats the specified date (expressed as a time)
+	 * to get a nice string representation.
+	 * 
+	 * @param time
+	 * 		Date to be formatted, expressed in ms.
+	 * @param biggest
+	 * 		Highest time unit to use when formatting.
+	 * @param smallest
+	 * 		Lowest time unit to use when formatting.
+	 * @param letter
+	 * 		Whether SI ({@code true}) of common ({@code false}) representation of the time units should be used.
+	 * @return
+	 * 		The obtained string.
+	 */
 	public static String formatTime(long time, TimeUnit biggest, TimeUnit smallest, boolean letter)
 	{	String result = null;
 		if(biggest.compareTo(smallest)>0)

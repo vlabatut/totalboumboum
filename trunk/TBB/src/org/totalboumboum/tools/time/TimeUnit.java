@@ -22,42 +22,78 @@ package org.totalboumboum.tools.time;
  */
 
 /**
+ * Values used when formatting dates and durations.
  * 
  * @author Vincent Labatut
- *
  */
 public enum TimeUnit
-{	MILLISECOND,
-	SECOND,
-	MINUTE,
-	HOUR;
+{	/** ms */
+	MILLISECOND("ms",""),
+	/** s */
+	SECOND("s","''"),
+	/** min */
+	MINUTE("min","'"),
+	/** h */
+	HOUR("h",":");
 
-	public String getLetter()
-	{	String result = null;
-		if(this==MILLISECOND)
-			result = "ms";
-		else if(this==SECOND)
-			result = "s";
-		else if(this==MINUTE)
-			result = "min";
-		else if(this==HOUR)
-			result = "h";
-		return result;
-	}
-
-	public String getSymbol()
-	{	String result = null;
-		if(this==MILLISECOND)
-			result = "";
-		else if(this==SECOND)
-			result = "''";
-		else if(this==MINUTE)
-			result = "'";
-		else if(this==HOUR)
-			result = ":";
-		return result;
+	/**
+	 * New time unit.
+	 * 
+	 * @param letter
+	 * 		SI representation of the time unit.
+	 * @param symbol
+	 * 		Commin representation of the time unit.
+	 */
+	TimeUnit(String letter, String symbol)
+	{	this.letter = letter;
+		this.symbol = symbol;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LETTER				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** SI reprensentation of this time unit */
+	private String letter;
+	
+	/**
+	 * Returns the SI representation of this time unit.
+	 * 
+	 * @return
+	 * 		SI representation of this time unit.
+	 */
+	public String getLetter()
+	{	return letter;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SYMBOL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Usual symbolic reprensentation of this time unit */
+	private String symbol;
+	
+	/**
+	 * Returns the common representation of this time unit.
+	 * 
+	 * @return
+	 * 		Common representation of this time unit.
+	 */
+	public String getSymbol()
+	{	return symbol;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TEXT					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns a text representation of this time unit:
+	 * single symbol or SI letter representation, depending
+	 * on the specified parameter.	
+	 * 
+	 * @param letter
+	 * 		If {@code true}, then the SI letters, otherwise the usual symbol.
+	 * @return
+	 * 		Text representation of this time unit.
+	 */
 	public String getText(boolean letter)
 	{	String result;
 		if(letter)
