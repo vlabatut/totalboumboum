@@ -54,7 +54,7 @@ public class LocalSytemControl extends SystemControl
 		if(!keysPressed.containsKey(keyCode) || !keysPressed.get(keyCode))
 		{	keysPressed.put(keyCode, true);
 		
-			// force game termination
+			// debug: force game termination
 			if ((keyCode == KeyEvent.VK_ESCAPE)
 //					|| (keyCode == KeyEvent.VK_END)
 //					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
@@ -62,6 +62,12 @@ public class LocalSytemControl extends SystemControl
 			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_CANCEL_ROUND);
 				loop.processEvent(controlEvent);
 			}
+			
+			// print screen
+//			else if(keyCode == KeyEvent.VK_PRINTSCREEN)	// TODO this key works on release only!
+//			{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN);
+//				loop.processEvent(controlEvent);
+//			}
 			
 			// faire renaitre le bonhomme
 //			else if(keyCode == KeyEvent.VK_1)
@@ -196,5 +202,11 @@ public class LocalSytemControl extends SystemControl
 	public void keyReleased(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
 		keysPressed.put(keyCode, false);
+		
+		// print screen
+		if(keyCode == KeyEvent.VK_PRINTSCREEN)
+		{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN);
+			loop.processEvent(controlEvent);
+		}
 	}
 }
