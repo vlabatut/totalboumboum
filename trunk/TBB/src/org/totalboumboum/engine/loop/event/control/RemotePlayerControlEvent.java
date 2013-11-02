@@ -26,13 +26,25 @@ import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 
 /**
+ * This class represents events
+ * specific to the remote control system.
  * 
  * @author Vincent Labatut
- *
  */
 public class RemotePlayerControlEvent extends StreamedEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new remote control event
+	 * for the specified sprite, with the
+	 * specified control code.
+	 * 
+	 * @param sprite
+	 * 		Controled sprite.
+	 * @param controlCode
+	 * 		Type of control.
+	 */
 	public RemotePlayerControlEvent(Sprite sprite, ControlCode controlCode)
 	{	super();
 		this.spriteId = sprite.getId();
@@ -42,8 +54,16 @@ public class RemotePlayerControlEvent extends StreamedEvent
 	/////////////////////////////////////////////////////////////////
 	// SPRITE ID			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Unique id of the controled sprite */
 	private int spriteId;
 	
+	/**
+	 * Returns the unique id of the controled
+	 * sprite.
+	 * 
+	 * @return
+	 * 		Sprite unique id.
+	 */
 	public int getSpriteId()
 	{	return spriteId;	
 	}
@@ -51,8 +71,16 @@ public class RemotePlayerControlEvent extends StreamedEvent
 	/////////////////////////////////////////////////////////////////
 	// CONTROL CODE			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Control code associated to the sprite */
 	private ControlCode controlCode;
 
+	/**
+	 * Returns the type of control
+	 * associated to the sprite.
+	 * 
+	 * @return
+	 * 		Control code.
+	 */
 	public ControlCode getControlCode()
 	{	return controlCode;	
 	}
@@ -60,6 +88,7 @@ public class RemotePlayerControlEvent extends StreamedEvent
 	/////////////////////////////////////////////////////////////////
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result = "RemotePlayerControlEvent("+time+":"+spriteId+"): " + controlCode;
 		return result;
