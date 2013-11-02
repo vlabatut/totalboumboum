@@ -33,7 +33,7 @@ public class CriterionSecond extends AiCriterionInteger<Agent>
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public Integer processValue(AiTile tile)
+	protected Integer processValue(AiTile tile)
 	{	ai.checkInterruption();
 		int result = 2;
 		

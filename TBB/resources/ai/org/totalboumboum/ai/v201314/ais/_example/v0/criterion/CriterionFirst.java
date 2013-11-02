@@ -31,7 +31,7 @@ public class CriterionFirst extends AiCriterionBoolean<Agent>
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public Boolean processValue(AiTile tile)
+	protected Boolean processValue(AiTile tile)
 	{	ai.checkInterruption();
 		boolean result = true;
 		
