@@ -22,8 +22,8 @@ package org.totalboumboum.tools;
  */
 
 /**
- * General class with various information
- * regarding the program.
+ * General class with various data
+ * regarding the general software.
  * 
  * @author Vincent Labatut
  */
@@ -38,8 +38,8 @@ public class GameData
 	public static final double TOLERANCE = 0.01;
 	/** Whether or node the game is executed in quickstart mode */
 	public static boolean quickMode;
-	/** Whether this is a production version */
-	public static boolean PRODUCTION = false;
+	/** Whether this is a production version (disable some buttons and options) */
+	public static final boolean PRODUCTION = false;
 	
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
