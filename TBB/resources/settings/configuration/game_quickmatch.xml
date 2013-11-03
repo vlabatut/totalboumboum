@@ -34,11 +34,11 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="11626f33-86fe-4408-ac80-96cc025aa25b" color="YELLOW" controls="1" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="1" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="2" spritePack="superbomberman3" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201314" folder="croix" allowedPlayers="2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201314" folder="pasaj" allowedPlayers="2 3 4 5 6" />
 	</levels>
 </gameQuickmatch>
 
