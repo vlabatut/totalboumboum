@@ -375,18 +375,38 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// HERO					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Heroes contained in this tile */
 	private List<Hero> heroes;
 
+	/**
+	 * Adds a new hero to this tile.
+	 * 
+	 * @param hero
+	 * 		Sprite to be added.
+	 */
 	private void addHero(Hero hero)
 	{	heroes.add(hero);		
 //		hero.setTile(this);
 //		level.addSprite(hero);
 	}
 	
+	/**
+	 * Adds the specified hero from this tile.
+	 * 
+	 * @param hero
+	 * 		Sprite to be removed.
+	 */
 	private void removeHero(Hero hero)
 	{	heroes.remove(hero);	
 	}
 
+	/**
+	 * Returns the list of all heroes
+	 * contained in this tile.
+	 *  
+	 * @return
+	 * 		List of all heroes in this tile.
+	 */
 	public List<Hero> getHeroes()
 	{	return heroes;
 	}
@@ -394,18 +414,38 @@ public class Tile
     /////////////////////////////////////////////////////////////////
 	// BOMB					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Bombs contained in this tile */
 	private List<Bomb> bombs;
 
+	/**
+	 * Adds a new bomb to this tile.
+	 * 
+	 * @param bomb
+	 * 		Sprite to be added.
+	 */
 	private void addBomb(Bomb bomb)
 	{	bombs.add(bomb);		
 //		bomb.setTile(this);
 //		level.addSprite(bomb);
 	}
 	
+	/**
+	 * Adds the specified bomb from this tile.
+	 * 
+	 * @param bomb
+	 * 		Sprite to be removed.
+	 */
 	private void removeBomb(Bomb bomb)
 	{	bombs.remove(bomb);	
 	}
 
+	/**
+	 * Returns the list of all bombs
+	 * contained in this tile.
+	 * 
+	 * @return
+	 * 		List of all bombs in this tile.
+	 */
 	public List<Bomb> getBombs()
 	{	return bombs;
 	}
@@ -413,18 +453,38 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// FIRE					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Fires contained in this tile */
 	private List<Fire> fires;
 
+	/**
+	 * Adds a new fire to this tile.
+	 * 
+	 * @param fire
+	 * 		Sprite to be added.
+	 */
 	private void addFire(Fire fire)
 	{	fires.add(fire);
 //		fire.setTile(this);
 //		level.addSprite(fire);
 	}
 	
+	/**
+	 * Adds the specified fire from this tile.
+	 * 
+	 * @param fire
+	 * 		Sprite to be removed.
+	 */
 	private void removeFire(Fire fire)
 	{	fires.remove(fire);	
 	}
 
+	/**
+	 * Returns the list of all fires
+	 * contained in this tile.
+	 * 
+	 * @return
+	 * 		List of all fires in this tile.
+	 */
 	public List<Fire> getFires()
 	{	return fires;
 	}
@@ -432,18 +492,38 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// BLOCK				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Blocks contained in this tile */
 	private List<Block> blocks;
 
+	/**
+	 * Adds a new block to this tile.
+	 * 
+	 * @param block
+	 * 		Sprite to be added.
+	 */
 	private void addBlock(Block block)
 	{	blocks.add(block);		
 //		block.setTile(this);
 //		level.addSprite(block);
 	}
 
+	/**
+	 * Adds the specified block from this tile.
+	 * 
+	 * @param block
+	 * 		Sprite to be removed.
+	 */
 	private void removeBlock(Block block)
 	{	blocks.remove(block);	
 	}
 	
+	/**
+	 * Returns the list of all blocks
+	 * contained in this tile.
+	 * 
+	 * @return
+	 * 		List of all blocks in this tile.
+	 */
 	public List<Block> getBlocks()
 	{	return blocks;
 	}
@@ -451,18 +531,38 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// ITEM					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Items contained in this tile */
 	private List<Item> items;
 
+	/**
+	 * Adds a new item to this tile.
+	 * 
+	 * @param item
+	 * 		Sprite to be added.
+	 */
 	private void addItem(Item item)
 	{	items.add(item);		
 //		item.setTile(this);
 //		level.addSprite(item);
 	}
 
+	/**
+	 * Adds the specified item from this tile.
+	 * 
+	 * @param item
+	 * 		Sprite to be removed.
+	 */
 	private void removeItem(Item item)
 	{	items.remove(item);	
 	}
 	
+	/**
+	 * Returns the list of all items
+	 * contained in this tile.
+	 * 
+	 * @return
+	 * 		List of all items in this tile.
+	 */
 	public List<Item> getItems()
 	{	return items;
 	}
@@ -470,18 +570,38 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// FLOOR				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Floors contained in this tile */
 	private List<Floor> floors;
 
+	/**
+	 * Adds a new floor to this tile.
+	 * 
+	 * @param floor
+	 * 		Sprite to be added.
+	 */
 	private void addFloor(Floor floor)
 	{	floors.add(floor);		
 //		floor.setTile(this);
 //		level.addSprite(floor);
 	}
 
+	/**
+	 * Adds the specified floor from this tile.
+	 * 
+	 * @param floor
+	 * 		Sprite to be removed.
+	 */
 	private void removeFloor(Floor floor)
 	{	floors.remove(floor);	
 	}
 
+	/**
+	 * Returns the list of all floors
+	 * contained in this tile.
+	 * 
+	 * @return
+	 * 		List of all floors in this tile.
+	 */
 	public List<Floor> getFloors()
 	{	return floors;
 	}
@@ -489,6 +609,12 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// GENERAL SPRITES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Adds a new sprite to this tile.
+	 * 
+	 * @param sprite
+	 * 		Sprite to add to the tile.
+	 */
 	public void addSprite(Sprite sprite)
 	{	if(sprite instanceof Block)
 			addBlock((Block) sprite);
@@ -504,6 +630,12 @@ public class Tile
 			addItem((Item) sprite);
 	}
 
+	/**
+	 * Remove a sprite contained in this tile.
+	 * 
+	 * @param sprite
+	 * 		Sprite to remove from the tile.
+	 */
 	public void removeSprite(Sprite sprite)
 	{	if(sprite instanceof Block)
 			removeBlock((Block) sprite);
@@ -519,6 +651,13 @@ public class Tile
 			removeItem((Item) sprite);
 	}
 
+	/**
+	 * Returns the list of all sprites
+	 * contained in this tile.
+	 * 
+	 * @return
+	 * 		List of all sprites.
+	 */
 	public List<Sprite> getSprites()
 	{	List<Sprite> result = new ArrayList<Sprite>();
 		// floor
@@ -554,6 +693,16 @@ public class Tile
 		return result;
 	}
 
+	/**
+	 * Returns the list of all sprites
+	 * contained in this tile, which have
+	 * the specified role.
+	 * 
+	 * @param role
+	 * 		Targetted role.
+	 * @return
+	 * 		List of all sprites.
+	 */
 	public List<Sprite> getSprites(Role role)
 	{	List<Sprite> result = new ArrayList<Sprite>();
 		// floor
@@ -580,12 +729,29 @@ public class Tile
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Spreads a game event to all the sprites
+	 * contained in this tile.
+	 * 
+	 * @param event
+	 * 		Event to be spread.
+	 */
 	public void spreadEvent(AbstractEvent event)
 	{	Role[] roles = {Role.FLOOR,Role.HERO,Role.BOMB,Role.FIRE,Role.BLOCK,Role.ITEM}; 
 		for(Role role: roles)
 			spreadEvent(event,role);
 	}
 
+	/**
+	 * Spreads a game event to all the sprites
+	 * contained in this tile which have the
+	 * specified role.
+	 * 
+	 * @param event
+	 * 		Event to be spread.
+	 * @param role 
+	 * 		Targetted role.
+	 */
 	public void spreadEvent(AbstractEvent event, Role role)
 	{	// floor
 		if(role==Role.FLOOR)
@@ -616,46 +782,103 @@ public class Tile
     /////////////////////////////////////////////////////////////////
 	// MATRIX POSITION		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Row index of this tile */ 
 	private int row;
+	/** Column index of this tile */ 
 	private int col;
 	
+	/**
+	 * Returns the row index of this tile.
+	 * 
+	 * @return
+	 * 		Index of the row of this tile.
+	 */
 	public int getRow()
 	{	return row;
 	}
 	
+	/**
+	 * Returns the column index of this tile.
+	 * 
+	 * @return
+	 * 		Index of the column  of this tile.
+	 */
 	public int getCol()
 	{	return col;
 	}
 	
+	/**
+	 * Returns the neighboring tile
+	 * in the specified direction.
+	 * 
+	 * @param direction
+	 * 		Direction to be considered.
+	 * @return
+	 * 		The corresponding heighbor.
+	 */
 	public Tile getNeighbor(Direction direction)
 	{	Tile result;
 		result = level.getNeighborTile(row,col,direction);
 		return result;
 	}
 	
-	public boolean isNeighbor(Tile n)
+	/**
+	 * Checks if the specified tile is
+	 * a neighbor of this tile.
+	 * 
+	 * @param tile
+	 * 		Tile to be checked.
+	 * @return
+	 * 		{@code true} iff the specified tile is a neighbor of this tile.
+	 */
+	public boolean isNeighbor(Tile tile)
 	{	Tile nd = getNeighbor(Direction.DOWN);
 		Tile nl = getNeighbor(Direction.LEFT);
 		Tile nr = getNeighbor(Direction.RIGHT);
 		Tile nu = getNeighbor(Direction.UP);
-		boolean result = n==nd || n==nl || n==nr || n==nu;
+		boolean result = tile==nd || tile==nl || tile==nr || tile==nu;
 		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PIXEL POSITION		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** x position of the center of this tile */
 	private double posX;
+	/** y position of the center of this tile */
 	private double posY;
 	
+	/**
+	 * Returns the x position of the center of this tile.
+	 * 
+	 * @return
+	 * 		x position of this tile.
+	 */
 	public double getPosX()
 	{	return posX;
 	}
 	
+	/**
+	 * Returns the y position of the center of this tile.
+	 * 
+	 * @return
+	 * 		y position of this tile.
+	 */
 	public double getPosY()
 	{	return posY;
 	}
 
+	/**
+	 * Checks if the specified location
+	 * belongs to this tile.
+	 * 
+	 * @param x
+	 * 		x position of the location to be tested.
+	 * @param y
+	 * 		y position of the location to be tested.
+	 * @return
+	 * 		{@code true} iff the location belongs to this tile.
+	 */
 	public boolean containsPoint(double x, double y)
 	{	boolean result;
 result = level.getTile(x,y)==this;
@@ -671,11 +894,13 @@ result = level.getTile(x,y)==this;
     /////////////////////////////////////////////////////////////////
 	// LEVEL		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Level containing this tile */
 	private Level level;
 	
     /////////////////////////////////////////////////////////////////
 	// STRING		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result;
 		result = getClass().getSimpleName();
