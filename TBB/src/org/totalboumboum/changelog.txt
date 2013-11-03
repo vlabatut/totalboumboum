@@ -565,12 +565,15 @@
 		- Évolution des stats sur l'ensemble des joueurs, pour l'ensemble des manches et des types de stats
 		- Enregistrement de l'historique des joueurs, pour chaque manche jouée
 	- ia :
-		- quelques bugs corrigés dans l'API, en particulier le modèle partiel (gros bug sur la fin des explosions)
-		- tous les anciens agents ont été débogués (du moins les bugs d'exécution ont été masqués)
-		- possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
-		- correction d'un bug dans les anciens agents : ils affichaient certaines exceptions (malgré l'option du jeu)
-		- ajout dans le checker de code source de l'API : ne pas utiliser printStackTrace
-		- test lors du chargement de la table de préférences : combinaisons manquantes
+		- Quelques bugs corrigés dans l'API, en particulier le modèle partiel (gros bug sur la fin des explosions)
+		- Tous les anciens agents ont été débogués (du moins les bugs d'exécution ont été masqués)
+		- Possibilité de découper le code source de l'agent en deux projets (TBB vs. versions des agents)
+		- Correction d'un bug dans les anciens agents : ils affichaient certaines exceptions (malgré l'option du jeu)
+		- Ajout dans le checker de code source de l'API : ne pas utiliser printStackTrace
+		- Test lors du chargement de la table de préférences : combinaisons manquantes
+		- Controle de la taille du texte affiché pendant le jeu (préférences)
+		- Affichage des chemins en fonction des coordonnées pixels, et non plus seulement cases.
+		- Affichage des délais d'attente définis dans les chemins, sous forme de disque placés aux points d'attente.
 	- options :
 		- Possibilité d'enchainer les tournois automatiquement, avec sélection automatique des joueurs
 		- Et plusieurs modes sont possibles: aléatoire, pack, classement, confrontations 
@@ -580,4 +583,5 @@
  		- Correction d'un bug empêchant de changer un joueur quant il y en a déjà 16 (en raison d'un 
  		  blocage provoqué par le choix de la couleur) 
  		- Correction d'un bug lié à l'utilisation de F10 sous Win7
+ 		- Possibilité de faire des captures d'écran en appuyant sur print screen
  		
