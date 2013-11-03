@@ -44,13 +44,11 @@ import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201314.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201314.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201314.tools.AiParser;
 import org.totalboumboum.engine.container.level.Level;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
@@ -361,25 +359,33 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		
 		// paths
 		{	Map<AiPath,Color> aiPaths = output.getPaths();
-			List<List<Tile>> enginePaths = getPaths();
+			List<List<double[]>> enginePaths = getPaths();
+			List<List<Long>> engineWaits = getPathWaits();
 			enginePaths.clear();
+			engineWaits.clear();
 			List<Color> enginePathColors = getPathColors();
 			enginePathColors.clear();
 			for(Entry<AiPath, Color> entry: aiPaths.entrySet())
 			{	// color
 				Color color = entry.getValue();
 				enginePathColors.add(color);
+				// waits
+				List<Long> waits = new ArrayList<Long>();
+				engineWaits.add(waits);
 				// path
 				AiPath aiPath = entry.getKey();
-				List<Tile> path = new ArrayList<Tile>();
+				List<double[]> path = new ArrayList<double[]>();
 				enginePaths.add(path);
-				for(AiLocation location: aiPath.getLocations())
-				{	// TODO should be adapted so that the pixel coordinates are used instead of the tiles'
-					AiTile aiTile = location.getTile();
-					int row = aiTile.getRow();
-					int col = aiTile.getCol();
-					Tile tile = level.getTile(row,col);
-					path.add(tile);
+				for(int i=0;i<aiPath.getLength();i++)
+				{	// wait
+					long wait = aiPath.getPause(i);
+					waits.add(wait);
+					// location
+					AiLocation location = aiPath.getLocation(i);
+					double x = location.getPosX();
+					double y = location.getPosY();
+					double coord[] = {x,y};
+					path.add(coord);
 				}
 			}
 		}
