@@ -1139,7 +1139,7 @@ public class AiPartialModel
 	 */
 	@Override
 	public String toString()
-	{	boolean details = true; // permet d'afficher les délais d'explosions en plus de la zone elle-même
+	{	boolean details = false; // permet d'afficher les délais d'explosions en plus de la zone elle-même
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4);
 		nf.setMaximumFractionDigits(0);
