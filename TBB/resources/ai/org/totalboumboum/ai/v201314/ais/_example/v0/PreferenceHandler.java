@@ -143,6 +143,9 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 	public void updateOutput()
 	{	ai.checkInterruption();
 		
+		// pour ne pas afficher la préférence des cases non-sélectionnées
+		outputWorstPref = false;
+		
 		// ici on se contente de faire le traitement par défaut
 		super.updateOutput();
 		
