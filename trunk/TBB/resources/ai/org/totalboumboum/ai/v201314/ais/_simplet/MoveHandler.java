@@ -129,6 +129,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 			costCalculator.setOpponentCost(1000); // on assimile la traversée d'un adversaire à un détour de 1 seconde
 			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOBRANCH);
 			dijkstra = new Dijkstra(ai,ownHero, costCalculator,successorCalculator);
+//			dijkstra.setVerbose(true);
 		}
 		long after = ai.getCurrentTime();
 		long elapsed = after - before;
@@ -211,7 +212,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 			HashMap<AiTile,Boolean> bombTiles = ai.preferenceHandler.bombTiles;
 			
 			// on part de la préférence maximale et on descend jusqu'à trouver une destination
-			Iterator<Integer> it1 = values.descendingIterator();
+			Iterator<Integer> it1 = values.iterator();
 			boolean goOn = true;
 			while(it1.hasNext() && goOn)
 			{	ai.checkInterruption();	
@@ -399,6 +400,8 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 					{	//e.printStackTrace();
 						indirectPath = new AiPath();
 					}
+					if(indirectPath==null)
+						indirectPath = new AiPath();
 					after = ai.getCurrentTime();
 					elapsed = after - before;
 					print("          astar finished: duration="+elapsed+" secondaryPath="+indirectPath);
@@ -427,7 +430,7 @@ if(!zone.getTile(5,2).getBlocks().isEmpty())
 				// s'il n'y a pas de case bloquée, alors le bloquage est dû à une explosion, 
 				// et on se contente d'attendre qu'elle disparaisse
 				if(blockedTile==null)
-				{	print("        there actually no blocked tile, so we wait for the end of an explosion");
+				{	print("        there actually is no blocked tile, so we wait for the end of an explosion");
 				}
 				
 				// sinon : on a une case bloquée
