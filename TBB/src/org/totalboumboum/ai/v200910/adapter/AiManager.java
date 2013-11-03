@@ -42,7 +42,6 @@ import org.totalboumboum.ai.v200910.adapter.data.AiZone;
 import org.totalboumboum.ai.v200910.adapter.path.AiPath;
 import org.totalboumboum.ai.v200910.adapter.ArtificialIntelligence;
 import org.totalboumboum.engine.container.level.Level;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
@@ -292,7 +291,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		
 		// paths
 		{	List<AiPath> aiPaths = output.getPaths();
-			List<List<Tile>> enginePaths = getPaths();
+			List<List<double[]>> enginePaths = getPaths();
 			enginePaths.clear();
 			List<Color> aiPathColors = output.getPathColors();
 			List<Color> enginePathColors = getPathColors();
@@ -303,13 +302,13 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 				enginePathColors.add(color);
 				// path
 				AiPath aiPath = aiPaths.get(index);
-				List<Tile> path = new ArrayList<Tile>();
+				List<double[]> path = new ArrayList<double[]>();
 				enginePaths.add(path);
-				for(AiTile aiTile: aiPath.getTiles())
-				{	int line = aiTile.getLine();
-					int col = aiTile.getCol();
-					Tile tile = level.getTile(line,col);
-					path.add(tile);
+				for(AiTile tile: aiPath.getTiles())
+				{	double x = tile.getPosX();
+					double y = tile.getPosY();
+					double coord[] = {x,y};
+					path.add(coord);
 				}
 			}
 		}
