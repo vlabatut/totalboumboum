@@ -44,7 +44,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.engine.container.level.Level;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
@@ -446,9 +445,11 @@ public abstract class AiAbstractManager<V>
 	/** Taille du texte affiché */
 	private float textSize = 1;
 	/** Chemins à afficher */
-	private final List<List<Tile>> paths = new ArrayList<List<Tile>>();
+	private final List<List<double[]>> paths = new ArrayList<List<double[]>>();
 	/** Couleurs des chemins à afficher */
 	private final List<Color> pathColors = new ArrayList<Color>();
+	/** Temps d'attente associés aux chemins à afficher */
+	private final List<List<Long>> pathWaits = new ArrayList<List<Long>>();
 	
 	/**
 	 * Met à jour la représentation des sorties de l'agent
@@ -520,22 +521,33 @@ public abstract class AiAbstractManager<V>
 	}
 
 	/**
-	 * renvoie la liste de chemins à afficher
+	 * Renvoie la liste de chemins à afficher.
 	 * 
 	 * @return	
-	 * 		liste de vecteurs de cases contigües représentant des chemins
+	 * 		Liste de vecteurs de cases contigües représentant des chemins.
 	 */
-	public List<List<Tile>> getPaths()
+	public List<List<double[]>> getPaths()
 	{	return paths;
 	}
 
 	/**
-	 * renvoie les couleurs des chemins à afficher
+	 * Renvoie les couleurs des chemins à afficher.
 	 * 
 	 * @return	
-	 * 		liste de couleurs
+	 * 		Liste de couleurs.
 	 */
 	public List<Color> getPathColors()
 	{	return pathColors;
+	}
+
+	/**
+	 * Renvoie les temps d'attente parfois associés
+	 * aux différentes étapes des chemins.
+	 * 
+	 * @return	
+	 * 		Liste de couleurs de durées exprimées en ms.
+	 */
+	public List<List<Long>> getPathWaits()
+	{	return pathWaits;
 	}
 }
