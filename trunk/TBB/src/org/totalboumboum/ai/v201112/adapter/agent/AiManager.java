@@ -38,12 +38,10 @@ import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201112.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201112.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 import org.totalboumboum.ai.v201112.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
 import org.totalboumboum.engine.container.level.Level;
-import org.totalboumboum.engine.container.tile.Tile;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.loop.VisibleLoop;
@@ -333,7 +331,7 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		
 		// paths
 		{	List<AiPath> aiPaths = output.getPaths();
-			List<List<Tile>> enginePaths = getPaths();
+			List<List<double[]>> enginePaths = getPaths();
 			enginePaths.clear();
 			List<Color> aiPathColors = output.getPathColors();
 			List<Color> enginePathColors = getPathColors();
@@ -344,15 +342,13 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 				enginePathColors.add(color);
 				// path
 				AiPath aiPath = aiPaths.get(index);
-				List<Tile> path = new ArrayList<Tile>();
+				List<double[]> path = new ArrayList<double[]>();
 				enginePaths.add(path);
 				for(AiLocation location: aiPath.getLocations())
-				{	// should be adapted so that the pixel coordinates are used instead of the tiles'
-					AiTile aiTile = location.getTile();
-					int row = aiTile.getRow();
-					int col = aiTile.getCol();
-					Tile tile = level.getTile(row,col);
-					path.add(tile);
+				{	double x = location.getPosX();
+					double y = location.getPosY();
+					double coord[] = {x,y};
+					path.add(coord);
 				}
 			}
 		}
