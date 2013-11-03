@@ -118,7 +118,7 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * L'heuristique la plus simple consiste à prendre la distance
-	 * de Manhattan entre la case courante tile et la case d'arrivée endTile.
+	 * de Manhattan entre la case courante {@code tile} et la case d'arrivée {@code endTile}.
 	 * cf. <a href="http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels">Wikipedia</a>.
 	 * <br/>
 	 * Ici, on considère le temps nécessaire pour parcourir cette distance exprimée en pixels.
@@ -145,6 +145,8 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
 			double h = zone.getPixelDistance(location,endTile);
+//if(h==0)
+//	System.out.println();
 			if(h < minH)
 				minH = h;
 		}
