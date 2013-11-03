@@ -1306,31 +1306,137 @@ public abstract class AiZone
 	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, AiTile tile, Direction direction)
-	{	double xCenter = tile.getPosX();
+	{	double result = 0;
+		AiTile tile0 = getTile(x1,y1);
+		if(!tile0.equals(tile))
+		{	result = result + getHorizontalPixelDistance(x1, tile, direction);
+			result = result + getVerticalPixelDistance(y1, tile, direction);
+		}
+		return result;
+	}
+	
+	/**
+	 * Renvoie la distance de Manhattan, exprimée en pixels, 
+	 * et seulement pour l'axe horizontal, entre la coordonnée
+	 * spécifiée et la case passées en paramètre.
+	 * On considère le point de la case le plus proche du
+	 * point de départ (et non pas son centre !).
+	 * <br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param x1
+	 * 		Abscisse du point de départ.
+	 * @param tile
+	 * 		Case d'arrivée.
+	 * @param direction
+	 * 		Direction à considérer.
+	 * @return
+	 * 		La distance calculée. 
+	 */
+	public double getHorizontalPixelDistance(double x1, AiTile tile, Direction direction)
+	{	double result = 0;
 		double yCenter = tile.getPosY();
-		double dim = tile.getSize()/2;
-		
-		int dir[] = direction.getIntFromDirection();
-		double xCorrection = 0;
-		if(dir[0]<0)
-			xCorrection = -1;
-		double yCorrection = 0;
-		if(dir[1]<0)
-			yCorrection = -1;
-		
-		double result = Double.POSITIVE_INFINITY;
-		for(Direction d: Direction.getPrimaryValues())
-		{	int val[] = d.getIntFromDirection();
-			double x2 = xCenter + val[0]*dim + xCorrection;
-			double y2 = yCenter + val[1]*dim + yCorrection;
-			double dist = getPixelDistance(x1,y1,x2,y2,direction);
-			if(dist<result)
-				result = dist;
+		AiTile t = getTile(x1, yCenter);
+		if(!tile.equals(t))
+		{	double xCenter = tile.getPosX();
+			double dim = tile.getSize();
+			double x2L = xCenter - dim/2 - 1;
+			double x2R = xCenter + dim/2;
+			double dxL = x2L - x1;
+			double dxR = x2R - x1;
+			double absDxL = Math.abs(dxL);
+			double absDxR = Math.abs(dxR);
+			double dx;
+			double direct;
+			if(absDxL<absDxR)
+			{	dx = dxL;
+				direct = absDxL;
+			}
+			else
+			{	dx = dxR;
+				direct = absDxR;
+			}
+			double indirect = pixelWidth - direct - dim;
+			Direction dir = direction.getHorizontalPrimary();
+			if(dir==Direction.NONE)
+				result = Math.min(direct,indirect);
+			else
+			{	Direction d = Direction.getHorizontalFromDouble(dx);
+				if(dir==d)
+					result = direct;
+				else
+					result = indirect;
+			}		
 		}
 		
 		return result;
 	}
-
+	
+	/**
+	 * Renvoie la distance de Manhattan, exprimée en pixels, 
+	 * et seulement pour l'axe vertical, entre la coordonnée
+	 * spécifiée et la case passées en paramètre.
+	 * On considère le point de la case le plus proche du
+	 * point de départ (et non pas son centre !).
+	 * <br/>
+	 * <b>ATTENTION :</b> le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param y1
+	 * 		Ordonnée du point de départ.
+	 * @param tile
+	 * 		Case d'arrivée.
+	 * @param direction
+	 * 		Direction à considérer.
+	 * @return
+	 * 		La distance calculée. 
+	 */
+	public double getVerticalPixelDistance(double y1, AiTile tile, Direction direction)
+	{	double result = 0;
+		double xCenter = tile.getPosX();
+		AiTile t = getTile(xCenter, y1);
+		if(!tile.equals(t))
+		{	double yCenter = tile.getPosY();
+			double dim = tile.getSize();
+			double y2U = yCenter - dim/2 - 1;
+			double y2D = yCenter + dim/2;
+			double dyL = y2U - y1;
+			double dyR = y2D - y1;
+			double absDyL = Math.abs(dyL);
+			double absDyR = Math.abs(dyR);
+			double dy;
+			double direct;
+			if(absDyL<absDyR)
+			{	dy = dyL;
+				direct = absDyL;
+			}
+			else
+			{	dy = dyR;
+				direct = absDyR;
+			}
+			double indirect = pixelWidth - direct - dim;
+			Direction dir = direction.getVerticalPrimary();
+			if(dir==Direction.NONE)
+				result = Math.min(direct,indirect);
+			else
+			{	Direction d = Direction.getVerticalFromDouble(dy);
+				if(dir==d)
+					result = direct;
+				else
+					result = indirect;
+			}
+		}
+		
+		return result;
+	}
+	
 	/**
 	 * Renvoie la distance de Manhattan, exprimée en pixels, 
 	 * entre les coordonnées et la case passées en paramètre.
@@ -2075,7 +2181,7 @@ public abstract class AiZone
 	 */
 	@Override
 	public String toString()
-	{	boolean displayBombs = true;	// permet d'activer/désactiver l'affichage des temps des bombes
+	{	boolean displayBombs = false;	// permet d'activer/désactiver l'affichage des temps des bombes
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4);
 		nf.setMaximumFractionDigits(0);
