@@ -26,6 +26,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +137,9 @@ public class DisplayAisPaths extends Display
 	/////////////////////////////////////////////////////////////////
 	// DRAW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Maximal plotted duration */
+	private final static long MAX_PAUSE = 2500;
+	
 	@Override
 	public void draw(Graphics g)
 	{	Graphics2D g2 = (Graphics2D)g;
@@ -145,41 +149,104 @@ public class DisplayAisPaths extends Display
 			if(player instanceof AiPlayer)
 			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				if(getShow(i))
-				{	List<List<Tile>> paths = aiMgr.getPaths();
+				{	List<List<double[]>> paths = aiMgr.getPaths();
+					List<List<Long>> pauses = aiMgr.getPathWaits();
 					List<Color> colors = aiMgr.getPathColors();
 					Stroke prevStroke = g2.getStroke();
-					int thickness = (int)(tileSize/3);
+					int thickness = (int)(tileSize/4); //used to be 3
 					Stroke stroke = new BasicStroke(thickness,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
 					g2.setStroke(stroke);
+					double minRadius = tileSize - thickness;
+					double maxRadius = tileSize;
 					for(int j=0;j<paths.size();j++)
-					{	List<Tile> path = paths.get(j);
+					{	List<double[]> path = paths.get(j);
+						List<Long> pause = pauses.get(j);
+						
+						// possibly complete path with tile centers
+						List<double[]> pathCplt = new ArrayList<double[]>();
+						List<Long> pauseCplt = new ArrayList<Long>();
+						for(int h=0;h<path.size()-1;h++)
+						{	double[] coord = path.get(h);
+							pathCplt.add(coord);
+							long p = pause.get(h);
+							pauseCplt.add(p);
+							Tile t = level.getTile(coord[0], coord[1]);
+							double[] coord1 = path.get(h+1);
+							if(coord[0]!=coord1[0] && coord[0]!=coord1[0])
+							{	double[] alt1 = {coord[0],coord1[1]};
+								double[] alt2 = {coord1[0],coord[1]};
+								if(t.containsPoint(alt1[0], alt1[1]) && coord[1]!=alt1[1])
+								{	pathCplt.add(alt1);
+									pauseCplt.add(0l);
+								}
+								else if(t.containsPoint(alt2[0], alt2[1]) && coord[0]!=alt2[0])
+								{	pathCplt.add(alt2);
+									pauseCplt.add(0l);
+								}
+							}
+						}
+						pathCplt.add(path.get(path.size()-1));
+						pauseCplt.add(pause.get(pause.size()-1));
+// old version						
+//						// possibly complete path with tile centers
+//						List<double[]> pathCplt = new ArrayList<double[]>();
+//						pathCplt.add(path.get(0));
+//						for(int h=1;h<path.size()-1;h++)
+//						{	double[] coord = path.get(h);
+//							Tile t = level.getTile(coord[0], coord[1]);
+//							boolean addCoord = h==0;
+//							if(!addCoord)
+//							{	double[] coord0 = path.get(h-1);
+//								Tile t0 = level.getTile(coord0[0], coord0[1]);
+//								addCoord = !t.equals(t0);
+//							}
+//							if(addCoord)
+//							{	double[] coord1 = {t.getPosX(),t.getPosY()};
+//								pathCplt.add(coord1);
+//							}
+//						}
+//						pathCplt.add(path.get(path.size()-1));
+						
+						// then draw it
 						Color color = colors.get(j);
-						if(color!=null && !path.isEmpty())
+						if(color!=null && !pathCplt.isEmpty())
 						{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),Loop.INFO_ALPHA_LEVEL);
 							g2.setPaint(paintColor);
-							Tile tile2 = path.get(0);
-							double x1,x2 = tile2.getPosX();
-							double y1,y2 = tile2.getPosY();
+							double[] coord2 = pathCplt.get(0);
+							double x1,x2 = coord2[0];
+							double y1,y2 = coord2[1];
 							Path2D shape = new Path2D.Double();
 							shape.moveTo(x2,y2);
 							int k = 1;
-							while(k<path.size())
-							{	// tiles
+							while(k<pathCplt.size())
+							{	// pause
+								long p = pauseCplt.get(k);
+								if(p>0)
+								{	int diameter = (int) (p/MAX_PAUSE * (maxRadius-minRadius) + minRadius);
+									double x = x2 - diameter/2;
+									double y = y2 - diameter/2;
+									Ellipse2D.Double circle = new Ellipse2D.Double(x, y, diameter, diameter);
+									g2.fill(circle);
+								}
+								// tiles
 								x1 = x2;
 								y1 = y2;
-								tile2 = path.get(k);							
-								x2 = tile2.getPosX();
-								y2 = tile2.getPosY();
-								// directions (to manage the case where the path cross the level off-scree)
+								coord2 = pathCplt.get(k);							
+								x2 = coord2[0];
+								y2 = coord2[1];
+								// distance
+								double hDist = level.getHorizontalPixelDistance(x1, x2);
+								double vDist = level.getVerticalPixelDistance(y1, y2);
+								// directions (to manage the case where the path goes off-screen)
 								Direction direction12 = level.getDirection(x1,y1,x2,y2);
 								int[] intDir12 = direction12.getIntFromDirection();
 								Direction direction21 = direction12.getOpposite();
 								int[] intDir21 = direction21.getIntFromDirection();
 								// alternative locations
-								double x1b = x2 + intDir21[0]*tileSize;
-								double y1b = y2 + intDir21[1]*tileSize;
-								double x2b = x1 + intDir12[0]*tileSize;
-								double y2b = y1 + intDir12[1]*tileSize;
+								double x1b = x2 + intDir21[0]*hDist;
+								double y1b = y2 + intDir21[1]*vDist;
+								double x2b = x1 + intDir12[0]*hDist;
+								double y2b = y1 + intDir12[1]*vDist;
 								// compare actual and theoretical positions
 								if(!CombinatoricsTools.isRelativelyEqualTo(x1,x1b) || !CombinatoricsTools.isRelativelyEqualTo(y1,y1b))
 								{	shape.lineTo(x2b,y2b);
