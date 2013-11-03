@@ -28,9 +28,10 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * Set of methods related to level-based
+ * calculations, mainly distance and delta processing.
  * 
  * @author Vincent Labatut
- *
  */
 public class LevelsTools
 {	
@@ -38,7 +39,22 @@ public class LevelsTools
 	// PIXEL DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * process the Manhattan distance
+	 * Processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param s1 
+	 * 		First sprite.
+	 * @param s2 
+	 * 		Second sprite.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the sprites.
 	 */
 	public static double getPixelDistance(Sprite s1, Sprite s2, Direction direction, double pixelHeight, double pixelWidth)
 	{	double x1 = s1.getCurrentPosX();
@@ -49,12 +65,52 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param s1 
+	 * 		First sprite.
+	 * @param s2 
+	 * 		Second sprite.
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the sprites.
+	 */
 	public static double getPixelDistance(Sprite s1, Sprite s2, double pixelHeight, double pixelWidth)
 	{	return getPixelDistance(s1,s2,Direction.NONE,pixelHeight,pixelWidth);
 	}
 	
 	/**
-	 * process the Manhattan distance
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelLeftX 
+	 * 		x coordinate of the left pixels.
+	 * @param pixelTopY 
+	 * 		y coordinate of the top pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
 	 */
 	public static double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
 	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
@@ -65,10 +121,55 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelLeftX 
+	 * 		x coordinate of the left pixels.
+	 * @param pixelTopY 
+	 * 		y coordinate of the top pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	public static double getPixelDistance(double x1, double y1, double x2, double y2, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
 	{	return getPixelDistance(x1,y1,x2,y2,Direction.NONE,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, taking the
+	 * specified direction into account, along the
+	 * horizontal axis.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelLeftX 
+	 * 		x coordinate of the left pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	public static double getHorizontalPixelDistance(double x1, double x2, Direction direction, double pixelLeftX, double pixelWidth)
 	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
 		x2 = normalizePositionX(x2,pixelLeftX,pixelWidth);
@@ -76,10 +177,48 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum, 
+	 * along the horizontal axis.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param pixelLeftX 
+	 * 		x coordinate of the left pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	public static double getHorizontalPixelDistance(double x1, double x2, double pixelLeftX, double pixelWidth)
 	{	return getHorizontalPixelDistance(x1,x2,Direction.NONE,pixelLeftX,pixelWidth);
 	}
 	
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, taking the
+	 * specified direction into account, along the
+	 * vertical axis.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelTopY 
+	 * 		y coordinate of the top pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	public static double getVerticalPixelDistance(double y1, double y2, Direction direction, double pixelTopY, double pixelHeight)
 	{	y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
 		y2 = normalizePositionY(y2,pixelTopY,pixelHeight);
@@ -87,12 +226,49 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum, 
+	 * along the vertical axis.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelTopY 
+	 * 		y coordinate of the top pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	public static double getVerticalPixelDistance(double y1, double y2, double pixelTopY, double pixelHeight)
 	{	return getVerticalPixelDistance(y1,y2,Direction.NONE,pixelTopY,pixelHeight);
 	}
 	
 	/**
-	 * process the manhattan distance
+	 * Processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
 	 */
 	private static double processPixelDistance(double x1, double y1, double x2, double y2, Direction direction, double pixelHeight, double pixelWidth)
 	{	double result = 0;
@@ -101,6 +277,22 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Processes the Manhattan distance along the horizontal axis,
+	 * taking the specified direction into account.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelWidth 
+	 * 		Width of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	private static double processHorizontalPixelDistance(double x1, double x2, Direction direction, double pixelWidth)
 	{	double result;
 		double dx = x2 - x1;
@@ -119,6 +311,22 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Processes the Manhattan distance along the vertical axis,
+	 * taking the specified direction into account.
+	 * The distance is expressed in pixels.
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param pixelHeight 
+	 * 		Height of the level, expressed in pixels.
+	 * @return 
+	 * 		Distance between the points.
+	 */
 	private static double processVerticalPixelDistance(double y1, double y2, Direction direction, double pixelHeight)
 	{	double result;
 		double dy = y2 - y1;
@@ -140,15 +348,69 @@ public class LevelsTools
     /////////////////////////////////////////////////////////////////
 	// TILE DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param s1 
+	 * 		First sprite.
+	 * @param s2 
+	 * 		Second sprite.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the sprites.
+	 */
 	public static int getTileDistance(Sprite s1, Sprite s2, Direction direction, int globalHeight, int globalWidth)
 	{	Tile tile1 = s1.getTile();
 		Tile tile2 = s2.getTile();
 		int result = getTileDistance(tile1,tile2,direction,globalHeight,globalWidth);
 		return result;
 	}
+
+	/**
+	 * Processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param s1 
+	 * 		First sprite.
+	 * @param s2 
+	 * 		Second sprite.
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the sprites.
+	 */
 	public static int getTileDistance(Sprite s1, Sprite s2, int globalHeight, int globalWidth)
 	{	return getTileDistance(s1,s2,Direction.NONE,globalHeight,globalWidth);
 	}
+	
+	/**
+	 * Processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param tile1 
+	 * 		First tile.
+	 * @param tile2 
+	 * 		Second tile.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the sprites.
+	 */
 	public static int getTileDistance(Tile tile1, Tile tile2, Direction direction, int globalHeight, int globalWidth)
 	{	int row1 = tile1.getRow();
 		int col1 = tile1.getCol();
@@ -157,10 +419,50 @@ public class LevelsTools
 		int result = processTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
 		return result;
 	}
+
+	/**
+	 * Processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param tile1 
+	 * 		First tile.
+	 * @param tile2 
+	 * 		Second tile.
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the sprites.
+	 */
 	public static int getTileDistance(Tile tile1, Tile tile2, int globalHeight, int globalWidth)
 	{	return getTileDistance(tile1,tile2,Direction.NONE,globalHeight,globalWidth);
 	}
 
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param row1 
+	 * 		Row coordinate of the first point.
+	 * @param col1 
+	 * 		Col coordinate of the first point.
+	 * @param row2 
+	 * 		Row coordinate of the second point.
+	 * @param col2 
+	 * 		Col coordinate of the second point.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the coordinates.
+	 */
 	public static int getTileDistance(int row1, int col1, int row2, int col2, Direction direction, int globalHeight, int globalWidth)
 	{	row1 = normalizePositionRow(row1,globalHeight);
 		col1 = normalizePositionCol(col1,globalWidth);
@@ -169,30 +471,144 @@ public class LevelsTools
 		int result = processTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
 		return result;
 	}
+	
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param row1 
+	 * 		Row coordinate of the first tile.
+	 * @param col1 
+	 * 		Col coordinate of the first tile.
+	 * @param row2 
+	 * 		Row coordinate of the second point.
+	 * @param col2 
+	 * 		Col coordinate of the second point.
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the tiles.
+	 */
 	public static int getTileDistance(int row1, int col1, int row2, int col2, int globalHeight, int globalWidth)
 	{	return getTileDistance(row1,col1,row2,col2,Direction.NONE,globalHeight,globalWidth);
 	}
 
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, taking the
+	 * specified direction into account, along the
+	 * horizontal axis.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param col1 
+	 * 		Col coordinate of the first tile.
+	 * @param col2 
+	 * 		Col coordinate of the second tile.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the columns.
+	 */
 	public static int getHorizontalTileDistance(int col1, int col2, Direction direction, int globalWidth)
 	{	col1 = normalizePositionCol(col1,globalWidth);
 		col2 = normalizePositionCol(col2,globalWidth);
 		int result = processHorizontalTileDistance(col1,col2,direction,globalWidth);
 		return result;
 	}
+
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum, 
+	 * along the horizontal axis.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param col1 
+	 * 		Col coordinate of the first tile.
+	 * @param col2 
+	 * 		Col coordinate of the second tile.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the columns.
+	 */
 	public static int getHorizontalTileDistance(int col1, int col2, int globalWidth)
 	{	return getHorizontalTileDistance(col1,col2,Direction.NONE,globalWidth);
 	}
 	
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, taking the
+	 * specified direction into account, along the
+	 * vertical axis.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param row1 
+	 * 		Row coordinate of the first tile.
+	 * @param row2 
+	 * 		Row coordinate of the second tile.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the rows.
+	 */
 	public static double getVerticalTileDistance(int row1, int row2, Direction direction, int globalHeight)
 	{	row1 = normalizePositionRow(row1,globalHeight);
 		row2 = normalizePositionRow(row2,globalHeight);
 		double result = processVerticalTileDistance(row1,row2,direction,globalHeight);
 		return result;
 	}
+
+	/**
+	 * Normalizes the specified coordinates, then
+	 * processes the Manhattan distance, considering
+	 * all possible directions and taking the minimum, 
+	 * along the vertical axis.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param row1 
+	 * 		Row coordinate of the first tile.
+	 * @param row2 
+	 * 		Row coordinate of the second tile.
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the rows.
+	 */
 	public static double getVerticalTileDistance(int row1, int row2, int globalHeight)
 	{	return getVerticalTileDistance(row1,row2,Direction.NONE,globalHeight);
 	}
 	
+	/**
+	 * Processes the Manhattan distance, taking the
+	 * specified direction into account.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param row1 
+	 * 		Row coordinate of the first tile.
+	 * @param col1 
+	 * 		Col coordinate of the first tile.
+	 * @param row2 
+	 * 		Row coordinate of the second tile.
+	 * @param col2
+	 * 		Col coordinate of the second tile.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the tiles.
+	 */
 	private static int processTileDistance(int row1, int col1, int row2, int col2, Direction direction, int globalHeight, int globalWidth)
 	{	int result = 0;
 		result = result + processHorizontalTileDistance(col1,col2,direction,globalWidth);
@@ -200,6 +616,22 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Processes the Manhattan distance along the horizontal axis,
+	 * taking the specified direction into account.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param col1 
+	 * 		Col coordinate of the first tile.
+	 * @param col2 
+	 * 		Col coordinate of the second tile.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalWidth 
+	 * 		Width of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the tiles.
+	 */
 	private static int processHorizontalTileDistance(int col1, int col2, Direction direction, int globalWidth)
 	{	int result;
 		int dCol = col2 - col1;
@@ -218,6 +650,22 @@ public class LevelsTools
 		return result;
 	}
 	
+	/**
+	 * Processes the Manhattan distance along the vertical axis,
+	 * taking the specified direction into account.
+	 * The distance is expressed in tiles.
+	 * 
+	 * @param row1 
+	 * 		Row coordinate of the first tile.
+	 * @param row2 
+	 * 		Row coordinate of the second tile.
+	 * @param direction
+	 * 		Direction used to process the distance. 
+	 * @param globalHeight 
+	 * 		Height of the level, expressed in tiles.
+	 * @return 
+	 * 		Distance between the tiles.
+	 */
 	private static int processVerticalTileDistance(int row1, int row2, Direction direction, int globalHeight)
 	{	int result;
 		int dRow = row2 - row1;
@@ -240,8 +688,19 @@ public class LevelsTools
 	// DIRECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * processes the direction from the sprite s1 to the sprite s2, considering the 
+	 * Processes the direction from the sprite {@code s1} to the sprite {@code s2}, considering the 
 	 * level is cyclic (i.e. using the shortest path).
+	 * 
+	 * @param s1 
+	 * 		First sprite.
+	 * @param s2 
+	 * 		Second sprite.
+	 * @param pixelHeight
+	 * 		Height of the level, in pixels. 
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels. 
+	 * @return
+	 * 		The resulting direction. 
 	 */
 	public static Direction getDirection(Sprite s1, Sprite s2, double pixelHeight, double pixelWidth)
 	{	double x1 = s1.getCurrentPosX();
@@ -253,8 +712,27 @@ public class LevelsTools
 	}
 	
 	/**
-	 * processes the direction from the location (x1,y1) to the location (x2,y2),
+	 * Processes the direction from the location (x1,y1) to the location (x2,y2),
 	 *  considering the level is cyclic (i.e. using the shortest path).
+	 *  
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelLeftX 
+	 * 		Left position, in pixels.
+	 * @param pixelTopY 
+	 * 		Top position, in pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels. 
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels. 
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	public static Direction getDirection(double x1, double y1, double x2, double y2, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
 	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
@@ -266,8 +744,19 @@ public class LevelsTools
 	}
 
 	/**
-	 * processes the direction from the location x1 to the location x2,
+	 * Processes the direction from the location x1 to the location x2,
 	 *  considering the level is cyclic (i.e. using the shortest path).
+	 *  
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param pixelLeftX 
+	 * 		Left position, in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels. 
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	public static Direction getHorizontalDirection(double x1, double x2, double pixelLeftX, double pixelWidth)
 	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
@@ -277,8 +766,19 @@ public class LevelsTools
 	}
 
 	/**
-	 * processes the direction from the location y1 to the location y2,
+	 * Processes the direction from the location y1 to the location y2,
 	 *  considering the level is cyclic (i.e. using the shortest path).
+	 *  
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelTopY 
+	 * 		Top position, in pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels. 
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	public static Direction getVerticalDirection(double y1, double y2, double pixelTopY, double pixelHeight)
 	{	y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
@@ -288,10 +788,25 @@ public class LevelsTools
 	}
 
 	/**
-	 * processes the overall direction from locations (x1,y1) to (x2,y2),
+	 * Processes the overall direction from locations (x1,y1) to (x2,y2),
 	 * considering the level is cyclic. In other words, several
 	 * directions are considered, and the one corresponding to the 
 	 * shortest distance is returned.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels. 
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels. 
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	private static Direction processDirection(double x1, double y1, double x2, double y2, double pixelHeight, double pixelWidth)
 	{	Direction temp;
@@ -304,11 +819,21 @@ public class LevelsTools
 	}
 	
 	/**
-	 * processes the horizontal direction from locations x1 to x2,
+	 * Processes the horizontal direction from locations x1 to x2,
 	 * considering the level is cyclic. In other words, two opposite
 	 * directions are considered, and the one corresponding to the 
 	 * shortest distance is returned.
-	 * The locations are supposed to have been normalized (i.e. they're in the level)
+	 * <br/>
+	 * The locations are supposed to have been normalized (i.e. they're in the level).
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels. 
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	private static Direction processHorizontalDirection(double x1, double x2, double pixelWidth)
 	{	Direction result;
@@ -321,11 +846,21 @@ public class LevelsTools
 	}
 	
 	/**
-	 * processes the vertical direction from locations y1 to y2,
+	 * Processes the vertical direction from locations y1 to y2,
 	 * considering the level is cyclic. In other words, two opposite
 	 * directions are considered, and the one corresponding to the 
 	 * shortest distance is returned.
-	 * The locations are supposed to have been normalized (i.e. they're in the level)
+	 * <br/>
+	 * The locations are supposed to have been normalized (i.e. they're in the level).
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels. 
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	private static Direction processVerticalDirection(double y1, double y2, double pixelHeight)
 	{	Direction result;
@@ -342,10 +877,17 @@ public class LevelsTools
 	/////////////////////////////////////////////////////////////////
 	
 	/**
-	 * processes the direction from s1 to s2, considering approximate 
+	 * Processes the direction from s1 to s2, considering approximate 
 	 * distance (i.e. it will be NONE even if s1 and s2 are just relatively close).
 	 * It also considers the level circularity, i.e. it will choose the
-	 * directions corresponding to the shortest distances. 
+	 * directions corresponding to the shortest distances.
+	 * 
+	 * @param s1 
+	 * 		First sprite.
+	 * @param s2 
+	 * 		Second sprite.
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	public static Direction getCompositeFromSprites(Sprite s1, Sprite s2)
 	{	Direction result;
@@ -362,10 +904,17 @@ public class LevelsTools
 	}
 
 	/**
-	 * processes the direction from the sprite in the specified MoveZone to the specified obstacle.
+	 * Processes the direction from the sprite in the specified MoveZone to the specified obstacle.
 	 * Approximate distance is considered (i.e. it will be NONE even if s1 and s2 
 	 * are just relatively close). It also considers the level circularity, 
-	 * i.e. it will choose the directions corresponding to the shortest distances 
+	 * i.e. it will choose the directions corresponding to the shortest distances.
+	 *  
+	 * @param mz
+	 * 		Move zone.
+	 * @param obstacle 
+	 * 		Considered obstacle.
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	public static Direction getCompositeFromSprites(MoveZone mz, Sprite obstacle)
 	{	Direction result;
@@ -386,7 +935,18 @@ public class LevelsTools
 	 * Warning: consider approximate distance, i.e. will be NONE
 	 * if the locations are relatively close.
 	 * Also: considers the level circularity, i.e. will choose the
-	 * directions corresponding to the shortest distances 
+	 * directions corresponding to the shortest distances.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @return 
+	 * 		The resulting direction. 
 	 */
 	private static Direction getCompositeFromLocations(double x1, double y1, double x2, double y2)
 	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
@@ -399,8 +959,21 @@ public class LevelsTools
 	// DELTAS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns the difference between x1 and x2, considering the level
+	 * Returns the difference between x1 and x2, considering the level
 	 * is cyclic and using the specified direction.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param direction 
+	 * 		Forced direction.
+	 * @param pixelLeftX 
+	 * 		Left position, in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels.
+	 * @return 
+	 * 		The processed difference.
 	 */
 	public static double getDeltaX(double x1, double x2, Direction direction, double pixelLeftX, double pixelWidth)
 	{	x1 = normalizePositionX(x1,pixelLeftX,pixelWidth);
@@ -410,9 +983,20 @@ public class LevelsTools
 	}
 	
 	/**
-	 * returns the difference between x1 and x2, considering the level
+	 * Returns the difference between x1 and x2, considering the level
 	 * is cyclic. In other words, the delta with the smallest absolute
 	 * value is returned.
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param pixelLeftX 
+	 * 		Left position, in pixels.
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels.
+	 * @return 
+	 * 		The processed difference.
 	 */
 	public static double getDeltaX(double x1, double x2, double pixelLeftX, double pixelWidth)
 	{	double result = getDeltaX(x1,x2,Direction.NONE,pixelLeftX,pixelWidth);
@@ -420,8 +1004,21 @@ public class LevelsTools
 	}
 
 	/**
-	 * returns the difference between y1 and y2, considering the level
+	 * Returns the difference between y1 and y2, considering the level
 	 * is cyclic and using the specified direction.
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param direction 
+	 * 		Forced direction.
+	 * @param pixelTopY 
+	 * 		Top position, in pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels.
+	 * @return 
+	 * 		The processed difference.
 	 */
 	public static double getDeltaY(double y1, double y2, Direction direction, double pixelTopY, double pixelHeight)
 	{	y1 = normalizePositionY(y1,pixelTopY,pixelHeight);
@@ -431,9 +1028,20 @@ public class LevelsTools
 	}
 	
 	/**
-	 * returns the difference between y1 and y2, considering the level
+	 * Returns the difference between y1 and y2, considering the level
 	 * is cyclic. In other words, the delta with the smallest absolute
 	 * value is returned.
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param pixelTopY 
+	 * 		Top position, in pixels.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels.
+	 * @return 
+	 * 		The processed difference.
 	 */
 	public static double getDeltaY(double y1, double y2, double pixelTopY, double pixelHeight)
 	{	double result = getDeltaY(y1,y2,Direction.NONE,pixelTopY,pixelHeight);
@@ -441,10 +1049,22 @@ public class LevelsTools
 	}
 
 	/**
-	 * returns the difference between x1 and x2, using the specified
+	 * Returns the difference between x1 and x2, using the specified
 	 * direction. Consequently, it may not be the delta with the smallest
 	 * absolute value (i.e. not necessarily the shortest path).
-	 * The locations are supposed to have been normalized (i.e. they're inside the level)
+	 * <br/>
+	 * The locations are supposed to have been normalized (i.e. they're inside the level).
+	 * 
+	 * @param x1 
+	 * 		x coordinate of the first point.
+	 * @param x2 
+	 * 		x coordinate of the second point.
+	 * @param direction 
+	 * 		Forced direction.
+	 * @param pixelWidth 
+	 * 		Width of the level, in pixels.
+	 * @return 
+	 * 		The processed difference.
 	 */
 	private static double processDeltaX(double x1, double x2, Direction direction, double pixelWidth)
 	{	double result;
@@ -470,10 +1090,22 @@ public class LevelsTools
 	}
 
 	/**
-	 * returns the difference between y1 and y2, using the specified
+	 * Returns the difference between y1 and y2, using the specified
 	 * direction. Consequently, it may not be the delta with the smallest
-	 * absolute value (i.e. not necessarily the shortest path)
-	 * The locations are supposed to have been normalized (i.e. they're inside the level)
+	 * absolute value (i.e. not necessarily the shortest path).
+	 * <br/>
+	 * The locations are supposed to have been normalized (i.e. they're inside the level).
+	 * 
+	 * @param y1 
+	 * 		y coordinate of the first point.
+	 * @param y2 
+	 * 		y coordinate of the second point.
+	 * @param direction 
+	 * 		Forced direction.
+	 * @param pixelHeight 
+	 * 		Height of the level, in pixels.
+	 * @return 
+	 * 		The processed difference.
 	 */
 	private static double processDeltaY(double y1, double y2, Direction direction, double pixelHeight)
 	{	double result;
@@ -501,6 +1133,28 @@ public class LevelsTools
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Get the tile corresponding to the specified position.
+	 * 
+	 * @param x
+	 * 		x coordinate of the considered position.
+	 * @param y
+	 * 		y coordinate of the considered position.
+	 * @param pixelLeftX
+	 * 		Coordinate of the level left pixels.
+	 * @param pixelTopY
+	 * 		Coordinate of the level top pixels.
+	 * @param pixelHeight
+	 * 		Height of the level, in pixels.
+	 * @param pixelWidth
+	 * 		Width of the level, in pixels.
+	 * @param globalHeight
+	 * 		Height of the level, in tiles.
+	 * @param globalWidth
+	 * 		Width of the level, in tiles.
+	 * @return
+	 * 		The tile at the specified location.
+	 */
 	public static int[] getTile(double x, double y, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth, int globalHeight, int globalWidth)
 	{	double temp[] = normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 		x = CombinatoricsTools.round(temp[0]);
@@ -518,6 +1172,22 @@ public class LevelsTools
 		return result;
 	}	
 	
+	/**
+	 * Get the neighbor tile for the specified direction.
+	 * 
+	 * @param row
+	 * 		Row of the original tile.
+	 * @param col
+	 * 		Col of the original tile.
+	 * @param direction
+	 * 		Direction of the neighbor.
+	 * @param globalHeight
+	 * 		Height of the level, in tiles.
+	 * @param globalWidth
+	 * 		Width of the level, in tiles.
+	 * @return
+	 * 		Neighbor tile.
+	 */
 	public static int[] getNeighborTile(int row, int col, Direction direction, int globalHeight, int globalWidth)
 	{	int c,l;
 		Direction p[] = direction.getPrimaries(); 
@@ -540,6 +1210,21 @@ public class LevelsTools
 		return result;
 	}
 
+	/**
+	 * Normalizes the specified position, in order to get some coordinates
+	 * actually contained in the level.
+	 * 
+	 * @param row
+	 * 		Row number.
+	 * @param col
+	 * 		Col number.
+	 * @param globalHeight
+	 * 		Height of the level, in tiles.
+	 * @param globalWidth
+	 * 		Width of the level, in tiles.
+	 * @return
+	 * 		Normalized coordinates.
+	 */
 	public static int[] normalizePosition(int row, int col, int globalHeight, int globalWidth)
 	{	int result[] = new int[2];
 		result[0] = normalizePositionRow(row,globalHeight);
@@ -547,6 +1232,18 @@ public class LevelsTools
 		//
 		return result;
 	}
+	
+	/**
+	 * Normalizes the specified position, in order to get a coordinate
+	 * actually contained in the level.
+	 * 
+	 * @param row
+	 * 		Row number.
+	 * @param globalHeight
+	 * 		Height of the level, in tiles.
+	 * @return
+	 * 		Normalized coordinate.
+	 */
 	public static int normalizePositionRow(int row, int globalHeight)
 	{	int result = row;
 		while(result<globalHeight)
@@ -555,6 +1252,18 @@ public class LevelsTools
 			result = result - globalHeight;
 		return result;
 	}
+	
+	/**
+	 * Normalizes the specified position, in order to get a coordinate
+	 * actually contained in the level.
+	 * 
+	 * @param col
+	 * 		Col number.
+	 * @param globalWidth
+	 * 		Width of the level, in tiles.
+	 * @return
+	 * 		Normalized coordinate.
+	 */
 	public static int normalizePositionCol(int col, int globalWidth)
 	{	int result = col;
 		while(result<globalWidth)
@@ -567,6 +1276,25 @@ public class LevelsTools
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Normalizes the specified position, in order to get some coordinates
+	 * actually contained in the level.
+	 * 
+	 * @param x
+	 * 		Position on the x axis.
+	 * @param y
+	 * 		Position on the y axis.
+	 * @param pixelLeftX
+	 * 		Position of the level left pixels.
+	 * @param pixelTopY
+	 * 		Position of the level top pixels.
+	 * @param pixelHeight
+	 * 		Height of the level, in pixels.
+	 * @param pixelWidth
+	 * 		Width of the level, in pixels.
+	 * @return
+	 * 		{@code true} iff the position is inside the level.
+	 */
 	public static double[] normalizePosition(double x, double y, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
 	{	double result[] = new double[2];
 		result[0] = normalizePositionX(x,pixelLeftX,pixelWidth);
@@ -574,6 +1302,19 @@ public class LevelsTools
 		//
 		return result;
 	}
+	/**
+	 * Normalizes the specified position, in order to get a coordinate
+	 * actually contained in the level.
+	 * 
+	 * @param x
+	 * 		Position on the x axis.
+	 * @param pixelLeftX
+	 * 		Position of the level left pixels.
+	 * @param pixelWidth
+	 * 		Width of the level, in pixels.
+	 * @return
+	 * 		{@code true} iff the position is inside the level.
+	 */
 	public static double normalizePositionX(double x, double pixelLeftX, double pixelWidth)
 	{	double result = x;
 		while(result<pixelLeftX)
@@ -582,6 +1323,20 @@ public class LevelsTools
 			result = result - pixelWidth;
 		return result;
 	}
+	
+	/**
+	 * Normalizes the specified position, in order to get a coordinate
+	 * actually contained in the level.
+	 * 
+	 * @param y
+	 * 		Position on the y axis.
+	 * @param pixelTopY
+	 * 		Position of the level top pixels.
+	 * @param pixelHeight
+	 * 		Height of the level, in pixels.
+	 * @return
+	 * 		{@code true} iff the position is inside the level.
+	 */
 	public static double normalizePositionY(double y, double pixelTopY, double pixelHeight)
 	{	double result = y;
 		while(result<pixelTopY)
@@ -590,15 +1345,62 @@ public class LevelsTools
 			result = result - pixelHeight;
 		return result;
 	}
+	
+	/**
+	 * Checks if the specified position is inside the level.
+	 * 
+	 * @param x
+	 * 		Position on the x axis.
+	 * @param y
+	 * 		Position on the y axis.
+	 * @param pixelLeftX
+	 * 		Position of the level left pixels.
+	 * @param pixelTopY
+	 * 		Position of the level left pixels.
+	 * @param pixelHeight
+	 * 		Height of the level, in pixels.
+	 * @param pixelWidth
+	 * 		Width of the level, in pixels.
+	 * @return
+	 * 		{@code true} iff the position is inside the level.
+	 */
 	public static boolean isInsidePosition(double x, double y, double pixelLeftX, double pixelTopY, double pixelHeight, double pixelWidth)
 	{	return isInsidePositionX(x,pixelLeftX,pixelWidth) && isInsidePositionY(y,pixelTopY,pixelHeight);		
 	}
+	
+	/**
+	 * Checks if the specified position is inside the level,
+	 * in terms of x axis.
+	 * 
+	 * @param x
+	 * 		Position on the x axis.
+	 * @param pixelLeftX
+	 * 		Position of the level left pixels.
+	 * @param pixelWidth
+	 * 		Width of the level, in pixels.
+	 * @return
+	 * 		{@code true} iff the position is inside the level.
+	 */
 	public static boolean isInsidePositionX(double x, double pixelLeftX, double pixelWidth)
-	{	//NOTE comparaison relative?
+	{	//NOTE plutot comparaison relative?
+		
 		return x>=pixelLeftX && x<=pixelLeftX+pixelWidth;
 	}
+	/**
+	 * Checks if the specified position is inside the level,
+	 * in terms of x axis.
+	 * 
+	 * @param y
+	 * 		Position on the y axis.
+	 * @param pixelTopY
+	 * 		Position of the level top pixels.
+	 * @param pixelHeight
+	 * 		Height of the level, in pixels.
+	 * @return
+	 * 		{@code true} iff the position is inside the level.
+	 */
 	public static boolean isInsidePositionY(double y, double pixelTopY, double pixelHeight)
-	{	//NOTE comparaison relative?
+	{	//NOTE plutot comparaison relative?
 		return y>=pixelTopY && y<=pixelTopY+pixelHeight;
 	}
 }
