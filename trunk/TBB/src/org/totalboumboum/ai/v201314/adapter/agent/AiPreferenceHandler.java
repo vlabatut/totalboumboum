@@ -702,6 +702,8 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	public boolean outputColors = true;
 	/** Détermine si le gestionnaire affiche du texte dans la sortie graphique */ 
 	public boolean outputText = true;
+	/** Détermine si le gestionnaire affiche les valeurs des pires préférences, ou les masque */ 
+	public boolean outputWorstPref = true;
 	
 	/**
 	 * Met à jour les sorties graphiques de l'agent en considérant
@@ -724,6 +726,11 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	{	ai.checkInterruption();
 		AiMode mode = ai.getModeHandler().getMode();
 
+		// pire préférence pour le mode courant
+		List<AiCombination> reference = referencePreferences.get(mode);
+		int worstPref = reference.size();
+		
+		// couleur
 		int rCoeff = 1;
 		int gCoeff = 1;
 		int bCoeff = 1;
@@ -736,6 +743,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			limit = 1;
 		AiOutput output = ai.getOutput();
 		
+		// modification de l'affichage
 		for(Entry<AiTile,Integer> entry: preferencesByTile.entrySet())
 		{	ai.checkInterruption();
 			AiTile tile = entry.getKey();
@@ -743,14 +751,16 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 			
 			// text
 			if(outputText)
-			{	String text = null;
-				if(value==Integer.MAX_VALUE)
-					text = "+\u221E";
-				else if(value==Integer.MIN_VALUE)
-					text = "-\u221E";
-				else
-					text = Integer.toString(value);
-				output.setTileText(tile,text);
+			{	if(value<worstPref || outputWorstPref)
+				{	String text = null;
+					if(value==Integer.MAX_VALUE)
+						text = "+\u221E";
+					else if(value==Integer.MIN_VALUE)
+						text = "-\u221E";
+					else
+						text = Integer.toString(value);
+					output.setTileText(tile,text);
+				}
 			}
 			
 			// color
