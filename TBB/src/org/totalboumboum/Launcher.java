@@ -1736,3 +1736,6 @@ public class Launcher
 // TODO pb avec les graphiques de manche : quand un joueur meurt, il faudrait afficher deux points :
 //		- un à la même hauteur que le précédent
 //		- l'autre à zéro (pour avoir une droite verticale au moment de l'éliminiation)
+
+// TODO ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
+//		des classes dédiées : DistanceTools, NeighborTools, etc. (?)
