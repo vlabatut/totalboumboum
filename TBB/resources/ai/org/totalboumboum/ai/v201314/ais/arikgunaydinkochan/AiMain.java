@@ -33,7 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.ais.arikgunaydinkochan.v0.Agent;
+import org.totalboumboum.ai.v201314.ais.arikgunaydinkochan.v1.Agent;
 import org.xml.sax.SAXException;
 
 /**
