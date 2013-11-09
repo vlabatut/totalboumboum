@@ -195,6 +195,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		// on réinitialise la case de départ
 		this.startLocation = startLocation;
 		heuristicCalculator.setEndTiles(endTiles);
+		successorCalculator.setEndTiles(endTiles);
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		costCalculator.init(root);
 		heuristicCalculator.init(root);

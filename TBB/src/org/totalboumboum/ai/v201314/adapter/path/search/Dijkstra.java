@@ -26,10 +26,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 import org.totalboumboum.ai.v201314.adapter.path.AiSearchNode;
@@ -123,6 +126,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	public Map<AiTile,AiSearchNode> startProcess(AiLocation startLocation) throws LimitReachedException
 	{	// on réinitialise la case de départ
 		this.startLocation = startLocation;
+		// et les fonctions secondaires
+		AiZone zone = startLocation.getZone();
+		Set<AiTile> endTiles = new TreeSet<AiTile>(zone.getTiles());
+		successorCalculator.setEndTiles(endTiles);
 		root = new AiSearchNode(ai,startLocation,hero,costCalculator,heuristicCalculator,successorCalculator);
 		costCalculator.init(root);
 		successorCalculator.init(root);
