@@ -95,6 +95,11 @@ public interface AiBomb extends AiSprite
 	/**
 	 * Renvoie le délai normal avant l'explosion de la bombe.
 	 * Ce délai ne tient pas compte des pannes éventuelles.
+	 * Il s'agit du temps total qui s'écoule théoriquement
+	 * entre le moment où la bombe est posée et celui où
+	 * elle explose. Il peut être plus long si la bombe tombe
+	 * en panne, et plus court si son explosion est provoquée
+	 * par une autre bombe.
 	 * <br/>
 	 * <b>Attention :</b> Ce délai n'est pas défini pour tous les types de bombes:
 	 * seulement pour celles à retardement.
