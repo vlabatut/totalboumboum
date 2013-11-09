@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 
 /**
@@ -413,8 +414,8 @@ public class AiPath implements Comparable<AiPath>
 
 	/**
 	 * Compare ce chemin à celui passé en paramètre, 
-	 * et renvoie vrai s'ils sont constitués de la même séquence d'emplacements
-	 *  et de pauses.
+	 * et renvoie vrai s'ils sont constitués de la même 
+	 * séquence d'emplacements et de pauses.
 	 * 
 	 * @param object
 	 * 		Le chemin à comparer.
@@ -434,6 +435,32 @@ public class AiPath implements Comparable<AiPath>
 				long pause1 = pauses.get(i);
 				long pause2 = path.getPause(i);
 				result = loc1.equals(loc2) && pause1==pause2;
+				i++;
+			}
+		}		
+		return result;		
+	}
+
+	/**
+	 * Compare ce chemin à celui passé en paramètre, 
+	 * et renvoie vrai s'ils sont constitués de la même 
+	 * séquence de cases (et non pas d'emplacements).
+	 * 
+	 * @param object
+	 * 		Le chemin à comparer.
+	 * @return	
+	 * 		Renvoie {@code true} ssi ce chemin est identique à celui passé en paramètre.
+	 */
+	public boolean equalsTiles(Object object)
+	{	boolean result = false;
+		if(object instanceof AiPath)
+		{	AiPath path = (AiPath)object;
+			result = getLength()==path.getLength();
+			int i=0;
+			while(result && i<locations.size())
+			{	AiTile t1 = locations.get(i).getTile();
+				AiTile t2 = path.getLocation(i).getTile();
+				result = t1.equals(t2);
 				i++;
 			}
 		}		
