@@ -27,6 +27,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
@@ -114,6 +116,38 @@ orderedDirections[2] = Direction.RIGHT;
 orderedDirections[3] = Direction.UP;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// END TILES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Ensemble des cases pouvant terminer le chemin */
+	protected final Set<AiTile> endTiles = new TreeSet<AiTile>();	
+
+	/**
+	 * Initialise/modifie l'ensemble des cases 
+	 * pouvant terminer le chemin recherché.
+	 * Cette méthode est appelée automatiquement
+	 * quand c'est nécessaire, depuis les algorithmes
+	 * de recherche.
+	 * 
+	 * @param endTiles	
+	 * 		Les cases terminant le chemin.
+	 */
+	public void setEndTiles(Set<AiTile> endTiles)
+	{	this.endTiles.clear();
+		this.endTiles.addAll(endTiles);
+	}
+
+	/**
+	 * Renvoie l'ensemble des cases objectifs (i.e. les cases terminant
+	 * le chemin recherché).
+	 * 
+	 * @return	
+	 * 		L'ensemble des cases objectifs.
+	 */
+	public Set<AiTile> getEndTiles()
+	{	return endTiles;	
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// OBSTACLES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

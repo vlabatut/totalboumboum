@@ -148,6 +148,47 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// SECURITY DELAY	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Délai de sécurité pour la case de destination */
+	private long securityDelay = 0l;
+
+	/**
+	 * Change le délai de sécurité pour la case de destination.
+	 * Ce délai correspond à la durée pendant laquelle cette case
+	 * doit rester sans explosion, après l'arrivée prévue de l'agent.
+	 * <br/>
+	 * Ceci permet de s'assurer que l'agent pourra passer un certain 
+	 * temps en sécurité dans la case de destination. La valeur par 
+	 * défaut est de 0 (aucune garantie). En cas de modification,
+	 * on peut suggérer d'utiliser une durée correspondant au temps
+	 * nécessaire à l'agent pour traverser une case. Ceci garantit
+	 * à l'agent qu'il aura le temps de parcourir toute la case pour
+	 * s'enfuir en cas d'explosion.
+	 * 
+	 * @param delay
+	 * 		Le délai de sécurité à respecter.
+	 */
+	public void setSecurityDelay(long delay)
+	{	securityDelay = delay;
+	}
+
+	/**
+	 * Renvoie le délai de sécurité spécifié pour
+	 * ce successeur. Un délai de 0 correspond à
+	 * un comportement "normal". 
+	 * <br/>
+	 * Cf. {@link #setSecurityDelay(long)} pour
+	 * plus de détails.
+	 * 
+	 * @return
+	 * 		Délai de sécurité, en ms.
+	 */
+	public long getSecurityDelay()
+	{	return securityDelay;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// MODELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Structure utilisée pour stocker les modèles */
@@ -354,12 +395,19 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(neighbor))
-					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AiSearchNode child = new AiSearchNode(futureLocation,node);
-						// on l'ajoute au noeud courant
-						result.add(child);
-						// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même
-						models.put(child,model);
+					{	// s'il s'agit d'une case de destination, il peut y avoir un test supplémentaire
+						if(securityDelay>0 && endTiles.contains(futureTile))
+						{	safe = model.simulateWait(securityDelay);
+						}
+						
+						// on crée le noeud fils correspondant (qui sera traité plus tard)
+						if(safe)
+						{	AiSearchNode child = new AiSearchNode(futureLocation,node);
+							// on l'ajoute au noeud courant
+							result.add(child);
+							// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même
+							models.put(child,model);
+						}
 					}
 					// si la case n'est pas la bonne : 
 					// la case ciblée n'était pas traversable et l'action est à ignorer
