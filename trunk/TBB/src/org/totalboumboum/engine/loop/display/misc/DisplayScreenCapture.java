@@ -52,6 +52,8 @@ public class DisplayScreenCapture extends Display
 	/////////////////////////////////////////////////////////////////
 	// SHOW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the flash should be displayed or not */
+	private boolean flash = true;
 	/** Duration of the flash */
 	private final static long DURATION = 200; 
 	/** Time left for the flash */
@@ -61,8 +63,13 @@ public class DisplayScreenCapture extends Display
 
 	@Override
 	public void switchShow(SystemControlEvent event)
-	{	time = RoundVariables.loop.getTotalRealTime();
-		first = true;
+	{	if(event.getIndex()==SystemControlEvent.REGULAR)
+		{	time = RoundVariables.loop.getTotalRealTime();
+			first = true;		
+		}
+		else
+		{	flash = !flash;
+		}
 	}
 	
 	/**
@@ -107,15 +114,45 @@ public class DisplayScreenCapture extends Display
 	{	this.first = first;
 	}
 
+	/**
+	 * Returns the value indicating whether
+	 * the flash should be displayed.
+	 * 
+	 * @return
+	 * 		Value indicating whether the flash should be displayed.
+	 */
+	private synchronized boolean getFlash()
+	{	return flash;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Message */
-	private final String MESSAGE = "Capture taken";
+	/** Capture message */
+	private final String MESSAGE_NORMAL = "Capture taken";
+	/** Flash capture message */
+	private final String MESSAGE_FLASH = "Capture flash";
+	/** Hiden capture message */
+	private final String MESSAGE_DISABLED = " disabled";
+	/** Shwon capture message */
+	private final String MESSAGE_ENABLED = " enabled";
 
 	@Override
 	public String getMessage(SystemControlEvent event)
-	{	return MESSAGE;
+	{	String message = null;
+	
+		if(event.getIndex()==SystemControlEvent.REGULAR)
+		{	message = MESSAGE_NORMAL;
+		}
+		else
+		{	boolean f = getFlash();
+			if(f)
+				message = MESSAGE_FLASH + MESSAGE_ENABLED;
+			else
+				message = MESSAGE_FLASH + MESSAGE_DISABLED;
+		}
+	
+		return message;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -123,29 +160,31 @@ public class DisplayScreenCapture extends Display
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void draw(Graphics g)
-	{	boolean first = isFirst();
-		if(first)
-		{	setFirstTime(false);
-		}
-		else
-		{	long time = getTime();
-			if(time!=0)
-			{	// update time
-				long currentTime = RoundVariables.loop.getTotalRealTime();
-				long elapsedTime = currentTime - time;
-				if(elapsedTime>=DURATION)
-				{	setTime(0);
-					elapsedTime = DURATION;
+	{	if(getFlash())
+		{	boolean first = isFirst();
+			if(first)
+			{	setFirstTime(false);
+			}
+			else
+			{	long time = getTime();
+				if(time!=0)
+				{	// update time
+					long currentTime = RoundVariables.loop.getTotalRealTime();
+					long elapsedTime = currentTime - time;
+					if(elapsedTime>=DURATION)
+					{	setTime(0);
+						elapsedTime = DURATION;
+					}
+					
+					// display flash
+					Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+					Rectangle rectangle = new Rectangle(dim);
+					Graphics2D g2 = (Graphics2D)g;
+					int alpha = 255 - (int)(255.0*elapsedTime/DURATION);
+					Color color = new Color(255,255,255,alpha);
+					g2.setPaint(color);
+					g2.fill(rectangle);
 				}
-				
-				// display flash
-				Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
-				Rectangle rectangle = new Rectangle(dim);
-				Graphics2D g2 = (Graphics2D)g;
-				int alpha = 255 - (int)(255.0*elapsedTime/DURATION);
-				Color color = new Color(255,255,255,alpha);
-				g2.setPaint(color);
-				g2.fill(rectangle);
 			}
 		}
 	}
