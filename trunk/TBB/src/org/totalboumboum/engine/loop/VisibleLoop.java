@@ -458,9 +458,9 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** total game time elapsed since the players took control */
+	/** Total game time elapsed since the players took control */
 	protected long totalGameTime = 0;
-	/** total real time elapsed since the level started appearing */
+	/** Total real time elapsed since the level started appearing */
 	protected long totalEngineTime = 0;
 	
 	/**
@@ -503,7 +503,7 @@ public abstract class VisibleLoop extends Loop
 
 	/** 
 	 * Returns the total real time elapsed 
-	 * since the round started.
+	 * since the round started, expressed in ms.
 	 * 
 	 * @return
 	 * 		Total real time spent since the round started.
@@ -517,47 +517,98 @@ public abstract class VisibleLoop extends Loop
 	// ENGINE STATS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /** Number of values stored to get an average */
-	protected static int NUM_VALUES = 10;   
+	protected static int NUM_VALUES = 10;
+	/** Time interval between to stat updates */
 	protected static long MAX_STATS_INTERVAL = 1000L;
+	/** Time of the previous stat update */
 	protected long prevStatsTime;   
+	/** Time when the game started */
 	protected long gameStartTime;
+	/** Number of frames counted since last update */
 	protected long frameCount = 0;
+	/** Number of frames skipped since last update */
 	protected long framesSkipped = 0L;
+	/** Stat count */
 	protected long statsCount = 0;
+	/** Average frame per second */
 	protected double averageFPS = 0.0;
+	/** Average AI update per second */
 	protected double averageUPS = 0.0;
+	/** Store FPS values */
 	protected double fpsStore[];
+	/** Store UPS values */
 	protected double upsStore[];
+	/** Store CPU usage values */
 	protected long cpuStore[][];
+	/** Previous CPU usage values */
 	protected long cpuPrev[];
+	/** Averaged CPU usage */
 	protected double averageCpu[];
+	/** Percentages of CPU usage */
 	protected double averageCpuProportions[];
+	/** Thread used to measure CPU usage */
 	protected ThreadMXBean tmxb = null;
+	/** Ids of the engine and agents threads */
 	protected HashMap<Long,PredefinedColor> threadIds = null;
+	/** Colors associated to the threads */
 	protected List<PredefinedColor> colors = null;
 	
-
+	/**
+	 * Returns the current average
+	 * frame per second rate.
+	 * 
+	 * @return
+	 * 		Current FPS.
+	 */
 	public double getAverageFPS()
 	{	return averageFPS;	
 	}
 	
+	/**
+	 * Returns the current average
+	 * update per second rate.
+	 * 
+	 * @return
+	 * 		Current UPS.
+	 */
 	public double getAverageUPS()
 	{	return averageUPS;	
 	}
 	
+	/**
+	 * Returns the current average
+	 * CPU usage.
+	 * 
+	 * @return
+	 * 		Current CPU usage.
+	 */
 	public double[] getAverageCpu()
 	{	return averageCpu;
 	}
 
+	/**
+	 * Returns the current average
+	 * CPU usage in percents.
+	 * 
+	 * @return
+	 * 		Current CPU usage in percents.
+	 */
 	public double[] getAverageCpuProportions()
 	{	return averageCpuProportions;
 	}
 
+	/**
+	 * Initializes stat-related objects.
+	 */
 	protected void initStats()
 	{	initFps();
 		initCpu();
 	}
 	
+	/**
+	 * Initializes FPS-related objects,
+	 * used when calculating stats.
+	 */
 	private void initFps()
 	{	// frames per second
 		fpsStore = new double[NUM_VALUES];
@@ -568,6 +619,10 @@ public abstract class VisibleLoop extends Loop
 		Arrays.fill(upsStore,0);
 	}
 	
+	/**
+	 * Initializes CPU usage-related objects,
+	 * used when calculating stats.
+	 */
 	private void initCpu()
 	{	// init stats
 		int pc = players.size() + 2;
@@ -609,6 +664,9 @@ public abstract class VisibleLoop extends Loop
 		}
 	}
 
+	/**
+	 * Update statistics.
+	 */
 	protected void updateStats( )
     {	frameCount++;
     	long timeNow = System.currentTimeMillis();
@@ -625,6 +683,12 @@ public abstract class VisibleLoop extends Loop
       	}
     }
 
+	/**
+	 * Update FPS-related statistics.
+	 * 
+	 * @param elapsedTime
+	 * 		Time elapsed since last update.
+	 */
 	protected void updateFps(long elapsedTime)
     {	// calculate the latest FPS and UPS
       	double currentFPS = 0;     
@@ -664,6 +728,12 @@ public abstract class VisibleLoop extends Loop
   		framesSkipped = 0;
     }
 
+	/**
+	 * Update CPU usage-related statistics.
+	 * 
+	 * @param elapsedTime
+	 * 		Time elapsed since last update.
+	 */
 	protected void updateCpu(long elapsedTime)
     {	// retrieve current cpu times
 		//System.out.println("------------------------------------------");
@@ -869,14 +939,13 @@ public abstract class VisibleLoop extends Loop
 		return result;
 	}
 	
-	public void performScreenCapture()
-	{	boolean sc = mustScreenCapture();
-		if(sc)
-		{	setScreenCapture(false);
-			panel.captureScreen();
-		}
-
-	}
+//	public void performScreenCapture()
+//	{	boolean sc = mustScreenCapture();
+//		if(sc)
+//		{	setScreenCapture(false);
+//			panel.captureScreen();
+//		}
+//	}
 	
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY MANAGER	/////////////////////////////////////////////
@@ -893,8 +962,12 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Configuration object for the engine options */
 	protected EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 	
+	/**
+	 * Initializes all logs.
+	 */
 	protected void initLogs()
 	{	if(engineConfiguration.getLogControls())
 		{	try
@@ -927,6 +1000,9 @@ public abstract class VisibleLoop extends Loop
 		}
 	}
 	
+	/**
+	 * Updatge all logs.
+	 */
 	protected void updateLogs()
 	{	if(engineConfiguration.getLogControls())
 		{	try
@@ -940,6 +1016,9 @@ public abstract class VisibleLoop extends Loop
 		}
 	}
 	
+	/**
+	 * Close all log files.
+	 */
 	protected void closeLogs()
 	{	if(engineConfiguration.getLogControls())
 		{	try
@@ -954,16 +1033,29 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE PAUSE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicate if the engine is currently paused */
 	protected boolean pauseEngine = false;
+	/** Indicate if the user required an engine step to be performed */
 	protected boolean stepEngine = false;
+	/** Lock associated to engine pause */
 	protected Lock debugLock = new ReentrantLock();
 
+	/**
+	 * Pause/unpause the engine.
+	 */
 	public void switchEnginePause()
 	{	debugLock.lock();
 		pauseEngine = !pauseEngine;		
 		debugLock.unlock();
 	}
 	
+	/**
+	 * Indicates if the engine is currently
+	 * paused.
+	 * 
+	 * @return
+	 * 		{@code true} if the engine is paused.
+	 */
 	public boolean getEnginePause()
 	{	boolean result;
 		debugLock.lock();
@@ -972,12 +1064,25 @@ public abstract class VisibleLoop extends Loop
 		return result;
 	}
 
+	/**
+	 * Requires to peform an
+	 * engine step.
+	 * 
+	 * @param value
+	 * 		{@code true} to peform an engine step.
+	 */
 	public void switchEngineStep(boolean value)
 	{	debugLock.lock();
 		stepEngine = value;		
 		debugLock.unlock();
 	}
 	
+	/**
+	 * Indicates if an engine step was required.
+	 * 
+	 * @return
+	 * 		{@code true} if an engine step was required.
+	 */
 	public boolean getEngineStep()
 	{	boolean result;
 		debugLock.lock();
@@ -986,6 +1091,9 @@ public abstract class VisibleLoop extends Loop
 		return result;
 	}
 	
+	/**
+	 * Performs the engine step.
+	 */
 	protected void updateEngineStep()
 	{	if(getEngineStep())
 		{	//prevTotalGameTime = totalGameTime;
@@ -997,6 +1105,9 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE SPEED		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Increases engine speed.
+	 */
 	protected void speedUp()
 	{	debugLock.lock();
 		double coef = Configuration.getEngineConfiguration().getSpeedCoeff()*2;
@@ -1004,6 +1115,9 @@ public abstract class VisibleLoop extends Loop
 		debugLock.unlock();
 	}
 	
+	/**
+	 * Decreaes engine speed.
+	 */
 	protected void slowDown()
 	{	debugLock.lock();
 		double coef = Configuration.getEngineConfiguration().getSpeedCoeff()/2;
@@ -1014,13 +1128,17 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// ENTRY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Order of the roles for the before-game sprite entry */
 	protected Role[] entryRoles;
+	/** Moment each type of sprite appears at the begining of a round */ 
 	protected Double[] entryDelays;
+	/** Index of the current step in these entries */
 	protected int entryIndex = 0;
+	/** Text displayed before game starts */
 	protected String[] entryTexts;
 	
 	/**
-	 * handles how sprites enter the zone
+	 * Handles how sprites enter the zone.
 	 */
 	protected void initEntries()
 	{	entryIndex = 0;
@@ -1045,6 +1163,10 @@ public abstract class VisibleLoop extends Loop
 //	System.out.println("entryDelays["+i+"]="+entryDelays[i]);
 	}
 
+	/**
+	 * Display the appropriate sprites/messages
+	 * before the actual beginning of the round.
+	 */
 	protected void updateEntries()
 	{	// general case
 		if(entryIndex<entryDelays.length)
@@ -1084,6 +1206,13 @@ public abstract class VisibleLoop extends Loop
 		}
 	}
 
+	/**
+	 * Returns the texts displayed when
+	 * starting the round.
+	 * 
+	 * @return
+	 * 		Texts displayed at the very begining of a round.
+	 */
 	public String[] getEntryTexts()
 	{	return entryTexts;
 	}
@@ -1091,6 +1220,7 @@ public abstract class VisibleLoop extends Loop
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if this object was destroyed */
 	protected boolean finished = false;
 	
 	@Override
