@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiFire;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
+import org.totalboumboum.ai.v201314.adapter.data.AiState;
 import org.totalboumboum.ai.v201314.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
@@ -146,6 +147,32 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 */
 	public SearchMode getSearchMode()
 	{	return searchMode;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SECURITY DELAY	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Délai de sécurité pour la case de destination */
+	private long securityDelay = 0l;
+
+	/**
+	 * Change le délai de sécurité pour la case de destination.
+	 * Ce délai correspond à la durée pendant laquelle cette case
+	 * doit rester sans explosion, après l'arrivée prévue de l'agent.
+	 * <br/>
+	 * Ceci permet de s'assurer que l'agent pourra passer un certain 
+	 * temps en sécurité dans la case de destination. La valeur par 
+	 * défaut est de 0 (aucune garantie). En cas de modification,
+	 * on peut suggérer d'utiliser une durée correspondant au temps
+	 * nécessaire à l'agent pour traverser une case. Ceci garantit
+	 * à l'agent qu'il aura le temps de parcourir toute la case pour
+	 * s'enfuir en cas d'explosion.
+	 * 
+	 * @param delay
+	 * 		Le délai de sécurité à respecter.
+	 */
+	public void setSecurityDelay(long delay)
+	{	securityDelay = delay;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -355,12 +382,26 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 					
 					// on teste si l'action a bien réussi : s'agit-il de la bonne case ?
 					if(futureTile.equals(neighbor))
-					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
-						AiSearchNode child = new AiSearchNode(futureLocation,node);
-						result.add(child);
+					{	// s'il s'agit d'une case de destination, il peut y avoir un test supplémentaire
+						if(securityDelay>0 && endTiles.contains(futureTile))
+						{	model.simulate(securityDelay);
+							futureZone = model.getCurrentZone();
+							futureHero = futureZone.getHeroByColor(hero.getColor());
+							AiState futureState = futureHero.getState();
+							AiStateName futureStateName = futureState.getName();
+							process = futureStateName!=AiStateName.BURNING && futureStateName!=AiStateName.ENDED;
+						}
+						else
+							process = true;
+						
+						// on crée le noeud fils correspondant (qui sera traité plus tard)
+						if(process)
+						{	AiSearchNode child = new AiSearchNode(futureLocation,node);
+							result.add(child);
 //if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 //	System.out.print("");
-						
+						}
+						// si le personnage ne survit pas à la durée de sécuritée, la case est ignorée (faudra arriver plus tard)
 					}
 					// si la case n'est pas la bonne : 
 					// la case ciblée n'était pas traversable et l'action est à ignorer
