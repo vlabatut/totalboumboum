@@ -205,7 +205,11 @@ public class LocalSytemControl extends SystemControl
 		
 		// print screen
 		if(keyCode == KeyEvent.VK_PRINTSCREEN)
-		{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN);
+		{	SystemControlEvent controlEvent = null;
+			if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+				controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN,SystemControlEvent.MODE);
+			else
+				controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_PRINT_SCREEN,SystemControlEvent.REGULAR);
 			loop.processEvent(controlEvent);
 		}
 	}
