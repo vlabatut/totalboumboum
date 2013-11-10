@@ -1739,3 +1739,5 @@ public class Launcher
 
 // TODO ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
 //		des classes dédiées : DistanceTools, NeighborTools, etc. (?)
+
+// TODO possibilité d'enregistrer la zone courante sous forme d'AiSimZone ?
