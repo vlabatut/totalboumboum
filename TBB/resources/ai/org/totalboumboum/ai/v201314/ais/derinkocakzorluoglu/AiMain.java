@@ -64,7 +64,7 @@ public class AiMain extends AiManager
 	 * L'exécution de cette méthode permet
 	 * de faire diverses vérifications du code source
 	 * de cet agent, ou bien effectue différentes
-	 * tâches liées à sa conceptions.
+	 * tâches liées à sa conception.
 	 * <br/>
 	 * Ici, à titre d'exemple, on teste automatiquement 
 	 * certains des points mentionnés dans le manuel de 
