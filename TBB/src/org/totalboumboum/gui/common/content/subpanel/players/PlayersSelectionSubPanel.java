@@ -53,8 +53,8 @@ import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
-import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -110,8 +110,8 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		colorBackgrounds = new ArrayList<Color>();
 		
 		// ready
-		ClientGeneralConnexion clientConfig = Configuration.getConnexionsConfiguration().getClientConnexion();
-		ServerGeneralConnexion serverConfig = Configuration.getConnexionsConfiguration().getServerConnexion();
+		ClientGeneralConnection clientConfig = Configuration.getConnectionsConfiguration().getClientConnection();
+		ServerGeneralConnection serverConfig = Configuration.getConnectionsConfiguration().getServerConnection();
 		showReady = clientConfig!=null || serverConfig!=null;
 
 		// sizes
@@ -447,12 +447,12 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		
 		MyLabel label = (MyLabel)e.getComponent();
 		int[] pos = getLabelPositionMultiple(label);
-		ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 		switch(pos[2])
 		{	case COL_DELETE:
 				{	// delete all
 					if(pos[0]==0)
-					{	if(connexion==null) //only if not a client
+					{	if(connection==null) //only if not a client
 						{	while(players.size()>0)
 							{	players.remove(0);
 								refresh();
@@ -471,7 +471,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 						else if(index<players.size())
 						{	// only if host is not a client
 							Profile profile = players.get(index);
-							if(connexion==null)
+							if(connection==null)
 							{	players.remove(index);
 								refresh();
 								firePlayerRemoved(index);
@@ -488,7 +488,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				{	// random selection
 					if(pos[0]==0)
 					{	// only if not a client
-						if(connexion==null)
+						if(connection==null)
 						{	try
 							{	ProfilesConfiguration.completeProfilesRandomly(players,LINES-1);
 								refresh();
@@ -536,7 +536,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				break;
 			case COL_RANK:
 				{	// only if host is not a client
-					if(connexion==null)
+					if(connection==null)
 					{	int index = pos[0]-1;
 						Iterator<Profile> it = players.iterator();
 						RankingService rankingService = GameStatistics.getRankingService();
@@ -592,7 +592,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			case COL_COLOR:
 				{	int index = pos[0]-1;
 					Profile profile = players.get(index);
-					if(connexion==null && !profile.isRemote())
+					if(connection==null && !profile.isRemote())
 					{	PredefinedColor color = profile.getSpriteColor();
 						color = Configuration.getProfilesConfiguration().getNextFreeColor(players,profile,color);
 						profile.getSelectedSprite().setColor(color);
