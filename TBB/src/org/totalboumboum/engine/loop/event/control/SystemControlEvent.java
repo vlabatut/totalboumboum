@@ -36,6 +36,8 @@ public class SystemControlEvent
 	public final static String REQUIRE_ENGINE_STEP = "REQUIRE_ENGINE_STEP";
 	/** Display next start message */
 	public final static String REQUIRE_NEXT_MESSAGE = "REQUIRE_NEXT_MESSAGE";
+	/** Record the current percepts for the concerned agent */
+	public final static String REQUIRE_RECORD_AI_PERCEPTS = "REQUIRE_RECORD_AI_PERCEPTS";
 	/** Slow down engine */
 	public final static String REQUIRE_SLOW_DOWN = "REQUIRE_SLOW_DOWN";
 	/** Speed up engine */
