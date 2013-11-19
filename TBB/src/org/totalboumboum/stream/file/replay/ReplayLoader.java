@@ -49,7 +49,7 @@ public class ReplayLoader
 	{	FileClientStream result = new FileClientStream();
 		
 		// load xml file
-		String individualFolder = FilePaths.getReplaysPath() + File.separator + folderName;
+		String individualFolder = FilePaths.getCaptureReplaysPath() + File.separator + folderName;
 		File dataFile = new File(individualFolder + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_SCHEMA);

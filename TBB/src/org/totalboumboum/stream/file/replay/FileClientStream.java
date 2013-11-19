@@ -241,7 +241,7 @@ public class FileClientStream
 	private ObjectInputStream in = null;
 
 	public void initStreams() throws IOException
-	{	String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+	{	String folderPath = FilePaths.getCaptureReplaysPath() + File.separator + folder;
 		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
 		File file = new File(filePath);
 		FileInputStream fileIn = new FileInputStream(file);

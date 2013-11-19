@@ -233,7 +233,7 @@ public class FileServerStream
 		
 		// possibly record the preview
 		if(preview!=null)
-		{	String previewFilename = FilePaths.getReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
+		{	String previewFilename = FilePaths.getCaptureReplaysPath() + File.separator + folder + File.separator + FileNames.FILE_PREVIEW + FileNames.EXTENSION_PNG;
 			File file = new File(previewFilename);
 			ImageIO.write(preview,"png",file);
 		}
@@ -249,7 +249,7 @@ public class FileServerStream
 
 	public void initStream() throws IOException
 	{	// open file
-		String folderPath = FilePaths.getReplaysPath() + File.separator + folder;
+		String folderPath = FilePaths.getCaptureReplaysPath() + File.separator + folder;
 		File file = new File(folderPath);
 		file.mkdir();
 		String filePath = folderPath + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_DATA;
