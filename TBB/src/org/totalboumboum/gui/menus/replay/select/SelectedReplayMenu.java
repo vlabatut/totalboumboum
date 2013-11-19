@@ -102,7 +102,7 @@ public class SelectedReplayMenu extends InnerMenuPanel implements DataPanelListe
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private SelectedReplayData levelData;
-	private String baseFolder = FilePaths.getReplaysPath();
+	private String baseFolder = FilePaths.getCaptureReplaysPath();
 
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
