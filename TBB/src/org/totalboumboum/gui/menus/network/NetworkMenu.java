@@ -51,8 +51,8 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
-import org.totalboumboum.stream.network.client.ClientIndividualConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.client.ClientState;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -146,9 +146,9 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 			buttonGamesNext.setEnabled(true);
 		
 		// players
-		ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-		ClientIndividualConnexion activeConnexion = connexion.getActiveConnexion();
-		if(activeConnexion==null)
+		ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		ClientIndividualConnection activeConnection = connection.getActiveConnection();
+		if(activeConnection==null)
 			buttonPlayersValidate.setEnabled(false);
 		else
 			buttonPlayersValidate.setEnabled(true);
@@ -182,29 +182,29 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_BUTTON_QUIT))
-		{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			connexion.exitGame();
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.exitGame();
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_PREVIOUS))				
-		{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			connexion.exitPlayersSelection();
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.exitPlayersSelection();
 
 			setButtonsGames();
 			container.setDataPart(gamesData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_PLAYERS_BUTTON_VALIDATE))
-		{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			connexion.confirmPlayersSelection(buttonPlayersValidate.isSelected());
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.confirmPlayersSelection(buttonPlayersValidate.isSelected());
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_NETWORK_GAMES_BUTTON_NEXT))
 		{	// set payers panel
 			GameInfo gameInfo = gamesData.getSelectedGame();
-			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			connexion.entersPlayerSelection(gameInfo);
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.entersPlayerSelection(gameInfo);
 			playersData.setTournamentConfiguration();
 			
 			setButtonsPlayers();
@@ -228,12 +228,12 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 	{	refreshButtons();
 		
 		if(getDataPart()==playersData)
-		{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			ClientIndividualConnexion activeConnexion = connexion.getActiveConnexion();
-			// active connexion lost >> exit player selection screen
-			if(object instanceof ClientIndividualConnexion && 
-					(activeConnexion.getState()==ClientState.SELECTING_PLAYERS || activeConnexion.getState()==ClientState.WAITING_TOURNAMENT))
-			{	connexion.exitPlayersSelection();
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			ClientIndividualConnection activeConnection = connection.getActiveConnection();
+			// active connection lost >> exit player selection screen
+			if(object instanceof ClientIndividualConnection && 
+					(activeConnection.getState()==ClientState.SELECTING_PLAYERS || activeConnection.getState()==ClientState.WAITING_TOURNAMENT))
+			{	connection.exitPlayersSelection();
 
 				setButtonsGames();
 				container.setDataPart(gamesData);
@@ -242,8 +242,8 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 			// tournament has just started >> enter tournament screen or get back to game selection
 			else if(object instanceof AbstractTournament)
 			{	// enter the tournament
-				if(activeConnexion.getState()==ClientState.WAITING_TOURNAMENT)
-				{	tournament = activeConnexion.getTournament();
+				if(activeConnection.getState()==ClientState.WAITING_TOURNAMENT)
+				{	tournament = activeConnection.getTournament();
 					
 					// synch game options
 					List<Profile> profiles = tournament.getProfiles();
@@ -292,7 +292,7 @@ public class NetworkMenu extends InnerMenuPanel implements DataPanelListener
 				}
 				// leave the tournament
 				else
-				{	connexion.exitPlayersSelection();
+				{	connection.exitPlayersSelection();
 	
 					setButtonsGames();
 					container.setDataPart(gamesData);

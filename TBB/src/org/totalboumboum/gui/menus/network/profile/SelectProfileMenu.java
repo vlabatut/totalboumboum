@@ -44,7 +44,7 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -119,8 +119,8 @@ public class SelectProfileMenu extends InnerMenuPanel
 					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
 				profile.getSelectedSprite().setColor(selectedColor);
 				// NOTE this would be so much cleaner with an events system...
-				ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-				if(connexion==null)
+				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+				if(connection==null)
 				{	try
 					{	ProfileLoader.reloadPortraits(profile);
 					}
@@ -144,9 +144,9 @@ public class SelectProfileMenu extends InnerMenuPanel
 				}
 				else
 				{	if(newSlot)
-						connexion.requestPlayersSet(index,profile);
+						connection.requestPlayersSet(index,profile);
 					else
-						connexion.requestPlayersAdd(profile);
+						connection.requestPlayersAdd(profile);
 				}
 			}
 			parent.refresh();

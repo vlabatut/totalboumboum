@@ -33,7 +33,7 @@ import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
-import org.totalboumboum.configuration.connexions.ConnexionsConfiguration;
+import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.subpanel.game.GameInfoSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.game.GameListSubPanel;
@@ -49,9 +49,9 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiImageTools;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexionListener;
-import org.totalboumboum.stream.network.client.ClientIndividualConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -63,7 +63,7 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  */
-public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener,ClientGeneralConnexionListener,HostInfoSubPanelListener
+public class GamesData extends EntitledDataPanel implements GameListSubPanelListener,ModalDialogPanelListener,ClientGeneralConnectionListener,HostInfoSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -72,9 +72,9 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 	public GamesData(SplitMenuPanel container)
 	{	super(container);
 	
-		ConnexionsConfiguration config = Configuration.getConnexionsConfiguration();
+		ConnectionsConfiguration config = Configuration.getConnectionsConfiguration();
 		try
-		{	config.initClientConnexion();
+		{	config.initClientConnection();
 		}
 		catch (IllegalArgumentException e)
 		{	e.printStackTrace();
@@ -100,9 +100,9 @@ public class GamesData extends EntitledDataPanel implements GameListSubPanelList
 		catch (ClassNotFoundException e)
 		{	e.printStackTrace();
 		}
-		ClientGeneralConnexion generalConnexion = config.getClientConnexion();
-		generalConnexion.addListener(this);
-		List<GameInfo> gamesList = generalConnexion.getGameList();
+		ClientGeneralConnection generalConnection = config.getClientConnection();
+		generalConnection.addListener(this);
+		List<GameInfo> gamesList = generalConnection.getGameList();
 		gamesMap = new HashMap<String, GameInfo>();
 		for(GameInfo gi: gamesList)
 			gamesMap.put(gi.getHostInfo().getId(),gi);
@@ -257,7 +257,7 @@ catch (UnknownHostException e)
 			}
 
 			setDataPart(mainPanel);
-			generalConnexion.requestGameInfos();
+			generalConnection.requestGameInfos();
 		}
 	}
 	
@@ -296,8 +296,8 @@ catch (UnknownHostException e)
 		HostInfo hostInfo = null;
 		if(gameInfo!=null)
 		{	hostInfo = gameInfo.getHostInfo();
-			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			connexion.refreshConnexion(gameInfo);
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			connection.refreshConnection(gameInfo);
 		}
 		hostPanel.setHostInfo(hostInfo);
 		fireDataPanelSelectionChange(gameInfo);
@@ -320,8 +320,8 @@ catch (UnknownHostException e)
 
 	@Override
 	public void refreshGameRequested(GameInfo gameInfo)
-	{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-		connexion.refreshConnexion(gameInfo);
+	{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		connection.refreshConnection(gameInfo);
 	}
 
 	@Override
@@ -367,13 +367,13 @@ catch (UnknownHostException e)
 					inputModalNew.removeListener(this);
 					inputModalNew = null;
 					// create new host
-					ConnexionsConfiguration config = Configuration.getConnexionsConfiguration();
+					ConnectionsConfiguration config = Configuration.getConnectionsConfiguration();
 					HostInfo hostInfo = new HostInfo();
 					String[] info = input.split(":");
 					hostInfo.setLastIp(info[0]);
 					hostInfo.setLastPort(Integer.parseInt(info[1]));
-					ClientGeneralConnexion connexion = config.getClientConnexion();
-					connexion.createConnexion(hostInfo);
+					ClientGeneralConnection connection = config.getClientConnection();
+					connection.createConnection(hostInfo);
 					
 					// refresh the GUI
 					//listPanel.refresh();
@@ -405,8 +405,8 @@ catch (UnknownHostException e)
 						{	String[] info = input.split(":");
 							hostInfo.setLastIp(info[0]);
 							hostInfo.setLastPort(Integer.parseInt(info[1]));
-							ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-							connexion.refreshConnexion(gameInfo);
+							ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+							connection.refreshConnection(gameInfo);
 
 							// refresh the GUI
 							listPanel.updateGame(gameInfo);
@@ -424,8 +424,8 @@ catch (UnknownHostException e)
 	// CLIENT CONNECTION LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void connexionAdded(ClientIndividualConnexion connexion, int index)
-	{	GameInfo gameInfo = connexion.getGameInfo();
+	public void connectionAdded(ClientIndividualConnection connection, int index)
+	{	GameInfo gameInfo = connection.getGameInfo();
 		String gameId = gameInfo.getHostInfo().getId();
 		gamesMap.put(gameId,gameInfo);
 		listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
@@ -433,17 +433,17 @@ catch (UnknownHostException e)
 	}
 
 	@Override
-	public void connexionRemoved(ClientIndividualConnexion connexion,int index)
-	{	GameInfo gameInfo = connexion.getGameInfo();
+	public void connectionRemoved(ClientIndividualConnection connection,int index)
+	{	GameInfo gameInfo = connection.getGameInfo();
 		String gameId = gameInfo.getHostInfo().getId();
 		gamesMap.remove(gameId);
 		listPanel.setGameInfos(gamesMap,GAME_LIST_LINES);
 	}
 
 	@Override
-	public void connexionGameInfoChanged(ClientIndividualConnexion connexion, int index, String oldId)
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
 	{	if(listPanel!=null)
-		{	GameInfo gameInfo = connexion.getGameInfo();
+		{	GameInfo gameInfo = connection.getGameInfo();
 			if(oldId!=null)
 			{	gamesMap.remove(oldId);
 				String gameId = gameInfo.getHostInfo().getId();
@@ -468,17 +468,17 @@ catch (UnknownHostException e)
 	}
 
 	@Override
-	public void connexionActiveConnexionLost(ClientIndividualConnexion connexion, int index)
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
 	{	// useless at this stage
 	}
 
 	@Override
-	public void connexionProfilesChanged(ClientIndividualConnexion connexion, int index)
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
 	{	// useless at this stage
 	}
 
 	@Override
-	public void connexionTournamentStarted(AbstractTournament tournament)
+	public void connectionTournamentStarted(AbstractTournament tournament)
 	{	// useless at this stage
 	}
 	
