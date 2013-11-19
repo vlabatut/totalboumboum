@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.controls.ControlSettings;
@@ -156,9 +157,20 @@ public abstract class Sprite implements Comparable<Sprite>
 	{	this.gesturePack = gesturePack;	
 	}
 	
-	/*
-	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est réinitialisée que si le gesture est modifié
+	/**
+	 * Change le gesture, la direction de l'animation et la direction des touches.
+	 * L'animation n'est réinitialisée que si le gesture est modifié.
+	 * 
+	 * @param gesture 
+	 * 		New animation.
+	 * @param spriteDirection
+	 * 		New animation direction. 
+	 * @param controlDirection
+	 * 		New move direction. 
+	 * @param reinit 
+	 * 		Ask for reset or not.
+	 * @param forcedDuration 
+	 * 		Imposed animation duration.
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// record event
@@ -205,7 +217,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	// REPLAY EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void processChangeAnimeEvent(SpriteChangeAnimeEvent event)
-	{	HashMap<String,Object> changes = event.getChanges();
+	{	Map<String,Object> changes = event.getChanges();
 		Direction direction = (Direction) changes.get(SpriteChangeAnimeEvent.SPRITE_EVENT_DIRECTION);
 		if(direction==null)
 			direction = getCurrentFacingDirection();
@@ -222,7 +234,7 @@ public abstract class Sprite implements Comparable<Sprite>
 	}
 	
 	public void processChangePositionEvent(SpriteChangePositionEvent event, double zoomCoef)
-	{	HashMap<String,Object> changes = event.getChanges();
+	{	Map<String,Object> changes = event.getChanges();
 		Double x = (Double) changes.get(SpriteChangePositionEvent.SPRITE_EVENT_POSITION_X);
 		if(x!=null)
 			setCurrentPosX(x*zoomCoef);
