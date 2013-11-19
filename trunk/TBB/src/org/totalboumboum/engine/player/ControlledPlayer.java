@@ -33,16 +33,36 @@ import org.totalboumboum.engine.control.player.LocalPlayerControl;
 import org.totalboumboum.engine.control.player.NetworkPlayerControl;
 import org.totalboumboum.engine.control.player.PlayerControl;
 import org.totalboumboum.game.profile.Profile;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.xml.sax.SAXException;
 
 /**
+ * Player controled locally, either by a human player
+ * or an agent.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class ControlledPlayer extends AbstractPlayer
 {	
+	/**
+	 * Builds a new player.
+	 * 
+	 * @param profile
+	 * 		Profile associated to this player.
+	 * @param base
+	 * 		Factory for the appropriate sprite.
+	 * @param tile
+	 * 		Starting position in the zone (tile).
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws SAXException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IOException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the player profile or agent program.
+	 */
 	public ControlledPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
@@ -54,8 +74,8 @@ public abstract class ControlledPlayer extends AbstractPlayer
 		sprite.setControlSettings(controlSettings);
 		
 		// set controls
-		ClientGeneralConnexion clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-		if(clientConnexion==null)
+		ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		if(clientConnection==null)
 			spriteControl = new LocalPlayerControl(this);
 		else
 			spriteControl = new NetworkPlayerControl(this);
@@ -64,14 +84,27 @@ public abstract class ControlledPlayer extends AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** control */
+	/** Controls for this player */
 	private PlayerControl spriteControl;
-	/** current controls */
+	/** Current control settings */
 	private ControlSettings controlSettings;
 
+	/**
+	 * Return the current controls settings.
+	 * 
+	 * @return
+	 * 		Current control settings.
+	 */
 	public ControlSettings getControlSettings()
 	{	return controlSettings;
 	}
+	
+	/**
+	 * Returns the control for this player.
+	 * 
+	 * @return
+	 * 		Control for this player.
+	 */
 	public PlayerControl getSpriteControl()
 	{	return spriteControl;
 	}

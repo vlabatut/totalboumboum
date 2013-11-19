@@ -31,12 +31,31 @@ import org.totalboumboum.game.profile.Profile;
 import org.xml.sax.SAXException;
 
 /**
+ * Player controled locally by a human.
  * 
  * @author Vincent Labatut
- *
  */
 public class HumanPlayer extends ControlledPlayer
 {	
+	/**
+	 * Builds a new locally human-controlled player.
+	 * 
+	 * @param profile
+	 * 		Profile associated to this player.
+	 * @param base
+	 * 		Factory for the appropriate sprite.
+	 * @param tile
+	 * 		Starting position in the zone (tile).
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws SAXException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IOException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the player profile or agent program.
+	 */
 	public HumanPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 	}

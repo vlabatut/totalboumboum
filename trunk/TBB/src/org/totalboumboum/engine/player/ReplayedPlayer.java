@@ -31,12 +31,31 @@ import org.totalboumboum.game.profile.Profile;
 import org.xml.sax.SAXException;
 
 /**
+ * Player whose control comes from a previously
+ * recorded file.
  * 
  * @author Vincent Labatut
- *
  */
 public class ReplayedPlayer extends AbstractPlayer
 {	
+	/**
+	 * 
+	 * @param profile
+	 * 		Profile associated to this player.
+	 * @param base
+	 * 		Factory for the appropriate sprite.
+	 * @param tile
+	 * 		Starting position in the zone (tile).
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws SAXException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IOException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the player profile or agent program.
+	 */
 	public ReplayedPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 	}

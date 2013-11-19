@@ -24,22 +24,37 @@ package org.totalboumboum.engine.player;
 import java.io.Serializable;
 
 /**
+ * Initial location of the player
+ * (when the round starts).
  * 
  * @author Vincent Labatut
- *
  */
 public class PlayerLocation implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
 	/////////////////////////////////////////////////////////////////
 	// NUMBER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Number of the location */
 	private int number;
-
+	
+	/**
+	 * Returns the location number.
+	 * 
+	 * @return
+	 * 		Location number.
+	 */
 	public int getNumber()
 	{	return number;
 	}
 	
+	/**
+	 * Changes the location number.
+	 * 
+	 * @param number
+	 * 		New location number.
+	 */
 	public void setNumber(int number)
 	{	this.number = number;
 	}
@@ -47,12 +62,25 @@ public class PlayerLocation implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COLUMN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Column of the starting location */
 	private int col;
 
+	/**
+	 * Returns the column of the starting location.
+	 * 
+	 * @return
+	 * 		Column of the starting location.
+	 */
 	public int getCol()
 	{	return col;
 	}
 	
+	/**
+	 * Changes the column of the starting location.
+	 * 
+	 * @param col
+	 * 		New column of the starting location.
+	 */
 	public void setCol(int col)
 	{	this.col = col;
 	}
@@ -60,12 +88,25 @@ public class PlayerLocation implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Row of the starting location */
 	private int row;
 
+	/**
+	 * Returns the row of the starting location.
+	 * 
+	 * @return
+	 * 		Row of the starting location.
+	 */
 	public int getRow()
 	{	return row;
 	}
 	
+	/**
+	 * Changes the row of the starting location.
+	 * 
+	 * @param row
+	 * 		New row of the starting location.
+	 */
 	public void setRow(int row)
 	{	this.row = row;
 	}

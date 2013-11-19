@@ -36,12 +36,47 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.xml.sax.SAXException;
 
 /**
+ * Represents a player controled by
+ * an artificial intelligence (a program,
+ * by opposition to a human player).
  * 
  * @author Vincent Labatut
- *
  */
 public class AiPlayer extends ControlledPlayer
 {	
+	/**
+	 * Builds a new AI-controlled player.
+	 * 
+	 * @param profile
+	 * 		Profile associated to this player.
+	 * @param base
+	 * 		Factory for the appropriate sprite.
+	 * @param tile
+	 * 		Starting position in the zone (tile).
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws SAXException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IOException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws SecurityException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws InstantiationException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws InvocationTargetException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws NoSuchMethodException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws URISyntaxException
+	 * 		Problem while accessing the player profile or agent program.
+	 */
 	public AiPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, URISyntaxException
 	{	super(profile,base,tile);
 
@@ -55,19 +90,48 @@ public class AiPlayer extends ControlledPlayer
 	/////////////////////////////////////////////////////////////////
 	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** artificial intelligence */
-	private AiAbstractManager<?> ai = null;
+	/** Artificial intelligence manager, used to handle the extra thread */
+	private AiAbstractManager<?,?> ai = null;
 	
+	/**
+	 * Updates the agent depending on the
+	 * last game evolution.
+	 * 
+	 * @param aisPause
+	 * 		Whether the agent is paused, or not.
+	 * @return
+	 * 		{@code true} iff the agent thread actually returned an action request.
+	 */
 	public boolean updateAi(boolean aisPause)
 	{	boolean result = ai.update(aisPause);
 		return result;
 	}
 	
+	/**
+	 * Record the agent percepts.
+	 * 
+	 * @throws IOException 
+	 * 		Problem while capturing the agent percepts.
+	 */
+	public void recordAi() throws IOException
+	{	ai.writePercepts();
+	}
+	
+	/**
+	 * Intializes all objects necessary
+	 * for the agent to run properly.
+	 */
 	public void initAi()
 	{	ai.initAgent();
 	}
 	
-	public AiAbstractManager<?> getArtificialIntelligence()
+	/**
+	 * Returns the object used to handle the agent thread.
+	 * 
+	 * @return
+	 * 		An ai manager object.
+	 */
+	public AiAbstractManager<?,?> getArtificialIntelligence()
 	{	return ai;
 	}
 	
