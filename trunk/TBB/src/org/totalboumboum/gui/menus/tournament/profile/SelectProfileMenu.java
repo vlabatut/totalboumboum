@@ -44,7 +44,7 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
@@ -134,19 +134,19 @@ public class SelectProfileMenu extends InnerMenuPanel
 				{	e1.printStackTrace();
 				}
 				// add to profiles list
-				ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+				ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
 				if(!newSlot)
 				{	profiles.add(index,profile);
 					// NOTE this would be so much cleaner with an events system...
-					if(connexion!=null)
-						connexion.profileSet(index,profile,null);
+					if(connection!=null)
+						connection.profileSet(index,profile,null);
 				}
 				else
 				{	profiles.add(profile);
 					// NOTE this would be so much cleaner with an events system...
-					if(connexion!=null)
+					if(connection!=null)
 					{	profile.setReady(true);
-						connexion.profileAdded(profile,null);
+						connection.profileAdded(profile,null);
 					}
 				}
 			}
