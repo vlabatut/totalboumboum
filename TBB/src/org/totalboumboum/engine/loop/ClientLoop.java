@@ -55,6 +55,7 @@ import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisPause;
+import org.totalboumboum.engine.loop.display.ais.DisplayAisRecordPercepts;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisTexts;
 import org.totalboumboum.engine.loop.display.game.DisplayCancel;
 import org.totalboumboum.engine.loop.display.game.DisplayFPS;
@@ -84,19 +85,28 @@ import org.totalboumboum.engine.player.HumanPlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * This class is used for network games,
+ * for the client side.
  * 
  * @author Vincent Labatut
- *
  */
 public class ClientLoop extends VisibleLoop implements InteractiveLoop, ReplayedLoop
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new client loop
+	 * for the specified round.
+	 * 
+	 * @param round
+	 * 		Round displayed by this loop.
+	 */
 	public ClientLoop(Round round)
 	{	super(round);
 	}	
@@ -118,8 +128,8 @@ public class ClientLoop extends VisibleLoop implements InteractiveLoop, Replayed
 
 		// load level & instance
 		hollowLevel.initLevel(this);
-		clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-		zoomCoefficient = RoundVariables.zoomFactor / clientConnexion.getZoomCoef();
+		clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		zoomCoefficient = RoundVariables.zoomFactor / clientConnection.getZoomCoef();
 		level = hollowLevel.getLevel();
 		RoundVariables.level = level;
 		instance.loadFiresetMap();
@@ -187,7 +197,7 @@ System.out.println(hero+" "+hero.getId());
 					controlSettings.add(map.get(index));
 			}
 		}
-		clientConnexion.sendControlSettings(controlSettings);
+		clientConnection.sendControlSettings(controlSettings);
 	}
 	
 	@Override
@@ -200,8 +210,8 @@ System.out.println(hero+" "+hero.getId());
 	@Override
 	protected void finishLoopInit()
 	{	super.finishLoopInit();
-		//ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-		clientConnexion.loadingComplete();
+		//ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+		clientConnection.loadingComplete();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -233,7 +243,10 @@ System.out.println(hero+" "+hero.getId());
 	/////////////////////////////////////////////////////////////////
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which agents are currently paused */
 	private final List<Boolean> pauseAis = new ArrayList<Boolean>();
+	/** Indicates which agent percepts should be recorded at the next update */
+	protected final List<Boolean> recordAiPercepts = new ArrayList<Boolean>();
 
 	@Override
 	public void switchAiPause(int index)
@@ -258,7 +271,14 @@ System.out.println(hero+" "+hero.getId());
 		return result;
 	}
 	
-	private void updateAis()
+	/**
+	 * Updates all agent players depending
+	 * on the last actions they returned.
+	 * 
+	 * @throws IOException 
+	 * 		Problem while capturing some agent percepts.
+	 */
+	private void updateAis() throws IOException
 	{	if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
 			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
@@ -273,6 +293,9 @@ System.out.println(hero+" "+hero.getId());
 		}
 	}
 	
+	/**
+	 * Initializes all agent players.
+	 */
 	protected void initAis()
 	{	for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
@@ -281,6 +304,59 @@ System.out.println(hero+" "+hero.getId());
 		}
 	}
 	
+	/**
+	 * Sets up the recording of the agent percepts,
+	 * for the player whose number is specified
+	 * as a parameter..
+	 * 
+	 * @param index
+	 * 		Player (must be an agent) whose percepts are to be recorded.
+	 * @param rec 
+	 * 		{@code true} for recording.
+	 */
+	public void switchRecordAiPercepts(int index, boolean rec)
+	{	debugLock.lock();
+		if(index<recordAiPercepts.size() && players.get(index) instanceof AiPlayer)
+			recordAiPercepts.set(index,rec);
+		debugLock.unlock();
+	}
+	
+	/**
+	 * Indicates if the agent whose index is specified
+	 * as a parameter should have its percepts recorded.
+	 * 
+	 * @param index
+	 * 		Index of the concerned agent.
+	 * @return
+	 * 		{@code true} iff the agent percepts must be recorded.
+	 */
+	public boolean getRecordAiPercepts(int index)
+	{	boolean result;
+		debugLock.lock();
+		result = recordAiPercepts.get(index);
+		debugLock.unlock();
+		return result;
+	}
+
+	/**
+	 * Record the percepts of the agents
+	 * when requested.
+	 * 
+	 * @throws IOException
+	 * 		Problem while writing the percept files.
+	 */
+	protected void recordAis() throws IOException
+	{	for(int i=0;i<players.size();i++)
+		{	AbstractPlayer player = players.get(i);
+			if(!player.isOut() && player instanceof AiPlayer)
+			{	boolean recordPercepts = getRecordAiPercepts(i);
+				if(recordPercepts)
+				{	((AiPlayer)player).recordAi();
+					switchRecordAiPercepts(i, false);
+				}
+			}
+		}
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
@@ -298,7 +374,7 @@ System.out.println(hero+" "+hero.getId());
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update()
+	protected void update() throws IOException
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
 			updateLogs();
@@ -308,13 +384,22 @@ System.out.println(hero+" "+hero.getId());
 			updateAis();
 			updateStats();
 		}
+	
+		recordAis();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ZOOM COEFFICIENT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current zoom coefficient */
 	private double zoomCoefficient = 1;
 	
+	/**
+	 * Changes the current zoom coefficient.
+	 * 
+	 * @param zoomCoef
+	 * 		New zoom coefficient.
+	 */
 	public void setZoomCoef(double zoomCoef)
 	{	this.zoomCoefficient = zoomCoef;
 	}
@@ -322,18 +407,23 @@ System.out.println(hero+" "+hero.getId());
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ClientGeneralConnexion clientConnexion;
+	/** Connection used for communication with the server */
+	private ClientGeneralConnection clientConnection;
 	
 	/**
 	 * always returns an event.
-	 * if the list is empty, the thread is blocked until an event arrives
+	 * if the list is empty, the thread 
+	 * is blocked until an event arrives
 	 */
 	@Override
 	public ReplayEvent retrieveEvent()
-	{	ReplayEvent result = clientConnexion.retrieveEvent();
+	{	ReplayEvent result = clientConnection.retrieveEvent();
 		return result;
 	}
 	
+	/**
+	 * Initializes network communication events.
+	 */
 	private void initEvent()
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
@@ -345,11 +435,14 @@ System.out.println(hero+" "+hero.getId());
 		//currentEvent = RoundVariables.netClientIn.readEvent();
 	}
 	
+	/**
+	 * Processes incoming network communication events.
+	 */
 	private void updateEvents()
 	{	if(!isOver())
 		{	if(VERBOSE)
 				System.out.println("/////////////////////////////////////////");		
-			List<ReplayEvent> events = clientConnexion.retrieveEventList(getTotalEngineTime());
+			List<ReplayEvent> events = clientConnection.retrieveEventList(getTotalEngineTime());
 	
 			// process events
 			for(ReplayEvent event: events)
@@ -435,6 +528,9 @@ System.out.println(hero+" "+hero.getId());
 		// AIs pauses
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
+		// AIs record percepts
+		display = new DisplayAisRecordPercepts(this);
+		displayManager.addDisplay(display);
 		// AIs effective usage
 		display = new DisplayEffectiveUsage(this);
 		displayManager.addDisplay(display);
@@ -473,6 +569,7 @@ System.out.println(hero+" "+hero.getId());
 	/////////////////////////////////////////////////////////////////
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Data corresponding to ai-related options */
 	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 
 	@Override
@@ -542,6 +639,10 @@ System.out.println(hero+" "+hero.getId());
 		}
 		else if(name.equals(SystemControlEvent.REQUIRE_PRINT_SCREEN))
 		{	setScreenCapture(true);
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_RECORD_AI_PERCEPTS))
+		{	int index = event.getIndex();
+			switchRecordAiPercepts(index,true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();

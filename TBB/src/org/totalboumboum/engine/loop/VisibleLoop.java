@@ -366,8 +366,11 @@ public abstract class VisibleLoop extends Loop
 	
 	/**
 	 * Performs one loop iteration.
+	 * 
+	 * @throws IOException 
+	 * 		Problem while capturing some agent percepts.
 	 */
-	public void process()
+	public void process() throws IOException
 	{	long beforeTime,afterTime,timeDiff,sleepTime,lastTime;
 		long overSleepTime = 0L;
 		int noDelays = 0;
@@ -452,8 +455,11 @@ public abstract class VisibleLoop extends Loop
 	
 	/**
 	 * Updates the game state.
+	 * 
+	 * @throws IOException 
+	 * 		Problem while capturing some agent percepts.
 	 */
-	protected abstract void update();
+	protected abstract void update() throws IOException;
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////

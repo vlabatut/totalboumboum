@@ -24,11 +24,23 @@ package org.totalboumboum.engine.loop;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 
 /**
+ * By opposition to the interactive type
+ * of loops, replayed loops do not let the user
+ * affect how the game goes.
  * 
  * @author Vincent Labatut
- *
  */
 public interface ReplayedLoop
 {	
+	/**
+	 * Fetch the next game event,
+	 * to update the loop.
+	 * <br/>
+	 * Must always returns an event.
+	 * If the list is empty, the thread is blocked until an event arrives
+	 * 
+	 * @return
+	 * 		Next game event.
+	 */
 	public ReplayEvent retrieveEvent();
 }

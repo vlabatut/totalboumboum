@@ -37,14 +37,26 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.statistics.overall.PlayerStats;
 
 /**
+ * This loop is not visible, it is used to
+ * quickly simulate a round between agent AI
+ * whose behavior is <i>approximated</i> through previous
+ * statistics.
  * 
  * @author Vincent Labatut
- *
  */
 public class SimulationLoop extends Loop
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Whether or not textual information should be displayed in the console */
 	private boolean verbose = false;
 	
+	/**
+	 * Builds a new simulated loop for
+	 * the specified round.
+	 * 
+	 * @param round
+	 * 		Round to be played.
+	 */
 	public SimulationLoop(Round round)
 	{	super(round);
 	}	

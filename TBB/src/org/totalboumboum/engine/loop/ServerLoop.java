@@ -65,7 +65,7 @@ import org.totalboumboum.engine.player.RemotePlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -160,6 +160,7 @@ public class ServerLoop extends LocalLoop
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
+			recordAiPercepts.add(false);
 			lastActionAis.add(0l);
 			
 			// record/transmit creation event
@@ -213,8 +214,8 @@ public class ServerLoop extends LocalLoop
 		DisplayWaitMessage waitMessage = new DisplayWaitMessage(this);
 		displayManager.addDisplay(waitMessage);
 		
-		ServerGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
-		while(!connexion.areAllClientsReady())
+		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		while(!connection.areAllClientsReady())
 		{	// sleep a bit
 			try
 			{	Thread.sleep(100);
@@ -263,7 +264,7 @@ public class ServerLoop extends LocalLoop
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update()
+	protected void update() throws IOException
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
 			updateLogs();
@@ -290,6 +291,10 @@ public class ServerLoop extends LocalLoop
 		}
 		else if(name.equals(SystemControlEvent.REQUIRE_PRINT_SCREEN))
 		{	setScreenCapture(true);
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_RECORD_AI_PERCEPTS))
+		{	int index = event.getIndex();
+			switchRecordAiPercepts(index,true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();
