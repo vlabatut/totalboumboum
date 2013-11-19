@@ -72,7 +72,7 @@ public class FileNames
 	public static final String FILE_COLORMAP = "colormap";
 	public static final String FILE_COLORMAPS = "colormaps";
 	public static final String FILE_CONFIGURATION = "configuration";
-	public static final String FILE_CONNECTIONS = "connexions";
+	public static final String FILE_CONNECTIONS = "connections";
 	public static final String FILE_CONTROLS = "controls";
 	public static final String FILE_CRITERION = "criterion";
 	public static final String FILE_DATA = "data";
@@ -101,6 +101,7 @@ public class FileNames
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_HEROES = "heroes";
 	public static final String FILE_HOSTS = "hosts";
+	public static final String FILE_IMAGES = "images";
 	public static final String FILE_INSTANCES = "instances";
 	public static final String FILE_ITEM = "item";
 	public static final String FILE_ITEMS = "items";
@@ -120,6 +121,7 @@ public class FileNames
 	public static final String FILE_ORG = "org";
 	public static final String FILE_OVERALL = "overall";
 	public static final String FILE_PENETRATION = "penetration";
+	public static final String FILE_PERCEPTS = "percepts";
 	public static final String FILE_PERMISSIONS = "permissions";
 	public static final String FILE_PLAYER = "player";
 	public static final String FILE_PLAYERS = "players";
@@ -133,8 +135,8 @@ public class FileNames
 	public static final String FILE_PROPERTIES = "properties";
 	public static final String FILE_RAW = "raw";
 	public static final String FILE_REMOTE = "remote";
-	public static final String FILE_REPLAYS = "replays";
 	public static final String FILE_REPLAY = "replay";
+	public static final String FILE_REPLAYS = "replays";
 	public static final String FILE_RESOURCES = "resources";
 	public static final String FILE_ROUND = "round";
 	public static final String FILE_ROUNDS = "rounds";

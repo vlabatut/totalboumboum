@@ -41,6 +41,9 @@ public class FilePaths
 	{	return FileNames.FILE_RESOURCES;		
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// AGENTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the root folder containing
 	 * all agent packs.
@@ -67,6 +70,9 @@ public class FilePaths
 			File.separator + FileNames.FILE_AI;		
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// CACHE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * storing all cache files.
@@ -146,15 +152,54 @@ public class FilePaths
 
 	/**
 	 * Returns the path of the folder
+	 * used to store different types of captures.
+	 * 
+	 * @return
+	 * 		Path of the capture folder.
+	 */
+	public static String getCapturePath()
+	{	return getResourcesPath()+File.separator+FileNames.FILE_CAPTURES;		
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// CAPTURES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the path of the folder
 	 * used to store screen captures.
 	 * 
 	 * @return
 	 * 		Path of the screen capture folder.
 	 */
-	public static String getScreenCapturePath()
-	{	return getResourcesPath()+File.separator+FileNames.FILE_CAPTURES;		
+	public static String getCaptureImagesPath()
+	{	return getCapturePath()+File.separator+FileNames.FILE_IMAGES;		
 	}
 	
+	/**
+	 * Returns the path of the folder
+	 * used to store percept captures.
+	 * 
+	 * @return
+	 * 		Path of the percept capture folder.
+	 */
+	public static String getCapturePerceptsPath()
+	{	return getCapturePath()+File.separator+FileNames.FILE_PERCEPTS;		
+	}
+	
+	/**
+	 * Returns the path of the folder
+	 * used to store replay files.
+	 * 
+	 * @return
+	 * 		Path of the replay folder.
+	 */
+	public static String getCaptureReplaysPath()
+	{	return getCapturePath()+File.separator+FileNames.FILE_REPLAYS;		
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * containing hero data.
@@ -188,6 +233,9 @@ public class FilePaths
 	{	return getResourcesPath()+File.separator+FileNames.FILE_LEVELS;		
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * used to store logs.
@@ -201,17 +249,6 @@ public class FilePaths
 	
 	/**
 	 * Returns the path of the folder
-	 * used to store replay files.
-	 * 
-	 * @return
-	 * 		Path of the replay folder.
-	 */
-	public static String getReplaysPath()
-	{	return getResourcesPath()+File.separator+FileNames.FILE_REPLAYS;		
-	}
-	
-	/**
-	 * Returns the path of the folder
 	 * used to store XML schemas (i.e. XSD files).
 	 * 
 	 * @return
@@ -221,6 +258,9 @@ public class FilePaths
 	{	return getResourcesPath()+File.separator+FileNames.FILE_SCHEMAS;		
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// OPTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * used to store the game settings.
@@ -254,6 +294,9 @@ public class FilePaths
 	{	return getSettingsPath()+File.separator+FileNames.FILE_CONTROLS;		
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * used to store match data.
@@ -320,6 +363,9 @@ public class FilePaths
 	{	return getResourcesPath()+File.separator+FileNames.FILE_SAVES;		
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// STATS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * used to store statistics.
