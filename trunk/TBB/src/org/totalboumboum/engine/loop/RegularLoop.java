@@ -69,13 +69,21 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
- * 
+ * Loop used to display local, interactive, non-network games.
+ *  
  * @author Vincent Labatut
- *
  */
 public class RegularLoop extends LocalLoop
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new regular loop
+	 * for the specified round.
+	 * 
+	 * @param round
+	 * 		Round handled by this loop.
+	 */
 	public RegularLoop(Round round)
 	{	super(round);
 	}	
@@ -147,6 +155,7 @@ public class RegularLoop extends LocalLoop
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
+			recordAiPercepts.add(false);
 			lastActionAis.add(0l);
 			
 			// record/transmit creation event
@@ -203,7 +212,7 @@ public class RegularLoop extends LocalLoop
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void update()
+	protected void update() throws IOException
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
 			updateEngineStep();
@@ -215,6 +224,8 @@ public class RegularLoop extends LocalLoop
 			updateAis();
 			updateStats();
 		}
+		
+		recordAis();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -256,6 +267,10 @@ public class RegularLoop extends LocalLoop
 		}
 		else if(name.equals(SystemControlEvent.REQUIRE_SPEED_UP))
 		{	speedUp();
+		}
+		else if(name.equals(SystemControlEvent.REQUIRE_RECORD_AI_PERCEPTS))
+		{	int index = event.getIndex();
+			switchRecordAiPercepts(index,true);
 		}
 		else if(name.equals(SystemControlEvent.SWITCH_AIS_PAUSE))
 		{	int index = event.getIndex();

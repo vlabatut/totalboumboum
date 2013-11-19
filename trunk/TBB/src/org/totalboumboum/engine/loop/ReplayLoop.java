@@ -72,13 +72,22 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * This class is used to display non-interactive rounds,
+ * i.e. replays.
  * 
  * @author Vincent Labatut
- *
  */
 public class ReplayLoop extends VisibleLoop implements ReplayedLoop
-{	private static final long serialVersionUID = 1L;
-	
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Builds a new replay loop
+	 * for the specified round.
+	 * 
+	 * @param round
+	 * 		Round to be displayed.
+	 */
 	public ReplayLoop(Round round)
 	{	super(round);
 	}	
@@ -199,8 +208,15 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	/////////////////////////////////////////////////////////////////
 	// ZOOM COEFFICIENT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current zoom coefficient */
 	private double zoomCoefficient = 1;
 	
+	/**
+	 * Changes the current zoom coefficient.
+	 * 
+	 * @param zoomCoef
+	 * 		New zoom coefficient.
+	 */
 	public void setZoomCoef(double zoomCoef)
 	{	this.zoomCoefficient = zoomCoef;
 	}
@@ -208,18 +224,18 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	/////////////////////////////////////////////////////////////////
 	// REPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current game event */
 	private ReplayEvent currentEvent = null;
 	
-	/**
-	 * always returns an event.
-	 * if the list is empty, the thread is blocked until an event arrives
-	 */
 	@Override
 	public ReplayEvent retrieveEvent()
 	{	ReplayEvent result = RoundVariables.fileIn.readEvent();
 		return result;
 	}
 
+	/**
+	 * Fetches the very first event.
+	 */
 	private void initEvent()
 	{	// get all the remaining useless SpriteEvents
 		ReplayEvent tempEvent;
@@ -231,6 +247,9 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 		currentEvent = RoundVariables.fileIn.readEvent();
 	}
 	
+	/**
+	 * Fetches the next event and updates the loop.
+	 */
 	private void updateEvents()
 	{	if(!isOver())
 		{	// final event
@@ -370,9 +389,15 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	/////////////////////////////////////////////////////////////////
 	// ENGINE SPEED		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** State of the fast forward command */
 	private boolean fastforward = false;
+	/** State of the backwards command */
 	private boolean backward = false;
 	
+	/**
+	 * Switches the fast forward command.
+	 * NOTE: don't we need a lock, here ?
+	 */
 	private void switchFastforward()
 	{	fastforward = !fastforward;
 		if(fastforward)
@@ -381,6 +406,10 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 			slowDown();
 	}
 	
+	/**
+	 * Switches the backwards command.
+	 * NOTE: don't we need a lock, here ?
+	 */
 	private void switchBackward()
 	{	backward = !backward;
 		if(backward)

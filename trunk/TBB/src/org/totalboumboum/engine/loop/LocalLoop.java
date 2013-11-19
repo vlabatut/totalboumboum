@@ -71,6 +71,7 @@ import org.totalboumboum.engine.loop.display.Display;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisColors;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisPaths;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisPause;
+import org.totalboumboum.engine.loop.display.ais.DisplayAisRecordPercepts;
 import org.totalboumboum.engine.loop.display.ais.DisplayAisTexts;
 import org.totalboumboum.engine.loop.display.game.DisplayCancel;
 import org.totalboumboum.engine.loop.display.game.DisplayFPS;
@@ -100,13 +101,22 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * This class is used to represent all forms
+ * of loop executed locally, i.e. on the host machine.
+ * This includes {@link RegularLoop} and {@link ServerLoop}.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new local loop.
+	 * 
+	 * @param round
+	 * 		Round to be displayed by this loop.
+	 */
 	public LocalLoop(Round round)
 	{	super(round);
 	}	
@@ -175,6 +185,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			hollowLevel.getInstance().initLinks();
 			players.add(player);
 			pauseAis.add(false);
+			recordAiPercepts.add(false);
 			lastActionAis.add(0l);
 			
 			// record/transmit creation event
@@ -234,6 +245,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	// LOGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Objects containing all agent-related options */
 	private AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
 	
 	@Override
@@ -293,8 +305,12 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates which agents are currently paused */
 	protected final List<Boolean> pauseAis = new ArrayList<Boolean>();
+	/** Indicates the time of the last action of each agent */
 	protected final List<Long> lastActionAis = new ArrayList<Long>();
+	/** Indicates which agent percepts should be recorded at the next update */
+	protected final List<Boolean> recordAiPercepts = new ArrayList<Boolean>();
 	
 	@Override
 	public void switchAiPause(int index)
@@ -309,7 +325,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		}
 		debugLock.unlock();
 	}
-		
+	
 	@Override
 	public boolean getAiPause(int index)
 	{	boolean result;
@@ -319,7 +335,16 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		return result;
 	}
 	
-	protected void updateAis()
+	/**
+	 * Updates all agent players depending
+	 * on the last actions they returned.
+	 * Also implements in-game process such
+	 * as bombing idle agents.
+	 * 
+	 * @throws IOException 
+	 * 		Problem while capturing some agent percepts.
+	 */
+	protected void updateAis() throws IOException
 	{	if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
 			boolean active[] = new boolean[players.size()];
@@ -338,7 +363,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				}
 			}
 			
-			// bomb useless ais
+			// bomb idle ais
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				if(!player.isOut() && player instanceof AiPlayer)
@@ -386,6 +411,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		}
 	}
 	
+	/**
+	 * Initializes all agent players.
+	 */
 	protected void initAis()
 	{	for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
@@ -394,6 +422,60 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		}
 	}
 	
+	/**
+	 * Sets up the recording of the agent percepts,
+	 * for the player whose number is specified
+	 * as a parameter..
+	 * 
+	 * @param index
+	 * 		Player (must be an agent) whose percepts are to be recorded.
+	 * @param rec 
+	 * 		{@code true} for recording.
+	 */
+	public void switchRecordAiPercepts(int index, boolean rec)
+	{	debugLock.lock();
+		if(index<recordAiPercepts.size() && players.get(index) instanceof AiPlayer)
+			recordAiPercepts.set(index,rec);
+		debugLock.unlock();
+	}
+	
+	/**
+	 * Indicates if the agent whose index is specified
+	 * as a parameter should have its percepts recorded.
+	 * 
+	 * @param index
+	 * 		Index of the concerned agent.
+	 * @return
+	 * 		{@code true} iff the agent percepts must be recorded.
+	 */
+	public boolean getRecordAiPercepts(int index)
+	{	boolean result;
+		debugLock.lock();
+		result = recordAiPercepts.get(index);
+		debugLock.unlock();
+		return result;
+	}
+
+	/**
+	 * Record the percepts of the agents
+	 * when requested.
+	 * 
+	 * @throws IOException
+	 * 		Problem while writing the percept files.
+	 */
+	protected void recordAis() throws IOException
+	{	for(int i=0;i<players.size();i++)
+		{	AbstractPlayer player = players.get(i);
+			if(!player.isOut() && player instanceof AiPlayer)
+			{	boolean recordPercepts = getRecordAiPercepts(i);
+				if(recordPercepts)
+				{	((AiPlayer)player).recordAi();
+					switchRecordAiPercepts(i, false);
+				}
+			}
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -444,6 +526,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		// AIs pauses
 		display = new DisplayAisPause(this);
 		displayManager.addDisplay(display);
+		// AIs record percepts
+		display = new DisplayAisRecordPercepts(this);
+		displayManager.addDisplay(display);
 		// AIs effective usage
 		display = new DisplayEffectiveUsage(this);
 		displayManager.addDisplay(display);
@@ -480,8 +565,12 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CELEBRATION		/////////////////////////////////////////////
+	// SUDDEN DEATH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Performs all updates related
+	 * to sudden death.
+	 */
 	public void updateSuddenDeath()
 	{	HollowLevel hollowLevel = round.getHollowLevel();
 		hollowLevel.applySuddenDeath(totalGameTime);
@@ -490,6 +579,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/////////////////////////////////////////////////////////////////
 	// CELEBRATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Variable used to track celebration duration */
 	double celebrationDuration = -1;
 
 	@Override
@@ -506,6 +596,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			gameOver = true;
 	}
 	
+	/**
+	 * Updates the celebration animation.
+	 */
 	protected void updateCelebration()
 	{	if(celebrationDuration>0)
 		{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());

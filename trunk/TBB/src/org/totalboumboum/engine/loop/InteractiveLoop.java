@@ -27,25 +27,64 @@ import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.player.AbstractPlayer;
 
 /**
+ * This interface must be implemented by all loops
+ * allowing the user to interact with the game.
+ * This concerns {@link ClientLoop} and {@link LocalLoop}
+ * including {@link RegularLoop} and {@link ServerLoop},
+ * but not {@link ReplayedLoop}, which is not interactive,
+ * nor {@link SimulationLoop} which is not even visible.
  * 
  * @author Vincent Labatut
- *
  */
 public interface InteractiveLoop
 {	
 	/////////////////////////////////////////////////////////////////
 	// AIS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Changes the pause state of the agent
+	 * player whose index is specified as
+	 * a parameter.
+	 * 
+	 * @param index
+	 * 		Index of the agent to be paused/unpaused.
+	 */
 	public void switchAiPause(int index);
+	
+	/**
+	 * Returns the pause state of the
+	 * agent whose index is specified as
+	 * a parameter.
+	 * 
+	 * @param index
+	 * 		Index of the agent of interest.
+	 * @return
+	 * 		{@code true} iff it is currently paused. 
+	 */
 	public boolean getAiPause(int index);
-
+	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the list of all players
+	 * involved in this loop.
+	 * 
+	 * @return
+	 * 		List of players.
+	 */
 	public List<AbstractPlayer> getPlayers();
 	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the level object played
+	 * during the game displayed by
+	 * this loop.
+	 * 
+	 * @return
+	 * 		The level used by this loop.
+	 */
 	public Level getLevel();
 }
