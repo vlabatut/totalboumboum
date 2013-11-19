@@ -978,7 +978,7 @@ public class GuiImageTools
 			};
 			loadTableImages(folder,uses);
 		}
-		// disconnexion
+		// disconnection
 		{	String folder = baseFolder+GuiFileTools.FILE_DISCONNECTION;
 			String[] uses =
 			{	GuiKeys.COMMON_GAME_LIST_DATA_STATE_UNKNOWN
