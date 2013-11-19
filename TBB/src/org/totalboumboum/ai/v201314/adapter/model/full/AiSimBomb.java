@@ -41,7 +41,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 public final class AiSimBomb extends AiSimSprite implements AiBomb
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une simulation de la bombe passée en paramètre,
 	 * avec les propriétés passées en paramètres.

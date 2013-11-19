@@ -46,7 +46,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 public final class AiSimTile extends AiTile
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Construit une simulation de case à partir 
 	 * des coordonnées passées en paramètres.

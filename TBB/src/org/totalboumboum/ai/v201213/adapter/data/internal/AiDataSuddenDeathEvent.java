@@ -48,7 +48,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiDataSuddenDeathEvent extends AiSuddenDeathEvent
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Creates a new event with the specified time
 	 * and sprites.

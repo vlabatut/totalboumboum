@@ -163,7 +163,7 @@ public class ApproximateSuccessorCalculator extends SuccessorCalculator
 				// si on ne l'a pas déjà explorée, alors on la traite
 				if(!noProcess && processedTilesMap.get(neighbor)==null)
 				{	AiLocation location = new AiLocation(neighbor);
-					AiSearchNode child = new AiSearchNode(location,node);
+					AiSearchNode child = new AiSearchNode(location,node,direction);
 					result.add(child);
 				}
 			}

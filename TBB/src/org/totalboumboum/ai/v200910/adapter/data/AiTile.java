@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v200910.adapter.data;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -46,8 +47,11 @@ import org.totalboumboum.game.round.RoundVariables;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public class AiTile
-{	/**
+public class AiTile implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
+	/**
 	 * construit une représentation de la case passée en paramètre
 	 * @param tile	case représentée
 	 * @param zone	zone contenant la représentation
@@ -90,7 +94,7 @@ public class AiTile
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** case du jeu que cette classe représente */
-	private Tile tile;
+	private transient Tile tile;
 	
 	/**
 	 * 

@@ -45,7 +45,9 @@ import org.totalboumboum.game.round.RoundVariables;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiSimTile extends AiTile
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * construit une simulation de case à partir des coordonnées passées en paramètres
 	 * 

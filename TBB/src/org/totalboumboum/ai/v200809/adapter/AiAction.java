@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v200809.adapter;
  * 
  */
 
+import java.io.Serializable;
+
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -37,8 +39,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public class AiAction
-{
+public class AiAction implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * construit une action non-orientée (DROP_BOMB,NONE,PUNCH...)
 	 * @param name	le nom de l'action

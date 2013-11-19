@@ -36,7 +36,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Vincent Labatut
  */
 public final class AiSimState  implements AiState
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Construit un objet simulant l'état d'un sprite qui vient d'être créé,
 	 * i.e. qui ne fait rien (STANDING) dans une direction neutre (NONE).

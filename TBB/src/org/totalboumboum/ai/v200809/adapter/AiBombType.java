@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v200809.adapter;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -30,7 +32,7 @@ package org.totalboumboum.ai.v200809.adapter;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public enum AiBombType
+public enum AiBombType implements Serializable
 {
 	/** bombe normale */
 	NORMAL,

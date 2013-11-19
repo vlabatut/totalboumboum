@@ -55,7 +55,9 @@ import org.totalboumboum.engine.content.sprite.block.Block;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * crée une représentation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.

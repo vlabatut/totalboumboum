@@ -74,7 +74,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiDataZone extends AiZone
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * construit une représentation du niveau passé en paramètre,
 	 * du point de vue du joueur passé en paramètre.
@@ -206,13 +208,13 @@ public final class AiDataZone extends AiZone
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** joueur contrôlé par l'agent */
-	private AbstractPlayer player;
+	private transient AbstractPlayer player;
 	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** niveau représenté par cette classe */
-	private Level level;
+	private transient Level level;
 	
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
@@ -311,7 +313,7 @@ public final class AiDataZone extends AiZone
 	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste interne des blocks contenus dans cette zone */
-	private final HashMap<Block,AiDataBlock> blockMap = new HashMap<Block,AiDataBlock>();
+	private final transient HashMap<Block,AiDataBlock> blockMap = new HashMap<Block,AiDataBlock>();
 	/** liste externe des blocks contenus dans cette zone */
 	private final List<AiBlock> blockList = new ArrayList<AiBlock>();
 	/** liste externe des blocks destructibles contenus dans cette zone */
@@ -371,7 +373,7 @@ public final class AiDataZone extends AiZone
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste interne des bombes contenues dans cette zone */
-	private final HashMap<Bomb,AiDataBomb> bombMap = new HashMap<Bomb,AiDataBomb>();
+	private final transient HashMap<Bomb,AiDataBomb> bombMap = new HashMap<Bomb,AiDataBomb>();
 	/** liste externe des bombes contenues dans cette zone */
 	private final List<AiBomb> bombList = new ArrayList<AiBomb>();
 	
@@ -422,7 +424,7 @@ public final class AiDataZone extends AiZone
 	// FIRES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste interne des feux contenus dans cette zone */
-	private final HashMap<Fire,AiDataFire> fireMap = new HashMap<Fire,AiDataFire>();
+	private final transient HashMap<Fire,AiDataFire> fireMap = new HashMap<Fire,AiDataFire>();
 	/** liste externe des feux contenus dans cette zone */
 	private final List<AiFire> fireList = new ArrayList<AiFire>();
 	
@@ -469,7 +471,7 @@ public final class AiDataZone extends AiZone
 	// FLOORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste interne des sols contenus dans cette zone */
-	private final HashMap<Floor,AiDataFloor> floorMap = new HashMap<Floor,AiDataFloor>();
+	private final transient HashMap<Floor,AiDataFloor> floorMap = new HashMap<Floor,AiDataFloor>();
 	/** liste externe des sols contenus dans cette zone */
 	private final List<AiFloor> floorList = new ArrayList<AiFloor>();
 
@@ -516,7 +518,7 @@ public final class AiDataZone extends AiZone
 	// HEROES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste interne des personnages contenus dans cette zone */
-	private final HashMap<Hero,AiDataHero> heroMap = new HashMap<Hero,AiDataHero>();
+	private final transient HashMap<Hero,AiDataHero> heroMap = new HashMap<Hero,AiDataHero>();
 	/** liste externe de tous les personnages contenus dans cette zone */
 	private final List<AiHero> heroList = new ArrayList<AiHero>();
 	/** liste externe des personnages restant encore dans cette zone */
@@ -595,7 +597,7 @@ public final class AiDataZone extends AiZone
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste interne des items contenus dans cette zone */
-	private final HashMap<Item,AiDataItem> itemMap = new HashMap<Item,AiDataItem>();
+	private final transient HashMap<Item,AiDataItem> itemMap = new HashMap<Item,AiDataItem>();
 	/** liste externe des items contenus dans cette zone */
 	private final List<AiItem> itemList = new ArrayList<AiItem>();
 	

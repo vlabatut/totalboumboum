@@ -62,7 +62,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 final class AiDataBomb extends AiDataSprite<Bomb> implements AiBomb
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une représentation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.

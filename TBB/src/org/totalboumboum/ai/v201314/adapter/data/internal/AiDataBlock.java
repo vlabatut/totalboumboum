@@ -53,7 +53,9 @@ import org.totalboumboum.engine.content.sprite.block.Block;
  * @author Vincent Labatut
  */
 final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une représentation du bloc passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.

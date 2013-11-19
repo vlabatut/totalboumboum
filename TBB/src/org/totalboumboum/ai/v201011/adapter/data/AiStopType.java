@@ -30,7 +30,7 @@ package org.totalboumboum.ai.v201011.adapter.data;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiStopType
-{
+{	
 	/** laisse passer n'importe quel sprite */
 	NO_STOP,
 	

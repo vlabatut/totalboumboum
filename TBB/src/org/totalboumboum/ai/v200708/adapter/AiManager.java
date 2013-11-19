@@ -51,18 +51,20 @@ import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * Classe servant d'interface entre les agents
+ * et le jeu.
  * 
  * @author Vincent Labatut
  * 
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AiAbstractManager<Integer>
-{	/** */
+public abstract class AiManager extends AiAbstractManager<Integer,AiPercepts>
+{	/** Flag de débogage */
 	private boolean debug = false;
 	
     /////////////////////////////////////////////////////////////////
-	// PERCEPTS			/////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void finishAi()
@@ -72,34 +74,19 @@ public abstract class AiManager extends AiAbstractManager<Integer>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** percept à envoyer à l'IA : matrice représentant la zone de jeu */
-    private int[][] zoneMatrix;;
-    /** percept à envoyer à l'IA : liste des bombes */
-    private Vector<int[]> bombs;
-    /** percept à envoyer à l'IA : liste des personnages */
-    private Vector<int[]> players;
-    /** percept à envoyer à l'IA : états personnages */
-    private Vector<Boolean> playersStates;
-    /** percept à envoyer à l'IA : temps avant le début du shrink */
-    private long timeBeforeShrink;
-    /** percept à envoyer à l'IA : prochaine position du shrink */
-    private int nextShrinkPosition[];
-    /** percept à envoyer à l'IA : position du personnage de l'IA */
-    private int ownPosition[];
-    /** percept à envoyer à l'IA : position relative de la bombe */
-    private int bombPosition;
-    /** percept à envoyer à l'IA : la portee de la bombe */
-    private int ownFirePower;
-    /** percept à envoyer à l'IA : le nombre total de bombes */
-    private int ownBombCount;
-    /** percept à envoyer à l'IA : la portee de la bombe */
-    private Vector<Integer> firePowers;
-    /** percept à envoyer à l'IA : le nombre total de bombes */
-    private Vector<Integer> bombCounts;
+    /** Percept à envoyer à l'IA */
+	private AiPercepts percepts = null;
+	
+	@Override
+    public AiPercepts getCurrentPercepts()
+    {	return percepts;
+    }
 
 	@Override
 	public void updatePercepts()
-	{	// compute all the percepts
+	{	percepts = new AiPercepts();
+		
+		// compute all the percepts
     	AbstractPlayer player = getPlayer(); 
     	VisibleLoop loop = RoundVariables.loop;
     	Tile[][] matrix = RoundVariables.level.getMatrix();
@@ -109,13 +96,13 @@ public abstract class AiManager extends AiAbstractManager<Integer>
     	long totalTime = loop.getTotalGameTime();
     	HollowLevel hollowLevel = RoundVariables.loop.getRound().getHollowLevel();
     	List<SuddenDeathEvent> suddenDeathEvents = hollowLevel.getSuddenDeathEvents();
-    	timeBeforeShrink = Long.MAX_VALUE;
-		nextShrinkPosition = new int[]{0,0};
+    	percepts.timeBeforeShrink = Long.MAX_VALUE;
+    	percepts.nextShrinkPosition = new int[]{0,0};
     	if(!suddenDeathEvents.isEmpty())
     	{	// temps restant avant le shrink
     		SuddenDeathEvent suddenDeathEvent = suddenDeathEvents.get(0);
     		long time = suddenDeathEvent.getTime();
-    		timeBeforeShrink = time - totalTime;
+    		percepts.timeBeforeShrink = time - totalTime;
     		// position du prochain bloc shrinké (il peut y en avoir plusieurs, 
     		// mais on ne prend que le premier par simplification)
 	    	Collection<List<Sprite>> sprites = suddenDeathEvent.getSprites().values();
@@ -124,41 +111,41 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	    		if(!list.isEmpty())
 	    		{	Sprite s = list.get(0);
 	    			Tile t = s.getTile();
-	    			nextShrinkPosition = new int[]{t.getRow(),t.getCol()};
+	    			percepts.nextShrinkPosition = new int[]{t.getRow(),t.getCol()};
 	    		}
 	    	}
     	}
     	
     	// position du joueur
- 		ownPosition = new int[2];
+    	percepts.ownPosition = new int[2];
  		Tile tile = sprite.getTile();
-        ownPosition[0] = tile.getCol();
-        ownPosition[1] = tile.getRow();
+ 		percepts.ownPosition[0] = tile.getCol();
+ 		percepts.ownPosition[1] = tile.getRow();
         // propriétés du joueur
         {	// bomb range
         	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
-			ownFirePower = (int)ab.getStrength();
+        	percepts.ownFirePower = (int)ab.getStrength();
 	        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
 			if(ab.isActive())
 			{	int limit = (int)ab.getStrength();
-				if(ownFirePower>limit)
-					ownFirePower = limit;
+				if(percepts.ownFirePower>limit)
+					percepts.ownFirePower = limit;
 			}
         }
         {	// bomb number
         	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
 	        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
-			ownBombCount = (int)ab.getStrength();
+	        percepts.ownBombCount = (int)ab.getStrength();
 			if(ab.isActive())
 			{	int limit = (int)ab.getStrength();
-				if(ownBombCount>limit)
-					ownBombCount = limit;
+				if(percepts.ownBombCount>limit)
+					percepts.ownBombCount = limit;
 			}
-			ownBombCount = ownBombCount - sprite.getDroppedBombs().size();
+			percepts.ownBombCount = percepts.ownBombCount - sprite.getDroppedBombs().size();
         }
 
         // position relative de l'éventuelle bombe
-        bombPosition = ArtificialIntelligence.AI_DIR_NONE;
+        percepts.bombPosition = ArtificialIntelligence.AI_DIR_NONE;
         List<Bomb> bombes = tile.getBombs();
         if(bombes.size()>0)
         {	int minX = Integer.MAX_VALUE;
@@ -178,26 +165,26 @@ public abstract class AiManager extends AiAbstractManager<Integer>
         	{	// même ligne ?
     	    	if(Math.abs(minX)>=Math.abs(minY))
     	    		if(minX>0)
-    	    			bombPosition = ArtificialIntelligence.AI_DIR_LEFT;
+    	    			percepts.bombPosition = ArtificialIntelligence.AI_DIR_LEFT;
     	    		else
-    	    			bombPosition = ArtificialIntelligence.AI_DIR_RIGHT;
+    	    			percepts.bombPosition = ArtificialIntelligence.AI_DIR_RIGHT;
     	    	// même colonne ?
     	    	else
     	    		if(minY>0)
-    	    			bombPosition = ArtificialIntelligence.AI_DIR_UP;
+    	    			percepts.bombPosition = ArtificialIntelligence.AI_DIR_UP;
     	    		else
-    	    			bombPosition = ArtificialIntelligence.AI_DIR_DOWN;
+    	    			percepts.bombPosition = ArtificialIntelligence.AI_DIR_DOWN;
         	}
         }
 
     	// matrice de la zone et listes de bombes et de personnages
- 		zoneMatrix = new int[matrix[0].length][matrix.length];
-    	bombs = new Vector<int[]>();
+        percepts.zoneMatrix = new int[matrix[0].length][matrix.length];
+        percepts.bombs = new Vector<int[]>();
     	for(int x=0;x<matrix.length;x++)
 	    {	for (int y=0;y<matrix[0].length;y++)
 	    	{	Tile temp = matrix[x][y];
 	    		// bloc vide
-    			zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_EMPTY;
+	    		percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_EMPTY;
 	    		// mur
 	    		if(temp.getBlocks().size()>0)
 	    		{	Block b = temp.getBlocks().get(0);
@@ -208,22 +195,22 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	    			{	SpecificAction action = new SpecificConsume(b);
 		    			// mur indestructible
 		    			if(sprite.isTargetPreventing(action))
-		    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		    				percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_HARD;
 		    			// mur destructible
 		    			else
-		    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		    				percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 	    			}
 	    		}
 	    		// bombe
 	    		else if(temp.getBombs().size()>0)
-	    		{	zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_BOMB;
+	    		{	percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_BOMB;
 	    			Bomb bomb = temp.getBombs().get(0);
 	    			int tempBombData[] = {temp.getCol(),temp.getRow(),bomb.getFlameRange()};
-	    			bombs.add(tempBombData);
+	    			percepts.bombs.add(tempBombData);
 	    		}
 	    		// feu
 	    		else if(temp.getFires().size()>0)
-	    			zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_FIRE;
+	    			percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_FIRE;
 	    		// bonus/malus
 	    		else if(temp.getItems().size()>0)
 	    		{	List<Item> items = temp.getItems();
@@ -244,7 +231,7 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 				    				{	StateAbility sa = (StateAbility) a;
 				    					if(sa.getName().equals(StateAbilityName.HERO_BOMB_NUMBER))
 				    					{	found = true;
-				    						zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
+				    						percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
 				    					}
 				    				}
 				    			}
@@ -257,13 +244,13 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 				    				// to avoid blocking situations, any other item is seen as a bomb extra range 
 				    				//if(a.getName().equals(StateAbility.BOMB_RANGE))
 				    				{	found = true;
-					    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_FIRE;
+				    					percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_FIRE;
 				    				}
 				    			}
 			    			}
 			    			if(!found)
 			    			{	found = true;
-			    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_UNKNOWN;			    			
+			    				percepts.zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_UNKNOWN;			    			
 			    			}
 	    				}	    				
 	    			}
@@ -272,10 +259,10 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 	    }
     	
     	// personnages
-    	players = new Vector<int[]>();
-    	playersStates = new Vector<Boolean>();
-    	firePowers = new Vector<Integer>();
-    	bombCounts = new Vector<Integer>();
+    	percepts.players = new Vector<int[]>();
+    	percepts.playersStates = new Vector<Boolean>();
+    	percepts.firePowers = new Vector<Integer>();
+    	percepts.bombCounts = new Vector<Integer>();
 		List<AbstractPlayer> plyrs = loop.getPlayers();
 		Iterator<AbstractPlayer> i = plyrs.iterator();
 		while(i.hasNext())
@@ -300,77 +287,68 @@ public abstract class AiManager extends AiAbstractManager<Integer>
 				else						
 					tempDirAI = ArtificialIntelligence.AI_DIR_NONE;
 				int tempPlayerData[] = {tempX,tempY,tempDirAI};
-				players.add(tempPlayerData);
-				playersStates.add(!tempPlayer.isOut());
+				percepts.players.add(tempPlayerData);
+				percepts.playersStates.add(!tempPlayer.isOut());
 				StateAbility ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
-		        firePowers.add((int)ab.getStrength());
+				percepts.firePowers.add((int)ab.getStrength());
 		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
-		        bombCounts.add((int)ab.getStrength());
+		        percepts.bombCounts.add((int)ab.getStrength());
 			}
 		}
 		
 		if(debug)
 		{	//zoneMatrix
 			System.out.println("zoneMatrix:");
-			for(int x=0;x<zoneMatrix.length;x++)
-		    {	for (int y=0;y<zoneMatrix[0].length;y++)
-		    	{	System.out.print(zoneMatrix[x][y]+" ");		    	
+			for(int x=0;x<percepts.zoneMatrix.length;x++)
+		    {	for (int y=0;y<percepts.zoneMatrix[0].length;y++)
+		    	{	System.out.print(percepts.zoneMatrix[x][y]+" ");		    	
 		    	}
 		    	System.out.println();
 		    }
 			//bombs
 			System.out.print("bombs:");
-			for(int k=0;k<bombs.size();k++)
-				System.out.print("("+bombs.get(k)[0]+","+bombs.get(k)[1]+","+bombs.get(k)[2]+") ");
+			for(int k=0;k<percepts.bombs.size();k++)
+				System.out.print("("+percepts.bombs.get(k)[0]+","+percepts.bombs.get(k)[1]+","+percepts.bombs.get(k)[2]+") ");
 			System.out.println();
 			//players
 			System.out.print("players:");
-			for(int k=0;k<players.size();k++)
-				System.out.print("("+players.get(k)[0]+","+players.get(k)[1]+","+players.get(k)[2]+") ");
+			for(int k=0;k<percepts.players.size();k++)
+				System.out.print("("+percepts.players.get(k)[0]+","+percepts.players.get(k)[1]+","+percepts.players.get(k)[2]+") ");
 			System.out.println();
 			//playersStates
 			System.out.print("playersStates:");
-			for(int k=0;k<playersStates.size();k++)
-				System.out.print(playersStates.get(k)+"; ");
+			for(int k=0;k<percepts.playersStates.size();k++)
+				System.out.print(percepts.playersStates.get(k)+"; ");
 			System.out.println();
 			// ownPosition
-			System.out.println("ownPosition: "+ownPosition[0]+";"+ownPosition[1]);
+			System.out.println("ownPosition: "+percepts.ownPosition[0]+";"+percepts.ownPosition[1]);
 			//timeBeforeShrink
 			//nextShrinkPosition
-			System.out.println("nextShrinkPosition: "+nextShrinkPosition[0]+";"+nextShrinkPosition[1]);
+			System.out.println("nextShrinkPosition: "+percepts.nextShrinkPosition[0]+";"+percepts.nextShrinkPosition[1]);
 			//bombPosition
-			System.out.println("bombPosition: "+bombPosition);
+			System.out.println("bombPosition: "+percepts.bombPosition);
 			//ownFirePower
-			System.out.println("ownFirePower: "+ownFirePower);
+			System.out.println("ownFirePower: "+percepts.ownFirePower);
 			//ownBombCount
-			System.out.println("ownBombCount: "+ownBombCount);
+			System.out.println("ownBombCount: "+percepts.ownBombCount);
 			//firePowers
 			//bombCounts
 		}
 		
 		// set the percepts
-		((ArtificialIntelligence)getAi()).setPercepts(zoneMatrix, bombs, players, playersStates, 
-			ownPosition, timeBeforeShrink, nextShrinkPosition, bombPosition, 
-			ownFirePower, ownBombCount, firePowers, bombCounts);
+		((ArtificialIntelligence)getAi()).setPercepts(percepts);
 	}
 
 	@Override
 	public void finishPercepts()
-	{	bombCounts.clear();
-		bombs.clear();
+	{	percepts.finish();
 		controlKeys.clear();
-		firePowers.clear();
-		nextShrinkPosition = null;
-		ownPosition = null;
-		players.clear();
-		playersStates.clear();
-		zoneMatrix = null;
 	}
 	
     /////////////////////////////////////////////////////////////////
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** simulates control keys */
+    /** Simulates control keys */
     private List<Integer> controlKeys = new ArrayList<Integer>();
 
 	@Override

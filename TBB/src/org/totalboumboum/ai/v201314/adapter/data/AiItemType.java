@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v201314.adapter.data;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -27,7 +29,7 @@ package org.totalboumboum.ai.v201314.adapter.data;
  * @author Vincent Labatut
  *
  */
-public enum AiItemType
+public enum AiItemType implements Serializable
 {
 	////////////////////////
 	// BOMBES

@@ -40,7 +40,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiHero extends AiSprite<Hero>
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * crée une représentation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.

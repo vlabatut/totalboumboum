@@ -402,7 +402,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 						
 						// on crée le noeud fils correspondant (qui sera traité plus tard)
 						if(safe)
-						{	AiSearchNode child = new AiSearchNode(futureLocation,node);
+						{	AiSearchNode child = new AiSearchNode(futureLocation,node,direction);
 							// on l'ajoute au noeud courant
 							result.add(child);
 							// on enregistre le modèle correspondant pour une utilisation ultérieure ici-même

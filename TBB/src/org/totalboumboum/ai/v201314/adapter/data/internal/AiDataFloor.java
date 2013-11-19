@@ -32,7 +32,9 @@ import org.totalboumboum.engine.content.sprite.floor.Floor;
  * @author Vincent Labatut
  */
 final class AiDataFloor extends AiDataSprite<Floor> implements AiFloor
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une représentation du sol passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.

@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201314.adapter.data;
  * 
  */
 
+import java.io.Serializable;
+
 import org.totalboumboum.ai.v201314.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
@@ -33,7 +35,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public interface AiState
+public interface AiState extends Serializable
 {
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////

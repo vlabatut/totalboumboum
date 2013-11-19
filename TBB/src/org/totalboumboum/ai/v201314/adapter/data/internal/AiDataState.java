@@ -37,9 +37,11 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @author Vincent Labatut
  */
 final class AiDataState implements AiState
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/** Sprite dont l'état est représenté */
-	private Sprite sprite;
+	private transient Sprite sprite;
 	
 	/**
 	 * Construit un objet représentant l'état du sprite passé en paramètre.

@@ -22,12 +22,23 @@ package org.totalboumboum.ai;
  */
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -44,11 +55,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.engine.container.level.Level;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
@@ -61,10 +76,12 @@ import org.xml.sax.SAXException;
  * @author Vincent Labatut
  *
  * @param <V>	
- * 		le type de donnée renvoyée par l'agent (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * 		Le type de donnée renvoyée par l'agent (et devant être traduite par 
+ * 		l'adaptateur en un évènement compatible avec le moteur du jeu)
+ * @param <T>
+ * 		Représentation des percepts.	
  */
-
-public abstract class AiAbstractManager<V>
+public abstract class AiAbstractManager<V, T extends Serializable>
 {	
 	/**
      * Contruit un nouveau manager. L'agent concerné
@@ -290,7 +307,7 @@ public abstract class AiAbstractManager<V>
     }
     
     /**
-     * terminer ce gestionnaire, et en particulier le thread exécutant l'agent.
+     * Termine ce gestionnaire, et en particulier le thread exécutant l'agent.
      * Ou plutôt tente de le terminer, car le résultat ne peut être forcé.
      */
     public final void finish()
@@ -310,7 +327,7 @@ public abstract class AiAbstractManager<V>
     }
     
     /**
-     * termine cet agent, et en particulier le processus qui l'exécute.
+     * Termine cet agent, et en particulier le processus qui l'exécute.
      * Pour cette raison, l'agent doit implémenter une méthode forçant 
      * sa terminaison.
      */
@@ -319,11 +336,11 @@ public abstract class AiAbstractManager<V>
     /////////////////////////////////////////////////////////////////
 	// PLAYER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** le joueur contrôlé par l'agent */
+    /** Le joueur contrôlé par l'agent */
     private AiPlayer player;
    
 	/**
-	 * renvoie le joueur contrôlé par l'agent géré
+	 * Tenvoie le joueur contrôlé par l'agent géré
 	 * 
 	 * @return	
 	 * 		un objet représentant le joueur contrôlé par l'agent
@@ -335,16 +352,25 @@ public abstract class AiAbstractManager<V>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    /**
+     * Renvoie les derniers percepts calculés pour l'agent.
+     * 
+     * @return
+     * 		Un objet représentant les derniers percepts calculés.
+     */
+    public abstract T getCurrentPercepts();
+    
 	/**
-	 * méthode utilisée pour mettre à jour les percepts de l'agent avant 
-	 * que cette dernière ne calcule la prochaine action à effectuer.
+	 * Méthode utilisée pour mettre à jour les percepts de l'agent avant 
+	 * que ce dernier ne calcule la prochaine action à effectuer.
+	 * <br/>
 	 * Cette méthode doit être surchargée de manière à adapter la structure
 	 * des données à l'agent qui va les traiter
 	 */
 	public abstract void updatePercepts();
 	
 	/**
-	 * méthode utilisée pour convertir la valeur renvoyée par l'agent 
+	 * Méthode utilisée pour convertir la valeur renvoyée par l'agent 
 	 * en un évènement standard traitable par le moteur du jeu.
 	 * 
 	 * @param value	
@@ -355,11 +381,111 @@ public abstract class AiAbstractManager<V>
 	public abstract List<ControlEvent> convertReaction(V value);
    
 	/**
-	 * termine proprement les percepts, de manière à libérer les ressources occupées.
+	 * Termine proprement les percepts, de manière à libérer les ressources occupées.
 	 * Cette méthode est appelée lorsque la partie est terminée et que les
 	 * percepts deviennent inutiles.
 	 */
 	public abstract void finishPercepts();
+	
+	/**
+	 * Enregistre les percepts (ceux définis par l'API IA)
+	 * dans un fichier, afin de pouvoir les utiliser plus tard, de
+	 * façon hors-ligne.
+	 * 
+	 * @throws IOException
+	 * 		Problème lors de l'enregistrement des percepts. 
+	 */
+	public final void writePercepts() throws IOException
+	{	T percepts = getCurrentPercepts();
+		if(percepts!=null)
+		{	// get current date and time
+			Calendar cal = new GregorianCalendar();
+			Date currentTime = cal.getTime();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+			String currentStr = sdf.format(currentTime);
+			
+			// set up file name
+			String path = FilePaths.getCapturePerceptsPath() + File.separator + currentStr + FileNames.EXTENSION_DATA;
+			File file = new File(path);
+	
+			// open stream
+			OutputStream os = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			
+			// record meta data
+			oos.writeObject(currentTime);
+			LevelInfo info = RoundVariables.loop.getRound().getHollowLevel().getLevelInfo();
+			oos.writeObject(info.getTitle());
+			oos.writeObject(info.getGlobalHeight());
+			oos.writeObject(info.getGlobalWidth());
+			oos.writeObject(info.getPackName());
+			oos.writeObject(info.getInstanceName());
+			oos.writeObject(info.getThemeName());
+			oos.writeObject(player.getColor());
+			
+			// record percepts
+			oos.writeObject(percepts);
+			
+			// close stream
+			oos.close();
+		}
+	}
+	
+	/**
+	 * Lit les percepts (ceux définis par l'API IA)
+	 * à partir d'un fichier, afin de pouvoir les utiliser de
+	 * façon hors-ligne.
+	 * 
+	 * @param fileName
+	 * 		Nom du fichier de percepts à lire. 
+	 * @return 
+	 * 		Les percepts lus dans le fichier spécifié.
+	 * 
+	 * @throws IOException
+	 * 		Problème lors de la lecture des percepts. 
+	 * @throws ClassNotFoundException 
+	 * 		Problème lors de la lecture des percepts. 
+	 */
+	public final T readPercepts(String fileName) throws IOException, ClassNotFoundException
+	{	// set up file name
+		String path = FilePaths.getCapturePerceptsPath() + File.separator + fileName;
+		System.out.println("Loading percepts from file \""+path+"\"");
+		File file = new File(path);
+
+		// open stream
+		InputStream is = new FileInputStream(file);
+		ObjectInputStream ois = new ObjectInputStream(is);
+		
+		// record meta data
+		Date time = (Date)ois.readObject();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS");
+		String timeStr = sdf.format(time);
+		System.out.println("..Percepts recorded on "+timeStr);
+		
+		String title = (String)ois.readObject();
+		int height = (Integer)ois.readObject();
+		int width = (Integer)ois.readObject();
+		String packName = (String)ois.readObject();
+		String instanceName = (String)ois.readObject();
+		String themeName = (String)ois.readObject();
+		PredefinedColor color = (PredefinedColor)ois.readObject();
+		System.out.println("..Controled player color: "+color);
+		System.out.println("..Zone name: "+packName+"/"+title);
+		System.out.println("..Zone dimensions: "+height+"×"+width);
+		System.out.println("..Zone theme: "+instanceName+"/"+themeName);
+		
+		// record percepts
+		@SuppressWarnings("unchecked")
+		T result = (T)ois.readObject();
+		System.out.println("..Zone content: ");
+		System.out.println(result.toString());
+		System.out.println("All percepts loaded");
+		
+		// close stream
+		ois.close();
+
+		return result;
+	}
 	
     /////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
@@ -378,7 +504,7 @@ public abstract class AiAbstractManager<V>
 	protected final int AVERAGE_SCOPE = 10;
 	
 	/** 
-	 * initialise la liste des noms des étapes 
+	 * Initialise la liste des noms des étapes 
 	 * implémentées par l'agent 
 	 */
 	protected abstract void initSteps();
@@ -458,7 +584,7 @@ public abstract class AiAbstractManager<V>
 	protected abstract void updateOutput();
 	
 	/**
-	 * renvoie les couleurs des cases
+	 * Renvoie les couleurs des cases
 	 * 
 	 * @return	
 	 * 		matrice de couleurs
@@ -468,7 +594,7 @@ public abstract class AiAbstractManager<V>
 	}
 
 	/**
-	 * renvoie les textes à afficher sur les cases
+	 * Renvoie les textes à afficher sur les cases
 	 * 
 	 * @return	
 	 * 		matrice de textes
@@ -478,7 +604,7 @@ public abstract class AiAbstractManager<V>
 	}
 
 	/**
-	 * renvoie le mode d'affichage du texte (gras ou pas)
+	 * Renvoie le mode d'affichage du texte (gras ou pas)
 	 * 
 	 * @return	
 	 * 		vrai si le mode d'affichage est gras

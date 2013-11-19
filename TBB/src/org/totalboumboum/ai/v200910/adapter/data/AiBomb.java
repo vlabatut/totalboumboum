@@ -53,7 +53,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiBomb extends AiSprite<Bomb>
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
 	 * la case passée en paramètre.

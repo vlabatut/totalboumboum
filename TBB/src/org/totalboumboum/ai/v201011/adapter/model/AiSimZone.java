@@ -53,7 +53,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiSimZone extends AiZone
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * contruit une zone qui est une copie de celle passée en paramètre.
 	 * si la paramètre fullCopy est faux, les sprites ne sont pas copiés,

@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.data;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +34,10 @@ import java.util.List;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEvent>
-{	
+public abstract class AiSuddenDeathEvent implements Comparable<AiSuddenDeathEvent>, Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

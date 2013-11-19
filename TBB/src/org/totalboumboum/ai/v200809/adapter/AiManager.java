@@ -53,10 +53,10 @@ import org.xml.sax.SAXException;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AiAbstractManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 {	
 	/////////////////////////////////////////////////////////////////
-	// PERCEPTS			/////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * termine proprement le gestionnaire de manière à libérer les ressources 
@@ -68,7 +68,18 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		ai.stopRequest();
 	}
 	
-    /////////////////////////////////////////////////////////////////
+ 	@Override
+	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
+	{	super.init(instance,player);
+	
+		loop = RoundVariables.loop;
+		level = RoundVariables.level;
+		percepts = new AiZone(level,player);
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		ai.setPercepts(percepts);
+	}
+ 	
+   /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** l'ensemble des percepts destinés à l'IA */
@@ -81,15 +92,10 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
-	{	super.init(instance,player);
-	
-		loop = RoundVariables.loop;
-		level = RoundVariables.level;
-		percepts = new AiZone(level,player);
-		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		ai.setPercepts(percepts);
-	}
+	public AiZone getCurrentPercepts()
+    {	return percepts;
+    }
+    
 	@Override
 	public void updatePercepts()
 	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;

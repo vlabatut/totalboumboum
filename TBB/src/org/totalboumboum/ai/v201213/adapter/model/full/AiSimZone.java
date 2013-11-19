@@ -63,7 +63,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimZone extends AiZone
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Contruit une zone qui est une copie de celle passée en paramètre.
 	 * 

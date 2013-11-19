@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201011.adapter.data;
  * 
  */
 
+import java.io.Serializable;
+
 import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
 import org.totalboumboum.engine.content.feature.Direction;
 
@@ -36,8 +38,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public interface AiState
-{
+public interface AiState extends Serializable
+{	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

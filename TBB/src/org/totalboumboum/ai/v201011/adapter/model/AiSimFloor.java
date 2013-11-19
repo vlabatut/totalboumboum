@@ -34,7 +34,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiSprite;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiSimFloor extends AiSimSprite implements AiFloor
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * crée une simulation du sol passé en paramètre,
 	 * avec les propriétés passées en paramètres.

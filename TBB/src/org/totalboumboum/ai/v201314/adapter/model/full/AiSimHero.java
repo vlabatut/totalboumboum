@@ -42,7 +42,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 public final class AiSimHero extends AiSimSprite implements AiHero
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une simulation du personnage passé en paramètre,
 	 * avec les propriétés passées en paramètres.

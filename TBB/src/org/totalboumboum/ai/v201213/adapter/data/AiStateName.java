@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * 
  */
 
+import java.io.Serializable;
+
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 
 /**
@@ -38,7 +40,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public enum AiStateName
+public enum AiStateName implements Serializable
 {	
 	// equivalent gesture: BURNING
 	/** Le sprite est en train de brûler */

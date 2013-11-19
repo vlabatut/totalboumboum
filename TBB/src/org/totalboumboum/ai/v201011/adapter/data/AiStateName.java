@@ -39,7 +39,7 @@ import org.totalboumboum.engine.content.feature.gesture.GestureName;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiStateName
-{
+{	
 	// equivalent gesture: BURNING
 	/** le sprite est en train de brûler */
 	BURNING,

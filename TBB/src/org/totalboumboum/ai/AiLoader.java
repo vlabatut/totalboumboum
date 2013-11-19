@@ -66,8 +66,8 @@ public class AiLoader
 	 * @throws NoSuchMethodException
 	 * 		Problème lors de l'accès aux classes de l'agent.
 	 */
-	public static AiAbstractManager<?> loadAi(String name, String packname) throws FileNotFoundException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException 
-	{	AiAbstractManager<?> result;
+	public static AiAbstractManager<?,?> loadAi(String name, String packname) throws FileNotFoundException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException 
+	{	AiAbstractManager<?,?> result;
 		
 		// check the file
 		String packageFolder = FilePaths.getAisPath()+File.separator+packname+File.separator+FileNames.FILE_AIS+File.separator+name;
@@ -84,7 +84,7 @@ public class AiLoader
 			throw new ClassCastException(classQualifiedName);
 		
 		// build an instance
-		result = (AiAbstractManager<?>)tempClass.getConstructor().newInstance();
+		result = (AiAbstractManager<?,?>)tempClass.getConstructor().newInstance();
 		
 		return result;
 	}

@@ -53,7 +53,9 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * @author Vincent Labatut
  */
 final class AiDataItem extends AiDataSprite<Item> implements AiItem
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une représentation de l'item passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
