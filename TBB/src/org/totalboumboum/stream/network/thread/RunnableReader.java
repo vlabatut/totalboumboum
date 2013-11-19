@@ -29,7 +29,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.totalboumboum.stream.network.AbstractConnexion;
+import org.totalboumboum.stream.network.AbstractConnection;
 import org.totalboumboum.stream.network.message.NetworkMessage;
 
 /**
@@ -51,10 +51,10 @@ public class RunnableReader implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// CONNECTION			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected AbstractConnexion connexion;
+	protected AbstractConnection connection;
 	
-	public void setConnexion(AbstractConnexion connexion)
-	{	this.connexion = connexion;
+	public void setConnection(AbstractConnection connection)
+	{	this.connection = connection;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -79,8 +79,8 @@ public class RunnableReader implements Runnable
 					}
 					catch (InterruptedException e)
 					{	// stream broken
-						System.err.println("SocketException: connexion lost");
-						owner.connexionLost();
+						System.err.println("SocketException: connection lost");
+						owner.connectionLost();
 					}
 				}
 			}
@@ -90,17 +90,17 @@ public class RunnableReader implements Runnable
 			{	Object object = in.readObject();
 				NetworkMessage message = (NetworkMessage) object;
 System.out.println(">>"+message);
-				connexion.messageRead(message);
+				connection.messageRead(message);
 			}
 			catch(SocketException e)
 			{	// stream broken
-				System.err.println("SocketException: connexion lost");
-				owner.connexionLost();
+				System.err.println("SocketException: connection lost");
+				owner.connectionLost();
 			}
 			catch(EOFException e)
 			{	// stream broken
-				System.err.println("EOFException: connexion lost");
-				owner.connexionLost();
+				System.err.println("EOFException: connection lost");
+				owner.connectionLost();
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
@@ -114,7 +114,7 @@ System.out.println(">>"+message);
 		try
 		{	in.close();
 			in = null;
-			connexion = null;
+			connection = null;
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
