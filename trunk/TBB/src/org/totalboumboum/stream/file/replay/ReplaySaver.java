@@ -49,7 +49,7 @@ public class ReplaySaver
 		Element root = saveReplayElement(replay);	
 		
 		// save file
-		String folder = FilePaths.getReplaysPath() + File.separator + replay.getFolder();
+		String folder = FilePaths.getCaptureReplaysPath() + File.separator + replay.getFolder();
 		String path = folder + File.separator + FileNames.FILE_REPLAY + FileNames.EXTENSION_XML;
 		File dataFile = new File(path);
 		String schemaFolder = FilePaths.getSchemasPath();
