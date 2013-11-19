@@ -22,13 +22,17 @@ package org.totalboumboum.engine.loop.event.replay;
  */
 
 /**
+ * Event used to control broadcasting.
  * 
  * @author Vincent Labatut
- *
  */
 public class StopReplayEvent extends ReplayEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new event.
+	 */
 	public StopReplayEvent()
 	{	super();
 	}
