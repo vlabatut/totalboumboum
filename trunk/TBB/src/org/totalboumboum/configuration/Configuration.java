@@ -28,9 +28,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.ai.AisConfigurationLoader;
 import org.totalboumboum.configuration.ai.AisConfigurationSaver;
-import org.totalboumboum.configuration.connexions.ConnexionsConfiguration;
-import org.totalboumboum.configuration.connexions.ConnexionsConfigurationLoader;
-import org.totalboumboum.configuration.connexions.ConnexionsConfigurationSaver;
+import org.totalboumboum.configuration.connections.ConnectionsConfiguration;
+import org.totalboumboum.configuration.connections.ConnectionsConfigurationLoader;
+import org.totalboumboum.configuration.connections.ConnectionsConfigurationSaver;
 import org.totalboumboum.configuration.controls.ControlsConfiguration;
 import org.totalboumboum.configuration.controls.ControlsConfigurationLoader;
 import org.totalboumboum.configuration.controls.ControlsConfigurationSaver;
@@ -69,7 +69,7 @@ public class Configuration
 		videoConfiguration = VideoConfigurationLoader.loadVideoConfiguration();
 		aisConfiguration = AisConfigurationLoader.loadAisConfiguration();
 		statisticsConfiguration = StatisticsConfigurationLoader.loadStatisticsConfiguration();
-		connexionsConfiguration = ConnexionsConfigurationLoader.loadConnexionsConfiguration();
+		connectionsConfiguration = ConnectionsConfigurationLoader.loadConnectionsConfiguration();
 	}
 	
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
@@ -80,7 +80,7 @@ public class Configuration
 		VideoConfigurationSaver.saveVideoConfiguration(videoConfiguration);
 		AisConfigurationSaver.saveAisConfiguration(aisConfiguration);
 		StatisticsConfigurationSaver.saveStatisticsConfiguration(statisticsConfiguration);
-		ConnexionsConfigurationSaver.saveConnexionsConfiguration(connexionsConfiguration);
+		ConnectionsConfigurationSaver.saveConnectionsConfiguration(connectionsConfiguration);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -170,12 +170,12 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// CONNECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static ConnexionsConfiguration connexionsConfiguration;
+	private static ConnectionsConfiguration connectionsConfiguration;
 
-	public static void setConnexionsConfiguration(ConnexionsConfiguration connexionsConfiguration)
-	{	Configuration.connexionsConfiguration = connexionsConfiguration;
+	public static void setConnectionsConfiguration(ConnectionsConfiguration connectionsConfiguration)
+	{	Configuration.connectionsConfiguration = connectionsConfiguration;
 	}
-	public static ConnexionsConfiguration getConnexionsConfiguration()
-	{	return connexionsConfiguration;
+	public static ConnectionsConfiguration getConnectionsConfiguration()
+	{	return connectionsConfiguration;
 	}
 }
