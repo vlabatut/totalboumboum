@@ -29,7 +29,7 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @author Vincent Labatut
  */
 public class SpriteInsertionEvent extends SpriteEvent
-{	/** */
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
 	/**

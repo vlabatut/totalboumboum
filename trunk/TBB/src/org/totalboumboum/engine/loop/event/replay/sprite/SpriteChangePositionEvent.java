@@ -25,13 +25,20 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * Reflects the fact a sprite moved.
  * 
  * @author Vincent Labatut
- *
  */
 public class SpriteChangePositionEvent extends SpriteChangeEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new move-related event.
+	 * 
+	 * @param sprite
+	 * 		The concerned sprite.
+	 */
 	public SpriteChangePositionEvent(Sprite sprite)
 	{	super(sprite);
 	}
@@ -39,16 +46,17 @@ public class SpriteChangePositionEvent extends SpriteChangeEvent
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** change in the horizontal position */
+	/** Change in the horizontal position */
 	public static final String SPRITE_EVENT_POSITION_X = "SPRITE_EVENT_POSITION_X";
-	/** change in the vertical position */
+	/** Change in the vertical position */
 	public static final String SPRITE_EVENT_POSITION_Y = "SPRITE_EVENT_POSITION_Y";
-	/** change in the height */
+	/** Change in the height */
 	public static final String SPRITE_EVENT_POSITION_Z = "SPRITE_EVENT_POSITION_Z";
 
 	/////////////////////////////////////////////////////////////////
 	// SEND EVENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public boolean getSendEvent()
 	{	return sendEvent && !RoundVariables.getFilterEvents();	
 	}
@@ -56,6 +64,7 @@ public class SpriteChangePositionEvent extends SpriteChangeEvent
 	/////////////////////////////////////////////////////////////////
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result = "SpriteChangePositionEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		if(changes.containsKey(SPRITE_EVENT_POSITION_X))

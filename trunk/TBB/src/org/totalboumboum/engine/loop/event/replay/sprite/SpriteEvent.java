@@ -26,13 +26,20 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.event.replay.ReplayEvent;
 
 /**
+ * General event concerning the evolution of a sprite.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class SpriteEvent extends ReplayEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new sprite-related event.
+	 * 
+	 * @param sprite
+	 * 		The concerned sprite.
+	 */
 	protected SpriteEvent(Sprite sprite)
 	{	super();
 		spriteId = sprite.getId();
@@ -43,8 +50,15 @@ public abstract class SpriteEvent extends ReplayEvent
 	/////////////////////////////////////////////////////////////////
 	// ID					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Id of the concerned sprite */
 	protected int spriteId;
 	
+	/**
+	 * Returns the id of the concerned sprite.
+	 * 
+	 * @return
+	 * 		Id of the concerned sprite
+	 */
 	public int getSpriteId()
 	{	return spriteId;
 	}
@@ -52,8 +66,15 @@ public abstract class SpriteEvent extends ReplayEvent
 	/////////////////////////////////////////////////////////////////
 	// DEBUG INFO			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Debug info regarding the sprite */
 	protected transient String spriteInfo = "N/A";
 	
+	/**
+	 * Returns some debug info regarding the sprite.
+	 * 
+	 * @return
+	 * 		Debug info regarding the sprite.
+	 */
 	public String getSpriteInfo()
 	{	return spriteInfo;
 	}
