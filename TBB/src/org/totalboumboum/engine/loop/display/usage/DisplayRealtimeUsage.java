@@ -164,7 +164,7 @@ public class DisplayRealtimeUsage extends Display
 			for(int i=0;i<players.size();i++)
 			{	AbstractPlayer player = players.get(i);
 				if(player instanceof AiPlayer)
-				{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+				{	AiAbstractManager<?,?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 					List<String> stepNames = new ArrayList<String>(aiMgr.getStepNames());
 				
 					// draw background
