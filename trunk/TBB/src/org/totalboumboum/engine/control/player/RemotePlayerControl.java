@@ -34,7 +34,7 @@ import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 import org.totalboumboum.engine.loop.event.control.RemotePlayerControlEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 
 /**
  * Server side class in charge
@@ -50,15 +50,15 @@ public class RemotePlayerControl
 	 * for <i>all</i> remote players.
 	 */
 	public RemotePlayerControl()
-	{	connexion = Configuration.getConnexionsConfiguration().getServerConnexion();
-		connexion.setRemotePlayerControl(this);
+	{	connection = Configuration.getConnectionsConfiguration().getServerConnection();
+		connection.setRemotePlayerControl(this);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// INPUT STREAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Server connexion */
-	private ServerGeneralConnexion connexion = null;
+	/** Server connection */
+	private ServerGeneralConnection connection = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
@@ -79,7 +79,7 @@ public class RemotePlayerControl
 System.out.println(sprite+" "+sprite.getId());	
 		orderedSprites.add(sprite);
 		
-//		ControlSettings controlSettings = connexion.getControlSettings(index);
+//		ControlSettings controlSettings = connection.getControlSettings(index);
 //		sprite.setControlSettings(controlSettings);
 	}
 	
@@ -173,7 +173,7 @@ System.out.println(sprite+" "+sprite.getId());
 		{	finished = true;
 		
 			sprites.clear();
-			connexion = null;
+			connection = null;
 		}
 	}
 }
