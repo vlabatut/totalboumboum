@@ -26,13 +26,18 @@ import java.io.Serializable;
 import org.totalboumboum.game.round.RoundVariables;
 
 /**
+ * Game event that can be written/read using streams
+ * (recorded in a file or sent through network).
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class StreamedEvent implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new streamable event.
+	 */
 	protected StreamedEvent()
 	{	time = RoundVariables.loop.getTotalEngineTime();
 	}
@@ -40,8 +45,15 @@ public abstract class StreamedEvent implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TIME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Time the event happened in the game */
 	protected long time;
 	
+	/**
+	 * Returns the time the event happened in the game.
+	 * 
+	 * @return
+	 * 		Time the event happened in the game.
+	 */
 	public long getTime()
 	{	return time;
 	}
