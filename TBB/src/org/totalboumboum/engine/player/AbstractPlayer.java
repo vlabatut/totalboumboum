@@ -38,12 +38,32 @@ import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
+ * Represents a generic player
+ * during a round.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class AbstractPlayer
 {	
+	/**
+	 * Builds a new player.
+	 * 
+	 * @param profile
+	 * 		Profile associated to this player (profiles are round-independent)
+	 * @param base
+	 * 		Base for the associated sprite.
+	 * @param tile
+	 * 		Starting tile.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while reading the player data.
+	 * @throws SAXException
+	 * 		Problem while reading the player data.
+	 * @throws IOException
+	 * 		Problem while reading the player data.
+	 * @throws ClassNotFoundException
+	 * 		Problem while reading the player data.
+	 */
 	public AbstractPlayer(Profile profile, HollowHeroFactory base, Tile tile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.profile = profile;
 		
@@ -63,35 +83,67 @@ public abstract class AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// PROFILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Profile associated to this player */
 	protected Profile profile;
 	
+	/**
+	 * Returns the profile object associated to this player.
+	 *  
+	 * @return
+	 * 		Profile object associated to this player 
+	 */
 	public Profile getProfile()
 	{	return profile;
+	}
+	
+	/**
+	 * Returns the profile associated to this player.
+	 *  
+	 * @return
+	 * 		Profile associated to this player 
+	 */
+	public String getId()
+	{	return profile.getId();
+	}
+
+	/**
+	 * Returns the profile name associated to this player.
+	 *  
+	 * @return
+	 * 		Profile name associated to this player 
+	 */
+	public String getName()
+	{	return profile.getName();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Sprite associated to this player */
 	protected Hero sprite;
 	
+	/**
+	 * Returns the sprite associated to this player.
+	 *  
+	 * @return
+	 * 		Profile associated to this player 
+	 */
 	public Hero getSprite()
 	{	return sprite;
 	}
 
-	public String getId()
-	{	return profile.getId();
-	}
-
-	public String getName()
-	{	return profile.getName();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** current color */
 	protected PredefinedColor color;
 	
+	/**
+	 * Returns the color associated to this player.
+	 *  
+	 * @return
+	 * 		Color associated to this player 
+	 */
 	public PredefinedColor getColor()
 	{	return color;
 	}
@@ -99,13 +151,25 @@ public abstract class AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// OUT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Indicates if the player is currently out of the game */
 	protected boolean playerOut = false;
 	
+	/**
+	 * Mark this player has currently
+	 * out of the game.
+	 */
 	public void setOut()
 	{	playerOut = true;
 		RoundVariables.loop.playerOut(this);	
 	}
 	
+	/**
+	 * Indicates if this player is currently
+	 * out of the game.
+	 * 	
+	 * @return
+	 * 		{@code true} iff this player is out of the game.
+	 */
 	public boolean isOut()
 	{	return playerOut;	
 	}

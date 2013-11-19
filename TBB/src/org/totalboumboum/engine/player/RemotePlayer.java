@@ -33,12 +33,32 @@ import org.totalboumboum.game.profile.Profile;
 import org.xml.sax.SAXException;
 
 /**
+ * Remotely controlled player.
  * 
  * @author Vincent Labatut
- *
  */
 public class RemotePlayer extends AbstractPlayer
 {	
+	/**
+	 * 
+	 * @param profile
+	 * 		Profile associated to this player.
+	 * @param base
+	 * 		Factory for the appropriate sprite.
+	 * @param tile
+	 * 		Starting position in the zone (tile).
+	 * @param controls 
+	 * 		Controls for this player.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws SAXException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws IOException
+	 * 		Problem while accessing the player profile or agent program.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the player profile or agent program.
+	 */
 	public RemotePlayer(Profile profile, HollowHeroFactory base, Tile tile, RemotePlayerControl controls) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	super(profile,base,tile);
 		
@@ -50,15 +70,27 @@ public class RemotePlayer extends AbstractPlayer
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** control */
+	/** Controls for this player */
 	private RemotePlayerControl spriteControl;
-	/** current controls */
+	/** Current control settings */
 	private ControlSettings controlSettings;
 
+	/**
+	 * Return the current controls settings.
+	 * 
+	 * @return
+	 * 		Current control settings.
+	 */
 	public ControlSettings getControlSettings()
 	{	return controlSettings;
 	}
 
+	/**
+	 * Returns the control for this player.
+	 * 
+	 * @return
+	 * 		Control for this player.
+	 */
 	public RemotePlayerControl getSpriteControl()
 	{	return spriteControl;
 	}
