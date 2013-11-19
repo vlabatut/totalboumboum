@@ -297,7 +297,9 @@ public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 		// paths
 		{	List<AiPath> aiPaths = output.getPaths();
 			List<List<double[]>> enginePaths = getPaths();
+			List<List<Long>> engineWaits = getPathWaits();
 			enginePaths.clear();
+			engineWaits.clear();
 			List<Color> aiPathColors = output.getPathColors();
 			List<Color> enginePathColors = getPathColors();
 			enginePathColors.clear();
@@ -305,12 +307,19 @@ public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 			{	// color
 				Color color = aiPathColors.get(index);
 				enginePathColors.add(color);
+				// waits
+				List<Long> waits = new ArrayList<Long>();
+				engineWaits.add(waits);
 				// path
 				AiPath aiPath = aiPaths.get(index);
 				List<double[]> path = new ArrayList<double[]>();
 				enginePaths.add(path);
 				for(AiTile tile: aiPath.getTiles())
-				{	double x = tile.getPosX();
+				{	// wait (fake)
+					long wait = 0l;
+					waits.add(wait);
+					// location
+					double x = tile.getPosX();
 					double y = tile.getPosY();
 					double coord[] = {x,y};
 					path.add(coord);
