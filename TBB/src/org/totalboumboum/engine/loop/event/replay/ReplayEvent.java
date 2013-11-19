@@ -24,13 +24,18 @@ package org.totalboumboum.engine.loop.event.replay;
 import org.totalboumboum.engine.loop.event.StreamedEvent;
 
 /**
+ * Event used when recording a round to a file,
+ * or when sending through network.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class ReplayEvent extends StreamedEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new replay event.
+	 */
 	protected ReplayEvent()
 	{	super();
 	}
@@ -38,8 +43,15 @@ public abstract class ReplayEvent extends StreamedEvent
 	/////////////////////////////////////////////////////////////////
 	// SEND EVENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the event should be sent or not */
 	protected transient boolean sendEvent = true;
 
+	/**
+	 * Indicates whether the event should be sent or not.
+	 * 
+	 * @return
+	 * 		{@code true} iff the event should be sent.
+	 */
 	public boolean getSendEvent()
 	{	return sendEvent;	
 	}
