@@ -160,7 +160,7 @@ public class LocalSytemControl extends SystemControl
 			else if(keyCode>=KeyEvent.VK_0 && keyCode<=KeyEvent.VK_9)
 			{	int index;
 				if(keyCode==KeyEvent.VK_0)
-					index = 9;
+					index = 10;
 				else
 					index = keyCode-KeyEvent.VK_1;
 				String name;
@@ -170,6 +170,8 @@ public class LocalSytemControl extends SystemControl
 					name = SystemControlEvent.SWITCH_DISPLAY_AIS_COLORS;
 				else if(keysPressed.containsKey(KeyEvent.VK_CONTROL) && keysPressed.get(KeyEvent.VK_CONTROL))
 					name = SystemControlEvent.SWITCH_DISPLAY_AIS_TEXTS;
+				else if(keysPressed.containsKey(KeyEvent.VK_CAPS_LOCK) && keysPressed.get(KeyEvent.VK_CAPS_LOCK))
+					name = SystemControlEvent.REQUIRE_RECORD_AI_PERCEPTS;
 				else
 					name = SystemControlEvent.SWITCH_AIS_PAUSE;
 				SystemControlEvent controlEvent = new SystemControlEvent(name,index);
