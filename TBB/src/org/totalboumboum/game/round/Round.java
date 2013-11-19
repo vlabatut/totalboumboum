@@ -55,8 +55,8 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.stream.file.replay.FileServerStream;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
-import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -220,8 +220,8 @@ public class Round implements StatisticHolder, Serializable
 	 */
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	ClientGeneralConnexion clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			ServerGeneralConnexion serverConnexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+		{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
 			
 			// replay
 			if(fileIn!=null)
@@ -229,12 +229,12 @@ public class Round implements StatisticHolder, Serializable
 				//TODO plus logique d'initialiser stream & round ici non ?
 			}
 			// client
-			else if(clientConnexion!=null)
+			else if(clientConnection!=null)
 			{	loop = new ClientLoop(this);
 				// TODO
 			}
 			// server
-			else if(serverConnexion!=null)
+			else if(serverConnection!=null)
 			{	loop = new ServerLoop(this);
 				// TODO
 			}
@@ -263,7 +263,7 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT GAME STREAM	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// TODO maybe should better be handled at a configuration level, like for the network connexions
+	// TODO maybe should better be handled at a configuration level, like for the network connections
 	// TODO maybe all the round ingame stuff should be over there too
 	/** Server stream, for the network mode */
 	private FileServerStream fileOut = null;
@@ -356,8 +356,8 @@ public class Round implements StatisticHolder, Serializable
 	 * Called when the round is over.
 	 */
 	public void loopOver()
-	{	ClientGeneralConnexion clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-		ServerGeneralConnexion serverConnexion = Configuration.getConnexionsConfiguration().getServerConnexion();
+	{	ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+		ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
 		
 		// read stats from replay if replayed
 		if(fileIn!=null)
@@ -376,9 +376,9 @@ public class Round implements StatisticHolder, Serializable
 			roundOver = true;
 		}
 		// read stats from server if network game
-		else if(clientConnexion!=null)
+		else if(clientConnection!=null)
 		{	// NOTE uggly blocking here
-			StatisticRound stats = clientConnexion.getRoundStats();
+			StatisticRound stats = clientConnection.getRoundStats();
 			setStats(stats);
 			roundOver = true;
 		}
@@ -413,12 +413,12 @@ public class Round implements StatisticHolder, Serializable
 		}
 
 		// possibly end network game
-		if(serverConnexion!=null)
+		if(serverConnection!=null)
 		{	// send a stop event
 			StopReplayEvent event = new StopReplayEvent();
-			serverConnexion.sendReplay(event);
+			serverConnection.sendReplay(event);
 			// and send the stats
-			serverConnexion.finishRound(stats);
+			serverConnection.finishRound(stats);
 		}
 
 		match.roundOver();
