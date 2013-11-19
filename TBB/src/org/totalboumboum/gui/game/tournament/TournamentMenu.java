@@ -73,11 +73,11 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexion;
-import org.totalboumboum.stream.network.client.ClientGeneralConnexionListener;
-import org.totalboumboum.stream.network.client.ClientIndividualConnexion;
+import org.totalboumboum.stream.network.client.ClientGeneralConnection;
+import org.totalboumboum.stream.network.client.ClientGeneralConnectionListener;
+import org.totalboumboum.stream.network.client.ClientIndividualConnection;
 import org.totalboumboum.stream.network.client.ClientState;
-import org.totalboumboum.stream.network.server.ServerGeneralConnexion;
+import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
@@ -90,7 +90,7 @@ import org.xml.sax.SAXException;
  * 
  * @author Vincent Labatut
  */
-public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel,ClientGeneralConnexionListener,DataPanelListener
+public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel,ClientGeneralConnectionListener,DataPanelListener
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
@@ -258,11 +258,11 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		// buttons
 		refreshButtons();
 		
-		// connexion
+		// connection
 		if(!browseOnly)
-		{	ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			if(connexion!=null)
-				connexion.addListener(this);
+		{	ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.addListener(this);
 		}
 	}
 	
@@ -326,8 +326,8 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		tournament.cancel();
 		tournament.finish();
 
-		// end possible connexion
-		Configuration.getConnexionsConfiguration().terminateConnexion();
+		// end possible connection
+		Configuration.getConnectionsConfiguration().terminateConnection();
 		
 		// set main menu frame
 		getFrame().setMainMenuPanel();
@@ -449,11 +449,11 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			}
 		
 			// record game
-			ServerGeneralConnexion serverConnexion = Configuration.getConnexionsConfiguration().getServerConnexion();
-			ClientGeneralConnexion clientConnexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			boolean connexionState = serverConnexion==null && clientConnexion==null;
-			buttonSave.setEnabled(connexionState);
-			buttonMenu.setEnabled(connexionState);
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			ClientGeneralConnection clientConnection = Configuration.getConnectionsConfiguration().getClientConnection();
+			boolean connectionState = serverConnection==null && clientConnection==null;
+			buttonSave.setEnabled(connectionState);
+			buttonMenu.setEnabled(connectionState);
 			
 			// record replay
 			boolean recordGames = Configuration.getEngineConfiguration().isRecordRounds();
@@ -592,9 +592,9 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				((MatchSplitPanel)matchPanel).refreshButtons();
 
 			// possibly updating client state
-			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			if(connexion!=null)
-				connexion.getActiveConnexion().setState(ClientState.BROWSING_MATCH);
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
 			
 			replaceWith(matchPanel);
 	    }
@@ -610,9 +610,9 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				((RoundSplitPanel)matchPanel).refreshButtons();
 
 			// possibly updating client state
-			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			if(connexion!=null)
-				connexion.getActiveConnexion().setState(ClientState.BROWSING_ROUND);
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
 			
 			replaceWith(matchPanel);
 	    }
@@ -639,9 +639,9 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			mPanel.setMatch(match);
 			mPanel.autoAdvance();
 			// possibly updating client state
-			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			if(connexion!=null)
-				connexion.getActiveConnexion().setState(ClientState.BROWSING_MATCH);
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_MATCH);
 			
 			replaceWith(matchPanel);
 	    }
@@ -697,9 +697,9 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			rPanel.autoAdvance();
 
 			// possibly updating client state
-			ClientGeneralConnexion connexion = Configuration.getConnexionsConfiguration().getClientConnexion();
-			if(connexion!=null)
-				connexion.getActiveConnexion().setState(ClientState.BROWSING_ROUND);
+			ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
+			if(connection!=null)
+				connection.getActiveConnection().setState(ClientState.BROWSING_ROUND);
 			
 			replaceWith(matchPanel);
 	    }
@@ -760,34 +760,34 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 	// CLIENT GENERAL CONNECTION	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public void connexionAdded(ClientIndividualConnexion connexion, int index)
+	public void connectionAdded(ClientIndividualConnection connection, int index)
 	{	// useless here
 	}
 
 	@Override
-	public void connexionRemoved(ClientIndividualConnexion connexion, int index)
+	public void connectionRemoved(ClientIndividualConnection connection, int index)
 	{	//
 	}
 
 	@Override
-	public void connexionGameInfoChanged(ClientIndividualConnexion connexion, int index, String oldId)
+	public void connectionGameInfoChanged(ClientIndividualConnection connection, int index, String oldId)
 	{	// useless here
 	}
 
 	@Override
-	public void connexionActiveConnexionLost(ClientIndividualConnexion connexion, int index)
-	{	// TODO maybe a reconnexion can be worked out...
-		if(connexion.getState()==ClientState.BROWSING_TOURNAMENT)
+	public void connectionActiveConnectionLost(ClientIndividualConnection connection, int index)
+	{	// TODO maybe a reconnection can be worked out...
+		if(connection.getState()==ClientState.BROWSING_TOURNAMENT)
 			quitTournament();
 	}
 
 	@Override
-	public void connexionProfilesChanged(ClientIndividualConnexion connexion, int index)
+	public void connectionProfilesChanged(ClientIndividualConnection connection, int index)
 	{	// useless here
 	}
 
 	@Override
-	public void connexionTournamentStarted(AbstractTournament tournament)
+	public void connectionTournamentStarted(AbstractTournament tournament)
 	{	// useless here
 	}
 

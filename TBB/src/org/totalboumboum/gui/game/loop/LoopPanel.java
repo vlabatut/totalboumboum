@@ -181,7 +181,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		String currentStr = sdf.format(currentTime);
 		
 		// set up file name
-		String path = FilePaths.getScreenCapturePath() + File.separator + currentStr + FileNames.EXTENSION_BMP;
+		String path = FilePaths.getCaptureImagesPath() + File.separator + currentStr + FileNames.EXTENSION_BMP;
 		File file = new File(path);
 		
 		// record image as bmp
