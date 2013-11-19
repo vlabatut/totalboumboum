@@ -147,7 +147,7 @@ public class DisplayAisPaths extends Display
 		for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
 			if(player instanceof AiPlayer)
-			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+			{	AiAbstractManager<?,?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				if(getShow(i))
 				{	List<List<double[]>> paths = aiMgr.getPaths();
 					List<List<Long>> pauses = aiMgr.getPathWaits();

@@ -139,7 +139,7 @@ public class DisplayAisTexts extends Display
 	{	for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
 			if(player instanceof AiPlayer)
-			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+			{	AiAbstractManager<?,?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				Color color = player.getColor().getColor();
 				// tile texts
 				if(getShow(i))

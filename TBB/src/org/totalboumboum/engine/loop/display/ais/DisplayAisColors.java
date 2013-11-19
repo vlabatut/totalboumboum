@@ -139,7 +139,7 @@ public class DisplayAisColors extends Display
 		for(int i=0;i<players.size();i++)
 		{	AbstractPlayer player = players.get(i);
 			if(player instanceof AiPlayer)
-			{	AiAbstractManager<?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
+			{	AiAbstractManager<?,?> aiMgr = ((AiPlayer)player).getArtificialIntelligence();
 				// tile colors
 				if(getShow(i))
 				{	List<Color>[][] colors = aiMgr.getTileColors();
