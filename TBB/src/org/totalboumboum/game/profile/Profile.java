@@ -120,7 +120,7 @@ public class Profile implements Serializable
 	}
 	
 	public boolean isRemote()
-	{	String hostId = Configuration.getConnexionsConfiguration().getHostId();
+	{	String hostId = Configuration.getConnectionsConfiguration().getHostId();
 		boolean result = !lastHost.equals(hostId);
 		return result;
 	}
