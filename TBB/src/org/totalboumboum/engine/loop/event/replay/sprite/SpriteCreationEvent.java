@@ -27,12 +27,13 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
+ * Event representing the creation of a new sprite.
  * 
  * @author Vincent Labatut
- *
  */
 public class SpriteCreationEvent extends SpriteEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 /*
 	public SpriteCreationEvent(int id, long time, String name, Role role, int row, int col)
@@ -44,6 +45,15 @@ public class SpriteCreationEvent extends SpriteEvent
 		this.col = col;
 	}
 */
+	/**
+	 * Builds a new event to represent
+	 * the creation of a new sprite.
+	 * 
+	 * @param sprite
+	 * 		Concerned sprite.
+	 * @param name
+	 * 		Sprite name.
+	 */
 	public SpriteCreationEvent(Sprite sprite, String name)
 	{	super(sprite);
 	
@@ -68,8 +78,15 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name of the new sprite */
 	private String name;
 	
+	/**
+	 * Returns the name of the new sprite.
+	 * 
+	 * @return
+	 * 		The name of the new sprite.
+	 */
 	public String getName()
 	{	return name;	
 	}
@@ -77,8 +94,15 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// ROLE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Role of the new sprite */
 	private Role role;
 	
+	/**
+	 * Returns the role of the new sprite.
+	 * 
+	 * @return
+	 * 		The role of the new sprite.
+	 */
 	public Role getRole()
 	{	return role;	
 	}
@@ -86,8 +110,15 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Color of the new sprite */
 	private PredefinedColor color;
 	
+	/**
+	 * Returns the color of the new sprite.
+	 * 
+	 * @return
+	 * 		The color of the new sprite.
+	 */
 	public PredefinedColor getColor()
 	{	return color;	
 	}
@@ -95,13 +126,27 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// LOCATION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Row position of the new sprite */
 	private int row;
+	/** Col position of the new sprite */
 	private int col;
 	
+	/**
+	 * Returns the row position of the new sprite.
+	 * 
+	 * @return
+	 * 		The row position of the new sprite.
+	 */
 	public int getRow()
 	{	return row;
 	}
 
+	/**
+	 * Returns the col position of the new sprite.
+	 * 
+	 * @return
+	 * 		The col position of the new sprite.
+	 */
 	public int getCol()
 	{	return col;	
 	}
@@ -109,6 +154,7 @@ public class SpriteCreationEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result = "SpriteCreationEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		result = result + name + " [" + color + "," + role + "] ";

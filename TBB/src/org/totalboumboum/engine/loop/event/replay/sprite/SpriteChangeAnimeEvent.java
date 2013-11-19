@@ -24,13 +24,20 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
+ * Reflects a change in the animation of a sprite.
  * 
  * @author Vincent Labatut
- *
  */
 public class SpriteChangeAnimeEvent extends SpriteChangeEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new animation-related sprite.
+	 * 
+	 * @param sprite
+	 * 		The concerned sprite.
+	 */
 	public SpriteChangeAnimeEvent(Sprite sprite)
 	{	super(sprite);
 	}
@@ -38,18 +45,19 @@ public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** change in the gesture (the name is transmitted */
+	/** Change in the gesture (the name is transmitted */
 	public static final String SPRITE_EVENT_GESTURE = "SPRITE_EVENT_GESTURE";
-	/** change in the animation direction */
+	/** Change in the animation direction */
 	public static final String SPRITE_EVENT_DIRECTION = "SPRITE_EVENT_DIRECTION";
-	/** forced duration */
+	/** Forced duration */
 	public static final String SPRITE_EVENT_DURATION = "SPRITE_EVENT_DURATION";
-	/** animation must be reinitialized */
+	/** Animation must be reinitialized */
 	public static final String SPRITE_EVENT_REINIT = "SPRITE_EVENT_REINIT";
 
 	/////////////////////////////////////////////////////////////////
 	// SEND EVENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public boolean getSendEvent()
 	{	return sendEvent;	
 	}
@@ -57,6 +65,7 @@ public class SpriteChangeAnimeEvent extends SpriteChangeEvent
 	/////////////////////////////////////////////////////////////////
 	// TO STRING			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public String toString()
 	{	String result = "SpriteChangeAnimeEvent("+time+":"+spriteId+"): " + getSpriteInfo() + " ";
 		if(changes.containsKey(SPRITE_EVENT_GESTURE))

@@ -22,17 +22,25 @@ package org.totalboumboum.engine.loop.event.replay.sprite;
  */
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
+ * General event reflecting a change in a sprite.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class SpriteChangeEvent extends SpriteEvent
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new change-related event.
+	 * 
+	 * @param sprite
+	 * 		The concerned sprite.
+	 */
 	protected SpriteChangeEvent(Sprite sprite)
 	{	super(sprite);
 		sendEvent = false;
@@ -41,12 +49,27 @@ public abstract class SpriteChangeEvent extends SpriteEvent
 	/////////////////////////////////////////////////////////////////
 	// CHANGES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected HashMap<String,Object> changes = new HashMap<String,Object>();
+	/** Map describing all the undergone changes */
+	protected Map<String,Object> changes = new HashMap<String,Object>();
 	
-	public HashMap<String,Object> getChanges()
+	/**
+	 * Returns all the undergone changes.
+	 * 
+	 * @return
+	 * 		Map of all changes.
+	 */
+	public Map<String,Object> getChanges()
 	{	return changes;
 	}
 
+	/**
+	 * Adds a new change.
+	 * 
+	 * @param key
+	 * 		Name of the change.
+	 * @param value
+	 * 		Nature of the change.
+	 */
 	public void setChange(String key, Object value)
 	{	changes.put(key,value);
 		sendEvent = true;
