@@ -396,7 +396,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 						
 						// on crée le noeud fils correspondant (qui sera traité plus tard)
 						if(process)
-						{	AiSearchNode child = new AiSearchNode(futureLocation,node);
+						{	AiSearchNode child = new AiSearchNode(futureLocation,node,direction);
 							result.add(child);
 //if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 //	System.out.print("");
@@ -439,7 +439,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 					if(safe)
 					{	// on crée le noeud fils correspondant (qui sera traité plus tard)
 						AiSearchNode child = new AiSearchNode(waitDuration,futureZone,node);
-						// on l'ajoute au noeud courant
+						// on l'ajoute au résultat courant
 						result.add(child);
 //if(!child.getLocation().getTile().equals(child.getLocation().getTile().getZone().getHeroByColor(hero.getColor()).getTile()))
 //	System.out.print("");

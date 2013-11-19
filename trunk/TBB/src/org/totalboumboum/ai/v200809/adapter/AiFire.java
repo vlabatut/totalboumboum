@@ -33,7 +33,9 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiFire extends AiSprite<Fire>
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * crée une représentation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.

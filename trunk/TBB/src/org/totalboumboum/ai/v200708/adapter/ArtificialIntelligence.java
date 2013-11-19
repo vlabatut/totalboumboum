@@ -115,7 +115,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Constructeur. 
-	 * @param name	nom de la classe
+	 * 
+	 * @param name	
+	 * 		nom de la classe
 	 */
 	public ArtificialIntelligence(String name)
 	{	if(name.length()>10)
@@ -154,8 +156,10 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le nom attribué à cette IA
-	 * (en général : le nom de la classe elle-même)
-	 * @return	le nom de l'IA
+	 * (en général : le nom de la classe elle-même).
+	 * 
+	 * @return	
+	 * 		le nom de l'IA
 	 */
 	public String getName()
 	{	return name;
@@ -165,7 +169,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie le percept du personnage sous la forme d'une matrice d'entiers.
 	 * Chaque entier est un code représentant la case correspondante en utilisant
 	 * les constantes AI_BLOCK_XXXXX.
-	 * @return	la matrice représentant la zone de jeu
+	 * 
+	 * @return	
+	 * 		la matrice représentant la zone de jeu
 	 */
 	protected int[][] getZoneMatrix()
 	{	return zoneMatrix;
@@ -194,9 +200,13 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la portée de la bombe située à la position passée en paramètres.
 	 * S'il n'y a pas de bombe à cette position, la valeur -1 est renvoyée.
-	 * @param	x	position de la bombe
-	 * @param	y	position de la bombe
-	 * @return	la portée de la bombe
+	 * 
+	 * @param	x	
+	 * 		position de la bombe
+	 * @param	y	
+	 * 		position de la bombe
+	 * @return	
+	 * 		la portée de la bombe
 	 */
 	protected int getBombPowerAt(int x, int y)
 	{	int result = -1;
@@ -211,8 +221,10 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie le nombre de joueurs participant à la partie, en plus
-	 * de celui dirigé par cette IA. 
-	 * @return	le nombre de joueurs.
+	 * de celui dirigé par cette IA.
+	 *  
+	 * @return	
+	 * 		le nombre de joueurs.
 	 */
 	protected int getPlayerCount()
 	{	return players.size();
@@ -222,9 +234,12 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie la position du personnage dont l'index est passé
 	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
 	 * {-1,-1} est renvoyée. Attention, le personnage dirigé par cette IA n'est 
-	 * jamais considéré. 
-	 * @param index	numéro du personnage
-	 * @return	position du personnage 
+	 * jamais considéré.
+	 *  
+	 * @param index	
+	 * 		numéro du personnage
+	 * @return	
+	 * 		position du personnage 
 	 */
 	protected int[] getPlayerPosition(int index)
 	{	int result[] = new int[2];
@@ -245,8 +260,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * -1 est renvoyée. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
 	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirigé par cette IA n'est 
 	 * jamais considéré.
-	 * @param index	numéro du personnage
-	 * @return	le sens de déplacement du personnage 
+	 * 
+	 * @param index	
+	 * 		numéro du personnage
+	 * @return	
+	 * 		le sens de déplacement du personnage 
 	 */
 	protected int getPlayerDirection(int index)
 	{	if(index<players.size())
@@ -261,8 +279,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * ou bien s'il n'y a pas de personnage ayant cet index, la valeur 
 	 * faux est renvoyée. Attention, le personnage dirigé par cette IA n'est 
 	 * jamais considéré.
-	 * @param index	numéro du personnage
-	 * @return	un booléen représentant l'état du personnage 
+	 * 
+	 * @param index	
+	 * 		numéro du personnage
+	 * @return	
+	 * 		un booléen représentant l'état du personnage 
 	 */
 	protected boolean isPlayerAlive(int index)
 	{	if(index<playersStates.size())
@@ -274,7 +295,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie le temps restant avant le début du shrink (la valeur
 	 * est négative si le shrink a déjà commencé).
-	 * @return	temps avant le shrink en millisecondes
+	 * 
+	 * @return	
+	 * 		temps avant le shrink en millisecondes
 	 */
 	protected long getTimeBeforeShrink()
 	{	return timeBeforeShrink;	
@@ -283,7 +306,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	/**
 	 * Renvoie la position du bloc qui sera le prochain à se faire écraser
 	 * par un bloc lors du shrink.
-	 * @return	un tableau de deux entiers représentant la position du prochain bloc du shrink
+	 * 
+	 * @return	
+	 * 		un tableau de deux entiers représentant la position du prochain bloc du shrink
 	 */
 	protected int[] getNextShrinkPosition()
 	{	return nextShrinkPosition;
@@ -303,7 +328,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * la forme AI_DIR_XXXX est renvoyée. La constante AI_DIR_NONE est renvoyée
 	 * s'il n'y a pas de bombe dans la case, ou bien si la bombe et le joueur sont placés
 	 * au même endroit.
-	 * @return	la position relative de la bombe
+	 * 
+	 * @return	
+	 * 		la position relative de la bombe
 	 */
 	protected int getBombPosition()
 	{	return bombPosition;
@@ -311,7 +338,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Renvoie la portée des bombes du joueur contrôlé par l'IA.
-	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
+	 * 
+	 * @return
+	 * 		puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getOwnFirePower()
 	{	return ownFirePower;
@@ -321,7 +350,9 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * Renvoie une valeur correspondant au nombre de bombes que le joueur contrôlé par l'IA
 	 * peut encore poser. Ce nombre correspond donc au nombre de bombes posables total moins 
 	 * le nombre de bombes déjà posées.
-	 * @return	nombre de bombes restant à poser
+	 * 
+	 * @return
+	 * 		nombre de bombes restant à poser
 	 */
 	protected int getOwnBombCount()
 	{	return ownBombCount;
@@ -329,8 +360,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 
 	/**
 	 * Renvoie la portée des bombes des joueurs autre que celui contrôlé par l'IA.
-	 * @param	index le numéro du joueur considéré
-	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)
+	 * 
+	 * @param	index 
+	 * 		le numéro du joueur considéré
+	 * @return
+	 * 		puissance des bombes (longueur de la flamme exprimée en nombre de cases)
 	 */
 	protected int getPlayerFirePower(int index)
 	{	return firePowers.get(index);
@@ -341,8 +375,11 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	 * que celui contrôlé par l'IA peuvent encore poser. 
 	 * Ce nombre correspond donc au nombre de bombes posables total moins 
 	 * le nombre de bombes déjà posées.
-	 * @param	index le numéro du joueur considéré
-	 * @return	nombre de bombes restant à poser
+	 * 
+	 * @param	index 
+	 * 		le numéro du joueur considéré
+	 * @return	
+	 * 		nombre de bombes restant à poser
 	 */
 	protected int getPlayerBombCount(int index)
 	{	return bombCounts.get(index);
@@ -350,36 +387,24 @@ public abstract class ArtificialIntelligence implements Callable<Integer>
 	
 	/**
 	 * Permet d'initialiser les percepts avant que l'IA ne calcule l'action à effectuer
-	 * via la méthode call. 
-	 * @param zoneMatrix	matrice représentant la zone de jeu
-	 * @param bombs	liste des bombes
-	 * @param players	liste des joueurs
-	 * @param playersStates	liste des états (mort ou vif) des joueurs
-	 * @param ownPosition	position du personnage de l'IA
-	 * @param timeBeforeShrink	temps avant le début du shrink
-	 * @param nextShrinkPosition	prochain bloc qui va être shrinké
-	 * @param bombPosition	position relative de la bombe
-	 * @param ownFirePower ? 
-	 * @param ownBombCount ?
-	 * @param firePowers ?
-	 * @param bombCounts ?
+	 * via la méthode {@code call}.
+	 * 
+	 * @param percepts
+	 * 		Objet représentant tous les percepts de l'agent.
 	 */
-	public void setPercepts(int zoneMatrix[][],Vector<int[]> bombs,Vector<int[]> players,
-			Vector<Boolean> playersStates, int[] ownPosition, long timeBeforeShrink,
-			int nextShrinkPosition[],int bombPosition, int ownFirePower, int ownBombCount,
-			Vector<Integer> firePowers, Vector<Integer> bombCounts)
-	{	this.zoneMatrix = zoneMatrix;
-		this.bombs = bombs;
-		this.players = players;
-		this.playersStates = playersStates;
-		this.ownPosition = ownPosition;
-		this.timeBeforeShrink = timeBeforeShrink;
-		this.nextShrinkPosition = nextShrinkPosition;
-		this.bombPosition = bombPosition;
-		this.ownFirePower = ownFirePower;
-		this.ownBombCount = ownBombCount;
-		this.firePowers = firePowers;
-		this.bombCounts = bombCounts;		
+	public void setPercepts(AiPercepts percepts)
+	{	this.zoneMatrix = percepts.zoneMatrix;
+		this.bombs = percepts.bombs;
+		this.players = percepts.players;
+		this.playersStates = percepts.playersStates;
+		this.ownPosition = percepts.ownPosition;
+		this.timeBeforeShrink = percepts.timeBeforeShrink;
+		this.nextShrinkPosition = percepts.nextShrinkPosition;
+		this.bombPosition = percepts.bombPosition;
+		this.ownFirePower = percepts.ownFirePower;
+		this.ownBombCount = percepts.ownBombCount;
+		this.firePowers = percepts.firePowers;
+		this.bombCounts = percepts.bombCounts;		
 	}
 	
 	/**

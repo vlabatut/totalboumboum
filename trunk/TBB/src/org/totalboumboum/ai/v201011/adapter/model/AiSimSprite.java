@@ -34,7 +34,9 @@ import org.totalboumboum.ai.v201011.adapter.data.AiStateName;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 abstract class AiSimSprite implements AiSprite
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * crée une nouvelle simulation d'un sprite
 	 * 

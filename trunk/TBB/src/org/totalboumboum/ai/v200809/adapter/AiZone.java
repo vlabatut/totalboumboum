@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v200809.adapter;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -59,11 +60,14 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public class AiZone
-{	/** niveau représenté par cette classe */
-	private Level level;
-	/** joueur contrôlé par l'IA */
-	private AbstractPlayer player;
+public class AiZone implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
+	/** Niveau représenté par cette classe */
+	private transient Level level;
+	/** Joueur contrôlé par l'IA */
+	private transient AbstractPlayer player;
 	
 	/**
 	 * construit une représentation du niveau passé en paramètre,
@@ -344,17 +348,17 @@ public class AiZone
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste des blocks contenus dans cette zone */
-	private final HashMap<Block,AiBlock> blocks = new HashMap<Block,AiBlock>();
+	private final transient HashMap<Block,AiBlock> blocks = new HashMap<Block,AiBlock>();
 	/** liste des bombes contenues dans cette zone */
-	private final HashMap<Bomb,AiBomb> bombs = new HashMap<Bomb,AiBomb>();
+	private final transient HashMap<Bomb,AiBomb> bombs = new HashMap<Bomb,AiBomb>();
 	/** liste des feux contenus dans cette zone */
-	private final HashMap<Fire,AiFire> fires = new HashMap<Fire,AiFire>();
+	private final transient HashMap<Fire,AiFire> fires = new HashMap<Fire,AiFire>();
 	/** liste des sols contenus dans cette zone */
-	private final HashMap<Floor,AiFloor> floors = new HashMap<Floor,AiFloor>();
+	private final transient HashMap<Floor,AiFloor> floors = new HashMap<Floor,AiFloor>();
 	/** liste des personnages contenus dans cette zone */
-	private final HashMap<Hero,AiHero> heroes = new HashMap<Hero,AiHero>();
+	private final transient HashMap<Hero,AiHero> heroes = new HashMap<Hero,AiHero>();
 	/** liste des items contenus dans cette zone */
-	private final HashMap<Item,AiItem> items = new HashMap<Item,AiItem>();
+	private final transient HashMap<Item,AiItem> items = new HashMap<Item,AiItem>();
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone

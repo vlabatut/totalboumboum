@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v200910.adapter.data;
  * 
  */
 
+import java.io.Serializable;
+
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
@@ -36,8 +38,10 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiSprite<T extends Sprite>
-{	
+public abstract class AiSprite<T extends Sprite> implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * construit une représentation du sprite passé en paramètre
 	 * 
@@ -69,7 +73,7 @@ public abstract class AiSprite<T extends Sprite>
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sprite représenté par cette classe */ 
-	private T sprite;
+	private transient T sprite;
 
 	/**
 	 * teste si cette représentation correspond au sprite passé en paramètre

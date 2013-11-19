@@ -38,6 +38,7 @@ import org.totalboumboum.ai.v201011.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201011.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201011.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201011.adapter.data.AiTile;
+import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.ai.v201011.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201011.adapter.path.AiPath;
 import org.totalboumboum.ai.v201011.adapter.ArtificialIntelligence;
@@ -60,16 +61,24 @@ import org.xml.sax.SAXException;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AiAbstractManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 {	
 	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * termine proprement le gestionnaire de manière à libérer les ressources 
-	 * qu'il occupait.
-	 */
-    @Override
+ 	@Override
+	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
+	{	super.init(instance,player);
+	
+		loop = RoundVariables.loop;
+		level = RoundVariables.level;
+		percepts = new AiDataZone(level,player);
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		ai.setPercepts(percepts);
+		output = ai.getOutput();
+	}
+
+   @Override
 	public void finishAi()
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();
@@ -88,16 +97,9 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
-	{	super.init(instance,player);
-	
-		loop = RoundVariables.loop;
-		level = RoundVariables.level;
-		percepts = new AiDataZone(level,player);
-		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		ai.setPercepts(percepts);
-		output = ai.getOutput();
-	}
+	public AiZone getCurrentPercepts()
+    {	return percepts;
+    }
 
 	@Override
 	public void updatePercepts()

@@ -60,10 +60,10 @@ import org.xml.sax.SAXException;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AiAbstractManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 {	
 	/////////////////////////////////////////////////////////////////
-	// FINISH			/////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * termine proprement le gestionnaire de manière à libérer les ressources 
@@ -74,18 +74,6 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();
 	}
-	
-    /////////////////////////////////////////////////////////////////
-	// PERCEPTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** l'ensemble des percepts destinés à l'IA */
-	private AiZone percepts;
-	/** le moteur du jeu */
-	private VisibleLoop loop;
-	/** le niveau dans lequel la partie se déroule */
-	private Level level;
-	/** date de la dernière mise à jour des percepts */
-	private long lastUpdateTime = 0;
 	
 	@Override
 	public void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
@@ -99,6 +87,23 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 		output = ai.getOutput();
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// PERCEPTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** l'ensemble des percepts destinés à l'IA */
+	private AiZone percepts;
+	/** le moteur du jeu */
+	private VisibleLoop loop;
+	/** le niveau dans lequel la partie se déroule */
+	private Level level;
+	/** date de la dernière mise à jour des percepts */
+	private long lastUpdateTime = 0;
+	
+	@Override
+	public AiZone getCurrentPercepts()
+    {	return percepts;
+    }
+	
 	@Override
 	public void updatePercepts()
 	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;

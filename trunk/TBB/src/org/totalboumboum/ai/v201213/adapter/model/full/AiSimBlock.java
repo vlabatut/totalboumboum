@@ -38,7 +38,9 @@ import org.totalboumboum.ai.v201213.adapter.data.AiStopType;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimBlock extends AiSimSprite implements AiBlock
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une simulation du bloc passé en paramètre,
 	 * avec les propriétés passées en paramètres.

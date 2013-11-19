@@ -21,6 +21,8 @@ package org.totalboumboum.ai.v200910.adapter.data;
  * 
  */
 
+import java.io.Serializable;
+
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.gesture.GestureName;
 import org.totalboumboum.engine.content.sprite.Sprite;
@@ -37,10 +39,12 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public class AiState 
-{
+public class AiState implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/** sprite dont l'état est représenté */
-	private Sprite sprite;
+	private transient Sprite sprite;
 	
 	/**
 	 * construit un objet représentant l'état du sprite passé en paramètre

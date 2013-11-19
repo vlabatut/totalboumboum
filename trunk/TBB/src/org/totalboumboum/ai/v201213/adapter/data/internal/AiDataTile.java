@@ -58,7 +58,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataTile extends AiTile
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Construit une représentation de la case passée en paramètre.
 	 * 
@@ -104,7 +106,7 @@ final class AiDataTile extends AiTile
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Case du jeu que cette classe représente */
-	private Tile tile;
+	private transient Tile tile;
 	
 	/**
 	 * Renvoie la case réelle représentée par cet objet.

@@ -40,6 +40,7 @@ import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201213.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201213.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201213.adapter.communication.AiOutput;
+import org.totalboumboum.ai.v201213.adapter.data.AiZone;
 import org.totalboumboum.ai.v201213.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201213.adapter.path.AiPath;
 import org.totalboumboum.ai.v201213.adapter.path.AiLocation;
@@ -67,11 +68,23 @@ import org.xml.sax.SAXException;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiManager extends AiAbstractManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 {	
 	/////////////////////////////////////////////////////////////////
 	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
+	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
+	{	super.init(instance,player);
+	
+		loop = RoundVariables.loop;
+		level = RoundVariables.level;
+		percepts = new AiDataZone(level,player);
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		ai.setZone(percepts);
+		output = ai.getOutput();
+	}
+
 	/**
 	 * Termine proprement le gestionnaire de manière à libérer les ressources 
 	 * qu'il occupait.
@@ -95,17 +108,10 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
-	{	super.init(instance,player);
+	public AiZone getCurrentPercepts()
+    {	return percepts;
+    }
 	
-		loop = RoundVariables.loop;
-		level = RoundVariables.level;
-		percepts = new AiDataZone(level,player);
-		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		ai.setZone(percepts);
-		output = ai.getOutput();
-	}
-
 	@Override
 	public final void updatePercepts()
 	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;

@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.data;
  * 
  */
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
@@ -30,8 +31,10 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiTile implements Comparable<AiTile>
-{	
+public abstract class AiTile implements Comparable<AiTile>, Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/////////////////////////////////////////////////////////////////
 	// ZONE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

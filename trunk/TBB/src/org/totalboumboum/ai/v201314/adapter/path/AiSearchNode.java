@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
+import org.totalboumboum.engine.content.feature.Direction;
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par 
@@ -66,6 +67,9 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		
 		// emplacement
 		this.location = location;
+		
+		// direction utilisée
+		this.direction = Direction.NONE;
 		
 		// hero
 		this.hero = hero;
@@ -103,13 +107,19 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 * 		Emplacement associé à ce noeud de recherche.
 	 * @param parent	
 	 * 		Noeud de recherche parent de ce noeud.
+	 * @param direction
+	 * 		Direction de déplacement pour aller du père au fils
+	 * 		(peut être {@link Direction#NONE} en cas d'attente.
 	 */
-	public AiSearchNode(AiLocation location, AiSearchNode parent)
+	public AiSearchNode(AiLocation location, AiSearchNode parent, Direction direction)
 	{	// agent
 		this.ai = parent.getAi();
 		
-		// case
+		// emplacement
 		this.location = location;
+		
+		// direction utilisée
+		this.direction = direction;
 		
 		// hero
 		this.hero = parent.getHero();
@@ -164,6 +174,9 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		double posY = location.getPosY();
 		this.location = new AiLocation(posX,posY,zone);
 		
+		// direction utilisée
+		this.direction = Direction.NONE;
+
 		// hero
 		this.hero = parent.getHero();
 		
@@ -222,6 +235,26 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 	 */
 	public AiLocation getLocation()
 	{	return location;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// DIRECTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Direction utilisée pour aller du père à ce fils */
+	private Direction direction = null;
+	
+	/**
+	 * Renvoie la direction utilisée pour 
+	 * aller du noeud de recherche père à ce
+	 * noeud de recherche fils. Il est possible
+	 * que la direction soit  {@link Direction#NONE}
+	 * en cas d'attente.
+	 * 
+	 * @return	
+	 * 		la direction associée à ce noeud de recherche.
+	 */
+	public Direction getDirection()
+	{	return direction;
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -563,6 +596,8 @@ public final class AiSearchNode// implements Comparable<AiSearchNode>
 		result.append(heuristic);
 		result.append("=");
 		result.append(cost+heuristic);
+		result.append(" ");
+		result.append(direction);
 		result.append(" ");
 		result.append(">");
 		return result.toString();

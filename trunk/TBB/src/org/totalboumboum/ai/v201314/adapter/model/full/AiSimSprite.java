@@ -31,7 +31,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiStateName;
  * @author Vincent Labatut
  */
 public abstract class AiSimSprite implements AiSprite
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une nouvelle simulation d'un sprite.
 	 * 

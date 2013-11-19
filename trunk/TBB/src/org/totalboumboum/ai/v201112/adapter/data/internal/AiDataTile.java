@@ -55,7 +55,9 @@ import org.totalboumboum.game.round.RoundVariables;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataTile extends AiTile
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * construit une représentation de la case passée en paramètre
 	 * 
@@ -101,7 +103,7 @@ final class AiDataTile extends AiTile
 	// ENGINE TILE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** case du jeu que cette classe représente */
-	private Tile tile;
+	private transient Tile tile;
 	
 	/**
 	 * renvoie la case réelle représentée par cet objet

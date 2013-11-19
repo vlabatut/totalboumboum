@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -61,8 +62,10 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public abstract class AiZone
-{	
+public abstract class AiZone implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

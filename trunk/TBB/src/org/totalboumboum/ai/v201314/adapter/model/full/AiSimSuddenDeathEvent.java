@@ -42,7 +42,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Vincent Labatut
  */
 public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Creates a new event with the specified time
 	 * and sprites.

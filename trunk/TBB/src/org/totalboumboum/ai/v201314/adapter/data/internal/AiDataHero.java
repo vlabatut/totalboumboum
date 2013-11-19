@@ -52,7 +52,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 final class AiDataHero extends AiDataSprite<Hero> implements AiHero
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une représentation du joueur passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.

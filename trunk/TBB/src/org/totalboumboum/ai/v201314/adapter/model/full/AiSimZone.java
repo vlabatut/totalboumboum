@@ -60,7 +60,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 public final class AiSimZone extends AiZone
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Contruit une zone qui est une copie de celle passée en paramètre.
 	 * 

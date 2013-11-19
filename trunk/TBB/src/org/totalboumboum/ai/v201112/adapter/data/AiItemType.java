@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v201112.adapter.data;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -29,7 +31,7 @@ package org.totalboumboum.ai.v201112.adapter.data;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public enum AiItemType
+public enum AiItemType implements Serializable
 {
 	/** le joueur peut poser une bombe de plus */
 	EXTRA_BOMB,

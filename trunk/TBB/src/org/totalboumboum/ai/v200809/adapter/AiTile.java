@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v200809.adapter;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -46,11 +47,14 @@ import org.totalboumboum.engine.content.sprite.item.Item;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public class AiTile
-{	/** représentation de la zone à laquelle cette case appartient */
+public class AiTile implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
+	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
 	/** case du jeu que cette classe représente */
-	private Tile tile;
+	private transient Tile tile;
 	
 	/**
 	 * construit une représentation de la case passée en paramètre

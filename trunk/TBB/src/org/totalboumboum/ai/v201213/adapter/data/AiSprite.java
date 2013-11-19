@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v201213.adapter.data;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -30,7 +32,7 @@ package org.totalboumboum.ai.v201213.adapter.data;
  * @deprecated
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
-public interface AiSprite extends Comparable<AiSprite>
+public interface AiSprite extends Comparable<AiSprite>, Serializable
 {	
 	/////////////////////////////////////////////////////////////////
 	// ID				/////////////////////////////////////////////

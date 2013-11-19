@@ -21,6 +21,7 @@ package org.totalboumboum.ai.v201314.adapter.data;
  * 
  */
 
+import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,8 +59,10 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiZone
-{	
+public abstract class AiZone implements Serializable
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -2181,7 +2184,7 @@ public abstract class AiZone
 	 */
 	@Override
 	public String toString()
-	{	boolean displayBombs = false;	// permet d'activer/désactiver l'affichage des temps des bombes
+	{	boolean displayBombs = false;	// TODO permet d'activer/désactiver l'affichage des temps des bombes
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4);
 		nf.setMaximumFractionDigits(0);

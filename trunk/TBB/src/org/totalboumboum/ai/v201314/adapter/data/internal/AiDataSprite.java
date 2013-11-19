@@ -41,7 +41,9 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  * 		Type de sprite représenté.
  */
 abstract class AiDataSprite<T extends Sprite> implements AiSprite
-{	
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Construit une représentation du sprite passé en paramètre.
 	 * 
@@ -106,7 +108,7 @@ abstract class AiDataSprite<T extends Sprite> implements AiSprite
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Sprite représenté par cette classe */ 
-	protected T sprite;
+	protected transient T sprite;
 
 	/**
 	 * Teste si cette représentation correspond au sprite passé en paramètre.

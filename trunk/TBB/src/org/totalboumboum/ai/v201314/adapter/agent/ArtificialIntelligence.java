@@ -176,8 +176,10 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	
 	/**
 	 * Renvoie la zone à laquelle l'agent a accès.
+	 * 
 	 * @return	
-	 * 		une {@link AiZone} représentant tous les percepts utilisables par l'agent.
+	 * 		une {@link AiZone} représentant tous les 
+	 * 		percepts utilisables par l'agent.
 	 */
 	public final AiZone getZone()
 	{	return zone;
@@ -188,7 +190,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * pour initialiser la zone de l'agent.
 	 * <br/>
 	 * Cette méthode est réservée au moteur du jeu : 
-	 * à ne pas utiliser dans votre agent.
+	 * <b>à ne pas utiliser dans votre agent</b>.
 	 * 
 	 * @param zone	
 	 * 		l'objet représentant la zone à laquelle l'agent aura accès

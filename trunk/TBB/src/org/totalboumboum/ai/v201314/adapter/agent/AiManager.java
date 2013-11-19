@@ -44,6 +44,7 @@ import org.totalboumboum.ai.AiAbstractManager;
 import org.totalboumboum.ai.v201314.adapter.communication.AiAction;
 import org.totalboumboum.ai.v201314.adapter.communication.AiActionName;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
@@ -72,11 +73,30 @@ import org.xml.sax.SAXException;
  * 
  * @author Vincent Labatut
  */
-public abstract class AiManager extends AiAbstractManager<AiAction>
+public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 {	
 	/////////////////////////////////////////////////////////////////
 	// AGENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
+	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
+	{	super.init(instance,player);
+	
+		// init fields
+		loop = RoundVariables.loop;
+		level = RoundVariables.level;
+		percepts = new AiDataZone(level,player);
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		ai.setZone(percepts);
+		output = ai.getOutput();
+		
+		// load preferences
+		Profile profile = player.getProfile();
+		String packName = profile.getAiPackname();
+		String aiName = profile.getAiName();
+		AiPreferenceLoader.loadAiPreferences(packName, aiName, ai);
+	}
+
 	@Override
 	public abstract ArtificialIntelligence instantiateAgent();
 
@@ -103,24 +123,10 @@ public abstract class AiManager extends AiAbstractManager<AiAction>
 	private long lastUpdateTime = 0;
 	
 	@Override
-	public final void init(String instance, AiPlayer player) throws NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, IOException, IllegalArgumentException, URISyntaxException
-	{	super.init(instance,player);
+	public AiZone getCurrentPercepts()
+    {	return percepts;
+    }
 	
-		// init fields
-		loop = RoundVariables.loop;
-		level = RoundVariables.level;
-		percepts = new AiDataZone(level,player);
-		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		ai.setZone(percepts);
-		output = ai.getOutput();
-		
-		// load preferences
-		Profile profile = player.getProfile();
-		String packName = profile.getAiPackname();
-		String aiName = profile.getAiName();
-		AiPreferenceLoader.loadAiPreferences(packName, aiName, ai);
-	}
-
 	@Override
 	public final void updatePercepts()
 	{	long elapsedTime = loop.getTotalGameTime() - lastUpdateTime;

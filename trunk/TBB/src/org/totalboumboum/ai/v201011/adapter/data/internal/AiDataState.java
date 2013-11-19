@@ -40,9 +40,11 @@ import org.totalboumboum.engine.content.sprite.Sprite;
  *		Ancienne API d'IA, à ne plus utiliser. 
  */
 final class AiDataState implements AiState
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/** sprite dont l'état est représenté */
-	private Sprite sprite;
+	private transient Sprite sprite;
 	
 	/**
 	 * construit un objet représentant l'état du sprite passé en paramètre

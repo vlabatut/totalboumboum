@@ -37,7 +37,9 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
  * @author Vincent Labatut
  */
 final class AiDataFire extends AiDataSprite<Fire> implements AiFire
-{
+{	/** Id de la classe */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Crée une représentation du feu passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
