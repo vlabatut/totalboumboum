@@ -161,18 +161,18 @@ public class Map {
 					 * } else
 					 */
 
-					if (xadversaire - q < width
+					if (xadversaire - q >= 0 && xadversaire - q < width
 							&& (matrix[xadversaire - q][yadversaire] == Etat.BOMBE))
 						matrix[xadversaire - q][yadversaire] = Etat.BOMBE;
-					else if (xadversaire - q > 0
+					else if (xadversaire - q >= 0 && xadversaire - q < width
 							&& (matrix[xadversaire - q][yadversaire] == Etat.FLAMMES || matrix[xadversaire
 									- q][yadversaire] == Etat.DANGER))
 						matrix[xadversaire - q][yadversaire] = Etat.DANGER;
-					else if (xadversaire - q < width
+					else if (xadversaire - q >= 0 && xadversaire - q < width
 							&& (matrix[xadversaire - q][yadversaire] == Etat.FEU))
 						matrix[xadversaire - q][yadversaire] = Etat.FEUFLAMMES;
 
-					else if (xadversaire - q > 0
+					else if (xadversaire - q >= 0 && xadversaire - q < width
 							// && matrix[xadversaire - q][yadversaire] !=
 							// Etat.POINTFLAMMES
 
@@ -267,17 +267,17 @@ public class Map {
 					 * 
 					 * } else
 					 */
-					if (yadversaire - q > 0 && yadversaire - q < height
+					if (yadversaire - q >= 0 && yadversaire - q < height
 							&& (matrix[xadversaire][yadversaire - q] == Etat.BOMBE))
 						matrix[xadversaire][yadversaire - q] = Etat.BOMBE;
-					else if (yadversaire - q > 0 && yadversaire - q < height
+					else if (yadversaire - q >= 0 && yadversaire - q < height
 							&& (matrix[xadversaire][yadversaire - q] == Etat.FEU))
 						matrix[xadversaire][yadversaire - q] = Etat.FEUFLAMMES;
-					else if (yadversaire - q > 0
+					else if (yadversaire - q >= 0
 							&& (matrix[xadversaire][yadversaire - q] == Etat.FLAMMES || matrix[xadversaire][yadversaire
 									- q] == Etat.DANGER))
 						matrix[xadversaire][yadversaire - q] = Etat.DANGER;
-					else if (yadversaire - q > 0
+					else if (yadversaire - q >= 0
 							// && matrix[xadversaire][yadversaire - q] !=
 							// Etat.POINTFLAMMES
 
