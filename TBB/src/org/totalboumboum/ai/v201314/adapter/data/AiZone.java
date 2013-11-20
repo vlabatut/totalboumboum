@@ -1345,35 +1345,54 @@ public abstract class AiZone implements Serializable
 		double yCenter = tile.getPosY();
 		AiTile t = getTile(x1, yCenter);
 		if(!tile.equals(t))
-		{	double xCenter = tile.getPosX();
+		{	List<Direction> directions = new ArrayList<Direction>();
+			if(direction==Direction.NONE)
+			{	directions.add(Direction.LEFT);
+				directions.add(Direction.RIGHT);
+			}
+			else
+				directions.add(direction);
+			
+			double xCenter = tile.getPosX();
 			double dim = tile.getSize();
-			double x2L = xCenter - dim/2 - 1;
-			double x2R = xCenter + dim/2;
-			double dxL = x2L - x1;
-			double dxR = x2R - x1;
-			double absDxL = Math.abs(dxL);
-			double absDxR = Math.abs(dxR);
-			double dx;
-			double direct;
-			if(absDxL<absDxR)
-			{	dx = dxL;
-				direct = absDxL;
+			result = Double.MAX_VALUE;
+			for(Direction dir: directions)
+			{	double d = - dir.getIntFromDirection()[0];
+				double x2 = xCenter + d*dim/2;
+				if(d>0)	
+					x2--;
+				double temp = getPixelDistance(x1, yCenter, x2, yCenter, dir);
+				if(temp<result)
+					result = temp;
 			}
-			else
-			{	dx = dxR;
-				direct = absDxR;
-			}
-			double indirect = pixelWidth - direct - dim;
-			Direction dir = direction.getHorizontalPrimary();
-			if(dir==Direction.NONE)
-				result = Math.min(direct,indirect);
-			else
-			{	Direction d = Direction.getHorizontalFromDouble(dx);
-				if(dir==d)
-					result = direct;
-				else
-					result = indirect;
-			}		
+			
+//			double x2L = xCenter - dim/2 - 1;
+//			double x2R = xCenter + dim/2;
+//			double dxL = x2L - x1;
+//			double dxR = x2R - x1;
+//			double absDxL = Math.abs(dxL);
+//			double absDxR = Math.abs(dxR);
+//			double dx;
+//			double direct;
+//			if(absDxL<absDxR)
+//			{	dx = dxL;
+//				direct = absDxL;
+//			}
+//			else
+//			{	dx = dxR;
+//				direct = absDxR;
+//			}
+//			double indirect = pixelWidth - direct - dim;
+//			Direction dir = direction.getHorizontalPrimary();
+//			if(dir==Direction.NONE)
+//				result = Math.min(direct,indirect);
+//			else
+//			{	Direction d = Direction.getHorizontalFromDouble(dx);
+//				if(dir==d)
+//					result = direct;
+//				else
+//					result = indirect;
+//			}		
 		}
 		
 		return result;
@@ -1406,35 +1425,54 @@ public abstract class AiZone implements Serializable
 		double xCenter = tile.getPosX();
 		AiTile t = getTile(xCenter, y1);
 		if(!tile.equals(t))
-		{	double yCenter = tile.getPosY();
+		{	List<Direction> directions = new ArrayList<Direction>();
+			if(direction==Direction.NONE)
+			{	directions.add(Direction.DOWN);
+				directions.add(Direction.UP);
+			}
+			else
+				directions.add(direction);
+			
+			double yCenter = tile.getPosY();
 			double dim = tile.getSize();
-			double y2U = yCenter - dim/2 - 1;
-			double y2D = yCenter + dim/2;
-			double dyL = y2U - y1;
-			double dyR = y2D - y1;
-			double absDyL = Math.abs(dyL);
-			double absDyR = Math.abs(dyR);
-			double dy;
-			double direct;
-			if(absDyL<absDyR)
-			{	dy = dyL;
-				direct = absDyL;
+			result = Double.MAX_VALUE;
+			for(Direction dir: directions)
+			{	double d = - dir.getIntFromDirection()[1];
+				double y2 = yCenter + d*dim/2;
+				if(d>0)	
+					y2--;
+				double temp = getPixelDistance(xCenter, y1, xCenter, y2, dir);
+				if(temp<result)
+					result = temp;
 			}
-			else
-			{	dy = dyR;
-				direct = absDyR;
-			}
-			double indirect = pixelWidth - direct - dim;
-			Direction dir = direction.getVerticalPrimary();
-			if(dir==Direction.NONE)
-				result = Math.min(direct,indirect);
-			else
-			{	Direction d = Direction.getVerticalFromDouble(dy);
-				if(dir==d)
-					result = direct;
-				else
-					result = indirect;
-			}
+			
+//			double y2U = yCenter - dim/2 - 1;
+//			double y2D = yCenter + dim/2;
+//			double dyU = y2U - y1;
+//			double dyD = y2D - y1;
+//			double absDyU = Math.abs(dyU);
+//			double absDyD = Math.abs(dyD);
+//			double dy;
+//			double direct;
+//			if(absDyU<absDyD)
+//			{	dy = dyU;
+//				direct = absDyU;
+//			}
+//			else
+//			{	dy = dyD;
+//				direct = absDyD;
+//			}
+//			double indirect = pixelWidth - direct - dim;
+//			Direction dir = direction.getVerticalPrimary();
+//			if(dir==Direction.NONE)
+//				result = Math.min(direct,indirect);
+//			else
+//			{	Direction d = Direction.getVerticalFromDouble(dy);
+//				if(dir==d)
+//					result = direct;
+//				else
+//					result = indirect;
+//			}
 		}
 		
 		return result;
