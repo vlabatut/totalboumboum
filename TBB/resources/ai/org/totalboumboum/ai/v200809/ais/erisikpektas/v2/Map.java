@@ -267,10 +267,10 @@ public class Map {
 					 * 
 					 * } else
 					 */
-					if (yadversaire - q < height
+					if (yadversaire - q > 0 && yadversaire - q < height
 							&& (matrix[xadversaire][yadversaire - q] == Etat.BOMBE))
 						matrix[xadversaire][yadversaire - q] = Etat.BOMBE;
-					else if (yadversaire - q < height
+					else if (yadversaire - q > 0 && yadversaire - q < height
 							&& (matrix[xadversaire][yadversaire - q] == Etat.FEU))
 						matrix[xadversaire][yadversaire - q] = Etat.FEUFLAMMES;
 					else if (yadversaire - q > 0
