@@ -1522,7 +1522,7 @@ public class Launcher
 	 * 		- supprimer zgraphics
 	 * 		- supprimer tous les commentaires TODO et NOTE
 	 * 		- effacer le changelog
-	 * 		- virer les classes contenant un main()
+	 * 		- [[virer les classes contenant un main()]]
 	 * - ressources :
 	 * 		- supprimer restmp
 	 * 		- supprimer les agents de test
