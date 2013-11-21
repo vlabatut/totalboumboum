@@ -338,16 +338,13 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	/**
 	 * Renvoie le critère dont le nom
 	 * est passé en paramètre (s'il existe).
-	 * <br/>
-	 * Cette méthode est destinée à un usage interne,
-	 * vous (le concepteur de l'agent) ne devez pas l'utiliser.
 	 * 
 	 * @param name
 	 * 		Nom du critère demandé. 
 	 * @return 
 	 * 		Le critère correspondant, ou {@code null} s'il n'existe pas.
 	 */
-	final AiCriterion<T,?> getCriterion(String name)
+	public final AiCriterion<T,?> getCriterion(String name)
 	{	AiCriterion<T,?> result = criterionMap.get(name);
 		return result;
 	}
@@ -410,7 +407,7 @@ public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> exte
 	 * @param name
 	 * 		Nom de la catégorie demandée. 
 	 * @return 
-	 * 		La catégorie correspondant, ou {@code null} si elle le
+	 * 		La catégorie correspondant, ou {@code null} si le
 	 * 		nom spécifié n'a pas été associé à une catégorie.
 	 */
 	protected final AiCategory getCategory(String name)
