@@ -229,7 +229,7 @@ public class PlayerEvolutionSubPanel extends ColumnsSubPanel implements MouseLis
 			}
 			
 			// init player colors
-			HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+			Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 			List<PredefinedColor> colors = new ArrayList<PredefinedColor>();
 			for(String id: selectedPlayers)
 			{	PlayerStats playerStats = playersStats.get(id);
@@ -564,7 +564,7 @@ if(colors.size()<selectedPlayers.size() )
 	{	// init colors
 		PredefinedColor colors[] = PredefinedColor.values();
 		playerColors.clear();
-		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		for(String playerId: selectedPlayers)
 		{	PlayerStats playerStats = playersStats.get(playerId);
 			PredefinedColor color = playerStats.getSelectedColor();

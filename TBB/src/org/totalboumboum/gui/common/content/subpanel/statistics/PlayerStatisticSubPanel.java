@@ -318,7 +318,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 		// building all pages
 		pageCount = 0;
 		int headerHeight = 0;
-		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		int idIndex = 0;
 		do
 		{	// build the panel			
@@ -700,7 +700,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				}
 				else if(buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_SELECT) || buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNSELECT))
 				{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
-					HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 					PlayerStats playerStats = playersStats.get(playerId);
 					if(playerStats.isSelected())
 						playerStats.setSelectedColor(null);
@@ -721,7 +721,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 							playerStats.setSelectedColor(color);
 						}
 					}
-					// TODO save stats, to keep selection? can save only data, faster
+					// 
 					refresh();
 				}
 			}
@@ -730,7 +730,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 			
 				if(buttonKey.equals(GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_COLOR))
 				{	String playerId = playersIds.get((currentPage*lines)+p[0]-1);
-					HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 					PlayerStats playerStats = playersStats.get(playerId);
 					PredefinedColor color = playerStats.getSelectedColor();
 					if(color!=null)
@@ -764,7 +764,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	{	PredefinedColor result = null;
 		
 		// used colors
-		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		List<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
 		for(PlayerStats p: playersStats.values())
 		{	PredefinedColor clr = p.getSelectedColor();
@@ -800,7 +800,7 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 	 */
 	public boolean isFreeColor(PredefinedColor color)
 	{	boolean result = true;
-		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		Iterator<PlayerStats> it = playersStats.values().iterator();
 		while(it.hasNext() && result)
 		{	PlayerStats p = it.next();
