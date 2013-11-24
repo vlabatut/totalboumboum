@@ -29,14 +29,21 @@ import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
 
 /**
+ * Represents the stats of a tournament.
  * 
  * @author Vincent Labatut
- *
  */
 public class StatisticTournament extends StatisticBase
-{
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new stat object for
+	 * the specified game object.
+	 * 
+	 * @param tournament
+	 * 		Game object.
+	 */
 	public StatisticTournament(AbstractTournament tournament)
 	{	super(tournament);
 		// confrontations
@@ -53,29 +60,73 @@ public class StatisticTournament extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC MATCHES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of match stats */
 	private final List<StatisticMatch> matches = new ArrayList<StatisticMatch>();
+	/** Number of rounds played */
 	private int played[];
+	/** Number of rounds won */
 	private int won[];
+	/** Number of rounds drawn*/
 	private int drawn[];
+	/** Number of rounds lost*/
 	private int lost[];
 		
+	/**
+	 * Returns the numbers of rounds played.
+	 * 
+	 * @return
+	 * 		Numbers of rounds played.
+	 */
 	public int[] getPlayed()
 	{	return played;
 	}
+	
+	/**
+	 * Returns the numbers of rounds won.
+	 * 
+	 * @return
+	 * 		Numbers of rounds won.
+	 */
 	public int[] getWon()
 	{	return won;
 	}
+
+	/**
+	 * Returns the numbers of rounds drawn.
+	 * 
+	 * @return
+	 * 		Numbers of rounds drawn.
+	 */
 	public int[] getDrawn()
 	{	return drawn;
 	}
+
+	/**
+	 * Returns the numbers of rounds lost.
+	 * 
+	 * @return
+	 * 		Numbers of rounds lost.
+	 */
 	public int[] getLost()
 	{	return lost;
 	}
 
+	/**
+	 * Returns the list of match stats.
+	 * 
+	 * @return
+	 * 		Match stats.
+	 */
 	public List<StatisticMatch> getStatisticMatches()
 	{	return matches;
 	}
 
+	/**
+	 * Adds a new match stat object to the current list.
+	 * 
+	 * @param match
+	 * 		New match stat object.
+	 */
 	public void addStatisticMatch(StatisticMatch match)
 	{	// matches stats
 		matches.add(match);

@@ -26,16 +26,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Stats as defined at the level of the whole game.
  * 
  * @author Vincent Labatut
- *
  */
 public class Statistics implements Serializable
-{
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/** List of tournament stats */
 	private final List<StatisticTournament> tournaments = new ArrayList<StatisticTournament>();
 	
+	/**
+	 * Adds a new tournament stat to the current list.
+	 * 
+	 * @param tournament
+	 * 		Stats to be added to the list.
+	 */
 	public void addGame(StatisticTournament tournament)
 	{	tournaments.add(tournament);
 	}

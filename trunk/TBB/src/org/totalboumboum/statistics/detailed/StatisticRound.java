@@ -27,14 +27,21 @@ import java.util.List;
 import org.totalboumboum.game.round.Round;
 
 /**
+ * Represents the stats of a round.
  * 
  * @author Vincent Labatut
- *
  */
 public class StatisticRound extends StatisticBase
-{
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new stat object for
+	 * the specified game object.
+	 * 
+	 * @param round
+	 * 		Game object.
+	 */
 	public StatisticRound(Round round)
 	{	super(round);
 	}
@@ -42,12 +49,20 @@ public class StatisticRound extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of event stats */
 	private final List<StatisticEvent> events = new ArrayList<StatisticEvent>();
 	
+	@Override
 	public List<StatisticEvent> getStatisticEvents()
 	{	return events;
 	}
 
+	/**
+	 * Adds a new event stat object to the current list.
+	 * 
+	 * @param event
+	 * 		New event stat object.
+	 */
 	public void addStatisticEvent(StatisticEvent event)
 	{	// events
 		events.add(event);
@@ -75,6 +90,14 @@ public class StatisticRound extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// TIME		/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Updates the current time of this round.
+	 * 
+	 * @param time
+	 * 		Current time.
+	 * @param round
+	 * 		Associated game object.
+	 */
 	public void updateTime(long time, Round round)
 	{	setTotalTime(time);
 		long[] sc = getScores(Score.TIME);
@@ -84,6 +107,12 @@ public class StatisticRound extends StatisticBase
 		}
 	}
 
+	/**
+	 * Sets the end time of this round.
+	 * 
+	 * @param round
+	 * 		Associated game object.
+	 */
 	public void finalizeTime(Round round)
 	{	updateTime(getTotalTime()+1,round);
 	}
