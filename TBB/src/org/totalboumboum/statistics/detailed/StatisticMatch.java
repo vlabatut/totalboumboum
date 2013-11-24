@@ -27,14 +27,21 @@ import java.util.List;
 import org.totalboumboum.game.match.Match;
 
 /**
+ * Represents the stats of a match.
  * 
  * @author Vincent Labatut
- *
  */
 public class StatisticMatch extends StatisticBase
-{
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new stat object for
+	 * the specified game object.
+	 * 
+	 * @param match
+	 * 		Game object.
+	 */
 	public StatisticMatch(Match match)
 	{	super(match);
 	}
@@ -42,12 +49,25 @@ public class StatisticMatch extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC ROUNDS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of round stats */
 	private final List<StatisticRound> rounds = new ArrayList<StatisticRound>();
 
+	/**
+	 * Return the list of round stats.
+	 * 
+	 * @return
+	 * 		Round stats.
+	 */
 	public List<StatisticRound> getStatisticRounds()
 	{	return rounds;
 	}
 
+	/**
+	 * Adds a new round stat object to the current list.
+	 * 
+	 * @param round
+	 * 		New round stat object.
+	 */
 	public void addStatisticRound(StatisticRound round)
 	{	// round stats
 		rounds.add(round);

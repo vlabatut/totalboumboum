@@ -26,32 +26,72 @@ import java.util.List;
 import org.totalboumboum.statistics.overall.PlayerStats.Value;
 
 /**
+ * Quantity used to describe a player behavior during a round.
  * 
  * @author Vincent Labatut
- *
  */
 public enum Score
-{	/** number of bombs dropped */
+{	
+	/////////////////////////////////////////////////////////////////
+	// VALUES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Number of bombs dropped */
 	BOMBS(Value.BOMBS), 
-	/** number of crowns picked up */
+	/** Number of crowns picked up */
 	CROWNS(Value.CROWNS), 
-	/** number of times bombed by other players */
+	/** Number of times bombed by other players */
 	BOMBEDS(Value.BOMBEDS),
-	/** number of items picked up */
+	/** Number of items picked up */
 	ITEMS(Value.ITEMS), 
-	/** number of other players bombed */
+	/** Number of other players bombed */
 	BOMBINGS(Value.BOMBINGS),
-	/** number of tiles painted */
+	/** Number of tiles painted */
 	PAINTINGS(Value.PAINTINGS), 
-	/** number of times the player bombed himself */
+	/** Number of times the player bombed himself */
 	SELF_BOMBINGS(Value.SELF_BOMBINGS), 
-	/** time played */
+	/** Time played */
 	TIME(Value.TIME);
 	
+	/**
+	 * Builds a new Score value.
+	 * 
+	 * @param value
+	 * 		Value associated to this Score.
+	 */
 	Score(Value value)
 	{	this.value = value;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// VALUE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Value associated to this score */
+	private Value value = null;
+	
+	/**
+	 * Returns the value associated to this score.
+	 * 
+	 * @return
+	 * 		Value associated to this score.
+	 */
+	public Value getValue()
+	{	return value;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Processes this score for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] process(StatisticRound stats, StatisticEvent event)
 	{	long[] result = new long[stats.getPlayersIds().size()];
 		switch(this)
@@ -83,6 +123,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the dropped bomb scores for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processBombs(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -95,6 +146,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the picked crowns scores for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processCrowns(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -111,6 +173,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the bombed by opponents for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processBombeds(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -125,6 +198,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the picked items for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processItems(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -137,6 +221,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the bombed opponents scores for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processBombings(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -151,6 +246,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the self bomb scores for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processSelfBombings(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -165,6 +271,17 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the tiles painted scores for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processPaintings(StatisticRound stats, StatisticEvent event)
 	{	// init
 		List<String> playersIds = stats.getPlayersIds();
@@ -184,11 +301,31 @@ public enum Score
 		return result;
 	}
 
+	/**
+	 * Processes the time played scores for all players in the 
+	 * specified round, using the specified event.
+	 * 
+	 * @param stats
+	 * 		Stats object used to get players.
+	 * @param event
+	 * 		Data used to process the scores.
+	 * @return
+	 * 		An array containing the scores.
+	 */
 	public long[] processTime(StatisticRound stats, StatisticEvent event)
 	{	long result[] = stats.getScores(this);
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Express this score as a string.
+	 * 
+	 * @return
+	 * 		A string representation of this score.
+	 */
 	public String stringFormat()
 	{	StringBuffer result = new StringBuffer();
 		String raw = this.toString(); 
@@ -196,11 +333,5 @@ public enum Score
 		raw = raw.toLowerCase();
 		result.append(raw.substring(1,raw.length()));
 		return result.toString();
-	}
-
-	private Value value = null;
-	
-	public Value getValue()
-	{	return value;
 	}
 }

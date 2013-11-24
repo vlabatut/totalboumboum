@@ -36,12 +36,23 @@ import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 
 /**
+ * Loads custom stats (i.e. non-Glicko2).
  * 
  * @author Vincent Labatut
- *
  */
 public class StatisticsLoader
-{
+{	
+	/**
+	 * Loads the stat files.
+	 * 
+	 * @return
+	 * 		Loaded stats.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static Statistics loadStatistics() throws IOException, ClassNotFoundException
 	{	Statistics result;
 		String statisticsFolder = FilePaths.getStatisticsPath();
@@ -54,7 +65,15 @@ public class StatisticsLoader
 		ois.close();
 		return result;
 	}
-	
+
+	/**
+	 * Records the specified stat files.
+	 * 
+	 * @param stats
+	 * 		Stats to be recorded.
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void saveStatistics(Statistics stats) throws IOException
 	{	String statisticsFolder = FilePaths.getStatisticsPath();
 		String individualFolder = statisticsFolder+File.separator+FileNames.FILE_STATISTICS;

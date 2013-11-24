@@ -33,13 +33,20 @@ import java.util.List;
 import org.totalboumboum.game.profile.Profile;
 
 /**
+ * Set of methods common to all statistical objects.
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class StatisticBase implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new statistical object.
+	 * 
+	 * @param holder
+	 * 		Game object described by this stat object.
+	 */
 	public StatisticBase(StatisticHolder holder)
 	{	totalTime = 0;
 		
@@ -68,10 +75,16 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// SCORES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** the current scores */
+	/** The current scores */
 	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
 	/**
-	 * get the current scores
+	 * Gets the current values for
+	 * the specified score.
+	 * 
+	 * @param score 
+	 * 		Score of interest.
+	 * @return 
+	 * 		Values associated to this score, for each player.
 	 */
 	public long[] getScores(Score score)
 	{	long[] result;
@@ -82,28 +95,41 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Points scored by the players */
 	private float[] points;
+	/** Total points scored by the players in the various sub-parts of the considered game object */
 	private float[] total;
 	
 	/**
-	 * points processed after the end of the confrontation
-	 * (for tournaments, matches and rounds)
+	 * Points processed after the end of the confrontation
+	 * (for tournaments, matches and rounds).
+	 * 
 	 * @return
+	 * 		Points scored by the players.
 	 */
 	public float[] getPoints()
 	{	return points;
 	}
 
+	/**
+	 * Changes the points associated to
+	 * this stat object.
+	 * 
+	 * @param points
+	 * 		New point values.
+	 */
 	public void setPoints(float[] points)
 	{	for(int i=0;i<points.length;i++)
 			this.points[i] = points[i];
 	}
 	
 	/**
-	 * sum of the points for all sub-confrontations
-	 * (ie matches for a tournament and rounds for a match. 
-	 * should not be used for rounds).
+	 * Sum of the points for all sub-confrontations
+	 * (i.e. matches for a tournament and rounds for a match. 
+	 * Should not be used for rounds).
+	 * 
 	 * @return
+	 * 		Total of the points scored in the sub-confrontations.
 	 */
 	public float[] getTotal()
 	{	return total;
@@ -112,23 +138,55 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** 
+	 * Returns the stat events associated to this stat object.
+	 * 
+	 * @return 
+	 * 		List of stat events.
+	 */
 	public abstract List<StatisticEvent> getStatisticEvents();
 	
 	/////////////////////////////////////////////////////////////////
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** 
+	 * Returns the number of confrontations 
+	 * (played up to now).
+	 * 
+	 * @return 
+	 * 		Number of past confrontations.
+	 */
 	public abstract int getConfrontationCount();
+	/** 
+	 * Returns the stats of each confrontation.
+	 *  
+	 * @return 
+	 * 		List of stat objects.
+	 */
 	public abstract List<StatisticBase> getConfrontationStats();
 
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Total time played */
 	private long totalTime;
 
+	/**
+	 * Returns the total time played.
+	 * 
+	 * @return
+	 * 		Total time.
+	 */
 	public long getTotalTime()
 	{	return totalTime;	
 	}
 	
+	/**
+	 * Changes the total time played.
+	 * 
+	 * @param totalTime
+	 * 		New total time.
+	 */
 	public void setTotalTime(long totalTime)
 	{	this.totalTime = totalTime;
 	}
@@ -136,22 +194,42 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// DATE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Start date of the associated game object */
 	private Date startDate;
+	/** End date of the associated game object */
 	private Date endDate;
 
+	/**
+	 * Returns the start date of the associated game object.
+	 * 
+	 * @return
+	 * 		Start date of the associated game object.
+	 */
 	public Date getStartDate()
 	{	return startDate;
 	}
 	
+	/**
+	 * Initializes the start date of the associated game object.
+	 */
 	public void initStartDate()
 	{	Calendar cal = new GregorianCalendar();
 		this.startDate = cal.getTime();
 	}
 	
+	/**
+	 * Returns the end date of the associated game object.
+	 * 
+	 * @return
+	 * 		End date of the associated game object.
+	 */
 	public Date getEndDate()
 	{	return endDate;
 	}
 	
+	/**
+	 * Initializes the end date of the associated game object.
+	 */
 	public void initEndDate()
 	{	Calendar cal = new GregorianCalendar();
 		this.endDate = cal.getTime();
@@ -160,12 +238,27 @@ public abstract class StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Ids of the involved players */
 	private final List<String> playersIds = new ArrayList<String>();
 
+	/**
+	 * Gets the list of players involved in
+	 * the associated game object.
+	 * 
+	 * @return
+	 * 		List of player ids.
+	 */
 	public List<String> getPlayersIds()
 	{	return playersIds;
 	}
 
+	/**
+	 * Adds a player to the list
+	 * of ids.
+	 * 
+	 * @param playerId
+	 * 		New player to add.
+	 */
 	public void addPlayerId(String playerId)
 	{	playersIds.add(playerId);
 	}
