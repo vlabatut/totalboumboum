@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,7 +37,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
-import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticRound;
 import org.totalboumboum.statistics.glicko2.Glicko2Loader;
@@ -56,15 +54,23 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * Represents all the game statistics.
  * 
  * @author Vincent Labatut
- *
  */
 public class GameStatistics
 {
 	/////////////////////////////////////////////////////////////////
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Loads the statistics.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void loadStatistics() throws IOException, ClassNotFoundException
 	{	// overall statistics
 		playersStats = OverallStatsLoader.loadOverallStatistics();
@@ -72,6 +78,26 @@ public class GameStatistics
 		rankingService = Glicko2Loader.loadGlicko2Statistics();
 	}
 	
+	/**
+	 * Saves the statistics.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the stat files.
+	 * @throws SecurityException
+	 * 		Problem while accessing the stat files.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the stat files.
+	 * @throws SAXException
+	 * 		Problem while accessing the stat files.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the stat files.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void saveStatistics() throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// overall statistics
 		OverallStatsSaver.saveOverallStatistics(playersStats);
@@ -82,6 +108,13 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	// PROCESS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Updates the game statistics using
+	 * those of the specified round.
+	 * 
+	 * @param stats
+	 * 		Round statistics used for updating the game stats.
+	 */
 	public static void update(StatisticRound stats)
 	{	try
 		{	// update
@@ -117,6 +150,26 @@ public class GameStatistics
 		}
 	}	
 	
+	/**
+	 * Resets all statistics.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the stat files.
+	 * @throws SecurityException
+	 * 		Problem while accessing the stat files.
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the stat files.
+	 * @throws SAXException
+	 * 		Problem while accessing the stat files.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the stat files.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void reset() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	resetPlayersStats();
 		resetHistories();
@@ -125,10 +178,11 @@ public class GameStatistics
 	}
 
 	/**
-	 * Reset the auto-advance index to zero.
+	 * Resets the auto-advance index to zero.
 	 * This value is used when the tournament
 	 * mode of the auto-advance options is
 	 * enabled.
+	 * (Maybe this method should not be here, by the way).
 	 */
 	private static void resetTournamentAutoAdvance()
 	{	TournamentConfiguration tc = Configuration.getGameConfiguration().getTournamentConfiguration();
@@ -136,8 +190,27 @@ public class GameStatistics
 	}
 	
 	/**
-	 * used when a new profile is created
+	 * Used when a new profile is created.
+	 * 
 	 * @param playerId
+	 * 		Id of the newly created player.
+	 * 
+	 * @throws IllegalArgumentException 
+	 * 		Problem while accessing the stat files.
+	 * @throws SecurityException 
+	 * 		Problem while accessing the stat files.
+	 * @throws IOException 
+	 * 		Problem while accessing the stat files.
+	 * @throws ParserConfigurationException 
+	 * 		Problem while accessing the stat files.
+	 * @throws SAXException 
+	 * 		Problem while accessing the stat files.
+	 * @throws IllegalAccessException 
+	 * 		Problem while accessing the stat files.
+	 * @throws NoSuchFieldException 
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException 
+	 * 		Problem while accessing the stat files.
 	 */
 	public static void addPlayer(String playerId) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	boolean changed = false;
@@ -199,17 +272,54 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS STATISTICS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static HashMap<String,PlayerStats> playersStats = new HashMap<String, PlayerStats>();
+	/** Custom player statistics (non-Glicko2) */
+	private static Map<String,PlayerStats> playersStats = new HashMap<String, PlayerStats>();
 
+	/**
+	 * Resets the custom player stats.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the stat files.
+	 * @throws SecurityException
+	 * 		Problem while accessing the stat files.
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the stat files.
+	 * @throws SAXException
+	 * 		Problem while accessing the stat files.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the stat files.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void resetPlayersStats() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	HashMap<String,PlayerStats> playersStats = OverallStatsSaver.initOverallStatistics();
 		GameStatistics.playersStats = playersStats;
 	}
 	
-	public static HashMap<String,PlayerStats> getPlayersStats()
+	/**
+	 * Returns the custom player stats.
+	 * 
+	 * @return
+	 * 		Player stats, non-Glicko2.
+	 */
+	public static Map<String,PlayerStats> getPlayersStats()
 	{	return playersStats;	
 	}
 	
+	/**
+	 * Updatse the custom stats,
+	 * i.e. non-Glicko2.
+	 * 
+	 * @param stats
+	 * 		Stats used for the update.
+	 * 
+	 * @throws FileNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void updatePlayersStats(StatisticRound stats) throws FileNotFoundException
 	{	float[] points = stats.getPoints();
 		List<Integer> winners = CombinatoricsTools.getWinners(points);
@@ -264,6 +374,10 @@ public class GameStatistics
 		}
 	}
 	
+	/**
+	 * Updates ranking evolution (a custom field,
+	 * not a Glicko-2 field).
+	 */
 	public static void updatePreviousRankings()
 	{	// put all values to -1 (to handle non-registered players)
 		for(PlayerStats playerStats: playersStats.values())
@@ -284,21 +398,55 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	// RANKING SERVICE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Glicko-2 Stats */
 	private static RankingService rankingService;
 
+	/**
+	 * Resets the Glicko-2 stats.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the stat files.
+	 * @throws SecurityException
+	 * 		Problem while accessing the stat files.
+	 * @throws IOException
+	 * 		Problem while accessing the stat files.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the stat files.
+	 * @throws SAXException
+	 * 		Problem while accessing the stat files.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the stat files.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the stat files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the stat files.
+	 */
 	public static void resetRankingService() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	RankingService rankingService = Glicko2Saver.initGlicko2Statistics();
 		GameStatistics.rankingService = rankingService;
 	}
 	
+	/**
+	 * Returns the Glicko-2 handler.
+	 * 
+	 * @return
+	 * 		Glicko-2 main object.
+	 */
 	public static RankingService getRankingService()
 	{	return rankingService;
 	}
 	
+	/**
+	 * Updates Glicko-2 data using the
+	 * specified stats.
+	 * 
+	 * @param stats
+	 * 		Stats used for the updated.
+	 */
 	public static void updateRankingService(StatisticRound stats)
 	{	// create the game results objects
 		GameResults gameResults = null;
-		/*		if(isTeamGame()) NOTE to be adapted
+		/*		if(isTeamGame()) 
 		{	Iterator teamNames = teamScores.keySet().iterator();
 			while (teamNames.hasNext())
 			{	String teamName = (String)teamNames.next();
