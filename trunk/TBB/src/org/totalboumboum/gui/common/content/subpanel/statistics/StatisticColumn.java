@@ -26,7 +26,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -335,7 +334,7 @@ public enum StatisticColumn
 				panel.setLabelIcon(line,col,icon,tooltip);	
 			}
 /*
- * TODO 
+ *  
  * éventuellement regénérer les stats pour compléter le nouveau champ
  * 			
  */
@@ -650,7 +649,7 @@ public enum StatisticColumn
 			Profile profile = entry.getValue();
 			String playerId = entry.getKey();
 			PlayerRating playerRating = rankingService.getPlayerRating(playerId);
-			HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+			Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 			PlayerStats playerStats = playersStats.get(playerId);
 			int playerRank = rankingService.getPlayerRank(playerId);
 			//int playersCount = rankingService.getPlayers().size();
