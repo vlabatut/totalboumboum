@@ -24,6 +24,7 @@ package org.totalboumboum.engine.loop;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.profile.Profile;
@@ -69,7 +70,7 @@ public class SimulationLoop extends Loop
 	{	// init
 		RankingService rankingService = GameStatistics.getRankingService();
 		List<Profile> profiles = round.getProfiles();
-		HashMap<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+		Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		List<Profile> currentPlayers = new ArrayList<Profile>(profiles);
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		HashMap<String,HashMap<Score,Long>> currentScores = new HashMap<String, HashMap<Score,Long>>();
