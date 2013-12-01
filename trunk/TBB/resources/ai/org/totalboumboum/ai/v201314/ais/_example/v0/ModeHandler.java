@@ -3,7 +3,7 @@ package org.totalboumboum.ai.v201314.ais._example.v0;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 
 /**
- * Classe gérant les déplacements de l'agent. 
+ * Classe gérant le mode courant de l'agent. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
  * 
  * TODO Effacez ces commentaires et remplacez-les par votre propre Javadoc.
