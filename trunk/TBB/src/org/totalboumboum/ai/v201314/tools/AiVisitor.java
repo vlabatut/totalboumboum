@@ -107,12 +107,12 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	/** Méthodes ignorées lors de l'analyse */
 	private final static List<String> IGNORED_METHODS = Arrays.asList(new String[]
 	{	"AiMain",			
-		"compare",
-		"equals",
-		"hashCode",
+//		"compare",
+//		"equals",
+//		"hashCode",
 		"instantiateAgent",
-		"main",
-		"toString"
+		"main"
+//		"toString"
 	});
 	/** Méthodes interdites */
 	private final static List<String> FORBIDDEN_METHODS = Arrays.asList(new String[]
@@ -127,7 +127,7 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
  	{	"Exception",			
  		"StopRequestException"
  	});
-	/** Classe autorisées */
+	/** Classe du jeu (hors API) autorisées */
 	private final static List<String> ALLOWED_CLASSES = Arrays.asList(new String[]
 	{	GAME_PACKAGE+".tools.images.PredefinedColor",
 		GAME_PACKAGE+".engine.content.feature.Direction"
@@ -395,7 +395,8 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 	 * 		Le bloc à analyser
 	 */
 	private void checkBlock(Statement statement)
-	{	if(!IGNORED_METHODS.contains(currentMethod))
+	{	indentLevel++;
+		if(!IGNORED_METHODS.contains(currentMethod))
 		{	int line = statement.getBeginLine();
 			if(statement instanceof BlockStmt)
 			{	BlockStmt block = (BlockStmt) statement;
@@ -461,6 +462,12 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 				errorCount++;
 			}
 		}
+		else
+		{	for(int i=0;i<indentLevel;i++)
+				System.out.print("..");
+			System.out.println("Méthode ignorée");
+		}
+		indentLevel--;
 	}
 	
 	@Override
