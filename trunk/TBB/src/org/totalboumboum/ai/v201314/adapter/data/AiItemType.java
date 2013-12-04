@@ -32,7 +32,7 @@ import java.io.Serializable;
 public enum AiItemType implements Serializable
 {
 	////////////////////////
-	// BOMBES
+	// BOMBS
 	////////////////////////
 	/** Le joueur ne peut plus poser de bombe du tout (malus temporaire) = constipation */
 	NO_BOMB(false),
@@ -47,7 +47,7 @@ public enum AiItemType implements Serializable
 	GOLDEN_BOMB(true),
 	
 	////////////////////////
-	// PORTÉE
+	// RANGE
 	////////////////////////
 	/** Les bombes ont une portée nulle (malus temporaire) */
 	NO_FLAME(false),
@@ -62,7 +62,7 @@ public enum AiItemType implements Serializable
 	GOLDEN_FLAME(true),
 	
 	////////////////////////
-	// VITESSE
+	// SPEED
 	////////////////////////
 	/** Le joueur se déplace très lentement (malus temporaire) */
 	NO_SPEED(false),
@@ -77,7 +77,7 @@ public enum AiItemType implements Serializable
 	GOLDEN_SPEED(true),
 
 	////////////////////////
-	// EFFET ALÉATOIRE
+	// RANDOM
 	////////////////////////
 	/** Effet négatif sur le joueur (ralentissement, constipation, etc.) */
 	RANDOM_NONE(false),
@@ -87,7 +87,7 @@ public enum AiItemType implements Serializable
 	
 
 	////////////////////////
-	// AUTRES
+	// OTHERS
 	////////////////////////
 	/** Le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
 	// (pas utilisé)
@@ -96,6 +96,9 @@ public enum AiItemType implements Serializable
 	/** Autre type d'item */
 	OTHER(false);
 	
+	////////////////////////
+	// GENERAL
+	////////////////////////
 	/**
 	 * Constructeur standard.
 	 * 
@@ -106,30 +109,13 @@ public enum AiItemType implements Serializable
 	{	this.bonus = bonus;
     }
 
-	////////////////////////
-	// BONUS/MALUS
-	////////////////////////
-	/** Variable vraie ssi l'item est un bonus */
-	private final boolean bonus;
-
 	/**
-	 * Indique si ce type correspond à 
-	 * un item bonus.
-	 * 
-	 * @return
-	 * 		{@code true} ssi l'item est un bonus.
-	 */
-	public boolean isBonus()
-	{	return bonus;
-	}
-	
-    /**
-	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
+	 * Calcule l'AiItemType correspondant au nom d'item passé en paramètre.
 	 * 
 	 * @param name	
-	 * 		nom de l'item à traiter
+	 * 		Nom de l'item à traiter.
 	 * @return	
-	 * 		symbole représentant ce type d'item
+	 * 		Symbole représentant ce type d'item.
 	 */
 	public static AiItemType makeItemType(String name)
 	{	AiItemType result;
@@ -181,6 +167,160 @@ public enum AiItemType implements Serializable
 			result = PUNCH;
 		else
 			result = OTHER;
+		return result;
+	}
+
+	////////////////////////
+	// BONUS/MALUS
+	////////////////////////
+	/** Variable vraie ssi l'item est un bonus */
+	private final boolean bonus;
+
+	/**
+	 * Indique si ce type correspond à 
+	 * un item bonus.
+	 * 
+	 * @return
+	 * 		{@code true} ssi l'item est un bonus.
+	 */
+	public boolean isBonus()
+	{	return bonus;
+	}
+	
+	////////////////////////
+	// KIND
+	////////////////////////
+	/**
+	 * Détermine si ce type d'item
+	 * concerne le nombre de bombes
+	 * qu'un joueur peut poser.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		concerne le nombre de bombes posables.
+	 */
+	public boolean isBombKind()
+	{	boolean result = 
+			this==ANTI_BOMB ||
+			this==EXTRA_BOMB ||
+			this==GOLDEN_BOMB ||
+			this==NO_BOMB;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * concerne la portée des bombes.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		concerne la portée des bombes.
+	 */
+	public boolean isFlameKind()
+	{	boolean result = 
+			this==ANTI_FLAME ||
+			this==EXTRA_FLAME ||
+			this==GOLDEN_FLAME ||
+			this==NO_FLAME;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * concerne la vitesse de déplacement
+	 * du joueur.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		concerne la vitesse du joueur.
+	 */
+	public boolean isSpeedKind()
+	{	boolean result = 
+			this==ANTI_SPEED ||
+			this==EXTRA_SPEED ||
+			this==GOLDEN_SPEED ||
+			this==NO_SPEED;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * a un effet aléatoire.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		a un effet aléatoire.
+	 */
+	public boolean isRandomKind()
+	{	boolean result = 
+			this==RANDOM_EXTRA ||
+			this==RANDOM_NONE;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * a un effet incrémental.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		a un effet incrémental.
+	 */
+	public boolean isExtraKind()
+	{	boolean result = 
+			this==EXTRA_BOMB ||
+			this==EXTRA_FLAME ||
+			this==EXTRA_SPEED ||
+			this==RANDOM_EXTRA;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * a un effet décrémental.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		a un effet décrémental.
+	 */
+	public boolean isAntiKind()
+	{	boolean result = 
+			this==ANTI_BOMB ||
+			this==ANTI_FLAME ||
+			this==ANTI_SPEED;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * a un effet maximisant.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		a un effet maximisant.
+	 */
+	public boolean isGoldenKind()
+	{	boolean result = 
+			this==GOLDEN_BOMB ||
+			this==GOLDEN_FLAME ||
+			this==GOLDEN_SPEED;
+		return result;
+	}
+
+	/**
+	 * Détermine si ce type d'item
+	 * a un effet minimisant.
+	 * 
+	 * @return
+	 * 		{@code true} ssi ce type d'item
+	 * 		a un effet minimisant.
+	 */
+	public boolean isNoneKind()
+	{	boolean result = 
+			this==NO_BOMB ||
+			this==NO_FLAME ||
+			this==NO_SPEED ||
+			this==RANDOM_NONE;
 		return result;
 	}
 }

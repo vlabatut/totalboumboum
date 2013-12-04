@@ -90,15 +90,19 @@ public interface AiHero extends AiSprite
 	 * le joueur peut encore poser. 
 	 * 
 	 * @return	
-	 * 		Le nombre de bombes simultanément posables (en général).
+	 * 		Le nombre de bombes simultanément posables (à ce moment du jeu).
 	 */
 	public int getBombNumberMax();
 	
 	/**
 	 * Renvoie le nombre de bombes posées par le personnage à ce moment-là.
-	 * Ce nombre est limité par la valeur renvoyée par {@link #getBombNumberMax()},
-	 * i.e. il ne peut pas être plus grand puisque getBombNumberMax renvoie
-	 * le nombre de bombes maximal que le joueur peut poser en même temps. 
+	 * Ce nombre est théorétiquement limité par la valeur renvoyée par 
+	 * {@link #getBombNumberMax()}, i.e. il ne peut pas être plus grand 
+	 * puisque getBombNumberMax renvoie le nombre de bombes maximal que le 
+	 * joueur peut poser en même temps. Cependant, il est possible que le
+	 * joueur ait posé son nombre maximal de bombes puis qu'il ait ramassé
+	 * un malus de type anti-bomb, auquel cas le nombre de ses bombes en
+	 * jeu est supérieur à {@code getBombNumberMax()}. 
 	 * 
 	 * @return	
 	 * 		Nombre de bombes posées en ce moment.
@@ -148,7 +152,7 @@ public interface AiHero extends AiSprite
 	 * de l'agent) n'en avez pas besoin.
 	 * 
 	 * @return
-	 * 		Un entier indiquant l'index de vitesse courant du joueur.
+	 * 		Un entier indiquant l'index de vitesse courante du joueur.
 	 */
 	public int getWalkingSpeedIndex();
 	
