@@ -49,7 +49,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Vincent Labatut
  */
 public class Test
-{
+{	/** Agent utilisé lors du test */
+	private static Agent agent = null;
+	
 	/**
 	 * Méthode de test.
 	 * 
@@ -63,7 +65,7 @@ public class Test
 	{	// on initialise l'agent
 		AiMain aiMain = new AiMain();
 		aiMain.loadPreferences();
-		Agent agent = (Agent)aiMain.instantiateAgent();
+		agent = (Agent)aiMain.instantiateAgent();
 
 		// on initialise sa zone
 		AiZone zone;
@@ -98,7 +100,9 @@ public class Test
 	 * 		Problème quelconque.
 	 */
 	public static AiZone usePredefinedZone() throws Exception
-	{	// on initialise la zone (cf. InitData)
+	{	agent.checkInterruption();	// pas nécessaire puisque c'est un test, mais si on n'exécute pas checkInterruption, le parser détecte un problème
+		
+		// on initialise la zone (cf. InitData)
 		AiSimZone result = InitData.initZone1();
 		
 		// on rajoute un adversaire
@@ -130,7 +134,9 @@ public class Test
 	 * 		Problème quelconque.
 	 */
 	public static AiZone useRecordedZone(AiMain aiMain) throws Exception
-	{	// il faut d'abord indiquer le nom du fichier ici
+	{	agent.checkInterruption();	// pas nécessaire puisque c'est un test, mais si on n'exécute pas checkInterruption, le parser détecte un problème
+		
+		// il faut d'abord indiquer le nom du fichier ici
 		String fileName = "2013-11-18 22-59-28-991.data";
 		
 		// et ensuite, on peut charger son contenu
