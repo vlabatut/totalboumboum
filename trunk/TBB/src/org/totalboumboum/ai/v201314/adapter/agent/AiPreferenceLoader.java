@@ -292,7 +292,7 @@ public class AiPreferenceLoader
 					}
 					catch(IllegalArgumentException e)
 					{	handler.displayPreferencesProblem();
-						throw new IllegalArgumentException(errMsg+e.getMessage());
+						throw new IllegalArgumentException(errMsg+"["+className+"] "+e.getMessage());
 					}
 				}
 			}
