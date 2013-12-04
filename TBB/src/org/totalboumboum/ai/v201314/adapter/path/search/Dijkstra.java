@@ -179,7 +179,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	}
 	
 	/**
-	 * Utilise Dijkstra pour calcule un chemin de fuite. Il s'agit
+	 * Utilise Dijkstra pour calculer un chemin de fuite. Il s'agit
 	 * ici de faire un parcours en largeur tenant compte des coûts,
 	 * comme dans la méthode de Dijkstra classique. La différence
 	 * est que la méthode classique va développer au maximum l'arbre
