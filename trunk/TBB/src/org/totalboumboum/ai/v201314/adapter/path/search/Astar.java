@@ -22,6 +22,7 @@ package org.totalboumboum.ai.v201314.adapter.path.search;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -322,7 +323,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * En effet, si vous sélectionnez par exemple {@link TimeFullSuccessorCalculator}
 	 * ou {@link TimePartialSuccessorCalculator} avec un mode restrictif (MODE_NOTREE 
 	 * ou MODE_NOBRANCH), il est peu probable que cette méthode trouve un chemin. En effet, 
-	 * ces modes restrictifs interdise la construction de chemins contenant plusieurs fois 
+	 * ces modes restrictifs interdisent la construction de chemins contenant plusieurs fois 
 	 * la même case. Or, puisqu'on cherche ici à revenir sur la case de départ, il est 
 	 * probable qu'on doive réutiliser certaines cases, ou au moins la toute première. La 
 	 * même remarque s'applique aux successeurs qui ne tiennent pas compte du temps 
@@ -345,7 +346,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		else if(successorCalculator instanceof TimePartialSuccessorCalculator)
 			mode = ((TimePartialSuccessorCalculator)successorCalculator).getSearchMode();
 		if(mode!=null && mode!=SearchMode.MODE_ALL && mode!=SearchMode.MODE_ONEBRANCH)
-			print("WARNING: a time-based successor function is used with the "+mode+" search mode, when looking for a loop path. These are very certainly not appropriate settings.");
+			print("WARNING: a time-based successor function is used with the "+mode+" search mode, when looking for a loop path. These settings are most certainly not appropriate.");
 		if(successorCalculator instanceof BasicSuccessorCalculator || successorCalculator instanceof ApproximateSuccessorCalculator)
 			print("WARNING: a time-based successor function is necessary when looking for a loop path (so no ApproximateSuccessorCalculator or BasicSuccessorCalculator.");
 		
@@ -447,9 +448,25 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				
 				// sinon on récupére les noeuds suivants
 				else
-				{	// développement (on copie la liste des enfants, qui est sinon immuable)
+				{	// développement (on copie la liste des fils, qui est sinon immuable)
 					long before2 = ai.getCurrentTime();
 					List<AiSearchNode> successors = new ArrayList<AiSearchNode>(lastSearchNode.getChildren());
+					
+					// dans le cas de la première itération de la recherche d'un cycle,
+					// on retire le fils correspondant à la même case (action d'attente)
+					// afin de forcer la sortie de case.
+					if(searchLoop && firstIteration)
+					{	Iterator<AiSearchNode> itemp = successors.iterator();
+						boolean fnd = false;
+						while(!fnd && itemp.hasNext())
+						{	AiSearchNode child = itemp.next();
+							AiTile t = child.getLocation().getTile();
+							if(endTiles.contains(t))
+							{	itemp.remove();
+								fnd = true;
+							}
+						}
+					}
 					
 					// verbose : temps
 					{	long after2 = ai.getCurrentTime();
