@@ -54,8 +54,8 @@ public class AiParser
 	public final static List<String> IGNORED_PACKAGES = new ArrayList<String>(Arrays.asList(new String[]
  	{	
 		"v0",
-//		"v1","v1_1","v1_2","v1_3",
- 		"v2","v2_1","v2_2","v2_3",
+		"v1","v1_1","v1_2","v1_3",
+ //		"v2","v2_1","v2_2","v2_3",
  		"v3","v3_1","v3_2","v3_3",
  		"v4","v4_1","v4_2","v4_3",
  		"v5","v5_1"
