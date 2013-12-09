@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\resources\schemas\zone.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+
+	<variableTiles>
+		<variableTile name="goldenItem">
+			<value proba="0.5">
+				<item name="goldenflame"/>
+			</value>
+			<value proba="0.5">
+				<item name="goldenbomb"/>
+			</value>
+		</variableTile>
+		<variableTile name="noItem">
+			<value proba="0.5">
+				<item name="noflame"/>
+			</value>
+			<value proba="0.5">
+				<item name="nobomb"/>
+			</value>
+		</variableTile>
+		<variableTile name="antiItem">
+			<value proba="0.5">
+				<item name="antiflame"/>
+			</value>
+			<value proba="0.5">
+				<item name="antibomb"/>
+			</value>
+		</variableTile>
+		<variableTile name="extraRain">
+			<value proba="0.33">
+				<item name="extraflame"/>
+			</value>
+			<value proba="0.33">
+				<item name="extrabomb"/>
+			</value>
+			<value proba="0.34">
+				<item name="extraspeed"/>
+			</value>
+		</variableTile>
+		<variableTile name="goldenRain">
+			<value proba="0.5">
+				<item name="goldenflame"/>
+			</value>
+			<value proba="0.5">
+				<item name="goldenbomb"/>
+			</value>
+		</variableTile>
+	</variableTiles>
+	<matrix>
+		<line pos="0">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="gsu" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="00_02" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="3">
+				<floor name="00_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="00_04" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="5">
+				<floor name="00_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="00_06" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="7">
+				<floor name="00_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="00_08" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="9">
+				<floor name="00_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="gsu" />
+			</tile>
+		</line>
+		<line pos="1">
+			<tile pos="0">
+				<floor name="01_00" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="01_01" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="01_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="01_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="01_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="01_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="01_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="01_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="01_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="01_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="01_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="01_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="01_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="01_13" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="01_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="2">
+			<tile pos="0">
+				<floor name="02_00" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="1">
+				<floor name="02_01" />
+			</tile>
+			<tile pos="2">
+				<floor name="02_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="02_03" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="4">
+				<floor name="02_04" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="5">
+				<floor name="02_05" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="6">
+				<floor name="02_06" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="7">
+				<floor name="02_07" />
+				<reference name="goldenItem"/>
+			</tile>
+			<tile pos="8">
+				<floor name="02_08" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="9">
+				<floor name="02_09" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="10">
+				<floor name="02_10" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="11">
+				<floor name="02_11" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="12">
+				<floor name="02_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="02_13" />
+			</tile>
+			<tile pos="14">
+				<floor name="02_14" />
+				<reference name="noItem"/>
+			</tile>
+		</line>
+		<line pos="3">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="03_01" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="03_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="03_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="03_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="03_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="03_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="03_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="03_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="03_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="03_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="03_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="03_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="03_13" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="03_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="4">
+			<tile pos="0">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="1">
+				<floor name="04_01" />
+			</tile>
+			<tile pos="2">
+				<floor name="04_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="04_03" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="4">
+				<floor name="04_04" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="5">
+				<floor name="04_05" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="6">
+				<floor name="04_06" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="7">
+				<floor name="04_07" />
+				<reference name="goldenItem"/>
+			</tile>
+			<tile pos="8">
+				<floor name="04_08" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="9">
+				<floor name="04_09" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="10">
+				<floor name="04_10" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="11">
+				<floor name="04_11" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="12">
+				<floor name="04_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="04_13" />
+			</tile>
+			<tile pos="14">
+				<floor name="04_14" />
+				<reference name="noItem"/>
+			</tile>
+		</line>
+		<line pos="5">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="05_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="05_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="05_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="05_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="05_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="05_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="05_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="05_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="05_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="05_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="05_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="05_13" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="05_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="6">
+			<tile pos="0">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="06_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="06_03" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="4">
+				<floor name="06_04" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="5">
+				<floor name="06_05" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="6">
+				<floor name="06_06" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="7">
+				<floor name="06_07" />
+				<reference name="goldenItem"/>
+			</tile>
+			<tile pos="8">
+				<floor name="06_08" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="9">
+				<floor name="06_09" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="10">
+				<floor name="06_10" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="11">
+				<floor name="06_11" />
+				<reference name="antiItem"/>
+			</tile>
+			<tile pos="12">
+				<floor name="06_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="06_13" />
+			</tile>
+			<tile pos="14">
+				<floor name="06_14" />
+				<reference name="noItem"/>
+			</tile>
+		</line>
+		<line pos="7">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="07_02" />
+			</tile>
+			<tile pos="3">
+				<floor name="07_03" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="07_04" />
+			</tile>
+			<tile pos="5">
+				<floor name="07_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="07_06" />
+			</tile>
+			<tile pos="7">
+				<floor name="07_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="07_08" />
+			</tile>
+			<tile pos="9">
+				<floor name="07_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="07_10" />
+			</tile>
+			<tile pos="11">
+				<floor name="07_11" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="07_12" />
+			</tile>
+			<tile pos="13">
+				<floor name="07_13" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="07_14" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+		</line>
+		<line pos="8">
+			<tile pos="0">
+				<floor name="regular" />
+				<block group="hardwalls" name="gsu" />
+			</tile>
+			<tile pos="1">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="3">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="5">
+				<floor name="08_05" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6">
+				<floor name="08_06" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="7">
+				<floor name="08_07" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8">
+				<floor name="08_08" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="9">
+				<floor name="08_09" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="10">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="11">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="12">
+				<floor name="regular" />
+				<reference name="noItem"/>
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<block group="hardwalls" name="gsu" />
+			</tile>
+		</line>
+	</matrix>
+	
+	<events relative="false" duration="90000">
+		<event time="2000">
+			<line pos="2">
+				<tile pos="2">
+					<bomb name="normal" range="1"/>
+				</tile>
+				<tile pos="12">
+					<bomb name="normal" range="1"/>
+				</tile>
+			</line>
+			<line pos="4">
+				<tile pos="2">
+					<bomb name="normal" range="1"/>
+				</tile>
+				<tile pos="12">
+					<bomb name="normal" range="1"/>
+				</tile>
+			</line>
+			<line pos="6">
+				<tile pos="2">
+					<bomb name="normal" range="1"/>
+				</tile>
+				<tile pos="12">
+					<bomb name="normal" range="1"/>
+				</tile>
+			</line>
+		</event>
+		<event time="20000">
+			<line pos="1,3,5,7" fixed="false" >
+				<tile pos="2,4,6,8,10,12" nbr="5">
+					<reference name="extraRain" />
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="false" >
+				<tile pos="2-12" nbr="5">
+					<reference name="extraRain" />
+				</tile>
+			</line>
+		</event>
+		<event time="30000">
+			<line pos="1,3,5,7" fixed="false" >
+				<tile pos="2,4,6,8,10,12" nbr="5">
+					<reference name="extraRain" />
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="false" >
+				<tile pos="2-12" nbr="5">
+					<reference name="extraRain" />
+				</tile>
+			</line>
+		</event>
+		<event time="40000">
+			<line pos="1,3,5,7" fixed="false" >
+				<tile pos="2,4,6,8,10,12" nbr="5">
+					<reference name="goldenRain" />
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="false" >
+				<tile pos="2-12" nbr="5">
+					<reference name="goldenRain" />
+				</tile>
+			</line>
+		</event>
+		<event time="50000">
+			<line pos="1,3,5,7" fixed="false" >
+				<tile pos="2,4,6,8,10,12" nbr="5">
+					<reference name="goldenRain" />
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="false" >
+				<tile pos="2-12" nbr="5">
+					<reference name="goldenRain" />
+				</tile>
+			</line>
+		</event>
+		<event time="50000">
+			<line pos="1,3,5,7" fixed="false" >
+				<tile pos="2,4,6,8,10,12" nbr="5">
+					<reference name="goldenRain" />
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="false" >
+				<tile pos="2-12" nbr="5">
+					<reference name="goldenRain" />
+				</tile>
+			</line>
+		</event>
+		<event time="60000">
+			<line pos="1,7" fixed="true" nbr="2">
+				<tile pos="2,4,6,8,10,12" nbr="6">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="true" nbr="3">
+				<tile pos="1,13" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="65000">
+			<line pos="0,8" fixed="true" nbr="2">
+				<tile pos="2,4,6,8,10,12" nbr="6">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+			<line pos="2,4,6" fixed="true" nbr="3">
+				<tile pos="0,14" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="70000">
+			<line pos="2-6" fixed="true" nbr="5">
+				<tile pos="2,12" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="74000">
+			<line pos="2,4,6" fixed="true" nbr="3">
+				<tile pos="3,11" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="78000">
+			<line pos="2-6" fixed="true" nbr="5">
+				<tile pos="4,10" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="82000">
+			<line pos="2,4,6" fixed="true" nbr="3">
+				<tile pos="5,9" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="88000">
+			<line pos="2-6" fixed="true" nbr="5">
+				<tile pos="6,8" nbr="2">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+		<event time="89000">
+			<line pos="2,6" fixed="true" nbr="2">
+				<tile pos="7" nbr="1">
+					<block group="hardwalls" name="shrink"/>
+				</tile>
+			</line>
+		</event>
+	</events>
+</zone>
+
