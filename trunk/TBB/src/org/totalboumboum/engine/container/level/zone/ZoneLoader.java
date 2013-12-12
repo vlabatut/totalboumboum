@@ -23,9 +23,14 @@ package org.totalboumboum.engine.container.level.zone;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -76,50 +81,19 @@ public class ZoneLoader
     }
         
     private static void loadMatrixElement(Element root, Zone result)
-    {	loadLineElements(root, result, -1);
+    {	loadLineElements(root, result);
     }
     
-    private static void loadEventsElement(Element root, Zone result)
-    {	if(root!=null)
-    	{	// duration
-    		long totalDuration = 0;
-			{	Attribute attribute = root.getAttribute(XmlNames.DURATION);
-				totalDuration = Long.valueOf(attribute.getValue());
-				result.setEventsDuration(totalDuration);
-			}
-	    	
-	    	// relative
-			{	Attribute attribute = root.getAttribute(XmlNames.RELATIVE);
-				boolean relative = Boolean.valueOf(attribute.getValue());
-				result.setEventsRelative(relative);
-			}
-	    	
-	    	// process each event
-	    	List<Element> elements = root.getChildren(XmlNames.EVENT);
-	    	Iterator<Element> i = elements.iterator();
-	    	while(i.hasNext())
-	    	{	// get element
-	    		Element event = i.next();
-	    		// get time
-				Attribute attribute = event.getAttribute(XmlNames.TIME);
-				long time = Long.valueOf(attribute.getValue());
-				if(time>totalDuration)
-					throw new IndexOutOfBoundsException("Zone events: one of the time step values is larger than the total duration.");
-				// complete result
-				loadLineElements(event, result, time);
-	    	}
-    	}
-    }
-    
-   @SuppressWarnings("unchecked")
-   private static void loadLineElements(Element root, Zone result, long time)
+    @SuppressWarnings("unchecked")
+   private static void loadLineElements(Element root, Zone result)
     {	// matrix
     	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
     	List<Element> elements = root.getChildren(XmlNames.LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element row = i.next();
-    		int posL = Integer.parseInt(row.getAttribute(XmlNames.POSITION).getValue().trim());
+    		String posLstr = row.getAttribute(XmlNames.POSITION).getValue().trim();
+    		int posL = Integer.parseInt(posLstr);
     		List<Element> elementsL = row.getChildren(XmlNames.TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
@@ -151,10 +125,7 @@ public class ZoneLoader
         			VariableTile vt = variableTiles.get(name);
         			vt.incrementOccurrencesCount();
         		}
-        		if(time<0)
-        			result.addTile(zt);
-        		else
-        			result.addEvent(time, zt);
+       			result.addTile(zt);
         	}
     	}
     }
@@ -201,5 +172,144 @@ public class ZoneLoader
 		}
 
 		return result;
+    }
+
+    private static void loadEventsElement(Element root, Zone result)
+    {	if(root!=null)
+    	{	// duration
+    		long totalDuration = 0;
+			{	Attribute attribute = root.getAttribute(XmlNames.DURATION);
+				totalDuration = Long.valueOf(attribute.getValue());
+				result.setEventsDuration(totalDuration);
+			}
+	    	
+	    	// relative
+			{	Attribute attribute = root.getAttribute(XmlNames.RELATIVE);
+				boolean relative = Boolean.valueOf(attribute.getValue());
+				result.setEventsRelative(relative);
+			}
+	    	
+	    	// process each event
+	    	List<Element> elements = root.getChildren(XmlNames.EVENT);
+	    	Iterator<Element> i = elements.iterator();
+	    	while(i.hasNext())
+	    	{	// get element
+	    		Element event = i.next();
+	    		// get time
+				Attribute attribute = event.getAttribute(XmlNames.TIME);
+				long time = Long.valueOf(attribute.getValue());
+				if(time>totalDuration)
+					throw new IndexOutOfBoundsException("Zone events: one of the time step values is larger than the total duration.");
+				// complete result
+				loadEvtLineElements(event, result, time);
+	    	}
+    	}
+    }
+    
+    @SuppressWarnings("unchecked")
+	private static void loadEvtLineElements(Element root, Zone result, long time)
+    {	// matrix
+    	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
+    	List<Element> elements = root.getChildren(XmlNames.LINE);
+    	Iterator<Element> i = elements.iterator();
+    	while(i.hasNext())
+    	{	Element row = i.next();
+    		String possiblePosLstr = row.getAttribute(XmlNames.POSITION).getValue().trim();
+    		Set<Integer> possiblePosLs = XmlTools.parseMultipleInteger(possiblePosLstr);
+    		int nbrL = Integer.parseInt(row.getAttribute(XmlNames.NBR).getValue().trim());
+    		boolean fixed = Boolean.parseBoolean(row.getAttribute(XmlNames.FIXED).getValue().trim());
+    		List<Integer> drawnPosL = drawPositions(possiblePosLs, nbrL);
+    		
+    		List<Element> elementsL = row.getChildren(XmlNames.TILE);
+        	Iterator<Element> iL = elementsL.iterator();
+        	while(iL.hasNext())
+        	{	String[] content = {null,null,null,null};
+        		Element tile = iL.next();
+        		content = loadBasicTileElement(tile);
+        		
+        		String possiblePosTstr = tile.getAttribute(XmlNames.POSITION).getValue().trim();
+        		Set<Integer> possiblePosTs = XmlTools.parseMultipleInteger(possiblePosTstr);
+        		int nbrT = Integer.parseInt(tile.getAttribute(XmlNames.NBR).getValue().trim());
+        		List<List<Integer>> pos = new ArrayList<List<Integer>>();
+        		if(fixed)
+        		{	List<Integer> drawnPosT = drawPositions(possiblePosTs, nbrT);
+       				for(int l: drawnPosL)
+       				{	for(int t: drawnPosT)
+       					{	List<Integer> tmp = Arrays.asList(l,t);
+   							pos.add(tmp);
+       					}
+       				}
+        		}
+        		else
+        		{	int nbr = nbrT*nbrL;
+        			List<List<Integer>> temp = new ArrayList<List<Integer>>();
+        			for(int l: possiblePosLs)
+       				{	for(int t: possiblePosTs)
+       					{	List<Integer> tmp = Arrays.asList(l,t);
+       						temp.add(tmp);
+       					}
+       				}
+        			pos = drawPositions(temp, nbr);
+        		}
+        		
+        		for(List<Integer> p: pos)
+        		{	int l = p.get(0);
+        			int t = p.get(1);
+        			ZoneHollowTile zt = new ZoneHollowTile(l,t);
+	        		
+	        		// constant parts
+	    			// floor
+	    			if(content[0]!=null)
+	    				zt.setFloor(content[0]);
+	    			// blocks
+	    			if(content[1]!=null)
+	    				zt.setBlock(content[1]);
+	    			// items
+	    			if(content[2]!=null)
+	    				zt.setItem(content[2]);
+	    			// bombs
+	    			if(content[3]!=null)
+	    				zt.setBomb(content[3]);        		
+	        		
+	    			// variable part
+	        		Element elt = tile.getChild(XmlNames.REFERENCE);
+	        		if(elt!=null)
+	        		{	String name = elt.getAttribute(XmlNames.NAME).getValue();
+	        			zt.setVariable(name);
+	        			VariableTile vt = variableTiles.get(name);
+	        			vt.incrementOccurrencesCount();
+	        		}
+	    			result.addEvent(time, zt);
+        		}
+        	}
+    	}
+    }
+    
+    //TODO compléter manuel pour tenir compte de cette modif (hasard ds évènements)
+    
+    /**
+     * Draw {@code number} values from the specified list.
+     * If the list is too short, then all its elements are returned.
+     * The same value cannot appear twice in the result list.
+     * 
+     * @param possibleValues
+     * 		List of values to draw from.
+     * @param number
+     * 		Number of values wanted.
+     * @return
+     * 		List of the randomly drawn values.
+     */
+    private static <T> List<T> drawPositions(Collection<T> possibleValues, int number)
+    {	List<T> pv = new ArrayList<T>(possibleValues);
+    	List<T> result = new ArrayList<T>();
+    	int i = 0;
+    	while(i<number && !pv.isEmpty())
+    	{	int index = (int)(Math.random()*pv.size());
+    		T value = pv.get(index);
+    		result.add(value);
+    		pv.remove(index);
+    		i++;
+    	}
+    	return result;
     }
 }

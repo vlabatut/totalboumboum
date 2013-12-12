@@ -76,27 +76,28 @@ public class LevelTools
 	public static void main(String[] args) throws Exception
 	{	
 		// create a level from scratch
-/*		HollowLevel level = initLevel(9,9,"levelpack","levelname","superbomberman1","tournament4");
-		setBackground(level);
+		HollowLevel level = initLevel(8,14,"tournament201314","averse","tournament","tournament7");
+//		setBackground(level);
 		addGrid(level);
-		addBorder(level,2,1,1,1);
-		addSoftwalls(level);
+//		addBorder(level,2,1,1,1);
+//		addSoftwalls(level);
 		insertCol(level,0,true,true,true,true,true);
-		insertRow(level,0,true,true,true,true,true);
-		insertCol(level,level.getLevelInfo().getGlobalWidth()/2,true,true,true,true,true);
-		insertRow(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
-		insertCol(level,level.getLevelInfo().getGlobalWidth()-1,true,true,true,true,true);
-		insertRow(level,level.getLevelInfo().getGlobalHeight()-1,true,true,true,true,true);
-		saveLevel(level);
-*/				
-		// open an existing level and replace the background
-		String pack = "tournament201314neutral";
-		String folder = "readysetgo";
-		XmlTools.init();
-		HollowLevel level = loadLevel(pack,folder);
-		removeBackground(level);
+//		insertRow(level,0,true,true,true,true,true);
+//		insertCol(level,level.getLevelInfo().getGlobalWidth()/2,true,true,true,true,true);
+//		insertRow(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
+//		insertCol(level,level.getLevelInfo().getGlobalWidth(),true,true,true,true,true);
+		insertRow(level,level.getLevelInfo().getGlobalHeight(),true,true,true,true,true);
 		setBackground(level);
 		saveLevel(level);
+				
+		// open an existing level and replace the background
+//		String pack = "tournament201314neutral";
+//		String folder = "readysetgo";
+//		XmlTools.init();
+//		HollowLevel level = loadLevel(pack,folder);
+//		removeBackground(level);
+//		setBackground(level);
+//		saveLevel(level);
 		
 		// open an existing level and add/remove columns/rows
 /*		String pack = "tournament201112";
@@ -183,9 +184,13 @@ public class LevelTools
 	 * 		A {@link HollowLevel} object representing the level.
 	 * 
 	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the level files.
 	 * @throws SAXException
+	 * 		Problem while accessing the level files.
 	 * @throws IOException
+	 * 		Problem while accessing the level files.
 	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the level files.
 	 */
 	protected static HollowLevel loadLevel(String pack, String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	HollowLevel level = HollowLevelLoader.loadHollowLevel(pack,name);
@@ -200,12 +205,19 @@ public class LevelTools
 	 * 		the level to be saved
 	 * 
 	 * @throws IOException
+	 * 		Problem while accessing the level files.
 	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the level files.
 	 * @throws SecurityException
+	 * 		Problem while accessing the level files.
 	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the level files.
 	 * @throws SAXException
+	 * 		Problem while accessing the level files.
 	 * @throws IllegalAccessException
+	 * 		Problem while accessing the level files.
 	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the level files.
 	 */
 	protected static void saveLevel(HollowLevel hollowLevel) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException
 	{	LevelInfo levelInfo = hollowLevel.getLevelInfo();
@@ -616,10 +628,10 @@ public class LevelTools
 			zone.addTile(tile);
 		}
 		// move existing rows
-		for(int l=height-1;l>row;l--)
+		for(int r=height-1;r>row;r--)
 		{	for(int c=0;c<width;c++)
-			{	ZoneHollowTile tile1 = zone.getTile(l,c);
-				ZoneHollowTile tile2 = zone.getTile(l-1,c);
+			{	ZoneHollowTile tile1 = zone.getTile(r,c);
+				ZoneHollowTile tile2 = zone.getTile(r-1,c);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
 				else
@@ -780,15 +792,15 @@ public class LevelTools
 		Zone zone = hollowLevel.getZone();
 		zone.setGlobalWidth(width);
 		// add new col
-		for(int l=0;l<height;l++)
-		{	ZoneHollowTile tile = new ZoneHollowTile(l,width-1);			
+		for(int r=0;r<height;r++)
+		{	ZoneHollowTile tile = new ZoneHollowTile(r,width-1);			
 			zone.addTile(tile);
 		}
 		// move existing columns
 		for(int c=width-1;c>col;c--)
-		{	for(int l=0;l<height;l++)
-			{	ZoneHollowTile tile1 = zone.getTile(l,c);
-				ZoneHollowTile tile2 = zone.getTile(l,c-1);
+		{	for(int r=0;r<height;r++)
+			{	ZoneHollowTile tile1 = zone.getTile(r,c);
+				ZoneHollowTile tile2 = zone.getTile(r,c-1);
 				if(moveFloors)
 					tile1.setFloor(tile2.getFloor());
 				else
@@ -812,8 +824,8 @@ public class LevelTools
 			}
 		}
 		// reinit column "col"
-		for(int l=0;l<height;l++)
-		{	ZoneHollowTile tile = zone.getTile(l,col);
+		for(int r=0;r<height;r++)
+		{	ZoneHollowTile tile = zone.getTile(r,col);
 			tile.setFloor("regular");
 			tile.setBlock(null);
 			tile.setBomb(null);

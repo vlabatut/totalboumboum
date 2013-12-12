@@ -130,6 +130,7 @@ public class XmlNames
 	public static final String FIRE = "fire";
 	public static final String FIRESET = "fireset";
 	public static final String FIRESETS = "firesets";
+	public static final String FIXED = "fixed";
 	public static final String FLOOR = "floor";
 	public static final String FLOORS = "floors";
 	public static final String FOLDER = "folder";
@@ -218,6 +219,7 @@ public class XmlNames
 	public static final String MODULATION = "modulation";
 	public static final String MULTIPLICATION = "multiplication";
 	public static final String NAME = "name";
+	public static final String NBR = "nbr";
 	public static final String NETWORK = "network";
 	public static final String NONE = "none";
 	public static final String NOTES = "notes";

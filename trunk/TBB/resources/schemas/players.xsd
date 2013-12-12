@@ -47,7 +47,7 @@
 
 	<xsd:complexType name="tItems">
 		<xsd:sequence>
-			<xsd:element name="item" type="tItem"  maxOccurs="unbounded"/>
+			<xsd:element name="item" type="tItem" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 

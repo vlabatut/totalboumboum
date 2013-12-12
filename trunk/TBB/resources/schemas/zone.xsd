@@ -20,7 +20,6 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
 	<xsd:complexType name="tBlock">
 		<xsd:attribute name="group" type="xsd:string" use="optional" />
 		<xsd:attribute name="name" type="xsd:string" use="required" />
@@ -57,7 +56,7 @@
 		<xsd:attribute name="name" type="xsd:string" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tTileType">
+	<xsd:complexType name="tTile">
 		<xsd:sequence>
 			<xsd:group ref="gBasicTile" />
 			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
@@ -67,7 +66,7 @@
 
 	<xsd:complexType name="tLine">
 		<xsd:sequence>
-			<xsd:element name="tile" type="tTileType" maxOccurs="unbounded"/>
+			<xsd:element name="tile" type="tTile" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="pos" type="xsd:integer" />
 	</xsd:complexType>
@@ -96,9 +95,35 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
+	<xsd:simpleType name="tMultipleInt">
+	    <xsd:restriction base="xsd:token">
+	        <xsd:pattern value="(\d+(\-\d+)?,)*\d+(\-\d+)?"/>
+	    </xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="tEvtTile">
+		<xsd:sequence>
+			<xsd:group ref="gBasicTile" />
+			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="pos" type="tMultipleInt" />
+		<xsd:attribute name="nbr" type="xsd:integer" default="1" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tEvtLine">
+		<xsd:sequence>
+			<xsd:element name="tile" type="tEvtTile" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="pos" type="tMultipleInt" />
+		<!-- Number of time the draw should be repeated -->
+		<xsd:attribute name="nbr" type="xsd:integer" default="1" />
+		<!-- Indicates if a random line should be drawn again when drawing the corresponding tile -->
+		<xsd:attribute name="fixed" type="xsd:boolean" default="false"/>
+	</xsd:complexType>
+
 	<xsd:complexType name="tEvent">
 		<xsd:sequence>
-			<xsd:element name="line" type="tLine" maxOccurs="unbounded"/>
+			<xsd:element name="line" type="tEvtLine" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<!-- time expressed in function of the total duration -->
 		<xsd:attribute name="time" type="xsd:integer" use="required" />
