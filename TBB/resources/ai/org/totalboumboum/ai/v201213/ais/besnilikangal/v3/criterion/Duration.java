@@ -13,7 +13,7 @@ import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
  * @author Mustafa Besnili
  */
 @SuppressWarnings("deprecation")
-public class Duree extends AiUtilityCriterionInteger<BesniliKangal>
+public class Duration extends AiUtilityCriterionInteger<BesniliKangal>
 {
 	/** Nom de ce critère */
 	public static final String NAME = "Duree";
@@ -25,7 +25,7 @@ public class Duree extends AiUtilityCriterionInteger<BesniliKangal>
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public Duree( BesniliKangal ai ) throws StopRequestException
+	public Duration( BesniliKangal ai ) throws StopRequestException
 	{
 		super( ai, NAME, MIN, MAX );
 		ai.checkInterruption();
@@ -42,7 +42,7 @@ public class Duree extends AiUtilityCriterionInteger<BesniliKangal>
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public Duree( BesniliKangal ai, int min, int max ) throws StopRequestException
+	public Duration( BesniliKangal ai, int min, int max ) throws StopRequestException
 	{
 		super( ai, NAME, min, max );
 		ai.checkInterruption();

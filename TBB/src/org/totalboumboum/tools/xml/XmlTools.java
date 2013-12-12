@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -233,6 +235,41 @@ public class XmlTools
 		text.append("\tYou should have received a copy of the GNU General Public License\n");
 		text.append("\talong with Total Boum Boum.  If not, see http://www.gnu.org/licenses.\n");
 		Comment result = new Comment(text.toString());
+		return result;
+	}
+	
+	/**
+	 * Parses a string of the form "1,4,6,10-16,58"
+	 * and returns the corresponding integers under the
+	 * form of a set. In the previous example, the result
+	 * would therefore be {1,4,6,10,11,12,13,14,15,16,58}.
+	 * 		
+	 * @param multint
+	 * 		Original string.
+	 * @return
+	 * 		Corresponding integers.
+	 */
+	public static Set<Integer> parseMultipleInteger(String multint)
+	{	Set<Integer> result = new TreeSet<Integer>();
+		String temp[] = multint.split(",");
+		for(String tmp: temp)
+		{	if(tmp.contains("-"))
+			{	String temp2[] = tmp.split("-");
+				int from = Integer.parseInt(temp2[0]);
+				int to = Integer.parseInt(temp2[1]);
+				if(from>to)
+				{	int tmp2 = to;
+					to = from;
+					from = tmp2;
+				}
+				for(int i=from;i<=to;i++)
+					result.add(i);
+			}
+			else
+			{	int value = Integer.parseInt(tmp);
+				result.add(value);
+			}
+		}
 		return result;
 	}
 }

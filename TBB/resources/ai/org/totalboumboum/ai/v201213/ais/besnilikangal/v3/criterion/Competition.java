@@ -1,7 +1,5 @@
 package org.totalboumboum.ai.v201213.ais.besnilikangal.v3.criterion;
 
-import java.util.List;
-
 import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201213.adapter.data.AiHero;
@@ -9,17 +7,18 @@ import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
 
 /**
- * Cette critere a été utilisé pour qu'on puisse détecter les agents qui se
- * trouvent dans une case qui est dans l'un des bombes portées.
+ * Cette critere est utilisé pour determiner la concurrence qui peut exister
+ * entre un des agents et notre agent. On considere la distance pour calculer la
+ * valeur de cette critere.
  * 
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
 @SuppressWarnings("deprecation")
-public class PlusFacile extends AiUtilityCriterionBoolean<BesniliKangal>
+public class Competition extends AiUtilityCriterionBoolean<BesniliKangal>
 {
 	/** Nom de ce critère */
-	public static final String NAME = "PlusFacile";
+	public static final String NAME = "Concurrence";
 
 	/**
 	 * @param ai
@@ -28,7 +27,7 @@ public class PlusFacile extends AiUtilityCriterionBoolean<BesniliKangal>
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public PlusFacile( BesniliKangal ai ) throws StopRequestException
+	public Competition( BesniliKangal ai ) throws StopRequestException
 	{
 		super( ai, NAME );
 		ai.checkInterruption();
@@ -41,11 +40,12 @@ public class PlusFacile extends AiUtilityCriterionBoolean<BesniliKangal>
 	protected Boolean processValue( AiTile tile ) throws StopRequestException
 	{
 		ai.checkInterruption();
-		List<AiHero> ennemies = (List<AiHero>) tile.getHeroes();
-		for ( AiHero ennemy : ennemies )
+		int distance = ai.getZone().getTileDistance( ai.ownHero.getTile(), tile );
+		for ( AiHero ennemy : ai.getZone().getRemainingOpponents() )
 		{
 			ai.checkInterruption();
-			return ai.heroOperation.isEnemyInDanger( ennemy );
+			if ( ai.getZone().getTileDistance( ennemy.getTile(), tile ) < distance )
+				return true;
 		}
 		return false;
 	}

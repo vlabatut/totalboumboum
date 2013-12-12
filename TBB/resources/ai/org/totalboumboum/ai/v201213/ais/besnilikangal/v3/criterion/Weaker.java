@@ -1,24 +1,24 @@
 package org.totalboumboum.ai.v201213.ais.besnilikangal.v3.criterion;
 
-import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionInteger;
+import org.totalboumboum.ai.v201213.adapter.agent.AiUtilityCriterionBoolean;
 import org.totalboumboum.ai.v201213.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201213.adapter.data.AiHero;
 import org.totalboumboum.ai.v201213.adapter.data.AiTile;
 import org.totalboumboum.ai.v201213.ais.besnilikangal.v3.BesniliKangal;
 
 /**
- * Cette critere a été utilisé pour calculer le nombre des murs autour d'une
- * case.
+ * Cette critere a été utilisé pour evaluer les agents qui sont plus puissant
+ * que. On ne considere que le nombre de bombe que les agents possedent. On va
+ * considerer les autres items aussi. Quand l'API contient ces informations.
  * 
  * @author Doruk Kangal
  * @author Mustafa Besnili
  */
 @SuppressWarnings("deprecation")
-public class Bloque extends AiUtilityCriterionInteger<BesniliKangal>
+public class Weaker extends AiUtilityCriterionBoolean<BesniliKangal>
 {
 	/** Nom de ce critère */
-	public static final String NAME = "Bloque";
-	/** Valeur maximale pour ce critère */
-	public static final int BLOCKING_LIMIT = 4;
+	public static final String NAME = "PlusFaible";
 
 	/**
 	 * @param ai
@@ -27,9 +27,9 @@ public class Bloque extends AiUtilityCriterionInteger<BesniliKangal>
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public Bloque( BesniliKangal ai ) throws StopRequestException
+	public Weaker( BesniliKangal ai ) throws StopRequestException
 	{
-		super( ai, NAME, 0, 4 );
+		super( ai, NAME );
 		ai.checkInterruption();
 	}
 
@@ -37,21 +37,15 @@ public class Bloque extends AiUtilityCriterionInteger<BesniliKangal>
 	// PROCESS 					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected Integer processValue( AiTile tile ) throws StopRequestException
+	protected Boolean processValue( AiTile tile ) throws StopRequestException
 	{
 		ai.checkInterruption();
-		int result = 0;
-		if ( !tile.getHeroes().isEmpty() )
+		for ( AiHero hero : tile.getHeroes() )
 		{
-			for ( AiTile neighborsTile : tile.getNeighbors() )
-			{
-				ai.checkInterruption();
-				if ( !neighborsTile.isCrossableBy( tile.getHeroes().get( 0 ) ) )
-					result++;
-			}
+			ai.checkInterruption();
+			if ( ai.ownHero.getBombNumberMax() >= hero.getBombNumberMax() )
+				return true;
 		}
-		if ( result > BLOCKING_LIMIT )
-			return BLOCKING_LIMIT;
-		return result;
+		return false;
 	}
 }

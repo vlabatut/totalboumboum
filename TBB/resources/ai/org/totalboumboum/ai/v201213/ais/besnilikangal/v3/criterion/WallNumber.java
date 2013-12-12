@@ -18,7 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Besnili
  */
 @SuppressWarnings("deprecation")
-public class NombreDesMurs extends AiUtilityCriterionInteger<BesniliKangal>
+public class WallNumber extends AiUtilityCriterionInteger<BesniliKangal>
 {
 	/** Nom de ce critère */
 	public static final String NAME = "NombreDesMures";
@@ -32,7 +32,7 @@ public class NombreDesMurs extends AiUtilityCriterionInteger<BesniliKangal>
 	 * @throws StopRequestException
 	 *             Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public NombreDesMurs( BesniliKangal ai ) throws StopRequestException
+	public WallNumber( BesniliKangal ai ) throws StopRequestException
 	{
 		super( ai, NAME, 0, DESTRUCTION_LIMIT );
 		ai.checkInterruption();
