@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.RankingTools;
 
 /**
  * Represents the stats of a tournament.
@@ -132,7 +132,7 @@ public class StatisticTournament extends StatisticBase
 		matches.add(match);
 		
 		// confrontations
-		int[] matchRanks = CombinatoricsTools.getRanks(match.getPoints());
+		int[] matchRanks = RankingTools.getRanks(match.getPoints());
 		int count = 0;
 		for(int i=0;i<matchRanks.length;i++)
 			if(matchRanks[i]==1)
