@@ -28,6 +28,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
@@ -47,10 +48,10 @@ import org.totalboumboum.engine.container.theme.Theme;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.gui.tools.GuiFileTools;
-import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
+import org.totalboumboum.tools.levels.DistanceTileTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
@@ -935,7 +936,7 @@ public class LevelTools
 	 */
 	protected static void removeSuddenDeath(HollowLevel level)
 	{	Zone zone = level.getZone();
-		HashMap<Long, List<ZoneHollowTile>> map = zone.getEvents();
+		Map<Long, List<ZoneHollowTile>> map = zone.getEvents();
 		map.clear();
 		zone.setEventsDuration(-1);
 	}
@@ -988,7 +989,7 @@ public class LevelTools
 		int minDist = Integer.MAX_VALUE;
 		Direction direction = null;
 		for(int i=0;i<row2.length;i++)
-		{	int dist = LevelsTools.getTileDistance(startRow, startCol, row2[i], col2[i], dirs[i], globalHeight, globalWidth);
+		{	int dist = DistanceTileTools.getTileDistance(startRow, startCol, row2[i], col2[i], dirs[i], globalHeight, globalWidth);
 			if(dist<minDist)
 			{	minDist = dist;
 				direction = dirs[i];
@@ -1402,7 +1403,7 @@ public class LevelTools
 		//proba = proba / 2;
 		
 		// create appropriate variable
-		HashMap<String, VariableTile> variables = zone.getVariableTiles();
+		Map<String, VariableTile> variables = zone.getVariableTiles();
 		String varName = "fallingBomb";
 		VariableTile variable = new VariableTile(varName);
 		variables.put(varName, variable);
@@ -1437,8 +1438,8 @@ public class LevelTools
 	private static void translateSuddenDeathTime(HollowLevel level, long delta)
 	{	// get data
 		Zone zone = level.getZone();
-		HashMap<Long, List<ZoneHollowTile>> temp = zone.getEvents();
-	 	HashMap<Long, List<ZoneHollowTile>> events = new HashMap<Long, List<ZoneHollowTile>>(temp);
+		Map<Long, List<ZoneHollowTile>> temp = zone.getEvents();
+	 	Map<Long, List<ZoneHollowTile>> events = new HashMap<Long, List<ZoneHollowTile>>(temp);
 	 	temp.clear();
 	 	
 	 	// translate events
@@ -1463,8 +1464,8 @@ public class LevelTools
 	private static void rescaleSuddenDeathTime(HollowLevel level, long newStart, long newEnd)
 	{	// get data
 		Zone zone = level.getZone();
-		HashMap<Long, List<ZoneHollowTile>> temp = zone.getEvents();
-	 	HashMap<Long, List<ZoneHollowTile>> events = new HashMap<Long, List<ZoneHollowTile>>(temp);
+		Map<Long, List<ZoneHollowTile>> temp = zone.getEvents();
+	 	Map<Long, List<ZoneHollowTile>> events = new HashMap<Long, List<ZoneHollowTile>>(temp);
 	 	temp.clear();
 	 	
 	 	// process transformation
