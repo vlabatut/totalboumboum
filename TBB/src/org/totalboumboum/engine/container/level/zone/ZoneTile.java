@@ -1,7 +1,5 @@
 package org.totalboumboum.engine.container.level.zone;
 
-import java.io.Serializable;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -23,15 +21,30 @@ import java.io.Serializable;
  * 
  */
 
+import java.util.logging.Level;
+
+import org.totalboumboum.engine.container.tile.Tile;
+
 /**
+ * This class represents a single tile in
+ * a zone. By opposition to {@link Tile},
+ * which represents a tile in a {@link Level}
+ * (an instancied zone).
  * 
  * @author Vincent Labatut
- *
  */
-public class ZoneTile implements Serializable
-{
+public class ZoneTile extends AbstractZoneTile
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new zone with the specified position.
+	 * 
+	 * @param row
+	 * 		Tile row number.
+	 * @param col
+	 * 		Tile column number.
+	 */
 	public ZoneTile(int row, int col)
 	{	this.row = row;
 		this.col = col;
@@ -40,11 +53,25 @@ public class ZoneTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COLUMN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Column number of this tile */
 	private int col;
 	
+	/**
+	 * Returns the column number of this tile.
+	 * 
+	 * @return
+	 * 		Tile column number.
+	 */
 	public int getCol()
 	{	return col;
 	}
+	
+	/**
+	 * Changes the column number of this tile.
+	 * 
+	 * @param col
+	 * 		New column number.
+	 */
 	public void setCol(int col)
 	{	this.col = col;
 	}
@@ -52,60 +79,26 @@ public class ZoneTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ROW				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Row number of this tile */
 	private int row;
 	
+	/**
+	 * Returns the row number of this tile.
+	 * 
+	 * @return
+	 * 		Tile row number.
+	 */
 	public int getRow()
 	{	return row;
 	}
+	
+	/**
+	 * Changes the row number of this tile.
+	 * 
+	 * @param row
+	 * 		New row number.
+	 */
 	public void setRow(int row)
 	{	this.row = row;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// BLOCK			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String block = null;
-
-	public String getBlock()
-	{	return block;
-	}
-	public void setBlock(String block)
-	{	this.block = block;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ITEM				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String item = null;
-
-	public String getItem()
-	{	return item;
-	}
-	public void setItem(String item)
-	{	this.item = item;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// BOMB				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String bomb = null;
-
-	public String getBomb()
-	{	return bomb;
-	}
-	public void setBomb(String bomb)
-	{	this.bomb = bomb;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FLOOR			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String floor = null;
-
-	public String getFloor()
-	{	return floor;
-	}
-	public void setFloor(String floor)
-	{	this.floor = floor;
 	}
 }

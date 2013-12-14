@@ -23,26 +23,36 @@ package org.totalboumboum.engine.container.level.zone;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Set;
 
+import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.variabletile.ValueTile;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.collections.SetTools;
 
 /**
+ * Represents a zone, before the sprites are actually loaded
+ * (after which the data is represented by a {@link Level} class).
  * 
  * @author Vincent Labatut
- *
  */
 public class Zone implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Buils a new zone using the specified dimensions.
+	 * 
+	 * @param globalWidth
+	 * 		Width in tiles.
+	 * @param globalHeight
+	 * 		Height in tiles.
+	 */
 	public Zone(int globalWidth, int globalHeight)
 	{	this.globalWidth = globalWidth;
 		this.globalHeight = globalHeight;
@@ -51,21 +61,47 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// DIMENSIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Zone width in tiles */
 	private int globalWidth;
+	/** Zone height in tiles */
 	private int globalHeight;
 	
+	/**
+	 * Returns the zone width in tiles.
+	 * 
+	 * @return
+	 * 		Zone width in tiles.
+	 */
 	public int getGlobalWidth()
 	{	return globalWidth;
 	}
 
+	/**
+	 * Changes the zone width in tiles.
+	 * 
+	 * @param width
+	 * 		New zone width in tiles.
+	 */
 	public void setGlobalWidth(int width)
 	{	globalWidth = width;
 	}
 	
+	/**
+	 * Returns the zone height in tiles.
+	 * 
+	 * @return
+	 * 		Zone height in tiles.
+	 */
 	public int getGlobalHeight()
 	{	return globalHeight;
 	}
 
+	/**
+	 * Changes the zone height in tiles.
+	 * 
+	 * @param height
+	 * 		New zone height in tiles.
+	 */
 	public void setGlobalHeight(int height)
 	{	globalHeight = height;
 	}
@@ -73,39 +109,84 @@ public class Zone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VARIABLES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,VariableTile> variableTiles = new HashMap<String, VariableTile>();
+	/** List of variables defined for this zone */
+	private Map<String,VariableTile> variableTiles = new HashMap<String, VariableTile>();
 	
-	public void setVariableTiles(HashMap<String,VariableTile> variables)
+	/**
+	 * Changes the variables defined for this zone.
+	 * 
+	 * @param variables
+	 * 		New list of variables defined for this zone.
+	 */
+	public void setVariableTiles(Map<String,VariableTile> variables)
 	{	this.variableTiles = variables;		
 	}
-	public HashMap<String,VariableTile> getVariableTiles()
+	
+	/**
+	 * Returns the variables defined for this zone.
+	 * 
+	 * @return
+	 * 		List of variables defined for this zone.
+	 */
+	public Map<String,VariableTile> getVariableTiles()
 	{	return variableTiles;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MATRIX		/////////////////////////////////////////////
+	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tiles composing the zone */
 	private List<ZoneHollowTile> tiles = new ArrayList<ZoneHollowTile>();
 	
+	/**
+	 * Adds a new tile to the zone.
+	 * 
+	 * @param tile
+	 * 		Tile to add.
+	 */
 	public void addTile(ZoneHollowTile tile)
 	{	tiles.add(tile);
 	}
 	
+	/**
+	 * Remove an existing tile from the zone.
+	 * 
+	 * @param tile
+	 * 		Tile to remove.
+	 */
 	public void removeTile(ZoneHollowTile tile)
 	{	tiles.remove(tile);
 	}
 	
+	/**
+	 * Returns the list of tiles composing this zone.
+	 * 
+	 * @return
+	 * 		List of tiles.
+	 */
 	public List<ZoneHollowTile> getTiles()
 	{	return tiles;
 	}
 	
+	/**
+	 * Returns the tile at the specified location.
+	 * 
+	 * @param row
+	 * 		Row number of the desired tile.
+	 * @param col
+	 * 		Col number of the desired tile.
+	 * @return
+	 * 		The tile at the specified positions.
+	 */
 	public ZoneHollowTile getTile(int row, int col)
 	{	ZoneHollowTile result = null;
 		
 		Iterator<ZoneHollowTile> it = tiles.iterator();
 		while(result==null && it.hasNext())
 		{	ZoneHollowTile temp = it.next();
-			if(temp.getRow()==row && temp.getCol()==col)
+			int r = temp.getRows().iterator().next();	//TODO to be adapted for random positions?
+			int c = temp.getCols().iterator().next();
+			if(r==row && c==col)
 				result = temp;
 		}
 		
@@ -119,7 +200,6 @@ public class Zone implements Serializable
 	private HashMap<Long,List<ZoneHollowTile>> events = new HashMap<Long,List<ZoneHollowTile>>();
 	/** List of initialized events */
 	private HashMap<Long,List<ZoneTile>> eventsInit;
-
 	/** Indicates if the step times are relative to the total duration, or are fixed */
 	private boolean eventsRelative = false;
 	/** Indicates the total duration. Always used if the game is set to no limit. Otherwise, can be overriden by game settings */
@@ -217,9 +297,9 @@ public class Zone implements Serializable
 	 * death events.
 	 * 
 	 * @return
-	 * 		A list of {@link ZoneHollowTile}.
+	 * 		A map of {@link ZoneHollowTile}.
 	 */
-	public HashMap<Long, List<ZoneHollowTile>> getEvents()
+	public Map<Long, List<ZoneHollowTile>> getEvents()
 	{	return events;
 	}
 	
@@ -229,7 +309,7 @@ public class Zone implements Serializable
 	 * @return
 	 * 		A map containing all remaining sudden death events.
 	 */
-	public HashMap<Long,List<ZoneTile>> getEventsInit()
+	public Map<Long,List<ZoneTile>> getEventsInit()
 	{	return eventsInit;
 	}
 	
@@ -239,10 +319,22 @@ public class Zone implements Serializable
 	/** Matrix representing the content of this zone */
 	private ZoneTile[][] matrix;
 	
+	/**
+	 * Returns the zone matrix.
+	 * 
+	 * @return
+	 * 		Matrix of tiles.
+	 */
 	public ZoneTile[][] getMatrix()
 	{	return matrix;		
 	}
 	
+	/**
+	 * Initializes the zone matrix.
+	 * 
+	 * @param timeLimit
+	 * 		Time limit of the game.
+	 */
 	public void makeMatrix(long timeLimit)
 	{	// init matrix
 		matrix = new ZoneTile[globalHeight][globalWidth];
@@ -264,8 +356,12 @@ public class Zone implements Serializable
     	Iterator<ZoneHollowTile> it = tiles.iterator();
     	while(it.hasNext())
     	{	ZoneHollowTile tile = it.next();
-    		ZoneTile instance = initTile(tile);
-        	matrix[instance.getRow()][instance.getCol()] = instance;
+    		List<ZoneTile> instances = initTile(tile);
+    		for(ZoneTile instance: instances)
+    		{	int row = instance.getRow();
+    			int col = instance.getCol();
+    			matrix[row][col] = instance;
+    		}
     	}
 		
     	// init events
@@ -282,42 +378,85 @@ public class Zone implements Serializable
     		// init
     		List<ZoneTile> listInit = new ArrayList<ZoneTile>();
     		for(ZoneHollowTile tile: list)
-    		{	ZoneTile instance = initTile(tile);
-    			listInit.add(instance);
+    		{	List<ZoneTile> instances = initTile(tile);
+    			for(ZoneTile instance: instances)
+    				listInit.add(instance);
     		}
     		eventsInit.put(time, listInit);
     	}
 	}
 	
-	private ZoneTile initTile(ZoneHollowTile tile)
-	{	// init instance tile
-		int col = tile.getCol();
-		int row = tile.getRow();
-		ZoneTile result = new ZoneTile(row, col);
+	/**
+	 * Receives a hollow zole tile, and instantiates it to 
+	 * produce a zone tile.
+	 * 
+	 * @param tile
+	 * 		Hollow zone tile.
+	 * @return
+	 * 		Instantiated zone tile.
+	 */
+	private List<ZoneTile> initTile(ZoneHollowTile tile)
+	{	// retrieve possible positions
+		Set<Integer> possCols = tile.getCols();
+		int nCols = tile.getColNumber();
+		Set<Integer> possRows = tile.getRows();
+		int nRows = tile.getRowNumber();
+if(nCols>1)
+	System.out.print("");
 		
-		// constant parts
-		result.setFloor(tile.getFloor());
-		result.setBlock(tile.getBlock());
-		result.setItem(tile.getItem());
-		result.setBomb(tile.getBomb());
+		// draw positions
+		List<ZoneTile> result = new ArrayList<ZoneTile>();
+		if(nRows!=0)
+		{	List<Integer> drawnPosR = SetTools.drawPositions(possRows, nRows);
+			for(int row: drawnPosR)
+			{	List<Integer> drawnPosC = SetTools.drawPositions(possCols, nCols);
+				for(int col: drawnPosC)
+				{	ZoneTile instance = new ZoneTile(row, col);
+					result.add(instance);
+				}
+			}
+		}
+		else
+		{	List<ZoneTile> temp = new ArrayList<ZoneTile>();
+			for(int row: possRows)
+			{	for(int col: possCols)
+				{	ZoneTile instance = new ZoneTile(row, col);
+					temp.add(instance);
+				}
+			}
+			result = SetTools.drawPositions(temp, nCols);
+		}
 		
-		// variable part
-		String name = tile.getVariable();
-		if(name!=null)
-		{	VariableTile vt = variableTiles.get(name);
-			ValueTile vit = vt.getNext();
-			String itm = vit.getItem();
-			String blck = vit.getBlock();
-			String flr = vit.getFloor();
-			String bmb = vit.getBomb();
-			if(result.getFloor()==null)
-				result.setFloor(flr);
-			if(result.getBlock()==null)
-				result.setBlock(blck);
-			if(result.getItem()==null)
-				result.setItem(itm);
-			if(result.getBomb()==null)
-				result.setBomb(bmb);
+		// init instance tiles
+		for(ZoneTile instance: result)
+		{	// constant parts
+			String floorStr = tile.getFloor();
+			instance.setFloor(floorStr);
+			String blockStr = tile.getBlock();
+			instance.setBlock(blockStr);
+			String itemStr = tile.getItem();
+			instance.setItem(itemStr);
+			String bombStr = tile.getBomb();
+			instance.setBomb(bombStr);
+			
+			// variable part
+			String name = tile.getVariable();
+			if(name!=null)
+			{	VariableTile vt = variableTiles.get(name);
+				ValueTile vit = vt.getNext();
+				String itm = vit.getItem();
+				String blck = vit.getBlock();
+				String flr = vit.getFloor();
+				String bmb = vit.getBomb();
+				if(instance.getFloor()==null)
+					instance.setFloor(flr);
+				if(instance.getBlock()==null)
+					instance.setBlock(blck);
+				if(instance.getItem()==null)
+					instance.setItem(itm);
+				if(instance.getBomb()==null)
+					instance.setBomb(bmb);
+			}
 		}
 		
 		return result;
@@ -325,13 +464,15 @@ public class Zone implements Serializable
 	
 	/**
 	 * Returns the number of items (both visible en hidden)
-	 * in this zone. Items appearing during the sudden death
+	 * in this zone. 
+	 * <br/>
+	 * <b>Note:</b> Items appearing during the sudden death
 	 * are not counted.
 	 *  
 	 * @return
 	 * 		The numbers of items in this zone.
 	 */
-	public HashMap<String,Integer> getItemCount()
+	public Map<String,Integer> getItemCount()
 	{	HashMap<String,Integer> result = new HashMap<String,Integer>();
 	
 		// matrix
@@ -353,7 +494,15 @@ public class Zone implements Serializable
 		return result;
 	}
 	
-	private void updateItemCount(ZoneTile tile, HashMap<String,Integer> result)
+	/**
+	 * Updates the specified item count depending on the specified tile.
+	 * 
+	 * @param tile
+	 * 		Tile to be considered.
+	 * @param result
+	 * 		Resulting item count.
+	 */
+	private void updateItemCount(ZoneTile tile, Map<String,Integer> result)
 	{	String item = tile.getItem();
 		if(item!=null)
 		{	int value;

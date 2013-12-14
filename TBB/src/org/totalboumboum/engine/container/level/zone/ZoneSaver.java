@@ -26,13 +26,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Comment;
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.variabletile.VariableTile;
@@ -45,11 +45,35 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Records a zone (as a file).
  * 
  * @author Vincent Labatut
  */
 public class ZoneSaver
-{	    
+{	
+	/**
+	 * Records the specified zone as a file in the specified folder.
+	 *  
+	 * @param folder
+	 * 		Folder to contain the file to create.
+	 * @param zone
+	 * 		Zone to record.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while recording the zone.
+	 * @throws SecurityException
+	 * 		Problem while recording the zone.
+	 * @throws ParserConfigurationException
+	 * 		Problem while recording the zone.
+	 * @throws SAXException
+	 * 		Problem while recording the zone.
+	 * @throws IOException
+	 * 		Problem while recording the zone.
+	 * @throws IllegalAccessException
+	 * 		Problem while recording the zone.
+	 * @throws NoSuchFieldException
+	 * 		Problem while recording the zone.
+	 */
 	public static void saveZone(String folder, Zone zone) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = saveZoneElement(zone);
@@ -62,6 +86,14 @@ public class ZoneSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Initializes the root element of the xml file.
+	 * 
+	 * @param zone
+	 * 		Zone to record.
+	 * @return
+	 * 		Root XML element.
+	 */
 	private static Element saveZoneElement(Zone zone)
 	{	Element result = new Element(XmlNames.ZONE);
 		
@@ -70,7 +102,7 @@ public class ZoneSaver
 		result.addContent(gplComment);
 
 		// tiles random variable
-		HashMap<String,VariableTile> variableTiles = zone.getVariableTiles();
+		Map<String,VariableTile> variableTiles = zone.getVariableTiles();
 		if(!variableTiles.isEmpty())
 		{	Element variableTilesElement = VariableTilesSaver.saveVariableTilesElement(variableTiles);
 			result.addContent(variableTilesElement);
@@ -88,10 +120,18 @@ public class ZoneSaver
 		return result;
 	}
     
+	/**
+	 * Generates the elements related to sudden death events.
+	 * 
+	 * @param zone
+	 * 		Zone to record.
+	 * @return
+	 * 		Created element.
+	 */
     private static Element saveEventsElement(Zone zone)
     {	Element result = null;
 
-    	HashMap<Long, List<ZoneHollowTile>> map = zone.getEvents();
+    	Map<Long, List<ZoneHollowTile>> map = zone.getEvents();
     	if(!map.isEmpty())
     	{	result = new Element(XmlNames.EVENTS);
 			
@@ -114,44 +154,54 @@ public class ZoneSaver
     			result.addContent(eventElement);
 				
     			// order tiles
-    			HashMap<Integer,HashMap<Integer,List<ZoneHollowTile>>> temp = new HashMap<Integer, HashMap<Integer,List<ZoneHollowTile>>>();
+    			Map<String,Map<String,List<ZoneHollowTile>>> temp = new HashMap<String, Map<String,List<ZoneHollowTile>>>();
     			for(ZoneHollowTile tile: tiles)
-    			{	int row = tile.getRow();
-    				HashMap<Integer,List<ZoneHollowTile>> temp2 = temp.get(row);
+    			{	Set<Integer> rows = tile.getRows();
+    				String rowsStr = XmlTools.generateMultipleIntegerString(rows);
+    				Map<String,List<ZoneHollowTile>> temp2 = temp.get(rowsStr);
     				if(temp2 == null)
-    				{	temp2 = new HashMap<Integer, List<ZoneHollowTile>>();
-    					temp.put(row,temp2);
+    				{	temp2 = new HashMap<String, List<ZoneHollowTile>>();
+    					temp.put(rowsStr,temp2);
     				}
-    				int col = tile.getCol();
-    				List<ZoneHollowTile> temp3 = temp2.get(col);
+    				Set<Integer> cols = tile.getCols();
+    				String colsStr = XmlTools.generateMultipleIntegerString(cols);
+    				List<ZoneHollowTile> temp3 = temp2.get(colsStr);
     				if(temp3 == null)
     				{	temp3 = new ArrayList<ZoneHollowTile>();
-    					temp2.put(col,temp3);
+    					temp2.put(colsStr,temp3);
     				}
     				temp3.add(tile);
     			}
 				
     			// process line
-    			for(Entry<Integer,HashMap<Integer,List<ZoneHollowTile>>> entry: temp.entrySet())
+    			for(Entry<String,Map<String,List<ZoneHollowTile>>> entry: temp.entrySet())
     			{	// create row element
-    				int row = entry.getKey();
+    				String rowsStr = entry.getKey();
     				Element rowElement = new Element(XmlNames.LINE);
-    				rowElement.setAttribute(XmlNames.POSITION,Integer.toString(row));
+    				rowElement.setAttribute(XmlNames.POSITION,rowsStr);
     				eventElement.addContent(rowElement);
     				
-		    		HashMap<Integer,List<ZoneHollowTile>> temp2 = entry.getValue();
-        			for(Entry<Integer,List<ZoneHollowTile>> entry2: temp2.entrySet())
-        			{	int col = entry2.getKey();
+		    		Map<String,List<ZoneHollowTile>> temp2 = entry.getValue();
+        			for(Entry<String,List<ZoneHollowTile>> entry2: temp2.entrySet())
+        			{	String colsStr = entry2.getKey();
     					List<ZoneHollowTile> temp3 = entry2.getValue();
     					for(ZoneHollowTile tile: temp3)
-    					{	// process contant terms
+    					{	int nRows = tile.getRowNumber();
+    						if(nRows!=tile.getRows().size())
+    							rowElement.setAttribute(XmlNames.NBR,Integer.toString(nRows));
+    						
+    						// process contant terms
 			        		String floor = tile.getFloor();
 			            	String block = tile.getBlock();
 			           		String item = tile.getItem();
 			           		String bomb = tile.getBomb();
 			           		Element tileElement = saveTileElement(floor,block,item,bomb);
-			    			tileElement.setAttribute(XmlNames.POSITION,Integer.toString(col));
-			        		
+			    			tileElement.setAttribute(XmlNames.POSITION,colsStr);
+			    			
+    						int nCols = tile.getColNumber();
+    						if(nCols!=tile.getCols().size())
+    							tileElement.setAttribute(XmlNames.NBR,Integer.toString(nCols));
+
 			    			// process variable term
 			        		String variable = tile.getVariable();
 			        		if(variable!=null)
@@ -171,6 +221,14 @@ public class ZoneSaver
     	return result;
     }
 
+    /**
+     * Processes the matrix part of the zone file.
+     * 
+     * @param zone
+     * 		Zone to record.
+     * @return
+     * 		Matrix element.
+     */
     private static Element saveMatrixElement(Zone zone)
     {	Element result = new Element(XmlNames.MATRIX);
     	
@@ -204,12 +262,41 @@ public class ZoneSaver
     	return result;
     }
     
+    /**
+     * Generates a tile element.
+     * 
+     * @param floor
+     * 		Floor name for tthe tile.
+     * @param block
+     * 		Block name for tthe tile.
+     * @param item
+     * 		Item name for tthe tile.
+     * @param bomb
+     * 		Bomb name for tthe tile.
+     * @return
+     * 		The corresponding tile element.
+     */
     private static Element saveTileElement(String floor, String block, String item, String bomb)
     {	Element result = new Element(XmlNames.TILE);
     	saveTileContent(result,floor,block,item,bomb);
 		return result;
     }
     
+    /**
+     * Adds the content of a tile
+     * to the specified element.
+     * 
+     * @param result
+     * 		Element to be completed.
+     * @param floor
+     * 		Floor name for tthe tile.
+     * @param block
+     * 		Block name for tthe tile.
+     * @param item
+     * 		Item name for tthe tile.
+     * @param bomb
+      * 		Bomb name for tthe tile.
+    */
     public static void saveTileContent(Element result, String floor, String block, String item, String bomb)
     {	// floor
 		if(floor!=null)
