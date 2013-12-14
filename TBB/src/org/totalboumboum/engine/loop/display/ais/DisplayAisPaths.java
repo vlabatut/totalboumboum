@@ -42,7 +42,7 @@ import org.totalboumboum.engine.loop.event.control.SystemControlEvent;
 import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.engine.player.AiPlayer;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 
 /**
  * Displays the paths set
@@ -248,7 +248,7 @@ public class DisplayAisPaths extends Display
 								double x2b = x1 + intDir12[0]*hDist;
 								double y2b = y1 + intDir12[1]*vDist;
 								// compare actual and theoretical positions
-								if(!CombinatoricsTools.isRelativelyEqualTo(x1,x1b) || !CombinatoricsTools.isRelativelyEqualTo(y1,y1b))
+								if(!ApproximationTools.isRelativelyEqualTo(x1,x1b) || !ApproximationTools.isRelativelyEqualTo(y1,y1b))
 								{	shape.lineTo(x2b,y2b);
 									g2.draw(shape);
 									shape = new Path2D.Double();
