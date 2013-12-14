@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.action.movehigh.SpecificMoveHigh
 import org.totalboumboum.engine.content.feature.action.movelow.SpecificMoveLow;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 
 /**
  * 
@@ -107,8 +107,8 @@ public class PotentialObstacle
 		double distY = RoundVariables.level.getVerticalPixelDistance(posY,currentY);
 		spriteDistance = distX+distY;
 		// if there's already an intersection between the sprite and this potential obstacle
-		if(!CombinatoricsTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) 
-				&& !CombinatoricsTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
+		if(!ApproximationTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) 
+				&& !ApproximationTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
 		//if(distX<tileDimension && distY<tileDimension)
 		{	contactX = currentX;
 			contactY = currentY;
@@ -117,30 +117,30 @@ public class PotentialObstacle
 		// else we need to process the intersection point (contact point)
 		else
 		{	// special case : sprite located in an angle of the obstacle safe zone
-			if(CombinatoricsTools.isRelativelyEqualTo(distX,tileDimension) 
-					&& CombinatoricsTools.isRelativelyEqualTo(distY,tileDimension))
+			if(ApproximationTools.isRelativelyEqualTo(distX,tileDimension) 
+					&& ApproximationTools.isRelativelyEqualTo(distY,tileDimension))
 			{	double interX[] = {RoundVariables.level.normalizePositionX(posX - tileDimension), RoundVariables.level.normalizePositionX(posX + tileDimension)};
 				double interY[] = {RoundVariables.level.normalizePositionY(posY - tileDimension), RoundVariables.level.normalizePositionY(posY + tileDimension)};
 				double distanceX[] = {RoundVariables.level.getHorizontalPixelDistance(interX[0], currentX), RoundVariables.level.getHorizontalPixelDistance(interX[1], currentX)};
 				double distanceY[] = {RoundVariables.level.getVerticalPixelDistance(interY[0], currentY), RoundVariables.level.getVerticalPixelDistance(interY[1], currentY)};
 				double deltaX = RoundVariables.level.getDeltaX(currentX,targetX);
 				double deltaY = RoundVariables.level.getDeltaY(currentY,targetY);
-				if(CombinatoricsTools.isRelativelyEqualTo(distanceX[0],0) 
-						&& CombinatoricsTools.isRelativelyEqualTo(distanceY[0],0) 
-						&& CombinatoricsTools.isRelativelyGreaterThan(deltaX,0)
-						&& CombinatoricsTools.isRelativelyGreaterThan(deltaY,0)
-					|| CombinatoricsTools.isRelativelyEqualTo(distanceX[0],0) 
-						&& CombinatoricsTools.isRelativelyEqualTo(distanceY[1],0) 
-						&& CombinatoricsTools.isRelativelyGreaterThan(deltaX,0)
-						&& CombinatoricsTools.isRelativelySmallerThan(deltaY,0)
-					|| CombinatoricsTools.isRelativelyEqualTo(distanceX[1],0) 
-						&& CombinatoricsTools.isRelativelyEqualTo(distanceY[0],0) 
-						&& CombinatoricsTools.isRelativelySmallerThan(deltaX,0)
-						&& CombinatoricsTools.isRelativelyGreaterThan(deltaY,0)
-					|| CombinatoricsTools.isRelativelyEqualTo(distanceX[1],0) 
-						&& CombinatoricsTools.isRelativelyEqualTo(distanceY[1],0) 
-						&& CombinatoricsTools.isRelativelySmallerThan(deltaX,0)
-						&& CombinatoricsTools.isRelativelySmallerThan(deltaY,0))
+				if(ApproximationTools.isRelativelyEqualTo(distanceX[0],0) 
+						&& ApproximationTools.isRelativelyEqualTo(distanceY[0],0) 
+						&& ApproximationTools.isRelativelyGreaterThan(deltaX,0)
+						&& ApproximationTools.isRelativelyGreaterThan(deltaY,0)
+					|| ApproximationTools.isRelativelyEqualTo(distanceX[0],0) 
+						&& ApproximationTools.isRelativelyEqualTo(distanceY[1],0) 
+						&& ApproximationTools.isRelativelyGreaterThan(deltaX,0)
+						&& ApproximationTools.isRelativelySmallerThan(deltaY,0)
+					|| ApproximationTools.isRelativelyEqualTo(distanceX[1],0) 
+						&& ApproximationTools.isRelativelyEqualTo(distanceY[0],0) 
+						&& ApproximationTools.isRelativelySmallerThan(deltaX,0)
+						&& ApproximationTools.isRelativelyGreaterThan(deltaY,0)
+					|| ApproximationTools.isRelativelyEqualTo(distanceX[1],0) 
+						&& ApproximationTools.isRelativelyEqualTo(distanceY[1],0) 
+						&& ApproximationTools.isRelativelySmallerThan(deltaX,0)
+						&& ApproximationTools.isRelativelySmallerThan(deltaY,0))
 				
 				{	contactX = currentX;
 					contactY = currentY;
@@ -152,10 +152,10 @@ public class PotentialObstacle
 				// for each side
 				for(int i=0;i<interX.length;i++)
 				{	// the side has to be on the sprite way
-					double interSignum = CombinatoricsTools.relativeSignum(RoundVariables.level.getDeltaX(currentX,interX[i]));
+					double interSignum = ApproximationTools.relativeSignum(RoundVariables.level.getDeltaX(currentX,interX[i]));
 					if(interSignum==0)
-						interSignum = CombinatoricsTools.relativeSignum(RoundVariables.level.getDeltaX(currentX,posX));
-					double targetSignum = CombinatoricsTools.relativeSignum(RoundVariables.level.getDeltaX(currentX,targetX));
+						interSignum = ApproximationTools.relativeSignum(RoundVariables.level.getDeltaX(currentX,posX));
+					double targetSignum = ApproximationTools.relativeSignum(RoundVariables.level.getDeltaX(currentX,targetX));
 					if(interSignum==targetSignum)				
 					{	Double interY = moveZone.projectVertically(interX[i]);
 						// if there's an intersection point between the side and the trajectory 
@@ -164,8 +164,8 @@ public class PotentialObstacle
 							double sourceDist = RoundVariables.level.getHorizontalPixelDistance(currentX,interX[i]) + RoundVariables.level.getVerticalPixelDistance(currentY,interY);
 							// smaller source-intersection distance and (critical projection distance or equal distance and diagonal trajectory) 
 							if(sourceDist<contactDistance && 
-								(!CombinatoricsTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension)
-								|| CombinatoricsTools.isRelativelyEqualTo(projectionDist,tileDimension) && CombinatoricsTools.isRelativelyEqualTo(RoundVariables.level.getDeltaY(posY,interY)/RoundVariables.level.getDeltaX(posX,interX[i]),moveZone.getTrajectoryA())))
+								(!ApproximationTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension)
+								|| ApproximationTools.isRelativelyEqualTo(projectionDist,tileDimension) && ApproximationTools.isRelativelyEqualTo(RoundVariables.level.getDeltaY(posY,interY)/RoundVariables.level.getDeltaX(posX,interX[i]),moveZone.getTrajectoryA())))
 							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	contactX = interX[i];
 								contactY = interY;
@@ -180,10 +180,10 @@ public class PotentialObstacle
 				// for each side
 				for(int i=0;i<interY.length;i++)
 				{	// the side has to be on the sprite way
-					double interSignum = CombinatoricsTools.relativeSignum(RoundVariables.level.getDeltaY(currentY,interY[i]));
+					double interSignum = ApproximationTools.relativeSignum(RoundVariables.level.getDeltaY(currentY,interY[i]));
 					if(interSignum==0)
-						interSignum = CombinatoricsTools.relativeSignum(RoundVariables.level.getDeltaY(currentY,posY));
-					double targetSignum = CombinatoricsTools.relativeSignum(RoundVariables.level.getDeltaY(currentY,targetY));
+						interSignum = ApproximationTools.relativeSignum(RoundVariables.level.getDeltaY(currentY,posY));
+					double targetSignum = ApproximationTools.relativeSignum(RoundVariables.level.getDeltaY(currentY,targetY));
 					if(interSignum==targetSignum)						
 					{	Double interX = moveZone.projectHorizontally(interY[i]);
 						// is there an intersection point between side and trajectory 
@@ -192,8 +192,8 @@ public class PotentialObstacle
 							double sourceDist = RoundVariables.level.getHorizontalPixelDistance(currentX,interX) + RoundVariables.level.getVerticalPixelDistance(currentY,interY[i]);
 							// smaller source-intersection distance and (critical projection distance or equal distance and diagonal trajectory) 
 							if(sourceDist<contactDistance && 
-								(!CombinatoricsTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension)
-								|| CombinatoricsTools.isRelativelyEqualTo(projectionDist,tileDimension) && CombinatoricsTools.isRelativelyEqualTo(RoundVariables.level.getDeltaY(posY,interY[i])/RoundVariables.level.getDeltaX(posX,interX),moveZone.getTrajectoryA())))
+								(!ApproximationTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension)
+								|| ApproximationTools.isRelativelyEqualTo(projectionDist,tileDimension) && ApproximationTools.isRelativelyEqualTo(RoundVariables.level.getDeltaY(posY,interY[i])/RoundVariables.level.getDeltaX(posX,interX),moveZone.getTrajectoryA())))
 							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	contactX = interX;
 								contactY = interY[i];
@@ -274,7 +274,7 @@ public class PotentialObstacle
 		double distX = RoundVariables.level.getHorizontalPixelDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
 		double distY = RoundVariables.level.getVerticalPixelDistance(sprite.getCurrentPosY(),moveZone.getCurrentY());
 		Contact contact = Contact.COLLISION;
-		if(!CombinatoricsTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !CombinatoricsTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
+		if(!ApproximationTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !ApproximationTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
 			// intersection iff the distance is relatively smaller than the tile size  
 			contact = Contact.INTERSECTION;
 		actorCircumstance.setContact(contact);

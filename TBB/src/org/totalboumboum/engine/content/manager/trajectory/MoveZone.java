@@ -32,7 +32,7 @@ import org.totalboumboum.engine.content.feature.ability.StateAbility;
 import org.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 
 /**
  * 
@@ -356,9 +356,9 @@ public class MoveZone
 	private boolean hasArrived()
 	{	boolean result = true;
 		double distX = RoundVariables.level.getHorizontalPixelDistance(currentX,targetX);
-		result = result && CombinatoricsTools.isRelativelyEqualTo(distX,0);
+		result = result && ApproximationTools.isRelativelyEqualTo(distX,0);
 		double distY = RoundVariables.level.getVerticalPixelDistance(currentY,targetY);
-		result = result && CombinatoricsTools.isRelativelyEqualTo(distY,0);
+		result = result && ApproximationTools.isRelativelyEqualTo(distY,0);
 		return result;
 	}
 		
@@ -475,7 +475,7 @@ public class MoveZone
 			double margin = tolerance*RoundVariables.scaledTileDimension;
 			if(tolerance==0)
 				margin = Double.MAX_VALUE;
-			if(dir!=Direction.NONE && CombinatoricsTools.isRelativelyGreaterThan(dist,margin))
+			if(dir!=Direction.NONE && ApproximationTools.isRelativelyGreaterThan(dist,margin))
 			{	// process safe position
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
