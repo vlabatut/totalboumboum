@@ -46,7 +46,8 @@ import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
+import org.totalboumboum.tools.computing.RankingTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -205,7 +206,7 @@ public class AiZone implements Serializable
 			roundRanks.clear();
 			Round round = level.getLoop().getRound();
 			float points[] = round.getCurrentPoints();
-			int ranks[] = CombinatoricsTools.getRanks(points);
+			int ranks[] = RankingTools.getRanks(points);
 			for(int i=0;i<players.size();i++)
 			{	Hero hero = (Hero)players.get(i).getSprite();
 				AiHero aiHero = heroMap.get(hero);
@@ -216,7 +217,7 @@ public class AiZone implements Serializable
 			matchRanks.clear();
 			Match match = round.getMatch();
 			points = match.getStats().getTotal();
-			ranks = CombinatoricsTools.getRanks(points);
+			ranks = RankingTools.getRanks(points);
 			for(int i=0;i<players.size();i++)
 			{	Hero hero = (Hero)players.get(i).getSprite();
 				AiHero aiHero = heroMap.get(hero);
@@ -922,10 +923,10 @@ public class AiZone implements Serializable
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
 	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
-		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
+		if(ApproximationTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
 		double dy = RoundVariables.level.getDeltaY(y1,y2);
-		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
+		if(ApproximationTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
@@ -1066,7 +1067,7 @@ public class AiZone implements Serializable
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1088,7 +1089,7 @@ public class AiZone implements Serializable
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1128,7 +1129,7 @@ public class AiZone implements Serializable
 		double x2 = sprite2.getPosX();
 		double y2 = sprite2.getPosY();
 		double result = level.getPixelDistance(x1,y1,x2,y2,direction);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1285,8 +1286,8 @@ public class AiZone implements Serializable
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	
-		result = result && CombinatoricsTools.isRelativelyEqualTo(x1,x2);
-		result = result && CombinatoricsTools.isRelativelyEqualTo(y1,y2);
+		result = result && ApproximationTools.isRelativelyEqualTo(x1,x2);
+		result = result && ApproximationTools.isRelativelyEqualTo(y1,y2);
 		return result;
 	}
 	
