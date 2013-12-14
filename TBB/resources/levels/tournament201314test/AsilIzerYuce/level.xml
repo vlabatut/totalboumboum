@@ -20,9 +20,9 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="AsilIzerYuce" />
-	<author value="Vincent Labatut" />
+	<author value="Emre Asıl, Tülin İzer &amp; Miray Yüce"/>
 	<source value="original" />
-	<preview file="preview.jpg" />
+	<preview file="preview.bmp" />
 	<instance name="tournament" />
 	<theme name="tournament7" />
 	<globalDimension height="11" width="11" />

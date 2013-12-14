@@ -20,9 +20,9 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="AcarSesyılmaz" />
-	<author value="Emre Acar, Yankı Sesyılmaz" />
+	<author value="Emre Acar &amp; Yankı Sesyılmaz" />
 	<source value="original" />
-	<preview file="preview.jpg" />
+	<preview file="preview.bmp" />
 	<instance name="tournament" />
 	<theme name="tournament7" />
 	<globalDimension height="8" width="9" />
