@@ -34,7 +34,7 @@
 	<limits>
 		<confrontation>
 			<points local="true" name="total" />
-			<threshold value="21" />
+			<threshold value="24" />
 		</confrontation>
 <!-- 
  		<points>
