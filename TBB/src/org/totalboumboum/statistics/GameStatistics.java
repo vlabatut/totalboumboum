@@ -48,7 +48,7 @@ import org.totalboumboum.statistics.overall.OverallStatsLoader;
 import org.totalboumboum.statistics.overall.OverallStatsSaver;
 import org.totalboumboum.statistics.overall.PlayerStats;
 import org.totalboumboum.statistics.overall.PlayerStats.Value;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.RankingTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
@@ -322,7 +322,7 @@ public class GameStatistics
 	 */
 	public static void updatePlayersStats(StatisticRound stats) throws FileNotFoundException
 	{	float[] points = stats.getPoints();
-		List<Integer> winners = CombinatoricsTools.getWinners(points);
+		List<Integer> winners = RankingTools.getWinners(points);
 		Date date = stats.getStartDate();
 		
 		for(int index=0;index<stats.getPlayersIds().size();index++)
