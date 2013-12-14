@@ -53,7 +53,7 @@
 	</xsd:group>
 
 	<xsd:complexType name="tTileReference">
-		<xsd:attribute name="name" type="xsd:string" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tTile">
