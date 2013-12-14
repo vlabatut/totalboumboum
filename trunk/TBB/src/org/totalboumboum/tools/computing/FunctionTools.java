@@ -21,38 +21,30 @@ package org.totalboumboum.tools.computing;
  * 
  */
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-
 /**
- * Compares two collections of integers.
- * First using their sizes, then their
- * content.
+ * Methods implementing various mathematical functions.
  * 
  * @author Vincent Labatut
  */
-public class IntegerCollectionComparator implements Comparator<Collection<Integer>>
-{	@Override
-	public int compare(Collection<Integer> s1, Collection<Integer> s2)
-	{	int size1 = s1.size();
-		int size2 = s2.size();
-		int result = size1-size2;
-		if(result==0)
-		{	Iterator<Integer> i1 = s1.iterator();
-			Iterator<Integer> i2 = s2.iterator();
-			boolean done;
-			do
-			{	int v1 = i1.next();
-				int v2 = i2.next();
-				result = v1-v2;
-				if(result==0)
-					done = !i1.hasNext();
-				else
-					done = true;
-			}
-			while(!done);
-		}
+public class FunctionTools
+{
+	/**
+	 * Processes the value of a sigmoid function for x.
+	 * The lambda parameter defines the slope (the higher, the more slopy)
+	 * and the theta parameter defines the center of symmetry. 
+	 * 
+	 * @param lambda
+	 * 		Slope.
+	 * @param theta
+	 * 		Center of symmetry.
+	 * @param x
+	 * 		Argument of the fonction.
+	 * @return
+	 * 		The result of the sigmoid function when applied to x.
+	 */
+	public static double sigmoid(double lambda, double theta, double x)
+	{	double result;
+		result = 1/(1+Math.exp(-lambda*(x-theta)));
 		return result;
-	}			
+	}	
 }
