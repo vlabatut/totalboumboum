@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.game.round.RoundVariables;
+import org.totalboumboum.tools.collections.IntegerCollectionComparator;
 
 /**
  * 
@@ -36,67 +36,7 @@ import org.totalboumboum.game.round.RoundVariables;
  */
 public class CombinatoricsTools
 {	
-	/////////////////////////////////////////////////////////////////
-	// APPROXIMATIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public static boolean isRelativelySmallerThan(double a, double b)
-	{	boolean result = false;
-		double temp = b-a;
-		result = temp>RoundVariables.toleranceCoefficient;
-		return result;
-	}
-
-	public static boolean isRelativelyGreaterThan(double a, double b)
-	{	boolean result = false;
-		double temp = a-b;
-		result = temp>RoundVariables.toleranceCoefficient;
-		return result;
-	}
 	
-	public static boolean isRelativelyEqualTo(double a, double b)
-	{	boolean result = false;
-		double temp = Math.abs(b-a);
-		result = temp<=RoundVariables.toleranceCoefficient;
-		return result;
-	}
-	
-	public static boolean isRelativelyGreaterOrEqualTo(double a, double b)
-	{	boolean result;
-		result = isRelativelyGreaterThan(a,b) || isRelativelyEqualTo(a,b);
-		return result;
-	}
-
-	public static boolean isRelativelySmallerOrEqualTo(double a, double b)
-	{	boolean result;
-		result = isRelativelySmallerThan(a,b) || isRelativelyEqualTo(a,b);
-		return result;
-	}
-
-	public static double round(double a)
-	{	double result;
-/*	
-		result = a/(configuration.getZoomFactor()*configuration.getTolerance());
-		result = Math.round(result);
-		result = result*(configuration.getZoomFactor()*configuration.getTolerance());
-*/	
-		double temp = Math.round(a);
-		if(isRelativelyEqualTo(a,temp))
-			result = temp;
-		else
-			result = a;
-		return result;
-	}
-	
-	public static int relativeSignum(double a)
-	{	int result;
-		if(isRelativelyEqualTo(a,0))
-			result = 0;
-		else if(isRelativelyGreaterThan(a,0))
-			result = +1;
-		else //if(isRelativelySmallerThan(a,0,loop))
-			result = -1;
-		return result;
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// COMBINATIONS		/////////////////////////////////////////////
@@ -498,65 +438,6 @@ for(List<Set<Integer>> list: matches)
 		}		
 		
 		System.out.println("\tdone");
-		return result;
-	}
-		
-	/////////////////////////////////////////////////////////////////
-	// ORDERING			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * process an array of ranks, each one corresponding to a player,
-	 * according to the points in input.
-	 * eg: {1,3,2} means the player 0 came first, player 1 came 
-	 * third and player 2 came second
-	 */
-	public static int[] getRanks(float[] pts)
-	{	// init
-		int[] result = new int[pts.length];
-		for(int i=0;i<result.length;i++)
-			result[i] = 1;
-		// process ranks
-		for(int i=0;i<result.length-1;i++)
-		{	for(int j=i+1;j<result.length;j++)
-			{	if(pts[i]<pts[j])
-					result[i] = result[i] + 1;
-				else if(pts[i]>pts[j])
-					result[j] = result[j] + 1;
-			}
-		}	
-		//
-		return result;
-	}
-
-	public static List<Integer> getWinners(float[] points)
-	{	List<Integer> result = new ArrayList<Integer>();
-		int[] ranks = getRanks(points);
-		for(int i=0;i<ranks.length;i++)
-			if(ranks[i]==1 && points[i]>0)
-				result.add(i);
-		return result;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FUNCTIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Processes the value of a sigmoid function for x.
-	 * The lambda parameter defines the slope (the higher, the more slopy)
-	 * and the theta parameter defines the center of symmetry. 
-	 * 
-	 * @param lambda
-	 * 		Slope.
-	 * @param theta
-	 * 		Center of symmetry.
-	 * @param x
-	 * 		Argument of the fonction.
-	 * @return
-	 * 		The result of the sigmoid function when applied to x.
-	 */
-	public static double sigmoid(double lambda, double theta, double x)
-	{	double result;
-		result = 1/(1+Math.exp(-lambda*(x-theta)));
 		return result;
 	}
 }
