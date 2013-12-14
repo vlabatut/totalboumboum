@@ -19,8 +19,8 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<title value="Bombfest" />
-	<author value="Saylam and Sönmez" />
+	<title value="SaylamSönmez" />
+	<author value="Berrenur Saylam &amp; Kübra Sönmez"/>
 	<source value="original" />
 	<preview file="preview.jpg" />
 	<instance name="tournament" />
