@@ -21,21 +21,30 @@ package org.totalboumboum.engine.container.level.variabletile;
  * 
  */
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneSaver;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
+ * Create the appropriate XML element to
+ * represent one or several tile variables.
  * 
  * @author Vincent Labatut
- *
  */
 public class VariableTilesSaver
 {	
-    public static Element saveVariableTilesElement(HashMap<String,VariableTile> variableTiles)
+	/**
+	 * Creates the general element containing all variable elements.
+	 * 
+	 * @param variableTiles
+	 * 		Map of variable tile objects.
+	 * @return
+	 * 		Corresponding XML element.
+	 */
+    public static Element saveVariableTilesElement(Map<String,VariableTile> variableTiles)
     {	Element result = new Element(XmlNames.VARIABLE_TILES);
     	for(VariableTile variableTile: variableTiles.values())
     	{	Element variableTileElement = saveVariableTileElement(variableTile);
@@ -44,6 +53,14 @@ public class VariableTilesSaver
     	return result;
     }
 
+    /**
+     * Creates an element representing a single variable tile.
+     * 
+     * @param variableTile
+     * 		Object to represent.
+     * @return
+     * 		Corresponding element.
+     */
     private static Element saveVariableTileElement(VariableTile variableTile)
     {	Element result = new Element(XmlNames.VARIABLE_TILE);
     	
@@ -60,6 +77,14 @@ public class VariableTilesSaver
     	return result;
     }
     
+    /**
+     * Creates an element corresponding to a tile value.
+     *  
+     * @param valueTile
+     * 		Tile value.
+     * @return
+     * 		Corresponding element.
+     */
     private static Element saveValueTileElement(ValueTile valueTile)
     {	// tile terms
     	String floor = valueTile.getFloor();
