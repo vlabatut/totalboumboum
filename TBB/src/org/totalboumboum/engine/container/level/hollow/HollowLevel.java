@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -140,8 +141,8 @@ public class HollowLevel implements Serializable
 			zone.makeMatrix(timeLimit);		
 	}
 	
-	public HashMap<String,Integer> getItemCount()
-	{	HashMap<String,Integer> result;
+	public Map<String,Integer> getItemCount()
+	{	Map<String,Integer> result;
 		if(zone!=null)
 			result = zone.getItemCount();
 		else
@@ -183,7 +184,7 @@ public class HollowLevel implements Serializable
 		level.initTileList();
 		
 		// init sudden death events
-		HashMap<Long, List<ZoneTile>> eventMap = zone.getEventsInit();
+		Map<Long, List<ZoneTile>> eventMap = zone.getEventsInit();
 		suddenDeathEvents = new ArrayList<SuddenDeathEvent>();
 		for(Entry<Long, List<ZoneTile>> entry: eventMap.entrySet())
 		{	Long time = entry.getKey();
