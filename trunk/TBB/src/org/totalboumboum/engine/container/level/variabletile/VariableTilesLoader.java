@@ -24,20 +24,30 @@ package org.totalboumboum.engine.container.level.variabletile;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.zone.ZoneLoader;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
+ * Analyzes an XML element and retrive the
+ * data needed to initialize a tile variable.
  * 
  * @author Vincent Labatut
- *
  */
 public class VariableTilesLoader
 {	
+	/**
+	 * Process a list of variable.
+	 * 
+	 * @param root
+	 * 		Element containing the list.
+	 * @return
+	 * 		Map of read tile variables.
+	 */
     @SuppressWarnings("unchecked")
-    public static HashMap<String,VariableTile> loadVariableTilesElement(Element root)
+    public static Map<String,VariableTile> loadVariableTilesElement(Element root)
     {	HashMap<String,VariableTile> result = new HashMap<String, VariableTile>();
 		if(root!=null)
 	   	{	List<Element> elements = root.getChildren(XmlNames.VARIABLE_TILE);
@@ -51,6 +61,15 @@ public class VariableTilesLoader
     	return result;
     }
     
+    /**
+     * Process a single variable element and 
+     * creates the corresponding object.
+     * 
+     * @param root
+     * 		Variable XML element.
+     * @return
+     * 		The corresponding tile variable object.
+     */
     @SuppressWarnings("unchecked")
     private static VariableTile loadVariableTileElement(Element root)
     {	String name = root.getAttribute(XmlNames.NAME).getValue().trim();

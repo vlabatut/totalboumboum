@@ -27,13 +27,22 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * Represents a random variable whose values are tiles.
+ * It is used to introduce random element when defining zones.
  * 
  * @author Vincent Labatut
- *
  */
 public class VariableTile implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Creates a new random tile variable
+	 * with the specified name.
+	 * 
+	 * @param name
+	 * 		Variable name (used for later reference).
+	 */
 	public VariableTile(String name)
 	{	this.name = name;
 	}
@@ -41,8 +50,15 @@ public class VariableTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Variable name */
 	private String name;//debug
 
+	/**
+	 * Returns the name of this variable.
+	 * 
+	 * @return
+	 * 		The variable name.
+	 */
 	public String getName()
 	{	return name;
 	}
@@ -50,23 +66,55 @@ public class VariableTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// VALUES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of possible values for this variable */
 	private List<ValueTile> values = new ArrayList<ValueTile>();
 
+	/**
+	 * Returns the list of possible values for this variable.
+	 * 
+	 * @return
+	 * 		List of tile values.
+	 */
 	public List<ValueTile> getValues()
 	{	return values;
 	}
 	
-	public void addValue(ValueTile valueItem)
-	{	values.add(valueItem);		
+	/**
+	 * Adds a new value to the list of possible
+	 * values of this variable.
+	 * 
+	 * @param value
+	 * 		New tile value to add.
+	 */
+	public void addValue(ValueTile value)
+	{	values.add(value);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROBAS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** 
+	 * Change the probability for the tile value of specified
+	 * index to be drawn. 
+	 * 
+	 * @param index 
+	 * 		Index of the value.
+	 * @param proba 
+	 * 		Probability for the value to be drawn.
+	 */
 	public void setProba(int index, float proba)
 	{	values.get(index).setProba(proba);				
 	}
 	
+	/**
+	 * Returns the probability of the value
+	 * whose index is specified, to be drawn.
+	 * 
+	 * @param index
+	 * 		Index of the value of interest.
+	 * @return
+	 * 		The associated probability measure.
+	 */
 	public float getProba(int index)
 	{	return values.get(index).getProba();				
 	}
@@ -74,14 +122,26 @@ public class VariableTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// OCCURRENCES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Number of occurrence of each value */ 
 	private List<Integer> counts;
+	/** Total number of drawn values */
 	private int totalCount;
+	/** Total number of occurrences (as specified in the zone) */
+	@SuppressWarnings("unused")
 	private int totalOccurrences = 0;
 
+	/**
+	 * Counts one more occurrence.
+	 */
 	public void incrementOccurrencesCount()
 	{	totalOccurrences++;
 	}
 	
+	/**
+	 * Initializes all variables used to count
+	 * values. Those are used to keep controle
+	 * of the drawing process.
+	 */
 	public void init()
 	{	counts = new ArrayList<Integer>();
 		for(int i=0;i<values.size();i++)
@@ -94,13 +154,14 @@ public class VariableTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Gets the next value for this variable, according to its probability distribution.
-	 * At first, I used Math.random() directly, but since the length of the series was too short,
+	 * At first, I used {@code Math.random()} directly, but since the length of the series was too short,
 	 * the properties of the distribution were not respected. The controlled version allows a better
 	 * respect of the probability distribution, by monitoring the generated values, but the resulting 
 	 * zone is always the same ! So a mixture of these two methods is used : half the values are 
 	 * generated completely randomly, and the rest is generated in a controlled way. 
 	 * 
-	 * @return	a value generated randomly
+	 * @return
+	 * 		A value generated randomly.
 	 */
 	public ValueTile getNext()
 	{	ValueTile result;
@@ -111,6 +172,14 @@ public class VariableTile implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Select a value for the next draw,
+	 * using the distribution of already
+	 * drawn values.
+	 * 
+	 * @return
+	 * 		A tile value.
+	 */
 	private ValueTile getNextControlled()
 	{	ValueTile result;
 		// count frequencies
@@ -157,6 +226,12 @@ public class VariableTile implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Draws the next tile value completely randomly.
+	 * 
+	 * @return
+	 * 		Tile value.
+	 */
 	private ValueTile getNextRandomly()
 	{	ValueTile result = null;
 		totalCount++;

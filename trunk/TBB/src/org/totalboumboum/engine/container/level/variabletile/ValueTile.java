@@ -24,13 +24,29 @@ package org.totalboumboum.engine.container.level.variabletile;
 import java.io.Serializable;
 
 /**
+ * Possibl value in a tile variable
+ * (see {@link VariableTile}).
  * 
  * @author Vincent Labatut
- *
  */
 public class ValueTile implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/***
+	 * Creates a tile value for a tile random variable.
+	 * 
+	 * @param floor
+	 * 		Floor name (or {@code null} for none).
+	 * @param block
+	 * 		Block name (or {@code null} for none).
+	 * @param item
+	 * 		Item name (or {@code null} for none).
+	 * @param bomb
+	 * 		Bomb name (or {@code null} for none).
+	 * @param proba
+	 * 		Value probability.
+	 */
 	public ValueTile(String floor, String block, String item, String bomb, float proba)
 	{	this.block = block;
 		this.item = item;
@@ -42,8 +58,16 @@ public class ValueTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// BLOCK			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Block name (or {@code null} for none) */
 	private String block;
 
+	/**
+	 * Returns the block name for this tile value 
+	 * (or {@code null} for none).
+	 * 
+	 * @return
+	 * 		Sprite name.
+	 */
 	public String getBlock()
 	{	return block;
 	}
@@ -51,8 +75,16 @@ public class ValueTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ITEM				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Item name (or {@code null} for none) */
 	private String item;
 
+	/**
+	 * Returns the item name for this tile value 
+	 * (or {@code null} for none).
+	 * 
+	 * @return
+	 * 		Sprite name.
+	 */
 	public String getItem()
 	{	return item;
 	}
@@ -60,8 +92,16 @@ public class ValueTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// BOMB				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Bomb name (or {@code null} for none) */
 	private String bomb;
 
+	/**
+	 * Returns the bomb name for this tile value 
+	 * (or {@code null} for none).
+	 * 
+	 * @return
+	 * 		Sprite name.
+	 */
 	public String getBomb()
 	{	return bomb;
 	}
@@ -69,8 +109,16 @@ public class ValueTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// FLOOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Floor name (or {@code null} for none) */
 	private String floor;
 
+	/**
+	 * Returns the floor name for this tile value 
+	 * (or {@code null} for none).
+	 * 
+	 * @return
+	 * 		Sprite name.
+	 */
 	public String getFloor()
 	{	return floor;
 	}
@@ -78,12 +126,25 @@ public class ValueTile implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PROBA			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Probability for this value to be drawn */
 	private float proba;
-
+	
+	/**
+	 * Returns the probability associated to this value.
+	 * 
+	 * @return
+	 * 		A probability measure.
+	 */
 	public float getProba()
 	{	return proba;	
 	}
 	
+	/**
+	 * Changes the probability associated to this value.
+	 * 
+	 * @param proba
+	 * 		The new probability measure.
+	 */
 	public void setProba(float proba)
 	{	this.proba = proba;
 	}
