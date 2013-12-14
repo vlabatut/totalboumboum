@@ -23,14 +23,10 @@ package org.totalboumboum.engine.container.level.zone;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -46,11 +42,34 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Loads a zone from a file.
+ * None of the random elements are valued at loading.
+ * This allows generating different levels when the
+ * same zone is played several times.
  * 
  * @author Vincent Labatut
  */
 public class ZoneLoader
-{	    
+{	   
+	/**
+	 * Loads a zone from a file.
+	 * 
+	 * @param folder
+	 * 		Folder containing the zone.
+	 * @param globalHeight
+	 * 		Height of the zone, in tiles.
+	 * @param globalWidth
+	 * 		Width of the zone, in tiles.
+	 * @return
+	 * 		The loaded zone object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem during the loading.
+	 * @throws SAXException
+	 * 		Problem during the loading.
+	 * @throws IOException
+	 * 		Problem during the loading.
+	 */
     public static Zone loadZone(String folder, int globalHeight, int globalWidth) throws ParserConfigurationException, SAXException, IOException
     {	// init
     	Zone result = new Zone(globalWidth,globalHeight);
@@ -66,7 +85,7 @@ public class ZoneLoader
 		
 		// tiles random variable
 		Element variables = root.getChild(XmlNames.VARIABLE_TILES);
-		HashMap<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
+		Map<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
 		result.setVariableTiles(variableTiles);
 		
 		// matrix
@@ -79,27 +98,43 @@ public class ZoneLoader
 		
 		return result;
     }
-        
+       
+    /**
+     * Processes the matrix part of the XML file.
+     * 
+     * @param root
+     * 		XML element representing the matrix.
+     * @param result
+     * 		Zone object to be completed.
+     */
     private static void loadMatrixElement(Element root, Zone result)
     {	loadLineElements(root, result);
     }
     
+    /**
+     * Processes a line element from the XML file.
+     * 
+     * @param root
+     * 		XML element representing the line.
+     * @param result
+     * 		Zone object to be completed.
+     */
     @SuppressWarnings("unchecked")
    private static void loadLineElements(Element root, Zone result)
     {	// matrix
-    	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
+    	Map<String,VariableTile> variableTiles = result.getVariableTiles();
     	List<Element> elements = root.getChildren(XmlNames.LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element row = i.next();
-    		String posLstr = row.getAttribute(XmlNames.POSITION).getValue().trim();
+    		String posLstr = row.getAttributeValue(XmlNames.POSITION);
     		int posL = Integer.parseInt(posLstr);
     		List<Element> elementsL = row.getChildren(XmlNames.TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
         	{	String[] content = {null,null,null,null};
         		Element tile = iL.next();
-        		int posT = Integer.parseInt(tile.getAttribute(XmlNames.POSITION).getValue().trim());
+        		int posT = Integer.parseInt(tile.getAttributeValue(XmlNames.POSITION));
         		ZoneHollowTile zt = new ZoneHollowTile(posL,posT);
         		
         		// constant parts
@@ -130,6 +165,14 @@ public class ZoneLoader
     	}
     }
     
+    /**
+     * Processes certain parts of a tile element.
+     * 
+     * @param root
+     * 		XML element representing the tile.
+     * @return
+     * 		A string representing the tile properties.
+     */
     @SuppressWarnings("unchecked")
     public static String[] loadBasicTileElement(Element root)
     {	String[] result = new String[4];
@@ -174,6 +217,15 @@ public class ZoneLoader
 		return result;
     }
 
+    /**
+     * Processes the element containing all sudden-death events.
+     * 
+     * @param root
+     * 		XML element representing the event list.
+     * @param result
+     * 		Zone object to be completed.
+     */
+    @SuppressWarnings("unchecked")
     private static void loadEventsElement(Element root, Zone result)
     {	if(root!=null)
     	{	// duration
@@ -206,19 +258,30 @@ public class ZoneLoader
     	}
     }
     
-    @SuppressWarnings("unchecked")
+   /**
+    * Processes a line element in the event list.
+    * 
+    * @param root
+    * 		XML element representing the line.
+    * @param result
+    * 		Zone object to be completed.
+	* @param time 
+	* 		Time of the event.
+    */
+   @SuppressWarnings("unchecked")
 	private static void loadEvtLineElements(Element root, Zone result, long time)
     {	// matrix
-    	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
+    	Map<String,VariableTile> variableTiles = result.getVariableTiles();
     	List<Element> elements = root.getChildren(XmlNames.LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element row = i.next();
     		String possiblePosLstr = row.getAttribute(XmlNames.POSITION).getValue().trim();
     		Set<Integer> possiblePosLs = XmlTools.parseMultipleInteger(possiblePosLstr);
-    		int nbrL = Integer.parseInt(row.getAttribute(XmlNames.NBR).getValue().trim());
-    		boolean fixed = Boolean.parseBoolean(row.getAttribute(XmlNames.FIXED).getValue().trim());
-    		List<Integer> drawnPosL = drawPositions(possiblePosLs, nbrL);
+    		int nbrL = possiblePosLs.size();
+    		String nbrLstr = row.getAttributeValue(XmlNames.NBR);
+    		if(nbrLstr!=null)
+    			nbrL = Integer.parseInt(nbrLstr);
     		
     		List<Element> elementsL = row.getChildren(XmlNames.TILE);
         	Iterator<Element> iL = elementsL.iterator();
@@ -229,33 +292,39 @@ public class ZoneLoader
         		
         		String possiblePosTstr = tile.getAttribute(XmlNames.POSITION).getValue().trim();
         		Set<Integer> possiblePosTs = XmlTools.parseMultipleInteger(possiblePosTstr);
-        		int nbrT = Integer.parseInt(tile.getAttribute(XmlNames.NBR).getValue().trim());
-        		List<List<Integer>> pos = new ArrayList<List<Integer>>();
-        		if(fixed)
-        		{	List<Integer> drawnPosT = drawPositions(possiblePosTs, nbrT);
-       				for(int l: drawnPosL)
-       				{	for(int t: drawnPosT)
-       					{	List<Integer> tmp = Arrays.asList(l,t);
-   							pos.add(tmp);
-       					}
-       				}
-        		}
-        		else
-        		{	int nbr = nbrT*nbrL;
-        			List<List<Integer>> temp = new ArrayList<List<Integer>>();
-        			for(int l: possiblePosLs)
-       				{	for(int t: possiblePosTs)
-       					{	List<Integer> tmp = Arrays.asList(l,t);
-       						temp.add(tmp);
-       					}
-       				}
-        			pos = drawPositions(temp, nbr);
-        		}
+        		int nbrT = possiblePosTs.size();
+        		String nbrTstr = tile.getAttributeValue(XmlNames.NBR);
+        		if(nbrTstr!=null)
+        			nbrT = Integer.parseInt(nbrTstr);
+
         		
-        		for(List<Integer> p: pos)
-        		{	int l = p.get(0);
-        			int t = p.get(1);
-        			ZoneHollowTile zt = new ZoneHollowTile(l,t);
+//        		List<List<Integer>> pos = new ArrayList<List<Integer>>();
+//        		if(fixed)
+//        		{	List<Integer> drawnPosT = drawPositions(possiblePosTs, nbrT);
+//       				for(int l: drawnPosL)
+//       				{	for(int t: drawnPosT)
+//       					{	List<Integer> tmp = Arrays.asList(l,t);
+//   							pos.add(tmp);
+//       					}
+//       				}
+//        		}
+//        		else
+//        		{	int nbr = nbrT*nbrL;
+//        			List<List<Integer>> temp = new ArrayList<List<Integer>>();
+//        			for(int l: possiblePosLs)
+//       				{	for(int t: possiblePosTs)
+//       					{	List<Integer> tmp = Arrays.asList(l,t);
+//       						temp.add(tmp);
+//       					}
+//       				}
+//        			pos = drawPositions(temp, nbr);
+//        		}
+        		
+//        		for(List<Integer> p: pos)
+//        		{	int l = p.get(0);
+//        			int t = p.get(1);
+//        			ZoneHollowTile zt = new ZoneHollowTile(l,t);
+        			ZoneHollowTile zt = new ZoneHollowTile(possiblePosLs,nbrL,possiblePosTs,nbrT);
 	        		
 	        		// constant parts
 	    			// floor
@@ -280,36 +349,8 @@ public class ZoneLoader
 	        			vt.incrementOccurrencesCount();
 	        		}
 	    			result.addEvent(time, zt);
-        		}
+//        		}
         	}
     	}
-    }
-    
-    //TODO compléter manuel pour tenir compte de cette modif (hasard ds évènements)
-    
-    /**
-     * Draw {@code number} values from the specified list.
-     * If the list is too short, then all its elements are returned.
-     * The same value cannot appear twice in the result list.
-     * 
-     * @param possibleValues
-     * 		List of values to draw from.
-     * @param number
-     * 		Number of values wanted.
-     * @return
-     * 		List of the randomly drawn values.
-     */
-    private static <T> List<T> drawPositions(Collection<T> possibleValues, int number)
-    {	List<T> pv = new ArrayList<T>(possibleValues);
-    	List<T> result = new ArrayList<T>();
-    	int i = 0;
-    	while(i<number && !pv.isEmpty())
-    	{	int index = (int)(Math.random()*pv.size());
-    		T value = pv.get(index);
-    		result.add(value);
-    		pv.remove(index);
-    		i++;
-    	}
-    	return result;
     }
 }
