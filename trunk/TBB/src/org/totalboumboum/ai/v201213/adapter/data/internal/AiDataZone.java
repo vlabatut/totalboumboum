@@ -57,9 +57,9 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.computing.RankingTools;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.levels.PositionTools;
 
 /**
  * Représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -189,7 +189,7 @@ public final class AiDataZone extends AiZone
 			roundRanks.clear();
 			Round round = level.getLoop().getRound();
 			float points[] = round.getCurrentPoints();
-			int ranks[] = CombinatoricsTools.getRanks(points);
+			int ranks[] = RankingTools.getRanks(points);
 			for(int i=0;i<players.size();i++)
 			{	Hero hero = (Hero)players.get(i).getSprite();
 				AiDataHero aiHero = heroMap.get(hero);
@@ -200,7 +200,7 @@ public final class AiDataZone extends AiZone
 			matchRanks.clear();
 			Match match = round.getMatch();
 			points = match.getStats().getTotal();
-			ranks = CombinatoricsTools.getRanks(points);
+			ranks = RankingTools.getRanks(points);
 			for(int i=0;i<players.size();i++)
 			{	Hero hero = (Hero)players.get(i).getSprite();
 				AiDataHero aiHero = heroMap.get(hero);
@@ -313,7 +313,7 @@ public final class AiDataZone extends AiZone
 	
 	@Override
 	public AiDataTile getTile(double x, double y)
-	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,height,width);
+	{	int[] coord = PositionTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,height,width);
 		AiDataTile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
