@@ -36,7 +36,7 @@ import org.totalboumboum.engine.content.sprite.block.Block;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.loop.event.replay.sprite.SpriteChangePositionEvent;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 
 /**
  * 
@@ -486,7 +486,7 @@ System.out.println();
 		
 		// normalizing height at the end of an air move
 		if(isTerminated)
-		{	if(CombinatoricsTools.isRelativelyEqualTo(currentPosZ,0))
+		{	if(ApproximationTools.isRelativelyEqualTo(currentPosZ,0))
 				currentPosZ = 0;
 			//
 			sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
