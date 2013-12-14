@@ -77,23 +77,23 @@ public class LevelTools
 	public static void main(String[] args) throws Exception
 	{	
 		// create a level from scratch
-		HollowLevel level = initLevel(8,14,"tournament201314","averse","tournament","tournament7");
+//		HollowLevel level = initLevel(8,14,"tournament201314","averse","tournament","tournament7");
+////		setBackground(level);
+//		addGrid(level);
+////		addBorder(level,2,1,1,1);
+////		addSoftwalls(level);
+//		insertCol(level,0,true,true,true,true,true);
+////		insertRow(level,0,true,true,true,true,true);
+////		insertCol(level,level.getLevelInfo().getGlobalWidth()/2,true,true,true,true,true);
+////		insertRow(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
+////		insertCol(level,level.getLevelInfo().getGlobalWidth(),true,true,true,true,true);
+//		insertRow(level,level.getLevelInfo().getGlobalHeight(),true,true,true,true,true);
 //		setBackground(level);
-		addGrid(level);
-//		addBorder(level,2,1,1,1);
-//		addSoftwalls(level);
-		insertCol(level,0,true,true,true,true,true);
-//		insertRow(level,0,true,true,true,true,true);
-//		insertCol(level,level.getLevelInfo().getGlobalWidth()/2,true,true,true,true,true);
-//		insertRow(level,level.getLevelInfo().getGlobalHeight()/2,true,true,true,true,true);
-//		insertCol(level,level.getLevelInfo().getGlobalWidth(),true,true,true,true,true);
-		insertRow(level,level.getLevelInfo().getGlobalHeight(),true,true,true,true,true);
-		setBackground(level);
-		saveLevel(level);
+//		saveLevel(level);
 				
 		// open an existing level and replace the background
-//		String pack = "tournament201314neutral";
-//		String folder = "readysetgo";
+//		String pack = "tournament201314qualif";
+//		String folder = "qualif8";
 //		XmlTools.init();
 //		HollowLevel level = loadLevel(pack,folder);
 //		removeBackground(level);
@@ -101,8 +101,8 @@ public class LevelTools
 //		saveLevel(level);
 		
 		// open an existing level and add/remove columns/rows
-/*		String pack = "tournament201112";
-		String folder = "carrefour";
+		String pack = "tournament201314qualif";
+		String folder = "qualif8";
 		XmlTools.init();
 		HollowLevel level = loadLevel(pack,folder);
 //		removeRow(level,12,true,true,true,true,true);
@@ -111,10 +111,10 @@ public class LevelTools
 //		removeRow(level,0,true,true,true,true,true);
 //		removeRow(level,0,true,true,true,true,true);
 //		removeRow(level,0,true,true,true,true,true);
-		insertCol(level,0,true,true,true,true,true);
-		insertCol(level,14,true,true,true,true,true);
+		insertCol(level,9,true,true,true,true,true);
+		insertCol(level,9,true,true,true,true,true);
 		saveLevel(level);
-*/
+
 		// open an existing level and add a sudden death
 /*		String pack = "tournament201213";
 		String folder = "compromis";
