@@ -1102,8 +1102,10 @@ public abstract class VisibleLoop extends Loop
 	 */
 	protected void updateEngineStep()
 	{	if(getEngineStep())
-		{	//prevTotalGameTime = totalGameTime;
-			totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+		{	if(gameStarted && !gameOver)
+			{	//prevTotalGameTime = totalGameTime;
+				totalGameTime = totalGameTime + (long)(milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			}
 			switchEngineStep(false);
 		}
 	}
