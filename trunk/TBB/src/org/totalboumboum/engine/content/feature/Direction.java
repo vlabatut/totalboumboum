@@ -28,7 +28,7 @@ import java.util.Locale;
 
 import org.jdom.Attribute;
 import org.jdom.Element;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
@@ -398,13 +398,13 @@ public enum Direction implements Serializable
 	public static Direction getCompositeFromRelativeDouble(double dx, double dy)
 	{	// horizontal component
 		Direction horizontal;
-		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
+		if(ApproximationTools.isRelativelyEqualTo(dx,0))
 			horizontal = Direction.NONE;
 		else
 			horizontal = getHorizontalFromDouble(dx);
 		// vertical component
 		Direction vertical;
-		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
+		if(ApproximationTools.isRelativelyEqualTo(dy,0))
 			vertical = Direction.NONE;
 		else
 			vertical = getVerticalFromDouble(dy);
