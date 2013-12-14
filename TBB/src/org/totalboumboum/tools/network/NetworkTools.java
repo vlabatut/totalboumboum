@@ -22,12 +22,21 @@ package org.totalboumboum.tools.network;
  */
 
 /**
+ * Network-related common methods.
  * 
  * @author Vincent Labatut
- *
  */
 public class NetworkTools
-{
+{	
+	/**
+	 * Checks if the specified string corresponds
+	 * to an actual ip address.
+	 * 
+	 * @param ip
+	 * 		String supposed to represent an ip address.
+	 * @return
+	 * 		{@code true} iff the ip is correct.
+	 */
 	public static boolean validateIPAddress(String ip)
 	{	boolean result = true;
 	
@@ -52,7 +61,15 @@ public class NetworkTools
 	    return result;
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * Checks if the specified string corresponds
+	 * to an actual ip address containing a valid port.
+	 * 
+	 * @param ip
+	 * 		String supposed to represent an ip address.
+	 * @return
+	 * 		{@code true} iff the ip has a valud port.
+	 */
 	public static boolean validateIPAddressPort(String ip)
 	{	boolean result = true;
 	
@@ -62,7 +79,8 @@ public class NetworkTools
 	    else
 	    {	result = validateIPAddress(chunks[0]);
 	    	try
-	    	{	int port = Integer.parseInt(chunks[1]);
+	    	{	@SuppressWarnings("unused")
+	    		int port = Integer.parseInt(chunks[1]);
 	    	}
 	    	catch(NumberFormatException e)
 	    	{	result = false;
