@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
@@ -100,7 +101,7 @@ public class FileServerStream
 	// ITEMS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void writeItems() throws IOException
-	{	HashMap<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
+	{	Map<String,Integer> itemsCounts = round.getHollowLevel().getItemCount();
 		write(itemsCounts);
 	}
 
