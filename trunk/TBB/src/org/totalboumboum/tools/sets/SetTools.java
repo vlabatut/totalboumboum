@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Methods related yo set management.
+ * Methods related to set management.
  * 
  * @author Vincent Labatut
  */
