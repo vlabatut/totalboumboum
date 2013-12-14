@@ -34,8 +34,8 @@ import java.util.Set;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
+import org.totalboumboum.tools.collections.SetTools;
 import org.totalboumboum.tools.images.PredefinedColor;
-import org.totalboumboum.tools.sets.SetTools;
 
 /**
  * Classe gérant le calcul des valeurs de préférence de l'agent.
