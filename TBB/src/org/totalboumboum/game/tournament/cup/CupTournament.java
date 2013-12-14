@@ -44,8 +44,8 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.collections.IntegerCollectionComparator;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
-import org.totalboumboum.tools.computing.IntegerCollectionComparator;
 
 /**
  * Class representing a cup tournament, i.e. with knock-out system.
