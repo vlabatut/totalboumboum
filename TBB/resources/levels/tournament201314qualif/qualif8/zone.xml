@@ -22,38 +22,38 @@
 	<variableTiles>
 		<variableTile name="item">
 			<value proba="0.25">
-				<item name="extrabomb"/>
+				<item name="extrabomb" />
 			</value>
 			<value proba="0.25">
-				<item name="extraflame"/>
+				<item name="extraflame" />
 			</value>
 			<value proba="0.25">
-				<item name="extraspeed"/>
+				<item name="extraspeed" />
 			</value>
 			<value proba="0.25">
-				<item name="randomextra"/>
+				<item name="randomextra" />
 			</value>
 		</variableTile>
 		<variableTile name="soft">
 			<value proba="0.25">
-				<block group="softwalls" name="redyellow"/>
-				<item name="extrabomb"/>
+				<block group="softwalls" name="redyellow" />
+				<item name="extrabomb" />
 			</value>
 			<value proba="0.25">
-				<block group="softwalls" name="yellowred"/>
-				<item name="extraflame"/>
+				<block group="softwalls" name="yellowred" />
+				<item name="extraflame" />
 			</value>
 			<value proba="0.25">
-				<block group="softwalls" name="redyellow"/>
-				<item name="extraspeed"/>
+				<block group="softwalls" name="redyellow" />
+				<item name="extraspeed" />
 			</value>
 			<value proba="0.25">
-				<block group="softwalls" name="yellowred"/>
-				<item name="randomextra"/>
+				<block group="softwalls" name="yellowred" />
+				<item name="randomextra" />
 			</value>
 		</variableTile>
 	</variableTiles>
-
+	
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
@@ -74,7 +74,7 @@
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
-				<reference name="soft"/>
+				<reference name="soft" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
@@ -90,7 +90,7 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<reference name="soft"/>
+				<reference name="item" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
@@ -98,13 +98,21 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="item" />
+				<reference name="soft" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
 			<tile pos="12">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="14">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
@@ -144,21 +152,29 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<block group="hardwalls" name="gsu" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<reference name="soft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="soft" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
 				<reference name="soft" />
 			</tile>
 			<tile pos="12">
+				<floor name="regular" />
+				<reference name="soft" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="soft" />
+			</tile>
+			<tile pos="14">
 				<floor name="regular" />
 				<reference name="soft" />
 			</tile>
@@ -195,21 +211,27 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<reference name="item" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="item" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
 			<tile pos="12">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="14">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
@@ -251,17 +273,24 @@
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<reference name="item" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="item" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
 			<tile pos="12">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="14">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
@@ -298,21 +327,27 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<reference name="item" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="item" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
 			<tile pos="12">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="14">
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
@@ -352,21 +387,29 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<block group="hardwalls" name="gsu" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<reference name="soft" />
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="soft" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
 				<reference name="soft" />
 			</tile>
 			<tile pos="12">
+				<floor name="regular" />
+				<reference name="soft" />
+			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="soft" />
+			</tile>
+			<tile pos="14">
 				<floor name="regular" />
 				<reference name="soft" />
 			</tile>
@@ -390,7 +433,7 @@
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
-				<reference name="soft"/>
+				<reference name="soft" />
 			</tile>
 			<tile pos="5">
 				<floor name="regular" />
@@ -406,7 +449,7 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<reference name="soft"/>
+				<reference name="item" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
@@ -414,7 +457,7 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="item" />
+				<reference name="soft" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
@@ -424,21 +467,29 @@
 				<floor name="regular" />
 				<reference name="item" />
 			</tile>
+			<tile pos="13">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
+			<tile pos="14">
+				<floor name="regular" />
+				<reference name="item" />
+			</tile>
 		</line>
 	</matrix>
 	
-	<events relative="false" duration="60000">
+	<events duration="60000" relative="false">
 		<event time="10000">
 			<line pos="2-4" nbr="0">
-				<tile pos="5-7" nbr="4">
-					<item name="extrabomb"/>
+				<tile pos="5-9" nbr="4">
+					<item name="extrabomb" />
 				</tile>
 			</line>
 		</event>
 		<event time="20000">
 			<line pos="2-4" nbr="0">
-				<tile pos="5-7" nbr="4">
-					<item name="extrabomb"/>
+				<tile pos="5-9" nbr="4">
+					<item name="extrabomb" />
 				</tile>
 			</line>
 		</event>

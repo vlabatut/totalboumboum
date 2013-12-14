@@ -20,14 +20,13 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="Qualif'8" />
-	<!-- Teste si l'agent possède une autre stratégie que le simple corridor -->
 	<author value="Vincent Labatut" />
 	<source value="original" />
 	<preview file="preview.jpg" />
 	<instance name="tournament" />
 	<theme name="tournament7" />
-	<globalDimension height="7" width="13" />
-	<visibleDimension height="7" width="13" />
+	<globalDimension height="7" width="15" />
+	<visibleDimension height="7" width="15" />
 	<visiblePosition upLine="0" leftCol="0" />
 	<display forceAll="false" maximize="true" />
 </level>
