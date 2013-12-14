@@ -21,6 +21,7 @@ package org.totalboumboum.engine.container.level;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,23 +37,41 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.levels.DeltaTools;
+import org.totalboumboum.tools.levels.DirectionTools;
+import org.totalboumboum.tools.levels.DistancePixelTools;
+import org.totalboumboum.tools.levels.DistanceTileTools;
+import org.totalboumboum.tools.levels.PositionTools;
 
 /**
+ * This class represents the in-game zone.
  * 
  * @author Vincent Labatut
- *
  */
 public class Level
-{	public Level(VisibleLoop loop)				
+{	
+	/**
+	 * Creates a new level for the specified loop.
+	 * 
+	 * @param loop
+	 * 		Loop in charge of running this level.
+	 */
+	public Level(VisibleLoop loop)				
 	{	this.loop = loop;
 	}
 	
      /////////////////////////////////////////////////////////////////
 	// LOOP					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Loop in charge of running the game */
 	private VisibleLoop loop;
 
+	/**
+	 * Returns the loop running this level.
+	 * 
+	 * @return
+	 * 		Loop handling this level.
+	 */
 	public VisibleLoop getLoop()
 	{	return loop;	
 	}
@@ -76,13 +95,23 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// SIZE & LOCATION in TILES		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Level width in tiles */
 	private int globalWidth;
+	/** Level height in tiles */
 	private int globalHeight;
-	private double pixelLeftX; // pas central
-	private double pixelTopY; // pas central
-	private double pixelWidth;
-	private double pixelHeight;
 
+	/**
+	 * Pixel positions of the tiles.
+	 * 
+	 * @param globalWidth
+	 * 		Width in tiles.
+	 * @param globalHeight
+	 * 		Height in tiles.
+	 * @param globalLeftX
+	 * 		X coord of the centers of the leftest tiles.
+	 * @param globalUpY
+	 * 		Y coord of the centers of the uppest tiles.
+	 */
 	public void setTilePositions(int globalWidth, int globalHeight, double globalLeftX, double globalUpY)
 	{	this.globalWidth = globalWidth;
 		this.globalHeight = globalHeight;
@@ -92,25 +121,76 @@ public class Level
 		this.pixelHeight = globalHeight*RoundVariables.scaledTileDimension;
 	}
 	
+	/**
+	 * Returns the level width in tiles.
+	 * 
+	 * @return
+	 * 		Level width expressed in tiles.
+	 */
+	public int getGlobalWidth()
+	{	return globalWidth;
+	}
+	
+	/**
+	 * Returns the level height in tiles.
+	 * 
+	 * @return
+	 * 		Level height expressed in tiles.
+	 */
+	public int getGlobalHeight()
+	{	return globalHeight;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SIZE & LOCATION in PIXELS	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Leftest pixel in the level */
+	private double pixelLeftX; // pas central
+	/** Uppest pixel in the level */
+	private double pixelTopY; // pas central
+	/** Level width in pixels */
+	private double pixelWidth;
+	/** Level height in pixels */
+	private double pixelHeight;
+
+	/**
+	 * Leftest pixel coordinate.
+	 * 
+	 * @return
+	 * 		X coordinate of the left level edge.
+	 */
 	public double getPixelLeftX()
 	{	return pixelLeftX;
 	}
+	
+	/**
+	 * Uppest pixel coordinate.
+	 * 
+	 * @return
+	 * 		Y coordinate of the top level edge.
+	 */
 	public double getPixelTopY()
 	{	return pixelTopY;
 	}
 	
+	/**
+	 * Returns the level width in pixels.
+	 * 
+	 * @return
+	 * 		Level width expressed in pixels.
+	 */
 	public double getPixelWidth()
 	{	return pixelWidth;
 	}
+	
+	/**
+	 * Returns the level height in pixels.
+	 * 
+	 * @return
+	 * 		Level height expressed in pixels.
+	 */
 	public double getPixelHeight()
 	{	return pixelHeight;
-	}
-	
-	public int getGlobalWidth()
-	{	return globalWidth;
-	}
-	public int getGlobalHeight()
-	{	return globalHeight;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -146,68 +226,68 @@ public class Level
 	// PIXEL DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public double getPixelDistance(Sprite s1, Sprite s2, Direction direction)
-	{	return LevelsTools.getPixelDistance(s1,s2,direction,pixelHeight,pixelWidth);
+	{	return DistancePixelTools.getPixelDistance(s1,s2,direction,pixelHeight,pixelWidth);
 	}
 	public double getPixelDistance(Sprite s1, Sprite s2)
-	{	return LevelsTools.getPixelDistance(s1,s2,pixelHeight,pixelWidth);
+	{	return DistancePixelTools.getPixelDistance(s1,s2,pixelHeight,pixelWidth);
 	}
 	
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return DistancePixelTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	return LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return DistancePixelTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	public double getHorizontalPixelDistance(double x1, double x2, Direction direction)
-	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,direction,pixelLeftX,pixelWidth);
+	{	return DistancePixelTools.getHorizontalPixelDistance(x1,x2,direction,pixelLeftX,pixelWidth);
 	}
 	public double getHorizontalPixelDistance(double x1, double x2)
-	{	return LevelsTools.getHorizontalPixelDistance(x1,x2,pixelLeftX,pixelWidth);
+	{	return DistancePixelTools.getHorizontalPixelDistance(x1,x2,pixelLeftX,pixelWidth);
 	}
 	
 	public double getVerticalPixelDistance(double y1, double y2, Direction direction)
-	{	return LevelsTools.getVerticalPixelDistance(y1,y2,direction,pixelTopY,pixelHeight);
+	{	return DistancePixelTools.getVerticalPixelDistance(y1,y2,direction,pixelTopY,pixelHeight);
 	}
 	public double getVerticalPixelDistance(double y1, double y2)
-	{	return LevelsTools.getVerticalPixelDistance(y1,y2,pixelTopY,pixelHeight);
+	{	return DistancePixelTools.getVerticalPixelDistance(y1,y2,pixelTopY,pixelHeight);
 	}
 	
     /////////////////////////////////////////////////////////////////
 	// TILE DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int getTileDistance(Sprite s1, Sprite s2, Direction direction)
-	{	return LevelsTools.getTileDistance(s1,s2,direction,globalHeight,globalWidth);
+	{	return DistanceTileTools.getTileDistance(s1,s2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Sprite s1, Sprite s2)
-	{	return LevelsTools.getTileDistance(s1,s2,globalHeight,globalWidth);
+	{	return DistanceTileTools.getTileDistance(s1,s2,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Tile tile1, Tile tile2, Direction direction)
-	{	return LevelsTools.getTileDistance(tile1,tile2,direction,globalHeight,globalWidth);
+	{	return DistanceTileTools.getTileDistance(tile1,tile2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(Tile tile1, Tile tile2)
-	{	return LevelsTools.getTileDistance(tile1,tile2,globalHeight,globalWidth);
+	{	return DistanceTileTools.getTileDistance(tile1,tile2,globalHeight,globalWidth);
 	}
 
 	public int getTileDistance(int row1, int col1, int row2, int col2, Direction direction)
-	{	return LevelsTools.getTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
+	{	return DistanceTileTools.getTileDistance(row1,col1,row2,col2,direction,globalHeight,globalWidth);
 	}
 	public int getTileDistance(int row1, int col1, int row2, int col2)
-	{	return LevelsTools.getTileDistance(row1,col1,row2,col2,globalHeight,globalWidth);
+	{	return DistanceTileTools.getTileDistance(row1,col1,row2,col2,globalHeight,globalWidth);
 	}
 
 	public int getHorizontalTileDistance(int col1, int col2, Direction direction)
-	{	return LevelsTools.getHorizontalTileDistance(col1,col2,direction,globalWidth);
+	{	return DistanceTileTools.getHorizontalTileDistance(col1,col2,direction,globalWidth);
 	}
 	public int getHorizontalTileDistance(int col1, int col2)
-	{	return LevelsTools.getHorizontalTileDistance(col1,col2,globalWidth);
+	{	return DistanceTileTools.getHorizontalTileDistance(col1,col2,globalWidth);
 	}
 	
 	public double getVerticalTileDistance(int row1, int row2, Direction direction)
-	{	return LevelsTools.getVerticalTileDistance(row1,row2,direction,globalHeight);
+	{	return DistanceTileTools.getVerticalTileDistance(row1,row2,direction,globalHeight);
 	}
 	public double getVerticalTileDistance(int row1, int row2)
-	{	return LevelsTools.getVerticalTileDistance(row1,row2,globalHeight);
+	{	return DistanceTileTools.getVerticalTileDistance(row1,row2,globalHeight);
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -310,7 +390,7 @@ public class Level
 	 * level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getDirection(Sprite s1, Sprite s2)
-	{	return LevelsTools.getDirection(s1,s2,pixelHeight,pixelWidth);
+	{	return DirectionTools.getDirection(s1,s2,pixelHeight,pixelWidth);
 	}
 	
 	/**
@@ -318,7 +398,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	return LevelsTools.getDirection(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return DirectionTools.getDirection(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	/**
@@ -326,7 +406,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getHorizontalDirection(double x1, double x2)
-	{	return LevelsTools.getHorizontalDirection(x1,x2,pixelLeftX,pixelWidth);
+	{	return DirectionTools.getHorizontalDirection(x1,x2,pixelLeftX,pixelWidth);
 	}
 
 	/**
@@ -334,7 +414,7 @@ public class Level
 	 *  considering the level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getVerticalDirection(double y1, double y2)
-	{	return LevelsTools.getVerticalDirection(y1,y2,pixelTopY,pixelHeight);
+	{	return DirectionTools.getVerticalDirection(y1,y2,pixelTopY,pixelHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -348,7 +428,7 @@ public class Level
 	 * directions corresponding to the shortest distances. 
 	 */
 	public Direction getCompositeFromSprites(Sprite s1, Sprite s2)
-	{	return LevelsTools.getCompositeFromSprites(s1,s2);
+	{	return DirectionTools.getCompositeFromSprites(s1,s2);
 	}
 
 	/**
@@ -358,7 +438,7 @@ public class Level
 	 * i.e. it will choose the directions corresponding to the shortest distances 
 	 */
 	public Direction getCompositeFromSprites(MoveZone mz, Sprite obstacle)
-	{	return LevelsTools.getCompositeFromSprites(mz,obstacle);
+	{	return DirectionTools.getCompositeFromSprites(mz,obstacle);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -369,7 +449,7 @@ public class Level
 	 * is cyclic and using the specified direction.
 	 */
 	public double getDeltaX(double x1, double x2, Direction direction)
-	{	return LevelsTools.getDeltaX(x1,x2,direction,pixelLeftX,pixelWidth);
+	{	return DeltaTools.getDeltaX(x1,x2,direction,pixelLeftX,pixelWidth);
 	}
 	
 	/**
@@ -378,7 +458,7 @@ public class Level
 	 * value is returned.
 	 */
 	public double getDeltaX(double x1, double x2)
-	{	return LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
+	{	return DeltaTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
 	}
 
 	/**
@@ -386,7 +466,7 @@ public class Level
 	 * is cyclic and using the specified direction.
 	 */
 	public double getDeltaY(double y1, double y2, Direction direction)
-	{	return LevelsTools.getDeltaY(y1,y2,direction,pixelTopY,pixelHeight);
+	{	return DeltaTools.getDeltaY(y1,y2,direction,pixelTopY,pixelHeight);
 	}
 	
 	/**
@@ -395,20 +475,20 @@ public class Level
 	 * value is returned.
 	 */
 	public double getDeltaY(double y1, double y2)
-	{	return LevelsTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
+	{	return DeltaTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Tile getTile(double x, double y)
-	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,globalHeight,globalWidth);
+	{	int[] coord = PositionTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,globalHeight,globalWidth);
 		Tile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
 	
 	public Tile getNeighborTile(int row, int col, Direction direction)
-	{	int[] coord = LevelsTools.getNeighborTile(row,col,direction,globalHeight,globalWidth);
+	{	int[] coord = PositionTools.getNeighborTile(row,col,direction,globalHeight,globalWidth);
 		Tile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
@@ -427,61 +507,69 @@ public class Level
 	}	
 
 	public int[] normalizePosition(int row, int col)
-	{	return LevelsTools.normalizePosition(row,col,globalHeight,globalWidth);
+	{	return PositionTools.normalizePosition(row,col,globalHeight,globalWidth);
 	}
 	public int normalizePositionRow(int row)
-	{	return LevelsTools.normalizePositionRow(row,globalHeight);
+	{	return PositionTools.normalizePositionRow(row,globalHeight);
 	}
 	public int normalizePositionCol(int col)
-	{	return LevelsTools.normalizePositionRow(col,globalHeight);
+	{	return PositionTools.normalizePositionRow(col,globalHeight);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public double[] normalizePosition(double x, double y)
-	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return PositionTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 	public double normalizePositionX(double x)
-	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
+	{	return PositionTools.normalizePositionX(x,pixelLeftX,pixelWidth);
 	}
 	public double normalizePositionY(double y)
-	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
+	{	return PositionTools.normalizePositionY(y,pixelTopY,pixelHeight);
 	}
 	public boolean isInsidePosition(double x, double y)
-	{	return LevelsTools.isInsidePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return PositionTools.isInsidePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 	public boolean isInsidePositionX(double x)
-	{	return LevelsTools.isInsidePositionX(x,pixelLeftX,pixelWidth);
+	{	return PositionTools.isInsidePositionX(x,pixelLeftX,pixelWidth);
 	}
 	public boolean isInsidePositionY(double y)
-	{	return LevelsTools.isInsidePositionY(y,pixelTopY,pixelHeight);
+	{	return PositionTools.isInsidePositionY(y,pixelTopY,pixelHeight);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// BORDERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("unused")
+	/** Don't remember what this is...*/
 	private double horizontalBorderX;
-	@SuppressWarnings("unused")
-	private double upBorderY;
-	@SuppressWarnings("unused")
-	private double downBorderY;
-	@SuppressWarnings("unused")
-	private double horizontalBorderHeight;
-	@SuppressWarnings("unused")
-	private double horizontalBorderWidth;
-	@SuppressWarnings("unused")
+	/** This neither...*/
 	private double verticalBorderY;
-	@SuppressWarnings("unused")
+	
+	/** Horizontal coordinate of the end of the left vertical border */
 	private double leftBorderX;
-	@SuppressWarnings("unused")
+	/** Horizontal oordinate of the beginning end of the right vertical border */
 	private double rightBorderX;
-	@SuppressWarnings("unused")
+	/** Height of the horizontal border, in pixels */
+	private double horizontalBorderHeight;
+	/** Width of the horizontal border, in pixels */
+	private double horizontalBorderWidth;
+
+	/** Vertical coordinate of the end of the up horizontal border */
+	private double upBorderY;
+	/** Vertical coordinate of the beginning of the down horizontal border */
+	private double downBorderY;
+	/** Height of the vertical border, in pixels */
 	private double verticalBorderHeight;
-	@SuppressWarnings("unused")
+	/** Width of the vertical border, in pixels */
 	private double verticalBorderWidth;
 	
+	/**
+	 * Initializes the border variable for this level.
+	 * 
+	 * @param values
+	 * 		Border variables/
+	 */
 	public void setBorders(double values[])
 	{	int i = 0;
 		horizontalBorderX = values[i++];
@@ -496,6 +584,32 @@ public class Level
 		verticalBorderWidth = values[i++];
 	}
 
+	/**
+	 * Possibly draws the level borders, in order
+	 * to cover sprites passing from one side to the other.
+	 *  
+	 * @param g
+	 * 		Object used for drawing.
+	 */
+	private void drawBorder(Graphics g)
+	{	g.setColor(Color.BLACK);
+		
+		if(horizontalBorderHeight>0 && horizontalBorderWidth>0)
+		{	g.fillRect(0, 0, 
+				(int)Math.round(horizontalBorderWidth), (int)Math.round(horizontalBorderHeight));
+			g.fillRect(0, (int)Math.round(downBorderY), 
+				(int)Math.round(horizontalBorderWidth), (int)Math.round(horizontalBorderHeight));
+		}
+		
+		if(verticalBorderHeight>0 && verticalBorderWidth>0)
+		{	g.fillRect(0, (int)Math.round(horizontalBorderHeight), 
+				(int)Math.round(verticalBorderWidth), (int)Math.round(verticalBorderHeight));
+			g.fillRect((int)Math.round(rightBorderX), (int)Math.round(horizontalBorderHeight), 
+				(int)Math.round(verticalBorderWidth), (int)Math.round(verticalBorderHeight));
+		}
+	}
+
+	
 	/////////////////////////////////////////////////////////////////
 	// IN GAME METHODS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -622,6 +736,9 @@ public class Level
 			for(int col=0;col<globalWidth;col++)
 				matrix[row][col].drawSelection(g,flat,onGround,shadow);
 		}
+		
+		// draw borders
+		drawBorder(g);
 	}
 /*	
 	private void drawBorders(Graphics g)
