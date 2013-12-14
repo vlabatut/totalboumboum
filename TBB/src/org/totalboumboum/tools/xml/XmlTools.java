@@ -272,4 +272,61 @@ public class XmlTools
 		}
 		return result;
 	}
+	
+	/**
+	 * Does the opposite of {@link #parseMultipleInteger(String)}:
+	 * it receives a set of integers and generates the compact
+	 * string representing them.
+	 * 
+	 * @param values
+	 * 		Set of <i>strictly positive</i> integer values.
+	 * @return
+	 * 		A string representing them, to be put in some XML file.
+	 */
+	public static String generateMultipleIntegerString(Set<Integer> values)
+	{	String result = "";
+		
+		TreeSet<Integer> vs = new TreeSet<Integer>(values);
+		int prev = -1;
+		int count = 0;
+		for(int v: vs)
+		{	if(result.isEmpty())
+			{	result = Integer.toString(v);
+				count = 1;
+			}
+			else
+			{	if(v==prev+1)
+				{	if(count==1)
+						result = result + "," + v;
+					else if(count==2)
+					{	int index = result.lastIndexOf(',');
+						result = result.substring(0,index);
+						result = result + "-" + v;
+					}
+					else
+					{	int index = result.lastIndexOf('-');
+						result = result.substring(0,index+1);
+						result = result + v;
+					}
+					count++;
+				}
+				else //if(v>prev+1)
+				{	count = 1;
+					result = result + "," + v;
+				}
+				
+			}
+			prev = v;
+		}
+		
+		return result;
+	}
+	
+//	public static void main(String args[])
+//	{	Set<Integer> values = new TreeSet<Integer>(Arrays.asList(1,2,3,6,7,8,9,10,11,23,46,89,4));
+//		System.out.println(values.toString());
+//		String test = generateMultipleIntegerString(values);
+//		System.out.println(test);
+//		
+//	}
 }
