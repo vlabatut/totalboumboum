@@ -43,8 +43,8 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
-import org.totalboumboum.tools.computing.LevelsTools;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.levels.PositionTools;
 
 /**
  * simule la zone de jeu et tous ces constituants : cases et sprites.
@@ -325,7 +325,7 @@ public final class AiSimZone extends AiZone
 	
 	@Override
 	public AiSimTile getTile(double x, double y)
-	{	int[] coord = LevelsTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,height,width);
+	{	int[] coord = PositionTools.getTile(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth,height,width);
 		AiSimTile result = matrix[coord[0]][coord[1]];
 		return result;
 	}
