@@ -28,6 +28,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiFire;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiSprite;
+import org.totalboumboum.ai.v201314.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201314.adapter.data.AiStopType;
 import org.totalboumboum.engine.content.feature.Contact;
 import org.totalboumboum.engine.content.feature.Direction;
@@ -94,6 +95,11 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	{	Block sprite = getSprite();
 		SpecificAction specificAction = new SpecificConsume(sprite);
 		destructible = !sprite.isTargetPreventing(specificAction);
+// NOTE workaround pour que les agents ne croient pas que les blocs de mort subite sont sans danger
+if(state.getName()==null || state.getName()==AiStateName.FLYING)
+{	this.destructible = false;
+}
+		
 	}
 
 	@Override
@@ -177,6 +183,12 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 			else
 				stopFires = AiStopType.NO_STOP;
 		}
+		
+// NOTE workaround pour que les agents ne croient pas que les blocs de mort subite sont sans danger
+if(state.getName()==null || state.getName()==AiStateName.FLYING)
+{	this.stopHeroes = AiStopType.STRONG_STOP;
+	this.stopFires = AiStopType.STRONG_STOP;
+}
 	}	
 
 	@Override

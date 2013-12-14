@@ -42,9 +42,12 @@ import org.totalboumboum.ai.v201314.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.levels.DeltaTools;
+import org.totalboumboum.tools.levels.DistancePixelTools;
+import org.totalboumboum.tools.levels.DistanceTileTools;
+import org.totalboumboum.tools.levels.PositionTools;
 
 /**
  * Représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -850,11 +853,11 @@ public abstract class AiZone implements Serializable
 	 * 		La direction correspondant au chemin le plus court.
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	double dx = LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
+	{	double dx = DeltaTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
-		double dy = LevelsTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
-		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
+		double dy = DeltaTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
+		if(ApproximationTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
@@ -887,7 +890,7 @@ public abstract class AiZone implements Serializable
 	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(int row1, int col1, int row2, int col2, Direction direction)
-	{	int result = LevelsTools.getTileDistance(row1,col1,row2,col2,direction,height,width);
+	{	int result = DistanceTileTools.getTileDistance(row1,col1,row2,col2,direction,height,width);
 		return result;
 	}
 
@@ -912,7 +915,7 @@ public abstract class AiZone implements Serializable
 	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(int row1, int col1, int row2, int col2)
-	{	int result = LevelsTools.getTileDistance(row1,col1,row2,col2,Direction.NONE,height,width);
+	{	int result = DistanceTileTools.getTileDistance(row1,col1,row2,col2,Direction.NONE,height,width);
 		return result;
 	}
 	
@@ -961,7 +964,7 @@ public abstract class AiZone implements Serializable
 		int col1 = tile1.getCol();
 		int row2 = tile2.getRow();
 		int col2 = tile2.getCol();
-		int result = LevelsTools.getTileDistance(row1,col1,row2,col2,height,width);
+		int result = DistanceTileTools.getTileDistance(row1,col1,row2,col2,height,width);
 		return result;
 	}
 	
@@ -1146,8 +1149,8 @@ public abstract class AiZone implements Serializable
 	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+	{	double result = DistancePixelTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1176,8 +1179,8 @@ public abstract class AiZone implements Serializable
 	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+	{	double result = DistancePixelTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1226,8 +1229,8 @@ public abstract class AiZone implements Serializable
 		double y1 = sprite1.getPosY();
 		double x2 = sprite2.getPosX();
 		double y2 = sprite2.getPosY();
-		double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+		double result = DistancePixelTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -1585,11 +1588,11 @@ public abstract class AiZone implements Serializable
 	 * 		Un tableau de deux réels.
 	 */
 	public double[] getPixelDeltas(double x1, double y1, double x2, double y2, Direction direction)
-	{	double dx = LevelsTools.getDeltaX(x1,x2,direction.getHorizontalPrimary(),pixelLeftX,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
+	{	double dx = DeltaTools.getDeltaX(x1,x2,direction.getHorizontalPrimary(),pixelLeftX,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
-		double dy = LevelsTools.getDeltaY(y1,y2,direction.getVerticalPrimary(),pixelTopY,pixelHeight);
-		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
+		double dy = DeltaTools.getDeltaY(y1,y2,direction.getVerticalPrimary(),pixelTopY,pixelHeight);
+		if(ApproximationTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		double result[] = {dx,dy};
 		return result;
@@ -1909,7 +1912,7 @@ public abstract class AiZone implements Serializable
 	public int[] getTranslatedTile(int row, int col, int drow, int dcol)
 	{	row = row + drow;
 		col = col + dcol;
-		int result[] = LevelsTools.normalizePosition(row,col,height,width);
+		int result[] = PositionTools.normalizePosition(row,col,height,width);
 		return result;
 	}
 
@@ -1937,7 +1940,7 @@ public abstract class AiZone implements Serializable
 	public double[] getTranslatedPoint(double x, double y, double dx, double dy)
 	{	x = x + dx;
 		y = y + dy;
-		double result[] = LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		double result[] = PositionTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 		return result;
 	}
 	
@@ -1959,7 +1962,7 @@ public abstract class AiZone implements Serializable
 	 * 		Un tableau contenant les versions normalisées de x et y.
 	 */
 	public double[] normalizePosition(double x, double y)
-	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return PositionTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	/**
@@ -1976,7 +1979,7 @@ public abstract class AiZone implements Serializable
 	 * 		La version normalisée de x.
 	 */
 	public double normalizePositionX(double x)
-	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
+	{	return PositionTools.normalizePositionX(x,pixelLeftX,pixelWidth);
 	}
 	
 	/**
@@ -1993,7 +1996,7 @@ public abstract class AiZone implements Serializable
 	 * 		La version normalisée de y.
 	 */
 	public double normalizePositionY(double y)
-	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
+	{	return PositionTools.normalizePositionY(y,pixelTopY,pixelHeight);
 	}
 	
 	/**
@@ -2011,7 +2014,7 @@ public abstract class AiZone implements Serializable
 	 * 		Un tableau contenant les versions normalisées de row et col.
 	 */
 	public int[] normalizePosition(int row, int col)
-	{	return LevelsTools.normalizePosition(row,col,height,width);
+	{	return PositionTools.normalizePosition(row,col,height,width);
 	}
 
 	/**
@@ -2028,7 +2031,7 @@ public abstract class AiZone implements Serializable
 	 * 		La version normalisée de col.
 	 */
 	public int normalizePositionCol(int col)
-	{	return LevelsTools.normalizePositionCol(col,width);
+	{	return PositionTools.normalizePositionCol(col,width);
 	}
 
 	/**
@@ -2045,7 +2048,7 @@ public abstract class AiZone implements Serializable
 	 * 		La version normalisée de row.
 	 */
 	public int normalizePositionRow(int row)
-	{	return LevelsTools.normalizePositionRow(row,height);
+	{	return PositionTools.normalizePositionRow(row,height);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -2110,8 +2113,8 @@ public abstract class AiZone implements Serializable
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	
-		result = result && CombinatoricsTools.isRelativelyEqualTo(x1,x2);
-		result = result && CombinatoricsTools.isRelativelyEqualTo(y1,y2);
+		result = result && ApproximationTools.isRelativelyEqualTo(x1,x2);
+		result = result && ApproximationTools.isRelativelyEqualTo(y1,y2);
 		return result;
 	}
 
