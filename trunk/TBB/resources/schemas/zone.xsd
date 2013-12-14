@@ -107,7 +107,7 @@
 			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
 		</xsd:sequence>
 		<xsd:attribute name="pos" type="tMultipleInt" />
-		<xsd:attribute name="nbr" type="xsd:integer" default="1" />
+		<xsd:attribute name="nbr" type="xsd:integer" use="optional" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tEvtLine">
@@ -116,9 +116,10 @@
 		</xsd:sequence>
 		<xsd:attribute name="pos" type="tMultipleInt" />
 		<!-- Number of time the draw should be repeated -->
-		<xsd:attribute name="nbr" type="xsd:integer" default="1" />
+		<!-- TODO this could easily be extended to non-event tiles -->
+		<xsd:attribute name="nbr" type="xsd:integer" use="optional" />
 		<!-- Indicates if a random line should be drawn again when drawing the corresponding tile -->
-		<xsd:attribute name="fixed" type="xsd:boolean" default="false"/>
+<!-- 		<xsd:attribute name="fixed" type="xsd:boolean" default="false"/> -->
 	</xsd:complexType>
 
 	<xsd:complexType name="tEvent">
