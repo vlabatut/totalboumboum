@@ -617,7 +617,7 @@
 				</tile>
 			</line>
 		</event>
-		<event time="20000">
+		<event time="15000">
 			<line pos="1,3,5,7" nbr="0" >
 				<tile pos="2,4,6,8,10,12" nbr="5">
 					<reference name="extraRain" />
@@ -629,7 +629,7 @@
 				</tile>
 			</line>
 		</event>
-		<event time="30000">
+		<event time="25000">
 			<line pos="1,3,5,7" nbr="0" >
 				<tile pos="2,4,6,8,10,12" nbr="5">
 					<reference name="extraRain" />
@@ -641,31 +641,19 @@
 				</tile>
 			</line>
 		</event>
-		<event time="40000">
+		<event time="35000">
 			<line pos="1,3,5,7" nbr="0" >
 				<tile pos="2,4,6,8,10,12" nbr="5">
-					<reference name="goldenRain" />
+					<reference name="extraRain" />
 				</tile>
 			</line>
 			<line pos="2,4,6" nbr="0" >
 				<tile pos="2-12" nbr="5">
-					<reference name="goldenRain" />
+					<reference name="extraRain" />
 				</tile>
 			</line>
 		</event>
-		<event time="50000">
-			<line pos="1,3,5,7" nbr="0" >
-				<tile pos="2,4,6,8,10,12" nbr="5">
-					<reference name="goldenRain" />
-				</tile>
-			</line>
-			<line pos="2,4,6" nbr="0" >
-				<tile pos="2-12" nbr="5">
-					<reference name="goldenRain" />
-				</tile>
-			</line>
-		</event>
-		<event time="50000">
+		<event time="47500">
 			<line pos="1,3,5,7" nbr="0" >
 				<tile pos="2,4,6,8,10,12" nbr="5">
 					<reference name="goldenRain" />
