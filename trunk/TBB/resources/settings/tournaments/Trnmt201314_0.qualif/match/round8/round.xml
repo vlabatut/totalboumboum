@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<points
+<round
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../schemas/point.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2013 Vincent Labatut 
@@ -22,43 +22,32 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<notes>
-		<line value="Only time based, no sharing." />
-	</notes>
+ 	<notes>
+ 		<line value="Manche utilisée pour la qualification des agents de l'édition 2013/14." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 14-12-2013" />
+ 	</notes>
 
-	<rankpoints invert="false" exaequoShare="true">
-		<rankings>
-			<scores type="TIME" />
-		</rankings>	
-		<values>
-			<value value="1" />
-		</values>
-	</rankpoints>
-	
-<!-- 	
-	<discretize>
-		<rankings >
-			<scores type="time" />
-			<scores type="bombings"/>
-			<scores type="items"/>
-			<scores type="bombs"/>
-		</rankings>
-		<thresholds>
-			<threshold value="1" />
-			<threshold value="2" />
-			<threshold value="3" />
-			<threshold value="4" />
-			<threshold value="5" />
-		</thresholds>
-		<values>
-			<value value="12" />
-			<value value="8" />
-			<value value="5" />
-			<value value="2" />
-			<value value="1" />
-			<value value="0" />
-		</values>
-	</discretize>
- -->
+	<author value="Vincent Labatut" />
+
+	<limits>
+		<lastStanding>
+			<points local="true" name="zeroPoint" />
+			<threshold value="0" comparator="EQUAL"/>
+		</lastStanding>
+
+		<lastStanding>
+			<points local="true" name="onePoint" />
+			<threshold value="1" comparator="EQUAL"/>
+		</lastStanding>
+
+		<time>
+			<points local="true" name="zeroPoint" />
+ 			<threshold value="30000" />
+		</time>
 		
-</points>
+	</limits>
+	
+	<level packname="tournament201213" name="qualif8" />
+
+</round>
