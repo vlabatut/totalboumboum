@@ -23,6 +23,12 @@ package org.totalboumboum.tools.temp;
 
 import java.net.*;
 
+/**
+ * Class defined to perform some network-related tests.
+ * 
+ * @author Vincent
+ */
+@SuppressWarnings("javadoc")
 public class Test
 {
 	public static void main(String[] args)
