@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.engine.container.itemset.ItemsetPreview;
@@ -86,7 +87,7 @@ public class AvailableItemsSubPanel extends TableSubPanel
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumFractionDigits(0);
 			ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
-			HashMap<String,Integer> itemList = hollowLevel.getItemCount();
+			Map<String,Integer> itemList = hollowLevel.getItemCount();
 			Iterator<Entry<String,SpritePreview>> i = itemsetPreview.getItemPreviews().entrySet().iterator();
 			int line = 0;
 			int colGroup = 0;
