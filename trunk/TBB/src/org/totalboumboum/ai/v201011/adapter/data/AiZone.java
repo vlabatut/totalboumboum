@@ -26,9 +26,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.tools.computing.CombinatoricsTools;
-import org.totalboumboum.tools.computing.LevelsTools;
+import org.totalboumboum.tools.computing.ApproximationTools;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.levels.DeltaTools;
+import org.totalboumboum.tools.levels.DistancePixelTools;
+import org.totalboumboum.tools.levels.DistanceTileTools;
+import org.totalboumboum.tools.levels.PositionTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -537,11 +540,11 @@ if(target==null || source==null)
 	 * 		la direction correspondant au chemin le plus court
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	double dx = LevelsTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(dx,0))
+	{	double dx = DeltaTools.getDeltaX(x1,x2,pixelLeftX,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
-		double dy = LevelsTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
-		if(CombinatoricsTools.isRelativelyEqualTo(dy,0))
+		double dy = DeltaTools.getDeltaY(y1,y2,pixelTopY,pixelHeight);
+		if(ApproximationTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
@@ -573,7 +576,7 @@ if(target==null || source==null)
 	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
-	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,direction,height,width);
+	{	int result = DistanceTileTools.getTileDistance(line1,col1,line2,col2,direction,height,width);
 		return result;
 	}
 
@@ -597,7 +600,7 @@ if(target==null || source==null)
 	 * 		La distance calculée. 
 	 */
 	public int getTileDistance(int line1, int col1, int line2, int col2)
-	{	int result = LevelsTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,height,width);
+	{	int result = DistanceTileTools.getTileDistance(line1,col1,line2,col2,Direction.NONE,height,width);
 		return result;
 	}
 	
@@ -644,7 +647,7 @@ if(target==null || source==null)
 		int col1 = tile1.getCol();
 		int line2 = tile2.getLine();
 		int col2 = tile2.getCol();
-		int result = LevelsTools.getTileDistance(line1,col1,line2,col2,height,width);
+		int result = DistanceTileTools.getTileDistance(line1,col1,line2,col2,height,width);
 		return result;
 	}
 	
@@ -772,8 +775,8 @@ if(target==null || source==null)
 	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
-	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+	{	double result = DistancePixelTools.getPixelDistance(x1,y1,x2,y2,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -801,8 +804,8 @@ if(target==null || source==null)
 	 * 		La distance calculée. 
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
-	{	double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+	{	double result = DistancePixelTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -849,8 +852,8 @@ if(target==null || source==null)
 		double y1 = sprite1.getPosY();
 		double x2 = sprite2.getPosX();
 		double y2 = sprite2.getPosY();
-		double result = LevelsTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
-		if(CombinatoricsTools.isRelativelyEqualTo(result,0))
+		double result = DistancePixelTools.getPixelDistance(x1,y1,x2,y2,direction,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+		if(ApproximationTools.isRelativelyEqualTo(result,0))
 			result = 0;
 		return result;
 	}
@@ -881,7 +884,7 @@ if(target==null || source==null)
 	 * 		un tableau contenant les versions normalisées de x et y
 	 */
 	public double[] normalizePosition(double x, double y)
-	{	return LevelsTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
+	{	return PositionTools.normalizePosition(x,y,pixelLeftX,pixelTopY,pixelHeight,pixelWidth);
 	}
 
 	/**
@@ -898,7 +901,7 @@ if(target==null || source==null)
 	 * 		la version normalisée de x
 	 */
 	public double normalizePositionX(double x)
-	{	return LevelsTools.normalizePositionX(x,pixelLeftX,pixelWidth);
+	{	return PositionTools.normalizePositionX(x,pixelLeftX,pixelWidth);
 	}
 	
 	/**
@@ -915,7 +918,7 @@ if(target==null || source==null)
 	 * 		la version normalisée de y
 	 */
 	public double normalizePositionY(double y)
-	{	return LevelsTools.normalizePositionY(y,pixelTopY,pixelHeight);
+	{	return PositionTools.normalizePositionY(y,pixelTopY,pixelHeight);
 	}
 	
 	/**
@@ -933,7 +936,7 @@ if(target==null || source==null)
 	 * 		un tableau contenant les versions normalisées de line et col
 	 */
 	public int[] normalizePosition(int line, int col)
-	{	return LevelsTools.normalizePosition(line,col,height,width);
+	{	return PositionTools.normalizePosition(line,col,height,width);
 	}
 
 	/**
@@ -950,7 +953,7 @@ if(target==null || source==null)
 	 * 		la version normalisée de col
 	 */
 	public int normalizePositionCol(int col)
-	{	return LevelsTools.normalizePositionCol(col,width);
+	{	return PositionTools.normalizePositionCol(col,width);
 	}
 
 	/**
@@ -967,7 +970,7 @@ if(target==null || source==null)
 	 * 		la version normalisée de line
 	 */
 	public int normalizePositionLine(int line)
-	{	return LevelsTools.normalizePositionRow(line,height);
+	{	return PositionTools.normalizePositionRow(line,height);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -1032,8 +1035,8 @@ if(target==null || source==null)
 	 */
 	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
 	{	boolean result = true;	
-		result = result && CombinatoricsTools.isRelativelyEqualTo(x1,x2);
-		result = result && CombinatoricsTools.isRelativelyEqualTo(y1,y2);
+		result = result && ApproximationTools.isRelativelyEqualTo(x1,x2);
+		result = result && ApproximationTools.isRelativelyEqualTo(y1,y2);
 		return result;
 	}
 
