@@ -95,7 +95,6 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<item name="nospeed" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
@@ -257,6 +256,7 @@
 			</tile>
 			<tile pos="6">
 				<floor name="regular" />
+				<item name="nospeed" />
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
