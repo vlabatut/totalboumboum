@@ -90,6 +90,7 @@ public final class AiDataZone extends AiZone
 	public AiDataZone(Level level, AbstractPlayer player)
 	{	this.level = level;
 		this.player = player;
+		
 		initMatrix();
 		initTime();
 //		updateMatrix();

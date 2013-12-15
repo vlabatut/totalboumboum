@@ -69,7 +69,8 @@ final class AiDataTile extends AiTile
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
 		this.tile = tile;
-		size = RoundVariables.scaledTileDimension;
+		AiTile.size = RoundVariables.scaledTileDimension;
+		
 		initTileLocation();
 		initPixelLocation();
 		updateSprites(0);
