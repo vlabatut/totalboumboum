@@ -479,15 +479,29 @@
 	</matrix>
 	
 	<events duration="60000" relative="false">
+		<event time="7000">
+			<line pos="3" nbr="0">
+				<tile pos="5,7,9" nbr="1">
+					<item name="extraspeed" />
+				</tile>
+			</line>
+		</event>
 		<event time="10000">
-			<line pos="2-4" nbr="0">
+			<line pos="2,4" nbr="0">
 				<tile pos="5-9" nbr="4">
 					<item name="extrabomb" />
 				</tile>
 			</line>
 		</event>
+		<event time="15000">
+			<line pos="3" nbr="0">
+				<tile pos="5,7,9" nbr="1">
+					<item name="extraspeed" />
+				</tile>
+			</line>
+		</event>
 		<event time="20000">
-			<line pos="2-4" nbr="0">
+			<line pos="2,4" nbr="0">
 				<tile pos="5-9" nbr="4">
 					<item name="extrabomb" />
 				</tile>
