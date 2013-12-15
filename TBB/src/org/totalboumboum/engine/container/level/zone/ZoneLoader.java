@@ -250,6 +250,8 @@ public class ZoneLoader
 	    		// get time
 				Attribute attribute = event.getAttribute(XmlNames.TIME);
 				long time = Long.valueOf(attribute.getValue());
+if(time==7000)
+	System.out.print("");
 				if(time>totalDuration)
 					throw new IndexOutOfBoundsException("Zone events: one of the time step values is larger than the total duration.");
 				// complete result
