@@ -106,7 +106,7 @@ public abstract class AiTile implements Comparable<AiTile>, Serializable
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Longueur d'un côté de la case en pixels */
-	protected double size;
+	protected static double size;
 		
 	/** 
 	 * Renvoie la taille de la case en pixels.
@@ -114,7 +114,7 @@ public abstract class AiTile implements Comparable<AiTile>, Serializable
 	 * @return	
 	 * 		Longueur d'un côté de la case en pixels.
 	 */
-	public double getSize()
+	public static double getSize()
 	{	return size;
 	}
 	

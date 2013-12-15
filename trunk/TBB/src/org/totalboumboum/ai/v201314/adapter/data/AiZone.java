@@ -1357,7 +1357,7 @@ public abstract class AiZone implements Serializable
 				directions.add(direction);
 			
 			double xCenter = tile.getPosX();
-			double dim = tile.getSize();
+			double dim = AiTile.getSize();
 			result = Double.MAX_VALUE;
 			for(Direction dir: directions)
 			{	double d = - dir.getIntFromDirection()[0];
@@ -1437,7 +1437,7 @@ public abstract class AiZone implements Serializable
 				directions.add(direction);
 			
 			double yCenter = tile.getPosY();
-			double dim = tile.getSize();
+			double dim = AiTile.getSize();
 			result = Double.MAX_VALUE;
 			for(Direction dir: directions)
 			{	double d = - dir.getIntFromDirection()[1];
@@ -1662,14 +1662,14 @@ public abstract class AiZone implements Serializable
 		
 		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	x = tile1x + dir[0]*tile1.size/2;
+		{	x = tile1x + dir[0]*AiTile.size/2;
 			if(dir[0]<0)
 				x--;
 			y = tile1y;
 		}
 		else if(direction.isVertical())
 		{	x = tile1x;
-			y = tile1y + dir[1]*tile1.size/2;
+			y = tile1y + dir[1]*AiTile.size/2;
 			if(dir[1]<0)
 				y--;
 		}
@@ -1725,14 +1725,14 @@ public abstract class AiZone implements Serializable
 		
 		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	x = tile1x + dir[0]*tile1.size/2;
+		{	x = tile1x + dir[0]*AiTile.size/2;
 			if(dir[0]<0)
 				x--;
 			y = (y1 + y2) / 2;
 		}
 		else if(direction.isVertical())
 		{	x = (x1 + x2) / 2;
-			y = tile1y + dir[1]*tile1.size/2;
+			y = tile1y + dir[1]*AiTile.size/2;
 			if(dir[1]<0)
 				y--;
 		}
@@ -1792,7 +1792,7 @@ public abstract class AiZone implements Serializable
 		
 		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	x = tile1x + dir[0]*tile1.size/2;
+		{	x = tile1x + dir[0]*AiTile.size/2;
 			if(dir[0]<0)
 				x--;
 			if(manhattan)
@@ -1805,7 +1805,7 @@ public abstract class AiZone implements Serializable
 				x = tile2x;
 			else
 				x = (x1 + tile2x) / 2;
-			y = tile1y + dir[1]*tile1.size/2;
+			y = tile1y + dir[1]*AiTile.size/2;
 			if(dir[1]<0)
 				y--;
 		}
@@ -1863,7 +1863,7 @@ public abstract class AiZone implements Serializable
 		
 		// calcul des coordonnées
 		if(direction.isHorizontal())
-		{	x = tile1x + dir[0]*tile1.size/2;
+		{	x = tile1x + dir[0]*AiTile.size/2;
 			if(dir[0]<0)
 				x--;
 			if(manhattan)
@@ -1876,7 +1876,7 @@ public abstract class AiZone implements Serializable
 				x = tile2x;
 			else
 				x = (x1 + tile2x) / 2;
-			y = tile1y + dir[1]*tile1.size/2;
+			y = tile1y + dir[1]*AiTile.size/2;
 			if(dir[1]<0)
 				y--;
 		}
