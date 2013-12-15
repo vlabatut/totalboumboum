@@ -101,16 +101,16 @@
 
 		<item name="nobomb" folder="nobomb" >
 			<abilities>
-				<ability strength="90"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="90"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="1" frame="true" time="20000" >
+				<ability strength="1" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="20000" strength="-10000" >
+				<ability strength="-10000" time="15000" >
 					<name value="HERO_BOMB_NUMBER" />
 				</ability>
 			</abilities>
@@ -118,16 +118,16 @@
 
 		<item name="noflame" folder="noflame" >
 			<abilities>
-				<ability strength="90"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="90"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="1" frame="true" time="20000" >
+				<ability strength="1" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="20000" strength="-10000" >
+				<ability strength="-10000" time="15000" >
 					<name value="HERO_BOMB_RANGE" />
 				</ability>
 			</abilities>
@@ -135,16 +135,16 @@
 
 		<item name="nospeed" folder="nospeed" >
 			<abilities>
-				<ability strength="90"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="90"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="1" frame="true" time="20000" >
+				<ability strength="1" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability strength="-10000" time="20000" >
+				<ability strength="-10000" time="15000" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
