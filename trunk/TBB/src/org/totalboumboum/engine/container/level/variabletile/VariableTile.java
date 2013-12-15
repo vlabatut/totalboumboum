@@ -129,6 +129,13 @@ public class VariableTile implements Serializable
 	/** Total number of occurrences (as specified in the zone) */
 	@SuppressWarnings("unused")
 	private int totalOccurrences = 0;
+	/*
+	 * This could be used to process in a way different from the current one :
+	 * 		- determine in advance the total number of values to be drawn
+	 * 		- process deterministically the number of occurrence for each value,
+	 * 		  using proportions of the total number of occurrences.
+	 * 		- the randomness just appears in the order the values are delivered.
+	 */
 
 	/**
 	 * Counts one more occurrence.
