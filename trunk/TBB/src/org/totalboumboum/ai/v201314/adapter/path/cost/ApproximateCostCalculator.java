@@ -84,8 +84,7 @@ public class ApproximateCostCalculator extends CostCalculator
 		this.hero = hero;
 		ownBombDuration = hero.getBombDuration();
 		ownExplosionDuration = hero.getExplosionDuration();
-		AiTile ownTile = hero.getTile();
-		crossTileDuration = (int)(ownTile.getSize()/hero.getWalkingSpeed() * 1000);
+		crossTileDuration = (int)(AiTile.getSize()/hero.getWalkingSpeed() * 1000);
 		
 		AiZone zone = ai.getZone();
 		model = new AiPartialModel(zone);
@@ -96,8 +95,7 @@ public class ApproximateCostCalculator extends CostCalculator
 	{	this.hero = root.getHero();
 		ownBombDuration = hero.getBombDuration();
 		ownExplosionDuration = hero.getExplosionDuration();
-		AiTile ownTile = hero.getTile();
-		crossTileDuration = (int)(ownTile.getSize()/hero.getWalkingSpeed() * 1000);
+		crossTileDuration = (int)(AiTile.getSize()/hero.getWalkingSpeed() * 1000);
 		
 		AiZone zone = ai.getZone();
 		model = new AiPartialModel(zone);
