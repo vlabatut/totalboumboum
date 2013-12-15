@@ -19,11 +19,21 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
+	<variableTiles>
+		<variableTile name="softwall">
+			<value proba="0.5">
+				<block group="softwalls" name="regular"/>
+			</value>
+			<value proba="0.5">
+			</value>
+		</variableTile>
+	</variableTiles>
+
 	<matrix>
 		<line pos="0">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -63,7 +73,7 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 		</line>
 		<line pos="1">
@@ -92,6 +102,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
@@ -133,6 +144,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
@@ -175,6 +187,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
@@ -217,6 +230,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
@@ -256,6 +270,7 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
+				<reference name="softwall" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
@@ -272,7 +287,7 @@
 		<line pos="6">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -312,7 +327,7 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 		</line>
 	</matrix>

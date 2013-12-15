@@ -24,17 +24,6 @@
 			<location player="00" line="04" col="04" />
 			<location player="01" line="02" col="02" />
 		</case>
-		<case players="3">
-			<location player="00" line="04" col="04" />
-			<location player="01" line="02" col="02" />
-			<location player="02" line="02" col="04" />
-		</case>
-		<case players="4">
-			<location player="00" line="04" col="04" />
-			<location player="01" line="02" col="02" />
-			<location player="02" line="02" col="04" />
-			<location player="03" line="04" col="02" />
-		</case>
 	</locations>
 	<items>
 		<item name="extrabomb" number="1" />

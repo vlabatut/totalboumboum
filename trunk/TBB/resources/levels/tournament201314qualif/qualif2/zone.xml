@@ -28,6 +28,16 @@
 				<block group="softwalls" name="yellowred" />
 			</value>
 		</variableTile>
+		<variableTile name="softwall2">
+			<value proba="0.33">
+				<block group="softwalls" name="redyellow" />
+			</value>
+			<value proba="0.33">
+				<block group="softwalls" name="yellowred" />
+			</value>
+			<value proba="0.34">
+			</value>
+		</variableTile>
 		<variableTile name="item">
 			<value proba="0.5">
 				<item name="extrabomb" />
@@ -99,7 +109,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -139,7 +149,7 @@
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
@@ -282,6 +292,7 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
+				<reference name="softwall2"/>
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
@@ -378,6 +389,7 @@
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
+				<reference name="softwall2"/>
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
@@ -509,7 +521,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -549,7 +561,7 @@
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />

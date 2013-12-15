@@ -188,7 +188,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -244,7 +244,7 @@
 			</tile>
 			<tile pos="15">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="16">
 				<floor name="regular" />
@@ -871,7 +871,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -927,7 +927,7 @@
 			</tile>
 			<tile pos="15">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="16">
 				<floor name="regular" />
