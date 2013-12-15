@@ -22,13 +22,24 @@ package org.totalboumboum.game.tournament;
  */
 
 /**
+ * Set of methods a tournament object must implement.
  * 
  * @author Vincent Labatut
- *
  */
 public interface TournamentRenderPanel
-{
+{	
+	/**
+	 * This method is called when the tournament is finished.
+	 */
 	public void tournamentOver();
+	
+	/**
+	 * This method is called when the current match is finished.
+	 */
 	public void matchOver();
+	
+	/**
+	 * This method is called when the current round is finished.
+	 */
 	public void roundOver();
 }
