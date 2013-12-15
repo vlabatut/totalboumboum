@@ -28,6 +28,16 @@
 				<block group="softwalls" name="yellowred" />
 			</value>
 		</variableTile>
+		<variableTile name="softwall2">
+			<value proba="0.33">
+				<block group="softwalls" name="redyellow" />
+			</value>
+			<value proba="0.33">
+				<block group="softwalls" name="yellowred" />
+			</value>
+			<value proba="0.34">
+			</value>
+		</variableTile>
 		<variableTile name="flame">
 			<value proba="0.4">
 				<block group="softwalls" name="redyellow" />
@@ -433,27 +443,27 @@
 			</tile>
 			<tile pos="7">
 				<floor name="regular" />
-				<reference name="softwall" />
+				<reference name="softwall2" />
 			</tile>
 			<tile pos="8">
 				<floor name="regular" />
-				<reference name="softwall" />
+				<reference name="softwall2" />
 			</tile>
 			<tile pos="9">
 				<floor name="regular" />
-				<reference name="softwall" />
+				<reference name="softwall2" />
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<reference name="softwall" />
+				<reference name="softwall2" />
 			</tile>
 			<tile pos="11">
 				<floor name="regular" />
-				<reference name="softwall" />
+				<reference name="softwall2" />
 			</tile>
 			<tile pos="12">
 				<floor name="regular" />
-				<reference name="softwall" />
+				<reference name="softwall2" />
 			</tile>
 			<tile pos="13">
 				<floor name="regular" />
