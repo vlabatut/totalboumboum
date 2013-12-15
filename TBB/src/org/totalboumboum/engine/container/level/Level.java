@@ -196,21 +196,48 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// TILES MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** All tiles constituting the zone presented as a matrix */
 	private Tile matrix[][];
+	/** All tiles constituting the zone presented as a list */
 	private List<Tile> tileList;
 	
+	/**
+	 * Returns the matrix containing all zone tiles.
+	 * 
+	 * @return
+	 * 		Matrix of tiles.
+	 */
 	public Tile[][] getMatrix()
 	{	return matrix;
 	}
 	
+	/**
+	 * Changes the tile matrix of this level.
+	 * 
+	 * @param matrix
+	 * 		New tile matrix.
+	 */
 	public void setMatrix(Tile matrix[][])
 	{	this.matrix = matrix;
 	}
 	
-	public Tile getTile(int l, int c)
-	{	return matrix[l][c];	
+	/**
+	 * Returns the tile located at the specified positions.
+	 * 
+	 * @param row
+	 * 		Tile row.
+	 * @param col
+	 * 		Tile column.
+	 * @return
+	 * 		The corresponding tile.
+	 */
+	public Tile getTile(int row, int col)
+	{	return matrix[row][col];	
 	}
 	
+	/**
+	 * Initializes the list containing all the level tiles.
+	 */
 	public void initTileList()
 	{	tileList = new ArrayList<Tile>();
 		for(int row=0;row<globalHeight;row++)
@@ -218,6 +245,12 @@ public class Level
 				tileList.add(matrix[row][col]);		
 	}
 	
+	/**
+	 * Returns the list containing all the level tiles.
+	 * 
+	 * @return
+	 * 		List of {@code AiTile} objects.
+	 */
 	public List<Tile> getTileList()
 	{	return tileList;
 	}
