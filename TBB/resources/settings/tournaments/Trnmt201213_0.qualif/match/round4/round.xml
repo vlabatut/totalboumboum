@@ -43,7 +43,7 @@
 
 		<time>
 			<points local="true" name="zeroPoint" />
- 			<threshold value="45000" />
+ 			<threshold value="60000" />
 		</time>
 		
 	</limits>
