@@ -41,17 +41,39 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used to load tournament definitions.
+ * Not a previously started instance of a tournament,
+ * but the general rules for a new one.
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamentLoader
-{	
+{	/** Tournament of type Cup */
 	private static final String CUP = "cup";
+	/** Tournament of type League */
 	private static final String LEAGUE = "league";
+	/** Tournament of type Sequence */
 	private static final String SEQUENCE = "sequence";
+	/** Tournament of type Single */
 	private static final String SINGLE = "single";
-
+	
+	/**
+	 * Opens the file and load the corresponding tournament.
+	 * 
+	 * @param folderPath
+	 * 		Path of the file to read.
+	 * @return
+	 * 		Object representing the tournament.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the tournament.
+	 * @throws SAXException
+	 * 		Problem while loading the tournament.
+	 * @throws IOException
+	 * 		Problem while loading the tournament.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the tournament.
+	 */
 	public static AbstractTournament loadTournamentFromFolderPath(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
@@ -65,12 +87,49 @@ public class TournamentLoader
 		
 		return result;
 	}
+	
+	/**
+	 * Loads a tournament using its sole name.
+	 * 
+	 * @param name
+	 * 		Name of the tournament to load.
+	 * @return
+	 * 		Object representing the loaded tournament.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the tournament.
+	 * @throws SAXException
+	 * 		Problem while loading the tournament.
+	 * @throws IOException
+	 * 		Problem while loading the tournament.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the tournament.
+	 */
 	public static AbstractTournament loadTournamentFromName(String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = FilePaths.getTournamentsPath()+File.separator+name;
 		AbstractTournament result = loadTournamentFromFolderPath(individualFolder);
 		return result;
     }
 	
+	/**
+	 * Processes the XML element describing a tournament.
+	 * 
+	 * @param path
+	 * 		Path of the XML file (some other files will need to be accessed).
+	 * @param root
+	 * 		XML root element.
+	 * @return
+	 * 		Object representing the tournament.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the tournament.
+	 * @throws SAXException
+	 * 		Problem while loading the tournament.
+	 * @throws IOException
+	 * 		Problem while loading the tournament.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the tournament.
+	 */
 	@SuppressWarnings("unchecked")
 	private static AbstractTournament loadTournamentElement(String path, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
@@ -112,6 +171,27 @@ public class TournamentLoader
 		return result;
 	}
 	
+	/**
+	 * Processes an XML element representing a match.
+	 * 
+	 * @param root
+	 * 		Element describing the match.
+	 * @param folder
+	 * 		Folder containing the corresponding XML file.
+	 * @param tournament
+	 * 		Tournament to contain the match. 
+	 * @return
+	 * 		The read match object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading the tournament.
+	 * @throws SAXException
+	 * 		Problem while loading the tournament.
+	 * @throws IOException
+	 * 		Problem while loading the tournament.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading the tournament.
+	 */
 	public static Match loadMatchElement(Element root, String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Match result;
 		
