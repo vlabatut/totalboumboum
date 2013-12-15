@@ -23,7 +23,7 @@
 		<line pos="0">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -63,7 +63,7 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 		</line>
 		<line pos="1">
@@ -276,7 +276,7 @@
 		<line pos="6">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
@@ -316,9 +316,19 @@
 			</tile>
 			<tile pos="10">
 				<floor name="regular" />
-				<block group="hardwalls" name="regular" />
+				<block group="hardwalls" name="gsu" />
 			</tile>
 		</line>
 	</matrix>
+	
+	<events relative="false" duration="60000">
+		<event time="5000">
+			<line pos="1-5" nbr="0">
+				<tile pos="7" nbr="2">
+					<block group="softwalls" name="regular"/>
+				</tile>
+			</line>
+		</event>
+	</events>
 </zone>
 
