@@ -545,7 +545,7 @@ public class AiFullModel
 				}
 				int dir[] = direction.getIntFromDirection();
 				AiSimTile tile = sprite.getTile();
-				double tileSize = tile.getSize();
+				double tileSize = AiTile.getSize();
 				double posX = sprite.getPosX();
 				double posY = sprite.getPosY();
 				double tileX = tile.getPosX();
@@ -715,7 +715,7 @@ public class AiFullModel
 		// compute move
 		double allowed = currentSpeed*duration/1000d;
 		int dir[] = direction.getIntFromDirection();
-		double tileSize = tile.getSize();
+		double tileSize = AiTile.getSize();
 		double tileX0 = tile.getPosX();
 		double tileY0 = tile.getPosY();
 		AiSimTile neighborTile = tile.getNeighbor(direction);

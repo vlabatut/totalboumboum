@@ -37,7 +37,6 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItem;
 import org.totalboumboum.ai.v201314.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.engine.content.feature.Direction;
-import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -66,8 +65,6 @@ public final class AiSimTile extends AiTile
 	 */
 	protected AiSimTile(AiSimZone zone, int row, int col, double posX, double posY)
 	{	this.zone = zone;
-
-		size = RoundVariables.scaledTileDimension;
 
 		// location
 		this.row = row;
