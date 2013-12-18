@@ -688,8 +688,11 @@ public abstract class AiZone implements Serializable
 		if(total==0)
 			total = 1; // avoid division by zero
 		for(AiItemType key: AiItemType.values())
-		{	Double value = hiddenItemsCounts.get(key)/total;
-			result.put(key,value);
+		{	Integer value = hiddenItemsCounts.get(key);
+			if(value==null)
+				value = 0;
+			double proba = value/total;
+			result.put(key,proba);
 		}
 		return result;
 	}
