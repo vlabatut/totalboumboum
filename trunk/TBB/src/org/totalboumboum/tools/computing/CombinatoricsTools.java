@@ -23,6 +23,8 @@ package org.totalboumboum.tools.computing;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -36,14 +38,51 @@ import org.totalboumboum.tools.collections.IntegerCollectionComparator;
  */
 public class CombinatoricsTools
 {	
+	public static void main(String args[])
+	{	
+//		int[][] combi = getCombinations(3, 5);
+//		//int[][] combi = getCombinations(4, 5);
+//		for(int i=0;i<combi.length;i++)
+//		{	System.out.print((i+1)+".");
+//			for(int j=0;j<combi[0].length;j++)
+//				System.out.print(" "+combi[i][j]);
+//			System.out.println();
+//		}
+		
+		
+		/*
+		 *
+		 * chaque match ne contient qu'un seul round
+		 * tous les joueurs participent au match et jouent chacun certains rounds (possible ? >> je crois pas !)
+		 * dans le xml, pas de distinction match/round
+		 * 
+		 */
+		
+		int n = 8;
+		int k = 3;
+		int[][] combinations = getCombinations(k, n);
+		int[][] groups;
+//		groups = checkGroups(combinations, n, k, 3);
+		groups = checkAllGroups(combinations, n, k);
+		if(groups==null)
+			System.out.println("No solution found for k="+k+" and n="+n);
+		else
+		{	System.out.println("Solution found for k="+k+" and n="+n);
+			for(int i=0;i<groups.length;i++)
+			{	print((i+1)+".");
+				for(int j=0;j<groups[0].length;j++)
+					System.out.print(" "+groups[i][j]);
+				System.out.println();
+			}
+			System.out.println("Found a solution in "+groups.length+" / "+combinations.length);
+		}
+	}
 	
-
 	/////////////////////////////////////////////////////////////////
-	// COMBINATIONS		/////////////////////////////////////////////
+	// REPARTITION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	/**
-	 * Processes all the unique distributions (i.e. without considering permutations)
+	 * Processes all the unique repartitions (i.e. without considering permutations)
 	 * of a certain number of players in a certain number of matches.
 	 * 
 	 * @param players
@@ -51,13 +90,26 @@ public class CombinatoricsTools
 	 * @param matches
 	 * 		Number of matches.
 	 * @return
-	 * 		A list of integers, each values represents a number of players in
+	 * 		A list of integers, each value represents a number of players in
 	 * 		the corresponding match.
 	 */
 	public static List<List<Integer>> processDistributions(int players, int matches)
 	{	return processDistributions(players,matches,players);
 		
 	}
+	
+	/**
+	 * Auxiliart function for {@link #processDistributions(int, int)}.
+	 * 
+	 * @param players
+	 * 		Number of players
+	 * @param matches
+	 * 		Number of matches.
+	 * @param previous
+	 * 		Previous config.
+	 * @return
+	 * 		A list of integers, each representing a match.
+	 */
 	private static List<List<Integer>> processDistributions(int players, int matches, int previous)
 	{	// init
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -92,8 +144,11 @@ public class CombinatoricsTools
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PERMUTATIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * Process all possible permutations for the integer list in input,
+	 * Process all possible permutations for the specified integer list,
 	 * according to Johnson's algorithm. 
 	 * <br/>
 	 * <b>Source:</b> <a href="http://en.wikipedia.org/wiki/Steinhaus-Johnson-Trotter_algorithm">Wikipedia</a>
@@ -161,7 +216,276 @@ public class CombinatoricsTools
 		
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FACTORIALS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Processes and returns n!.
+	 * 
+	 * @param n
+	 * 		Parameter of the factorial function.
+	 * @return
+	 * 		The value n!.
+	 */
+	public static int getFactorial(int n)
+	{	int result = 0;
+		
+		if(n>0)
+		{	result = 1;
+			for(int i=2;i<=n;i++)
+				result = result * i;
+		}
+	
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COMBINATIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Computes all combinations of k values in n possible values.
+	 *  
+	 * @param k
+	 * 		Size of the combinations.
+	 * @param n
+	 * 		Upper value.
+	 * @return
+	 * 		Matrix whose rows are combinations of k integer amongst [0,n-1].
+	 */
+	public static int[][] getCombinations(int k, int n)
+	{	// init
+		int size = getFactorial(n)/(getFactorial(k)*getFactorial(n-k));
+		int result[][] = new int[size][k];
 
+		// max values
+		int maxVals[] = new int[k];
+		for(int d=0;d<k;d++)
+			maxVals[k-1-d] = n-1-d;
+		print("max values: ");
+		for(int d=0;d<k;d++)
+			print(" "+maxVals[d]);
+		println();
+		
+		// first combi
+		int c = 0;
+		for(int d=0;d<k;d++)
+			result[c][d] = d;
+		c++;
+
+		// processes combinations
+		do
+		{	// copy
+			for(int d=0;d<k;d++)
+				result[c][d] = result[c-1][d];
+
+			// increments
+			boolean increment = true;
+			int d = k-1;
+			while(d<k)
+			{	if(increment)
+				{	if(result[c][d]==maxVals[d])
+					{	result[c][d] = 0;
+						d--;
+					}
+					else
+					{	result[c][d] = result[c][d] + 1;
+						increment = false;
+						d++;
+					}
+				}
+				else
+				{	result[c][d] = result[c][d-1] + 1;
+					d++;
+				}
+			}
+			c++;
+		}
+		while(c<size);
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// GROUPS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Selects the minimum number of groups of size k amongst n players,
+	 * so that each player belongs to exactly p groups. If such selection
+	 * does not exist, the method returns {@code null}.
+	 * 
+	 * @param combinations
+	 * 		All possible combinations of k amongst n.
+	 * @param n
+	 * 		Number of players.
+	 * @param k
+	 * 		Size of groups.
+	 * @param p
+	 * 		Number of groups a player must belong to.
+	 * @return
+	 * 		Selected groups (or {@code null}).
+	 */
+	private static int[][] checkGroups(int[][] combinations, int n, int k, int p)
+	{	int[][] result = null;
+		println("looking for p="+p+" confrontations by player for n="+n+" and k="+k);
+		
+		if((p*n % k) == 0)
+		{	// init result
+			int m = p*n / k;
+			int maxVal = p*(k-1)/(n-1); //nbr of times a player is in the same group than another
+			
+			// init structures
+			Deque<Deque<int[]>> fringes = new LinkedList<Deque<int[]>>();
+			Deque<int[]> rootFr = new LinkedList<int[]>();
+//			rootFr.addAll(Arrays.asList(combinations));
+			rootFr.add(combinations[0]);
+			fringes.push(rootFr);
+			int counts[][][] = new int[m][n][n];
+			LinkedList<int[]> currentBranch = new LinkedList<int[]>();
+			
+			// depth-firt search (backtracking)
+			int depth = 0;
+			boolean found = false;
+			while(!found && depth>=0)
+			{	print("Current branch: ");
+				for(int[] tmp: currentBranch)
+					print(" "+Arrays.toString(tmp));
+				println();
+				
+				Deque<int[]> currentFr = fringes.peek();
+				if(currentFr.isEmpty())
+				{	println(" Empty fringe >> Going up  the research tree");
+					if(!currentBranch.isEmpty())
+					{	currentBranch.pop();
+						fringes.pop();
+					}
+					depth--;
+				}
+				else
+				{	int[] currentCombi = currentFr.poll();
+					List<Integer> cc = new ArrayList<>();for(int i=0;i<currentCombi.length;i++) cc.add(currentCombi[i]);
+					println(" Processing combination "+Arrays.toString(currentCombi));
+					boolean consistant = true;
+					for(int i=0;i<n;i++)
+					{	for(int j=0;j<n;j++)
+						if(j==i)
+							counts[depth][i][j] = 0;
+						else if(cc.contains(i) && cc.contains(j))
+						{	int base = 0;
+							if(depth>0)
+								base = counts[depth-1][i][j];
+							counts[depth][i][j] = base + 1;
+							consistant = consistant && counts[depth][i][j]<=maxVal;
+						}
+						else
+						{	if(depth>0)
+								counts[depth][i][j] = counts[depth-1][i][j];
+							else
+								counts[depth][i][j] = 0;
+						}
+					}
+					println("  Counts are now "+Arrays.toString(counts[depth]));
+					if(consistant)
+					{	println("   Which IS consistant >> going down in the research tree");
+						currentBranch.push(currentCombi);
+						depth++;
+						if(depth==m)
+							found = true;
+						else
+						{	Deque<int[]> combis = new LinkedList<int[]>(Arrays.asList(combinations));
+							combis.removeAll(currentBranch);
+							fringes.push(combis);
+						}
+					}
+					else
+						println("   Which is not consistant >> trying next combination on the next level");
+				}
+			}
+			
+			// build result
+			if(found)
+			{	result = new int[m][k];
+				for(int i=0;i<m;i++)
+				{	int[] combi = currentBranch.get(m-1-i);
+					for(int j=0;j<k;j++)
+						result[i][j] = combi[j];
+				}
+			}
+		}
+		else
+		{	println("p*n / k = "+p+"*"+n+" / "+k+" = "+( p*n / k)+" mod "+( p*n % k)+" >> done");
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Look for a selection of groups such that each player belongs
+	 * to the same number of groups.
+	 * 
+	 * @param combinations
+	 * 		All possible combinations of k amongst n.
+	 * @param n
+	 * 		Number of players.
+	 * @param k
+	 * 		Size of groups.
+	 * @return
+	 * 		Selected groups (or {@code null} if no solution was found).
+	 */
+	private static int[][] checkAllGroups(int[][] combinations, int n, int k)
+	{	int[][] result = null;
+		
+		int pMax = k*combinations.length/n;
+		int p = 3;
+		System.out.println("pmax="+pMax);
+		while(result==null && p<=pMax)
+		{	System.out.println("n="+n+" k="+k+" ckn="+combinations.length+" p="+p);
+			result = checkGroups(combinations, n, k, p);
+			p++;
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PRINT (DEBUG)	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Whether debug messages should be displayed */
+	private static boolean verbose = false;
+	
+	/**
+	 * Debug version of System.out.print.
+	 * 
+	 * @param str
+	 * 		Message to print. 
+	 */
+	private static void print(String str)
+	{	if(verbose)
+			System.out.print(str);
+	}
+
+	/**
+	 * Debug version of System.out.println.
+	 * 
+	 * @param str
+	 * 		Message to print. 
+	 */
+	private static void println(String str)
+	{	if(verbose)
+			System.out.println(str);
+	}
+
+	/**
+	 * Debug version of System.out.println.
+	 */
+	private static void println()
+	{	if(verbose)
+			System.out.println();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ?????????		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 /*	public static void processChampionship(int totalPlayers, int matchPlayers)
 	{	List<Set<Integer>> matches = new ArrayList<Set<Integer>>();
 		Set<Set<Integer>> uniqueMatches = new TreeSet<Set<Integer>>(new Comparator<Set<Integer>>()
