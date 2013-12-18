@@ -172,12 +172,20 @@ public abstract class AiAbstractSearchAlgorithm
 			{	// premier critère : cout du noeud de recherche
 				int result = o1.compareScoreTo(o2);
 				
+				// deuxième critère : nombre d'étapes dans le chemin
+				if(result==0)
+				{	int d1 = o1.getDepth();
+					int d2 = o2.getDepth();
+					result = d1 - d2;
+				}
+				
 				// en cas d'égalité : ordre d'insertion (pas considéré dans les files, par défaut)
 				if(result==0)
 				{	int n1 = o1.getInsertionOrder();
 					int n2 = o2.getInsertionOrder();
 					result = n1 - n2;
 				}
+
 				return result;
 			}
 		};
