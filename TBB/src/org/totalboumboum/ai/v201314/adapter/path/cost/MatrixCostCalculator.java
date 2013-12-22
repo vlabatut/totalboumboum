@@ -102,7 +102,7 @@ public class MatrixCostCalculator extends CostCalculator
 	/////////////////////////////////////////////////////////////////
 	// COST MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** matrice utilisée pour déterminer le coût d'une action */
+	/** Matrice utilisée pour déterminer le coût d'une action */
 	private double costMatrix[][];
 	
 	/**
@@ -211,6 +211,11 @@ public class MatrixCostCalculator extends CostCalculator
 			}
 			if(containsMalus)
 				result = result + malusCost;
+		}
+		
+		// on rajoute le coût supplémentaire s'il est défini pour la case
+		if(tileCosts!=null)
+		{	result = result + tileCosts[row][col];
 		}
 		
 		return result;

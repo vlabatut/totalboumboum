@@ -93,11 +93,11 @@ public class TileCostCalculator extends CostCalculator
 	public double processCost(AiSearchNode currentNode, AiLocation nextLocation)
 	{	// on suppose que la case est voisine, donc le coût est toujours de 1
 		double result = 1;
+		AiTile destination = nextLocation.getTile();
 		
 		// et on rajoute le coût supplémentaire si la case contient un adversaire
 		if(opponentCost>0)
-		{	AiTile destination = nextLocation.getTile();
-			AiZone zone = destination.getZone();
+		{	AiZone zone = destination.getZone();
 			List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
 			List<AiHero> heroes = destination.getHeroes();
 			opponents.retainAll(heroes);
@@ -107,8 +107,7 @@ public class TileCostCalculator extends CostCalculator
 		
 		// on rajoute le coût supplémentaire si la case contient un malus
 		if(malusCost>0)
-		{	AiTile destination = nextLocation.getTile();
-			List<AiItem> items = destination.getItems();
+		{	List<AiItem> items = destination.getItems();
 			Iterator<AiItem> it = items.iterator();
 			boolean containsMalus = false;
 			while(it.hasNext() && !containsMalus)
@@ -117,6 +116,13 @@ public class TileCostCalculator extends CostCalculator
 			}
 			if(containsMalus)
 				result = result + malusCost;
+		}
+		
+		// on rajoute le coût supplémentaire s'il est défini pour la case
+		if(tileCosts!=null)
+		{	int row = destination.getRow();
+			int col = destination.getCol();
+			result = result + tileCosts[row][col];
 		}
 		
 		return result;		
