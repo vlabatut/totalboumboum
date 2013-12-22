@@ -47,7 +47,7 @@ import org.totalboumboum.tools.computing.CombinatoricsTools;
 /**
  * This class represents a tournament in which
  * all players must play against each other at
- * some point, possibly several time. It is
+ * some point, possibly several times. It is
  * based on the league model used in most sports.
  * 
  * @author Vincent Labatut
@@ -197,7 +197,7 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	/**
-	 * Returns the allowed number of players
+	 * Returns the allowed numbers of players
 	 * for the matches of this tournament.
 	 * 
 	 * @return
@@ -205,23 +205,27 @@ public class LeagueTournament extends AbstractTournament
 	 */
 	public Set<Integer> getMatchesAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
+		
 		for(int i=2;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		for(Match m:matches)
 		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
 			result.retainAll(temp);			
 		}
+		
 		return result;			
 	}
 
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = getMatchesAllowedPlayerNumbers();
+		
 		int min = Collections.min(result);
 		min = Math.max(min,2);
 		result = new TreeSet<Integer>();
 		for(int i=min;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
+		
 		return result;			
 	}
 
