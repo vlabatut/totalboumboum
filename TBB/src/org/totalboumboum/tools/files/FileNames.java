@@ -71,6 +71,7 @@ public class FileNames
 	public static final String FILE_CHARACTERS = "characters";
 	public static final String FILE_COLORMAP = "colormap";
 	public static final String FILE_COLORMAPS = "colormaps";
+	public static final String FILE_COMBIS = "combis";
 	public static final String FILE_CONFIGURATION = "configuration";
 	public static final String FILE_CONNECTIONS = "connections";
 	public static final String FILE_CONTROLS = "controls";
@@ -116,6 +117,7 @@ public class FileNames
 	public static final String FILE_MATRICES = "matrices";
 	public static final String FILE_MATRIX = "matrix";
 	public static final String FILE_MINE = "mine";
+	public static final String FILE_MISC = "misc";
 	public static final String FILE_MODULATIONS = "modulations";
 	public static final String FILE_NORMAL = "normal";
 	public static final String FILE_ORG = "org";
