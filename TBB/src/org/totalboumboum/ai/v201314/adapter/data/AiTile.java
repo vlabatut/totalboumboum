@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.game.round.RoundVariables;
 
 /**
  * Représente une case du jeu, avec tous les sprites qu'elle contient.
@@ -106,7 +107,7 @@ public abstract class AiTile implements Comparable<AiTile>, Serializable
 	// TILE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Longueur d'un côté de la case en pixels */
-	protected static double size;
+	protected static double size = RoundVariables.scaledTileDimension;
 		
 	/** 
 	 * Renvoie la taille de la case en pixels.
