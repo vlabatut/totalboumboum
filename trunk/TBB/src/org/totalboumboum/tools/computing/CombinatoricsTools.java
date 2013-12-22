@@ -59,7 +59,7 @@ public class CombinatoricsTools
 		 * 
 		 */
 		
-		int n = 11;
+		int n = 8;
 		int k = 3;
 		int[][] combinations = getCombinations(k, n);
 		int[][] groups;
