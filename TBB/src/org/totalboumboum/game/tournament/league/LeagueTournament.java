@@ -21,16 +21,21 @@ package org.totalboumboum.game.tournament.league;
  * 
  */
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.jdom.Element;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.PointsProcessor;
@@ -43,6 +48,11 @@ import org.totalboumboum.stream.network.data.host.HostState;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
+import org.totalboumboum.tools.files.FileNames;
+import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.xml.XmlNames;
+import org.totalboumboum.tools.xml.XmlTools;
+import org.xml.sax.SAXException;
 
 /**
  * This class represents a tournament in which
@@ -56,6 +66,20 @@ public class LeagueTournament extends AbstractTournament
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new league tournament object.
+	 * Possible reads the confrontation maps from
+	 * a file, if needed.
+	 * 
+	 * @throws IOException
+	 * 		Problem while loading the confrontation maps. 
+	 * @throws SAXException 
+	 * 		Problem while loading the confrontation maps. 
+	 */
+	public LeagueTournament() throws SAXException, IOException
+	{	loadConfrontationMaps();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -501,5 +525,97 @@ public class LeagueTournament extends AbstractTournament
 		HOMOGENEOUS,
 		/** (Tries to) distribute confrontations heterogeneously over matches */
 		HETEROGENEOUS;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONFRONTATIONS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Map of preprocessed confrontation (too long to process on demand) */
+	private Map<Integer,Map<Integer,Set<Integer>>> confrontationMaps = null;
+	
+	/**
+	 * Loads the pre-processed confrontation map, only if needed.
+	 * 
+	 * @throws SAXException
+	 * 		Problem while loading the confrontation maps. 
+	 * @throws IOException
+	 * 		Problem while loading the confrontation maps. 
+	 */
+	private void loadConfrontationMaps() throws SAXException, IOException
+	{	if(confrontationMaps==null)
+		{	// open files
+			String individualFolder = FilePaths.getMiscPath();
+			File dataFile = new File(individualFolder+File.separator+FileNames.FILE_COMBIS+FileNames.EXTENSION_XML);
+			String schemaFolder = FilePaths.getSchemasPath();
+			File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_COMBIS+FileNames.EXTENSION_SCHEMA);
+			
+			// retrieve and process the XML content
+			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+			loadCombisElement(root);
+		}
+	}
+	
+	/**
+	 * Processes the xml content of the confrontation maps file.
+	 * 
+	 * @param root
+	 * 		Root of the XML document.
+	 */
+	@SuppressWarnings("unchecked")
+	private void loadCombisElement(Element root)
+	{	// process each element in the XML document
+		List<Element> tournamentElts = root.getChildren(XmlNames.TOURNAMENT);
+		for(Element tournamentElt: tournamentElts)
+			loadTournamentElement(tournamentElt);
+	}
+	
+	/**
+	 * Processes each tournament element in the XML file.
+	 * Each one corresponds to a fixed number of tournament players.
+	 *   
+	 * @param root
+	 * 		Element of the tournament.
+	 */
+	@SuppressWarnings("unchecked")
+	private void loadTournamentElement(Element root)
+	{	// retrieve the player number
+		String playersStr = root.getAttributeValue(XmlNames.PLAYERS);
+		int players = Integer.parseInt(playersStr);
+		Map<Integer,Set<Integer>> result = new HashMap<Integer, Set<Integer>>();
+		confrontationMaps.put(players, result);
+		
+		// process each sub-element
+		List<Element> matchesElts = root.getChildren(XmlNames.MATCHES);
+		for(Element matchesElt: matchesElts)
+			loadMatchesElement(matchesElt, result);
+	}
+
+	/**
+	 * Processes each matches element in the XML file.
+	 * Each one corresponds to a fixed number of match players.
+	 *   
+	 * @param root
+	 * 		Element of the tournament.
+	 * @param result
+	 * 		Map to be completed during the process. 
+	 */
+	@SuppressWarnings("unchecked")
+	private void loadMatchesElement(Element root, Map<Integer,Set<Integer>> result)
+	{	// retrieve the player number
+		String playersStr = root.getAttributeValue(XmlNames.PLAYERS);
+		int players = Integer.parseInt(playersStr);
+		Set<Integer> list = new TreeSet<Integer>();
+		result.put(players, list);
+		
+		// process each sub-element
+		List<Element> matchElts = root.getChildren(XmlNames.MATCH);
+		for(Element matchElt: matchElts)
+		{	String playerListStr = matchElt.getAttributeValue(XmlNames.PLAYERS);
+			String temp[] = playerListStr.split(" ");
+			for(String tmp: temp)
+			{	int player = Integer.parseInt(tmp);
+				list.add(player);
+			}
+		}
 	}
 }
