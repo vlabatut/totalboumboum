@@ -24,6 +24,7 @@ package org.totalboumboum.tools.computing;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -58,12 +59,23 @@ public class CombinatoricsTools
 		 * 
 		 */
 		
-		int n = 8;
+		int n = 11;
 		int k = 3;
 		int[][] combinations = getCombinations(k, n);
 		int[][] groups;
+		long before = System.currentTimeMillis();
 //		groups = checkGroups(combinations, n, k, 3);
-		groups = checkAllGroups(combinations, n, k);
+//		groups = backTrackingAll(combinations, n, k);
+		groups = forwardCheckingAll(combinations, n, k);
+		
+		long after = System.currentTimeMillis();
+		long elapsed = (after - before) / 1000;
+		String time = elapsed%60 + "s"; elapsed = elapsed / 60;
+		time = elapsed%60 + "min " + time; elapsed = elapsed / 60;
+		time = elapsed%24 + "h " + time; elapsed = elapsed / 24;
+		time = elapsed + "d " + time;
+		System.out.println("Duration: "+time);
+		
 		if(groups==null)
 			System.out.println("No solution found for k="+k+" and n="+n);
 		else
@@ -228,8 +240,8 @@ public class CombinatoricsTools
 	 * @return
 	 * 		The value n!.
 	 */
-	public static int getFactorial(int n)
-	{	int result = 0;
+	public static long getFactorial(int n)
+	{	long result = 0;
 		
 		if(n>0)
 		{	result = 1;
@@ -255,7 +267,7 @@ public class CombinatoricsTools
 	 */
 	public static int[][] getCombinations(int k, int n)
 	{	// init
-		int size = getFactorial(n)/(getFactorial(k)*getFactorial(n-k));
+		int size = (int)(getFactorial(n)/getFactorial(k)/getFactorial(n-k));
 		int result[][] = new int[size][k];
 
 		// max values
@@ -307,7 +319,7 @@ public class CombinatoricsTools
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// GROUPS			/////////////////////////////////////////////
+	// BACKTRACKING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Selects the minimum number of groups of size k amongst n players,
@@ -325,7 +337,7 @@ public class CombinatoricsTools
 	 * @return
 	 * 		Selected groups (or {@code null}).
 	 */
-	private static int[][] checkGroups(int[][] combinations, int n, int k, int p)
+	private static int[][] backTracking(int[][] combinations, int n, int k, int p)
 	{	int[][] result = null;
 		println("looking for p="+p+" confrontations by player for n="+n+" and k="+k);
 		
@@ -354,7 +366,7 @@ public class CombinatoricsTools
 				
 				Deque<int[]> currentFr = fringes.peek();
 				if(currentFr.isEmpty())
-				{	println(" Empty fringe >> Going up  the research tree");
+				{	println(" Empty fringe >> Going up the research tree");
 					if(!currentBranch.isEmpty())
 					{	currentBranch.pop();
 						fringes.pop();
@@ -386,7 +398,7 @@ public class CombinatoricsTools
 					}
 					println("  Counts are now "+Arrays.toString(counts[depth]));
 					if(consistant)
-					{	println("   Which IS consistant >> going down in the research tree");
+					{	println("   Which IS consistant >> going down the research tree");
 						currentBranch.push(currentCombi);
 						depth++;
 						if(depth==m)
@@ -432,7 +444,7 @@ public class CombinatoricsTools
 	 * @return
 	 * 		Selected groups (or {@code null} if no solution was found).
 	 */
-	private static int[][] checkAllGroups(int[][] combinations, int n, int k)
+	private static int[][] backTrackingAll(int[][] combinations, int n, int k)
 	{	int[][] result = null;
 		
 		int pMax = k*combinations.length/n;
@@ -440,7 +452,170 @@ public class CombinatoricsTools
 		System.out.println("pmax="+pMax);
 		while(result==null && p<=pMax)
 		{	System.out.println("n="+n+" k="+k+" ckn="+combinations.length+" p="+p);
-			result = checkGroups(combinations, n, k, p);
+			result = backTracking(combinations, n, k, p);
+			p++;
+		}
+		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FORWARD CHECKING		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Selects the minimum number of groups of size k amongst n players,
+	 * so that each player belongs to exactly p groups. If such selection
+	 * does not exist, the method returns {@code null}.
+	 * 
+	 * @param combinations
+	 * 		All possible combinations of k amongst n.
+	 * @param n
+	 * 		Number of players.
+	 * @param k
+	 * 		Size of groups.
+	 * @param p
+	 * 		Number of groups a player must belong to.
+	 * @return
+	 * 		Selected groups (or {@code null}).
+	 */
+	private static int[][] forwardChecking(int[][] combinations, int n, int k, int p)
+	{	int[][] result = null;
+		println("looking for p="+p+" confrontations by player for n="+n+" and k="+k);
+		
+		if((p*n % k) != 0)
+			println("p*n / k = "+p+"*"+n+" / "+k+" = "+(p*n/k)+" mod "+(p*n%k)+" >> done");
+		else if(p*(k-1)%(n-1) != 0)
+			println("p*(k-1) / (n-1) = "+p+"*"+(k-1)+" / "+(n-1)+" = "+(p*(k-1)/(n-1))+" mod "+(p*(k-1)%(n-1))+" >> done");
+		
+		else
+		{	// init result
+			int m = p*n / k;			// nbr of groups
+			int maxVal = p*(k-1)/(n-1); // nbr of times a player is in the same group than another
+			
+			// init structures
+			Deque<Deque<int[]>> fringes = new LinkedList<Deque<int[]>>();
+			Deque<int[]> rootFr = new LinkedList<int[]>();
+			rootFr.add(combinations[0]);
+			fringes.push(rootFr);
+			int counts[][][] = new int[m][n][n];
+			LinkedList<int[]> currentBranch = new LinkedList<int[]>();
+			
+			// depth-firt search (backtracking)
+			int depth = 0;
+			boolean found = false;
+			while(!found && depth>=0)
+			{	print("Current branch: ");
+				for(int[] tmp: currentBranch)
+					print(" "+Arrays.toString(tmp));
+				println();
+				
+				Deque<int[]> currentFr = fringes.peek();
+				if(currentFr.isEmpty())
+				{	println(" Empty fringe >> Going up the research tree");
+					if(!currentBranch.isEmpty())
+					{	currentBranch.pop();
+						fringes.pop();
+					}
+					depth--;
+				}
+				else
+				{	int[] currentCombi = currentFr.poll();
+					List<Integer> cc = new ArrayList<>();for(int i=0;i<currentCombi.length;i++) cc.add(currentCombi[i]);
+					println(" Processing combination "+Arrays.toString(currentCombi));
+					boolean consistant = true;
+					for(int i=0;i<n;i++)
+					{	for(int j=0;j<n;j++)
+						if(j==i)
+							counts[depth][i][j] = 0;
+						else if(cc.contains(i) && cc.contains(j))
+						{	int base = 0;
+							if(depth>0)
+								base = counts[depth-1][i][j];
+							counts[depth][i][j] = base + 1;
+							consistant = consistant && counts[depth][i][j]<=maxVal;
+						}
+						else
+						{	if(depth>0)
+								counts[depth][i][j] = counts[depth-1][i][j];
+							else
+								counts[depth][i][j] = 0;
+						}
+					}
+					println("  Counts are now "+Arrays.toString(counts[depth]));
+					if(consistant)
+					{	println("   Which IS consistant >> going down the research tree");
+						currentBranch.push(currentCombi);
+						depth++;
+						if(depth==m)
+							found = true;
+						else
+						{	Deque<int[]> combis = new LinkedList<int[]>();
+							if(depth==1)
+							{	combis.addAll(Arrays.asList(combinations));
+								combis.removeAll(currentBranch);
+							}
+							else
+							{	for(int fr[]: currentFr)
+								{	boolean cst = true;
+									int i=0;
+									while(i<fr.length-1 && cst)
+									{	int j=i+1;
+										while(j<fr.length && cst)
+										{	int row = fr[i];
+											int col = fr[j];
+											cst = counts[depth-1][row][col]<maxVal;
+											j++;
+										}
+										i++;
+									}
+									if(cst)
+										combis.add(fr);
+								}
+							}
+							fringes.push(combis);
+						}
+					}
+					else
+						println("   Which is not consistant >> trying next combination on the next level");
+				}
+			}
+			
+			// build result
+			if(found)
+			{	result = new int[m][k];
+				for(int i=0;i<m;i++)
+				{	int[] combi = currentBranch.get(m-1-i);
+					for(int j=0;j<k;j++)
+						result[i][j] = combi[j];
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Look for a selection of groups such that each player belongs
+	 * to the same number of groups.
+	 * 
+	 * @param combinations
+	 * 		All possible combinations of k amongst n.
+	 * @param n
+	 * 		Number of players.
+	 * @param k
+	 * 		Size of groups.
+	 * @return
+	 * 		Selected groups (or {@code null} if no solution was found).
+	 */
+	private static int[][] forwardCheckingAll(int[][] combinations, int n, int k)
+	{	int[][] result = null;
+		
+		int pMax = k*combinations.length/n;
+		int p = 3;
+		System.out.println("pmax="+pMax);
+		while(result==null && p<=pMax)
+		{	System.out.println("n="+n+" k="+k+" ckn="+combinations.length+" p="+p);
+			result = forwardChecking(combinations, n, k, p);
 			p++;
 		}
 		
