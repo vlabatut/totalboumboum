@@ -177,6 +177,7 @@ final class AiDataHero extends AiDataSprite<Hero> implements AiHero
 		
 		// number of bombs currently dropped
     	bombNumberCurrent = sprite.getDroppedBombs().size();
+//System.err.println("bombNumberCurrent="+bombNumberCurrent);
     	
     	// limit for the bomb range
 		{	StateAbility ab = sprite.getAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
