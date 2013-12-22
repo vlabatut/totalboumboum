@@ -119,8 +119,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Calcule le plus court chemin pour aller de la position {@code startLocation} et 
-	 * allant à la case {@code endTile}, en utilisant l'algorithme A*. La méthode
+	 * Calcule le plus court chemin pour aller de la position {@code startLocation} 
+	 * à la case {@code endTile}, en utilisant l'algorithme A*. La méthode
 	 * peut avoir 3 comportement différents, en fonction du résultat de la recherche :
 	 * <ul>
 	 * 		<li>Si un chemin optimal peut être trouvé entre les cases de départ et de destination,
@@ -232,6 +232,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
+	 * TODO à appeler "restart"
 	 */
 	public AiPath startProcess(AiTile endTile) throws LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
@@ -267,6 +268,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 * @throws IllegalArgumentException
 	 * 		Si la liste des cases de destination est vide.
+	 * TODO à appeler "restart"
 	 */
 	public AiPath startProcess(Set<AiTile> endTiles) throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
