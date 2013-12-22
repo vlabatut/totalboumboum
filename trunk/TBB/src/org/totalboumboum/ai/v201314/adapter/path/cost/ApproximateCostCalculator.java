@@ -213,6 +213,13 @@ public class ApproximateCostCalculator extends CostCalculator
 				result = result + malusCost;
 		}
 		
+		// on rajoute le coût supplémentaire s'il est défini pour la case
+		if(tileCosts!=null)
+		{	int row = destination.getRow();
+			int col = destination.getCol();
+			result = result + tileCosts[row][col];
+		}
+		
 		return result;		
 	}
 }

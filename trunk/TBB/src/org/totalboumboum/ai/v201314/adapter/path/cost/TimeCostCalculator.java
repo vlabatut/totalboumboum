@@ -125,6 +125,7 @@ public class TimeCostCalculator extends CostCalculator
 	public double processCost(AiSearchNode currentNode, AiLocation nextLocation)
 	{	// on calcule le temps nécessaire pour aller de la position courante à la suivante
 		AiLocation currentLocation = currentNode.getLocation();
+		AiTile destination = nextLocation.getTile();
 		AiZone zone = currentLocation.getZone();
 		double speed = hero.getWalkingSpeed();
 		double distance = zone.getPixelDistance(currentLocation,nextLocation);
@@ -132,8 +133,7 @@ public class TimeCostCalculator extends CostCalculator
 		
 		// on rajoute le coût supplémentaire si la case contient un adversaire
 		if(opponentCost>0)
-		{	AiTile destination = nextLocation.getTile();
-			List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
+		{	List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
 			List<AiHero> heroes = destination.getHeroes();
 			opponents.retainAll(heroes);
 			if(!opponents.isEmpty())
@@ -142,8 +142,7 @@ public class TimeCostCalculator extends CostCalculator
 		
 		// on rajoute le coût supplémentaire si la case contient un malus
 		if(malusCost>0)
-		{	AiTile destination = nextLocation.getTile();
-			List<AiItem> items = destination.getItems();
+		{	List<AiItem> items = destination.getItems();
 			Iterator<AiItem> it = items.iterator();
 			boolean containsMalus = false;
 			while(it.hasNext() && !containsMalus)
@@ -152,6 +151,13 @@ public class TimeCostCalculator extends CostCalculator
 			}
 			if(containsMalus)
 				result = result + malusCost;
+		}
+		
+		// on rajoute le coût supplémentaire s'il est défini pour la case
+		if(tileCosts!=null)
+		{	int row = destination.getRow();
+			int col = destination.getCol();
+			result = result + tileCosts[row][col];
 		}
 		
 		return result;		

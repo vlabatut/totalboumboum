@@ -93,13 +93,13 @@ public class PixelCostCalculator extends CostCalculator
 	public double processCost(AiSearchNode currentNode, AiLocation nextLocation)
 	{	// on calcule simplement la distance en pixels
 		AiLocation currentLocation = currentNode.getLocation();
+		AiTile destination = nextLocation.getTile();
 		AiZone zone = currentLocation.getZone();
 		double result = zone.getPixelDistance(currentLocation,nextLocation);
 		
 		// on rajoute le coût supplémentaire si la case contient un adversaire
 		if(opponentCost>0)
 		{	List<AiHero> opponents = new ArrayList<AiHero>(zone.getRemainingOpponents());
-			AiTile destination = nextLocation.getTile();
 			List<AiHero> heroes = destination.getHeroes();
 			opponents.retainAll(heroes);
 			if(!opponents.isEmpty())
@@ -108,8 +108,7 @@ public class PixelCostCalculator extends CostCalculator
 		
 		// on rajoute le coût supplémentaire si la case contient un malus
 		if(malusCost>0)
-		{	AiTile destination = nextLocation.getTile();
-			List<AiItem> items = destination.getItems();
+		{	List<AiItem> items = destination.getItems();
 			Iterator<AiItem> it = items.iterator();
 			boolean containsMalus = false;
 			while(it.hasNext() && !containsMalus)
@@ -118,6 +117,13 @@ public class PixelCostCalculator extends CostCalculator
 			}
 			if(containsMalus)
 				result = result + malusCost;
+		}
+		
+		// on rajoute le coût supplémentaire s'il est défini pour la case
+		if(tileCosts!=null)
+		{	int row = destination.getRow();
+			int col = destination.getCol();
+			result = result + tileCosts[row][col];
 		}
 		
 		return result;		
