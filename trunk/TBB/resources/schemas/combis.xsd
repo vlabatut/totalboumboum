@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+	<xsd:simpleType name="tPlayers">
+		<xsd:list itemType="xsd:integer"/>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tMatch">
+		<xsd:attribute name="players" type="tPlayers" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatches">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="players" type="xsd:integer" use="required" />
+		<xsd:attribute name="nbr" type="xsd:integer" use="required" />
+		<xsd:attribute name="max" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTournament">
+		<xsd:sequence>
+			<xsd:element name="matches" type="tMatches" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="players" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tCombis">
+		<xsd:sequence>
+			<xsd:element name="tournament" type="tTournament" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="combis" type="tCombis" />
+
+</xsd:schema>
