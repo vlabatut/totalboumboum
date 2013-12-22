@@ -160,9 +160,13 @@ public abstract class AiAbstractSearchAlgorithm
 	}
 	
 	/**
-	 * Réinitialise la frange ainsi
-	 * que les variables qui lui sont
-	 * liées.
+	 * Réinitialise la frange ainsi que les variables qui lui sont liées.
+	 * La frange est une file de priorité. La somme coût+heuristique est utilisée
+	 * comme premier critère de priorité : plus cette valeur est faible et plus
+	 * le noeud de recherche correspondant est prioritaire. En cas d'égalité,
+	 * on considère la profondeur du noeud comme second critère. Cela permet
+	 * de donner la priorité à des noeuds représentant des chemins contenant
+	 * moins de cases différentes.
 	 */
 	protected void resetFringe()
 	{	// comparateur de noeuds
