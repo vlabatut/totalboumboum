@@ -81,7 +81,7 @@ public final class DijkstraUse
 	}
 	
 	/**
-	 * Affiche les couts correspondant aux chemins
+	 * Affiche les coûts correspondant aux chemins
 	 * associés à chaque case de la zone. C'est un
 	 * affichage de l'objet renvoyé par dijkstra.
 	 * 
@@ -118,18 +118,18 @@ public final class DijkstraUse
 	 * pris en compte.
 	 */
 	private static void example1()
-	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+	{	// On utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place.
 		ArtificialIntelligence ai = InitData.initAi();
 		ai.setVerbose(true);
 		
-		// on initialise la zone
+		// On initialise la zone.
 		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
 		System.out.println("\n\n-------- EXEMPLE 1 --------");
-		// on crée l'objet dijkstra avec les fonctions les plus simples
-		// à noter qu'à la différence de A*, on n'a pas besoin de fonction
+		// On crée l'objet dijkstra avec les fonctions les plus simples.
+		// A noter qu'à la différence de A*, on n'a pas besoin de fonction
 		// heuristique pour cet algorithme.
 		CostCalculator costCalculator = new TileCostCalculator(ai);
 		SuccessorCalculator successorCalculator = new BasicSuccessorCalculator(ai);
@@ -138,23 +138,23 @@ public final class DijkstraUse
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
 		
 		System.out.println("+++ Utilisation classique de Dijkstra +++");
-		// on applique l'algorithme pour trouver tous les chemins
-		// entre la position courante toutes les autres cases de la zone.
-		// donc il est inutile de préciser une case de destination,
+		// On applique l'algorithme pour trouver tous les chemins
+		// entre la position courante et toutes les autres cases de la zone.
+		// Donc, il est inutile de préciser une case de destination,
 		// puisqu'elles le sont toutes (des destinations).
 		AiLocation startLocation = new AiLocation(hero);
 		try
-		{	// au lieu de renvoyer un simple chemin, dijkstra
+		{	// Au lieu de renvoyer un simple chemin, dijkstra
 			// renvoie une map associant à chaque case le noeud
-			// de recherche feuille correspondant. si aucun
+			// de recherche feuille correspondant. Si aucun
 			// chemin n'est trouvé, c'est la valeur null qui est 
-			// associée à la case. sinon, s'il y a bien un noeud
+			// associée à la case. Sinon, s'il y a bien un noeud
 			// de recherche, alors la méthode processPath de ce
 			// noeud permet d'obtenir le chemin pour aller dans
-			// cette case
+			// cette case.
 			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
-			// on affiche une matrice correspondant au temps nécessaire
-			// pour aller dans chaque case
+			// On affiche une matrice correspondant au temps nécessaire
+			// pour aller dans chaque case.
 			displayTimeMatrix(zone,paths);
 			// on extrait et affiche le chemin pour l'une des cases
 			AiTile tile = zone.getTile(3,4);
@@ -169,14 +169,14 @@ public final class DijkstraUse
 		{	e.printStackTrace();
 		}
 		
-		// comme pour A*, il est possible de reprendre une recherche depuis
+		// Comme pour A*, il est possible de reprendre une recherche depuis
 		// le début en réutilisant l'arbre de recherche existant, en utilisant :
 		// 		dijkstra.startProcess();
-		// il est aussi possible de reprendre une recherche qui avait été
+		// Il est aussi possible de reprendre une recherche qui avait été
 		// interrompue par une exception en utilisant :
 		//		dijkstra.continueProcess();
 		
-		// les limites sont gérées comme pour A* et leur dépassement
+		// Les limites sont gérées comme pour A* et leur dépassement
 		// déclenche lui aussi une LimitReachedException.
 	}
 	
@@ -186,17 +186,17 @@ public final class DijkstraUse
 	 * c'était le cas dans l'exemple 1).
 	 */
 	private static void example2()
-	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+	{	// On utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place.
 		ArtificialIntelligence ai = InitData.initAi();
 		ai.setVerbose(true);
 		
-		// on initialise la zone
+		// On initialise la zone.
 		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
 		System.out.println("\n\n-------- EXEMPLE 2 --------");
-		// comme pour A*, on peut utiliser les fonctions à base de pixels
+		// Comme pour A*, on peut utiliser les fonctions à base de pixels,
 		// plutôt que celle à base de cases. 
 		CostCalculator costCalculator = new PixelCostCalculator(ai);
 		SuccessorCalculator successorCalculator = new BasicSuccessorCalculator(ai);
@@ -207,11 +207,11 @@ public final class DijkstraUse
 		System.out.println("+++ Utilisation des fonctions à base de pixels +++");
 		AiLocation startLocation = new AiLocation(24,25,zone);
 		try
-		{	// application de l'algo
+		{	// Application de l'algo.
 			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
-			// matrice des temps
+			// Matrice des temps.
 			displayTimeMatrix(zone,paths);
-			// chemin
+			// Chemin obtenu
 			AiTile tile = zone.getTile(3,4);
 			AiSearchNode leaf = paths.get(tile);
 			AiPath path = leaf.processPath();
@@ -232,33 +232,33 @@ public final class DijkstraUse
 	 * Dijkstra qu'avec A*.
 	 */
 	private static void example3()
-	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+	{	// On utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place.
 		ArtificialIntelligence ai = InitData.initAi();
 		ai.setVerbose(true);
 		
-		// on initialise la zone
+		// On initialise la zone.
 		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
-		// utilisation des fonctions tenant compte du temps, avec modèle complet
+		// Utilisation des fonctions tenant compte du temps, avec modèle complet.
 		System.out.println("\n\n-------- EXEMPLE 3 --------");
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
-		// pour l'exemple on prend MODE_NOTREE (le plus restrictif), 
+		// Pour l'exemple on prend MODE_NOTREE (le plus restrictif), 
 		// mais les autres modes sont aussi utilisables ici.
 		SuccessorCalculator successorCalculator = new TimeFullSuccessorCalculator(ai,hero,SearchMode.MODE_NOTREE);
 		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
-		dijkstra.setVerbose(true); // pour afficher les détails du traitement
+		dijkstra.setVerbose(true); // Pour afficher les détails du traitement
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
 		
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOBRANCH +++");
 		AiLocation startLocation = new AiLocation(hero);
 		try
-		{	// application de l'algo
+		{	// Application de l'algo.
 			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
-			// matrice des temps
+			// Matrice des temps.
 			displayTimeMatrix(zone,paths);
-			// chemin
+			// Chemin obtenu.
 			AiTile tile = zone.getTile(3,4);
 			AiSearchNode leaf = paths.get(tile);
 			AiPath path = leaf.processPath();
@@ -277,32 +277,32 @@ public final class DijkstraUse
 	 * (sinon c'est trop long).
 	 */
 	private static void example4()
-	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+	{	// On utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place.
 		ArtificialIntelligence ai = InitData.initAi();
 		ai.setVerbose(true);
 		
-		// on initialise la zone
+		// On initialise la zone.
 		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
-		// utilisation des fonctions tenant compte du temps, 
-		// avec modèle partiel
+		// Utilisation des fonctions tenant compte du temps, 
+		// avec modèle partiel.
 		System.out.println("\n\n-------- EXEMPLE 4 --------");
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
 		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
 		Dijkstra dijkstra = new Dijkstra(ai,hero,costCalculator,successorCalculator);
-		dijkstra.setVerbose(true); // pour afficher les détails du traitement
+		dijkstra.setVerbose(true); // Pour afficher les détails du traitement
 		dijkstra.setMaxHeight(2*(zone.getWidth()+zone.getHeight())); // on augmente la limite
 		
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOTREE +++");
 		AiLocation startLocation = new AiLocation(hero);
 		try
-		{	// application de l'algo
+		{	// Application de l'algo.
 			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
-			// matrice des temps
+			// Matrice des temps.
 			displayTimeMatrix(zone,paths);
-			// chemin
+			// Chemin obtenu.
 			AiTile tile = zone.getTile(3,4);
 			AiSearchNode leaf = paths.get(tile);
 			AiPath path = leaf.processPath();
@@ -324,16 +324,16 @@ public final class DijkstraUse
 	 * un item ou un adversaire inaccessible..
 	 */
 	private static void example5()
-	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+	{	// On utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place.
 		ArtificialIntelligence ai = InitData.initAi();
 		ai.setVerbose(true);
 		
-		// on initialise la zone
+		// On initialise la zone.
 		AiSimZone zone = InitData.initZone1();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
-		// utilisation des fonctions approximatives (sans modèle) 
+		// Utilisation des fonctions approximatives (sans modèle).
 		System.out.println("\n\n-------- EXEMPLE 5 --------");
 		CostCalculator costCalculator = new ApproximateCostCalculator(ai,hero);
 		SuccessorCalculator successorCalculator = new ApproximateSuccessorCalculator(ai);
@@ -344,11 +344,11 @@ public final class DijkstraUse
 		System.out.println("+++ Utilisation des fonctions approximatives (à base de temps, mais sans modèle) +++");
 		AiLocation startLocation = new AiLocation(hero);
 		try
-		{	// application de l'algo
+		{	// Application de l'algo.
 			Map<AiTile,AiSearchNode> paths = dijkstra.startProcess(startLocation);
-			// matrice des temps
+			// Matrice des temps.
 			displayTimeMatrix(zone,paths);
-			// chemin
+			// Chemin obtenu.
 			AiTile tile = zone.getTile(3,4);
 			AiSearchNode leaf = paths.get(tile);
 			AiPath path = leaf.processPath();
@@ -379,16 +379,16 @@ public final class DijkstraUse
 	 * facilement dans un piège.
 	 */
 	private static void example6()
-	{	// on utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place
+	{	// On utilise ici une ai anonyme, mais vous pouvez utiliser la vôtre à la place.
 		ArtificialIntelligence ai = InitData.initAi();
 		ai.setVerbose(true);
 		
-		// on initialise la zone
+		// On initialise la zone.
 		AiSimZone zone = InitData.initZone5();
 		ai.setZone(zone);
 		AiHero hero = zone.getHeroByColor(PredefinedColor.WHITE);
 		
-		// utilisation de la fonction de fuite dans Dijkstra 
+		// Utilisation de la fonction de fuite dans Dijkstra.
 		System.out.println("\n\n-------- EXEMPLE 6 --------");
 		CostCalculator costCalculator = new TimeCostCalculator(ai,hero);
 		SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
@@ -399,7 +399,7 @@ public final class DijkstraUse
 		System.out.println("+++ Utilisation des fonctions à base de temps, modèle complet, MODE_NOTREE +++");
 		AiLocation startLocation = new AiLocation(hero);
 		try
-		{	// application de l'algo
+		{	// Application de l'algo.
 			AiPath path = dijkstra.processEscapePath(startLocation);
 			System.out.println("+++ path="+path);
 		}
