@@ -24,7 +24,7 @@
 	
  	<notes>
  		<line value="Rencontre utilisée pour la qualification des agents l'édition 2013/14." />
- 		<line value="L'agent à qualifier rencontre un agent de référence sur 8 zones différentes, à l'occasion de 3 manches (soit un total de 24 manches)." />
+ 		<line value="L'agent à qualifier rencontre un agent de référence sur 8 zones différentes, à l'occasion de 2 manches (soit un total de 16 manches)." />
  		<line value="Le processus est répété en 1-contre-1 avec 4 agents différents : Humain (fixe), Promeneur, Suiveur et Simplet." />
  		<line value="Author: Vincent Labatut" />
  		<line value="Date: 20-08-2013" />
@@ -35,7 +35,7 @@
 	<limits>
 		<confrontation>
 			<points local="true" name="total" />
-			<threshold value="24" />
+			<threshold value="16" />
 		</confrontation>
 <!-- 
  		<points>
@@ -49,33 +49,25 @@
  	<rounds randomOrder="false" >
   		<round local="true" name="round1" />
   		<round local="true" name="round1" />
-  		<round local="true" name="round1" />
-  		
+		
   		<round local="true" name="round2" />
   		<round local="true" name="round2" />
-  		<round local="true" name="round2" />
-  		
+		
   		<round local="true" name="round3" />
   		<round local="true" name="round3" />
-  		<round local="true" name="round3" />
-  		
+		
   		<round local="true" name="round4" />
   		<round local="true" name="round4" />
-  		<round local="true" name="round4" />
-  		  		
+		
   		<round local="true" name="round5" />
   		<round local="true" name="round5" />
-  		<round local="true" name="round5" />
-  		
+		
   		<round local="true" name="round6" />
   		<round local="true" name="round6" />
-  		<round local="true" name="round6" />
-  		
+		
   		<round local="true" name="round7" />
   		<round local="true" name="round7" />
-  		<round local="true" name="round7" />
-  		
-  		<round local="true" name="round8" />
+		
   		<round local="true" name="round8" />
   		<round local="true" name="round8" />
   	</rounds>
