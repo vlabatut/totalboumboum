@@ -575,6 +575,7 @@
 		- Affichage des chemins en fonction des coordonnées pixels, et non plus seulement cases.
 		- Affichage des délais d'attente définis dans les chemins, sous forme de disque placés aux points d'attente.
 		- Possibilité de faire des captures de percepts avec CAPSLOCK+numéro de l'agent.
+		- Possibilité de définir un coût supplémentaire pour chaque case, pour la recherche de chemin.
 	- options :
 		- Possibilité d'enchainer les tournois automatiquement, avec sélection automatique des joueurs
 		- Et plusieurs modes sont possibles: aléatoire, pack, classement, confrontations 
