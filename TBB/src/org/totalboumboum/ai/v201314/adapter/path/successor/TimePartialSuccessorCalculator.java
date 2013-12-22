@@ -211,7 +211,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
+	// PROCESSED TILES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Renvoie la map correspondant au noeud
@@ -281,6 +281,12 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Switch pour la modification empêchant l'oscillation (ce champ est temporaire) */
+	private boolean oscilModif = true;	// TODO
+	
 	/** 
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
@@ -373,9 +379,25 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 				}
 			}
 
-			// on teste s'il y a un obstacle "artificiel" (adversaire ou malus)
-			process = process && (!considerOpponents || !containsOpponent(neighbor)) && 
-					(!considerMaluses || !containsMalus(neighbor));
+			// on rajoute quelques tests indépendants du mode
+			{	// on teste si on la case passée est égale à la case future
+				// >> si c'est le cas sans qu'il y ait d'attente dans la case présente,
+				//    ça correspond à une oscillation complètement inutile, qui doit être empêchée
+				if(process && oscilModif)
+				{	AiSearchNode prevNode = node.getParent();
+					if(prevNode!=null)
+					{	Direction curDir = node.getDirection();
+						AiTile prevTile = prevNode.getLocation().getTile();
+						process = !(prevTile.equals(neighbor) && !prevTile.equals(tile) && curDir==Direction.NONE);
+					}
+				}
+				
+				// on teste s'il y a un obstacle "artificiel" (adversaire ou malus)
+				if(process)
+				 {	process = (!considerOpponents || !containsOpponent(neighbor)) 
+				 		&& (!considerMaluses || !containsMalus(neighbor));
+				 }
+			}
 
 			// si on a le droit de traiter la case
 			if(process)

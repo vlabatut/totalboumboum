@@ -195,6 +195,9 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Switch pour la modification empêchant l'oscillation (ce champ est temporaire) */
+	private boolean oscilModif = true;	// TODO
+	
 	/**
 	 * Renvoie la map correspondant au noeud
 	 * de recherche passé en paramètre. La map
@@ -267,6 +270,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
 	 * mais aussi la possibilité d'attendre dans la case courante.
+	 * <br/>
 	 * Autre différence : les cases déjà traversées sont considérées,
 	 * car le chemin peut inclure des retours en arrière pour éviter
 	 * des explosions.
@@ -357,9 +361,25 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 				}
 			}
 
-			// on teste s'il y a un obstacle "artificiel" (adversaire ou malus)
-			process = process && (!considerOpponents || !containsOpponent(neighbor)) && 
-					(!considerMaluses || !containsMalus(neighbor));
+			// on rajoute quelques tests indépendants du mode
+			{	// on teste si on la case passée est égale à la case future
+				// >> si c'est le cas sans qu'il y ait d'attente dans la case présente,
+				//    ça correspond à une oscillation complètement inutile, qui doit être empêchée
+				if(process && oscilModif)
+				{	AiSearchNode prevNode = node.getParent();
+					if(prevNode!=null)
+					{	Direction curDir = node.getDirection();
+						AiTile prevTile = prevNode.getLocation().getTile();
+						process = !(prevTile.equals(neighbor) && !prevTile.equals(tile) && curDir==Direction.NONE);
+					}
+				}
+				
+				// on teste s'il y a un obstacle "artificiel" (adversaire ou malus)
+				if(process)
+				{	process = (!considerOpponents || !containsOpponent(neighbor))
+						&& (!considerMaluses || !containsMalus(neighbor));
+				}
+			}
 			
 			// si on a le droit de traiter la case
 			if(process)
@@ -410,7 +430,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 				// la case ciblée n'est pas sûre et est ignorée
 			}
 			// si la case a déjà été visitée depuis la dernière pause,
-			// on l'ignore car il est inutile d'y repasser
+			// on l'ignore car il est (à peu près) inutile d'y repasser
 		}
 		
 		// on considère éventuellement l'action d'attente, 
