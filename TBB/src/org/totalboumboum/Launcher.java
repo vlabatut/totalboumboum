@@ -1733,11 +1733,12 @@ public class Launcher
 // TODO corolaire : lorsque les IA sont menacées par le jeu, la bombe
 // 		doit tomber et non pas apparaitre (comme c'est surement le cas)
 
-// TODO pb avec les graphiques de manche : quand un joueur meurt, il faudrait afficher deux points :
+// TODO pb avec les graphiques (stats) de manche : quand un joueur meurt, il faudrait afficher deux points :
 //		- un à la même hauteur que le précédent
 //		- l'autre à zéro (pour avoir une droite verticale au moment de l'éliminiation)
 
-// TODO ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
+// TODO API 
+// + ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
 //		des classes dédiées : DistanceTools, NeighborTools, etc. (?)
-
-// TODO possibilité d'enregistrer la zone courante sous forme d'AiSimZone ?
+// + certaines méthodes de recherche réutilisant l'arbre sont à renommer "restart" (au lieu de "start")
+// + carrément virer costCalculator (penser à màj la doc pr ne plus y en parler)
