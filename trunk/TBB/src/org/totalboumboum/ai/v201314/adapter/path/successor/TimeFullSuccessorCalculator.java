@@ -363,14 +363,18 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 
 			// on rajoute quelques tests indépendants du mode
 			{	// on teste si on la case passée est égale à la case future
-				// >> si c'est le cas sans qu'il y ait d'attente dans la case présente,
-				//    ça correspond à une oscillation complètement inutile, qui doit être empêchée
+				// >> si c'est le cas (étant donné qu'il n'y a donc d'attente dans la case présente),
+				//    ça correspond à une oscillation complètement inutile, qui doit être empêchée.
+				//    du type : A -(right)- B -(left)- A
+				//    par contre, on garde les A -(right)- B -(none)- B -(left)- A
 				if(process && oscilModif)
 				{	AiSearchNode prevNode = node.getParent();
 					if(prevNode!=null)
-					{	Direction curDir = node.getDirection();
-						AiTile prevTile = prevNode.getLocation().getTile();
-						process = !(prevTile.equals(neighbor) && !prevTile.equals(tile) && curDir==Direction.NONE);
+					{	AiTile prevTile = prevNode.getLocation().getTile();
+//						Direction curDir = node.getDirection();
+						process = !(prevTile.equals(neighbor) && !prevTile.equals(tile) 
+//							&& curDir==Direction.NONE
+						);
 					}
 				}
 				
