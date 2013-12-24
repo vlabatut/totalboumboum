@@ -24,21 +24,27 @@ package org.totalboumboum.tools.computing;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
-import org.totalboumboum.tools.collections.IntegerCollectionComparator;
+import org.totalboumboum.game.tournament.league.LeagueTournament;
 
 /**
+ * Various methods designed to perform
+ * combinatorics-related calculations.
  * 
  * @author Vincent Labatut
- *
  */
+@SuppressWarnings("unused")
 public class CombinatoricsTools
 {	
+	/**
+	 * Methods used to process combination maps
+	 * for the {@link LeagueTournament}.
+	 * 
+	 * @param args
+	 * 		None needed.
+	 */
 	public static void main(String args[])
 	{	
 //		int[][] combi = getCombinations(3, 5);
@@ -59,8 +65,8 @@ public class CombinatoricsTools
 		 * 
 		 */
 		
-		int n = 8;
-		int k = 3;
+		int n = 10;
+		int k = 7;
 		int[][] combinations = getCombinations(k, n);
 		int[][] groups;
 		long before = System.currentTimeMillis();
@@ -656,287 +662,5 @@ public class CombinatoricsTools
 	private static void println()
 	{	if(verbose)
 			System.out.println();
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ?????????		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-/*	public static void processChampionship(int totalPlayers, int matchPlayers)
-	{	List<Set<Integer>> matches = new ArrayList<Set<Integer>>();
-		Set<Set<Integer>> uniqueMatches = new TreeSet<Set<Integer>>(new Comparator<Set<Integer>>()
-		{	@Override
-			public int compare(Set<Integer> s1, Set<Integer> s2)
-			{	Iterator<Integer> i1 = s1.iterator();
-				Iterator<Integer> i2 = s2.iterator();
-				int result = 0;
-				boolean done;
-				do
-				{	int v1 = i1.next();
-					int v2 = i2.next();
-					result = v1-v2;
-					if(result==0)
-						done = !i1.hasNext();
-					else
-						done = true;
-				}
-				while(!done);
-				return result;
-			}			
-		});
-		int mod = (totalPlayers-1)%(matchPlayers-1);
-		if(mod!=0)
-			System.out.println("incompatibilité entre le nombre total de joueurs et la capacité du match");
-		else
-		{	int rep = (totalPlayers-1)/(matchPlayers-1);
-			for(int i=0;i<totalPlayers;i++)
-			{	int index = i;
-				for(int j=0;j<rep;j++)
-				{	Set<Integer> match = new TreeSet<Integer>();
-					match.add(i);
-					for(int k=0;k<(matchPlayers-1);k++)
-					{	index = (index+1)%totalPlayers;
-						match.add(index);
-					}
-					matches.add(match);
-					uniqueMatches.add(match);
-				}
-			}
-			// display matches
-			System.out.println("total number of matches: "+matches.size());
-			for(Set<Integer> match: matches)
-			{	System.out.print("[ ");
-				for(Integer player: match)
-					System.out.print(player+" ");
-				System.out.println("]");
-			}
-			System.out.println();
-	
-			// display unique matches
-			System.out.println("total number of unique matches: "+uniqueMatches.size());
-			for(Set<Integer> match: uniqueMatches)
-			{	System.out.print("[ ");
-				for(Integer player: match)
-					System.out.print(player+" ");
-				System.out.println("]");
-			}
-			System.out.println();
-	
-			// counts for player 0
-			int counts[] = new int[totalPlayers];
-			for(Set<Integer> match: matches)
-			{	if(match.contains(0))
-				{	for(Integer player: match)
-						counts[player]++;
-				}
-			}
-			System.out.println("Counts for player 0:");
-			for(int i=0;i<counts.length;i++)
-			{	System.out.println(i+"\t: "+counts[i]);
-			}
-			System.out.println();
-	
-			// unique counts for player 0
-			Arrays.fill(counts,0);
-			for(Set<Integer> match: uniqueMatches)
-			{	if(match.contains(0))
-				{	for(Integer player: match)
-						counts[player]++;
-				}
-			}
-			System.out.println("Unique counts for player 0:");
-			for(int i=0;i<counts.length;i++)
-			{	System.out.println(i+"\t: "+counts[i]);
-			}
-			System.out.println();
-		}
-	}*/
-	public static void processChampionship(int totalPlayers, int matchPlayers)
-	{	
-		// set patterns
-		int centralPlayer = 0;//(totalPlayers-1)/2;
-		int matchOpponents = matchPlayers - 1;
-		int totalOpponents = totalPlayers - 1;
-		int combinationCount = totalOpponents/matchOpponents;
-		List<Set<Integer>> patterns = new ArrayList<Set<Integer>>();
-/*		Set<Integer> set;
-		set = new TreeSet<Integer>(Arrays.asList(0,1,2,7,8));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,2,3,6,7));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,3,4,5,6));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,1,3,6,8));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,2,4,5,7));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,1,4,5,8));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,2,4,6,8));patterns.add(set);
-		set = new TreeSet<Integer>(Arrays.asList(0,1,3,5,7));patterns.add(set);*/
-		for(int i=0;i<combinationCount;i++)
-		{	TreeSet<Integer> pattern = new TreeSet<Integer>();
-			pattern.add(centralPlayer);
-			int leftBase = (centralPlayer - i*matchOpponents + totalPlayers) % totalPlayers;
-			int rightBase = (centralPlayer + i*matchOpponents) % totalPlayers;
-			for(int j=1;j<=(matchOpponents/2);j++)
-			{	int leftIndex = (leftBase-j+totalPlayers) % totalPlayers;
-if(pattern.contains(leftIndex))
-	System.out.println("pattern already contains "+leftIndex);
-else
-				pattern.add(leftIndex);
-				int rightIndex = (rightBase+j) % totalPlayers;
-if(pattern.contains(rightIndex))
-	System.out.println("pattern already contains "+rightIndex);
-else
-				pattern.add(rightIndex);				
-			}
-			patterns.add(pattern);
-		}
-		
-/*		
-System.out.println("------------");
-for(Set<Integer> set: patterns)
-{	System.out.print("[ ");
-	for(Integer integer: set)
-		System.out.print(integer+" ");
-	System.out.println("]");
-}
-*/		
-		// process matches
-		List<List<Set<Integer>>> matches = new ArrayList<List<Set<Integer>>>();
-		for(Set<Integer> pattern: patterns)
-		{	List<Set<Integer>> list = new ArrayList<Set<Integer>>();
-			for(int i=0;i<totalPlayers;i++)
-			{	Set<Integer> match = new TreeSet<Integer>();
-				for(Integer p: pattern)
-					match.add((p+i)%totalPlayers);
-				list.add(match);
-			}
-			matches.add(list);
-		}
-		
-System.out.println("------------");
-for(int i=0;i<patterns.size();i++)
-{	// pattern
-	Set<Integer> pattern = patterns.get(i);
-	System.out.print("[ ");
-	for(Integer integer: pattern)
-		System.out.print(integer+" ");
-	System.out.println("]");
-	// matches for this pattern
-	List<Set<Integer>> list = matches.get(i);
-	for(Set<Integer> match: list)
-	{	System.out.print("\t[ ");
-		for(Integer integer: match)
-			System.out.print(integer+" ");
-		System.out.println("]");
-	}
-	System.out.println();
-}
-
-System.out.println("------------");
-centralPlayer = (totalPlayers-1)/2;
-for(int i=0;i<totalPlayers;i++)
-	System.out.print("\t"+i);
-System.out.println();
-System.out.println("--------------------------------------------------------------------------------");
-for(List<Set<Integer>> list: matches)
-{	int count[] = new int[totalPlayers];
-	Arrays.fill(count,0);
-	for(Set<Integer> match: list)
-	{	if(match.contains(centralPlayer))
-		{	for(Integer p: match)
-				count[p]++;
-		}
-	}
-	for(int i=0;i<count.length;i++)
-		System.out.print("\t"+count[i]);
-	System.out.println();
-}
-	
-	
-	}
-	
-	public static Set<Set<Integer>> processCombinationsRec(int n, int k)
-	{	Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
-		
-		if(k==1)
-		{	for(int i=0;i<n;i++)
-			{	Set<Integer> set = new TreeSet<Integer>();
-				set.add(new Integer(i));
-				result.add(set);
-			}			
-		}
-		else
-		{	Set<Set<Integer>> combis = processCombinationsRec(n,k-1);
-			for(int i=0;i<n;i++)
-			{	for(Set<Integer> set: combis)
-				{	if(!set.contains(i))
-					{	Set<Integer> copy = new TreeSet<Integer>(set);
-						copy.add(i);
-						if(!result.contains(copy))
-							result.add(copy);
-					}
-				}
-			}
-		}
-		return result;
-	}
-
-	public static Set<Set<Integer>> processCombinationsIter(int n, int k, List<Set<Integer>> previous)
-	{	System.out.println("\tprocess C("+n+","+k+")");
-		Set<Set<Integer>> result = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
-		
-		if(previous!=null)
-		{	result.addAll(previous);
-			Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
-			for(int i=0;i<n;i++)
-			{	for(Set<Integer> set: result)
-				{	boolean test;
-					int l = 0;
-					do
-					{	test = !set.contains(l);
-						l++;
-					}
-					while(test && l<=i);
-					if(test)
-					{	Set<Integer> tempSet = new TreeSet<Integer>(set);
-						tempSet.add(i);
-						temp.add(tempSet);
-					}
-				}
-			}
-			result = temp;
-		}
-		else
-		{	// init
-			System.out.println("\t\tprocess C("+n+",1)");
-			for(int i=0;i<n;i++)
-			{	Set<Integer> set = new TreeSet<Integer>();
-				set.add(new Integer(i));
-				result.add(set);
-			}
-			System.out.println("\t\tdone");
-			
-			for(int m=2;m<=k;m++)
-			{	System.out.println("\t\tprocess C("+n+","+m+")");
-				Set<Set<Integer>> temp = new TreeSet<Set<Integer>>(new IntegerCollectionComparator());
-				for(int i=0;i<n;i++)
-				{	for(Set<Integer> set: result)
-					{	boolean test;
-						int l = 0;
-						do
-						{	test = !set.contains(l);
-							l++;
-						}
-						while(test && l<=i);
-						if(test)
-						{	Set<Integer> tempSet = new TreeSet<Integer>(set);
-							tempSet.add(i);
-							temp.add(tempSet);
-						}
-					}
-				}
-				System.out.println("\t\tdone");
-				result = temp;
-			}
-		}		
-		
-		System.out.println("\tdone");
-		return result;
 	}
 }

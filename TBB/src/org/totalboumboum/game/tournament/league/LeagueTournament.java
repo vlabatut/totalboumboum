@@ -25,13 +25,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -364,10 +361,7 @@ public class LeagueTournament extends AbstractTournament
 	 * Set matches in a random order.
 	 */
 	private void randomizeMatches()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(matches,random);
+	{	Collections.shuffle(matches);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -394,18 +388,35 @@ public class LeagueTournament extends AbstractTournament
 		confrontations = null;
 		// try to minimize the number of matches
 		if(minimizeConfrontations)
-		{	for(Integer k: ks)
-			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CombinatoricsTools.processCombinationsRec/*processMinimalCombinations*/(n,k));
-				if(confrontations==null || conf.size()<confrontations.size())
-					confrontations = conf;
-			}			
+		{	int matchNbr = Integer.MAX_VALUE;
+			Map<Integer,List<Set<Integer>>> trnmt = confrontationMaps.get(n);
+			for(Integer k: ks)
+			{	List<Set<Integer>> matches = trnmt.get(k);
+				int tempMatchNbr = matches.size();
+				if(tempMatchNbr<matchNbr)
+				{	matchNbr = tempMatchNbr;
+					confrontations = matches;
+				}
+			}
 		}
-		// or choose all possible combinations (might be quite long)
+		// or choose all possible combinations (might be quite a long tournament !)
 		else
-		{	for(Integer k: ks)
-			{	List<Set<Integer>> conf = new ArrayList<Set<Integer>>(CombinatoricsTools.processCombinationsRec(n,k));
-				if(confrontations==null || conf.size()<confrontations.size())
-					confrontations = conf;
+		{	int matchNbr = Integer.MAX_VALUE;
+			int combis[][] = null;
+			for(Integer k: ks)
+			{	int tempCombis[][] = CombinatoricsTools.getCombinations(k, n);
+				int tempMatchNbr = tempCombis.length;
+				if(tempMatchNbr<matchNbr)
+				{	matchNbr = tempMatchNbr;
+					combis = tempCombis;
+				}
+			}
+			List<Set<Integer>> matches = new ArrayList<Set<Integer>>();
+			for(int i=0;i<combis.length;i++)
+			{	Set<Integer> match = new TreeSet<Integer>();
+				for(int j=0;j<combis[i].length;j++)
+					match.add(combis[i][j]);
+				matches.add(match);
 			}
 		}
 		if(confrontationOrder==ConfrontationOrder.RANDOM)
@@ -487,10 +498,7 @@ public class LeagueTournament extends AbstractTournament
 	 * the same players).
 	 */
 	private void randomizeConfrontations()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(confrontations,random);
+	{	Collections.shuffle(confrontations);
 	}
 
 	/**
@@ -499,7 +507,7 @@ public class LeagueTournament extends AbstractTournament
 	 * matches do not involve the same players).
 	 */
 	private void heterogenizeConfrontations()
-	{	// TODO		
+	{	// TODO	not implemenented yet
 	}
 	
 	/**
@@ -508,7 +516,7 @@ public class LeagueTournament extends AbstractTournament
 	 * matches involve roughly the same players).
 	 */
 	private void homogenizeConfrontations()
-	{	// TODO		
+	{	// TODO	not implemenented yet
 	}
 	
 	/**
@@ -531,7 +539,7 @@ public class LeagueTournament extends AbstractTournament
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Map of preprocessed confrontation (too long to process on demand) */
-	private Map<Integer,Map<Integer,Set<Integer>>> confrontationMaps = null;
+	private Map<Integer,Map<Integer,List<Set<Integer>>>> confrontationMaps = null;
 	
 	/**
 	 * Loads the pre-processed confrontation map, only if needed.
@@ -552,6 +560,29 @@ public class LeagueTournament extends AbstractTournament
 			// retrieve and process the XML content
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			loadCombisElement(root);
+			
+			// complete with missing settings, using all possible combinations
+			for(int n=2;n<=GameData.MAX_PROFILES_COUNT;n++)
+			{	Map<Integer, List<Set<Integer>>> trnmt = confrontationMaps.get(n);
+				if(trnmt==null)
+				{	trnmt = new HashMap<Integer, List<Set<Integer>>>();
+					confrontationMaps.put(n, trnmt);
+				}
+				for(int k=2;k<=n;k++)
+				{	List<Set<Integer>> matches = trnmt.get(k);
+					if(matches==null)
+					{	matches = new ArrayList<Set<Integer>>();
+						trnmt.put(k, matches);
+					}
+					int combis[][] = CombinatoricsTools.getCombinations(k, n);
+					for(int i=0;i<combis.length;i++)
+					{	Set<Integer> match = new TreeSet<Integer>();
+						for(int j=0;j<combis[i].length;j++)
+							match.add(combis[i][j]);
+						matches.add(match);
+					}
+				}
+			}
 		}
 	}
 	
@@ -581,7 +612,7 @@ public class LeagueTournament extends AbstractTournament
 	{	// retrieve the player number
 		String playersStr = root.getAttributeValue(XmlNames.PLAYERS);
 		int players = Integer.parseInt(playersStr);
-		Map<Integer,Set<Integer>> result = new HashMap<Integer, Set<Integer>>();
+		Map<Integer,List<Set<Integer>>> result = new HashMap<Integer, List<Set<Integer>>>();
 		confrontationMaps.put(players, result);
 		
 		// process each sub-element
@@ -600,11 +631,11 @@ public class LeagueTournament extends AbstractTournament
 	 * 		Map to be completed during the process. 
 	 */
 	@SuppressWarnings("unchecked")
-	private void loadMatchesElement(Element root, Map<Integer,Set<Integer>> result)
+	private void loadMatchesElement(Element root, Map<Integer,List<Set<Integer>>> result)
 	{	// retrieve the player number
 		String playersStr = root.getAttributeValue(XmlNames.PLAYERS);
 		int players = Integer.parseInt(playersStr);
-		Set<Integer> list = new TreeSet<Integer>();
+		List<Set<Integer>> list = new ArrayList<Set<Integer>>();
 		result.put(players, list);
 		
 		// process each sub-element
@@ -612,9 +643,11 @@ public class LeagueTournament extends AbstractTournament
 		for(Element matchElt: matchElts)
 		{	String playerListStr = matchElt.getAttributeValue(XmlNames.PLAYERS);
 			String temp[] = playerListStr.split(" ");
+			Set<Integer> set = new TreeSet<Integer>();
+			list.add(set);
 			for(String tmp: temp)
 			{	int player = Integer.parseInt(tmp);
-				list.add(player);
+				set.add(player);
 			}
 		}
 	}
