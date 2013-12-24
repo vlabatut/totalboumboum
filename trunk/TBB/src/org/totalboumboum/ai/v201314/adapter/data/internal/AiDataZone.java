@@ -21,6 +21,9 @@ package org.totalboumboum.ai.v201314.adapter.data.internal;
  * 
  */
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,6 +58,7 @@ import org.totalboumboum.engine.player.AbstractPlayer;
 import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.computing.RankingTools;
@@ -90,6 +94,8 @@ public final class AiDataZone extends AiZone
 	public AiDataZone(Level level, AbstractPlayer player)
 	{	this.level = level;
 		this.player = player;
+		
+		initTileSize(RoundVariables.scaledTileDimension);
 		
 		initMatrix();
 		initTime();
@@ -828,7 +834,7 @@ public final class AiDataZone extends AiZone
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean equals(Object o)
@@ -840,6 +846,49 @@ public final class AiDataZone extends AiZone
 			result = this==o;
 		}
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SERIALIZABLE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Override of the {@code defaultWriteObject} method, allows writing the
+	 * static {@code AiTile.size} field.
+	 * 
+	 * @param oos
+	 * 		Previously opened object stream.
+	 * @throws IOException
+	 * 		Problem while writing in the stream.
+	 */
+	private void writeObject(ObjectOutputStream oos) throws IOException
+	{	// default serialization 
+		oos.defaultWriteObject();
+		
+		// write the tile size
+		double tileSize = AiTile.getSize();
+		oos.writeObject(tileSize);
+	}
+
+	/**
+	 * Override of the {@code defaultReadObject} method, allows reading the
+	 * static {@code AiTile.size} field.
+	 * 
+	 * @param ois
+	 * 		Previously opened object stream.
+	 * @throws ClassNotFoundException 
+	 * 		Problem while reading from the stream.
+	 * @throws IOException
+	 * 		Problem while reading from the stream.
+	 */
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException
+	{	// default deserialization
+		ois.defaultReadObject();
+
+		// read the tile size
+		double tileSize = (Double)ois.readObject();
+//		double tileSize = 53;
+		initTileSize(tileSize);
+		RoundVariables.scaledTileDimension = tileSize;
 	}
 	
 	/////////////////////////////////////////////////////////////////
