@@ -46,7 +46,6 @@ import org.totalboumboum.engine.content.sprite.fire.Fire;
 import org.totalboumboum.engine.content.sprite.floor.Floor;
 import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.content.sprite.item.Item;
-import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -69,7 +68,6 @@ final class AiDataTile extends AiTile
 	protected AiDataTile(Tile tile, AiDataZone zone)
 	{	this.zone = zone;
 		this.tile = tile;
-		AiTile.size = RoundVariables.scaledTileDimension;
 		
 		initTileLocation();
 		initPixelLocation();
