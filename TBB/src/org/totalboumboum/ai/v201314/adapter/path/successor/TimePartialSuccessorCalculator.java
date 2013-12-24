@@ -389,10 +389,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 				{	AiSearchNode prevNode = node.getParent();
 					if(prevNode!=null)
 					{	AiTile prevTile = prevNode.getLocation().getTile();
-//						Direction curDir = node.getDirection();
-						process = !(prevTile.equals(neighbor) && !prevTile.equals(tile) 
-//							&& curDir==Direction.NONE
-						);
+						process = !prevTile.equals(neighbor);
 					}
 				}
 				
