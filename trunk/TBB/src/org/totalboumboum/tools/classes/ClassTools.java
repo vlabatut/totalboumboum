@@ -41,20 +41,24 @@ import org.totalboumboum.engine.content.sprite.item.Item;
 import org.totalboumboum.tools.files.FileNames;
 
 /**
+ * Methods related to Java class management.
  * 
  * @author Vincent Labatut
- *
  */
 public class ClassTools
-{	
+{	/** Character used to separate class and package names */
 	public static final String CLASS_SEPARATOR = ".";
 
 	/**
-	 * Renvoie la liste des noms des classes situées dans un package dans un Jar. 
-	 * exemple : getClasseNamesInPackage("C:/j2sdk1.4.1_02/lib/mail.jar", "com.sun.mail.handlers");
-	 * @param jarName	chemin du Jar
-	 * @param packageName	nom complet du package
-	 * @return	liste des classes
+	 * Returns the list of the names of classes located in a package inside a JAR file.
+	 * For instance: {@code getClasseNamesInPackage("C:/j2sdk1.4.1_02/lib/mail.jar", "com.sun.mail.handlers");}.
+	 * 
+	 * @param jarName	
+	 * 		JAR file path.
+	 * @param packageName	
+	 * 		Package qualified name.
+	 * @return	
+	 * 		Array of classes.
 	 */
 	public static Class<?>[] getClassesInPackageJar(String jarName,String packageName)
 	{	List<Class<?>> classes = new ArrayList<Class<?>>();
@@ -71,6 +75,7 @@ public class ClassTools
 					classes.add(Class.forName(temp.substring(0, temp.length() - 6)));
 				}
 			}
+			jarFile.close();
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -81,9 +86,15 @@ public class ClassTools
 	}
 	
 	/**
-	 * Renvoie la liste des noms des classes situées dans un package (pas dans un Jar). 
-	 * @param packageName	nom complet du package
-	 * @return	liste des classes
+	 * Returns the list of the names of classes located in a package (not inside a JAR).
+	 * 
+	 * @param packageName	
+	 * 		Package qualified name.
+	 * @return	
+	 * 		Array of classes.
+	 * 
+	 * @throws ClassNotFoundException 
+	 * 		Problem while accessing the specified class.
 	 */
 	public static Class<?>[] getClassesInPackage(String packageName) throws ClassNotFoundException 
 	{	List<Class<?>> classes = new ArrayList<Class<?>>();
@@ -120,6 +131,20 @@ public class ClassTools
 		return classesA;
 	}
 	
+	/**
+	 * Returns the list of the names of classes located in a package implementing
+	 * the specified interface.
+	 * 
+	 * @param packageName	
+	 * 		Package qualified name.
+	 * @param inter
+	 * 		Interface the classes must implement.
+	 * @return	
+	 * 		Array of classes.
+	 * 
+	 * @throws ClassNotFoundException 
+	 * 		Problem while accessing the specified class.
+	 */
 	public static Class<?>[] getClassesInPackageImplementing(String packageName, Class<?> inter) throws ClassNotFoundException
 	{	List<Class<?>> classes = new ArrayList<Class<?>>();
 		Class<?>[] temp = getClassesInPackage(packageName);
@@ -133,6 +158,14 @@ public class ClassTools
 		return classesA;
 	}
 
+	/**
+	 * Returns the class corresponding to the specified sprite role.
+	 *  
+	 * @param name
+	 * 		Role name.
+	 * @return
+	 * 		Corresponding class.
+	 */
 	public static Class<?> getClassFromRole(String name)
 	{	Class<?> result = null;
 		if(name.equalsIgnoreCase("block"))
@@ -150,6 +183,21 @@ public class ClassTools
 		return result;
 	}
 	
+	/**
+	 * Returns the field associated to a specific value in the specified class.
+	 * 
+	 * @param value
+	 * 		Value of interest.
+	 * @param cls
+	 * 		Concerned class.
+	 * @return
+	 * 		Field with this value.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the class fields.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the class fields.
+	 */
 	public static Field getFieldFromValue(int value, Class<?> cls) throws IllegalArgumentException, IllegalAccessException
 	{	Field result = null;
 		Field[] fields = cls.getFields();
@@ -169,6 +217,12 @@ public class ClassTools
 		return result;
 	}
 
+	/**
+	 * Gets the root package of the game.
+	 * 
+	 * @return
+	 * 		Game main package (as a string).
+	 */
 	public static String getTbbPackage()
 	{	return FileNames.FILE_ORG + CLASS_SEPARATOR + FileNames.FILE_TOTALBOUMBOUM;		
 	}
