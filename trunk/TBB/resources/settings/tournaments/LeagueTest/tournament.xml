@@ -32,11 +32,11 @@
  	
 	<author value="Vincent Labatut" />
 
-	<league randomizePlayers="false" minimizeConfrontations="false" confrontationsOrder="HOMOGENEOUS" >
+	<league randomizePlayers="false" minimizeConfrontations="true" confrontationsOrder="NONE" >
 <!-- 		<points local="false" name="TournamentBasic" />  -->
 		<matches randomOrder="true">
-			<match local="true" name="matchA" />
-			<match local="true" name="matchB" />
+			<match local="true" name="match" />
+<!-- 			<match local="true" name="matchB" /> -->
 		</matches>
 	</league>		
 		
