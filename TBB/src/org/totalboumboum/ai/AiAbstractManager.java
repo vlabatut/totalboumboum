@@ -456,7 +456,7 @@ public abstract class AiAbstractManager<V, T extends Serializable>
 		InputStream is = new FileInputStream(file);
 		ObjectInputStream ois = new ObjectInputStream(is);
 		
-		// record meta data
+		// read meta data
 		Date time = (Date)ois.readObject();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS");
 		String timeStr = sdf.format(time);
@@ -474,7 +474,7 @@ public abstract class AiAbstractManager<V, T extends Serializable>
 		System.out.println("..Zone dimensions: "+height+"×"+width);
 		System.out.println("..Zone theme: "+instanceName+"/"+themeName);
 		
-		// record percepts
+		// read percepts
 		@SuppressWarnings("unchecked")
 		T result = (T)ois.readObject();
 		System.out.println("..Zone content: ");
