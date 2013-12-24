@@ -21,6 +21,9 @@ package org.totalboumboum.ai.v201314.adapter.model.full;
  * 
  */
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -1733,6 +1736,48 @@ public final class AiSimZone extends AiZone
 				sprite.setState(state);
 			}
 		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SERIALIZABLE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Override of the {@code defaultWriteObject} method, allows writing the
+	 * static {@code AiTile.size} field.
+	 * 
+	 * @param oos
+	 * 		Previously opened object stream.
+	 * @throws IOException
+	 * 		Problem while writing in the stream.
+	 */
+	private void writeObject(ObjectOutputStream oos) throws IOException
+	{	// default serialization 
+		oos.defaultWriteObject();
+		
+		// write the tile size
+		double tileSize = AiTile.getSize();
+		oos.writeObject(tileSize);
+	}
+
+	/**
+	 * Override of the {@code defaultReadObject} method, allows reading the
+	 * static {@code AiTile.size} field.
+	 * 
+	 * @param ois
+	 * 		Previously opened object stream.
+	 * @throws ClassNotFoundException 
+	 * 		Problem while reading from the stream.
+	 * @throws IOException
+	 * 		Problem while reading from the stream.
+	 */
+	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException
+	{	// default deserialization
+		ois.defaultReadObject();
+
+		// read the tile size
+		double tileSize = (Double)ois.readObject();
+		initTileSize(tileSize);
+		RoundVariables.scaledTileDimension = tileSize;
 	}
 	
 	/////////////////////////////////////////////////////////////////

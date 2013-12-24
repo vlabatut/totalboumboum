@@ -205,6 +205,16 @@ public abstract class AiZone implements Serializable
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
+	 * Initialise la taille des cases.
+	 * 
+	 * @param value 
+	 * 		Taille d'une case.
+	 */
+	protected void initTileSize(double value)
+	{	AiTile.size = value;
+	}
+	
+	/**
 	 * Renvoie toutes les cases de cette zone
 	 * sous forme d'une liste. Les cases y sont
 	 * placées ligne à ligne.
