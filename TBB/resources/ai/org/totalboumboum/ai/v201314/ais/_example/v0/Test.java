@@ -137,7 +137,7 @@ public class Test
 	{	agent.checkInterruption();	// pas nécessaire puisque c'est un test, mais si on n'exécute pas checkInterruption, le parser détecte un problème
 		
 		// il faut d'abord indiquer le nom du fichier ici
-		String fileName = "2013-11-18 22-59-28-991.data";
+		String fileName = "2013-12-24 18-12-39-396.data";
 		
 		// et ensuite, on peut charger son contenu
 		AiZone result = aiMain.readPercepts(fileName);
