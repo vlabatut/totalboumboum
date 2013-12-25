@@ -23,7 +23,7 @@ package org.totalboumboum.game.limit;
 
 import java.io.Serializable;
 
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
@@ -42,6 +42,6 @@ public interface Limit extends Serializable
 	// POINTS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public float[] processPoints(StatisticHolder holder);
-	public PointsProcessor getPointProcessor();
+	public AbstractPointsProcessor getPointProcessor();
 	
 }

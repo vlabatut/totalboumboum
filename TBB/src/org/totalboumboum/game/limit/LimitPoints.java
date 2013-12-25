@@ -21,7 +21,7 @@ package org.totalboumboum.game.limit;
  * 
  */
 
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
@@ -34,7 +34,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 {	private static final long serialVersionUID = 1L;
 
-	public LimitPoints(float threshold, Comparisons comparatorCode, PointsProcessor pointProcessor, PointsProcessor thresholdPointProcessor)
+	public LimitPoints(float threshold, Comparisons comparatorCode, AbstractPointsProcessor pointProcessor, AbstractPointsProcessor thresholdPointProcessor)
 	{	this.threshold = threshold;
 		this.comparatorCode = comparatorCode;
 		this.thresholdPointProcessor = thresholdPointProcessor;
@@ -44,12 +44,12 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// LIMITED VALUE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor thresholdPointProcessor;
+	private AbstractPointsProcessor thresholdPointProcessor;
 
-	public PointsProcessor getThresholdPointProcessor()
+	public AbstractPointsProcessor getThresholdPointProcessor()
 	{	return thresholdPointProcessor;
 	}
-	public void setThresholdPointProcessor(PointsProcessor thresholdPointProcessor)
+	public void setThresholdPointProcessor(AbstractPointsProcessor thresholdPointProcessor)
 	{	this.thresholdPointProcessor = thresholdPointProcessor;
 	}
 
@@ -118,13 +118,13 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
+	private AbstractPointsProcessor pointProcessor;
 	
-	public PointsProcessor getPointProcessor()
+	public AbstractPointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 
-	public void setPointProcessor(PointsProcessor pointProcessor)
+	public void setPointProcessor(AbstractPointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
 

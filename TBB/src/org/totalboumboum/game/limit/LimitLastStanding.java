@@ -23,7 +23,7 @@ package org.totalboumboum.game.limit;
 
 import java.util.List;
 
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
@@ -36,7 +36,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 public class LimitLastStanding implements RoundLimit
 {	private static final long serialVersionUID = 1L;
 
-	public LimitLastStanding(int threshold, Comparisons comparatorCode, PointsProcessor pointProcessor)
+	public LimitLastStanding(int threshold, Comparisons comparatorCode, AbstractPointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
@@ -96,13 +96,13 @@ public class LimitLastStanding implements RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
+	private AbstractPointsProcessor pointProcessor;
 	
-	public PointsProcessor getPointProcessor()
+	public AbstractPointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 
-	public void setPointProcessor(PointsProcessor pointProcessor)
+	public void setPointProcessor(AbstractPointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
 
