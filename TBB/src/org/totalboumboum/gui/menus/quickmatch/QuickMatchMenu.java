@@ -55,11 +55,11 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsConstant;
-import org.totalboumboum.game.points.PointsProcessor;
-import org.totalboumboum.game.points.PointsRankpoints;
-import org.totalboumboum.game.points.PointsScores;
-import org.totalboumboum.game.points.PointsTotal;
+import org.totalboumboum.game.points.PointsProcessorConstant;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
+import org.totalboumboum.game.points.PointsProcessorRankpoints;
+import org.totalboumboum.game.points.PointsProcessorScores;
+import org.totalboumboum.game.points.PointsProcessorTotal;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.TournamentType;
@@ -299,7 +299,7 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 		
 		// limits
 		{	Limits<MatchLimit> limits = new Limits<MatchLimit>();
-			PointsProcessor pointsProcessor = new PointsTotal();
+			AbstractPointsProcessor pointsProcessor = new PointsProcessorTotal();
 			// round limit
 			{	int roundsLimit = quickMatchConfiguration.getLimitRounds();
 				if(roundsLimit>0)
@@ -325,11 +325,11 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			float[] values = new float[pts.size()];
 			for(int i=0;i<values.length;i++)
 				values[i] = pts.get(i);
-			PointsProcessor source = new PointsScores(Score.TIME);
-			ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+			AbstractPointsProcessor source = new PointsProcessorScores(Score.TIME);
+			ArrayList<AbstractPointsProcessor> sources = new ArrayList<AbstractPointsProcessor>();
 			sources.add(source);
-			PointsProcessor normalPP = new PointsRankpoints(sources,values,false,share);
-			PointsProcessor drawPP = new PointsConstant(0);
+			AbstractPointsProcessor normalPP = new PointsProcessorRankpoints(sources,values,false,share);
+			AbstractPointsProcessor drawPP = new PointsProcessorConstant(0);
 			QuickMatchDraw draw = quickMatchConfiguration.getPointsDraw();
 			long time = quickMatchConfiguration.getLimitTime();
 			if(time>0)
