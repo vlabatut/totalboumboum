@@ -21,7 +21,7 @@ package org.totalboumboum.game.limit;
  * 
  */
 
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
@@ -39,7 +39,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 {	private static final long serialVersionUID = 1L;
 
-	public LimitTime(long threshold, Comparisons comparatorCode, PointsProcessor pointProcessor)
+	public LimitTime(long threshold, Comparisons comparatorCode, AbstractPointsProcessor pointProcessor)
 	{	this.threshold = threshold;	
 		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
@@ -94,13 +94,13 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
+	private AbstractPointsProcessor pointProcessor;
 	
-	public PointsProcessor getPointProcessor()
+	public AbstractPointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 
-	public void setPointProcessor(PointsProcessor pointProcessor)
+	public void setPointProcessor(AbstractPointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
 

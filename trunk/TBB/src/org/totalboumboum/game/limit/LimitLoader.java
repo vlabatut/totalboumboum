@@ -27,7 +27,7 @@ import java.util.Locale;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -44,7 +44,7 @@ public class LimitLoader
 	{	Limit result = null;
 		String type = root.getName();
 		Element pointProcessorElt = root.getChild(XmlNames.POINTS);
-		PointsProcessor pointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointProcessorElt,folder);
+		AbstractPointsProcessor pointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointProcessorElt,folder);
 
 		if(type.equals(XmlNames.CONFRONTATION))
 			result = loadLimitConfrontationElement(root,pointProcessor);
@@ -64,7 +64,7 @@ public class LimitLoader
 		return result;
 	}
 
-	private static LimitConfrontation loadLimitConfrontationElement(Element root, PointsProcessor pointProcessor)
+	private static LimitConfrontation loadLimitConfrontationElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
@@ -77,7 +77,7 @@ public class LimitLoader
 		return result;
 	}
 
-	private static LimitPoints loadLimitPointsElement(Element root, String folder, PointsProcessor pointProcessor) throws ParserConfigurationException, SAXException, IOException
+	private static LimitPoints loadLimitPointsElement(Element root, String folder, AbstractPointsProcessor pointProcessor) throws ParserConfigurationException, SAXException, IOException
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
@@ -87,13 +87,13 @@ public class LimitLoader
 		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// point processor
     	Element thresholdPointProcessorElt = root.getChild(XmlNames.SOURCE);
-		PointsProcessor thresholdPointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(thresholdPointProcessorElt,folder);
+		AbstractPointsProcessor thresholdPointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(thresholdPointProcessorElt,folder);
 		// result
 		LimitPoints result = new LimitPoints(threshold,comparatorCode,pointProcessor,thresholdPointProcessor);
 		return result;
 	}
 	
-	private static LimitScore loadLimitScoreElement(Element root, PointsProcessor pointProcessor)
+	private static LimitScore loadLimitScoreElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
@@ -109,7 +109,7 @@ public class LimitLoader
 		return result;
 	}
 
-	private static LimitTime loadLimitTimeElement(Element root, PointsProcessor pointProcessor)
+	private static LimitTime loadLimitTimeElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
@@ -122,7 +122,7 @@ public class LimitLoader
 		return result;
 	}
 
-	private static LimitLastStanding loadLimitLastStandingElement(Element root, PointsProcessor pointProcessor)
+	private static LimitLastStanding loadLimitLastStandingElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlNames.VALUE).getValue();
