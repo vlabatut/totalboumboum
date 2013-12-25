@@ -36,7 +36,7 @@ import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.RoundLimit;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.round.RoundLoader;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
@@ -230,7 +230,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
-		PointsProcessor pointsProcessor = null;
+		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);

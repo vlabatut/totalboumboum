@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.TournamentLimit;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentLoader;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
@@ -172,7 +172,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
-		PointsProcessor pointsProcessor = null;
+		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
