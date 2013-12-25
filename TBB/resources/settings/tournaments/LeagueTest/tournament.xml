@@ -22,7 +22,7 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
-	<general name="Tournoi simple de test"/>
+	<general name="Tournoi ligue de test"/>
 
  	<notes>
  		<line value="Tournoi de type championnat de test." />
@@ -32,11 +32,12 @@
  	
 	<author value="Vincent Labatut" />
 
-	<league randomizePlayers="false" minimizeConfrontations="true" confrontationsOrder="NONE" >
-<!-- 		<points local="false" name="TournamentBasic" />  -->
+	<league randomizePlayers="false" minimizeConfrontations="true" confrontationsOrder="UNCHANGED" >
+		<points local="true" name="points" />
+		
 		<matches randomOrder="true">
-			<match local="true" name="match" />
-<!-- 			<match local="true" name="matchB" /> -->
+			<match local="true" name="match1" />
+			<match local="true" name="match2" />
 		</matches>
 	</league>		
 		
