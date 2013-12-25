@@ -272,54 +272,64 @@ public class CombinatoricsTools
 	 * 		Matrix whose rows are combinations of k integer amongst [0,n-1].
 	 */
 	public static int[][] getCombinations(int k, int n)
-	{	// init
-		int size = (int)(getFactorial(n)/getFactorial(k)/getFactorial(n-k));
-		int result[][] = new int[size][k];
-
-		// max values
-		int maxVals[] = new int[k];
-		for(int d=0;d<k;d++)
-			maxVals[k-1-d] = n-1-d;
-		print("max values: ");
-		for(int d=0;d<k;d++)
-			print(" "+maxVals[d]);
-		println();
+	{	int result[][];
 		
-		// first combi
-		int c = 0;
-		for(int d=0;d<k;d++)
-			result[c][d] = d;
-		c++;
-
-		// processes combinations
-		do
-		{	// copy
+		if(k==n)
+		{	result = new int[1][k];
+			for(int i=0;i<k;i++)
+				result[0][i] = i;
+		}
+	
+		else
+		{	// init
+			int size = (int)(getFactorial(n)/getFactorial(k)/getFactorial(n-k));
+			result = new int[size][k];
+	
+			// max values
+			int maxVals[] = new int[k];
 			for(int d=0;d<k;d++)
-				result[c][d] = result[c-1][d];
-
-			// increments
-			boolean increment = true;
-			int d = k-1;
-			while(d<k)
-			{	if(increment)
-				{	if(result[c][d]==maxVals[d])
-					{	result[c][d] = 0;
-						d--;
+				maxVals[k-1-d] = n-1-d;
+			print("max values: ");
+			for(int d=0;d<k;d++)
+				print(" "+maxVals[d]);
+			println();
+			
+			// first combi
+			int c = 0;
+			for(int d=0;d<k;d++)
+				result[c][d] = d;
+			c++;
+	
+			// processes combinations
+			do
+			{	// copy
+				for(int d=0;d<k;d++)
+					result[c][d] = result[c-1][d];
+	
+				// increments
+				boolean increment = true;
+				int d = k-1;
+				while(d<k)
+				{	if(increment)
+					{	if(result[c][d]==maxVals[d])
+						{	result[c][d] = 0;
+							d--;
+						}
+						else
+						{	result[c][d] = result[c][d] + 1;
+							increment = false;
+							d++;
+						}
 					}
 					else
-					{	result[c][d] = result[c][d] + 1;
-						increment = false;
+					{	result[c][d] = result[c][d-1] + 1;
 						d++;
 					}
 				}
-				else
-				{	result[c][d] = result[c][d-1] + 1;
-					d++;
-				}
+				c++;
 			}
-			c++;
+			while(c<size);
 		}
-		while(c<size);
 		
 		return result;
 	}
