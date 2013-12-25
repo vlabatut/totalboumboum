@@ -1742,3 +1742,16 @@ public class Launcher
 //		des classes dédiées : DistanceTools, NeighborTools, etc. (?)
 // + certaines méthodes de recherche réutilisant l'arbre sont à renommer "restart" (au lieu de "start")
 // + carrément virer costCalculator (penser à màj la doc pr ne plus y en parler)
+
+/*
+ * TODO tournoi ligue
+ * 		+ afficher quelques infos dans la page principale de la gui (pas besoin de limite à proprement parler)
+ * 			+ split horizontal
+ * 			+ un côté général + un côté match courant (nombre et taille des confrontations)
+ * 		+ permettre de contraindre les nombres de joueurs dans matches et rounds (XML)
+ * 		+ permettre des nombres de confrontations différents en fonction du match (on recalcule à chaque fois, quoi)
+ * TODO tournoi coupe
+ * 		+ remplacer l'affichage des matchs, car déjà dispo dans partie résultats
+ * 		+ à la place, mettre des infos générales sur le tournoi
+ * 		+ >> p-ê un split horizontal plutot que vertical ?
+ */
