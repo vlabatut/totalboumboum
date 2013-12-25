@@ -28,10 +28,9 @@ import java.util.List;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
-
 /**
- * This PointsProcessor calculates some rankings in function of the results 
- * coming from the source PointsProcessor objects. The position of the source
+ * This {@code PointsProcessor} computes some rankings in function of the results 
+ * coming from the source {@code PointsProcessor} objects. The position of the source
  * in the list determines its priority while evaluating the rankings.
  * <br/>
  * For example, if the sources were {12,5,5} and {0,4,6} then the rankings would be {1,3,2} 
@@ -40,10 +39,19 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
  * 
  * @author Vincent Labatut
  */
-public class PointsRankings extends PointsProcessor implements PPFunction
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorRankings extends AbstractPointsProcessor implements InterfacePointsProcessorFunction
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsRankings(List<PointsProcessor> sources, boolean inverted)
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param sources
+	 * 		List of operands (other {@code PointsProcessor} objects).
+	 * @param inverted
+	 * 		Whether rankings should be considered in reverse order.
+	 */
+	public PointsProcessorRankings(List<AbstractPointsProcessor> sources, boolean inverted)
 	{	this.sources.addAll(sources);
 		this.inverted = inverted;
 	}
@@ -51,8 +59,15 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether rankings should be considered in reverse order */
 	private boolean inverted;
 	
+	/**
+	 * Indicates whether rankings should be considered in reverse order.
+	 * 
+	 * @return
+	 * 		{@code true} iff rankings should be considered in reverse order.
+	 */
 	public boolean isInverted()
 	{	return inverted;	
 	}
@@ -60,9 +75,16 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private List<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+	/** List of operands */
+	private List<AbstractPointsProcessor> sources = new ArrayList<AbstractPointsProcessor>();
 
-	public List<PointsProcessor> getSources()
+	/**
+	 * Returns the list of operands.
+	 * 
+	 * @return
+	 * 		List of {@code PointsProcessor} objects.
+	 */
+	public List<AbstractPointsProcessor> getSources()
 	{	return sources;		
 	}
 	
@@ -74,9 +96,9 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	{	// source
 		StatisticBase stats = holder.getStats();
 		List<float[]> values = new ArrayList<float[]>();
-		Iterator<PointsProcessor> it = sources.iterator();
+		Iterator<AbstractPointsProcessor> it = sources.iterator();
 		while (it.hasNext())
-		{	PointsProcessor source = it.next();
+		{	AbstractPointsProcessor source = it.next();
 			values.add(source.process(holder));
 		}
 		
@@ -102,7 +124,19 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 	
 	/**
 	 * Compares two players according to their points.
-	 * The various sources are considered according to their order in the list. 
+	 * The various sources are considered according to 
+	 * their order in the list.
+	 * 
+	 * @param i
+	 * 		Player i. 
+	 * @param j 
+	 * 		Player j.
+	 * @param values 
+	 * 		Values for all players.
+	 * @param inverted 
+	 * 		Whehter order should be inverted.
+	 * @return 
+	 * 		Result of the comparison.
 	 */
 	public int comparePoints(int i, int j, List<float[]> values, boolean inverted)
 	{	// inverted ?
@@ -139,9 +173,9 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 			result.append("<inverted> ; ");
 		// argument
 		result.append("<");
-		Iterator<PointsProcessor> i = sources.iterator();
+		Iterator<AbstractPointsProcessor> i = sources.iterator();
 		while (i.hasNext())
-		{	PointsProcessor temp = i.next();
+		{	AbstractPointsProcessor temp = i.next();
 			result.append(temp.toString());
 			result.append(";");
 		}

@@ -21,51 +21,59 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import java.util.List;
+import java.text.NumberFormat;
 
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor calculate the maximal value
- * in the results coming from source PointProcessor.
- * 
- * For example, if the source was {12,2,5} then the result would be {12,12,12} 
+ * This {@code PointsProcessor} always sends the same real value as a result.
+ * <br/>
+ * For example, if there was 5 players and the parameter was 7, 
+ * then the result would be {7,7,7}.
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsMaximum extends PointsProcessor implements PPFunction
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorConstant extends AbstractPointsProcessor implements InterfacePointsProcessorConstant
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsMaximum(PointsProcessor source)
-	{	this.source = source;
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param value
+	 * 		Constant value.
+	 */
+	public PointsProcessorConstant(float value)
+	{	this.value = value;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SOURCES			/////////////////////////////////////////////
+	// PARAMETER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor source;
-
+	/** Constant value */
+	private float value;
+	
+	/**
+	 * Returns the constant value associated to this {@code PointsProcessor}.
+	 * 
+	 * @return
+	 * 		Constant value.
+	 */
+	public float getValue()
+	{	return value;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public float[] process(StatisticHolder holder)
-	{	// init
-		StatisticBase stats = holder.getStats();
-		List<String> playersIds = stats.getPlayersIds();
-		float[] result = new float[playersIds.size()];
-		float[] temp = source.process(holder);
-		// process
-		float max = Float.MIN_VALUE;
-		for(int i=0;i<temp.length;i++)
-		{	if(temp[i]>max)
-				max = temp[i];
-		}
-		for(int i=0;i<result.length;i++)
-			result[i] = max;
-		//
+	{	StatisticBase stats = holder.getStats();
+		int nbr = stats.getPlayersIds().size();
+		float result[] = new float[nbr];
+		for(int i=0;i<nbr;i++)
+			result[i] = value;
 		return result;
 	}
 
@@ -76,12 +84,12 @@ public class PointsMaximum extends PointsProcessor implements PPFunction
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// function
-		result.append("Max");
-		// argument
-		result.append("(");
-		result.append(source.toString());
-		result.append(")");
+		// value
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+		String val = nf.format(value);
+		result.append(val);
 		// result
 		return result.toString();
 	}

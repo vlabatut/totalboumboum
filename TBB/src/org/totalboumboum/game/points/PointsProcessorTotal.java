@@ -21,53 +21,32 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import java.util.List;
-
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor calculates its result by summing all the 
- * the results coming from the source PointProcessor.
- * 
- * For example, for 5 players and a {1,3,4,0,3} points vector coming
- * from the source, the result would be {11,11,11,11,11}. 
+ * This {@code PointsProcessor} calculates its result by sending back 
+ * the total points for this tournament or match.
+ * <br/>
+ * For example, for a match in which 3 rounds have been played with
+ * {1,0,0,0}, {1,5,0,2} and {1,2,3,4} points, the result would be {3,7,3,6}. 
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsSummation extends PointsProcessor implements PPFunction
-{	private static final long serialVersionUID = 1L;
-
-	public PointsSummation(PointsProcessor source)
-	{	this.source = source;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// SOURCES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PointsProcessor source;
+public class PointsProcessorTotal extends AbstractPointsProcessor implements InterfacePointsProcessorConstant
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public float[] process(StatisticHolder holder)
-	{	// init
-		StatisticBase stats = holder.getStats();
-		List<String> playersIds = stats.getPlayersIds();
-		float[] result = new float[playersIds.size()];
-		float[] temp = source.process(holder);
-		// process
-		float sum = 0;
-		for(int i=0;i<temp.length;i++)
-			sum = sum + temp[i];
-		for(int i=0;i<result.length;i++)
-			result[i] = sum;
-		//
+	{	StatisticBase stats = holder.getStats();
+		float result[] = stats.getTotal();
 		return result;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -75,12 +54,8 @@ public class PointsSummation extends PointsProcessor implements PPFunction
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// function
-		result.append("Sum");
-		// argument
-		result.append("(");
-		result.append(source.toString());
-		result.append(")");
+		// value
+		result.append("Total");
 		// result
 		return result.toString();
 	}

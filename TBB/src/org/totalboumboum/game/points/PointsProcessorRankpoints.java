@@ -29,27 +29,41 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor process the rankings in function of  the results coming 
- * from the source PointProcessor, and then gives points according to this
- * ranking.
- * 
- * note: the same result can be obtained by combing a Rankings and a Discretize
- * PointsProcessor objects, but PointsRankpoints allows to specify a special
- * behaviour for draws (share points or not).
- * 
+ * This {@code PointsProcessor} computes the rankings in function of the results coming 
+ * from the source {@code PointProcessor}, and then gives points according to these rankings.
+ * <br/>
+ * Note: the same result can be obtained by combing a {@link PointsProcessorRankings} and a 
+ * {@link PointsProcessorDiscretize} objects, but {@code PointsRankpoints} allows to specify 
+ * an additional behaviour to handle draws (share points or not).
+ * <br/>
  * For example, if the source was {12,2,5} and we have the values :
- * 		- 10 pts for the first place
- * 		- 5 pts for the second place
- * then the result would be {10,0,5} 
+ * <ul>
+ * 		<li>10 pts for the first place</li>
+ * 		<li>5 pts for the second place</li>
+ * 		<li>(implicitly, 0 pt for the third place)</li>
+ * </ul>
+ * then the result would be {10,0,5}. 
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsRankpoints extends PointsProcessor implements PPFunction
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorRankpoints extends AbstractPointsProcessor implements InterfacePointsProcessorFunction
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsRankpoints(List<PointsProcessor> sources, float[] values, boolean inverted, boolean exaequoShare)
-	{	this.source = new PointsRankings(sources,inverted);
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param sources
+	 * 		List of operands (other {@code PointsProcessor} objects).
+	 * @param values
+	 * 		Values associated to the ranks.
+	 * @param inverted
+	 * 		Whether the ranks should be considered in the reverse order.
+	 * @param exaequoShare
+	 * 		Whether points should be shared in case of tie between players.
+	 */
+	public PointsProcessorRankpoints(List<AbstractPointsProcessor> sources, float[] values, boolean inverted, boolean exaequoShare)
+	{	this.source = new PointsProcessorRankings(sources,inverted);
 		this.values = values;
 		this.exaequoShare = exaequoShare;
 	}
@@ -57,12 +71,27 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Values associated to the ranks */
 	private float[] values;
+	/** Whether the points should be shared or not */
 	private boolean exaequoShare;
 
+	/**
+	 * Returns the values associated to the ranks.
+	 * 
+	 * @return
+	 * 		Array of floats associated to the ranks.
+	 */
 	public float[] getValues()
 	{	return values;	
 	}
+	
+	/**
+	 * Indicates if the points should be shared or not.
+	 * 
+	 * @return
+	 * 		{@code true} iff the points are shared in case of a tie.
+	 */
 	public boolean getExaequoShare()
 	{	return exaequoShare;	
 	}
@@ -70,9 +99,16 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsRankings source;
+	/** List of operands */
+	private PointsProcessorRankings source;
 	
-	public PointsRankings getSource()
+	/**
+	 * Returns the list of operands.
+	 * 
+	 * @return
+	 * 		List of {@code PointsProcessor} objects.
+	 */
+	public PointsProcessorRankings getSource()
 	{	return source;	
 	}
 	
@@ -159,9 +195,9 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 		result.append("> ; ");
 		// arguments
 		result.append("<");
-		Iterator<PointsProcessor> i = source.getSources().iterator();
+		Iterator<AbstractPointsProcessor> i = source.getSources().iterator();
 		while (i.hasNext())
-		{	PointsProcessor temp = i.next();
+		{	AbstractPointsProcessor temp = i.next();
 			result.append(temp.toString());
 			result.append(";");
 		}

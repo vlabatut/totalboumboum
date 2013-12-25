@@ -28,22 +28,32 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor discretizes the points definition set and associates 
+ * This {@code PointsProcessor} discretizes the points definition set and associates 
  * a given number points to every resulting interval. Points are calculated
- * form the PointsProcessor source according to the corresponding category.
- *  
- * for example, if the source was {3,12,0} and the parameters :
+ * form the {@code PointsProcessor} source according to the corresponding category.
+ *  <br/>
+ * For example, if the source was {3,12,0} and the parameters :
  * 		thresholds:     | 2 | 5 | 12 | 33 |
- * 		values:       | 1 | 2 | 4  |  6 | 10 |
- * the the result would be {2,4,0}
+ * 		values:       | 0 | 2 | 4  | 6 |  10 |
+ * the the result would be {2,4,0}.
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsDiscretize extends PointsProcessor implements PPFunction
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorDiscretize extends AbstractPointsProcessor implements InterfacePointsProcessorFunction
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsDiscretize(PointsProcessor source, float[] thresholds, float[] values)
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param source
+	 * 		Operand (another {@code PointsProcessor}).
+	 * @param thresholds
+	 * 		Discretization thresholds.
+	 * @param values
+	 * 		Values associated to the intervals defined by the thresholds.
+	 */
+	public PointsProcessorDiscretize(AbstractPointsProcessor source, float[] thresholds, float[] values)
 	{	this.source = source;
 		this.thresholds = thresholds;
 		this.values = values;
@@ -52,23 +62,46 @@ public class PointsDiscretize extends PointsProcessor implements PPFunction
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor source;
+	/** Unique operand */
+	private AbstractPointsProcessor source;
 	
-	public PointsProcessor getSource()
+	/**
+	 * Returns the unique operand.
+	 * 
+	 * @return
+	 * 		A {@code PointsProcessor} object.
+	 */
+	public AbstractPointsProcessor getSource()
 	{	return source;	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Thresholds used for the discretization */
 	private float[] thresholds;
+	/** Values associated to the intervals resulting from the discretization */
 	private float[] values;
 	
-	public float[] getValues()
-	{	return values;	
-	}
+	/**
+	 * Returns the thresholds used for the discretization.
+	 * 
+	 * @return
+	 * 		Array of floats used as thresholds.
+	 */
 	public float[] getThresholds()
 	{	return thresholds;	
+	}
+	
+	/**
+	 * Returns the Values associated to the intervals resulting 
+	 * from the discretization.
+	 * 
+	 * @return
+	 * 		Array of floats used as values.
+	 */
+	public float[] getValues()
+	{	return values;	
 	}
 	
 	/////////////////////////////////////////////////////////////////

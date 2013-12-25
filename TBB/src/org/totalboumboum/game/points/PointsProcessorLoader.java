@@ -40,15 +40,35 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Processes an XML element describing a {@code PointsProcessor} object,
+ * and returns it as a {@code PointsProcessor}. Can do the same thing from
+ * an XML file, too.
  * 
  * @author Vincent Labatut
- *
  */
 public class PointsProcessorLoader
 {
-
-    public static PointsProcessor loadPointProcessorFromElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
-	{	PointsProcessor result;
+	/**
+	 * Processes the specified XML element in order
+	 * to identify and instanciate the corresponding
+	 * {@code PointProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element describing the {@code PointsProcessor}.
+	 * @param folder
+	 * 		Folder containing the currently processed XML file.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while parsing the XML file.
+	 * @throws SAXException
+	 * 		Problem while parsing the XML file.
+	 * @throws IOException
+	 * 		Problem while parsing the XML file.
+	 */
+    public static AbstractPointsProcessor loadPointProcessorFromElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
+	{	AbstractPointsProcessor result;
 		// local
 		String localStr = root.getAttribute(XmlNames.LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
@@ -64,7 +84,24 @@ public class PointsProcessorLoader
 		return result;
 	}
 	
-	public static PointsProcessor loadPointProcessorFromFilePath(String folderPath) throws ParserConfigurationException, SAXException, IOException
+    /**
+     * Open an XML file describing a {@code PointsProcessor}
+     * and returns it. The file is located in a non-default
+     * folder.
+     * 
+     * @param folderPath
+     * 		XML file path.
+     * @return
+     * 		The {@code PointsProcessor} read.
+     * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while parsing the XML file.
+	 * @throws SAXException
+	 * 		Problem while parsing the XML file.
+	 * @throws IOException
+	 * 		Problem while parsing the XML file.
+     */
+	public static AbstractPointsProcessor loadPointProcessorFromFilePath(String folderPath) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = folderPath;
@@ -73,11 +110,28 @@ public class PointsProcessorLoader
 		dataFile = new File(individualFolder+FileNames.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_POINT+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		PointsProcessor result = loadPointProcessorElement(root);
+		AbstractPointsProcessor result = loadPointProcessorElement(root);
 		return result;
 	}
 
-	public static PointsProcessor loadPointProcessorFromName(String name) throws ParserConfigurationException, SAXException, IOException
+    /**
+     * Open an XML file describing a {@code PointsProcessor}
+     * and returns it. The file is located in the default
+     * {@code PointsProcessor} folder.
+     * 
+     * @param name
+     * 		XML file path.
+     * @return
+     * 		The {@code PointsProcessor} read.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while parsing the XML file.
+	 * @throws SAXException
+	 * 		Problem while parsing the XML file.
+	 * @throws IOException
+	 * 		Problem while parsing the XML file.
+	 */
+	public static AbstractPointsProcessor loadPointProcessorFromName(String name) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		String schemaFolder = FilePaths.getSchemasPath();
 		String individualFolder = FilePaths.getPointsPath();
@@ -86,14 +140,23 @@ public class PointsProcessorLoader
 		dataFile = new File(individualFolder+File.separator+name+FileNames.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_POINT+FileNames.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		PointsProcessor result = loadPointProcessorElement(root);
+		AbstractPointsProcessor result = loadPointProcessorElement(root);
 		return result;
 	}
 
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
     @SuppressWarnings("unchecked")
-	private static PointsProcessor loadPointProcessorElement(Element root)
+	private static AbstractPointsProcessor loadPointProcessorElement(Element root)
 	{	// init
-    	PointsProcessor result;
+    	AbstractPointsProcessor result;
     	Element element;
 		// point processor
     	List<Element> elts = root.getChildren(); 
@@ -107,8 +170,17 @@ public class PointsProcessorLoader
 		return result;
 	}		
 
-	public static PointsProcessor loadGeneralPointElement(Element root)
-	{	PointsProcessor result = null;
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	public static AbstractPointsProcessor loadGeneralPointElement(Element root)
+	{	AbstractPointsProcessor result = null;
 		String type = root.getName();
 
 		if(type.equals(XmlNames.TOTAL))
@@ -144,75 +216,152 @@ public class PointsProcessorLoader
 		return result;
 	}
 
-	private static PointsTotal loadTotalElement(Element root)
-	{	PointsTotal result = new PointsTotal();
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	private static PointsProcessorTotal loadTotalElement(Element root)
+	{	PointsProcessorTotal result = new PointsProcessorTotal();
 		return result;
 	}
 
-	private static PointsScores loadScoresElement(Element root)
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	private static PointsProcessorScores loadScoresElement(Element root)
 	{	// type
 		String str = root.getAttribute(XmlNames.TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
 		// result
-		PointsScores result = new PointsScores(score);
+		PointsProcessorScores result = new PointsProcessorScores(score);
 		return result;
 	}
-	private static PointsConstant loadConstantElement(Element root)
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	private static PointsProcessorConstant loadConstantElement(Element root)
 	{	// value
 		String str = root.getAttribute(XmlNames.VALUE).getValue();
 		float value = Float.valueOf(str);
 		// result
-		PointsConstant result = new PointsConstant(value);
+		PointsProcessorConstant result = new PointsProcessorConstant(value);
 		return result;
 	}
 	
-	private static PointsMaximum loadMaximumElement(Element root)
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	private static PointsProcessorMaximum loadMaximumElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointsProcessor source = loadGeneralPointElement(src);
+		AbstractPointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointsMaximum result = new PointsMaximum(source);
+		PointsProcessorMaximum result = new PointsProcessorMaximum(source);
 		return result;
 	}
-	private static PointsMinimum loadMinimumElement(Element root)
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	private static PointsProcessorMinimum loadMinimumElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointsProcessor source = loadGeneralPointElement(src);
+		AbstractPointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointsMinimum result = new PointsMinimum(source);
+		PointsProcessorMinimum result = new PointsProcessorMinimum(source);
 		return result;
 	}
-	private static PointsSummation loadSummationElement(Element root)
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
+	private static PointsProcessorSummation loadSummationElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointsProcessor source = loadGeneralPointElement(src);
+		AbstractPointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointsSummation result = new PointsSummation(source);
+		PointsProcessorSummation result = new PointsProcessorSummation(source);
 		return result;
 	}
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsRankings loadRankingsElement(Element root)
+	private static PointsProcessorRankings loadRankingsElement(Element root)
 	{	// invert
 		String str = root.getAttribute(XmlNames.INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
 		// sources
-		List<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+		List<AbstractPointsProcessor> sources = new ArrayList<AbstractPointsProcessor>();
 		List<Element> srcs = root.getChildren();
 		Iterator<Element> it = srcs.iterator();
 		while(it.hasNext())
 		{	Element src = it.next();
-			PointsProcessor source = loadGeneralPointElement(src);
+			AbstractPointsProcessor source = loadGeneralPointElement(src);
 			sources.add(source);
 		}
 		// result
-		PointsRankings result = new PointsRankings(sources,invert);
+		PointsProcessorRankings result = new PointsProcessorRankings(sources,invert);
 		return result;
 	}
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsDiscretize loadDiscretizeElement(Element root)
+	private static PointsProcessorDiscretize loadDiscretizeElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointsProcessor source = loadGeneralPointElement(src);
+		AbstractPointsProcessor source = loadGeneralPointElement(src);
 		// thresholds
 		Element thresholdsElt = root.getChild(XmlNames.THRESHOLDS);
 		List<Element> thresholds = thresholdsElt.getChildren(XmlNames.THRESHOLD);
@@ -234,11 +383,21 @@ public class PointsProcessorLoader
 			vals[i] = value;
 		}
 		// result
-		PointsDiscretize result = new PointsDiscretize(source,thresh,vals);
+		PointsProcessorDiscretize result = new PointsProcessorDiscretize(source,thresh,vals);
 		return result;
 	}
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsRankpoints loadRankpointsElement(Element root)
+	private static PointsProcessorRankpoints loadRankpointsElement(Element root)
 	{	// share
 		String str = root.getAttribute(XmlNames.EXAEQUO_SHARE).getValue();
 		boolean exaequoShare = Boolean.valueOf(str);
@@ -247,12 +406,12 @@ public class PointsProcessorLoader
 		boolean invert = Boolean.valueOf(str);
 		// sources
 		Element rankingsElt = root.getChild(XmlNames.RANKINGS);
-		List<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+		List<AbstractPointsProcessor> sources = new ArrayList<AbstractPointsProcessor>();
 		List<Element> srcs = rankingsElt.getChildren();
 		Iterator<Element> it = srcs.iterator();
 		while(it.hasNext())
 		{	Element src = it.next();
-			PointsProcessor source = loadGeneralPointElement(src);
+			AbstractPointsProcessor source = loadGeneralPointElement(src);
 			sources.add(source);
 		}
 		// values
@@ -266,60 +425,99 @@ public class PointsProcessorLoader
 			vals[i] = value;
 		}
 		// result
-		PointsRankpoints result = new PointsRankpoints(sources,vals,invert,exaequoShare);
+		PointsProcessorRankpoints result = new PointsProcessorRankpoints(sources,vals,invert,exaequoShare);
 		return result;
 	}
 	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsAddition loadAdditionElement(Element root)
+	private static PointsProcessorAddition loadAdditionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
+		AbstractPointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
+		AbstractPointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointsAddition result = new PointsAddition(leftSource,rightSource);
+		PointsProcessorAddition result = new PointsProcessorAddition(leftSource,rightSource);
 		return result;
 	}
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsSubstraction loadSubtractionElement(Element root)
+	private static PointsProcessorSubstraction loadSubtractionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
+		AbstractPointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
+		AbstractPointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointsSubstraction result = new PointsSubstraction(leftSource,rightSource);
+		PointsProcessorSubstraction result = new PointsProcessorSubstraction(leftSource,rightSource);
 		return result;
 	}
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsMultiplication loadMultiplicationElement(Element root)
+	private static PointsProcessorMultiplication loadMultiplicationElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
+		AbstractPointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
+		AbstractPointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointsMultiplication result = new PointsMultiplication(leftSource,rightSource);
+		PointsProcessorMultiplication result = new PointsProcessorMultiplication(leftSource,rightSource);
 		return result;
 	}
+	
+	/**
+	 * Processes the specified element in order to extract
+	 * a {@code PointsProcessor} object.
+	 * 
+	 * @param root
+	 * 		XML element to process.
+	 * @return
+	 * 		Resulting {@code PointsProcessor} object.
+	 */
 	@SuppressWarnings("unchecked")
-	private static PointsDivision loadDivisionElement(Element root)
+	private static PointsProcessorDivision loadDivisionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
+		AbstractPointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
+		AbstractPointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointsDivision result = new PointsDivision(leftSource,rightSource);
+		PointsProcessorDivision result = new PointsProcessorDivision(leftSource,rightSource);
 		return result;
 	}
 }
