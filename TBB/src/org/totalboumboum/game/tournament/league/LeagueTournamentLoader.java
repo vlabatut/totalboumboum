@@ -29,6 +29,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
+import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.game.tournament.TournamentLoader;
 import org.totalboumboum.game.tournament.league.LeagueTournament.ConfrontationOrder;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -81,11 +83,13 @@ public class LeagueTournamentLoader
     	result.setConfrontationOrder(confrontationOrder);
     	
     	
-/*		// point processor
-    	Element pointsProcessorElt = root.getChild(XmlTools.POINTS);
-		PointsProcessor pointsProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointsProcessorElt,folder);
-		result.setPointsProcessor(pointsProcessor);
-*/		
+		// point processor
+    	Element pointsProcessorElt = root.getChild(XmlNames.POINTS);
+    	if(pointsProcessorElt!=null)
+		{	AbstractPointsProcessor pointsProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointsProcessorElt,folder);
+			result.setPointsProcessor(pointsProcessor);
+		}
+    	
 		// matches
 		element = root.getChild(XmlNames.MATCHES);
 		loadMatchesElement(element,folder,result);

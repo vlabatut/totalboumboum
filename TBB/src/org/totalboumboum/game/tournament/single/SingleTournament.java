@@ -40,8 +40,8 @@ import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsProcessor;
-import org.totalboumboum.game.points.PointsTotal;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
+import org.totalboumboum.game.points.PointsProcessorTotal;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.rank.Ranks;
@@ -116,7 +116,7 @@ public class SingleTournament extends AbstractTournament
 			match.setNotes(notes);
 		}
 		{	// limits
-			PointsProcessor pointProcessor = new PointsTotal();
+			AbstractPointsProcessor pointProcessor = new PointsProcessorTotal();
 			Limits<MatchLimit> limits = new Limits<MatchLimit>();
 			MatchLimit limit = new LimitConfrontation(1,Comparisons.GREATEREQ,pointProcessor);
 			limits.addLimit(limit);
