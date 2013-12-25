@@ -34,7 +34,7 @@ import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.match.MatchLoader;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
@@ -189,7 +189,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
-		PointsProcessor pointsProcessor = null;
+		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
