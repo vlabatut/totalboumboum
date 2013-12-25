@@ -27,18 +27,27 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor adds the results coming from two other PointProcessor objects.
- * 
+ * This {@code PointsProcessor} divides the results coming from 
+ * two other {@code PointProcessor} objects.
+ * <br/>
  * For example, if the sources were {12,2,5} and {3,2,1}
- * then the result would be {15,4,6} 
+ * then the result would be {4,1,5}.
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsAddition extends PointsProcessor implements PPSecondaryOperator
-{	private static final long serialVersionUID = 1L;
-
-	public PointsAddition(PointsProcessor leftSource, PointsProcessor rightSource)
+public class PointsProcessorDivision extends AbstractPointsProcessor implements InterfacePointsProcessorPrimaryOperator
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param leftSource
+	 * 		Left operand (another {@code PointsProcessor}).
+	 * @param rightSource
+	 * 		Right operand (another {@code PointsProcessor}).
+	 */
+	public PointsProcessorDivision(AbstractPointsProcessor leftSource, AbstractPointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;
 	}
@@ -46,9 +55,11 @@ public class PointsAddition extends PointsProcessor implements PPSecondaryOperat
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor leftSource;
-	private PointsProcessor rightSource;
-	
+	/** Left operand */
+	private AbstractPointsProcessor leftSource;
+	/** Right operand */
+	private AbstractPointsProcessor rightSource;
+
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -62,7 +73,11 @@ public class PointsAddition extends PointsProcessor implements PPSecondaryOperat
 		float[] rightTemp = rightSource.process(holder);
 		// process
 		for(int i=0;i<result.length;i++)
-			result[i] = leftTemp[i] + rightTemp[i];
+		{	if(rightTemp[i]==0) //division by zero
+				result[i] = Float.MAX_VALUE;
+			else
+				result[i] = leftTemp[i] * rightTemp[i];
+		}
 		//
 		return result;
 	}
@@ -75,11 +90,26 @@ public class PointsAddition extends PointsProcessor implements PPSecondaryOperat
 	{	// init
 		StringBuffer result = new StringBuffer();
 		// left operand
-		result.append(leftSource.toString());
+		if(leftSource instanceof InterfacePointsProcessorConstant
+			|| leftSource instanceof InterfacePointsProcessorPrimaryOperator
+			|| leftSource instanceof InterfacePointsProcessorFunction)
+			result.append(leftSource.toString());
+		else
+		{	result.append("(");
+			result.append(leftSource.toString());
+			result.append(")");
+		}
 		// operator
-		result.append(new Character('\u002B').toString());
+		result.append(new Character('\u002F').toString());
 		// right operand
-		result.append(rightSource.toString());
+		if(rightSource instanceof InterfacePointsProcessorConstant
+			|| rightSource instanceof InterfacePointsProcessorFunction)
+			result.append(rightSource.toString());
+		else
+		{	result.append("(");
+			result.append(rightSource.toString());
+			result.append(")");
+		}
 		// result
 		return result.toString();
 	}

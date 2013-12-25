@@ -28,23 +28,50 @@ import java.util.List;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
+ * Class used to process points at the end of a confrontation
+ * (round, match, tournament). {@code PointsProcessor} objects 
+ * can be combined to obtain complex processing.
  * 
  * @author Vincent Labatut
- *
  */
-public abstract class PointsProcessor implements Serializable
-{	private static final long serialVersionUID = 1L;
+public abstract class AbstractPointsProcessor implements Serializable
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Process the points using the process implemented by
+	 * this processor object, using the specified
+	 * statistcs holder.
+	 * 
+	 * @param holder
+	 * 		Data source for the processing.
+	 * @return
+	 * 		Resulting array of points.
+	 */
 	public abstract float[] process(StatisticHolder holder);
 	
 	/////////////////////////////////////////////////////////////////
 	// NOTES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Textual description of the processor */
 	private final List<String> notes = new ArrayList<String>();
 
+	/**
+	 * Changes the textual description of the processor.
+	 * 
+	 * @param notes
+	 * 		New textual description of the processor.
+	 */
 	public void setNotes(List<String> notes)
 	{	this.notes.addAll(notes);
 	}
+	
+	/**
+	 * Returns the textual description of the processor.
+	 * 
+	 * @return
+	 * 		Textual description of the processor.
+	 */
 	public List<String> getNotes()
 	{	return notes;
 	}

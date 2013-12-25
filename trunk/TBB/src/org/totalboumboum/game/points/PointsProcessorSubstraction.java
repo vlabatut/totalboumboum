@@ -27,18 +27,26 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor divides the results coming from two other PointProcessor objects.
- * 
- * For example, if the sources were {12,2,5} and {3,2,1}
- * then the result would be {4,1,5} 
+ * This {@code PointsProcessor} substracts the results coming 
+ * from two other {@code PointProcessor} objects.
+ * <br/>
+ * For example, for {1,5,0,1} and {1,2,1,0} the result would be {0,3,-1,1}
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorSubstraction extends AbstractPointsProcessor implements InterfacePointsProcessorSecondaryOperator
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsDivision(PointsProcessor leftSource, PointsProcessor rightSource)
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param leftSource
+	 * 		Left operand (another {@code PointsProcessor}).
+	 * @param rightSource
+	 * 		Right operand (another {@code PointsProcessor}).
+	 */
+	public PointsProcessorSubstraction(AbstractPointsProcessor leftSource, AbstractPointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;
 	}
@@ -46,8 +54,10 @@ public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor leftSource;
-	private PointsProcessor rightSource;
+	/** Left operand */
+	private AbstractPointsProcessor leftSource;
+	/** Right operand */
+	private AbstractPointsProcessor rightSource;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
@@ -62,11 +72,7 @@ public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 		float[] rightTemp = rightSource.process(holder);
 		// process
 		for(int i=0;i<result.length;i++)
-		{	if(rightTemp[i]==0) //division by zero
-				result[i] = Float.MAX_VALUE;
-			else
-				result[i] = leftTemp[i] * rightTemp[i];
-		}
+			result[i] = leftTemp[i] - rightTemp[i];
 		//
 		return result;
 	}
@@ -79,20 +85,13 @@ public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 	{	// init
 		StringBuffer result = new StringBuffer();
 		// left operand
-		if(leftSource instanceof PPConstant
-			|| leftSource instanceof PPPrimaryOperator
-			|| leftSource instanceof PPFunction)
-			result.append(leftSource.toString());
-		else
-		{	result.append("(");
-			result.append(leftSource.toString());
-			result.append(")");
-		}
+		result.append(leftSource.toString());
 		// operator
-		result.append(new Character('\u002F').toString());
+		result.append(new Character('\u2212').toString());
 		// right operand
-		if(rightSource instanceof PPConstant
-			|| rightSource instanceof PPFunction)
+		if(rightSource instanceof InterfacePointsProcessorConstant
+			|| rightSource instanceof InterfacePointsProcessorPrimaryOperator
+			|| rightSource instanceof InterfacePointsProcessorFunction)
 			result.append(rightSource.toString());
 		else
 		{	result.append("(");

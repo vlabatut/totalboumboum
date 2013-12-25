@@ -27,26 +27,32 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor substracts the results coming from two other PointProcessor objects.
- * 
- * For example, for {1,5,0,1} and {1,2,1,0} the result would be {0,3,-1,1}
+ * This {@code PointsProcessor} calculate the maximal value
+ * in the results coming from source {@code PointsProcessor}.
+ * <br/>
+ * For example, if the source was {12,2,5} then the result would be {12,12,12}.
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsSubstraction extends PointsProcessor implements PPSecondaryOperator
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorMaximum extends AbstractPointsProcessor implements InterfacePointsProcessorFunction
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsSubstraction(PointsProcessor leftSource, PointsProcessor rightSource)
-	{	this.leftSource = leftSource;
-		this.rightSource = rightSource;
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param source
+	 * 		Operand (another {@code PointsProcessor}).
+	 */
+	public PointsProcessorMaximum(AbstractPointsProcessor source)
+	{	this.source = source;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor leftSource;
-	private PointsProcessor rightSource;
+	/** Unique operand */
+	private AbstractPointsProcessor source;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
@@ -57,15 +63,19 @@ public class PointsSubstraction extends PointsProcessor implements PPSecondaryOp
 		StatisticBase stats = holder.getStats();
 		List<String> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
-		float[] leftTemp = leftSource.process(holder);
-		float[] rightTemp = rightSource.process(holder);
+		float[] temp = source.process(holder);
 		// process
+		float max = Float.MIN_VALUE;
+		for(int i=0;i<temp.length;i++)
+		{	if(temp[i]>max)
+				max = temp[i];
+		}
 		for(int i=0;i<result.length;i++)
-			result[i] = leftTemp[i] - rightTemp[i];
+			result[i] = max;
 		//
 		return result;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -73,20 +83,12 @@ public class PointsSubstraction extends PointsProcessor implements PPSecondaryOp
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// left operand
-		result.append(leftSource.toString());
-		// operator
-		result.append(new Character('\u2212').toString());
-		// right operand
-		if(rightSource instanceof PPConstant
-			|| rightSource instanceof PPPrimaryOperator
-			|| rightSource instanceof PPFunction)
-			result.append(rightSource.toString());
-		else
-		{	result.append("(");
-			result.append(rightSource.toString());
-			result.append(")");
-		}
+		// function
+		result.append("Max");
+		// argument
+		result.append("(");
+		result.append(source.toString());
+		result.append(")");
 		// result
 		return result.toString();
 	}

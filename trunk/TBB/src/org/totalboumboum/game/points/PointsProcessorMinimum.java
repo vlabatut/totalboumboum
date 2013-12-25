@@ -21,47 +21,58 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import java.text.NumberFormat;
+import java.util.List;
 
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
-
 /**
- * This PointsProcessor always send the same real value as a result
- * 
- * For example, if there was 5 players and the parameter was 7 
- * then the result would be {7,7,7} 
+ * This {@code PointsProcessor} calculate the minimal value
+ * in the results coming from source {@code PointsProcessor}.
+ * <br/>
+ * For example, if the source was {12,2,5} then the result would be {2,2,2}.
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsConstant extends PointsProcessor implements PPConstant
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorMinimum extends AbstractPointsProcessor implements InterfacePointsProcessorFunction
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsConstant(float value)
-	{	this.value = value;	
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param source
+	 * 		Operand (another {@code PointsProcessor}).
+	 */
+	public PointsProcessorMinimum(AbstractPointsProcessor source)
+	{	this.source = source;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PARAMETER		/////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private float value;
-	
-	public float getValue()
-	{	return value;	
-	}
+	/** Unique operand */
+	private AbstractPointsProcessor source;
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public float[] process(StatisticHolder holder)
-	{	StatisticBase stats = holder.getStats();
-		int nbr = stats.getPlayersIds().size();
-		float result[] = new float[nbr];
-		for(int i=0;i<nbr;i++)
-			result[i] = value;
+	{	// init
+		StatisticBase stats = holder.getStats();
+		List<String> playersIds = stats.getPlayersIds();
+		float[] result = new float[playersIds.size()];
+		float[] temp = source.process(holder);
+		// process
+		float min = Float.MAX_VALUE;
+		for(int i=0;i<temp.length;i++)
+		{	if(temp[i]<min)
+				min = temp[i];
+		}
+		for(int i=0;i<result.length;i++)
+			result[i] = min;
+		//
 		return result;
 	}
 
@@ -72,12 +83,12 @@ public class PointsConstant extends PointsProcessor implements PPConstant
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// value
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(2);
-		nf.setMinimumFractionDigits(2);
-		String val = nf.format(value);
-		result.append(val);
+		// function
+		result.append("Min");
+		// argument
+		result.append("(");
+		result.append(source.toString());
+		result.append(")");
 		// result
 		return result.toString();
 	}

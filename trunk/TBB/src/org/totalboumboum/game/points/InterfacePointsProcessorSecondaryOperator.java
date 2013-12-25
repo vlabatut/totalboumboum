@@ -22,11 +22,12 @@ package org.totalboumboum.game.points;
  */
 
 /**
+ * This interface is implemented by {@code PointProcessor} classes
+ * which have a lower priority than the {@link InterfacePointsProcessorPrimaryOperator} objects.
  * 
  * @author Vincent Labatut
- *
  */
-public interface PPFunction
+public interface InterfacePointsProcessorSecondaryOperator
 {
-
+	//
 }

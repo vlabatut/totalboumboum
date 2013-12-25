@@ -22,11 +22,11 @@ package org.totalboumboum.game.points;
  */
 
 /**
+ * Implemented by constant {@code PointProcessor} objects.
  * 
  * @author Vincent Labatut
- *
  */
-public interface PPSecondaryOperator
+public interface InterfacePointsProcessorConstant
 {
-
+	//
 }

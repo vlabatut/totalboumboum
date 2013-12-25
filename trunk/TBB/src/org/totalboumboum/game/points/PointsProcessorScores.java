@@ -21,52 +21,62 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import java.util.List;
-
+import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor multiplies the results coming from two other PointProcessor objects.
- * 
- * For example, if the sources were {1,2,3} and {4,5,6}
- * then the result would be {4,10,18} 
+ * This {@code PointsProcessor} sends back one score as a result.
+ * <br/>
+ * For example, if the first player had picked 15 items, the second none and 
+ * the third 7, and if the items scores were processed, then the result would 
+ * be {15,0,7} 
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsMultiplication extends PointsProcessor implements PPPrimaryOperator
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorScores extends AbstractPointsProcessor implements InterfacePointsProcessorConstant
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsMultiplication(PointsProcessor leftSource, PointsProcessor rightSource)
-	{	this.leftSource = leftSource;
-		this.rightSource = rightSource;
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param score
+	 * 		Score from which the values are used by this {@code PointsProcessor}.
+	 */
+	public PointsProcessorScores(Score score)
+	{	this.score = score;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SOURCES			/////////////////////////////////////////////
+	// PARAMETERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor leftSource;
-	private PointsProcessor rightSource;
+	/** Score concerned by this processor */
+	private Score score;
+	
+	/**
+	 * Returns the {@link Score} concerned by this processor.
+	 * 
+	 * @return
+	 * 		Score type concerned by this processor.
+	 */
+	public Score getScore()
+	{	return score;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public float[] process(StatisticHolder holder)
-	{	// init
-		StatisticBase stats = holder.getStats();
-		List<String> playersIds = stats.getPlayersIds();
-		float[] result = new float[playersIds.size()];
-		float[] leftTemp = leftSource.process(holder);
-		float[] rightTemp = rightSource.process(holder);
-		// process
+	{	StatisticBase stats = holder.getStats();
+		long[] temp = stats.getScores(score);
+		float result[] = new float[stats.getPlayersIds().size()];
 		for(int i=0;i<result.length;i++)
-			result[i] = leftTemp[i] * rightTemp[i];
-		//
+			result[i] = temp[i];
 		return result;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -74,28 +84,8 @@ public class PointsMultiplication extends PointsProcessor implements PPPrimaryOp
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// left operand
-		if(leftSource instanceof PPConstant
-			|| leftSource instanceof PPPrimaryOperator
-			|| leftSource instanceof PPFunction)
-			result.append(leftSource.toString());
-		else
-		{	result.append("(");
-			result.append(leftSource.toString());
-			result.append(")");
-		}
-		// operator
-		result.append(new Character('\u00D7').toString());
-		// right operand
-		if(rightSource instanceof PPConstant
-			|| rightSource instanceof PPPrimaryOperator
-			|| rightSource instanceof PPFunction)
-			result.append(rightSource.toString());
-		else
-		{	result.append("(");
-			result.append(rightSource.toString());
-			result.append(")");
-		}
+		// value
+		result.append(score.stringFormat());
 		// result
 		return result.toString();
 	}

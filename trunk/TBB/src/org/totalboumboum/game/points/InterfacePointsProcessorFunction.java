@@ -22,11 +22,11 @@ package org.totalboumboum.game.points;
  */
 
 /**
+ * {@code PointProcessor} object to be used as a function.
  * 
  * @author Vincent Labatut
- *
  */
-public interface PPPrimaryOperator
+public interface InterfacePointsProcessorFunction
 {
-
+	//
 }

@@ -27,25 +27,38 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor calculate the minimal value
- * in the results coming from source PointProcessor.
- * 
- * For example, if the source was {12,2,5} then the result would be {2,2,2} 
+ * This {@code PointsProcessor} adds the results coming 
+ * from two other {@code PointProcessor} objects.
+ * <br/>
+ * For example, if the sources were {12,2,5} and {3,2,1}
+ * then the result would be {15,4,6} 
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsMinimum extends PointsProcessor implements PPFunction
-{	private static final long serialVersionUID = 1L;
-
-	public PointsMinimum(PointsProcessor source)
-	{	this.source = source;
+public class PointsProcessorAddition extends AbstractPointsProcessor implements InterfacePointsProcessorSecondaryOperator
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param leftSource
+	 * 		Left operand (another {@code PointsProcessor}).
+	 * @param rightSource
+	 * 		Right operand (another {@code PointsProcessor}).
+	 */
+	public PointsProcessorAddition(AbstractPointsProcessor leftSource, AbstractPointsProcessor rightSource)
+	{	this.leftSource = leftSource;
+		this.rightSource = rightSource;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor source;
+	/** Left operand */
+	private AbstractPointsProcessor leftSource;
+	/** Right operand */
+	private AbstractPointsProcessor rightSource;
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
@@ -56,19 +69,15 @@ public class PointsMinimum extends PointsProcessor implements PPFunction
 		StatisticBase stats = holder.getStats();
 		List<String> playersIds = stats.getPlayersIds();
 		float[] result = new float[playersIds.size()];
-		float[] temp = source.process(holder);
+		float[] leftTemp = leftSource.process(holder);
+		float[] rightTemp = rightSource.process(holder);
 		// process
-		float min = Float.MAX_VALUE;
-		for(int i=0;i<temp.length;i++)
-		{	if(temp[i]<min)
-				min = temp[i];
-		}
 		for(int i=0;i<result.length;i++)
-			result[i] = min;
+			result[i] = leftTemp[i] + rightTemp[i];
 		//
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -76,12 +85,12 @@ public class PointsMinimum extends PointsProcessor implements PPFunction
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// function
-		result.append("Min");
-		// argument
-		result.append("(");
-		result.append(source.toString());
-		result.append(")");
+		// left operand
+		result.append(leftSource.toString());
+		// operator
+		result.append(new Character('\u002B').toString());
+		// right operand
+		result.append(rightSource.toString());
 		// result
 		return result.toString();
 	}

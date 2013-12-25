@@ -21,48 +21,60 @@ package org.totalboumboum.game.points;
  * 
  */
 
-import org.totalboumboum.statistics.detailed.Score;
+import java.util.List;
+
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * This PointsProcessor sends back one score as a result
- * 
- * For example, if the first player had picked 15 items, the second none and 
- * the third 7, and if the items score wass processed, then result would be {15,0,7} 
+ * This {@code PointsProcessor} calculates its result by summing all the 
+ * the results coming from the source {@code PointProcessor}.
+ * <br/>
+ * For example, for 5 players and a {1,3,4,0,3} points vector coming
+ * from the source, the result would be {11,11,11,11,11}. 
  * 
  * @author Vincent Labatut
- *
  */
-public class PointsScores extends PointsProcessor implements PPConstant
-{	private static final long serialVersionUID = 1L;
+public class PointsProcessorSummation extends AbstractPointsProcessor implements InterfacePointsProcessorFunction
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
-	public PointsScores(Score score)
-	{	this.score = score;	
+	/**
+	 * Builds a new {@code PointsProcessor}.
+	 * 
+	 * @param source
+	 * 		Operand (another {@code PointsProcessor}).
+	 */
+	public PointsProcessorSummation(AbstractPointsProcessor source)
+	{	this.source = source;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PARAMETERS		/////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Score score;
-	
-	public Score getScore()
-	{	return score;	
-	}
-	
+	/** Unique operand */
+	private AbstractPointsProcessor source;
+
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public float[] process(StatisticHolder holder)
-	{	StatisticBase stats = holder.getStats();
-		long[] temp = stats.getScores(score);
-		float result[] = new float[stats.getPlayersIds().size()];
+	{	// init
+		StatisticBase stats = holder.getStats();
+		List<String> playersIds = stats.getPlayersIds();
+		float[] result = new float[playersIds.size()];
+		float[] temp = source.process(holder);
+		// process
+		float sum = 0;
+		for(int i=0;i<temp.length;i++)
+			sum = sum + temp[i];
 		for(int i=0;i<result.length;i++)
-			result[i] = temp[i];
+			result[i] = sum;
+		//
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -70,8 +82,12 @@ public class PointsScores extends PointsProcessor implements PPConstant
 	public String toString()
 	{	// init
 		StringBuffer result = new StringBuffer();
-		// value
-		result.append(score.stringFormat());
+		// function
+		result.append("Sum");
+		// argument
+		result.append("(");
+		result.append(source.toString());
+		result.append(")");
 		// result
 		return result.toString();
 	}
