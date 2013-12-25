@@ -81,7 +81,7 @@
 <!-- LEAGUE -->
 	<xsd:simpleType name="tConfrontationsOrder">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="UNCHANGED" />
 			<xsd:enumeration value="RANDOM" />
 			<xsd:enumeration value="HOMOGENEOUS" />
 			<xsd:enumeration value="HETEROGENEOUS" />
@@ -90,7 +90,7 @@
 
 	<xsd:complexType name="tLeague">
 		<xsd:sequence>
-<!-- 			<xsd:element name="points" type="tPointProcessor" />  -->
+			<xsd:element name="points" type="tPointProcessor" />
 			<xsd:element name="matches" type="tMatches" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />

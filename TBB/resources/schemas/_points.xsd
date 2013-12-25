@@ -131,21 +131,34 @@
 	
 	<xsd:group name="gPoints">
 		<xsd:choice>
+			<!--  Total points for a given set of rounds or matches -->
 			<xsd:element name="total" type="tPointsTotal" />
 		
+			<!-- Values for a given score (kills, killed, bombs dropped, etc.) -->
 			<xsd:element name="scores" type="tPointsScores" />
+			<!-- Just a constant value (repeated as many times as players) -->
 			<xsd:element name="constant" type="tPointsConstant" />
 
+			<!-- Take the maximal value over all players (repeated as many times as players) -->
 			<xsd:element name="maximum" type="tPointsMaximum" />
+			<!-- Take the minimal value over all players (repeated as many times as players) -->
 			<xsd:element name="minimum" type="tPointsMinimum" />
+			<!-- Sums the values over all players (repeated as many times as players) -->
 			<xsd:element name="summation" type="tPointsSummation" />
+			<!-- Replace values by their rankings -->
 			<xsd:element name="rankings" type="tPointsRankings" />
+			<!-- Discretizes values and replace by predefined intervall-specific values -->
 			<xsd:element name="discretize" type="tPointsDiscretize" />
+			<!-- Computes rankings from values, and replace rankings by new values -->
 			<xsd:element name="rankpoints" type="tPointsRankpoints" />
 
+			<!-- Adds two vectors of values (value by value) -->
 			<xsd:element name="addition" type="tPointsAddition" />
+			<!-- Substract two vectors of values (value by value) -->
 			<xsd:element name="subtraction" type="tPointsSubtraction" />
+			<!-- Multiplies two vectors of values (value by value) -->
 			<xsd:element name="multiplication" type="tPointsMultiplication" />
+			<!-- Divides two vectors of values (value by value) -->
 			<xsd:element name="division" type="tPointsDivision" />
 		</xsd:choice>
 	</xsd:group>
