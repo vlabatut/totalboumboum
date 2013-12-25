@@ -21,8 +21,8 @@
 -->
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
-		<levels randomOrder="true" />
-		<players randomLocation="true" />
+		<levels randomOrder="false" />
+		<players randomLocation="false" />
 		<limits points="0" rounds="16" time="0" />
 		<points share="true" draw="NONE">
 			<value rank="1" points="8" />
@@ -34,11 +34,12 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="1" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="11626f33-86fe-4408-ac80-96cc025aa25b" color="YELLOW" controls="2" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="11626f33-86fe-4408-ac80-96cc025aa25b" color="YELLOW" controls="1" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="2" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="46af46f8-eee5-44a1-9b1d-857a8654bba2" color="PINK" controls="3" spritePack="superbomberman4" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="tournament201314" folder="croix" allowedPlayers="2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201314" folder="averses" allowedPlayers="2 3 4 5 6" />
 	</levels>
 </gameQuickmatch>
 
