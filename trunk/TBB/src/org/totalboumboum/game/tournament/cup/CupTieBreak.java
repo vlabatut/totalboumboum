@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsRankings;
+import org.totalboumboum.game.points.PointsProcessorRankings;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 
@@ -130,7 +130,7 @@ public class CupTieBreak implements Serializable
 	// RANKINGS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Points processor used to break the tie */
-	private PointsRankings pointsRankings;
+	private PointsProcessorRankings pointsRankings;
 	
 	/**
 	 * Changes the points processor used to break the tie.
@@ -138,7 +138,7 @@ public class CupTieBreak implements Serializable
 	 * @param rankings
 	 * 		New points processor used to break the tie
 	 */
-	public void setPointsRankings(PointsRankings rankings)
+	public void setPointsRankings(PointsProcessorRankings rankings)
 	{	this.pointsRankings = rankings;
 	}	
 	
@@ -148,7 +148,7 @@ public class CupTieBreak implements Serializable
 	 * @return
 	 * 		Points processor used to break the tie.
 	 */
-	public PointsRankings getPointsRankings()
+	public PointsProcessorRankings getPointsRankings()
 	{	return pointsRankings;
 	}
 	

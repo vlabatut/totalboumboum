@@ -31,9 +31,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
-import org.totalboumboum.game.points.PointsRankings;
+import org.totalboumboum.game.points.PointsProcessorRankings;
 import org.totalboumboum.game.tournament.TournamentLoader;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
@@ -246,9 +246,9 @@ public class CupTournamentLoader
 		
 		// tie break
 		Element rankingsElt = root.getChild(XmlNames.RANKINGS);
-		PointsRankings rankings = new PointsRankings(new ArrayList<PointsProcessor>(),false);
+		PointsProcessorRankings rankings = new PointsProcessorRankings(new ArrayList<AbstractPointsProcessor>(),false);
 		if(rankingsElt!=null)
-			rankings = (PointsRankings)PointsProcessorLoader.loadGeneralPointElement(rankingsElt);
+			rankings = (PointsProcessorRankings)PointsProcessorLoader.loadGeneralPointElement(rankingsElt);
 		result.setPointsRankings(rankings);
 		
 		return result;

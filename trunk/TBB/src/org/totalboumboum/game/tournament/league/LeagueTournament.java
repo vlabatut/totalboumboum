@@ -35,7 +35,7 @@ import java.util.TreeSet;
 import org.jdom.Element;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.match.Match;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
@@ -56,6 +56,24 @@ import org.xml.sax.SAXException;
  * all players must play against each other at
  * some point, possibly several times. It is
  * based on the league model used in most sports.
+ * <br/>
+ * One or several matches can be associated to the tournament,
+ * and the number of times the same match is played depends
+ * on both the total number of players involved in the tournament
+ * and the numbers of players the match can handle. Once all
+ * players have meet each other on one match, the process is
+ * performed again on the next match. This is repeated again
+ * all matches have been played.
+ * <br/>
+ * Concerning the number of confrontations, i.e. the number of
+ * times the same match is repeated, it can be either the total
+ * number of possible combinations of k (players in on match)
+ * amongst n (total number of players for the whole tournament).
+ * Sometimes, it is possible to use less than all these combinations,
+ * though. For example, if we consider n=6 and k=3 (6 players in
+ * the tournament, 3 in each match), then the number of combinations
+ * is 20, but we can have all players play against all others in
+ * only 10 confrontations.
  * 
  * @author Vincent Labatut
  */
@@ -99,21 +117,26 @@ public class LeagueTournament extends AbstractTournament
 	@Override
 	public void progress()
 	{	if(!isOver())
-		{	// confrontations
-			Set<Integer> players = confrontations.get(matchCount);
-			matchCount++;
+		{	// get players for next match
+			Set<Integer> players = confrontations.get(confCount);
 			List<Profile> prof = new ArrayList<Profile>();
 			for(Integer idx: players)
 			{	Profile profile = profiles.get(idx);
 				prof.add(profile);
 			}
 			
-			// match
+			// set up next match
 			Match match = matches.get(currentIndex);
-			currentIndex++;
 			currentMatch = match.copy();
 			currentMatch.init(prof);
 			playedMatches.add(currentMatch);
+			
+			// update match/conf counts
+			confCount++;
+			if(confCount==confrontations.size())
+			{	confCount = 0;
+				currentIndex++;
+			}
 		}
 	}
 
@@ -123,15 +146,8 @@ public class LeagueTournament extends AbstractTournament
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		
-		// iterator
-		if(currentIndex>=matches.size())
-		{	if(randomizeMatches)
-				randomizeMatches();
-			currentIndex = 0;
-		}
-		
 		// limits
-		if(matchCount==confrontations.size()-1)
+		if(currentIndex>=matches.size())
 		{	float[] points;
 			if(pointsProcessor!=null)
 				points = pointsProcessor.process(this);
@@ -167,7 +183,7 @@ public class LeagueTournament extends AbstractTournament
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Used to process points for this tournament */
-	private PointsProcessor pointsProcessor;
+	private AbstractPointsProcessor pointsProcessor;
 		
 	/**
 	 * Returns the point processor of this tournament.
@@ -175,17 +191,19 @@ public class LeagueTournament extends AbstractTournament
 	 * @return
 	 * 		Point processor of this tournament.
 	 */
-	public PointsProcessor getPointsProcessor()
+	public AbstractPointsProcessor getPointsProcessor()
 	{	return pointsProcessor;
 	}
 
 	/**
 	 * Changes the point processor of this tournament.
+	 * By default, we just sum the points scored over
+	 * all matches, so some ties can appear in the end. 
 	 * 
 	 * @param pointsProcessor
 	 * 		New point processor of this tournament.
 	 */
-	public void setPointsProcessor(PointsProcessor pointsProcessor)
+	public void setPointsProcessor(AbstractPointsProcessor pointsProcessor)
 	{	this.pointsProcessor = pointsProcessor;
 	}
 
@@ -369,8 +387,8 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	/** Prototype matches for this tournament */ 
 	private List<Match> matches = new ArrayList<Match>();
-	/** Number of match played until now */
-	private int matchCount;
+	/** Number of confrontations played for the current match */
+	private int confCount;
 
 	/**
 	 * Initializes the matches of this tournament.
@@ -425,7 +443,7 @@ public class LeagueTournament extends AbstractTournament
 			homogenizeConfrontations();
 		else if(confrontationOrder==ConfrontationOrder.HETEROGENEOUS)
 			heterogenizeConfrontations();
-		matchCount = 0;
+		confCount = 0;
 	}
 
 	/**
@@ -526,7 +544,7 @@ public class LeagueTournament extends AbstractTournament
 	 */
 	public enum ConfrontationOrder
 	{	/** Keeps the order as defined by the designer */
-		AS_IS,
+		UNCHANGED,
 		/** Randomizes the order */
 		RANDOM,
 		/** (Tries to) distribute confrontations homogeneously over matches */
@@ -538,7 +556,7 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map of preprocessed confrontation (too long to process on demand) */
+	/** Map of preprocessed confrontations (takes too long to process on demand) */
 	private Map<Integer,Map<Integer,List<Set<Integer>>>> confrontationMaps = null;
 	
 	/**
@@ -551,7 +569,9 @@ public class LeagueTournament extends AbstractTournament
 	 */
 	private void loadConfrontationMaps() throws SAXException, IOException
 	{	if(confrontationMaps==null)
-		{	// open files
+		{	confrontationMaps = new HashMap<Integer, Map<Integer,List<Set<Integer>>>>();
+			
+			// open files
 			String individualFolder = FilePaths.getMiscPath();
 			File dataFile = new File(individualFolder+File.separator+FileNames.FILE_COMBIS+FileNames.EXTENSION_XML);
 			String schemaFolder = FilePaths.getSchemasPath();
@@ -587,7 +607,7 @@ public class LeagueTournament extends AbstractTournament
 	}
 	
 	/**
-	 * Processes the xml content of the confrontation maps file.
+	 * Processes the XML content of the confrontation maps file.
 	 * 
 	 * @param root
 	 * 		Root of the XML document.
