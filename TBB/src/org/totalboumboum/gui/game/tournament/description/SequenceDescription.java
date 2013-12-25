@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 
 import org.totalboumboum.game.limit.Limit;
 import org.totalboumboum.game.limit.TournamentLimit;
-import org.totalboumboum.game.points.PointsProcessor;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
@@ -162,7 +162,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	@Override
 	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
-		PointsProcessor pointsProcessor = null;
+		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
