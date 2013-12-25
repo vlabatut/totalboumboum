@@ -28,13 +28,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.totalboumboum.game.points.PointsConstant;
-import org.totalboumboum.game.points.PointsDiscretize;
-import org.totalboumboum.game.points.PointsProcessor;
-import org.totalboumboum.game.points.PointsRankings;
-import org.totalboumboum.game.points.PointsRankpoints;
-import org.totalboumboum.game.points.PointsScores;
-import org.totalboumboum.game.points.PointsTotal;
+import org.totalboumboum.game.points.PointsProcessorConstant;
+import org.totalboumboum.game.points.PointsProcessorDiscretize;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
+import org.totalboumboum.game.points.PointsProcessorRankings;
+import org.totalboumboum.game.points.PointsProcessorRankpoints;
+import org.totalboumboum.game.points.PointsProcessorScores;
+import org.totalboumboum.game.points.PointsProcessorTotal;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -73,13 +73,13 @@ public class PointsSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// POINTS PROCESSOR	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointsProcessor;
+	private AbstractPointsProcessor pointsProcessor;
 
-	public PointsProcessor getPointsProcessor()
+	public AbstractPointsProcessor getPointsProcessor()
 	{	return pointsProcessor;	
 	}
 	
-	public void setPointsProcessor(PointsProcessor pointsProcessor)
+	public void setPointsProcessor(AbstractPointsProcessor pointsProcessor)
 	{	this.pointsProcessor = pointsProcessor;
 		// init data
 		ArrayList<List<Object>> data = new ArrayList<List<Object>>();
@@ -163,35 +163,35 @@ public class PointsSubPanel extends TableSubPanel
 //		repaint();
 	}
 	
-	private void makePointsProcessorPanel(PointsProcessor pp, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsProcessorPanel(AbstractPointsProcessor pp, List<List<Object>> data, List<List<String>> tooltips)
 	{	// rankpoints
-		if(pp instanceof PointsRankpoints)
-		{	PointsRankpoints pr = (PointsRankpoints) pp;
+		if(pp instanceof PointsProcessorRankpoints)
+		{	PointsProcessorRankpoints pr = (PointsProcessorRankpoints) pp;
 			makePointsRankpointsPanel(pr,data,tooltips);
 		}
 		// discretize
-		else if(pp instanceof PointsDiscretize)
-		{	PointsDiscretize pd = (PointsDiscretize) pp;
+		else if(pp instanceof PointsProcessorDiscretize)
+		{	PointsProcessorDiscretize pd = (PointsProcessorDiscretize) pp;
 			makePointsDiscretizePanel(pd,data,tooltips);
 		}
 		// rankings
-		else if(pp instanceof PointsRankings)
-		{	PointsRankings pr = (PointsRankings) pp;
+		else if(pp instanceof PointsProcessorRankings)
+		{	PointsProcessorRankings pr = (PointsProcessorRankings) pp;
 			makePointsRankingsPanel(pr,data,tooltips);
 		}
 		// constant
-		else if(pp instanceof PointsConstant)
-		{	PointsConstant pc = (PointsConstant) pp;
+		else if(pp instanceof PointsProcessorConstant)
+		{	PointsProcessorConstant pc = (PointsProcessorConstant) pp;
 			makePointsConstantPanel(pc,data,tooltips);
 		}
 		// total
-		else if(pp instanceof PointsTotal)
-		{	PointsTotal pt = (PointsTotal) pp;
+		else if(pp instanceof PointsProcessorTotal)
+		{	PointsProcessorTotal pt = (PointsProcessorTotal) pp;
 			makePointsTotalPanel(pt,data,tooltips);
 		}
 		// scores
-		else if(pp instanceof PointsScores)
-		{	PointsScores ps = (PointsScores) pp;
+		else if(pp instanceof PointsProcessorScores)
+		{	PointsProcessorScores ps = (PointsProcessorScores) pp;
 			makePointsScoresPanel(ps,data,tooltips);
 		}
 		// others
@@ -213,7 +213,7 @@ public class PointsSubPanel extends TableSubPanel
 		}
 	}
 	
-	private void makePointsRankpointsPanel(PointsRankpoints pr, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsRankpointsPanel(PointsProcessorRankpoints pr, List<List<Object>> data, List<List<String>> tooltips)
 	{	// format
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -239,11 +239,11 @@ public class PointsSubPanel extends TableSubPanel
 			tt.add(tooltip);
 		}
 		// source
-		{	PointsRankings prk = pr.getSource();
-		List<PointsProcessor> sources = prk.getSources();
-			Iterator<PointsProcessor> i = sources.iterator();
+		{	PointsProcessorRankings prk = pr.getSource();
+		List<AbstractPointsProcessor> sources = prk.getSources();
+			Iterator<AbstractPointsProcessor> i = sources.iterator();
 			while(i.hasNext())
-			{	PointsProcessor source = i.next();
+			{	AbstractPointsProcessor source = i.next();
 				makePointsProcessorPanel(source,data,tooltips);
 			}
 		}
@@ -265,7 +265,7 @@ public class PointsSubPanel extends TableSubPanel
 		}		
 	}
 
-	private void makePointsDiscretizePanel(PointsDiscretize pd, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsDiscretizePanel(PointsProcessorDiscretize pd, List<List<Object>> data, List<List<String>> tooltips)
 	{	// format
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -286,7 +286,7 @@ public class PointsSubPanel extends TableSubPanel
 			tt.add(tooltip);				
 		}
 		// source
-		{	PointsProcessor source = pd.getSource();
+		{	AbstractPointsProcessor source = pd.getSource();
 			makePointsProcessorPanel(source,data,tooltips);
 		}
 		// values & thresholds
@@ -313,7 +313,7 @@ public class PointsSubPanel extends TableSubPanel
 		}
 	}
 
-	private void makePointsRankingsPanel(PointsRankings pr, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsRankingsPanel(PointsProcessorRankings pr, List<List<Object>> data, List<List<String>> tooltips)
 	{	// this PP
 		{	boolean inverted = pr.isInverted();
 			List<Object> dt = new ArrayList<Object>();
@@ -334,16 +334,16 @@ public class PointsSubPanel extends TableSubPanel
 			tt.add(tooltip);
 		}
 		// sources
-		{	List<PointsProcessor> sources = pr.getSources();
-			Iterator<PointsProcessor> i = sources.iterator();
+		{	List<AbstractPointsProcessor> sources = pr.getSources();
+			Iterator<AbstractPointsProcessor> i = sources.iterator();
 			while(i.hasNext())
-			{	PointsProcessor source = i.next();
+			{	AbstractPointsProcessor source = i.next();
 				makePointsProcessorPanel(source,data,tooltips);
 			}
 		}
 	}
 
-	private void makePointsConstantPanel(PointsConstant pc, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsConstantPanel(PointsProcessorConstant pc, List<List<Object>> data, List<List<String>> tooltips)
 	{	// format
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -364,7 +364,7 @@ public class PointsSubPanel extends TableSubPanel
 		tt.add(text);
 	}
 
-	private void makePointsTotalPanel(PointsTotal pt, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsTotalPanel(PointsProcessorTotal pt, List<List<Object>> data, List<List<String>> tooltips)
 	{	List<Object> dt = new ArrayList<Object>();
 		List<String> tt = new ArrayList<String>();
 		data.add(dt);
@@ -379,7 +379,7 @@ public class PointsSubPanel extends TableSubPanel
 		tt.add(tooltip);
 	}
 
-	private void makePointsScoresPanel(PointsScores ps, List<List<Object>> data, List<List<String>> tooltips)
+	private void makePointsScoresPanel(PointsProcessorScores ps, List<List<Object>> data, List<List<String>> tooltips)
 	{	Score score = ps.getScore();
 		List<Object> dt = new ArrayList<Object>();
 		List<String> tt = new ArrayList<String>();
