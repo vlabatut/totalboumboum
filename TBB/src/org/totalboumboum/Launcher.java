@@ -1754,4 +1754,5 @@ public class Launcher
  * 		+ remplacer l'affichage des matchs, car déjà dispo dans partie résultats
  * 		+ à la place, mettre des infos générales sur le tournoi
  * 		+ >> p-ê un split horizontal plutot que vertical ?
+ * TODO FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
  */
