@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2013 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<general name="Tournoi de Galatasaray VII"/>
+
+ 	<notes>
+ 		<line value="7ème tournoi d'évaluation pour le projet d'IA de la GSÜ." />
+ 		<line value="Date: 26-12-2013" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<cup sortPlayers="SEEDS" >
+		<leg number="0" randomizeParts="false" >
+			<part name="Quart-de-finale 1" number="0">
+				<match local="true" name="leg1" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="1"/>
+					<player part="-1" rank="2"/>
+					<player part="-1" rank="3"/>
+				</players>
+			</part>
+			<part name="Quart-de-finale 2" number="1">
+				<match local="true" name="leg1" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="4"/>
+					<player part="-1" rank="5"/>
+					<player part="-1" rank="6"/>
+				</players>
+			</part>
+			<part name="Quart-de-finale 3" number="2">
+				<match local="true" name="leg1" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="7"/>
+					<player part="-1" rank="8"/>
+					<player part="-1" rank="9"/>
+				</players>
+			</part>
+			<part name="Quart-de-finale 4" number="3">
+				<match local="true" name="leg1" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="-1" rank="10"/>
+					<player part="-1" rank="11"/>
+					<player part="-1" rank="12"/>
+				</players>
+			</part>
+		</leg>
+
+		<leg number="1" >
+			<part name="Classement" number="0"  rank="3">
+				<match local="true" name="leg2" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="0" rank="3"/>
+					<player part="1" rank="3"/>
+					<player part="2" rank="3"/>
+					<player part="3" rank="3"/>
+				</players>
+			</part>
+			<part name="Demi-finale 1" number="1">
+				<match local="true" name="leg2" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="0" rank="1"/>
+					<player part="2" rank="1"/>
+					<player part="1" rank="2"/>
+					<player part="3" rank="2"/>
+				</players>
+			</part>
+			<part name="Demi-finale 2" number="2">
+				<match local="true" name="leg2" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="1" rank="1"/>
+					<player part="3" rank="1"/>
+					<player part="0" rank="2"/>
+					<player part="2" rank="2"/>
+				</players>
+			</part>
+		</leg>
+
+		<leg number="2" >
+			<part name="Petite finale" number="0" rank="2">
+				<match local="true" name="leg3" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="1" rank="3"/>
+					<player part="2" rank="3"/>
+					<player part="1" rank="4"/>
+					<player part="2" rank="4"/>
+				</players>
+			</part>
+			<part name="Finale" number="1" rank="1">
+				<match local="true" name="leg3" />
+				<tieBreak>
+					<rankings>
+						<scores type="BOMBINGS"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="1" rank="1"/>
+					<player part="2" rank="1"/>
+					<player part="1" rank="2"/>
+					<player part="2" rank="2"/>
+				</players>
+			</part>
+		</leg>
+		
+	</cup>		
+		
+</tournament>
