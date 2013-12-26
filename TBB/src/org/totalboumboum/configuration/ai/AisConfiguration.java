@@ -182,6 +182,8 @@ public class AisConfiguration
 	public enum TournamentAutoAdvance
 	{	/** Priority to players with less confrontations */
 		CONFRONTATIONS,
+		/** Keeps on using the currently selected players */
+		CONSTANT,
 		/** Priority to players of a specified pack */
 		PACK,
 		/** Players are picked randomly */
