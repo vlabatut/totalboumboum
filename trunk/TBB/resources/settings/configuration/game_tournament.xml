@@ -22,8 +22,8 @@
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
 	<tournament name="Trnmt201314_0.qualif" />
 	<players>
-		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="GREY" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
-		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="ed343446-7b2a-4ce3-a391-5e79cbb638ea" color="ORANGE" controls="2" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="1" spritePack="superbomberman3" spriteFolder="shirobon" />
 	</players>
 	<autoAdvance index="4" />
 </gameTournament>
