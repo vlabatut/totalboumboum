@@ -20,10 +20,10 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Qualification du tournoi 2013/14" type="SINGLE" />
-	<played matches="1" rounds="16" />
-	<dates start="2013-12-26T13:25:50" save="2013-12-26T13:34:55" />
+	<played matches="0" rounds="6" />
+	<dates start="2013-12-26T18:11:04" save="2013-12-26T18:15:53" />
 	<players>
-		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
+		<player name="1314.Güneş+Sağlam+Turgut" />
 		<player name="Simplet" />
 	</players>
 </archive>

@@ -36,6 +36,7 @@
 	<xsd:simpleType name="tTournamentAutoAdvanceMode">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="CONFRONTATIONS" />
+			<xsd:enumeration value="CONSTANT" />
 			<xsd:enumeration value="PACK" />
 			<xsd:enumeration value="RANDOM" />
 			<xsd:enumeration value="RANKS" />
