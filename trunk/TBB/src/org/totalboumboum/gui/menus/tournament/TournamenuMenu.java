@@ -37,7 +37,9 @@ import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.configuration.ai.AisConfiguration.AutoAdvance;
+import org.totalboumboum.configuration.ai.AisConfiguration.TournamentAutoAdvance;
 import org.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import org.totalboumboum.configuration.game.tournament.TournamentConfigurationSaver;
 import org.totalboumboum.configuration.profiles.ProfilesConfiguration;
@@ -325,11 +327,13 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
-		{	// set payers panel
+		{	// set players panel
 			playersData.setTournamentConfiguration(tournamentConfiguration);
 			setButtonsPlayers();
 			refresh();
-			if(Configuration.getAisConfiguration().getAutoAdvance()==AutoAdvance.TOURNAMENT)
+			AisConfiguration aisConfiguration = Configuration.getAisConfiguration();
+			if(aisConfiguration.getAutoAdvance()==AutoAdvance.TOURNAMENT
+				&& aisConfiguration.getTournamentAutoAdvanceMode()!=TournamentAutoAdvance.CONSTANT)
 			{	playersData.autoSelectPlayers();
 				refreshButtons();
 			}
