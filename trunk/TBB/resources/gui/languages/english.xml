@@ -166,6 +166,7 @@
 					<group name="TournamentAutoAdvanceMode">
 						<text name="Title" value="Tournament AA Mode" tooltip="Mode used when tournament auto-advance is selected" />
 						<text name="Confrontations" value="Rounds" tooltip="Priority to agents having played less rounds than others" />
+						<text name="Constant" value="Constant" tooltip="Keep the currently selected agents" />
 						<text name="Pack" value="Pack" tooltip="Priority to agents from the pack specified below" />
 						<text name="Random" value="Random" tooltip="All players are randomly selected" />
 						<text name="Ranks" value="Ranks" tooltip="Iteratively selects players with close Glicko-2 rankings" />
