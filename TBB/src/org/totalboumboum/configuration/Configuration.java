@@ -52,15 +52,35 @@ import org.totalboumboum.configuration.video.VideoConfigurationSaver;
 import org.xml.sax.SAXException;
 
 /**
+ * This class gives access to all configuration-related objects.
  * 
  * @author Vincent Labatut
- *
  */
 public class Configuration
 {	
 	/////////////////////////////////////////////////////////////////
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Loads all configuration-related objects from XML files.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws SAXException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws IOException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws SecurityException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading one of the configuration objects.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading one of the configuration objects.
+	 */
 	public static void loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	controlsConfiguration = ControlsConfigurationLoader.loadControlsConfiguration();
 		engineConfiguration = EngineConfigurationLoader.loadEngineConfiguration();
@@ -72,6 +92,24 @@ public class Configuration
 		connectionsConfiguration = ConnectionsConfigurationLoader.loadConnectionsConfiguration();
 	}
 	
+	/**
+	 * Records all configuration-related objects in XML files.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws SecurityException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws SAXException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws IOException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing one of the XML configuration files.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing one of the XML configuration files.
+	 */
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
 		EngineConfigurationSaver.saveEngineConfiguration(engineConfiguration);
@@ -86,11 +124,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Game engine-related settings */
 	private static EngineConfiguration engineConfiguration;
 
+	/**
+	 * Changes the engine-related settings.
+	 * 
+	 * @param engineConfiguration
+	 * 		New engine-related settings.
+	 */
 	public static void setEngineConfiguration(EngineConfiguration engineConfiguration)
 	{	Configuration.engineConfiguration = engineConfiguration;
 	}
+	
+	/**
+	 * Returns the engine-related settings.
+	 * 
+	 * @return
+	 * 		Current engine-related settings.
+	 */
 	public static EngineConfiguration getEngineConfiguration()
 	{	return engineConfiguration;
 	}
@@ -98,11 +150,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// VIDEO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Video-related settings */
 	private static VideoConfiguration videoConfiguration;
 
+	/**
+	 * Changes the video-related settings.
+	 * 
+	 * @param videoConfiguration
+	 * 		New video-related settings.
+	 */
 	public static void setVideoConfiguration(VideoConfiguration videoConfiguration)
 	{	Configuration.videoConfiguration = videoConfiguration;
 	}
+	
+	/**
+	 * Returns the vide-related settings.
+	 * 
+	 * @return
+	 * 		Current vide-related settings.
+	 */
 	public static VideoConfiguration getVideoConfiguration()
 	{	return videoConfiguration;
 	}
@@ -110,11 +176,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Controls-related settings */
 	private static ControlsConfiguration controlsConfiguration;
 
+	/**
+	 * Changes the controls-related settings.
+	 * 
+	 * @param controlsConfiguration
+	 * 		New controls-related settings.
+	 */
 	public static void setControlsConfiguration(ControlsConfiguration controlsConfiguration)
 	{	Configuration.controlsConfiguration = controlsConfiguration;
 	}
+	
+	/**
+	 * Returns the controls-related settings.
+	 * 
+	 * @return
+	 * 		Current controls-related settings.
+	 */
 	public static ControlsConfiguration getControlsConfiguration()
 	{	return controlsConfiguration;
 	}
@@ -122,11 +202,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// GAME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Game-related settings */
 	private static GameConfiguration gameConfiguration;
 
+	/**
+	 * Changes the game-related settings.
+	 * 
+	 * @param gameConfiguration
+	 * 		New game-related settings.
+	 */
 	public static void setGameConfiguration(GameConfiguration gameConfiguration)
 	{	Configuration.gameConfiguration = gameConfiguration;
 	}
+	
+	/**
+	 * Returns the game-related settings.
+	 * 
+	 * @return
+	 * 		Current game-related settings.
+	 */
 	public static GameConfiguration getGameConfiguration()
 	{	return gameConfiguration;
 	}
@@ -134,11 +228,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Profiles-related settings */
 	private static ProfilesConfiguration profilesConfiguration;
 
+	/**
+	 * Changes the profiles-related settings.
+	 * 
+	 * @param profilesConfiguration
+	 * 		New profiles-related settings.
+	 */
 	public static void setProfilesConfiguration(ProfilesConfiguration profilesConfiguration)
 	{	Configuration.profilesConfiguration = profilesConfiguration;
 	}
+	
+	/**
+	 * Returns the profiles-related settings.
+	 * 
+	 * @return
+	 * 		Current profiles-related settings.
+	 */
 	public static ProfilesConfiguration getProfilesConfiguration()
 	{	return profilesConfiguration;
 	}
@@ -146,11 +254,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// AI				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Agents-related settings */
 	private static AisConfiguration aisConfiguration;
 
+	/**
+	 * Changes the agents-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		New agents-related settings.
+	 */
 	public static void setAisConfiguration(AisConfiguration aisConfiguration)
 	{	Configuration.aisConfiguration = aisConfiguration;
 	}
+	
+	/**
+	 * Returns the agents-related settings.
+	 * 
+	 * @return
+	 * 		Current agents-related settings.
+	 */
 	public static AisConfiguration getAisConfiguration()
 	{	return aisConfiguration;
 	}
@@ -158,11 +280,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Stats-related settings */
 	private static StatisticsConfiguration statisticsConfiguration;
 
+	/**
+	 * Changes the stats-related settings.
+	 * 
+	 * @param statisticsConfiguration
+	 * 		New stats-related settings.
+	 */
 	public static void setStatisticsConfiguration(StatisticsConfiguration statisticsConfiguration)
 	{	Configuration.statisticsConfiguration = statisticsConfiguration;
 	}
+	
+	/**
+	 * Returns the stats-related settings.
+	 * 
+	 * @return
+	 * 		Current stats-related settings.
+	 */
 	public static StatisticsConfiguration getStatisticsConfiguration()
 	{	return statisticsConfiguration;
 	}
@@ -170,11 +306,25 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// CONNECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Connection-related settings */
 	private static ConnectionsConfiguration connectionsConfiguration;
 
+	/**
+	 * Changes the connection-related settings.
+	 * 
+	 * @param connectionsConfiguration
+	 * 		New connection-related settings.
+	 */
 	public static void setConnectionsConfiguration(ConnectionsConfiguration connectionsConfiguration)
 	{	Configuration.connectionsConfiguration = connectionsConfiguration;
 	}
+	
+	/**
+	 * Returns the connection-related settings.
+	 * 
+	 * @return
+	 * 		Current connection-related settings.
+	 */
 	public static ConnectionsConfiguration getConnectionsConfiguration()
 	{	return connectionsConfiguration;
 	}
