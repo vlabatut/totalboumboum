@@ -25,5 +25,6 @@
 	<bombUselessAis value="3000" />
 	<displayExceptions value="true" />
 	<logExceptions value="false" />
+	<recordStats value="true" />
 </ais>
 
