@@ -1756,5 +1756,11 @@ public class Launcher
  * 		+ >> p-ê un split horizontal plutot que vertical ?
  * TODO FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
  * 
- * TODO touche pour envoyer des bombes en cas de cycle ?
+ * TODO touche pour envoyer des bombes manuellement en cas de cycle (évite d'avoir à le détecter manuellement) ?
+ * 
+ * TODO
+ * 		+ sortir automatiquement les stats de chaque round, match, etc, sous la forme de fichier texte
+ * 		+ proposer d'enregistrer les stats, depuis le menu de sauvegarde ?
+ * 		+ capture d'écran des graphiques ? dessiner directement dans un panel puis sauver. à voir pour la couleur du fond ?
+ * 		+ (corriger les plots lors des éliminations (verticalité) >> cf plus haut
  */
