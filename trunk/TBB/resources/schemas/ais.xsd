@@ -66,6 +66,10 @@
 		<xsd:attribute name="value" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tRecordStats">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tAis">
 		<xsd:sequence>
 			<xsd:element name="ups" type="tUps" />
@@ -74,6 +78,7 @@
 			<xsd:element name="bombUselessAis" type="tBombUselessAis" />
 			<xsd:element name="displayExceptions" type="tDisplayExceptions" />
 			<xsd:element name="logExceptions" type="tLogExceptions" />
+			<xsd:element name="recordStats" type="tRecordStats" />
 		</xsd:sequence>
 	</xsd:complexType>
 
