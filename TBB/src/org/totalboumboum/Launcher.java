@@ -1757,6 +1757,7 @@ public class Launcher
  * TODO FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
  * 
  * TODO touche pour envoyer des bombes manuellement en cas de cycle (évite d'avoir à le détecter manuellement) ?
+ * 		+ détection auto : retenir les cases correspondant à des changements de direction ?
  * 
  * TODO
  * 		+ sortir automatiquement les stats de chaque round, match, etc, sous la forme de fichier texte
