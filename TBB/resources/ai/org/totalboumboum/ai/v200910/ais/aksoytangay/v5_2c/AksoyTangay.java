@@ -179,7 +179,7 @@ public class AksoyTangay extends ArtificialIntelligence
 //				attackManager = null;
 //			else if(attackManager.placeChanged())
 //				attackManager = null;
-			else if(attackManager.getHeroToAttack().hasEnded())
+			else if(attackManager.getHeroToAttack()!=null && attackManager.getHeroToAttack().hasEnded())
 				attackManager = null;
 			else if(attackManager.finishedOnePartOfPath())
 			{

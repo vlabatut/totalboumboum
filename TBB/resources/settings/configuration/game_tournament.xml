@@ -20,10 +20,22 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt201314_0.qualif" />
+	<tournament name="NeutralCup" />
 	<players>
-		<player file="c7adf502-106d-4486-af18-560a5e5c812c" color="BLUE" controls="2" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="227b2e4d-bd7b-4153-962b-699bc909e5e1" color="GRASS" controls="1" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="5e4ee407-71c3-4220-9265-26253cc08f1a" color="GREY" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="26db3658-cf0e-4650-96f4-55080b4720f8" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="358f7188-1cb2-4852-9536-6e04f86da5e5" color="CYAN" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="27a298f3-ea71-4e96-8e5f-2b50862d4798" color="ORANGE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="ac0853de-bb8f-4141-8fa9-4a3b2708d331" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="69306440-cfe9-4136-9494-faa95068c1c3" color="PURPLE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="0ec23e1a-67b3-46a7-89ff-90aa4d6c581d" color="YELLOW" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="0ff9f846-9767-42c7-b662-05dd6e851c6d" color="GRASS" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="e346d333-bbba-4dc8-bfd0-31de94a3dbae" color="RUST" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="dd71e2ae-4889-4ca0-9973-c75eb175af25" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="02226a8f-e736-4f28-8772-5143952e861c" color="PINK" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="3c898e42-a3e2-4b6d-866e-f672ec19d326" color="RED" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="dd226be2-5b7a-4017-a415-963b546bb716" color="BLUE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="c6bea657-b93e-4e7c-8aa8-11eddca19f41" color="WHITE" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<autoAdvance index="0" />
 </gameTournament>
