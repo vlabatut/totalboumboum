@@ -1755,4 +1755,6 @@ public class Launcher
  * 		+ à la place, mettre des infos générales sur le tournoi
  * 		+ >> p-ê un split horizontal plutot que vertical ?
  * TODO FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
+ * 
+ * TODO touche pour envoyer des bombes en cas de cycle ?
  */
