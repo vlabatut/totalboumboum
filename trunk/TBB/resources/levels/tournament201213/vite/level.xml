@@ -20,7 +20,7 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<title value="vite" />
-	<author value="[Author's name]" />
+	<author value="Vincent Labatut" />
 	<source value="original" />
 	<preview file="preview.jpg" />
 	<instance name="tournament" />
