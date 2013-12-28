@@ -580,6 +580,7 @@
 		- Possibilité d'enchainer les tournois automatiquement, avec sélection automatique des joueurs
 		- Et plusieurs modes sont possibles: aléatoire, pack, classement, confrontations 
 		- Menu options modifié en conséquence (maintenant trois modes différents d'enchainement automatique+options)
+		- Enregistrement des stats des confrontations sous forme de fichiers texte.
  	- gui :
  		- Correction d'un bug empêchant l'affichage correct des noms des matches lors des coupes
  		- Correction d'un bug empêchant de changer un joueur quant il y en a déjà 16 (en raison d'un 
