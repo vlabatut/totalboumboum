@@ -33,6 +33,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("javadoc")
 public class TextBouncer extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
@@ -75,7 +76,8 @@ private boolean trucking = true;
 
     Panel fontControls = new Panel();
     choice.addItemListener(new ItemListener() {
-      public void itemStateChanged(ItemEvent ie) {
+    	@Override
+      	public void itemStateChanged(ItemEvent ie) {
         Font font = new Font(choice.getSelectedItem(), Font.PLAIN, size);
         bouncer.setFont(font);
       }
@@ -135,6 +137,7 @@ private boolean trucking = true;
     mHeight = (float) bounds.getHeight();
     // Make sure points are within range.
     addComponentListener(new ComponentAdapter() {
+      @Override
       public void componentResized(ComponentEvent ce) {
         Dimension d = getSize();
         if (mX < 0)
@@ -173,7 +176,8 @@ private boolean trucking = true;
   protected Checkbox createCheckbox(String label, final int item) {
     Checkbox check = new Checkbox(label);
     check.addItemListener(new ItemListener() {
-      @SuppressWarnings("static-access")
+    @Override
+	@SuppressWarnings("static-access")
 	public void itemStateChanged(ItemEvent ie) {
         setSwitch(item, (ie.getStateChange() == ie.SELECTED));
       }
@@ -210,6 +214,7 @@ private boolean trucking = true;
     mShearY += mShearDeltaY;
   }
 
+  @Override
   public void paint(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
     setAntialiasing(g2);
@@ -264,6 +269,7 @@ private boolean trucking = true;
     g2.drawLine(w + arrow, h + side - arrow, w, h + side);
   }
 
+  @Override
   public void run() {
     while (trucking) {
       render();
@@ -337,6 +343,7 @@ private boolean trucking = true;
     mRateListener = af;
   }
 
+  @Override
   public void firePropertyChange(String name, double oldValue, double newValue) {
     mRateListener.rateChanged(newValue);
   }
@@ -396,6 +403,7 @@ private boolean trucking = true;
   }
 }
 
+@SuppressWarnings("javadoc")
 class AnimationFrame extends JFrame {
   private static final long serialVersionUID = 1L;
 

@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.BorderLayout;
@@ -14,6 +15,7 @@ import java.awt.image.ConvolveOp;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.BufferedImage;
 
+@SuppressWarnings("javadoc")
 public class BrightnessChanger extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -58,11 +60,13 @@ public class BrightnessChanger extends JPanel {
 
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
 		g.drawImage(convolvedImage, 0, 0, this);
 	}
 
 	class BrightnessListener implements ChangeListener {
+		@Override
 		public void stateChanged(ChangeEvent changeEvent) {
 			float factor = (float) (slide.getValue()) / 10;
 			setBrightnessFactor(factor);

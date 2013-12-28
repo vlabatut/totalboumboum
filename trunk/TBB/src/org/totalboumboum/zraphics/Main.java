@@ -21,6 +21,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JColorChooser;
@@ -35,8 +36,9 @@ import javax.swing.JTextField;
  *
  * @author adam
  */
+@SuppressWarnings("javadoc")
 public class Main {
-    private JTextField text;
+	private JTextField text;
     private TextDemoPanel shapePanel;
     private JCheckBox bevel;
     private JCheckBox shadow;
@@ -44,7 +46,8 @@ public class Main {
     private JCheckBox jiggle;
     private JSlider fatten;
     private JSlider textSize;
-    private JComboBox fontName;
+    @SuppressWarnings("rawtypes")
+	private JComboBox fontName;
     /** Creates a new instance of Main */
     public Main() {
     }
@@ -69,7 +72,8 @@ public class Main {
         frame.setVisible(true);        
     }
     
-    public JPanel makeHeader(){
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public JPanel makeHeader(){
         JPanel p = new JPanel(new BorderLayout());
         text = new JTextField("Walker Software");
         p.add(text);
@@ -116,7 +120,8 @@ public class Main {
         return p;
     }
     public class UpdateAction implements ActionListener{
-            public void actionPerformed(ActionEvent evt){
+            @Override
+			public void actionPerformed(ActionEvent evt){
                 shapePanel.setDrawShadow(shadow.isSelected());
                 shapePanel.setDrawBevel(bevel.isSelected());
                 shapePanel.setInverted(inverted.isSelected());
@@ -130,7 +135,8 @@ public class Main {
         
     }
     public class TextColorAction implements ActionListener{
-            public void actionPerformed(ActionEvent evt){
+            @Override
+			public void actionPerformed(ActionEvent evt){
                 Color c = JColorChooser.showDialog(shapePanel, "Text Color",
                         shapePanel.getTextColor());
                 if(c!=null){
@@ -140,7 +146,8 @@ public class Main {
         
     }
     public class BackgroundColorAction implements ActionListener{
-            public void actionPerformed(ActionEvent evt){
+            @Override
+			public void actionPerformed(ActionEvent evt){
                 Color c = JColorChooser.showDialog(shapePanel, "Backgound Color",
                         shapePanel.getBackground());
                 if(c!=null){
