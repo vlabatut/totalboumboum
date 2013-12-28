@@ -17,7 +17,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -28,8 +30,9 @@ import java.util.Random;
  *
  * @author Adam Walker <adam@walkersoftware.net>
  */
+@SuppressWarnings("javadoc")
 public class TextDemoPanel extends JComponent{
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private Shape shape = null;
     private Shape outline = null;
     private String text = "Walker Software";
@@ -58,11 +61,13 @@ public class TextDemoPanel extends JComponent{
         
     }
     public class MA extends MouseAdapter{
-        public void mouseClicked(MouseEvent e) {
+        @Override
+		public void mouseClicked(MouseEvent e) {
             requestFocus();
         }
     }
     public class KA extends KeyAdapter{
+        @Override
         public void keyPressed(KeyEvent evt){
             char c = evt.getKeyChar();
             int num = c-'0';
@@ -80,6 +85,8 @@ public class TextDemoPanel extends JComponent{
         repaint();
     }
     boolean flags[] = new boolean[10];
+    
+    @Override
     public void paintComponent(Graphics go){
         //System.out.println("Go");
         Graphics2D g = (Graphics2D)go;
