@@ -101,6 +101,10 @@ public class AisConfigurationLoader
 		// log exceptions during game
 		element = root.getChild(XmlNames.LOG_EXCEPTIONS);
 		loadLogExceptionsElement(element,result);
+		
+		// record stats automatically
+		element = root.getChild(XmlNames.RECORD_STATS);
+		loadRecordStatsElement(element, result);
 	}
 	
 	/**
@@ -201,5 +205,19 @@ public class AisConfigurationLoader
 	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
 		boolean logExceptions = Boolean.valueOf(value);
 		result.setLogExceptions(logExceptions);
+	}
+	
+	/**
+	 * Loads the stat recording flag.
+	 * 
+	 * @param root
+	 * 		Stat recording element.
+	 * @param result
+	 * 		Settings object to be completed.
+	 */
+	private static void loadRecordStatsElement(Element root, AisConfiguration result)
+	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+		boolean recordStats = Boolean.valueOf(value);
+		result.setRecordStats(recordStats);
 	}
 }
