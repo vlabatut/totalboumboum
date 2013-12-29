@@ -93,7 +93,7 @@ public class TimeTools
 	 * @param smallest
 	 * 		Lowest time unit to use when formatting.
 	 * @param letter
-	 * 		Whether SI ({@code true}) of common ({@code false}) representation of the time units should be used.
+	 * 		Whether SI ({@code true}) or common ({@code false}) representation of the time units should be used.
 	 * @return
 	 * 		The obtained string.
 	 */
