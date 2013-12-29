@@ -21,7 +21,9 @@ package org.totalboumboum.statistics.detailed;
  * 
  */
 
+import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -29,8 +31,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.totalboumboum.game.profile.Profile;
+import org.totalboumboum.tools.files.FilePaths;
 
 /**
  * Set of methods common to all statistical objects.
@@ -76,7 +80,7 @@ public abstract class StatisticBase implements Serializable
 	// SCORES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** The current scores */
-	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
+	protected final Map<Score,long[]> scores = new HashMap<Score,long[]>();
 	/**
 	 * Gets the current values for
 	 * the specified score.
@@ -96,9 +100,9 @@ public abstract class StatisticBase implements Serializable
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Points scored by the players */
-	private float[] points;
+	protected float[] points;
 	/** Total points scored by the players in the various sub-parts of the considered game object */
-	private float[] total;
+	protected float[] total;
 	
 	/**
 	 * Points processed after the end of the confrontation
@@ -169,7 +173,7 @@ public abstract class StatisticBase implements Serializable
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Total time played */
-	private long totalTime;
+	protected long totalTime;
 
 	/**
 	 * Returns the total time played.
@@ -195,9 +199,9 @@ public abstract class StatisticBase implements Serializable
 	// DATE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Start date of the associated game object */
-	private Date startDate;
+	protected Date startDate;
 	/** End date of the associated game object */
-	private Date endDate;
+	protected Date endDate;
 
 	/**
 	 * Returns the start date of the associated game object.
@@ -239,7 +243,7 @@ public abstract class StatisticBase implements Serializable
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Ids of the involved players */
-	private final List<String> playersIds = new ArrayList<String>();
+	protected final List<String> playersIds = new ArrayList<String>();
 
 	/**
 	 * Gets the list of players involved in
@@ -261,5 +265,26 @@ public abstract class StatisticBase implements Serializable
 	 */
 	public void addPlayerId(String playerId)
 	{	playersIds.add(playerId);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FILE		/////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the beginning of the file path for text outputs.
+	 * 
+	 * @return
+	 * 		File path (beginning).
+	 */
+	public String getFilePath()
+	{	// get current date and time
+		Calendar cal = new GregorianCalendar();
+		Date currentTime = cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss-SSS");
+		
+		// set up file name
+		String currentStr = sdf.format(currentTime);
+		String result = FilePaths.getConfrontationsStatisticsPath() + File.separator + currentStr;
+		return result;
 	}
 }
