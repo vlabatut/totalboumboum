@@ -32,12 +32,23 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 
 /**
+ * Loads all selected profiles to XML files.
  * 
  * @author Vincent Labatut
- *
  */
 public class ProfileSaver
 {	
+	/**
+	 * Records the specified profile.
+	 * 
+	 * @param profile
+	 * 		Profile object.
+	 * @param id
+	 * 		Profile id.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing a file.
+	 */
 	public static void saveProfile(Profile profile, String id) throws IOException
 	{	// build document
 		Element root = saveProfileElement(profile);
@@ -50,6 +61,14 @@ public class ProfileSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Processes the main profile element of the XML file.
+	 * 
+	 * @param profile
+	 * 		Profile object.
+	 * @return
+	 * 		Produced XML element.
+	 */
 	private static Element saveProfileElement(Profile profile)
 	{	Element result = new Element(XmlNames.PROFILE);
 		
@@ -78,6 +97,15 @@ public class ProfileSaver
 		return result;
 	}
 	
+	/**
+	 * Processes the element of the XML file
+	 * representing the profile general info.
+	 * 
+	 * @param profile
+	 * 		Profile object.
+	 * @return
+	 * 		Produced XML element.
+	 */
 	private static Element saveGeneralElement(Profile profile)
 	{	Element result = new Element(XmlNames.GENERAL);
 		String name = profile.getName();
@@ -85,6 +113,15 @@ public class ProfileSaver
 		return result;
 	}
 
+	/**
+	 * Processes the element of the XML file
+	 * representing the profile ai info.
+	 * 
+	 * @param profile
+	 * 		Profile object.
+	 * @return
+	 * 		Produced XML element.
+	 */
 	private static Element saveAiElement(Profile profile)
 	{	Element result = new Element(XmlNames.AI);
 		// name
@@ -97,6 +134,15 @@ public class ProfileSaver
 		return result;
 	}
 	
+	/**
+	 * Processes the element of the XML file
+	 * representing the profile sprite info.
+	 * 
+	 * @param profile
+	 * 		Profile object.
+	 * @return
+	 * 		Produced XML element.
+	 */
 	private static Element saveCharacterElement(Profile profile)
 	{	Element result = new Element(XmlNames.CHARACTER);
 		// name
@@ -112,11 +158,19 @@ public class ProfileSaver
 		return result;
 	}
 
+	/**
+	 * Processes the element of the XML file
+	 * representing the profile network info.
+	 * 
+	 * @param profile
+	 * 		Profile object.
+	 * @return
+	 * 		Produced XML element.
+	 */
 	private static Element saveNetworkElement(Profile profile)
 	{	Element result = new Element(XmlNames.NETWORK);
 		String lastHost = profile.getLastHost();
 		result.setAttribute(XmlNames.LAST_HOST,lastHost);
 		return result;
 	}
-
 }
