@@ -204,6 +204,11 @@
 						<text name="Disabled" value="Disabled" tooltip="AIs-caused exceptions log is disabled" />
 						<text name="Enabled" value="Enabled" tooltip="AIs-caused exceptions log is enabled" />
 					</group>
+					<group name="RecordStatistics">
+						<text name="Title" value="Record statistics" tooltip="Record the statistics of each confrontation in an additional text file  (statistics/confrontations folder)" />
+						<text name="Disabled" value="Disabled" tooltip="Statistics recording is disabled" />
+						<text name="Enabled" value="Enabled" tooltip="Statistics recording is enabled" />
+					</group>
 				</group>
 			</group>
 			
