@@ -1022,7 +1022,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 
 //on regarde si on peut poser une bombe pour tuer.On donne +20 points si c'st possible de poser une bombe.
 				// Regarder vers la gauche.
-				int i = (xp - 1 + getZoneMatrixDimX()) % getZoneMatrixDimX();
+				int i = Math.max(0,(xp - 1 + getZoneMatrixDimX()) % getZoneMatrixDimX());
 				while (tab[i][yp] % 10 != AI_BLOCK_WALL_HARD
 						&& tab[i][yp] % 10 != AI_BLOCK_WALL_SOFT
 						&& xp - i <= bombF
@@ -1032,7 +1032,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 					i--;
 				}
 				// Regarder vers la droite.
-				i = (xp + 1) % getZoneMatrixDimX();
+				i = Math.max(0,(xp + 1) % getZoneMatrixDimX());
 				while (tab[i][yp] % 10 != AI_BLOCK_WALL_HARD
 						&& tab[i][yp] % 10 != AI_BLOCK_WALL_SOFT
 						&& i - xp <= bombF
@@ -1043,7 +1043,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 				}
 
 				// Regarder vers le haut.
-				i = (yp - 1 + getZoneMatrixDimY()) % getZoneMatrixDimY();
+				i = Math.max(0,(yp - 1 + getZoneMatrixDimY()) % getZoneMatrixDimY());
 				while (tab[xp][i] % 10 != AI_BLOCK_WALL_HARD
 						&& tab[xp][i] % 10 != AI_BLOCK_WALL_SOFT
 						&& yp - i <= bombF
@@ -1054,7 +1054,7 @@ public class BingolKetenci2 extends ArtificialIntelligence {
 				}
 
 				// Regarder vers le bas.
-				i = (yp + 1) % getZoneMatrixDimY();
+				i = Math.max(0,(yp + 1) % getZoneMatrixDimY());
 				while (tab[xp][i] % 10 != AI_BLOCK_WALL_HARD
 						&& tab[xp][i] % 10 != AI_BLOCK_WALL_SOFT
 						&& i - yp <= bombF
