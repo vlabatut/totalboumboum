@@ -65,6 +65,8 @@ public class AisConfiguration
 		result.setLogExceptions(logExceptions);
 		result.setLogExceptionsSeparately(logExceptionsSeparately);
 
+		result.setRecordStats(recordStats);
+		
 		return result;
 	}
 
@@ -463,5 +465,33 @@ public class AisConfiguration
 	 */
 	public OutputStream getExceptionsLogOutput()
 	{	return exceptionsLogStream;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// RECORD STATS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Indicates if agent stats should be recorded in text files */
+	private boolean recordStats = false;
+	
+	/**
+	 * Indicates if stats should be record as text files.
+	 * This allows chaining many tournaments automatically
+	 * and then assessing results later.
+	 * 
+	 * @return
+	 * 		{@code true} iff stats are recorded.
+	 */
+	public boolean getRecordStats()
+	{	return recordStats;
+	}
+
+	/**
+	 * Changes the option regarding agent stat recording.
+	 * 
+	 * @param recordStats
+	 * 		{@code true} to record agent stats.
+	 */
+	public void setRecordStats(boolean recordStats)
+	{	this.recordStats = recordStats;
 	}
 }

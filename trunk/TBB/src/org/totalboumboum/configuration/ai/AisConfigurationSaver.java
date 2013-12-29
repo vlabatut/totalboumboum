@@ -107,6 +107,10 @@ public class AisConfigurationSaver
 		Element logExceptionsElement = saveLogExceptionsElement(aisConfiguration);
 		result.addContent(logExceptionsElement);
 
+		// automatically record player stats
+		Element recordStatsElement = saveRecordStatsElement(aisConfiguration);
+		result.addContent(recordStatsElement);
+
 		return result;
 	}
 	
@@ -227,6 +231,24 @@ public class AisConfigurationSaver
 		
 		String logExceptions = Boolean.toString(aisConfiguration.getLogExceptions());
 		result.setAttribute(XmlNames.VALUE,logExceptions);
+		
+		return result;
+	}
+
+	/**
+	 * Builds an XML element representing
+	 * stat recording-related settings.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
+	private static Element saveRecordStatsElement(AisConfiguration aisConfiguration)
+	{	Element result = new Element(XmlNames.RECORD_STATS);
+		
+		String recordStats = Boolean.toString(aisConfiguration.getRecordStats());
+		result.setAttribute(XmlNames.VALUE,recordStats);
 		
 		return result;
 	}
