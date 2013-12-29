@@ -27,21 +27,44 @@ import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * 
+ * Object used to define the end of a confrontation,
+ * be it a round, match or tournament.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface Limit extends Serializable
 {
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Uses the specified statistics to check if this limit has been reached.
+	 * 
+	 * @param holder
+	 * 		Stat source.
+	 * @return
+	 * 		{@code true} iff the limit was reached.
+	 */
 	public boolean testThreshold(StatisticHolder holder);
 
 	/////////////////////////////////////////////////////////////////
 	// POINTS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Processes the points for each player, as defined in this limit object.
+	 * 
+	 * @param holder
+	 * 		Stat source.
+	 * @return
+	 * 		Array of points.
+	 */
 	public float[] processPoints(StatisticHolder holder);
-	public AbstractPointsProcessor getPointProcessor();
 	
+	/**
+	 * Returns the point processor used to compute the points.
+	 *
+	 * @return
+	 * 		A point processor.
+	 */
+	public AbstractPointsProcessor getPointProcessor();
 }

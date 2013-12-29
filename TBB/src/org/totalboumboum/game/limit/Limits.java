@@ -29,21 +29,89 @@ import java.util.List;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
+ * Handles a list of limits for a given confrontation.
+ * 
+ * @param <T> 
+ * 		Type of the handled limits.
  * 
  * @author Vincent Labatut
- *
  */
 public class Limits<T extends Limit> implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/////////////////////////////////////////////////////////////////
+	// LIMITS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** List of limits handled by this object */
 	List<T> limits = new ArrayList<T>();
+	/** Currently selected limit */
 	private int index;
 	
+	/**
+	 * Adds a new limit to the list.
+	 * 
+	 * @param limit
+	 * 		New limit to add to the list.
+	 */
 	public void addLimit(T limit)
 	{	limits.add(limit);
 		index = -1;
 	}
 	
+	/**
+	 * Selects the limit whose index is specified as a parameter.
+	 * 
+	 * @param index
+	 * 		Index of the desired limit.
+	 */
+	public void selectLimit(int index)
+	{	this.index = index;
+	}
+
+	/**
+	 * Retursn an iterator over the limits.
+	 * 
+	 * @return
+	 * 		Iterator object.
+	 */
+	public Iterator<T> iterator()
+	{	return limits.iterator();
+	}
+	
+	/**
+	 * Returns the limit whose index is passed as a parameter.
+	 * 
+	 * @param index
+	 * 		Position of the desired limit.
+	 * @return
+	 * 		Corresponding limit.
+	 */
+	public Limit getLimit(int index)
+	{	return limits.get(index);		
+	}
+	
+	/**
+	 * Returns the number of limits in this object.
+	 * 
+	 * @return
+	 * 		Number of limits.
+	 */
+	public int size()
+	{	return limits.size();	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// THRESHOLD		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Uses the specified statistics to check if this limit has been reached.
+	 * 
+	 * @param holder
+	 * 		Stat source.
+	 * @return
+	 * 		{@code true} iff the limit was reached.
+	 */
 	public boolean testLimit(StatisticHolder holder)
 	{	boolean result = false;
 		index = -1;
@@ -60,12 +128,30 @@ public class Limits<T extends Limit> implements Serializable
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Processes the points for each player, as defined in this limit object.
+	 * 
+	 * @param holder
+	 * 		Stat source.
+	 * @return
+	 * 		Array of points.
+	 */
 	public float[] processPoints(StatisticHolder holder)
 	{	Limit limit = limits.get(index);
 		float[] result = limit.processPoints(holder);
 		return result;
 	}
-	
+
+	/**
+	 * Returns the time-related limit contained
+	 * in this object (if there's one).
+	 * 
+	 * @return
+	 * 		A time limit object.
+	 */
 	public LimitTime getTimeLimit()
 	{	LimitTime result = null;
 		Iterator<T> it = limits.iterator();
@@ -77,22 +163,9 @@ public class Limits<T extends Limit> implements Serializable
 		return result;
 	}
 	
-	public void selectLimit(int index)
-	{	this.index = index;
-	}
-	
-	public Iterator<T> iterator()
-	{	return limits.iterator();
-	}
-	
-	public Limit getLimit(int index)
-	{	return limits.get(index);		
-	}
-	
-	public int size()
-	{	return limits.size();	
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Cleanly finishes this object,
 	 * possibly freeing some memory.

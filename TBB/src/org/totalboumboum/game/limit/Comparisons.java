@@ -22,15 +22,19 @@ package org.totalboumboum.game.limit;
  */
 
 /**
+ * Comparison operators used in {@link Limit} objects.
  * 
  * @author Vincent Labatut
- *
  */
 public enum Comparisons
-{
+{	/** x == y */
 	EQUAL,
+	/** x > y */
 	GREATER,
+	/** x < y */
 	LESS,
+	/** x >= y */
 	GREATEREQ,
+	/** x <= y */
 	LESSEQ
 }

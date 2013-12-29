@@ -34,12 +34,30 @@ import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
 /**
+ * Loads limit objects.
  * 
  * @author Vincent Labatut
- *
  */
 public class LimitLoader
 {
+	/**
+	 * Processes an XML element to get the limit object
+	 * it describes.
+	 * 
+	 * @param root
+	 * 		Main XML element.
+	 * @param folder
+	 * 		Folder containing the XML file.
+	 * @return
+	 * 		A limit object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing a file.
+	 * @throws SAXException
+	 * 		Problem while accessing a file.
+	 * @throws IOException
+	 * 		Problem while accessing a file.
+	 */
 	public static Limit loadLimitElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limit result = null;
 		String type = root.getName();
@@ -64,6 +82,16 @@ public class LimitLoader
 		return result;
 	}
 
+	/**
+	 * Processes a confrontation limit element.
+	 * 
+	 * @param root
+	 * 		XML element.
+	 * @param pointProcessor
+	 * 		Corresponding point processor.
+	 * @return
+	 * 		The resulting limit object.
+	 */
 	private static LimitConfrontation loadLimitConfrontationElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
@@ -77,6 +105,25 @@ public class LimitLoader
 		return result;
 	}
 
+	/**
+	 * Processes a points limit element.
+	 * 
+	 * @param root
+	 * 		XML element.
+	 * @param folder
+	 * 		Current folder.
+	 * @param pointProcessor
+	 * 		Corresponding point processor.
+	 * @return
+	 * 		The resulting limit object.
+	 * 
+	 * @throws ParserConfigurationException 
+	 * 		Problem while accessing a file.
+	 * @throws SAXException 
+	 * 		Problem while accessing a file.
+	 * @throws IOException 
+	 * 		Problem while accessing a file.
+	 */
 	private static LimitPoints loadLimitPointsElement(Element root, String folder, AbstractPointsProcessor pointProcessor) throws ParserConfigurationException, SAXException, IOException
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
@@ -93,6 +140,16 @@ public class LimitLoader
 		return result;
 	}
 	
+	/**
+	 * Processes a score limit element.
+	 * 
+	 * @param root
+	 * 		XML element.
+	 * @param pointProcessor
+	 * 		Corresponding point processor.
+	 * @return
+	 * 		The resulting limit object.
+	 */
 	private static LimitScore loadLimitScoreElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
@@ -109,6 +166,16 @@ public class LimitLoader
 		return result;
 	}
 
+	/**
+	 * Processes a time limit element.
+	 * 
+	 * @param root
+	 * 		XML element.
+	 * @param pointProcessor
+	 * 		Corresponding point processor.
+	 * @return
+	 * 		The resulting limit object.
+	 */
 	private static LimitTime loadLimitTimeElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);
@@ -122,6 +189,16 @@ public class LimitLoader
 		return result;
 	}
 
+	/**
+	 * Processes a last-standing limit element.
+	 * 
+	 * @param root
+	 * 		XML element.
+	 * @param pointProcessor
+	 * 		Corresponding point processor.
+	 * @return
+	 * 		The resulting limit object.
+	 */
 	private static LimitLastStanding loadLimitLastStandingElement(Element root, AbstractPointsProcessor pointProcessor)
 	{	// threshold
 		Element thresholdElt = root.getChild(XmlNames.THRESHOLD);

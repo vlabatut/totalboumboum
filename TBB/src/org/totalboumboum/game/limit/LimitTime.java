@@ -26,19 +26,29 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * this limit is based on time. In a round, a similar limit could be defined 
- * whith a ScoreLimit, but not in a tournament or match. Moreover, if there is no
- * player left in the round (which is theoretically possible), then the ScoreLimit 
- * based on time is no longer equivalent to the TimeLimit.
+ * This limit is based on time. In a round, a similar limit could be defined 
+ * whith a {@link LimitScore}, but not in a tournament or match. Moreover, if there is no
+ * player left in the round (which is theoretically possible), then the {@code LimitScore}
+ * based on time is no longer equivalent to the {@code LimitTime}.
  * For example, a tournament can be stopped when one player's cumulated time is
  * greater than 10 minutes.   
  * 
  * @author Vincent Labatut
- *
  */
 public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new limit object.
+	 * 
+	 * @param threshold
+	 * 		Threshold value.
+	 * @param comparatorCode
+	 * 		How the comparison is performed.
+	 * @param pointProcessor
+	 * 		Associated point processor.
+	 */
 	public LimitTime(long threshold, Comparisons comparatorCode, AbstractPointsProcessor pointProcessor)
 	{	this.threshold = threshold;	
 		this.comparatorCode = comparatorCode;
@@ -48,21 +58,47 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Threshold of this limit object */
 	private long threshold;
+	/** Type of the performed comparison */ 
 	private Comparisons comparatorCode;
 
+	/**
+	 * Returns the threshold value of this limit object.
+	 * 
+	 * @return
+	 * 		Threshold value.
+	 */
 	public long getThreshold()
 	{	return threshold;
 	}
 
+	/**
+	 * Changes the threshold value of this limit object.
+	 * 
+	 * @param threshold
+	 * 		New threshold value.
+	 */
 	public void setThreshold(long threshold)
 	{	this.threshold = threshold;
 	}
 
+	/**
+	 * Returns the comparison mode of this limit object.
+	 * 
+	 * @return
+	 * 		Comparison mode.
+	 */
 	public Comparisons getComparatorCode()
 	{	return comparatorCode;
 	}
 	
+	/**
+	 * Changes the comparison mode of this limit object.
+	 * 
+	 * @param comparatorCode
+	 * 		New comparison mode.
+	 */
 	public void setComparatorCode(Comparisons comparatorCode)
 	{	this.comparatorCode = comparatorCode;
 	}
@@ -94,12 +130,20 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Associated point processor */
 	private AbstractPointsProcessor pointProcessor;
 	
+	@Override
 	public AbstractPointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 
+	/**
+	 * Changes the associated point processor.
+	 *  
+	 * @param pointProcessor
+	 * 		New point processor.
+	 */
 	public void setPointProcessor(AbstractPointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
