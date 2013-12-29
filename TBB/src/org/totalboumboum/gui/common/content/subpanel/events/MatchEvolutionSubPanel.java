@@ -40,7 +40,6 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
@@ -697,17 +696,36 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of objects listening to this panel */
 	private List<EvolutionSubPanelListener> listeners = new ArrayList<EvolutionSubPanelListener>();
 	
+	/**
+	 * Adds a new listener to this panel.
+	 * 
+	 * @param listener
+	 * 		New listener.
+	 */
 	public void addListener(EvolutionSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
+	/**
+	 * Removes an existing listener from this panel.
+	 * 
+	 * @param listener
+	 * 		Listener to remove.
+	 */
 	public void removeListener(EvolutionSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
+	/**
+	 * Fires a mouse pressed event, transmits it to all listeners.
+	 * 
+	 * @param e
+	 * 		Event to transmit to listeners.
+	 */
 	private void fireMousePressed(MouseEvent e)
 	{	for(EvolutionSubPanelListener listener: listeners)
 			listener.mousePressed(e);

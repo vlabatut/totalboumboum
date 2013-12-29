@@ -24,11 +24,18 @@ import java.awt.event.MouseEvent;
  */
 
 /**
- * 
+ * Interface for objects listening to panels
+ * displaying the evolution of statistics.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface EvolutionSubPanelListener
 {
+	/**
+	 * Called when the mouse is pressed on the panel.
+	 * 
+	 * @param e
+	 * 		Corresponding mouse event. 
+	 */
 	public void mousePressed(MouseEvent e);
 }
