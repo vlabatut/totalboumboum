@@ -204,6 +204,11 @@
 						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des exceptions désactivé" />
 						<text name="Enabled" value="Activé" tooltip="Enregistrement des exceptions activé" />
 					</group>
+					<group name="RecordStatistics">
+						<text name="Title" value="Enregistrer les statistiques" tooltip="Enregistre dans un fichier supplémentaire les statistiques de chaque confrontation (dossier statistics/confrontations)" />
+						<text name="Disabled" value="Désactivé" tooltip="Enregistrement des statistiques désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Enregistrement des statistiques activé" />
+					</group>
 				</group>
 			</group>
 			
