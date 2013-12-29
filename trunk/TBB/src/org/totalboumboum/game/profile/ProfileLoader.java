@@ -43,12 +43,37 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Loads all selected profiles from XML files.
  * 
  * @author Vincent Labatut
- *
  */
 public class ProfileLoader
 {	
+	/**
+	 * Loads all selected profiles.
+	 * 
+	 * @param profilesSelection
+	 * 		Selected profile ids.
+	 * @return
+	 * 		Loaded profiles
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading a profile file.
+	 * @throws SecurityException
+	 * 		Problem while loading a profile file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException
+	 * 		Problem while loading a profile file.
+	 * @throws IOException
+	 * 		Problem while loading a profile file.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading a profile file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading a profile file.
+	 */
 	public static List<Profile> loadProfiles(ProfilesSelection profilesSelection) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	List<Profile> result = new ArrayList<Profile>();
 		int size = profilesSelection.getProfileCount();
@@ -76,6 +101,31 @@ public class ProfileLoader
 		return result;
 	}
 
+	/**
+	 * Loading a profile list.
+	 * 
+	 * @param playersIds
+	 * 		Ids of the concerned profiles.
+	 * @return
+	 * 		Objects representing the profiles.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading a profile file.
+	 * @throws SecurityException
+	 * 		Problem while loading a profile file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException
+	 * 		Problem while loading a profile file.
+	 * @throws IOException
+	 * 		Problem while loading a profile file.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading a profile file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading a profile file.
+	 */
 	public static HashMap<String,Profile> loadProfiles(List<String> playersIds) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	HashMap<String,Profile> result = new HashMap<String, Profile>();
 		for(String playerId: playersIds)
@@ -85,6 +135,31 @@ public class ProfileLoader
 		return result;
 	}
 	
+	/**
+	 * Loads a single profile.
+	 * 
+	 * @param id
+	 * 		Profile id.
+	 * @return
+	 * 		Object representing the profile.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException
+	 * 		Problem while loading a profile file.
+	 * @throws IOException
+	 * 		Problem while loading a profile file.
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading a profile file.
+	 * @throws SecurityException
+	 * 		Problem while loading a profile file.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading a profile file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading a profile file.
+	 */
 	public static Profile loadProfile(String id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String profilesFolder = FilePaths.getProfilesPath();
 		File dataFile = new File(profilesFolder+File.separator+id+FileNames.EXTENSION_XML);
@@ -97,6 +172,31 @@ public class ProfileLoader
 		return result;
 	}
 	
+	/**
+	 * Processes the main element of a profile XML file.
+	 * 
+	 * @param root
+	 * 		Main element.
+	 * @param result
+	 * 		Profile to be completed.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while loading a profile file.
+	 * @throws SecurityException
+	 * 		Problem while loading a profile file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException
+	 * 		Problem while loading a profile file.
+	 * @throws IOException
+	 * 		Problem while loading a profile file.
+	 * @throws IllegalAccessException
+	 * 		Problem while loading a profile file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException
+	 * 		Problem while loading a profile file.
+	 */
 	private static void loadProfileElement(Element root, Profile result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// general properties
     	Element generalElt = root.getChild(XmlNames.GENERAL);
@@ -116,12 +216,28 @@ public class ProfileLoader
 		loadNetworkElement(networkElt,result); 
 	}
     
+	/**
+	 * Loads the profile general info.
+	 * 
+	 * @param root
+	 * 		Element containing the general info.
+	 * @param result
+	 * 		Profile to be completed.
+	 */
     private static void loadGeneralElement(Element root, Profile result)
     {	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue();
     	result.setName(name);
     }
     
+	/**
+	 * Loads the profile ai info.
+	 * 
+	 * @param root
+	 * 		Element containing the ai info.
+	 * @param result
+	 * 		Profile to be completed.
+	 */
     private static void loadAiElement(Element root, Profile result)
     {	// name
     	String name = root.getAttribute(XmlNames.NAME).getValue();
@@ -132,6 +248,23 @@ public class ProfileLoader
     	result.setAiPackname(packname.trim());
     }
     
+	/**
+	 * Loads the profile sprite info.
+	 * 
+	 * @param root
+	 * 		Element containing the sprite info.
+	 * @param result
+	 * 		Profile to be completed.
+	 * 
+	 * @throws ParserConfigurationException 
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException 
+	 * 		Problem while loading a profile file.
+	 * @throws IOException 
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException 
+	 * 		Problem while loading a profile file.
+	 */
     private static void loadSpriteElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// packname
     	String spritePackname = root.getAttribute(XmlNames.PACKNAME).getValue();
@@ -159,26 +292,76 @@ public class ProfileLoader
 		loadPortraits(result,packName,folderName,spriteColor);
     }	        
 
-    private static void loadNetworkElement(Element root, Profile result)
+	/**
+	 * Loads the profile network info.
+	 * 
+	 * @param root
+	 * 		Element containing the network info.
+	 * @param result
+	 * 		Profile to be completed.
+	 */
+   private static void loadNetworkElement(Element root, Profile result)
     {	// last host
     	String lastHost = root.getAttribute(XmlNames.LAST_HOST).getValue();
     	result.setLastHost(lastHost.trim());
     }
     
-    public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String spritePackname = profile.getSpritePack();
-		String spriteFoldername = profile.getSpriteFolder();
-		PredefinedColor spriteColor = profile.getSpriteColor();
-		loadPortraits(profile,spritePackname,spriteFoldername,spriteColor);
+	/**
+	 * Reloads the profile portraits
+	 * 
+	 * @param result
+	 * 		Profile to be completed.
+	 * 
+	 * @throws ParserConfigurationException 
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException 
+	 * 		Problem while loading a profile file.
+	 * @throws IOException 
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException 
+	 * 		Problem while loading a profile file.
+	 */
+   public static void reloadPortraits(Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String spritePackname = result.getSpritePack();
+		String spriteFoldername = result.getSpriteFolder();
+		PredefinedColor spriteColor = result.getSpriteColor();
+		loadPortraits(result,spritePackname,spriteFoldername,spriteColor);
     }
     
-    private static void loadPortraits(Profile profile, String spritePackname, String spriteFoldername, PredefinedColor spriteColor) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	/**
+	 * Loads the profile portraits.
+	 * 
+	 * @param result
+	 * 		Profile to be completed.
+	 * @param spritePackname
+	 * 		Pack containing the sprite.
+	 * @param spriteFoldername
+	 * 		Folder containing the sprite files.
+	 * @param spriteColor
+	 * 		Color of the sprite.
+	 * 
+	 * @throws ParserConfigurationException 
+	 * 		Problem while loading a profile file.
+	 * @throws SAXException 
+	 * 		Problem while loading a profile file.
+	 * @throws IOException 
+	 * 		Problem while loading a profile file.
+	 * @throws ClassNotFoundException 
+	 * 		Problem while loading a profile file.
+	 */
+   private static void loadPortraits(Profile result, String spritePackname, String spriteFoldername, PredefinedColor spriteColor) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String folder = FilePaths.getHeroesPath() + File.separator + spritePackname;
 		folder = folder + File.separator + spriteFoldername;
 		Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
-		profile.setPortraits(portraits);
+		result.setPortraits(portraits);
     }
     
+   /**
+    * Returns the list of all currently existing profile ids in the game.
+    * 
+    * @return
+    * 		List of profile ids.
+    */
     public static List<String> getIdsList()
     {	List<String> result = new ArrayList<String>();
     	

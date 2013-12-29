@@ -23,44 +23,111 @@ package org.totalboumboum.game.profile;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
- * 
+ * Class used to handle the image representing
+ * a player in menus.
+ *  
  * @author Vincent Labatut
- *
  */
 public class Portraits
 {	
+	/////////////////////////////////////////////////////////////////
+	// IN-GAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Images used in game */
+	Map<String, BufferedImage> ingame = new HashMap<String, BufferedImage>();
+	/** Loser face */
 	public static final String INGAME_LOST = "LOST";
+	/** Still in the game face */
 	public static final String INGAME_NORMAL = "NORMAL";
+	/** Out of the game face */
 	public static final String INGAME_OUT = "OUT";
+	/** Winner face */
 	public static final String INGAME_WON = "WON";
 	
-	public static final String OUTGAME_BODY = "BODY";
-	public static final String OUTGAME_HEAD = "HEAD";
-	
-	
-	HashMap<String, BufferedImage> ingame = new HashMap<String, BufferedImage>();
-	HashMap<String, BufferedImage> outgame = new HashMap<String, BufferedImage>();
-	
+	/**
+	 * Add an in-game image to the current map.
+	 * 
+	 * @param name
+	 * 		Image itself.
+	 * @param image
+	 * 		Name of the image.
+	 */
 	public void addIngamePortrait(String name, BufferedImage image)
 	{	ingame.put(name, image);		
 	}
+	
+	/**
+	 * Retrieves one of the in-game images.
+	 * 
+	 * @param name
+	 * 		Name of the image.
+	 * @return
+	 * 		Corresponding image itself.
+	 */
 	public BufferedImage getIngamePortrait(String name)
 	{	return ingame.get(name);	
 	}
+	
+	/**
+	 * Checks if the in-game image whose name is specified as
+	 * a parameter is contained in this object.
+	 * 
+	 * @param name
+	 * 		Name of the image.
+	 * @return
+	 * 		{@code true} iff the image exists.
+	 */
 	public boolean containsIngamePortrait(String name)
 	{	return ingame.containsKey(name);	
 	}
 
-	public void addOutgamePortrait(String name, BufferedImage image)
+	/////////////////////////////////////////////////////////////////
+	// OFF-GAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Images used off game */
+	Map<String, BufferedImage> outgame = new HashMap<String, BufferedImage>();
+	/** Body image */
+	public static final String OUTGAME_BODY = "BODY";
+	/** Face image */
+	public static final String OUTGAME_HEAD = "HEAD";
+	
+	/**
+	 * Add an off-game image to the current map.
+	 * 
+	 * @param name
+	 * 		Image itself.
+	 * @param image
+	 * 		Name of the image.
+	 */
+	public void addOffgamePortrait(String name, BufferedImage image)
 	{	outgame.put(name, image);		
 	}
-	public BufferedImage getOutgamePortrait(String name)
+	
+	/**
+	 * Retrieves one of the off-game images.
+	 * 
+	 * @param name
+	 * 		Name of the image.
+	 * @return
+	 * 		Corresponding image itself.
+	 */
+	public BufferedImage getOffgamePortrait(String name)
 	{	return outgame.get(name);	
 	}
-	public boolean containsOutgamePortrait(String name)
+	
+	/**
+	 * Checks if the off-game image whose name is specified as
+	 * a parameter is contained in this object.
+	 * 
+	 * @param name
+	 * 		Name of the image.
+	 * @return
+	 * 		{@code true} iff the image exists.
+	 */
+	public boolean containsOffgamePortrait(String name)
 	{	return outgame.containsKey(name);	
 	}
 }
-

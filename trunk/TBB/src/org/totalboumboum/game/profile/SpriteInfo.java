@@ -26,13 +26,20 @@ import java.io.Serializable;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
- * 
+ * Contains all the details needed to load a sprite.
+ *  
  * @author Vincent Labatut
- *
  */
 public class SpriteInfo implements Serializable
-{	private static final long serialVersionUID = 1L;
-
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Makes a copy of this sprite info.
+	 * 
+	 * @return
+	 * 		Copy of this sprite info.
+	 */
 	public SpriteInfo copy()
 	{	SpriteInfo result = new SpriteInfo();
 		result.setPack(pack);
@@ -42,6 +49,15 @@ public class SpriteInfo implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Detects if this sprite info is different from the
+	 * specified one.
+	 * 
+	 * @param spriteInfo
+	 * 		Reference sprite info.
+	 * @return
+	 * 		{@code true} iff they are different.
+	 */
 	public boolean hasChanged(SpriteInfo spriteInfo)
 	{	boolean result = false;
 		if(!result && pack!=null && spriteInfo.getPack()!=null)
@@ -58,21 +74,47 @@ public class SpriteInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PICTURES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Pack containing the described sprite */
 	private String pack;
+	/** Folder containing the described sprite */
 	private String folder;
 
+	/**
+	 * Returns the pack containing the described sprite.
+	 * 
+	 * @return
+	 * 		Pack containing the described sprite.
+	 */
 	public String getPack()
 	{	return pack;
 	}
 
+	/**
+	 * Changes the pack containing the described sprite.
+	 * 
+	 * @param pack
+	 * 		New pack containing the described sprite.
+	 */
 	public void setPack(String pack)
 	{	this.pack = pack;
 	}
 
+	/**
+	 * Returns the folder containing the described sprite.
+	 * 
+	 * @return
+	 * 		Folder containing the described sprite.
+	 */
 	public String getFolder()
 	{	return folder;
 	}
 
+	/**
+	 * Changes the folder containing the described sprite.
+	 * 
+	 * @param folder
+	 * 		New folder containing the described sprite.
+	 */
 	public void setFolder(String folder)
 	{	this.folder = folder;
 	}
@@ -80,12 +122,25 @@ public class SpriteInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// NAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name of the sprite */
 	private String name;
 
+	/**
+	 * Returns the name of the sprite.
+	 * 
+	 * @return
+	 * 		Name of the sprite.
+	 */
 	public String getName()
 	{	return name;
 	}
 
+	/**
+	 * Changes the name of the sprite.
+	 * 
+	 * @param name
+	 * 		New name for the sprite.
+	 */
 	public void setName(String name)
 	{	this.name = name;
 	}
@@ -93,12 +148,25 @@ public class SpriteInfo implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Color of the sprite */
 	private PredefinedColor color;
-
+	
+	/**
+	 * Returns the color of the sprite.
+	 * 
+	 * @return
+	 * 		Color of the sprite.
+	 */
 	public PredefinedColor getColor()
 	{	return color;
 	}
 
+	/**
+	 * Changes the color of the sprite.
+	 * 
+	 * @param color
+	 * 		New color for the sprite.
+	 */
 	public void setColor(PredefinedColor color)
 	{	this.color = color;
 	}
