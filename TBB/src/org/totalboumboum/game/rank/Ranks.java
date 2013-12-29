@@ -27,18 +27,28 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.game.profile.Profile;
 
 /**
+ * This class is used to process and represents player
+ * rankings for a given confrontation (be it a round,
+ * match or tournament).
  * 
  * @author Vincent Labatut
- *
  */
 public class Ranks implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Makes a copy of this object.
+	 * 
+	 * @return
+	 * 		A copy of this object.
+	 */
 	public Ranks copy()
 	{	Ranks result = new Ranks();
 		for(Entry<Integer,List<Profile>> entry: ranks.entrySet())
@@ -53,12 +63,27 @@ public class Ranks implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// HASHMAP			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Map containing all ranks and ranked players */
 	private final HashMap<Integer,List<Profile>> ranks = new HashMap<Integer, List<Profile>>();
 	
-	public HashMap<Integer,List<Profile>> getRanks()
+	/**
+	 * Returns the map of all ranks.
+	 * 
+	 * @return
+	 * 		Map of all ranks.
+	 */
+	public Map<Integer,List<Profile>> getRanks()
 	{	return ranks;
 	}
-		
+	
+	/**
+	 * Adds a player to the specified rank.
+	 * 
+	 * @param rank
+	 * 		Rank of interest.
+	 * @param profile
+	 * 		Player to be added to this rank.
+	 */
 	public void addProfile(int rank, Profile profile)
 	{	List<Profile> list = ranks.get(rank);
 		if(list==null)
@@ -69,14 +94,33 @@ public class Ranks implements Serializable
 		
 	}
 	
+	/**
+	 * Checks if this object contains at least one rank.
+	 * 
+	 * @return
+	 * 		{@code true} iff this object contains one rank or more.
+	 */
 	public boolean isEmpty()
 	{	return ranks.isEmpty();		
 	}
 	
+	/**
+	 * Removes a rank (and all the concerned players).
+	 * 
+	 * @param rank
+	 * 		Rank to be removed.
+	 */
 	public void remove(int rank)
 	{	ranks.remove(rank);		
 	}
 	
+	/**
+	 * Returns the number of players ranked 
+	 * in this object.
+	 *  
+	 * @return
+	 * 		Number of ranked players.
+	 */
 	public int size()
 	{	int result = 0;
 		for(Entry<Integer,List<Profile>> entry: ranks.entrySet())
@@ -106,6 +150,12 @@ public class Ranks implements Serializable
 		return result;
 	}
 */
+	/**
+	 * Returns the ordered list of players.
+	 * 
+	 * @return
+	 * 		List of players ordered depending on their rank.
+	 */
 	public List<Profile> getAbsoluteOrderList()
 	{	// init
 		List<Profile> result = new ArrayList<Profile>();
@@ -135,6 +185,15 @@ public class Ranks implements Serializable
 		return result;
 	}
 
+	/**
+	 * Returns the list of players corresponding
+	 * to the specified rank.
+	 * 
+	 * @param rank
+	 * 		Rank of interest.
+	 * @return
+	 * 		Players having obtained this rank.
+	 */
 	public List<Profile> getProfilesFromRank(int rank)
 	{	List<Profile> result = ranks.get(rank);
 		return result;		
@@ -143,13 +202,23 @@ public class Ranks implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the rank of the specified profile, without considering
+	 * ex-aequos. In other terms, if two players are both ranked
+	 * 3rd, then this method returns 3 for one of them and 4 for the other.
+	 * 
+	 * @param profile
+	 * 		Player of interest.
+	 * @return
+	 * 		Absolute rank of the player.
+	 */
 	public int getAbsoluteRankForProfile(Profile profile)
 	{	int result = -1;
 		Iterator<Entry<Integer,List<Profile>>> it = ranks.entrySet().iterator();
 		int cpt = 1;
 		while(it.hasNext() && result==-1)
 		{	Entry<Integer,List<Profile>> entry = it.next();
-		List<Profile> list = entry.getValue();
+			List<Profile> list = entry.getValue();
 			Iterator<Profile> it2 = list.iterator();
 			while(it2.hasNext() && result==-1)
 			{	Profile p = it2.next();
@@ -162,6 +231,16 @@ public class Ranks implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Returns the rank of the specified profile, considering
+	 * ex-aequos. In other terms, if two players are both ranked
+	 * 3rd, then this method returns 3 for both of them.
+	 * 
+	 * @param profile
+	 * 		Player of interest.
+	 * @return
+	 * 		Rank of the player.
+	 */
 	public int getRankForProfile(Profile profile)
 	{	int result = -1;
 		Iterator<Entry<Integer,List<Profile>>> it = ranks.entrySet().iterator();
