@@ -42,6 +42,7 @@
   		<round local="true" name="roundItems" />
   		<round local="true" name="roundPower" />
   		<round local="true" name="roundReadysetgo" />
+  		<round local="true" name="roundClassic" />
   	</rounds>
 	
 </match>
