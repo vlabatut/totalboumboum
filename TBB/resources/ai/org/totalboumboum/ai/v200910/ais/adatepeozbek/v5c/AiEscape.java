@@ -390,8 +390,10 @@ public class AiEscape
 				{
 					
 					AiHero hr = getCloserHero();
-					AiPath pt = calculateNewPath(hr.getTile());
-					ownAi.setPath(pt);
+					if(hr!=null)
+					{	AiPath pt = calculateNewPath(hr.getTile());
+						ownAi.setPath(pt);
+					}
 					
 					return;	
 				}
