@@ -1664,7 +1664,7 @@ public class Launcher
 	 * 		x adapter les traj des bombes 
 	 */
 
-// TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournant)
+// TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournante)
 // TODO les scores obtenus lors des tie breaks sont-ils comptés dans les stats du tournoi?
 
 /* TODO
@@ -1688,11 +1688,6 @@ public class Launcher
 // TODO faire apparaitre graphiquement les résultats d'un round en surimpression sur la zone de jeu
 // TODO insérer une animation optionnelle de présentation des participants au round
 
-/*
- * articles à écrire sur le blog:
- * 		- enchainement des tournois (montrer l'évolution des stats, du coup?)
- */
-
 //TODO JProfiler:
 //	- voir ce qui prend du temps à l'ouverture des stats
 //	- voir ce qui cause inéluctablement des ralentissements lors du premier round
@@ -1701,6 +1696,7 @@ public class Launcher
 // TODO auto-advance: 
 //	- faire dessiner systématiquement un dessin en surimpression
 //	- le thread d'auto advance ne fait que changer l'état de ce dessin (masqué par défaut)
+//	- ça pourrait être un truc dans un label dans la barre de menu horizontale d'en bas
 
 // TODO màj des stats Glicko seulement lors des màj du classement? (éviter graphiques en escalier)
 //		>> comment savoir quand on lieu les màj glicko-2 ?
@@ -1733,10 +1729,6 @@ public class Launcher
 // TODO corolaire : lorsque les IA sont menacées par le jeu, la bombe
 // 		doit tomber et non pas apparaitre (comme c'est surement le cas)
 
-// TODO pb avec les graphiques (stats) de manche : quand un joueur meurt, il faudrait afficher deux points :
-//		- un à la même hauteur que le précédent
-//		- l'autre à zéro (pour avoir une droite verticale au moment de l'éliminiation)
-
 // TODO API 
 // + ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
 //		des classes dédiées : DistanceTools, NeighborTools, etc. (?)
@@ -1768,11 +1760,11 @@ public class Launcher
  * 		+ proposer d'enregistrer les stats d'une confrontation
  * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
  * 		+ capture d'écran des graphiques ? dessiner directement dans un panel puis sauver. à voir pour la couleur du fond ?
- * 		+ (corriger les plots lors des éliminations (verticalité) >> cf plus haut (déjà fait pr temps (ou autre))
  */
 
 /*
  * TODO POSTS SITE
+ * 		+ enchainement des tournois (montrer l'évolution des stats, du coup?)
  * 		+ anniversaire TBB
  * 		+ nouveau niveau de qualification
  * 		+ nouveaux niveaux du tournoi

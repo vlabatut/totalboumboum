@@ -586,7 +586,8 @@
  		- Correction d'un bug empêchant de changer un joueur quant il y en a déjà 16 (en raison d'un 
  		  blocage provoqué par le choix de la couleur) 
  		- Correction d'un bug lié à l'utilisation de F10 sous Win7
- 		- Possibilité de faire des captures d'écran en appuyant sur print screen
+ 		- Possibilité de faire des captures d'écran en cours de jeu, appuyant sur la touche print screen
+ 		- Correction d'un bug dans l'affichage des graphiques d'évolution des rounds
  	- niveaux :
  		- C'est maintenant possible de définir des évènements de mort subite dont la position est aléatoire
  	- moteur :
