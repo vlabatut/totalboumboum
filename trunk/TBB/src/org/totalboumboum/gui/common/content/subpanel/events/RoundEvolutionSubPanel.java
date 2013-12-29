@@ -40,7 +40,6 @@ import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Column;
@@ -450,11 +449,19 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 					{	long time = event.getTime();
 						String targetId = event.getTargetId();
 						int index = series.get(targetId);
+						// update elimination times list
 						List<Long> elim = eliminations.get(index);
 						elim.add(time);
+						/// possibly repeat the last value in the data series
+						if(selectedScore!=Score.TIME)
+						{	long count = counts.get(index);
+							DataTable dataTable = dataTables.get(index);
+							dataTable.add(time,count);
+						}
+						// add zero value to the data series
 						DataTable dataTable = dataTables.get(index);
-						counts.set(index,0l);
 						dataTable.add(time,0l);
+						counts.set(index,0l);
 					}
 				}
 			}
@@ -867,17 +874,36 @@ public class RoundEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of objects listening to this panel */
 	private List<EvolutionSubPanelListener> listeners = new ArrayList<EvolutionSubPanelListener>();
 	
+	/**
+	 * Adds a new listener to this panel.
+	 * 
+	 * @param listener
+	 * 		New listener.
+	 */
 	public void addListener(EvolutionSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
+	/**
+	 * Removes an existing listener from this panel.
+	 * 
+	 * @param listener
+	 * 		Listener to remove.
+	 */
 	public void removeListener(EvolutionSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
+	/**
+	 * Fires a mouse pressed event, transmits it to all listeners.
+	 * 
+	 * @param e
+	 * 		Event to transmit to listeners.
+	 */
 	private void fireMousePressed(MouseEvent e)
 	{	for(EvolutionSubPanelListener listener: listeners)
 			listener.mousePressed(e);
