@@ -21,11 +21,19 @@ package org.totalboumboum.game.tournament.league;
  * 
  */
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,11 +42,14 @@ import java.util.TreeSet;
 
 import org.jdom.Element;
 import org.totalboumboum.configuration.Configuration;
+import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.statistics.detailed.Score;
+import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.stream.network.data.host.HostState;
@@ -47,6 +58,9 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.CombinatoricsTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
+import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
@@ -142,11 +156,11 @@ public class LeagueTournament extends AbstractTournament
 
 	@Override
 	public void matchOver()
-	{	// stats
+	{	// update stats
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		
-		// limits
+		// check limits
 		if(currentIndex>=matches.size())
 		{	float[] points;
 			if(pointsProcessor!=null)
@@ -158,6 +172,18 @@ public class LeagueTournament extends AbstractTournament
 			panel.tournamentOver();
 			stats.initEndDate();
 			
+			// possibly record stats as text file
+			if(hasAi())
+			{	AisConfiguration config = Configuration.getAisConfiguration();
+				if(config.getRecordStats())
+				try
+				{	recordStatsAsText();
+				}
+				catch (FileNotFoundException e)
+				{	e.printStackTrace();
+				}
+			}
+
 			// server connection
 			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
 			if(serverConnection!=null)
@@ -345,6 +371,163 @@ public class LeagueTournament extends AbstractTournament
 		}
 			
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	protected void recordStatsAsText() throws FileNotFoundException
+	{	// get data
+		Ranks orderedPlayers = getOrderedPlayers();
+		List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
+		float points[] = stats.getPoints();
+			
+		// get file name
+		String fileBase = stats.getFilePath();
+		int confNbr = playedMatches.size();
+		String filePath = fileBase + "." + FileNames.FILE_TOURNAMENT + FileNames.EXTENSION_TEXT;
+			
+		// open text stream
+		FileOutputStream fileOut = new FileOutputStream(filePath);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+		OutputStreamWriter outSW = new OutputStreamWriter(outBuff);
+		PrintWriter writer = new PrintWriter(outSW);
+			
+		// write general info
+		writer.println("Tournament: "+getName());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); 
+		Date startDate = stats.getStartDate();
+		writer.println("Start: "+sdf.format(startDate));
+		Date endDate = stats.getEndDate();
+		writer.println("End: "+sdf.format(endDate));
+		long duration = endDate.getTime() - startDate.getTime();
+		String durationStr = TimeTools.formatTime(duration, TimeUnit.MINUTE, TimeUnit.MILLISECOND, false);
+		writer.println("Duration: "+durationStr);
+		writer.println();
+
+		// write headers
+		writer.print("Rank\t");
+		writer.print("Name\t");
+		writer.print("Color\t");
+//			writer.print("Id\t");
+		writer.print("Bombs\t");
+		writer.print("Items\t");
+		writer.print("Bombeds\t");
+		writer.print("Selfies\t");
+		writer.print("Bombings\t");
+		writer.print("Played\t");
+		writer.print("Lost\t");
+		writer.print("Drawn\t");
+		writer.print("Won\t");
+		writer.print("Points\t");
+		for(int i=0;i<confNbr;i++)
+			writer.print("M"+(i+1)+"\t");
+		writer.println();
+
+		// write data
+		for(int i=0;i<points.length;i++)
+		{	// set profile stuff
+			Profile profile = absoluteList.get(i);
+			int profileIndex = profiles.indexOf(profile);
+
+			// rank
+			{	int rank = orderedPlayers.getRankForProfile(profile);
+				writer.print(rank+".\t");
+			}
+			
+			// name
+			{	String name = profile.getName();
+				writer.print(name+"\t");
+			}
+			
+			// color
+			{	PredefinedColor color = profile.getSpriteColor();
+				writer.print(color+"\t");
+			}
+			
+			// id
+//				{	String id = playersIds.get(profileIndex);
+//					writer.print(name+"\t");
+//				}
+			
+			// bombs dropped
+			{	long scores[] = stats.getScores(Score.BOMBS);
+				long bombs = scores[profileIndex];
+				writer.print(bombs+"\t");
+			}
+			
+			// items pîcked
+			{	long scores[] = stats.getScores(Score.ITEMS);
+				long items = scores[profileIndex];
+				writer.print(items+"\t");
+			}
+			
+			// times bombed
+			{	long scores[] = stats.getScores(Score.BOMBEDS);
+				long bombeds = scores[profileIndex];
+				writer.print(bombeds+"\t");
+			}
+			
+			// self-bombings
+			{	long scores[] = stats.getScores(Score.SELF_BOMBINGS);
+				long selfies = scores[profileIndex];
+				writer.print(selfies+"\t");
+			}
+			
+			// players bombed
+			{	long scores[] = stats.getScores(Score.BOMBINGS);
+				long bombings = scores[profileIndex];
+				writer.print(bombings+"\t");
+			}
+			
+			// played
+			{	int played = stats.getPlayed()[profileIndex];
+				writer.print(played+"\t");
+			}
+			
+			// lost
+			{	int lost = stats.getLost()[profileIndex];
+				writer.print(lost+"\t");
+			}
+			
+			// drawn
+			{	int drawn = stats.getDrawn()[profileIndex];
+				writer.print(drawn+"\t");
+			}
+			
+			// won
+			{	int won = stats.getWon()[profileIndex];
+				writer.print(won+"\t");
+			}
+			
+			// points
+			{	float total[] = stats.getTotal();
+				float pts = total[profileIndex];
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
+				String ptsStr = nf.format(pts);
+				writer.print(ptsStr+"\t");
+			}
+			
+			// confrontations
+			{	List<StatisticBase> statMatches = stats.getConfrontationStats();
+				for(StatisticBase statMatch: statMatches)
+				{	float pts = statMatch.getPoints()[profileIndex];
+					NumberFormat nf = NumberFormat.getInstance();
+					nf.setMaximumFractionDigits(2);
+					nf.setMinimumFractionDigits(0);
+					String ptsStr = nf.format(pts);
+					writer.print(ptsStr+"\t");
+				}
+			}
+			
+			writer.println();
+		}
+		
+		// close stream
+		writer.close();
 	}
 
 	/////////////////////////////////////////////////////////////////
