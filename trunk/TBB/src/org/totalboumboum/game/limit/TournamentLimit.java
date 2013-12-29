@@ -21,12 +21,14 @@ package org.totalboumboum.game.limit;
  * 
  */
 
+import org.totalboumboum.game.tournament.AbstractTournament;
+
 /**
+ * Limit object meant to be used by an {@link AbstractTournament}.
  * 
  * @author Vincent Labatut
- *
  */
 public interface TournamentLimit extends Limit
 {
-
+	//
 }

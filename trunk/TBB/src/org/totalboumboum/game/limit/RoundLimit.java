@@ -21,12 +21,14 @@ package org.totalboumboum.game.limit;
  * 
  */
 
+import org.totalboumboum.game.round.Round;
+
 /**
+ * Limit object meant to be used by a {@link Round}.
  * 
  * @author Vincent Labatut
- *
  */
 public interface RoundLimit extends Limit
 {
-
+	//
 }

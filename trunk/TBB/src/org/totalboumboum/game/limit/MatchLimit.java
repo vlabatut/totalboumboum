@@ -21,12 +21,14 @@ package org.totalboumboum.game.limit;
  * 
  */
 
+import org.totalboumboum.game.match.Match;
+
 /**
+ * Limit object meant to be used by a {@link Match}.
  * 
  * @author Vincent Labatut
- *
  */
 public interface MatchLimit extends Limit
 {
-
+	//
 }

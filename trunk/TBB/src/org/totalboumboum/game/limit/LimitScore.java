@@ -27,15 +27,27 @@ import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
- * this limit is based on a given score (time, bombings, items...).
- * for example, a round can be stopped as soon as a player collects 30 items, or has 4 bombings
+ * This limit is based on a given score (time, bombings, items...).
+ * For example, a round can be stopped as soon as a player collects 30 items, or has 4 bombings.
  * 
  * @author Vincent Labatut
- *
  */
 public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new limit object.
+	 * 
+	 * @param threshold
+	 * 		Threshold value.
+	 * @param comparatorCode
+	 * 		How the comparison is performed.
+	 * @param score
+	 * 		Concerned score.
+	 * @param pointProcessor
+	 * 		Associated point processor.
+	 */
 	public LimitScore(long threshold, Comparisons comparatorCode, Score score, AbstractPointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.score = score;
@@ -46,8 +58,15 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// LIMITED VALUE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Score used by this limit */
 	private Score score;
 
+	/**
+	 * Returns the score used by this limit.
+	 * 
+	 * @return
+	 * 		Score used by this limit.
+	 */
 	public Score getScore()
 	{	return score;
 	}
@@ -55,21 +74,47 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Threshold of this limit object */
 	private long threshold;
+	/** Type of the performed comparison */ 
 	private Comparisons comparatorCode;
 	
+	/**
+	 * Returns the threshold value of this limit object.
+	 * 
+	 * @return
+	 * 		Threshold value.
+	 */
 	public long getThreshold()
 	{	return threshold;
 	}
 	
+	/**
+	 * Changes the threshold value of this limit object.
+	 * 
+	 * @param threshold
+	 * 		New threshold value.
+	 */
 	public void setThreshold(int threshold)
 	{	this.threshold = threshold;
 	}
 
+	/**
+	 * Returns the comparison mode of this limit object.
+	 * 
+	 * @return
+	 * 		Comparison mode.
+	 */
 	public Comparisons getComparatorCode()
 	{	return comparatorCode;
 	}
 	
+	/**
+	 * Changes the comparison mode of this limit object.
+	 * 
+	 * @param comparatorCode
+	 * 		New comparison mode.
+	 */
 	public void setComparatorCode(Comparisons comparatorCode)
 	{	this.comparatorCode = comparatorCode;
 	}
@@ -118,12 +163,20 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Associated point processor */
 	private AbstractPointsProcessor pointProcessor;
 	
+	@Override
 	public AbstractPointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 
+	/**
+	 * Changes the associated point processor.
+	 *  
+	 * @param pointProcessor
+	 * 		New point processor.
+	 */
 	public void setPointProcessor(AbstractPointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
