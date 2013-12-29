@@ -267,6 +267,7 @@ public class XmlNames
 	public static final String RANKINGS = "rankings";
 	public static final String RANKING = "ranking";
 	public static final String RANKPOINTS = "rankpoints";
+	public static final String RECORD_STATS = "recordStats";
 	public static final String RED = "red";
 	public static final String REFERENCE = "reference";
 	public static final String REGULAR_LAUNCH = "regularLaunch";
