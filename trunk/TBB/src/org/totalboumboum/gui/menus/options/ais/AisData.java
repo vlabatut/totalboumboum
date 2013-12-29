@@ -26,7 +26,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NavigableSet;
@@ -56,30 +55,50 @@ import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.xml.sax.SAXException;
 
 /**
+ * Table used to the display the AI-related options.
  * 
  * @author Vincent Labatut
- *
  */
 public class AisData extends EntitledDataPanel implements MouseListener
-{	
+{	/** Class id */
 	private static final long serialVersionUID = 1L;
 	
+	/** Row count */
 	private static final int LINE_COUNT = 20;
+	/** Row used to display the update-per-second option */
 	private static final int LINE_UPS = 0;
+	/** Row used to display the auto-advance option */
 	private static final int LINE_AUTO_ADVANCE = 1;
+	/** Row used to display the auto-advance delay */
 	private static final int LINE_AUTO_ADVANCE_DELAY = 2;
+	/** Row used to display the tournament auto-advance mode */
 	private static final int LINE_TRMNT_AUTO_ADVANCE_MODE = 3;
+	/** Row used to display the pack for the tournament auto-advance mode */
 	private static final int LINE_TRMNT_AUTO_ADVANCE_PACK = 4;
+	/** Row used to display the option hiding all-AI games (simulating them) */
 	private static final int LINE_HIDE_ALL_AIS = 5;
+	/** Row used to display the option allowing to automatically threaten idle agents */
 	private static final int LINE_BOMB_USELESS_AIS = 6;
-	private static final int LINE_DISPLAY_EXCPTIONS = 7;
+	/** Row used to display the option displaying AI exceptions in the console */
+	private static final int LINE_DISPLAY_EXCEPTIONS = 7;
+	/** Row used to display the option logging AI exceptions in a file */
 	private static final int LINE_LOG_EXCEPTIONS = 8;
+	/** Row used to display the option allowing to record tournament stats as separate text files */
+	private static final int LINE_RECORD_STATS = 9;
 
-	
+	/** Packs available for the tournament auto-advance "pack" mode */
 	private List<String> availablePacks;
+	/** Panel used to display options */
 	private LinesSubPanel optionsPanel;
+	/** Associated configuration object */
 	private AisConfiguration aisConfiguration;
 	
+	/**
+	 * Creates a new panel to display ai-related options.
+	 * 
+	 * @param container
+	 * 		Container of this panel.
+	 */
 	public AisData(SplitMenuPanel container)
 	{	super(container);
 
@@ -370,7 +389,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				}
 				
 				// #7 DISPLAY EXCEPTIONS
-				{	Line ln = optionsPanel.getLine(LINE_DISPLAY_EXCPTIONS);
+				{	Line ln = optionsPanel.getLine(LINE_DISPLAY_EXCEPTIONS);
 					ln.addLabel(0);
 					int col = 0;
 					// name
@@ -417,8 +436,32 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
+				// #9 RECORD STATS
+				{	Line ln = optionsPanel.getLine(LINE_RECORD_STATS);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_RECORD_STATISTICS_TITLE,false);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setRecordStats();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
 				// EMPTY
-				{	for(int line=LINE_LOG_EXCEPTIONS+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_RECORD_STATS+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int maxWidth = ln.getWidth();
@@ -434,6 +477,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		}
 	}
 	
+	/**
+	 * Init the AI pack list depending on available files and folders.
+	 */
 	private void initPackList()
 	{	TreeSet<String> temp = new TreeSet<String>();
 		RankingService rankingService = GameStatistics.getRankingService();
@@ -477,6 +523,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		availablePacks = new ArrayList<String>(temp2);
 	}
 	
+	/**
+	 * Updates the auto-advance option.
+	 */
 	private void setAutoAdvance()
 	{	AutoAdvance autoAdvance = aisConfiguration.getAutoAdvance();
 		String aaStr = autoAdvance.toString();
@@ -484,6 +533,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_AUTO_ADVANCE).setLabelKey(2,key,false);
 	}
 	
+	/**
+	 * Updates the auto-advance delay.
+	 */
 	private void setAutoAdvanceDelay()
 	{	long speed = aisConfiguration.getAutoAdvanceDelay();
 		String text = Long.toString(speed/1000);
@@ -491,6 +543,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_AUTO_ADVANCE_DELAY).setLabelText(2,text,tooltip);
 	}
 	
+	/**
+	 * Updates the tournament auto-advance mode.
+	 */
 	private void setTournamentAutoAdvanceMode()
 	{	TournamentAutoAdvance tournamentAutoAdvance = aisConfiguration.getTournamentAutoAdvanceMode();
 		String taaStr = tournamentAutoAdvance.toString();
@@ -498,12 +553,18 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_TRMNT_AUTO_ADVANCE_MODE).setLabelKey(2,key,false);
 	}
 	
+	/**
+	 * Updates the tournament auto-advance pack.
+	 */
 	private void setTournamentAutoAdvancePack()
 	{	String pack = aisConfiguration.getTournamentAutoAdvancePack();
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_AIS_LINE_TOURNAMENT_AUTO_ADVANCE_PACK_TITLE+GuiKeys.TOOLTIP);
 		optionsPanel.getLine(LINE_TRMNT_AUTO_ADVANCE_PACK).setLabelText(2,pack,tooltip);
 	}
 	
+	/**
+	 * Updates the UPS option.
+	 */
 	private void setUps()
 	{	int ups = aisConfiguration.getAiUps();
 		String text = Integer.toString(ups);
@@ -511,6 +572,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_UPS).setLabelText(2,text,tooltip);
 	}
 	
+	/**
+	 * Updates the options controlling the display of all-ai rounds.
+	 */
 	private void setHideAllais()
 	{	boolean hideAllais = aisConfiguration.getHideAllAis();
 		String key;
@@ -521,6 +585,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_HIDE_ALL_AIS).setLabelKey(1,key,true);
 	}
 	
+	/**
+	 * Updates the option controlling the threatening of idle agents.
+	 */
 	private void setBombUselessAis()
 	{	long buais = aisConfiguration.getBombUselessAis();
 		String text,tooltip;
@@ -535,6 +602,9 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_BOMB_USELESS_AIS).setLabelText(2,text,tooltip);
 	}
 	
+	/**
+	 * 	Updates the option displaying AI exceptions in the console.
+	 */
 	private void setDisplayExceptions()
 	{	boolean displayExceptions = aisConfiguration.getDisplayExceptions();
 		String key;
@@ -542,9 +612,12 @@ public class AisData extends EntitledDataPanel implements MouseListener
 			key = GuiKeys.MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_ENABLED;
 		else
 			key = GuiKeys.MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_DISABLED;
-		optionsPanel.getLine(LINE_DISPLAY_EXCPTIONS).setLabelKey(1,key,true);
+		optionsPanel.getLine(LINE_DISPLAY_EXCEPTIONS).setLabelKey(1,key,true);
 	}
 	
+	/** 
+	 * Updates the option logging AI exceptions in a file.
+	 */
 	private void setLogExceptions()
 	{	boolean logExceptions = aisConfiguration.getLogExceptions();
 		String key;
@@ -555,11 +628,30 @@ public class AisData extends EntitledDataPanel implements MouseListener
 		optionsPanel.getLine(LINE_LOG_EXCEPTIONS).setLabelKey(1,key,true);
 	}
 	
+	/** 
+	 * Updates the option allowing to record tournament stats as separate text files
+	 */
+	private void setRecordStats()
+	{	boolean recordStats = aisConfiguration.getRecordStats();
+		String key;
+		if(recordStats)
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_RECORD_STATISTICS_ENABLED;
+		else
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_RECORD_STATISTICS_DISABLED;
+		optionsPanel.getLine(LINE_RECORD_STATS).setLabelKey(1,key,true);
+	}
+	
 	@Override
 	public void refresh()
 	{	// nothing to do here
 	}
 
+	/**
+	 * Returns the configuration object associated to this panel.
+	 * 
+	 * @return
+	 * 		Ai-related configuration object.
+	 */
 	public AisConfiguration getAisConfiguration()
 	{	return aisConfiguration;
 	}	
@@ -567,20 +659,19 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -695,7 +786,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				setBombUselessAis();
 				break;
 			// display exceptions
-			case LINE_DISPLAY_EXCPTIONS:
+			case LINE_DISPLAY_EXCEPTIONS:
 				boolean displayExceptions = !aisConfiguration.getDisplayExceptions();
 				aisConfiguration.setDisplayExceptions(displayExceptions);
 				setDisplayExceptions();
@@ -705,6 +796,12 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				boolean logExceptions = !aisConfiguration.getLogExceptions();
 				aisConfiguration.setLogExceptions(logExceptions);
 				setLogExceptions();
+				break;
+			// record stats
+			case LINE_RECORD_STATS:
+				boolean recordStats = !aisConfiguration.getRecordStats();
+				aisConfiguration.setRecordStats(recordStats);
+				setRecordStats();
 				break;
 		}
 
