@@ -150,6 +150,9 @@ public class FilePaths
 	{	return getCachePath()+File.separator+FileNames.FILE_THEMES;		
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// CAPTURES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * used to store different types of captures.
@@ -161,9 +164,6 @@ public class FilePaths
 	{	return getResourcesPath()+File.separator+FileNames.FILE_CAPTURES;		
 	}
 	
-    /////////////////////////////////////////////////////////////////
-	// CAPTURES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	/**
 	 * Returns the path of the folder
 	 * used to store screen captures.
@@ -388,6 +388,17 @@ public class FilePaths
 	{	return getResourcesPath()+File.separator+FileNames.FILE_STATISTICS;		
 	}
 
+	/**
+	 * Returns the path of the folder
+	 * used to store confrontation statistics.
+	 * 
+	 * @return
+	 * 		Path of the confrontation stats folder.
+	 */
+	public static String getConfrontationsStatisticsPath()
+	{	return getStatisticsPath()+File.separator+FileNames.FILE_CONFRONTATIONS;		
+	}
+	
 	/**
 	 * Returns the path of the folder
 	 * used to store detailed statistics.
