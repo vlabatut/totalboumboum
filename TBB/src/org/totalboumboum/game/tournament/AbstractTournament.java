@@ -21,6 +21,7 @@ package org.totalboumboum.game.tournament;
  * 
  */
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -260,6 +261,23 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	public List<Profile> getProfiles()
 	{	return profiles;	
 	}
+	
+	/**
+	 * Checks if the current confrontation contains artificial agents.
+	 * 
+	 * @return
+	 * 		{@code true} iff the confrontation has at least one artificial agent.
+	 */
+	public boolean hasAi()
+	{	List<Profile> profiles = getProfiles();
+		Iterator<Profile> it = profiles.iterator();
+		boolean result = false;
+		while(it.hasNext() && !result)
+		{	Profile profile = it.next();
+			result = profile.hasAi();
+		}
+		return result;
+	}
 
 	/**
 	 * Returns the profile whose id corresponds
@@ -356,6 +374,14 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	{	return stats;
 	}
 
+	/**
+	 * Records a summary of the stats of this tournament as a text file.
+	 * 
+	 * @throws FileNotFoundException 
+	 * 		Problem while accessing the stats file.
+	 */
+	protected abstract void recordStatsAsText() throws FileNotFoundException;
+	
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
