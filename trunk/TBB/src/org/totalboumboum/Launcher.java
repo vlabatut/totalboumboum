@@ -1754,7 +1754,12 @@ public class Launcher
  * 		+ remplacer l'affichage des matchs, car déjà dispo dans partie résultats
  * 		+ à la place, mettre des infos générales sur le tournoi
  * 		+ >> p-ê un split horizontal plutot que vertical ?
- * TODO FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
+ * 
+ * TODO compét
+ * 		+ FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
+ * 		+ ajouter le nouveau niveau à coupe (colimaçon)
+ * 		+ mesurer le temps pris par coupe, compléter en fonction (plus de rounds ?)
+ * 		+ définir version neutre de tous les niveaux, compléter supercoupe
  * 
  * TODO touche pour envoyer des bombes manuellement en cas de cycle (évite d'avoir à le détecter manuellement) ?
  * 		+ détection auto : retenir les cases correspondant à des changements de direction ?
