@@ -1760,8 +1760,15 @@ public class Launcher
  * 		+ détection auto : retenir les cases correspondant à des changements de direction ?
  * 
  * TODO
- * 		+ sortir automatiquement les stats de chaque round, match, etc, sous la forme de fichier texte
- * 		+ proposer d'enregistrer les stats, depuis le menu de sauvegarde ?
+ * 		+ proposer d'enregistrer les stats d'une confrontation
+ * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
  * 		+ capture d'écran des graphiques ? dessiner directement dans un panel puis sauver. à voir pour la couleur du fond ?
- * 		+ (corriger les plots lors des éliminations (verticalité) >> cf plus haut
+ * 		+ (corriger les plots lors des éliminations (verticalité) >> cf plus haut (déjà fait pr temps (ou autre))
  */
+
+/*
+ * TODO POSTS SITE
+ * 		+ nouveau niveau de qualification
+ * 		+ nouveaux niveaux du tournoi
+ * 		+ format de la super coupe
+ */ 
