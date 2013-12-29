@@ -22,11 +22,14 @@ package org.totalboumboum.gui.common.content.subpanel.round;
  */
 
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface RoundQuickConfigSubPanelListener
 {
+	/**
+	 * Called when the configuration is modified.
+	 */
 	public void roundQuickConfigModified();
 }

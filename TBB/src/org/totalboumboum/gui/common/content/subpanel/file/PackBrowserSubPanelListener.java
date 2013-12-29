@@ -22,11 +22,14 @@ package org.totalboumboum.gui.common.content.subpanel.file;
  */
 
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface PackBrowserSubPanelListener
-{
+{	
+	/**
+	 * Called when the pack selection is changed.
+	 */
 	public void packBrowserSelectionChanged();
 }

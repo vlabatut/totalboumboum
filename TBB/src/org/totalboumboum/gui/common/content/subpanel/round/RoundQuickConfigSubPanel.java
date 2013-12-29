@@ -36,19 +36,27 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
+ * Panel used to configure quick rounds.
  * 
  * @author Vincent Labatut
- *
  */
 public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public RoundQuickConfigSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINE_COUNT,1,false);
 	

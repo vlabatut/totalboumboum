@@ -22,12 +22,19 @@ package org.totalboumboum.gui.common.content.subpanel.transfer;
  */
 
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface TransferSubPanelListener
 {
+	/**
+	 * Called when the left transfer button is clicked.
+	 */
 	public void transferLeftClicked();
+	
+	/**
+	 * Called when the right transfer button is clicked.
+	 */
 	public void transferRightClicked();
 }

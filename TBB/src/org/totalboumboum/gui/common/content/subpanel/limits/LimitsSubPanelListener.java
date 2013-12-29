@@ -1,7 +1,5 @@
 package org.totalboumboum.gui.common.content.subpanel.limits;
 
-import java.awt.event.MouseEvent;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -23,13 +21,25 @@ import java.awt.event.MouseEvent;
  * 
  */
 
+import java.awt.event.MouseEvent;
+
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface LimitsSubPanelListener
 {
+	/**
+	 * Called when the limit selection has changed.
+	 */
 	public void limitSelectionChanged();
+	
+	/**
+	 * Called when the mouse is pressed on the panel.
+	 * 
+	 * @param e
+	 * 		Corresponding mouse event. 
+	 */
 	public void mousePressed(MouseEvent e);
 }

@@ -1,7 +1,5 @@
 package org.totalboumboum.gui.common.content.subpanel.leg;
 
-import java.awt.event.MouseEvent;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -23,16 +21,35 @@ import java.awt.event.MouseEvent;
  * 
  */
 
+import java.awt.event.MouseEvent;
+
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface LegSubPanelListener
 {
+	/**
+	 * Called when the leg selection has changed.
+	 */
 	public void legSelectionChanged();
+	
+	/**
+	 * Called when the previous leg button is clicked.
+	 */
 	public void legBeforeClicked();
+	
+	/**
+	 * Called when the next leg button is clicked.
+	 */
 	public void legAfterClicked();
 	
+	/**
+	 * Called when the mouse is pressed on the panel.
+	 * 
+	 * @param e
+	 * 		Corresponding mouse event. 
+	 */
 	public void mousePressed(MouseEvent e);
 }

@@ -45,13 +45,22 @@ import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 
 /**
+ * Panel displaying a cup tournament part.
  * 
  * @author Vincent Labatut
- *
  */
 public class PartSubPanel extends LinesSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public PartSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.TITLE,1,1,false);
 		

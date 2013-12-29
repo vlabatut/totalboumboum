@@ -49,7 +49,6 @@ import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiStringTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
@@ -59,15 +58,26 @@ import org.totalboumboum.tools.images.PredefinedColor;
 import org.xml.sax.SAXException;
 
 /**
+ * Panel used for player selection.
  * 
  * @author Vincent Labatut
- *
  */
 public class PlayersSelectionSubPanel extends TableSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 16+1;
+	/** Number of columns */
 	private static final int COLS = 7;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public PlayersSelectionSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
@@ -245,7 +255,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			// hero
 			{	// content
 				String tooltip = profile.getSpriteName();
-				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+				BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
 				setLabelIcon(line,COL_HERO,image,tooltip);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);

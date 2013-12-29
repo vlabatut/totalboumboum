@@ -41,20 +41,28 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
- * allows to browse a folder with its content
- * one level of hierarchy : the folder itself and its content
- * an optional ".." button allows going to the parent.
+ * Allows to browse a folder with its content
+ * one level of hierarchy: the folder itself and its content.
+ * An optional ".." button allows going to the parent.
  * 
  * @author Vincent Labatut
- *
  */
 public class FolderBrowserSubPanel extends TableSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 20;;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public FolderBrowserSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
 		

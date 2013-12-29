@@ -62,7 +62,7 @@ import de.erichseifert.gral.ui.InteractivePanel;
 
 /**
  * This class is used to display plots representing the evolution
- * of Glicko-2 related statistics. It includes various controls
+ * of player statistics. It includes various controls
  * allowing to hide/display players and switch to other stats.
  * 
  * @author Vincent Labatut

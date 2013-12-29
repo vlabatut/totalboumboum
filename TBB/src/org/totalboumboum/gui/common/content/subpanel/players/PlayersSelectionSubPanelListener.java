@@ -24,9 +24,10 @@ import java.awt.event.MouseEvent;
  */
 
 /**
- * 
+ * Interface for objects listening to panels
+ * displaying a player selection table.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface PlayersSelectionSubPanelListener
 {

@@ -340,7 +340,7 @@ public enum StatisticColumn
  */
 		}
 		else if(this==GENERAL_PORTRAIT)
-		{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+		{	BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
 			String tooltip = profile.getSpriteName();
 			panel.setLabelIcon(line,col,image,tooltip);
 		}		

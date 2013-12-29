@@ -22,11 +22,14 @@ package org.totalboumboum.gui.common.content.subpanel.host;
  */
 
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface HostInfoSubPanelListener
 {
+	/**
+	 * Called when the ip button is clicked.
+	 */
 	public void ipClicked();
 }

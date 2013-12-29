@@ -38,7 +38,6 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.images.ImageTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 
@@ -287,17 +286,17 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 
 	@Override
@@ -316,6 +315,6 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 }

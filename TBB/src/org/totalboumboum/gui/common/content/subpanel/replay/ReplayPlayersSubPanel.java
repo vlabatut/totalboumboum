@@ -28,21 +28,32 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.file.replay.FileClientStream;
 import org.totalboumboum.tools.GameData;
 
 /**
+ * Panel used to browse replay files.
  * 
  * @author Vincent Labatut
- *
  */
 public class ReplayPlayersSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of columns by group */
 	private static final int COL_SUBS = 1;
+	/** Number of column groups */
 	private static final int COL_GROUPS = 1;
+	/** Number of lines */
 	private static final int LINES = GameData.MAX_PROFILES_COUNT;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public ReplayPlayersSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		setReplay(null);

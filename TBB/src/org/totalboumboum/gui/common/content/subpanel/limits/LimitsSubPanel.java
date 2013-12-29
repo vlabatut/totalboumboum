@@ -37,29 +37,41 @@ import org.totalboumboum.game.limit.LimitScore;
 import org.totalboumboum.game.limit.LimitTime;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.gui.common.content.MyLabel;
-import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
+ * Panel displaying limits details.
  * 
  * @author Vincent Labatut
- *
  */
 public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of column groups */
 	private static final int COL_GROUPS = 1;
+	/** Number of columns by group */
 	private static final int COL_SUBS = 2;
+	/** Number of lines */
 	private static final int LINES = 8;
-
+	/** Gui key */
 	private String prefix;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 * @param type
+	 * 		Limit type.
+	 */
 	public LimitsSubPanel(int width, int height, String type)
 	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		

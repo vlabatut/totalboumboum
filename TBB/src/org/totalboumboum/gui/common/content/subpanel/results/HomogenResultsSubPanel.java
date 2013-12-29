@@ -41,7 +41,6 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
@@ -50,18 +49,28 @@ import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
+ * Panel used to display various game results (as a table).
  * 
  * @author Vincent Labatut
- *
  */
 public class HomogenResultsSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = GameData.STANDARD_TILE_DIMENSION+1;
+	/** Number of columns */
 	private static final int COLS = 0;
-	
-
+	/** Gui key prefix */
 	private String prefix;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public HomogenResultsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,true);
 		
@@ -226,7 +235,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				}
 				// portrait
 				if(showPortrait)
-				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+				{	BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
 					String tooltip = profile.getSpriteName();
 					setLabelIcon(line,col,image,tooltip);
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;

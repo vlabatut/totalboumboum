@@ -39,17 +39,17 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
- * allows to browse files, with a paginated view
- * flat structure only (no folder-like hierarchy)
+ * Allows to browse files, with a paginated view
+ * flat structure only (no folder-like hierarchy).
  * 
  * @author Vincent Labatut
- *
  */
 public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 20;
 
 	public FileBrowserSubPanel(int width, int height)

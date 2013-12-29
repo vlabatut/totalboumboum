@@ -36,7 +36,6 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.tools.GameData;
@@ -44,18 +43,28 @@ import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
 /**
+ * Panel displaying league tournament results.
  * 
  * @author Vincent Labatut
- *
  */
 public class LeagueResultsSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = GameData.STANDARD_TILE_DIMENSION+1;
+	/** Number of columns */
 	private static final int COLS = 0;
-	
+	/** Gui key prefix */
+	private static final String PREFIX = GuiKeys.COMMON_RESULTS+GuiKeys.TOURNAMENT;
 
-	private String prefix;
-
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public LeagueResultsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,true);
 		
@@ -91,9 +100,6 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			if(showPoints) 
 				cols++;
 			reinit(LINES,cols);
-			
-			// prefix
-			prefix = GuiKeys.COMMON_RESULTS+GuiKeys.TOURNAMENT;
 				
 			// col widths
 			int headerHeight = getHeaderHeight();
@@ -106,7 +112,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			
 			// headers
 			int col = 0;
-			{	String headerPrefix = prefix+GuiKeys.HEADER;
+			{	String headerPrefix = PREFIX+GuiKeys.HEADER;
 				if(showPortrait) 
 				{	String key = headerPrefix+GuiKeys.PORTRAIT;
 					setLabelKey(0,col,key,true);
@@ -175,7 +181,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 				Color clr = profile.getSpriteColor().getColor();
 				// portrait
 				if(showPortrait)
-				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+				{	BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
 					String tooltip = profile.getSpriteName();
 					setLabelIcon(line,col,image,tooltip);
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
