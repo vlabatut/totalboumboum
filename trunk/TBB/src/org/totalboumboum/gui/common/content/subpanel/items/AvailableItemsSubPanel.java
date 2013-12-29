@@ -24,7 +24,6 @@ package org.totalboumboum.gui.common.content.subpanel.items;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -38,20 +37,31 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.tools.images.ImageTools;
 
 /**
+ * Panel displaying available items, before the round starts.
  * 
  * @author Vincent Labatut
- *
  */
 public class AvailableItemsSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 4;
+	/** Number of columns by group */
 	private static final int COL_SUBS = 2;
+	/** Number of column groups */
 	private static final int COL_GROUPS = 5;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public AvailableItemsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		// title

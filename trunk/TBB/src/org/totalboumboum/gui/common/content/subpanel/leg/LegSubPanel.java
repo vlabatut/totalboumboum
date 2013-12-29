@@ -47,16 +47,24 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * Panel displaying a cup tournament leg.
  * 
  * @author Vincent Labatut
- *
  */
 public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSubPanelListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public LegSubPanel(int width, int height)
 	{	super(width,height,Mode.BORDER);
 	

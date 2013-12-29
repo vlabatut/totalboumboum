@@ -32,17 +32,26 @@ import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * Panel used to select levels.
  * 
  * @author Vincent Labatut
- *
  */
 public class TransferSubPanel extends TableSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of columns */
 	private static final int COLS = 1;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public TransferSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,1,1,COLS,false);
 	

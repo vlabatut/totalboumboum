@@ -1,7 +1,5 @@
 package org.totalboumboum.gui.common.content.subpanel.game;
 
-import org.totalboumboum.stream.network.data.game.GameInfo;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2013 Vincent Labatut 
@@ -23,17 +21,51 @@ import org.totalboumboum.stream.network.data.game.GameInfo;
  * 
  */
 
+import org.totalboumboum.stream.network.data.game.GameInfo;
+
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface GameListSubPanelListener
 {
+	/**
+	 * Called when the game selection has changed.
+	 * 
+	 * @param gameId 
+	 * 		Id of the selected game.
+	 */
 	public void gameSelectionChanged(String gameId);
+
+	/**
+	 * Called when the line has changed.
+	 * 
+	 * @param gameInfo 
+	 * 		Info of the changed game.
+	 */
 	public void gameLineModified(GameInfo gameInfo);
+
+	/**
+	 * Called when the requested game has changed.
+	 * 
+	 * @param gameInfo 
+	 * 		Info of the requested game.
+	 */
 	public void refreshGameRequested(GameInfo gameInfo);
+
+	/**
+	 * Called when the previous game is required.
+	 */
 	public void gameBeforeClicked();
+
+	/**
+	 * Called when the next game is required.
+	 */
 	public void gameAfterClicked();
+
+	/**
+	 * Called when a game is added.
+	 */
 	public void gameAddClicked();
 }

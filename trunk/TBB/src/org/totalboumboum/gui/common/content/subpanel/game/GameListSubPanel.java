@@ -47,21 +47,32 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiMiscTools;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.network.data.game.GameInfo;
 import org.totalboumboum.stream.network.data.host.HostInfo;
 
 /**
+ * Panel displaying a list of remote games.
  * 
  * @author Vincent Labatut
- *
  */
 public class GameListSubPanel extends EmptySubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Column number for the previous button */
 	private final static int COL_PREVIOUS = 0;
+	/** Column number for the display button */
 	private final static int COL_DISPLAY = 2;
+	/** Column number for the next button */
 	private final static int COL_NEXT = 4;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public GameListSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
 

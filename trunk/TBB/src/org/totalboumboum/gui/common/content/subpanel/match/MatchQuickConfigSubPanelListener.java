@@ -22,11 +22,14 @@ package org.totalboumboum.gui.common.content.subpanel.match;
  */
 
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface MatchQuickConfigSubPanelListener
 {
+	/**
+	 * Called when the match configuration is changed.
+	 */
 	public void matchQuickConfigModified();
 }

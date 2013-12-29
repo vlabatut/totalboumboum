@@ -42,21 +42,31 @@ import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.gui.tools.GuiStringTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
 
 /**
+ * Panel displaying a list of players.
  * 
  * @author Vincent Labatut
- *
  */
 public class PlayersListSubPanel extends TableSubPanel implements MouseListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 16+1;
+	/** Number of columns */
 	private static final int COLS = 4;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public PlayersListSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
@@ -136,7 +146,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				setLineBackground(line,bg);
 				// portrait
-				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+				{	BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
 					String tooltip = profile.getSpriteName();
 					setLabelIcon(line,col,image,tooltip);
 					col++;

@@ -45,18 +45,32 @@ import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.statistics.detailed.Score;
 
 /**
+ * Panel displaying {@link AbstractPointsProcessor} information.
  * 
  * @author Vincent Labatut
- *
  */
 public class PointsSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 8;
+	/** Number of columns by group */
 	private static final int COL_SUBS = 2;
+	/** Number of column groups */
 	private static final int COL_GROUPS = 1;
-	
+	/** Gui key */
 	private String prefix;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 * @param type
+	 * 		Processor type.
+	 */
 	public PointsSubPanel(int width, int height, String type)
 	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		

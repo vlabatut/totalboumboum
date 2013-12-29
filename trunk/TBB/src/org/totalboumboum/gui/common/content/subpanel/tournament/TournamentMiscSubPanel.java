@@ -38,18 +38,30 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
+ * Panel displaying tournament details.
  * 
  * @author Vincent Labatut
- *
  */
 public class TournamentMiscSubPanel extends TableSubPanel
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of columns by group */
 	private static final int COL_SUBS = 2;
+	/** Number of column groups */
 	private static final int COL_GROUPS = 1;
 	
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 * @param lines
+	 * 		Number of lines in the panel table.
+	 */
 	public TournamentMiscSubPanel(int width, int height, int lines)
 	{	super(width,height,SubPanel.Mode.BORDER,lines,COL_GROUPS,COL_SUBS,true);
 	

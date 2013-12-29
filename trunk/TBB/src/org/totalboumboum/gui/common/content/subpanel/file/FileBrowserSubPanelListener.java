@@ -22,12 +22,19 @@ package org.totalboumboum.gui.common.content.subpanel.file;
  */
 
 /**
- * 
+ * Interface for objects listening to the associated panel.
+ *  
  * @author Vincent Labatut
- *
  */
 public interface FileBrowserSubPanelListener
 {
+	/**
+	 * Called when the file selection has changed.
+	 */
 	public void fileBrowserSelectionChanged();
+	
+	/**
+	 * Called when the parent is reached.
+	 */
 	public void fileBrowserParentReached();
 }

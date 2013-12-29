@@ -41,21 +41,30 @@ import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
-import org.totalboumboum.gui.tools.GuiImageTools;
 
 /**
- * like the FolderBrowser, but for specific folders called packs,
- * with a slightly different structure (eg AI agents packages)
- * top level folder, so there's no ".." button like in FolderBrowser
+ * Like the {@link FolderBrowserSubPanel}, but for specific folders called packs,
+ * with a slightly different structure (eg AI agents packages).
+ * Top level folder, so there's no ".." button like in {@code FolderBrowserSubPanel}.
  * 
  * @author Vincent Labatut
- *
  */
 public class PackBrowserSubPanel extends TableSubPanel implements MouseListener, FolderBrowserSubPanelListener
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	/** Number of lines */
 	private static final int LINES = 20;
+	/** Number of columns */
 	private static final int COLS = 1;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public PackBrowserSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,COLS,false);
 		
