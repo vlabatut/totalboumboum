@@ -1768,7 +1768,11 @@ public class Launcher
 
 /*
  * TODO POSTS SITE
+ * 		+ anniversaire TBB
  * 		+ nouveau niveau de qualification
  * 		+ nouveaux niveaux du tournoi
  * 		+ format de la super coupe
+ * 		+ vidéos du tournoi
  */ 
+
+// TODO A*: insérer un critère primaire permettant de désavantager les chemins passant par certaines cases?
