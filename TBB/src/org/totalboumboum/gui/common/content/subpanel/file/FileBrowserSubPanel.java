@@ -52,6 +52,14 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 	/** Number of lines */
 	private static final int LINES = 20;
 
+	/**
+	 * Builds a new panel.
+	 * 
+	 * @param width
+	 * 		Width of the panel.
+	 * @param height
+	 * 		Height of the panel.
+	 */
 	public FileBrowserSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
 		
