@@ -21,10 +21,18 @@ package org.totalboumboum.game.round;
  * 
  */
 
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
@@ -35,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
+import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.loop.ClientLoop;
 import org.totalboumboum.engine.loop.ReplayLoop;
 import org.totalboumboum.engine.loop.RegularLoop;
@@ -50,6 +59,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.statistics.GameStatistics;
+import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.statistics.detailed.StatisticRound;
@@ -59,7 +69,10 @@ import org.totalboumboum.stream.network.client.ClientGeneralConnection;
 import org.totalboumboum.stream.network.server.ServerGeneralConnection;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.RankingTools;
+import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.images.PredefinedColor;
+import org.totalboumboum.tools.time.TimeTools;
+import org.totalboumboum.tools.time.TimeUnit;
 import org.xml.sax.SAXException;
 
 /**
@@ -387,7 +400,19 @@ public class Round implements StatisticHolder, Serializable
 		{	stats.initEndDate();		
 		}
 	
-		// possibly not record simulated stats
+		// possibly record stats as text file
+		if(hasAi())
+		{	AisConfiguration config = Configuration.getAisConfiguration();
+			if(config.getRecordStats())
+			try
+			{	recordStatsAsText();
+			}
+			catch (FileNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		
+		// possibly include stats in DB
 		if((!(loop instanceof SimulationLoop) || Configuration.getStatisticsConfiguration().getIncludeSimulations())
 		// possibly not record quick mode stats
 			&& (!GameData.quickMode || Configuration.getStatisticsConfiguration().getIncludeQuickStarts())
@@ -423,8 +448,7 @@ public class Round implements StatisticHolder, Serializable
 
 		match.roundOver();
 		if(panel!=null)
-		{	panel.roundOver();
-		}
+			panel.roundOver();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -460,6 +484,138 @@ public class Round implements StatisticHolder, Serializable
 		{	stats.addStatisticEvent(event);
 			//stats.computePoints(getPointProcessor());
 		}
+	}
+
+	/**
+	 * Record a summary of the stats as a text file.
+	 * 
+	 * @throws FileNotFoundException 
+	 * 		Problem while accessing the stats file.
+	 */
+	private void recordStatsAsText() throws FileNotFoundException
+	{	// get data
+		List<Profile> players = getProfiles();
+		Ranks orderedPlayers = getOrderedPlayers();
+		List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
+		float points[] = stats.getPoints();
+		
+		// get file name
+		String fileBase = stats.getFilePath();
+		int number = match.getPlayedRounds().size();
+		String filePath = fileBase + "." + FileNames.FILE_ROUND + number + FileNames.EXTENSION_TEXT;
+		
+		// open text stream
+		FileOutputStream fileOut = new FileOutputStream(filePath);
+		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
+		OutputStreamWriter outSW = new OutputStreamWriter(outBuff);
+		PrintWriter writer = new PrintWriter(outSW);
+		
+		// write general info
+		writer.println("Match: "+match.getName());
+		writer.println("Round number: "+number);
+		LevelInfo levelInfo = hollowLevel.getLevelInfo();
+		writer.println("Level: "+levelInfo.getPackName()+"/"+levelInfo.getTitle());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss"); 
+		Date startDate = stats.getStartDate();
+		writer.println("Start: "+sdf.format(startDate));
+		Date endDate = stats.getEndDate();
+		writer.println("End: "+sdf.format(endDate));
+		long duration = endDate.getTime() - startDate.getTime();
+		String durationStr = TimeTools.formatTime(duration, TimeUnit.MINUTE, TimeUnit.MILLISECOND, false);
+		writer.println("Duration: "+durationStr);
+		writer.println();
+		
+		// write headers
+		writer.print("Rank\t");
+		writer.print("Name\t");
+		writer.print("Color\t");
+//		writer.print("Id\t");
+		writer.print("Bombs\t");
+		writer.print("Items\t");
+		writer.print("Bombeds\t");
+		writer.print("Selfies\t");
+		writer.print("Bombings\t");
+		writer.print("Time\t");
+		writer.print("Points\t");
+		writer.println();
+
+		// write data
+		for(int i=0;i<points.length;i++)
+		{	// retrieve profile stuff
+			Profile profile = absoluteList.get(i);
+			int profileIndex = players.indexOf(profile);
+
+			// rank
+			{	int rank = orderedPlayers.getRankForProfile(profile);
+				writer.print(rank+".\t");
+			}
+			
+			// name
+			{	String name = profile.getName();
+				writer.print(name+"\t");
+			}
+			
+			// color
+			{	PredefinedColor color = profile.getSpriteColor();
+				writer.print(color+"\t");
+			}
+			
+			// id
+//			{	String id = playersIds.get(profileIndex);
+//				writer.print(name+"\t");
+//			}
+			
+			// bombs dropped
+			{	long scores[] = stats.getScores(Score.BOMBS);
+				long bombs = scores[profileIndex];
+				writer.print(bombs+"\t");
+			}
+			
+			// items pîcked
+			{	long scores[] = stats.getScores(Score.ITEMS);
+				long items = scores[profileIndex];
+				writer.print(items+"\t");
+			}
+			
+			// times bombed
+			{	long scores[] = stats.getScores(Score.BOMBEDS);
+				long bombeds = scores[profileIndex];
+				writer.print(bombeds+"\t");
+			}
+			
+			// self-bombings
+			{	long scores[] = stats.getScores(Score.SELF_BOMBINGS);
+				long selfies = scores[profileIndex];
+				writer.print(selfies+"\t");
+			}
+			
+			// players bombed
+			{	long scores[] = stats.getScores(Score.BOMBINGS);
+				long bombings = scores[profileIndex];
+				writer.print(bombings+"\t");
+			}
+			
+			// time played
+			{	long scores[] = stats.getScores(Score.TIME);
+				long time = scores[profileIndex];
+				String timeStr = TimeTools.formatTime(time,TimeUnit.SECOND,TimeUnit.MILLISECOND,false);
+				writer.print(timeStr+"\t");
+			}
+			
+			// points scored
+			{	double pts = points[profileIndex];
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
+				String ptsStr = nf.format(pts);
+				writer.print(ptsStr+"\t");
+			}
+			
+			writer.println();
+		}
+		
+		// close stream
+		writer.close();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -547,6 +703,23 @@ public class Round implements StatisticHolder, Serializable
 	{	return match.getProfiles();
 	}	
 	
+	/**
+	 * Checks if the current confrontation contains artificial agents.
+	 * 
+	 * @return
+	 * 		{@code true} iff the confrontation has at least one artificial agent.
+	 */
+	public boolean hasAi()
+	{	List<Profile> profiles = getProfiles();
+		Iterator<Profile> it = profiles.iterator();
+		boolean result = false;
+		while(it.hasNext() && !result)
+		{	Profile profile = it.next();
+			result = profile.hasAi();
+		}
+		return result;
+	}
+
 	/**
 	 * Returns the list of the colors,
 	 * for all players involved in this
