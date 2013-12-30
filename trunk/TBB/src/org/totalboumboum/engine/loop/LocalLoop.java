@@ -34,9 +34,11 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Deque;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
@@ -380,35 +382,60 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 						double imprecision = (Math.random()-0.5)/5;
 						bombUselessAis = (long)(bombUselessAis*(1+imprecision));
 						if(bombUselessAis>0 && lastAction>=bombUselessAis)
-						{	int range = 0;
-							// we occasionally increase the range
-							double extraRangeProba = Math.random();
-							if(extraRangeProba>0.95)
-								range = 1;
-							int duration = 3000;
-							Tile tile = player.getSprite().getTile();
-							HollowLevel hollowLevel = round.getHollowLevel();
-							BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
-							Bombset bombset = bombsetMap.getBombset(null);
-							Bomb bomb = bombset.makeBomb(null,tile,range,duration);
-							SpecificAction appearAction = new SpecificAppear(bomb);
-							ActionAbility actionAbility = bomb.modulateAction(appearAction);
-							if(actionAbility.isActive())
-							{	level.insertSpriteTile(bomb);
-								SpriteInsertionEvent event = new SpriteInsertionEvent(bomb);
-								RoundVariables.writeEvent(event);
-								//
-								SpecificDrop dropAction = new SpecificDrop(tile,bomb);
-								ActionEvent evt = new ActionEvent(dropAction);
-								bomb.processEvent(evt);
+						{	Tile tile = player.getSprite().getTile();
+							boolean success = dropLevelBomb(tile);
+							if(success)
 								lastAction = 0;
-							}
 						}
 						lastActionAis.set(i,lastAction);
 					}
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Tries to drop a bomb in the level's name.
+	 * If possible, the bomb is dropped in the 
+	 * specified tile and the method returns {@code true}.
+	 * Otherwise, the method just returns {@code false}
+	 * and no bomb is dropped at all.
+	 *  
+	 * @param tile
+	 * 		Targeted tile.
+	 * @return
+	 * 		{@code true} iff a bomb could be dropped.
+	 */
+	protected boolean dropLevelBomb(Tile tile)
+	{	boolean result = false;
+
+		// we occasionally increase the range
+		int range = 0;
+		double extraRangeProba = Math.random();
+		if(extraRangeProba>0.95)
+			range = 1;
+		
+		// duration
+		int duration = 3000;
+		
+		// drop bomb
+		HollowLevel hollowLevel = round.getHollowLevel();
+		BombsetMap bombsetMap = hollowLevel.getInstance().getBombsetMap();
+		Bombset bombset = bombsetMap.getBombset(null);
+		Bomb bomb = bombset.makeBomb(null,tile,range,duration);
+		SpecificAction appearAction = new SpecificAppear(bomb);
+		ActionAbility actionAbility = bomb.modulateAction(appearAction);
+		if(actionAbility.isActive())
+		{	level.insertSpriteTile(bomb);
+			SpriteInsertionEvent event = new SpriteInsertionEvent(bomb);
+			RoundVariables.writeEvent(event);
+			//
+			SpecificDrop dropAction = new SpecificDrop(tile,bomb);
+			ActionEvent evt = new ActionEvent(dropAction);
+			bomb.processEvent(evt);
+			result = true;
+		}
+		return result;
 	}
 	
 	/**
@@ -476,6 +503,84 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CYCLES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** List used to monitor the position of players and detect cycles */
+	private List<Deque<Tile>> cycleHistory = null;
+	/** Maximal size of the tile lists used to monitor cycles */
+	private final static int CYCLE_SIZE = 12;
+	
+	/**
+	 * Initializes the structure used to monitor player cycles.
+	 */
+	private void initCycleHistory()
+	{	cycleHistory = new ArrayList<Deque<Tile>>();
+		for(int i=0;i<players.size();i++)
+		{	Deque<Tile> list = new LinkedList<Tile>();
+			cycleHistory.add(list);
+		}
+	}
+	
+	/**
+	 * Updates the structure monitoring player cycles,
+	 * and possible sends a bomb on the players involved
+	 * in cycles.
+	 */
+	private void updateCycleHistory()
+	{	for(int i=0;i<players.size();i++)
+		{	// retrieve data
+			AbstractPlayer player = players.get(i);
+			Hero hero = player.getSprite();
+			Tile tile = hero.getTile();
+			Deque<Tile> tiles = cycleHistory.get(i);
+			
+			// update cycle list
+			if(tiles.isEmpty())
+				tiles.add(tile);
+			else
+			{	Tile t = tiles.getLast();
+				// check if the last tile is different
+				if(!t.equals(tile))
+				{	if(tiles.size()==CYCLE_SIZE)
+						tiles.removeFirst();
+					tiles.addLast(tile);
+
+					// check for cycles
+					for(int c=3;c<=4;c++)
+					{	boolean hasCycle = lookForCycle(tiles, c);
+						if(hasCycle)
+						{	boolean result = dropLevelBomb(tile);
+							if(result)
+								tiles.clear();
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Checks if the specified list contains a cycle
+	 * of the specified length. What we call cycle here
+	 * is the repetition of a sequence of tiles. The search
+	 * starts from the end of the list (most recent tiles).
+	 *  
+	 * @param tiles
+	 * 		List of tiles.
+	 * @param length
+	 * 		Length of the targeted cycle.
+	 * @return
+	 * 		{@code true} iff a cycle was found.
+	 */
+	private boolean lookForCycle(Deque<Tile> tiles, int length)
+	{	boolean result = false;
+		
+		//TODO
+		
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
