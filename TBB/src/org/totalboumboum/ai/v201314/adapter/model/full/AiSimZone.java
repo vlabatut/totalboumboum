@@ -430,9 +430,9 @@ public final class AiSimZone extends AiZone
 	 * de ce joueur).
 	 * 
 	 * @param sprite
-	 * 		Le sprit à supprimer de la zone.
+	 * 		Le sprite à supprimer de la zone.
 	 */
-	protected void removeSprite(AiSimSprite sprite)
+	public void removeSprite(AiSimSprite sprite)
 	{	if(sprite instanceof AiSimBlock)
 		{	AiSimBlock block = (AiSimBlock)sprite;
 			removeSprite(block);
