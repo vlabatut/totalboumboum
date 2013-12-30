@@ -22,11 +22,11 @@ package org.totalboumboum.engine.container;
  */
 
 /**
+ * Represents a cachable sprite.
  * 
  * @author Vincent Labatut
- *
  */
 public interface CachableSpriteContainer
 {
-
+	// 
 }
