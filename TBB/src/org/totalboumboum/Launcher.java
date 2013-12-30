@@ -1760,6 +1760,7 @@ public class Launcher
  * 		+ proposer d'enregistrer les stats d'une confrontation
  * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
  * 		+ capture d'écran des graphiques ? dessiner directement dans un panel puis sauver. à voir pour la couleur du fond ?
+ * 		+ tester tournoi ligue
  */
 
 /*
