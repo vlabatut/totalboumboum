@@ -598,8 +598,8 @@ public class Match implements StatisticHolder, Serializable
 			matchOver = true;
 			if(panel!=null)
 			{	panel.matchOver();
-				stats.initEndDate();
 			}
+			stats.initEndDate();
 			
 			// possibly record stats as text file
 			if(hasAi())
