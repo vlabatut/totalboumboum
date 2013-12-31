@@ -95,9 +95,13 @@ public class AisConfigurationSaver
 		Element hideAllAisElement = saveHideAllAisElement(aisConfiguration);
 		result.addContent(hideAllAisElement);
 		
-		// bomb useless players
+		// bomb useless ais
 		Element bombUselessAisElement = saveBombUselessAisElement(aisConfiguration);
 		result.addContent(bombUselessAisElement);
+
+		// bomb cycling ais
+		Element bombCyclingAisElement = saveBombCyclingAisElement(aisConfiguration);
+		result.addContent(bombCyclingAisElement);
 
 		// display exceptions onscreen during game
 		Element displayExceptionsElement = saveDisplayExceptionsElement(aisConfiguration);
@@ -183,7 +187,8 @@ public class AisConfigurationSaver
 
 	/**
 	 * Builds an XML element representing
-	 * AI theatening-related settings.
+	 * AI theatening-related settings,
+	 * concerning AI idleness.
 	 * 
 	 * @param aisConfiguration
 	 * 		Settings to be recorded.
@@ -195,6 +200,25 @@ public class AisConfigurationSaver
 		
 		String bombUselessAis = Long.toString(aisConfiguration.getBombUselessAis());
 		result.setAttribute(XmlNames.VALUE,bombUselessAis);
+		
+		return result;
+	}
+
+	/**
+	 * Builds an XML element representing
+	 * AI theatening-related settings,
+	 * concerning cycling actions.
+	 * 
+	 * @param aisConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
+	private static Element saveBombCyclingAisElement(AisConfiguration aisConfiguration)
+	{	Element result = new Element(XmlNames.BOMB_CYCLING_AIS);
+		
+		String bombCyclingAis = Boolean.toString(aisConfiguration.getBombCyclingAis());
+		result.setAttribute(XmlNames.VALUE,bombCyclingAis);
 		
 		return result;
 	}
