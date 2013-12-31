@@ -27,12 +27,19 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.control.ControlCode;
 
 /**
+ * This class is used to control sprites through keyboard (human player)
+ * or actions (artificial agent).
  * 
  * @author Vincent Labatut
- *
  */
 public abstract class ControlManager
 {	
+	/**
+	 * Builds a sprite control manager.
+	 * 
+	 * @param sprite
+	 * 		Controlled sprite.
+	 */
 	public ControlManager(Sprite sprite)
 	{	this.sprite = sprite;
 	}	
@@ -40,13 +47,25 @@ public abstract class ControlManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** managed sprite  */
+	/** Controlled sprite  */
 	protected Sprite sprite;
 	
+	/**
+	 * Returns the controlled sprite.
+	 * 
+	 * @return
+	 * 		Controlled sprite.
+	 */
 	public Sprite getSprite()
 	{	return sprite;
 	}
 	
+	/**
+	 * Changes the controlled sprite.
+	 * 
+	 * @param sprite
+	 * 		New controlled sprite.
+	 */
 	public void setSprite(Sprite sprite)
 	{	this.sprite = sprite;
 	}
@@ -54,8 +73,15 @@ public abstract class ControlManager
 	/////////////////////////////////////////////////////////////////
 	// SETTINGS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Controls for this sprite */
 	protected ControlSettings controlSettings;
 	
+	/**
+	 * Changes the controls for this sprite.
+	 * 
+	 * @param controlSettings
+	 * 		New controls.
+	 */
 	public void setControlSettings(ControlSettings controlSettings)
 	{	this.controlSettings = controlSettings;
 	}
@@ -63,20 +89,43 @@ public abstract class ControlManager
 	/////////////////////////////////////////////////////////////////
 	// CODES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Adds a new control code.
+	 * 
+	 * @param controlCode
+	 * 		Code to add.
+	 */
 	public abstract void putControlCode(ControlCode controlCode);
 
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Adds a new control event.
+	 * 
+	 * @param controlEvent
+	 * 		Event to add.
+	 */
 	public abstract void putControlEvent(ControlEvent controlEvent);
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Updates controls.
+	 */
 	public abstract void update();
 	
 	/////////////////////////////////////////////////////////////////
 	// COPY					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Makes a copy of this manager.
+	 * 
+	 * @param sprite
+	 * 		Sprite to manage.
+	 * @return
+	 * 		New control manager for the specified sprite.
+	 */
 	public abstract ControlManager copy(Sprite sprite);
 }
