@@ -1,0 +1,18 @@
+Tournament: Tournoi de Galatasaray VII
+Start: 2013-07-31 12:07:15
+End: 2013-53-31 12:53:30
+Duration: 46'15''319
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	M1	M2	M3	M4	M5	M6	M7	M8	M9	
+1.	1314.Asıl+İzer+Yüce	WHITE	96	14	4	7	8	-	1	-	-	-	-	2	-	1	
+2.	1314.Dönmez+LabatCamy	GREEN	199	9	4	3	7	-	-	-	1	-	-	1	-	2	
+3.	1314.Derin+Koçak+Zorluoğlu	RED	148	21	6	11	9	-	-	-	2	-	2	-	-	3	
+4.	1314.Saylam+Sönmez	PINK	83	16	7	8	3	-	2	-	-	-	1	-	-	4	
+5.	1314.Çiftçi+Kaplanoğlu+Köseoğlu	ORANGE	183	17	4	5	5	1	-	-	-	-	3	-	1	-	
+6.	1314.Oralı+Osmanoğlu	YELLOW	116	17	7	12	6	-	-	2	-	-	-	4	2	-	
+7.	1314.Engin+Serhan+Tipici	INDIGO	88	22	9	11	2	2	-	-	-	-	-	3	3	-	
+8.	1314.Acar+Sesyılmaz	ULTRAMARINE	103	43	6	10	8	-	-	1	-	-	4	-	4	-	
+9.	1314.Güneş+Sağlam+Turgut	BLUE	73	33	5	7	7	3	-	-	-	1	-	-	-	-	
+10.	1314.Arık+Günaydın+Kochan	GREY	85	8	6	5	4	-	3	-	-	2	-	-	-	-	
+11.	1314.Akyol+Kaptan+Koçak	BLACK	2	0	13	0	0	-	-	-	3	3	-	-	-	-	
+12.	1314.Çetin+Özel	CYAN	0	1	14	0	0	-	-	3	-	4	-	-	-	-	
