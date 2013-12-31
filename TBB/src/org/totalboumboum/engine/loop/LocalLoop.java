@@ -510,7 +510,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	/** List used to monitor the position of players and detect cycles */
 	private List<LinkedList<Tile>> cycleHistory = null;
 	/** Maximal size of the tile lists used to monitor cycles */
-	private final static int CYCLE_SIZE = 12;
+	private final static int CYCLE_SIZE = 15;
 	
 	/**
 	 * Initializes the structure used to monitor player cycles.
@@ -552,7 +552,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 						{	// ignore aligned tiles (to simplify the search for cycles)
 							Tile prev0 = tiles.pollLast();
 							Tile prev1 = tiles.getLast();
-							if(!level.areAlignedTiles(prev1,prev0,tile) || prev1.equals(tile))
+							if(!level.areOrderAlignedTiles(prev1,prev0,tile) || prev1.equals(tile))
 								tiles.addLast(prev0);
 							tiles.addLast(tile);
 							
@@ -560,15 +560,20 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							if(tiles.size()>CYCLE_SIZE)
 								tiles.removeFirst();
 		
+System.out.println(player.getColor()+": "+tiles.toString());			
 							// check for cycles
-							for(int c=2;c<=4;c++)
-							{	// find a cycle
-								boolean hasCycle = lookForCycle(tiles, c);
-								// possibly bomb the concerned player
-								if(hasCycle)
-								{	boolean result = dropLevelBomb(tile);
-									if(result)
-										tiles.clear();
+							if(tiles.size()==CYCLE_SIZE)
+							{	for(int c=3;c<=5;c++)
+								{	// find a cycle
+									boolean hasCycle = lookForCycle(tiles, c);
+									// possibly bomb the concerned player
+									if(hasCycle)
+									{	boolean result = dropLevelBomb(tile);
+										if(result)
+										{	tiles.clear();
+System.out.println(player.getColor()+": cycle of size c="+c+" detected");			
+										}
+									}
 								}
 							}
 						}
@@ -576,6 +581,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 				}
 			}
 		}
+//System.out.println("---------------------------------");			
 	}
 	
 	/**
@@ -594,25 +600,28 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	private boolean lookForCycle(LinkedList<Tile> tiles, int length)
 	{	boolean result = false;
 		
+		// we try identifying a cycle starting from the end of the sequence
 		int i = tiles.size()-1;
-		while(!result && i>=2*length-1)
-		{	int j=i-length;
-			while(!result && j>=length-1)
+//		while(!result && i>=2*length-1)
+		{	// we look for the maximum of repetitions
+			result = true;
+			int j=i-length;
+			while(result && j>=length-1)
 			{	int k = 0;
 				boolean similar = true;
 				while(similar && k<length)
-				{	Tile tRef = tiles.get(i+k);
-					Tile tComp = tiles.get(j+k);
+				{	Tile tRef = tiles.get(i-k);
+					Tile tComp = tiles.get(j-k);
 					similar = tRef.equals(tComp);
 					k++;
 				}
-				if(similar)
-					result = true;
+				if(!similar)
+					result = false;
 				else
 					j--;
 			}
 			
-			i--;
+//			i--;
 		}
 		
 		return result;
