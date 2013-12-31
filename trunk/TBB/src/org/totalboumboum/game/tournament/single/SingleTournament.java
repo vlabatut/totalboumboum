@@ -268,6 +268,8 @@ public class SingleTournament extends AbstractTournament
 		Ranks orderedPlayers = getOrderedPlayers();
 		List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
 		float points[] = stats.getPoints();
+		Match match = playedMatches.get(0);
+		List<Round> playedRounds = match.getPlayedRounds();
 		
 		// get file name
 		String fileBase = stats.getFilePath();
@@ -301,9 +303,10 @@ public class SingleTournament extends AbstractTournament
 		writer.print("Bombeds\t");
 		writer.print("Selfies\t");
 		writer.print("Bombings\t");
-		for(int i=0;i<playedMatches.size();i++)
-			writer.print("M"+(i+1)+"\t");
+		for(int i=0;i<playedRounds.size();i++)
+			writer.print("R"+(i+1)+"\t");
 		writer.print("Total\t");
+		writer.print("Points\t");
 		writer.println();
 
 		// write data
@@ -363,9 +366,9 @@ public class SingleTournament extends AbstractTournament
 			}
 			
 			// confrontations
-			{	List<StatisticBase> statMatches = stats.getConfrontationStats();
-				for(StatisticBase statMatch: statMatches)
-				{	float pts = statMatch.getPoints()[profileIndex];
+			{	List<StatisticBase> statRounds = stats.getConfrontationStats();
+				for(StatisticBase statRound: statRounds)
+				{	float pts = statRound.getPoints()[profileIndex];
 					NumberFormat nf = NumberFormat.getInstance();
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);
@@ -377,6 +380,15 @@ public class SingleTournament extends AbstractTournament
 			// total
 			{	float total[] = stats.getTotal();
 				float pts = total[profileIndex];
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
+				String ptsStr = nf.format(pts);
+				writer.print(ptsStr+"\t");
+			}
+			
+			// points scored
+			{	double pts = points[profileIndex];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
