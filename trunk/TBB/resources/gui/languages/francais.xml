@@ -194,6 +194,11 @@
 						<text name="Minus" value="Moins" tooltip="Diminue la durée" />
 						<text name="Disabled" value="Désactivé" tooltip="Sans limite" />
 					</group>
+					<group name="BombCyclingAis">
+						<text name="Title" value="Menacer les agents qui bouclent" tooltip="Permet de sortir d'une situation dans laquelle les agents répètent indéfiniment le même cycle d'actions" />
+						<text name="Disabled" value="Désactivé" tooltip="Menace désactivée" />
+						<text name="Enabled" value="Activé" tooltip="Menace activée" />
+					</group>
 					<group name="DisplayExceptions">
 						<text name="Title" value="Afficher les exceptions" tooltip="Affiche dans la console les exceptions provoquées par les IA au cours de la partie" />
 						<text name="Disabled" value="Désactivé" tooltip="Affichage des exceptions désactivé" />

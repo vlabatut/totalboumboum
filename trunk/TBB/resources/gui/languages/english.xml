@@ -189,10 +189,15 @@
 						<text name="Enabled" value="Enabled" tooltip="Simule all-AIs is enabled" />
 					</group>
 					<group name="BombUselessAis">
-						<text name="Title" value="Bomb Inactive Agents" tooltip="Duration before a bomb is automatically dropped on an inactive agent" />
+						<text name="Title" value="Threaten Inactive Agents" tooltip="Duration before a bomb is automatically dropped on an inactive agent" />
 						<text name="Plus" value="Plus" tooltip="Increase the duration" />
 						<text name="Minus" value="Minus" tooltip="Decrease the duration" />
 						<text name="Disabled" value="Disabled" tooltip="Limitless" />
+					</group>
+					<group name="BombCyclingAis">
+						<text name="Title" value="Threaten looping agents" tooltip="Drops a bomb on agents repeating the same series of actions again and again" />
+						<text name="Disabled" value="Disabled" tooltip="Threat is disabled" />
+						<text name="Enabled" value="Enabled" tooltip="Threat is enabled" />
 					</group>
 					<group name="DisplayExceptions">
 						<text name="Title" value="Display Exceptions" tooltip="Display on the console ingame exceptions caused by AIs" />
