@@ -59,6 +59,7 @@ public class AisConfiguration
 		
 		result.setHideAllAis(hideAllAis);
 		result.setBombUselessAis(bombUselessAis);
+		result.setBombCyclingAis(bombCyclingAis);
 		
 		result.setDisplayExceptions(displayExceptions);
 
@@ -312,7 +313,8 @@ public class AisConfiguration
 	/** Drop a level bomb on players standing still (not doing anything) */
 	private long bombUselessAis = -1;
 	/** Time probability */
-	
+	/** Drop a level bomb on player caught in some cycle of actions */
+	private boolean bombCyclingAis = false;
 	/**
 	 * Indicates if the AIs rounds should
 	 * be displayed or only simulated.
@@ -346,13 +348,34 @@ public class AisConfiguration
 	}
 	
 	/**
-	 * Change the AIs threatening option.
+	 * Changes the Is threatening option regarding idle AIs.
 	 * 
 	 * @param bombUselessPlayers
 	 * 		{@code true} iff the threatening option is enabled.
 	 */
 	public void setBombUselessAis(long bombUselessPlayers)
 	{	this.bombUselessAis = bombUselessPlayers;
+	}
+
+	/**
+	 * Indicates if AIs repeating endlessly the same
+	 * actions should be threaten by level bombs.
+	 * 
+	 * @return
+	 * 		{@code true} iff the threatening option is enabled.
+	 */
+	public boolean getBombCyclingAis()
+	{	return bombCyclingAis;
+	}
+	
+	/**
+	 * Change the threatening option regarding cycling AIs.
+	 * 
+	 * @param bombCyclingAis
+	 * 		{@code true} iff the threatening option is enabled.
+	 */
+	public void setBombCyclingAis(boolean bombCyclingAis)
+	{	this.bombCyclingAis = bombCyclingAis;
 	}
 
 	/////////////////////////////////////////////////////////////////

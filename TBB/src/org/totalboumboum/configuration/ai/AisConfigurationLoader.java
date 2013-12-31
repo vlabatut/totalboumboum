@@ -90,9 +90,13 @@ public class AisConfigurationLoader
 		element = root.getChild(XmlNames.HIDE_ALLAIS);
 		loadHideAllAisElement(element,result);
 		
-		// hide all-ais rounds
+		// bomb idle ais
 		element = root.getChild(XmlNames.BOMB_USELESS_AIS);
 		loadBombUselessAisElement(element,result);
+		
+		// bomb cycling ais
+		element = root.getChild(XmlNames.BOMB_CYCLING_AIS);
+		loadBombCyclingAisElement(element,result);
 		
 		// display exceptions onscreen during game
 		element = root.getChild(XmlNames.DISPLAY_EXCEPTIONS);
@@ -177,6 +181,20 @@ public class AisConfigurationLoader
 	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
 		long bombUselessAis = Long.valueOf(value);
 		result.setBombUselessAis(bombUselessAis);
+	}
+
+	/**
+	 * Loads threatening option related settings.
+	 * 
+	 * @param root
+	 * 		Threatening element.
+	 * @param result
+	 * 		Settings object to be completed.
+	 */
+	private static void loadBombCyclingAisElement(Element root, AisConfiguration result)
+	{	String value = root.getAttribute(XmlNames.VALUE).getValue().trim();
+		boolean bombCyclingAis = Boolean.valueOf(value);
+		result.setBombCyclingAis(bombCyclingAis);
 	}
 
 	/**
