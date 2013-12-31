@@ -222,6 +222,7 @@ public class RegularLoop extends LocalLoop
 			updateSuddenDeath();
 			level.update();		
 			updateAis();
+			updateCycleHistory();
 			updateStats();
 		}
 		

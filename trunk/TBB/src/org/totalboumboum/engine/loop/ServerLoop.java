@@ -274,6 +274,7 @@ public class ServerLoop extends LocalLoop
 			remoteControls.update();
 			level.update();		
 			updateAis();
+			updateCycleHistory();
 			updateStats();
 		}
 	}

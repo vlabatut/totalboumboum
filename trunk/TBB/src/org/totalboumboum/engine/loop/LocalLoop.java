@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Deque;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -104,7 +103,7 @@ import org.xml.sax.SAXException;
 
 /**
  * This class is used to represent all forms
- * of loop executed locally, i.e. on the host machine.
+ * of loops executed locally, i.e. on the host machine.
  * This includes {@link RegularLoop} and {@link ServerLoop}.
  * 
  * @author Vincent Labatut
@@ -231,6 +230,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	protected void startLoopInit()
 	{	super.startLoopInit();
 		initAis();
+		initCycleHistory();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -351,9 +351,10 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		{	aiTime = aiTime + milliPeriod;
 			boolean active[] = new boolean[players.size()];
 			Arrays.fill(active,false);
-		
+			AisConfiguration aiConfig = Configuration.getAisConfiguration();
+			
 			// simple update
-			if(aiTime >= Configuration.getAisConfiguration().getAiPeriod())
+			if(aiTime >= aiConfig.getAiPeriod())
 			{	aiTime = 0;
 				for(int i=0;i<players.size();i++) //TODO would be good to actually have a list of ai players, processing it again each time is useless
 				{	AbstractPlayer player = players.get(i);
@@ -377,7 +378,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							lastAction = 0;
 						else
 							lastAction = lastAction + milliPeriod;
-						long bombUselessAis = Configuration.getAisConfiguration().getBombUselessAis();
+						long bombUselessAis = aiConfig.getBombUselessAis();
 						// we want slightly different times to avoid draws
 						double imprecision = (Math.random()-0.5)/5;
 						bombUselessAis = (long)(bombUselessAis*(1+imprecision));
@@ -507,7 +508,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	// CYCLES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** List used to monitor the position of players and detect cycles */
-	private List<Deque<Tile>> cycleHistory = null;
+	private List<LinkedList<Tile>> cycleHistory = null;
 	/** Maximal size of the tile lists used to monitor cycles */
 	private final static int CYCLE_SIZE = 12;
 	
@@ -515,9 +516,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	 * Initializes the structure used to monitor player cycles.
 	 */
 	private void initCycleHistory()
-	{	cycleHistory = new ArrayList<Deque<Tile>>();
+	{	cycleHistory = new ArrayList<LinkedList<Tile>>();
 		for(int i=0;i<players.size();i++)
-		{	Deque<Tile> list = new LinkedList<Tile>();
+		{	LinkedList<Tile> list = new LinkedList<Tile>();
 			cycleHistory.add(list);
 		}
 	}
@@ -527,32 +528,49 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	 * and possible sends a bomb on the players involved
 	 * in cycles.
 	 */
-	private void updateCycleHistory()
-	{	for(int i=0;i<players.size();i++)
-		{	// retrieve data
-			AbstractPlayer player = players.get(i);
-			Hero hero = player.getSprite();
-			Tile tile = hero.getTile();
-			Deque<Tile> tiles = cycleHistory.get(i);
-			
-			// update cycle list
-			if(tiles.isEmpty())
-				tiles.add(tile);
-			else
-			{	Tile t = tiles.getLast();
-				// check if the last tile is different
-				if(!t.equals(tile))
-				{	if(tiles.size()==CYCLE_SIZE)
-						tiles.removeFirst();
-					tiles.addLast(tile);
-
-					// check for cycles
-					for(int c=3;c<=4;c++)
-					{	boolean hasCycle = lookForCycle(tiles, c);
-						if(hasCycle)
-						{	boolean result = dropLevelBomb(tile);
-							if(result)
-								tiles.clear();
+	protected void updateCycleHistory()
+	{	AisConfiguration aiConfig = Configuration.getAisConfiguration();
+		if(aiConfig.getBombCyclingAis())
+		{	for(int i=0;i<players.size();i++)
+			{	// retrieve data
+				AbstractPlayer player = players.get(i);
+				Hero hero = player.getSprite();
+				Tile tile = hero.getTile();
+				LinkedList<Tile> tiles = cycleHistory.get(i);
+				
+				// update cycle list
+				if(tiles.isEmpty())
+					tiles.add(tile);
+				else
+				{	Tile t = tiles.getLast();
+					// check if the last tile is different
+					if(!t.equals(tile))
+					{	if(tiles.size()==1)
+							tiles.add(tile);
+					
+						else
+						{	// ignore aligned tiles (to simplify the search for cycles)
+							Tile prev0 = tiles.pollLast();
+							Tile prev1 = tiles.getLast();
+							if(!level.areAlignedTiles(prev1,prev0,tile) || prev1.equals(tile))
+								tiles.addLast(prev0);
+							tiles.addLast(tile);
+							
+							// possibly remove the first tile to keep the queue size constant
+							if(tiles.size()>CYCLE_SIZE)
+								tiles.removeFirst();
+		
+							// check for cycles
+							for(int c=2;c<=4;c++)
+							{	// find a cycle
+								boolean hasCycle = lookForCycle(tiles, c);
+								// possibly bomb the concerned player
+								if(hasCycle)
+								{	boolean result = dropLevelBomb(tile);
+									if(result)
+										tiles.clear();
+								}
+							}
 						}
 					}
 				}
@@ -573,12 +591,29 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	 * @return
 	 * 		{@code true} iff a cycle was found.
 	 */
-	private boolean lookForCycle(Deque<Tile> tiles, int length)
+	private boolean lookForCycle(LinkedList<Tile> tiles, int length)
 	{	boolean result = false;
 		
-		//TODO
-		// faudrait des cycles plus longs >> trop lent
-		// identifier plutot les cases correspondant à des changement de directions et des pauses
+		int i = tiles.size()-1;
+		while(!result && i>=2*length-1)
+		{	int j=i-length;
+			while(!result && j>=length-1)
+			{	int k = 0;
+				boolean similar = true;
+				while(similar && k<length)
+				{	Tile tRef = tiles.get(i+k);
+					Tile tComp = tiles.get(j+k);
+					similar = tRef.equals(tComp);
+					k++;
+				}
+				if(similar)
+					result = true;
+				else
+					j--;
+			}
+			
+			i--;
+		}
 		
 		return result;
 	}
