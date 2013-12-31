@@ -269,9 +269,43 @@ public class Level
 	 * 		{@code true} iff they are aligned.
 	 */
 	public boolean areAlignedTiles(Tile t1, Tile t2, Tile t3)
-	{	boolean result = 
-			t1.getCol()==t2.getCol() && t1.getCol()==t3.getCol()
-			|| t1.getRow()==t2.getRow() && t1.getRow()==t3.getRow();
+	{	int col1 = t1.getCol();
+		int col2 = t2.getCol();
+		int col3 = t3.getCol();
+		int row1 = t1.getRow();
+		int row2 = t2.getRow();
+		int row3 = t3.getRow();
+		
+		boolean result = 
+			col1==col2 && col1==col3
+			|| row1==row2 && row1==row3;
+		return result;
+	}
+	
+	/**
+	 * Same as {@link #areAlignedTiles}, but this time the three
+	 * tiles must be in the specified order.
+	 * 
+	 * @param t1
+	 * 		First tile.
+	 * @param t2
+	 * 		Second tile.
+	 * @param t3
+	 * 		Third tile.
+	 * @return
+	 * 		{@code true} iff they are aligned and ordered.
+	 */
+	public boolean areOrderAlignedTiles(Tile t1, Tile t2, Tile t3)
+	{	int col1 = t1.getCol();
+		int col2 = t2.getCol();
+		int col3 = t3.getCol();
+		int row1 = t1.getRow();
+		int row2 = t2.getRow();
+		int row3 = t3.getRow();
+		
+		boolean result = 
+			col1==col2 && col1==col3 && (row1<row2 && row2<row3 || row1>row2 && row2>row3)
+			|| row1==row2 && row1==row3 && (col1<col2 && col2<col3 || col1>col2 && col2>col3);
 		return result;
 	}
 	

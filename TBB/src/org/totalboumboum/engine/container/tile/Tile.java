@@ -29,7 +29,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
@@ -916,7 +915,7 @@ result = level.getTile(x,y)==this;
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiTile)
+		if(o instanceof Tile)
 		{	Tile t = (Tile)o;	
 			result = compareTo(t)==0;
 		}
