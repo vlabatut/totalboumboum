@@ -211,6 +211,7 @@ public class PositionTools
 		//
 		return result;
 	}
+	
 	/**
 	 * Normalizes the specified position, in order to get a coordinate
 	 * actually contained in the level.
@@ -255,6 +256,9 @@ public class PositionTools
 		return result;
 	}
 	
+    /////////////////////////////////////////////////////////////////
+	// INSIDE LOCATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Checks if the specified position is inside the level.
 	 * 
@@ -277,9 +281,6 @@ public class PositionTools
 	{	return isInsidePositionX(x,pixelLeftX,pixelWidth) && isInsidePositionY(y,pixelTopY,pixelHeight);		
 	}
 	
-    /////////////////////////////////////////////////////////////////
-	// INSIDE LOCATION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	/**
 	 * Checks if the specified position is inside the level,
 	 * in terms of x axis.
@@ -298,6 +299,7 @@ public class PositionTools
 		
 		return x>=pixelLeftX && x<=pixelLeftX+pixelWidth;
 	}
+	
 	/**
 	 * Checks if the specified position is inside the level,
 	 * in terms of x axis.

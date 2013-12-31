@@ -126,7 +126,7 @@ public class DirectionTools
 
 	/**
 	 * Processes the direction from s1 to s2, considering approximate 
-	 * distance (i.e. it will be NONE even if s1 and s2 are just relatively close).
+	 * distance (i.e. it will be {@code NONE} even if s1 and s2 are just relatively close).
 	 * It also considers the level circularity, i.e. it will choose the
 	 * directions corresponding to the shortest distances.
 	 * 
@@ -153,7 +153,7 @@ public class DirectionTools
 
 	/**
 	 * Processes the direction from the sprite in the specified MoveZone to the specified obstacle.
-	 * Approximate distance is considered (i.e. it will be NONE even if s1 and s2 
+	 * Approximate distance is considered (i.e. it will be {@code NONE} even if s1 and s2 
 	 * are just relatively close). It also considers the level circularity, 
 	 * i.e. it will choose the directions corresponding to the shortest distances.
 	 *  
