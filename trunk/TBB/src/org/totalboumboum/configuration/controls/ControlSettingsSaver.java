@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -66,7 +67,7 @@ public class ControlSettingsSaver
 		Comment gplComment = XmlTools.getGplComment();
 		result.addContent(gplComment);
 
-		HashMap<String,Integer> onEvents = controlSettings.getOnEvents();
+		Map<String,Integer> onEvents = controlSettings.getOnEvents();
 		Iterator<Entry<String,Integer>> onIt = onEvents.entrySet().iterator();
 		while(onIt.hasNext())
 		{	// data
