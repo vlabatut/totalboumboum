@@ -577,6 +577,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	{	boolean result = false;
 		
 		//TODO
+		// faudrait des cycles plus longs >> trop lent
+		// identifier plutot les cases correspondant à des changement de directions et des pauses
 		
 		return result;
 	}
