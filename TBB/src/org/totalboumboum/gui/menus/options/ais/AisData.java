@@ -79,12 +79,14 @@ public class AisData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_HIDE_ALL_AIS = 5;
 	/** Row used to display the option allowing to automatically threaten idle agents */
 	private static final int LINE_BOMB_USELESS_AIS = 6;
+	/** Row used to display the option allowing to automatically threaten cycling agents */
+	private static final int LINE_BOMB_CYCLING_AIS = 7;
 	/** Row used to display the option displaying AI exceptions in the console */
-	private static final int LINE_DISPLAY_EXCEPTIONS = 7;
+	private static final int LINE_DISPLAY_EXCEPTIONS = 8;
 	/** Row used to display the option logging AI exceptions in a file */
-	private static final int LINE_LOG_EXCEPTIONS = 8;
+	private static final int LINE_LOG_EXCEPTIONS = 9;
 	/** Row used to display the option allowing to record tournament stats as separate text files */
-	private static final int LINE_RECORD_STATS = 9;
+	private static final int LINE_RECORD_STATS = 10;
 
 	/** Packs available for the tournament auto-advance "pack" mode */
 	private List<String> availablePacks;
@@ -388,7 +390,31 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #7 DISPLAY EXCEPTIONS
+				// #7 BOMB CYCLING AIS
+				{	Line ln = optionsPanel.getLine(LINE_BOMB_CYCLING_AIS);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS_TITLE,false);
+						col++;
+					}
+					// value
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiSizeTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
+						setBombCyclingAis();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+				
+				// #8 DISPLAY EXCEPTIONS
 				{	Line ln = optionsPanel.getLine(LINE_DISPLAY_EXCEPTIONS);
 					ln.addLabel(0);
 					int col = 0;
@@ -412,7 +438,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #8 LOG EXCEPTIONS
+				// #9 LOG EXCEPTIONS
 				{	Line ln = optionsPanel.getLine(LINE_LOG_EXCEPTIONS);
 					ln.addLabel(0);
 					int col = 0;
@@ -436,7 +462,7 @@ public class AisData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 				
-				// #9 RECORD STATS
+				// #10 RECORD STATS
 				{	Line ln = optionsPanel.getLine(LINE_RECORD_STATS);
 					ln.addLabel(0);
 					int col = 0;
@@ -600,6 +626,19 @@ public class AisData extends EntitledDataPanel implements MouseListener
 			tooltip = text+" ms";
 		}
 		optionsPanel.getLine(LINE_BOMB_USELESS_AIS).setLabelText(2,text,tooltip);
+	}
+	
+	/**
+	 * Updates the option controlling the threatening of cycling agents.
+	 */
+	private void setBombCyclingAis()
+	{	boolean bcais = aisConfiguration.getBombCyclingAis();
+		String key;
+		if(bcais)
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS_ENABLED;
+		else
+			key = GuiKeys.MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS_DISABLED;
+		optionsPanel.getLine(LINE_BOMB_CYCLING_AIS).setLabelKey(1,key,true);
 	}
 	
 	/**
@@ -784,6 +823,12 @@ public class AisData extends EntitledDataPanel implements MouseListener
 				buais = 1000*(buais/1000);
 				aisConfiguration.setBombUselessAis(buais);
 				setBombUselessAis();
+				break;
+			// display exceptions
+			case LINE_BOMB_CYCLING_AIS:
+				boolean bcais = !aisConfiguration.getBombCyclingAis();
+				aisConfiguration.setBombCyclingAis(bcais);
+				setBombCyclingAis();
 				break;
 			// display exceptions
 			case LINE_DISPLAY_EXCEPTIONS:
