@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.Role;
@@ -51,7 +52,7 @@ import org.totalboumboum.game.round.RoundVariables;
  * 
  * @author Vincent Labatut
  */
-public class Tile
+public class Tile implements Comparable<Tile>
 {	
 	/**
 	 * Creates a tile using the specified data.
@@ -892,13 +893,13 @@ result = level.getTile(x,y)==this;
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// LEVEL		/////////////////////////////////////////
+	// LEVEL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Level containing this tile */
 	private Level level;
 	
     /////////////////////////////////////////////////////////////////
-	// STRING		/////////////////////////////////////////
+	// STRING				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
@@ -908,4 +909,32 @@ result = level.getTile(x,y)==this;
 		result = result+"("+posX+","+posY+")";
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COMPARISONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiTile)
+		{	Tile t = (Tile)o;	
+			result = compareTo(t)==0;
+		}
+		return result;
+	}
+	
+	@Override
+    public int hashCode()
+    {	int height = level.getGlobalHeight();
+		int result = col + height*row;
+    	return result;
+    }
+
+	@Override
+    public int compareTo(Tile tile)
+    {	int result = row - tile.getRow();
+    	if(result==0)
+    		result = col - tile.getCol();
+    	return result;
+    }
 }
