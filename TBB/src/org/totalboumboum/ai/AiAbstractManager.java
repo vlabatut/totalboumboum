@@ -246,6 +246,7 @@ public abstract class AiAbstractManager<V, T extends Serializable>
 	    			for(ControlEvent event: events)
 						player.getSprite().putControlEvent(event);
 	    		}
+	    		
 	    		// pas de passage en pause : cet appel est-il fini ?
 	    		else if(futureAi.isDone())
 	    		{	try
@@ -281,10 +282,12 @@ public abstract class AiAbstractManager<V, T extends Serializable>
 						}
 						if(Configuration.getAisConfiguration().getDisplayExceptions())
 	    					e.printStackTrace();
-					}    			
+					} 
+	    			
 	    			// on lance le calcul pour le prochain coup
 	    			makeCall();
 	    		}
+	    		
 	    		// sinon on ne fait rien
 	    		else
 	    		{	//
