@@ -58,6 +58,10 @@
 		<xsd:attribute name="value" type="xsd:integer" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tBombCyclingAis">
+		<xsd:attribute name="value" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tDisplayExceptions">
 		<xsd:attribute name="value" type="xsd:boolean" use="required" />
 	</xsd:complexType>
@@ -76,6 +80,7 @@
 			<xsd:element name="autoAdvance" type="tAutoAdvance" />
 			<xsd:element name="hideAllAis" type="tHideAllAis" />
 			<xsd:element name="bombUselessAis" type="tBombUselessAis" />
+			<xsd:element name="bombCyclingAis" type="tBombCyclingAis" />
 			<xsd:element name="displayExceptions" type="tDisplayExceptions" />
 			<xsd:element name="logExceptions" type="tLogExceptions" />
 			<xsd:element name="recordStats" type="tRecordStats" />
