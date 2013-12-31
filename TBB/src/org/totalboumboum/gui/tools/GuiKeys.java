@@ -100,6 +100,7 @@ public class GuiKeys
 	public static final String CUP = "Cup";
 	public static final String CURRENT = "Current";
 	public static final String CYAN = "Cyan";
+	public static final String CYCLING = "Cycling";
 	public static final String CUSTOM = "Custom";
 	public static final String DATA = "Data";
 	public static final String DEFAULT = "Default";
@@ -526,6 +527,11 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_MINUS = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+MINUS;
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_PLUS = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+PLUS;
 				public static final String MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS_DISABLED = MENU_OPTIONS_AIS_LINE_BOMB_USELESS_AIS+DISABLED;
+				/** BOMB CYCLING AIS */
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS = MENU_OPTIONS_AIS_LINE+BOMB+CYCLING+AIS;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS_TITLE = MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS+TITLE;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS_DISABLED = MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS+DISABLED;
+				public static final String MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS_ENABLED = MENU_OPTIONS_AIS_LINE_BOMB_CYCLING_AIS+ENABLED;
 				/** DISPLAY EXCEPTIONS */
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS = MENU_OPTIONS_AIS_LINE+DISPLAY+EXCEPTIONS;
 				public static final String MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS_TITLE = MENU_OPTIONS_AIS_LINE_DISPLAY_EXCEPTIONS+TITLE;
