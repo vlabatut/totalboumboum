@@ -34,12 +34,13 @@
 		<suddenDeath disabled="false" />
 	</settings>
 	<players>
-		<player file="11626f33-86fe-4408-ac80-96cc025aa25b" color="YELLOW" controls="1" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="17e55773-9f92-4a47-b953-6f197925bb76" color="ORANGE" controls="2" spritePack="superbomberman4" spriteFolder="shirobon" />
-		<player file="46af46f8-eee5-44a1-9b1d-857a8654bba2" color="PINK" controls="3" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="dd71e2ae-4889-4ca0-9973-c75eb175af25" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="0eb14b39-3e11-4871-9535-4587250b926a" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="ed343446-7b2a-4ce3-a391-5e79cbb638ea" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="0f392b59-99e3-41be-8281-75bc6db8e7b1" color="RED" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 	</players>
 	<levels>
-		<level pack="tournament201314" folder="averses" allowedPlayers="2 3 4 5 6" />
+		<level pack="tournament201314" folder="items" allowedPlayers="2 3 4 5 6" />
 	</levels>
 </gameQuickmatch>
 
