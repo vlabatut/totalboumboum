@@ -26,12 +26,18 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.control.ControlCode;
 
 /**
+ * Fake control manager, for the replay and remote loops.
  * 
  * @author Vincent Labatut
- *
  */
 public class EmptyControlManager extends ControlManager
-{	
+{
+	/**
+	 * Builds a fake control manager (for replay or network modes).
+	 * 
+	 * @param sprite
+	 * 		Controlled sprite.
+	 */
 	public EmptyControlManager(Sprite sprite)
 	{	super(sprite);
 	}	
@@ -39,6 +45,7 @@ public class EmptyControlManager extends ControlManager
 	/////////////////////////////////////////////////////////////////
 	// CODES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public synchronized void putControlCode(ControlCode controlCode)
 	{	
 		// useless here
@@ -47,6 +54,7 @@ public class EmptyControlManager extends ControlManager
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public synchronized void putControlEvent(ControlEvent controlEvent)
 	{	
 		// useless here
@@ -55,6 +63,7 @@ public class EmptyControlManager extends ControlManager
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void update()
 	{	
 		// useless here

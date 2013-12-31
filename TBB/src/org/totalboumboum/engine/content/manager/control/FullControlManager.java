@@ -32,15 +32,23 @@ import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.engine.EngineConfiguration;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;
 import org.totalboumboum.engine.content.sprite.Sprite;
+import org.totalboumboum.engine.content.sprite.hero.Hero;
 import org.totalboumboum.engine.control.ControlCode;
 
 /**
+ * Handles the controls of controlled sprite
+ * (usually the {@link Hero} type).
  * 
  * @author Vincent Labatut
- *
  */
 public class FullControlManager extends ControlManager
-{	
+{
+	/**
+	 * Creates a new control manager for the specified sprite.
+	 * 
+	 * @param sprite
+	 * 		Controlled sprite.
+	 */
 	public FullControlManager(Sprite sprite)
 	{	super(sprite);
 		controlCodes = new LinkedList<ControlCode>();
@@ -51,14 +59,16 @@ public class FullControlManager extends ControlManager
 	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** list of current control */
+	/** List of current control */
 	protected LinkedList<Integer> currentControls;
+	/** Engine configuration regarding controls */
 	private EngineConfiguration engineConfiguration = Configuration.getEngineConfiguration();
 	
 	/////////////////////////////////////////////////////////////////
 	// CODES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected int compte=0;
+	/** Counter (debug mode) */
+	protected int count = 0;
 	/** controls waiting to be processed */
 	protected LinkedList<ControlCode> controlCodes;
 	
@@ -67,12 +77,15 @@ public class FullControlManager extends ControlManager
 	{	controlCodes.offer(controlCode);
 	}
 
+	/**
+	 * Updates current control codes.
+	 */
 	private void updateCodes()
 	{	boolean debug = false;
 //		boolean test = controlCodes.size()>0; 
 		if(debug /*&& test*/)		
-		{	System.out.println("--"+compte+"--");
-			compte++;
+		{	System.out.println("--"+count+"--");
+			count++;
 			System.out.print("controlCodes: [ ");
 			for(int i=0;i<controlCodes.size();i++)
 				System.out.print("("+controlCodes.get(i).getKeyCode()+","+controlCodes.get(i).getMode()+") ");
@@ -167,7 +180,7 @@ public class FullControlManager extends ControlManager
 	/////////////////////////////////////////////////////////////////
 	// EVENTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** events waiting to be transmitted */
+	/** Events waiting to be transmitted */
 	protected LinkedList<ControlEvent> controlEvents;
 	
 	@Override
@@ -175,6 +188,9 @@ public class FullControlManager extends ControlManager
 	{	controlEvents.offer(controlEvent);	
 	}
 
+	/**
+	 * Updates current events.
+	 */
 	private void updateEvents()
 	{	
 //if(sprite instanceof Sprite)
@@ -206,6 +222,14 @@ public class FullControlManager extends ControlManager
 		}
 	}
 
+	/**
+	 * Remove one of the current events.
+	 * 
+	 * @param eventsList
+	 * 		List of events to consider. 
+	 * @param event
+	 * 		Event to remove from the list.
+	 */
 	private void removeEvent(LinkedList<ControlEvent> eventsList, ControlEvent event)
 	{	boolean found = false;
 		int i = eventsList.size()-1;
