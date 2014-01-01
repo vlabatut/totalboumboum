@@ -2,7 +2,7 @@
 <ais xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\ais.xsd">
 	<!--
 	Total Boum Boum
-	Copyright 2008-2013 Vincent Labatut
+	Copyright 2008-2014 Vincent Labatut
 	
 	This file is part of Total Boum Boum.
 	
@@ -23,7 +23,7 @@
 	<autoAdvance value="TOURNAMENT" delay="3000" tournament="CONFRONTATIONS" pack="v201314" />
 	<hideAllAis value="false" />
 	<bombUselessAis value="5000" />
-	<bombCyclingAis value="false" />
+	<bombCyclingAis value="true" />
 	<displayExceptions value="true" />
 	<logExceptions value="false" />
 	<recordStats value="false" />
