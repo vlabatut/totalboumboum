@@ -2,7 +2,7 @@ package org.totalboumboum.game.tournament.single;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2014 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -366,7 +366,7 @@ public class SingleTournament extends AbstractTournament
 			}
 			
 			// confrontations
-			{	List<StatisticBase> statRounds = stats.getConfrontationStats();
+			{	List<StatisticBase> statRounds = match.getStats().getConfrontationStats();
 				for(StatisticBase statRound: statRounds)
 				{	float pts = statRound.getPoints()[profileIndex];
 					NumberFormat nf = NumberFormat.getInstance();
