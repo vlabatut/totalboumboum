@@ -2,7 +2,7 @@ package org.totalboumboum.engine.loop;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2014 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -560,7 +560,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 							if(tiles.size()>CYCLE_SIZE)
 								tiles.removeFirst();
 		
-System.out.println(player.getColor()+": "+tiles.toString());			
+//System.out.println(player.getColor()+": "+tiles.toString());			
 							// check for cycles
 							if(tiles.size()==CYCLE_SIZE)
 							{	for(int c=3;c<=5;c++)
@@ -571,7 +571,7 @@ System.out.println(player.getColor()+": "+tiles.toString());
 									{	boolean result = dropLevelBomb(tile);
 										if(result)
 										{	tiles.clear();
-System.out.println(player.getColor()+": cycle of size c="+c+" detected");			
+//System.out.println(player.getColor()+": cycle of size c="+c+" detected");			
 										}
 									}
 								}
