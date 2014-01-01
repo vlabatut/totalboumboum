@@ -20,20 +20,24 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="Trnmt201314_1.cup" />
+	<tournament name="NeutralCup" />
 	<players>
-		<player file="dd71e2ae-4889-4ca0-9973-c75eb175af25" color="ULTRAMARINE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="d73fcbbf-7efc-423e-86b6-a752228a4372" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="69306440-cfe9-4136-9494-faa95068c1c3" color="GREY" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="0eb14b39-3e11-4871-9535-4587250b926a" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="56450bda-a8e1-4c77-b424-f19e3e3c07b6" color="CYAN" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="ed343446-7b2a-4ce3-a391-5e79cbb638ea" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="0f392b59-99e3-41be-8281-75bc6db8e7b1" color="RED" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="e567b7ac-7061-4141-b314-34614d428670" color="GREEN" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="430cf1b5-4831-4d94-b3b4-a5d0a6780462" color="INDIGO" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="c7adf502-106d-4486-af18-560a5e5c812c" color="BLUE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="4401ce2b-b1c6-428b-bcc0-45b998f1797a" color="YELLOW" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="ce2dd151-dc2f-4e9d-a652-c5fdfcb3f5ad" color="PINK" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="90d43698-a591-4f03-aa22-8e662f9d0b89" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="1d8af34e-db74-4826-86e5-4d88492a27d3" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="7c2b4e66-3a14-4253-a0db-5dd6742e579b" color="PINK" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
+		<player file="bf0ed21f-8d7a-4cee-aa27-2d6729ce9940" color="YELLOW" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="9bed4abd-b956-4bf1-bf01-42d490d26dce" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="77015d7c-ddf2-4b46-89b3-46a24d91f2d0" color="BLUE" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="6bdd7857-18dd-4128-b5d9-4d52543ba1f8" color="PURPLE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="accd13b7-4e82-4e07-a5c4-8f8472cc49d9" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="6120e48f-3b5d-4681-b2f8-ae7f7277345b" color="BROWN" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="8bba1aef-591e-484b-942a-89ee4aacb665" color="RUST" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="4a22a9cf-9bd9-4a55-b206-e0cbccdce042" color="GREY" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="ac0853de-bb8f-4141-8fa9-4a3b2708d331" color="GRASS" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="d9dc2fd6-c0c5-42d7-9c16-46b838c6dbae" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="a883f212-80a2-4887-bda5-b5d5d39b6062" color="GREEN" controls="0" spritePack="superbomberman3" spriteFolder="shirobon" />
+		<player file="d5437bdc-e1e0-4778-b2a1-d95f086ae957" color="RED" controls="0" spritePack="superbomberman4" spriteFolder="shirobon" />
+		<player file="aaf8bf17-7c30-4450-920f-8be905a77461" color="CYAN" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
 	</players>
 	<autoAdvance index="0" />
 </gameTournament>
