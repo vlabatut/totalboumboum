@@ -2,7 +2,7 @@ package org.totalboumboum.ai.v201314.ais.saylamsonmez;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2014 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -33,7 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
 import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.ais.saylamsonmez.v3.Agent;
+import org.totalboumboum.ai.v201314.ais.saylamsonmez.v4.Agent;
 import org.xml.sax.SAXException;
 
 /**
