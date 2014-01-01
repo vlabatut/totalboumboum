@@ -2,7 +2,7 @@ package org.totalboumboum.tools.xml;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2014 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -218,7 +218,7 @@ public class XmlTools
 	{	StringBuffer text = new StringBuffer();
 		text.append("\n");
 		text.append("\tTotal Boum Boum\n");
-		text.append("\tCopyright 2008-2013 Vincent Labatut\n");
+		text.append("\tCopyright 2008-2014 Vincent Labatut\n");
 		text.append("\t\n");
 		text.append("\tThis file is part of Total Boum Boum.\n");
 		text.append("\t\n");
