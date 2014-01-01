@@ -19,22 +19,26 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Tournoi de Galatasaray VII" type="CUP" />
-	<played matches="8" rounds="6" />
-	<dates start="2013-12-31T07:25:38" save="2013-12-31T08:12:29" />
+	<tournament name="Coupe de test" type="CUP" />
+	<played matches="3" rounds="5" />
+	<dates start="2014-01-01T15:03:48" save="2014-01-01T15:15:34" />
 	<players>
-		<player name="1314.Asıl+İzer+Yüce" />
-		<player name="1314.Güneş+Sağlam+Turgut" />
-		<player name="1314.Arık+Günaydın+Kochan" />
-		<player name="1314.Dönmez+LabatCamy" />
-		<player name="1314.Derin+Koçak+Zorluoğlu" />
-		<player name="1314.Engin+Serhan+Tipici" />
-		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
-		<player name="1314.Oralı+Osmanoğlu" />
-		<player name="1314.Çetin+Özel" />
-		<player name="1314.Acar+Sesyılmaz" />
-		<player name="1314.Saylam+Sönmez" />
-		<player name="1314.Akyol+Kaptan+Koçak" />
+		<player name="1213.Oral+Özuğur" />
+		<player name="1112.Güngör+Kavuz" />
+		<player name="0809.Dayioğlugil+Geçkalan" />
+		<player name="0910.Dane+Şatır" />
+		<player name="1112.Coşkun+Özdemir" />
+		<player name="0809.Devecioğlu+Korkmaz" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="0809.Akpolat+Şener" />
+		<player name="0910.Adatape+Özbek" />
+		<player name="0809.Günalp+Yürtsever" />
+		<player name="1011.İsbir+Koyaş" />
+		<player name="1112.Kayuka+Taşkın" />
+		<player name="0910.Aldanmaz+Yenigün" />
+		<player name="1112.Demirel+Öz" />
+		<player name="1112.Arık+Köseoğlu" />
+		<player name="1112.Çalışkan+Geçkalan+Seven" />
 	</players>
 </archive>
 
