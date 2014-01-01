@@ -2,7 +2,7 @@ package org.totalboumboum.engine.container.level;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2014 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -116,20 +116,20 @@ public class LevelTools
 //		insertCol(level,9,true,true,true,true,true);
 //		saveLevel(level);
 
-		// open an existing level and add a sudden death
-		String pack = "tournament201314";
-		String folder = "colimacon";
-		XmlTools.init();
-		HollowLevel level = loadLevel(pack,folder);
-//		rescaleSuddenDeathTime(level,90000,120000);
-//		removeSuddenDeath(level);
-		int thickness = 4;
-		boolean clockwise = true;
-		long startTime = 60000;
-		long endTime = 90000;
-		boolean relative = true;
-		long totalTime = 90000;
-		boolean crushHardwalls = false;
+//		// open an existing level and add a sudden death
+//		String pack = "tournament201314";
+//		String folder = "colimacon";
+//		XmlTools.init();
+//		HollowLevel level = loadLevel(pack,folder);
+////		rescaleSuddenDeathTime(level,90000,120000);
+////		removeSuddenDeath(level);
+//		int thickness = 4;
+//		boolean clockwise = true;
+//		long startTime = 60000;
+//		long endTime = 90000;
+//		boolean relative = true;
+//		long totalTime = 90000;
+//		boolean crushHardwalls = false;
 //		addSpiralSuddenDeath(level, thickness, clockwise, 1, 5, startTime, endTime, relative, totalTime, crushHardwalls);
 //		addLinearSuddenDeath(level, thickness, 2, true, 1, 13, startTime, endTime, relative, totalTime, crushHardwalls);
 //		addCustomSuddenDeath(level, Arrays.asList(
