@@ -2,7 +2,7 @@ package org.totalboumboum;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2013 Vincent Labatut 
+ * Copyright 2008-2014 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -1681,7 +1681,7 @@ public class Launcher
 //			combi avec les touches numériques ? >> pas pratique). 
 //			ou alors avec control droite >> pas possible
 //		>> faire défiler ? (encore moins pratique)
-//		>> utiliser une fenêtre séparée ? > semble être la meilleure solution
+//		>> utiliser une fenêtre séparée ? >> semble être la meilleure solution
 
 // TODO dans les stats d'évolution de la partie, afficher l'occupation processeur
 
@@ -1723,11 +1723,6 @@ public class Launcher
 // ça peut être la galère... ou pas. peut être qu'il faut simplifier, à ce niveau si prospectif.
 
 //TODO écrire un agent très simple, Direct, qui pose une bombe le plus loin possible de l'adversaire
-
-// TODO faire détecter les motifs répétitifs par le jeu lui-même
-// 		casser le motif en balançant des bombes
-// TODO corolaire : lorsque les IA sont menacées par le jeu, la bombe
-// 		doit tomber et non pas apparaitre (comme c'est surement le cas)
 
 // TODO API 
 // + ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
