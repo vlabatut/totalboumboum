@@ -555,6 +555,8 @@
 		- outil de génération de code source (vide) à partir d'un agent générique
 
 + beta.026
+	- général :
+		- mise à niveau de la date de copyright
 	- ressources : 
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- Thème du tournoi 2013/14
