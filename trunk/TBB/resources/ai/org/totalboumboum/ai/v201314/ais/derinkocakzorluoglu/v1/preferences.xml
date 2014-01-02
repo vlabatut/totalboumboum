@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/preferences.xsd">
+
+
+	<categories>
+		<category name="FIRST_CATEGORY" criteria="Danger Distance" />
+		<category name="SECOND_CATEGORY" criteria="Danger DistanceEnemy WallNumber" />
+		
+	</categories>
+	
+	
+	<tables>
+		
+		<table mode="ATTACKING">
+			<combination category="FIRST_CATEGORY" values="true true" />
+			<combination category="FIRST_CATEGORY" values="true false" />
+			<combination category="FIRST_CATEGORY" values="false true" />
+			<combination category="FIRST_CATEGORY" values="false false" />
+			<combination category="SECOND_CATEGORY" values="true true 0" />
+			<combination category="SECOND_CATEGORY" values="true true 1" />
+			<combination category="SECOND_CATEGORY" values="true true 2" />
+			<combination category="SECOND_CATEGORY" values="true true 3" />
+			<combination category="SECOND_CATEGORY" values="true true 4" />
+			<combination category="SECOND_CATEGORY" values="true false 0" />
+			<combination category="SECOND_CATEGORY" values="true false 1" />
+			<combination category="SECOND_CATEGORY" values="true false 2" />
+			<combination category="SECOND_CATEGORY" values="true false 3" />
+			<combination category="SECOND_CATEGORY" values="true false 4" />
+			<combination category="SECOND_CATEGORY" values="false true 0" />
+			<combination category="SECOND_CATEGORY" values="false true 1" />
+			<combination category="SECOND_CATEGORY" values="false true 2" />
+			<combination category="SECOND_CATEGORY" values="false true 3" />
+			<combination category="SECOND_CATEGORY" values="false true 4" />
+			<combination category="SECOND_CATEGORY" values="false false 0" />
+			<combination category="SECOND_CATEGORY" values="false false 1" />
+			<combination category="SECOND_CATEGORY" values="false false 2" />
+			<combination category="SECOND_CATEGORY" values="false false 3" />
+			<combination category="SECOND_CATEGORY" values="false false 4" />
+			
+		</table>
+		
+		<table mode="COLLECTING">
+			<combination category="FIRST_CATEGORY" values="true true" />
+			<combination category="FIRST_CATEGORY" values="true false" />
+			<combination category="FIRST_CATEGORY" values="false true" />
+			<combination category="FIRST_CATEGORY" values="false false" />
+			<combination category="SECOND_CATEGORY" values="true true 0" />
+			<combination category="SECOND_CATEGORY" values="true true 1" />
+			<combination category="SECOND_CATEGORY" values="true true 2" />
+			<combination category="SECOND_CATEGORY" values="true true 3" />
+			<combination category="SECOND_CATEGORY" values="true true 4" />
+			<combination category="SECOND_CATEGORY" values="true false 0" />
+			<combination category="SECOND_CATEGORY" values="true false 1" />
+			<combination category="SECOND_CATEGORY" values="true false 2" />
+			<combination category="SECOND_CATEGORY" values="true false 3" />
+			<combination category="SECOND_CATEGORY" values="true false 4" />
+			<combination category="SECOND_CATEGORY" values="false true 0" />
+			<combination category="SECOND_CATEGORY" values="false true 1" />
+			<combination category="SECOND_CATEGORY" values="false true 2" />
+			<combination category="SECOND_CATEGORY" values="false true 3" />
+			<combination category="SECOND_CATEGORY" values="false true 4" />
+			<combination category="SECOND_CATEGORY" values="false false 0" />
+			<combination category="SECOND_CATEGORY" values="false false 1" />
+			<combination category="SECOND_CATEGORY" values="false false 2" />
+			<combination category="SECOND_CATEGORY" values="false false 3" />
+			<combination category="SECOND_CATEGORY" values="false false 4" />
+		</table>
+		
+		
+	</tables>	
+	
+</preferences>
+

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/preferences.xsd">
+
+<!--
+	Tous les commentaires contenus dans ce document sont là pour vous
+	aider à comprendre sa structure. VOUS DEVEZ LES EFFACER après les avoir lus 
+ -->
+
+
+	<!--
+		Tout d'abord, chaque catégorie soit être définie. Pour chacune,
+		vous devez insiquer son, qui doit être unique, et la liste de
+		critères qui la caractérisent. Chaque critère ne peut apparaitre
+		qu'une seule fois dans une catégorie. Les noms utilisés pour identifier
+		les critères doivent être ceux définis dans les classes correspodantes.
+		L'ordre des critères est important : il doit être compatible avec
+		l'ordre des valeurs données lors de la définition des combinaisons,
+		plus bas dans ce même document. 
+ 	-->
+	<categories>
+		<category name="ECHAPE" criteria="MENACE DISTANCE ENEMYPROXIMITY" />
+		<category name="ATTACK" criteria="DISTANCE DISTANCE_ADVERSAIRE VOISIN_VIDE EXISTENCE_BOMB" />
+		<category name="COLLECT" criteria="DISTANCE" />
+	</categories>
+	
+	<!--
+		Deux tables de préférences doivent être définies, chacune
+		pour l'un des deux modes collecte et attaque. Dans chaque
+		table, TOUTES LES COMBINAISONS possibles doivent être ordonnées,
+		de la plus préférée à la moins préférée. Autrement dit : par
+		ordre décroissant de préférence. 
+		Les noms utilisés pour identifier les catégories doivent correspondre
+		à ceux donnés dans la première partie de ce document XML.
+		L'ordre des valeurs doit correspondre à l'ordre des critères qui
+		a été spécifié lors de la définition des catégories, dans la
+		première partie de ce document.
+	 -->
+	<tables>
+		<!-- 
+			Table définissant les préférences du mode collecte
+		 -->
+		<table mode="COLLECTING">
+
+		<combination category="COLLECT" values="1" />
+		<combination category="COLLECT" values="2" />
+		<combination category="COLLECT" values="3" />
+		<combination category="COLLECT" values="4" />
+		</table>
+		
+		<!-- 
+			Table définissant les préférences du mode attaque
+		 -->
+		<table mode="ATTACKING">
+			<combination category="ECHAPE" values="false 1 1" />
+			<combination category="ECHAPE" values="false 2 1" />
+			<combination category="ECHAPE" values="false 3 1" />
+			<combination category="ECHAPE" values="false 4 1" />
+			<combination category="ECHAPE" values="false 1 2" />
+			<combination category="ECHAPE" values="false 2 2" />
+			<combination category="ECHAPE" values="false 3 2" />
+			<combination category="ECHAPE" values="false 4 2" />
+			<combination category="ECHAPE" values="false 1 3" />
+			<combination category="ECHAPE" values="false 2 3" />
+			<combination category="ECHAPE" values="false 3 3" />
+			<combination category="ECHAPE" values="false 4 3" />
+			<combination category="ECHAPE" values="false 1 4" />
+			<combination category="ECHAPE" values="false 2 4" />
+			<combination category="ECHAPE" values="false 3 4" />
+			<combination category="ECHAPE" values="false 4 4" />
+			
+
+
+			
+			<combination category="ATTACK" values="1 true true false" />
+			<combination category="ATTACK" values="1 true false false" />
+			
+	
+			<combination category="ATTACK" values="1 false false false" />
+			<combination category="ATTACK" values="2 true true false" />
+			<combination category="ATTACK" values="2 false true false" />
+			
+			
+			<combination category="ATTACK" values="2 true false false" />
+			
+			
+			<combination category="ATTACK" values="3 true false false" />
+			
+			<combination category="ATTACK" values="1 false true false" />
+			
+			<combination category="ATTACK" values="3 true true false" />
+			<combination category="ATTACK" values="2 false false false" />
+			<combination category="ATTACK" values="3 false true false" />
+			<combination category="ATTACK" values="3 false false false" />
+			<combination category="ATTACK" values="4 false true false" />
+			<combination category="ATTACK" values="4 false false false" />
+			<combination category="ATTACK" values="4 true true false" />
+			<combination category="ATTACK" values="4 true false false" />
+			
+			<combination category="ATTACK" values="1 true true true" />
+			<combination category="ATTACK" values="1 true false true" />
+			<combination category="ATTACK" values="1 false true true" />
+			<combination category="ATTACK" values="1 false false true" />
+			<combination category="ATTACK" values="2 true true true" />
+			<combination category="ATTACK" values="2 false true true" />
+			<combination category="ATTACK" values="2 true false true" />
+			<combination category="ATTACK" values="3 true false true" />
+			<combination category="ATTACK" values="3 true true true" />
+			<combination category="ATTACK" values="2 false false true" />
+			<combination category="ATTACK" values="3 false true true" />
+			<combination category="ATTACK" values="3 false false true" />
+			<combination category="ATTACK" values="4 false true true" />
+			<combination category="ATTACK" values="4 false false true" />
+			<combination category="ATTACK" values="4 true true true" />
+			<combination category="ATTACK" values="4 true false true" />
+		
+			<combination category="ECHAPE" values="true 1 1" />
+			<combination category="ECHAPE" values="true 2 1" />
+			<combination category="ECHAPE" values="true 3 1" />
+			<combination category="ECHAPE" values="true 4 1" />
+			<combination category="ECHAPE" values="true 1 2" />
+			<combination category="ECHAPE" values="true 2 2" />
+			<combination category="ECHAPE" values="true 3 2" />
+			<combination category="ECHAPE" values="true 4 2" />
+			<combination category="ECHAPE" values="true 1 3" />
+			<combination category="ECHAPE" values="true 2 3" />
+			<combination category="ECHAPE" values="true 3 3" />
+			<combination category="ECHAPE" values="true 4 3" />
+			<combination category="ECHAPE" values="true 1 4" />
+			<combination category="ECHAPE" values="true 2 4" />
+			<combination category="ECHAPE" values="true 3 4" />
+			<combination category="ECHAPE" values="true 4 4" />
+			
+		</table>
+	</tables>	
+	
+</preferences>
+

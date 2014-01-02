@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/preferences.xsd">
+
+<!--
+	Tous les commentaires contenus dans ce document sont là pour vous
+	aider à comprendre sa structure. VOUS DEVEZ LES EFFACER après les avoir lus 
+ -->
+
+
+	<!--
+		Tout d'abord, chaque catégorie soit être définie. Pour chacune,
+		vous devez insiquer son, qui doit être unique, et la liste de
+		critères qui la caractérisent. Chaque critère ne peut apparaitre
+		qu'une seule fois dans une catégorie. Les noms utilisés pour identifier
+		les cr<,++itères doivent être ceux définis dans les classes correspodantes.
+		L'ordre des critères est important : il doit être compatible avec
+		l'ordre des valeurs données lors de la définition des combinaisons,
+		plus bas dans ce même document. 
+ 	-->
+	<categories>
+		<category name="EffetDomino" criteria="DeclencherUneAutreBombe Distance Duree" />
+
+	</categories>
+	
+	<!--
+		Deux tables de préférences doivent être définies, chacune
+		pour l'un des deux modes collecte et attaque. Dans chaque
+		table, TOUTES LES COMBINAISONS possibles doivent être ordonnées,
+		de la plus préférée à la moins préférée. Autrement dit : par
+		ordre décroissant de préférence. 
+		Les noms utilisés pour identifier les catégories doivent correspondre
+		à ceux donnés dans la première partie de ce document XML.
+		L'ordre des valeurs doit correspondre à l'ordre des critères qui
+		a été spécifié lors de la définition des catégories, dans la
+		première partie de ce document.
+	 -->
+	<tables>
+		<!-- 
+			Table définissant les préférences du mode collecte
+		 -->
+		<table mode="COLLECTING">
+			<combination category="EffetDomino" values="2 true true" />
+			<combination category="EffetDomino" values="1 true true" />
+			<combination category="EffetDomino" values="0 true true" />
+			<combination category="EffetDomino" values="0 false true" />
+			<combination category="EffetDomino" values="1 false true" />
+			<combination category="EffetDomino" values="2 false true" />
+			<combination category="EffetDomino" values="0 true false" />
+			<combination category="EffetDomino" values="1 true false" />
+			<combination category="EffetDomino" values="2 true false" />
+			<combination category="EffetDomino" values="0 false false" />
+			<combination category="EffetDomino" values="1 false false" />
+			<combination category="EffetDomino" values="2 false false" />
+		</table>
+		
+		<!-- 
+			Table définissant les préférences du mode attaque
+		 -->
+		<table mode="ATTACKING">
+			<combination category="EffetDomino" values="2 true true" />
+			<combination category="EffetDomino" values="1 true true" />
+			<combination category="EffetDomino" values="0 true true" />
+			<combination category="EffetDomino" values="0 false true" />
+			<combination category="EffetDomino" values="1 false true" />
+			<combination category="EffetDomino" values="2 false true" />
+			<combination category="EffetDomino" values="0 true false" />
+			<combination category="EffetDomino" values="1 true false" />
+			<combination category="EffetDomino" values="2 true false" />
+			<combination category="EffetDomino" values="0 false false" />
+			<combination category="EffetDomino" values="1 false false" />
+			<combination category="EffetDomino" values="2 false false" />
+
+		
+		</table>
+	</tables>	
+	
+</preferences>
+

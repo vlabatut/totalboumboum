@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/preferences.xsd">
+
+<!--
+	Tous les commentaires contenus dans ce document sont là pour vous
+	aider à comprendre sa structure. VOUS DEVEZ LES EFFACER après les avoir lus 
+ -->
+
+
+	<!--
+		Tout d'abord, chaque catégorie soit être définie. Pour chacune,
+		vous devez insiquer son, qui doit être unique, et la liste de
+		critères qui la caractérisent. Chaque critère ne peut apparaitre
+		qu'une seule fois dans une catégorie. Les noms utilisés pour identifier
+		les critères doivent être ceux définis dans les classes correspodantes.
+		L'ordre des critères est important : il doit être compatible avec
+		l'ordre des valeurs données lors de la définition des combinaisons,
+		plus bas dans ce même document. 
+ 	-->
+	<categories>
+		<category name="CATEGORY1" criteria="Menace Distance Attack" />
+	</categories>
+	
+	<!--
+		Deux tables de préférences doivent être définies, chacune
+		pour l'un des deux modes collecte et attaque. Dans chaque
+		table, TOUTES LES COMBINAISONS possibles doivent être ordonnées,
+		de la plus préférée à la moins préférée. Autrement dit : par
+		ordre décroissant de préférence. 
+		Les noms utilisés pour identifier les catégories doivent correspondre
+		à ceux donnés dans la première partie de ce document XML.
+		L'ordre des valeurs doit correspondre à l'ordre des critères qui
+		a été spécifié lors de la définition des catégories, dans la
+		première partie de ce document.
+	 -->
+	<tables>
+		<!-- 
+			Table définissant les préférences du mode collecte
+		 -->
+		<table mode="COLLECTING">
+			<combination category="CATEGORY1" values="0 0 0" />
+			<combination category="CATEGORY1" values="0 0 1" />
+			<combination category="CATEGORY1" values="0 1 0" />
+			<combination category="CATEGORY1" values="0 1 1" />
+			<combination category="CATEGORY1" values="1 0 0" />
+			<combination category="CATEGORY1" values="1 0 1" />
+			<combination category="CATEGORY1" values="1 1 0" />
+			<combination category="CATEGORY1" values="1 1 1" />
+			<combination category="CATEGORY1" values="2 0 0" />
+			<combination category="CATEGORY1" values="2 0 1" />
+			<combination category="CATEGORY1" values="2 1 0" />
+			<combination category="CATEGORY1" values="2 1 1" />
+		</table>
+		
+		<!-- 
+			Table définissant les préférences du mode attaque
+		 -->
+		<table mode="ATTACKING">
+			<combination category="CATEGORY1" values="0 0 0" />
+			<combination category="CATEGORY1" values="0 0 1" />
+			<combination category="CATEGORY1" values="0 1 0" />
+			<combination category="CATEGORY1" values="0 1 1" />
+			<combination category="CATEGORY1" values="1 0 0" />
+			<combination category="CATEGORY1" values="1 0 1" />
+			<combination category="CATEGORY1" values="1 1 0" />
+			<combination category="CATEGORY1" values="1 1 1" />
+			<combination category="CATEGORY1" values="2 0 0" />
+			<combination category="CATEGORY1" values="2 0 1" />
+			<combination category="CATEGORY1" values="2 1 0" />
+			<combination category="CATEGORY1" values="2 1 1" />
+			
+		</table>
+	</tables>	
+	
+</preferences>
+

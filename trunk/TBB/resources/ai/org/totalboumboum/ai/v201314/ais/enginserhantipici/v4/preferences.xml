@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../schemas/preferences.xsd">
+
+	<categories>
+		
+		<category name="ATTACK" criteria="DISTANCE_TRIANGLE EMPTY_NEIGHBOUR EXISTENCE_BOMB " />
+		<category name="COLLECT" criteria="DISTANCE" />
+		<category name="EASY_ATTACK" criteria="ENEMY_PROXIMITY EXISTENCE_BOMB" />
+		<category name="SECURITY" criteria="DANGER_DEGREE DISTANCE_BOMB DISTANCE" />
+		<category name="SEARCH" criteria="DISTANCE" />
+		<category name="DEAD_END_ABS" criteria="FIRE_FIELD BOMB_RANGE_ENOUGH" />
+		<category name="SPEED_ATTACK" criteria="FIRE_TIME" />
+	
+	</categories>
+	
+
+	<tables>
+		<!-- 
+			Table définissant les préférences du mode collecte
+		 -->
+		<table mode="COLLECTING">
+		
+		
+		<combination category="COLLECT" values="1" />
+		<combination category="COLLECT" values="2" />
+		<combination category="COLLECT" values="3" />
+		<combination category="COLLECT" values="4" />
+		
+		
+
+		</table>
+		
+		<!-- 
+			Table définissant les préférences du mode attaque
+		 -->
+		<table mode="ATTACKING">
+		
+		
+			<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+			<!-- %%%%%%%%%%%%%%% SPEED ATTACK %%%%%%%%%%%%%%%%%% -->	
+
+			<combination category="SPEED_ATTACK" values="true" />
+			<combination category="SPEED_ATTACK" values="false" />
+			
+			<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+		
+		
+			<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+			<!-- %%%%%%%%%%%%%%% DEAD_END_ABS %%%%%%%%%%%%%%%%%%% -->	
+
+			<combination category="DEAD_END_ABS" values="1 false" />
+			<combination category="DEAD_END_ABS" values="2 false" />
+			<combination category="DEAD_END_ABS" values="3 false" />
+			<combination category="DEAD_END_ABS" values="4 false" />
+			
+			<combination category="DEAD_END_ABS" values="1 true" />
+			<combination category="DEAD_END_ABS" values="2 true" />
+			<combination category="DEAD_END_ABS" values="3 true" />
+			<combination category="DEAD_END_ABS" values="4 true" />
+
+			
+			<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+			
+			
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+		<!-- %%%%%%%%%%%%%%%%%% SECURITY %%%%%%%%%%%%%%%%%%%%%%%%%% -->
+			
+			<combination category="SECURITY" values="3 2 1" />
+			<combination category="SECURITY" values="3 3 1" />
+			<combination category="SECURITY" values="3 4 1" />
+			<combination category="SECURITY" values="3 5 1" />
+			
+			
+			<combination category="SECURITY" values="3 2 2" />
+			<combination category="SECURITY" values="3 3 2" />
+			<combination category="SECURITY" values="3 4 2" />
+			<combination category="SECURITY" values="3 5 2" />
+			<combination category="SECURITY" values="3 1 2" />
+			
+		<!-- Because, if the DISTANCE =  1 it means that we are absulutly near a bomb-->
+			<combination category="SECURITY" values="3 1 1" />
+			
+			<combination category="SECURITY" values="3 2 3" />
+			<combination category="SECURITY" values="3 3 3" />
+			<combination category="SECURITY" values="3 4 3" />
+			<combination category="SECURITY" values="3 5 3" />
+			<combination category="SECURITY" values="3 1 3" />
+			
+			<combination category="SECURITY" values="3 2 4" />
+			<combination category="SECURITY" values="3 3 4" />
+			<combination category="SECURITY" values="3 4 4" />
+			<combination category="SECURITY" values="3 5 4" />
+			<combination category="SECURITY" values="3 1 4" />
+		
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+			
+			<combination category="SECURITY" values="2 2 1" />
+			<combination category="SECURITY" values="2 3 1" />
+			<combination category="SECURITY" values="2 4 1" />
+			<combination category="SECURITY" values="2 5 1" />
+		
+			
+			<combination category="SECURITY" values="2 2 2" />
+			<combination category="SECURITY" values="2 3 2" />
+			<combination category="SECURITY" values="2 4 2" />
+			<combination category="SECURITY" values="2 5 2" />
+			<combination category="SECURITY" values="2 1 2" />
+		<!-- Because, if the DISTANCE =  1 it means that we are absulutly near a bomb-->
+			<combination category="SECURITY" values="2 1 1" />
+			
+			<combination category="SECURITY" values="2 2 3" />
+			<combination category="SECURITY" values="2 3 3" />
+			<combination category="SECURITY" values="2 4 3" />
+			<combination category="SECURITY" values="2 5 3" />
+			<combination category="SECURITY" values="2 1 3" />
+			
+			<combination category="SECURITY" values="2 2 4" />
+			<combination category="SECURITY" values="2 3 4" />
+			<combination category="SECURITY" values="2 4 4" />
+			<combination category="SECURITY" values="2 5 4" />
+			<combination category="SECURITY" values="2 1 4" />
+
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+			<combination category="SECURITY" values="1 2 1" />
+			<combination category="SECURITY" values="1 3 1" />
+			<combination category="SECURITY" values="1 4 1" />
+			<combination category="SECURITY" values="1 5 1" />
+			
+			
+			<combination category="SECURITY" values="1 2 2" />
+			<combination category="SECURITY" values="1 3 2" />
+			<combination category="SECURITY" values="1 4 2" />
+			<combination category="SECURITY" values="1 5 2" />
+			<combination category="SECURITY" values="1 1 2" />
+		
+
+			
+			<combination category="SECURITY" values="1 2 3" />
+			<combination category="SECURITY" values="1 3 3" />
+			<combination category="SECURITY" values="1 4 3" />
+			<combination category="SECURITY" values="1 5 3" />
+			<combination category="SECURITY" values="1 1 3" />
+			
+			<combination category="SECURITY" values="1 2 4" />
+			<combination category="SECURITY" values="1 3 4" />
+			<combination category="SECURITY" values="1 4 4" />
+			<combination category="SECURITY" values="1 5 4" />
+			<combination category="SECURITY" values="1 1 4" />
+			
+	<!-- Because, if the DISTANCE =  1 it means that we are absulutly near a bomb-->
+			<combination category="SECURITY" values="1 1 1" />
+			
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+			<!-- %%%%%%%%%%%%%%% SEARCH %%%%%%%%%%%%%%%%%% -->	
+			
+			<combination category="SEARCH" values="1" />
+			<combination category="SEARCH" values="2" />
+			<combination category="SEARCH" values="3" />
+			<combination category="SEARCH" values="4" />
+			
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+		
+		
+		
+			
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+		<!-- %%%%%%%%%%%%%%% EASY ATTACK %%%%%%%%%%%%%%%%%% -->
+		
+		
+			<combination category="EASY_ATTACK" values="2 false" />
+			<combination category="EASY_ATTACK" values="3 false" />
+			<combination category="EASY_ATTACK" values="4 false" />
+			<combination category="EASY_ATTACK" values="1 false" />
+			<combination category="EASY_ATTACK" values="2 true" />
+			<combination category="EASY_ATTACK" values="3 true" />
+			<combination category="EASY_ATTACK" values="4 true" />
+			<combination category="EASY_ATTACK" values="1 true" />
+			
+		<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+		<!-- %%%%%%%%%%%%%%% TRIANGLE ATTACK %%%%%%%%%%%%%%%%%% -->
+
+			<combination category="ATTACK" values="1 true false" />
+			<combination category="ATTACK" values="1 false false" />
+			<combination category="ATTACK" values="2 true false" />
+			<combination category="ATTACK" values="2 false false" />
+			<combination category="ATTACK" values="3 true false" />
+			<combination category="ATTACK" values="3 false false" />
+			<combination category="ATTACK" values="4 true false" />
+			<combination category="ATTACK" values="4 false false" />
+			<combination category="ATTACK" values="5 true false" />
+			<combination category="ATTACK" values="5 false false" />
+		
+			
+			<combination category="ATTACK" values="1 true true" />
+			<combination category="ATTACK" values="1 false true" />
+			<combination category="ATTACK" values="2 true true" />
+			<combination category="ATTACK" values="2 false true" />
+			<combination category="ATTACK" values="3 true true" />
+			<combination category="ATTACK" values="3 false true" />
+			<combination category="ATTACK" values="4 true true" />
+			<combination category="ATTACK" values="4 false true" />	
+			<combination category="ATTACK" values="5 true true" />
+			<combination category="ATTACK" values="5 false true" />
+	
+			
+		
+					
+		</table>
+	</tables>	
+	
+</preferences>
+

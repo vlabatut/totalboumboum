@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../../../../../schemas/preferences.xsd">
+
+
+	<categories>
+		<category name="PASSIVE_CORRIDOR" criteria="ENEMY_DISTANCE SECURITY" />
+		<category name="CORRIDOR" criteria="SECURITY CORRIDOR ENEMY_DISTANCE" />
+		<category name="COLLECT" criteria="SECURITY ENOUGH_TIME" />
+
+	</categories>
+
+	<tables>
+		<table mode="ATTACKING">
+			<combination category="COLLECT" values="False True" />
+			<combination category="COLLECT" values="True True" />
+
+			<combination category="CORRIDOR" values="True 0 1" />
+			<combination category="CORRIDOR" values="True 0 0" />
+			<combination category="CORRIDOR" values="True 1 0" />
+			<combination category="CORRIDOR" values="True 0 2" />
+			<combination category="CORRIDOR" values="True 1 2" />
+			<combination category="CORRIDOR" values="True 1 1" />
+			<combination category="CORRIDOR" values="False 0 1" />
+			<combination category="CORRIDOR" values="False 0 2" />
+
+			<combination category="PASSIVE_CORRIDOR" values="0 False" />
+			<combination category="PASSIVE_CORRIDOR" values="0 True" />
+			<!-- 26 -->
+			<combination category="PASSIVE_CORRIDOR" values="1 True" />
+			<combination category="PASSIVE_CORRIDOR" values="2 True" />
+
+			<!-- 28 -->
+			<combination category="CORRIDOR" values="True 2 1" />
+			<combination category="CORRIDOR" values="True 2 2" />
+			<combination category="CORRIDOR" values="True 2 0" />
+
+			<!-- 31 -->
+			<combination category="CORRIDOR" values="False 0 0" />
+			<combination category="CORRIDOR" values="False 1 0" />
+			<combination category="CORRIDOR" values="False 1 1" />
+			<combination category="CORRIDOR" values="False 1 2" />
+
+			<!-- 37 -->
+			<combination category="CORRIDOR" values="False 2 0" />
+			<combination category="CORRIDOR" values="False 2 2" />
+			<combination category="CORRIDOR" values="False 2 1" />
+
+			<!-- 42 -->
+			<combination category="PASSIVE_CORRIDOR" values="1 False" />
+			<combination category="PASSIVE_CORRIDOR" values="2 False" />
+
+			<!-- 44 -->
+			<combination category="COLLECT" values="True False" />
+			<combination category="COLLECT" values="False False" />
+		</table>
+
+		<table mode="COLLECTING">
+			<combination category="COLLECT" values="True True" />
+
+			<combination category="PASSIVE_CORRIDOR" values="2 TRUE" />
+			<combination category="PASSIVE_CORRIDOR" values="2 FALSE" />
+			<combination category="PASSIVE_CORRIDOR" values="1 TRUE" />
+			<combination category="PASSIVE_CORRIDOR" values="0 TRUE" />
+			<combination category="PASSIVE_CORRIDOR" values="1 FALSE" />
+			<combination category="PASSIVE_CORRIDOR" values="0 FALSE" />
+
+			<combination category="COLLECT" values="True False" />
+			<combination category="COLLECT" values="False True" />
+			<combination category="COLLECT" values="False False" />
+		</table>
+	</tables>
+
+</preferences>
+
