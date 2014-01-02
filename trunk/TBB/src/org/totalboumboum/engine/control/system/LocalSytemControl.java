@@ -197,6 +197,12 @@ public class LocalSytemControl extends SystemControl
 					controlEvent = new SystemControlEvent(SystemControlEvent.SWITCH_DISPLAY_REALTIME_USAGE,SystemControlEvent.REGULAR);
 				loop.processEvent(controlEvent);
 			}
+			
+			else if(keyCode == KeyEvent.VK_SPACE)
+			{	SystemControlEvent controlEvent;
+				controlEvent = new SystemControlEvent(SystemControlEvent.CUSTOM_SYSTEM_CONTROL);
+				loop.processEvent(controlEvent);
+			}
 		}
 	}
 	
