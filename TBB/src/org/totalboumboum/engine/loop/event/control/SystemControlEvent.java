@@ -28,7 +28,9 @@ package org.totalboumboum.engine.loop.event.control;
  *
  */
 public class SystemControlEvent
-{	/** Prematurely end a round */
+{	/** Used to activate various debugging functionalities */
+	public final static String CUSTOM_SYSTEM_CONTROL = "CUSTOM_SYSTEM_CONTROL";
+	/** Prematurely end a round */
 	public final static String REQUIRE_CANCEL_ROUND = "REQUIRE_CANCEL_ROUND";
 	/** Make a screen capture */
 	public final static String REQUIRE_PRINT_SCREEN = "REQUIRE_PRINT_SCREEN";

@@ -294,9 +294,11 @@ public class RegularLoop extends LocalLoop
 	private void customSystemControl()
 	{	// here we drop a level bomb on each player
 		for(AbstractPlayer player: players)
-		{	Hero sprite = player.getSprite();
-			Tile tile = sprite.getTile();
-			dropLevelBomb(tile);
+		{	if(!player.isOut())
+			{	Hero sprite = player.getSprite();
+				Tile tile = sprite.getTile();
+				dropLevelBomb(tile);
+			}
 		}
 	}
 }
