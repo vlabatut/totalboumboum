@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/preferences.xsd">
+
+    <categories>
+        <category name="GOOD_FOR_COLLECT" criteria="CAN_ESCAPE BONUS_TILE GP_TILE FAR_TILE MALUS_TILE DANGEROUS_TILE"/>
+
+        <category name="ATTACK_ENEMY_ACCESSIBLE"
+                  criteria="LOCKS_ENEMY THREAT_TO_ENEMY BONUS_TILE MALUS_TILE DANGEROUS_TILE"/>
+        <category name="ATTACK_ENEMY_INACCESSIBLE"
+                  criteria="CAN_ESCAPE DESTROYS_WALL CLOSEST_TILE MALUS_TILE DANGEROUS_TILE"/>
+    </categories>
+
+    <tables>
+        <table mode="COLLECTING">
+            <!--very good things, close, safe etc-->
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 true false false"/>
+
+            <!--good things, at least safe-->
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 true false false"/>
+
+            <!--bad because of malus-->
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 false true false"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 true true false"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 true true false"/>
+
+            <!--very bad things-->
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 false false true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 false false true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 true false true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 true false true"/>
+
+
+            <!--worst things-->
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 false true true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 false true true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true true 4 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 3 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 2 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 1 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true true 0 true true true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="true false 4 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 3 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 2 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 1 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="true false 0 true true true"/>
+
+
+            <!--CANNOT ESCAPE-->
+
+            <!--very good things, close, safe etc-->
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 true false false"/>
+
+            <!--good things, at least safe-->
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 true false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 false false false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 true false false"/>
+
+            <!--bad because of malus-->
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 false true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 false true false"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 true true false"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 true true false"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 true true false"/>
+
+            <!--very bad things-->
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 false false true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 false false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 false false true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 true false true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 true false true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 true false true"/>
+
+
+            <!--worst things-->
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 false true true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 false true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 false true true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false true 4 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 3 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 2 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 1 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false true 0 true true true"/>
+
+            <combination category="GOOD_FOR_COLLECT" values="false false 4 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 3 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 2 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 1 true true true"/>
+            <combination category="GOOD_FOR_COLLECT" values="false false 0 true true true"/>
+
+
+        </table>
+
+        <table mode="ATTACKING">
+            <!--very good, can lock enemy also safe-->
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true true false false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true false false false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false true false false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false false false false"/>
+
+            <!--still good, can threaten enemy also safe-->
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true true false false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true false false false"/>
+
+            <!--it is not good to put bomb from below-->
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false true false false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false false false false"/>
+
+            <!--bad, safe but malus here-->
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true true true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true false true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false true true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false false true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true true true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true false true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false true true false"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false false true false"/>
+
+            <!--worse, not safe-->
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true true false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true false false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false true false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false false false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true true false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true false false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false true false true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false false false true"/>
+
+            <!--worst, not safe and contains malus!!-->
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true true true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true true false true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false true true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="true false false true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true true true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false true false true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false true true true"/>
+            <combination category="ATTACK_ENEMY_ACCESSIBLE" values="false false false true true"/>
+
+            <!--CLOSEST-->
+            <!--safe and clean-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true true false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true true true false"/>
+            <!--safe but malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true true false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true true true true"/>
+            <!--dangerous-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false true false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false true true false"/>
+            <!--dangerous and malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false true false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false true true true"/>
+            <!--safe and clean-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true true false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true true true false"/>
+            <!--safe but malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true true false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true true true true"/>
+            <!--dangerous-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false true false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false true true false"/>
+            <!--dangerous and malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false true false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false true true true"/>
+
+            <!-- NOT CLOSEST-->
+            <!--safe and clean-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true false false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true false true false"/>
+            <!--safe but malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true false false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true true false true true"/>
+            <!--dangerous-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false false false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false false true false"/>
+            <!--dangerous and malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false false false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="true false false true true"/>
+            <!--safe and clean-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true false false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true false true false"/>
+            <!--safe but malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true false false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false true false true true"/>
+            <!--dangerous-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false false false false"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false false true false"/>
+            <!--dangerous and malus-->
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false false false true"/>
+            <combination category="ATTACK_ENEMY_INACCESSIBLE" values="false false false true true"/>
+
+        </table>
+    </tables>
+
+</preferences>
+

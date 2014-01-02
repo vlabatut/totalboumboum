@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="../../../../../../../../../schemas/preferences.xsd">
+    <categories>
+        <category name="VOISINAGE_UN_ENNEMI" criteria="PLUS_FAIBLE DISTANCE MENACE"/>
+        <category name="NON_PROCHE_UN_ENNEMI" criteria="DISTANCE MENACE NMB_DE_MURS"/>
+    </categories>
+
+    <tables>
+        <table mode="COLLECTING">
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 0 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 1 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 1 1" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 0 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 1 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 0 1" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 0 1" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 1 1" />
+
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 0 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 0 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 0 1" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 0 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 0 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 0 1" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 1 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 1 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 1 1" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 1 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 1 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 1 1" />
+        </table>
+
+        <table mode="ATTACKING">
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 0 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 1 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 1 1" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 0 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 1 0" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="0 0 1" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 0 1" />
+            <combination category="VOISINAGE_UN_ENNEMI" values="1 1 1" />
+
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 0 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 0 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 0 1" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 0 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 0 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 0 1" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 1 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 1 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="0 1 1" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 1 3" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 1 2" />
+            <combination category="NON_PROCHE_UN_ENNEMI" values="1 1 1" />
+        </table>
+    </tables>
+
+</preferences>
+
