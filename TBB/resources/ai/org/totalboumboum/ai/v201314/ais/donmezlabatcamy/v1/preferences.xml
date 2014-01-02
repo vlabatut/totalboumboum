@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/preferences.xsd">
+
+
+	<categories>
+		<category name="CAT_DUMMY" criteria="CONCURRENCE" />
+
+		<category name="CAT_BOMB" criteria="THREAT RISK CONCURRENCE" />
+		<category name="CAT_DEST_WALL" criteria="NBDESTWALL DISTANCE CONCURRENCE" />
+		<category name="CAT_ENNEMY" criteria="THREAT ZONEWALL" />
+	</categories>
+
+
+	<tables>
+
+
+		<table mode="COLLECTING">
+			<combination category="CAT_DUMMY" values="true" />
+			<combination category="CAT_DUMMY" values="false" />
+		</table>
+		<!-- Table définissant les préférences du mode attaque -->
+		<table mode="ATTACKING">
+
+			<combination category="CAT_BOMB" values="0 3 true" />
+			<combination category="CAT_BOMB" values="0 2 true" />
+			<combination category="CAT_BOMB" values="1 3 true" />
+			<combination category="CAT_BOMB" values="1 2 true" />
+			<combination category="CAT_ENNEMY" values="0 3" />
+			<combination category="CAT_ENNEMY" values="0 2" />
+			<combination category="CAT_ENNEMY" values="1 3" />
+			<combination category="CAT_ENNEMY" values="1 2" />
+			<combination category="CAT_ENNEMY" values="0 1" />
+			<combination category="CAT_ENNEMY" values="1 1" />
+			<combination category="CAT_BOMB" values="2 3 true" />
+			<combination category="CAT_BOMB" values="2 2 true" />
+			<combination category="CAT_BOMB" values="3 3 true" />
+			<combination category="CAT_BOMB" values="3 2 true" />
+			<combination category="CAT_ENNEMY" values="2 3" />
+			<combination category="CAT_ENNEMY" values="3 3" />
+			<combination category="CAT_ENNEMY" values="2 2" />
+			<combination category="CAT_ENNEMY" values="3 2" />
+			<combination category="CAT_ENNEMY" values="2 1" />
+			<combination category="CAT_ENNEMY" values="3 1" />
+			<combination category="CAT_DEST_WALL" values="3 0 true" />
+			<combination category="CAT_DEST_WALL" values="3 1 true" />
+			<combination category="CAT_DEST_WALL" values="2 0 true" />
+			<combination category="CAT_DEST_WALL" values="2 1 true" />
+			<combination category="CAT_DEST_WALL" values="3 2 true" />
+			<combination category="CAT_DEST_WALL" values="3 3 true" />
+			<combination category="CAT_DEST_WALL" values="2 2 true" />
+			<combination category="CAT_DEST_WALL" values="2 3 true" />
+			<combination category="CAT_DEST_WALL" values="1 0 true" />
+			<combination category="CAT_DEST_WALL" values="1 1 true" />
+			<combination category="CAT_DEST_WALL" values="1 2 true" />
+			<combination category="CAT_DEST_WALL" values="1 3 true" />
+			<combination category="CAT_DEST_WALL" values="0 0 true" />
+			<combination category="CAT_DEST_WALL" values="0 1 true" />
+			<combination category="CAT_DEST_WALL" values="0 2 true" />
+			<combination category="CAT_DEST_WALL" values="0 3 true" />
+			<combination category="CAT_BOMB" values="0 3 false" />
+			<combination category="CAT_BOMB" values="0 2 false" />
+			<combination category="CAT_BOMB" values="1 3 false" />
+			<combination category="CAT_BOMB" values="1 2 false" />
+			<combination category="CAT_ENNEMY" values="0 0" />
+			<combination category="CAT_ENNEMY" values="1 0" />
+			<combination category="CAT_ENNEMY" values="2 0" />
+			<combination category="CAT_ENNEMY" values="3 0" />
+			<combination category="CAT_BOMB" values="2 3 false" />
+			<combination category="CAT_BOMB" values="2 2 false" />
+			<combination category="CAT_BOMB" values="3 3 false" />
+			<combination category="CAT_BOMB" values="3 2 false" />
+			<combination category="CAT_DEST_WALL" values="3 0 false" />
+			<combination category="CAT_DEST_WALL" values="3 1 false" />
+			<combination category="CAT_DEST_WALL" values="2 0 false" />
+			<combination category="CAT_DEST_WALL" values="2 1 false" />
+			<combination category="CAT_DEST_WALL" values="3 2 false" />
+			<combination category="CAT_DEST_WALL" values="3 3 false" />
+			<combination category="CAT_DEST_WALL" values="2 2 false" />
+			<combination category="CAT_DEST_WALL" values="2 3 false" />
+			<combination category="CAT_DEST_WALL" values="1 0 false" />
+			<combination category="CAT_DEST_WALL" values="1 1 false" />
+			<combination category="CAT_DEST_WALL" values="1 2 false" />
+			<combination category="CAT_DEST_WALL" values="1 3 false" />
+			<combination category="CAT_DEST_WALL" values="0 0 false" />
+			<combination category="CAT_DEST_WALL" values="0 1 false" />
+			<combination category="CAT_DEST_WALL" values="0 2 false" />
+			<combination category="CAT_DEST_WALL" values="0 3 false" />
+			<combination category="CAT_BOMB" values="0 1 true" />
+			<combination category="CAT_BOMB" values="0 0 true" />
+			<combination category="CAT_BOMB" values="1 1 true" />
+			<combination category="CAT_BOMB" values="1 0 true" />
+			<combination category="CAT_BOMB" values="2 1 true" />
+			<combination category="CAT_BOMB" values="2 0 true" />
+			<combination category="CAT_BOMB" values="3 1 true" />
+			<combination category="CAT_BOMB" values="3 0 true" />
+			<combination category="CAT_BOMB" values="0 1 false" />
+			<combination category="CAT_BOMB" values="0 0 false" />
+			<combination category="CAT_BOMB" values="1 1 false" />
+			<combination category="CAT_BOMB" values="1 0 false" />
+			<combination category="CAT_BOMB" values="2 1 false" />
+			<combination category="CAT_BOMB" values="2 0 false" />
+			<combination category="CAT_BOMB" values="3 1 false" />
+			<combination category="CAT_BOMB" values="3 0 false" />
+
+		</table>
+	</tables>
+
+</preferences>
+
