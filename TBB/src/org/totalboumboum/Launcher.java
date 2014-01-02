@@ -1748,9 +1748,6 @@ public class Launcher
  * 		+ mesurer le temps pris par coupe, compléter en fonction (plus de rounds ?)
  * 		+ définir version neutre de tous les niveaux, compléter supercoupe
  * 
- * TODO touche pour envoyer des bombes manuellement en cas de cycle (évite d'avoir à le détecter manuellement) ?
- * 		+ détection auto : retenir les cases correspondant à des changements de direction ?
- * 
  * TODO
  * 		+ proposer d'enregistrer les stats d'une confrontation
  * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
