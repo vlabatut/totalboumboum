@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<!--
+	Total Boum Boum
+	Copyright 2008-2014 Vincent Labatut
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
+-->
+	<tournament name="Tournoi de Galatasaray VII" type="CUP" />
+	<played matches="0" rounds="0" />
+	<dates start="2014-01-03T11:29:51" save="2014-01-03T11:30:07" />
+	<players>
+		<player name="1314.Akyol+Kaptan+Koçak" />
+		<player name="1314.Acar+Sesyılmaz" />
+		<player name="1314.Saylam+Sönmez" />
+		<player name="1314.Asıl+İzer+Yüce" />
+		<player name="1314.Arık+Günaydın+Kochan" />
+		<player name="1314.Oralı+Osmanoğlu" />
+		<player name="1314.Dönmez+LabatCamy" />
+		<player name="1314.Sağlam+Turgut" />
+		<player name="1314.Engin+Serhan+Tipici" />
+		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
+		<player name="1314.Derin+Koçak+Zorluoğlu" />
+		<player name="Simplet" />
+	</players>
+</archive>
+
