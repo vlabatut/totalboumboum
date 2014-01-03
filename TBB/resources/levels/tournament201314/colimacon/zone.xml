@@ -698,6 +698,7 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
+				<block group="softwalls" name="regular" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
@@ -750,10 +751,10 @@
 			</tile>
 			<tile pos="17">
 				<floor name="regular" />
+				<item name="goldenbomb" />
 			</tile>
 			<tile pos="18">
 				<floor name="regular" />
-				<block group="softwalls" name="regular" />
 			</tile>
 		</line>
 		<line pos="10">
