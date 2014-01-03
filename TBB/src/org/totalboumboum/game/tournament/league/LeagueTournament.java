@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -180,6 +181,9 @@ public class LeagueTournament extends AbstractTournament
 				{	recordStatsAsText();
 				}
 				catch (FileNotFoundException e)
+				{	e.printStackTrace();
+				}
+				catch (UnsupportedEncodingException e)
 				{	e.printStackTrace();
 				}
 			}
@@ -377,7 +381,7 @@ public class LeagueTournament extends AbstractTournament
 	// STATS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void recordStatsAsText() throws FileNotFoundException
+	protected void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException
 	{	// get data
 		Ranks orderedPlayers = getOrderedPlayers();
 		List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
@@ -391,7 +395,7 @@ public class LeagueTournament extends AbstractTournament
 		// open text stream
 		FileOutputStream fileOut = new FileOutputStream(filePath);
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
-		OutputStreamWriter outSW = new OutputStreamWriter(outBuff);
+		OutputStreamWriter outSW = new OutputStreamWriter(outBuff, "UTF-8");
 		PrintWriter writer = new PrintWriter(outSW);
 			
 		// write general info

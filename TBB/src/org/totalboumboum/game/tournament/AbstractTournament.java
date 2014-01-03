@@ -24,6 +24,7 @@ package org.totalboumboum.game.tournament;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -379,8 +380,10 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * 
 	 * @throws FileNotFoundException 
 	 * 		Problem while accessing the stats file.
+	 * @throws UnsupportedEncodingException 
+	 * 		Problem while accessing the stats file.
 	 */
-	protected abstract void recordStatsAsText() throws FileNotFoundException;
+	protected abstract void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException;
 	
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
