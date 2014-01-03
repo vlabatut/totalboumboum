@@ -19,18 +19,22 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Super-coupe de Galatasaray VI" type="CUP" />
-	<played matches="3" rounds="6" />
-	<dates start="2014-01-03T15:30:19" save="2014-01-03T15:50:08" />
+	<tournament name="Tournoi de Galatasaray VII" type="CUP" />
+	<played matches="9" rounds="9" />
+	<dates start="2014-01-03T14:06:33" save="2014-01-03T15:26:50" />
 	<players>
+		<player name="1314.Akyol+Kaptan+Koçak" />
+		<player name="1314.Acar+Sesyılmaz" />
+		<player name="1314.Saylam+Sönmez" />
 		<player name="1314.Asıl+İzer+Yüce" />
+		<player name="1314.Arık+Günaydın+Kochan" />
+		<player name="1314.Oralı+Osmanoğlu" />
+		<player name="1314.Dönmez+LabatCamy" />
+		<player name="1314.Sağlam+Turgut" />
+		<player name="1314.Engin+Serhan+Tipici" />
 		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="1112.Coşkun+Özdemir" />
-		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Doruk+Küpelioğlu" />
-		<player name="1213.Oral+Özuğur" />
-		<player name="1011.Kesimal+Varol" />
+		<player name="1314.Derin+Koçak+Zorluoğlu" />
+		<player name="Simplet" />
 	</players>
 </archive>
 
