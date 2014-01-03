@@ -401,6 +401,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	 * specified tile and the method returns {@code true}.
 	 * Otherwise, the method just returns {@code false}
 	 * and no bomb is dropped at all.
+	 * <br/>
+	 * The bomb dropped by this method has a 0 range.
 	 *  
 	 * @param tile
 	 * 		Targeted tile.
@@ -408,16 +410,36 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	 * 		{@code true} iff a bomb could be dropped.
 	 */
 	protected boolean dropLevelBomb(Tile tile)
-	{	boolean result = false;
-
-		// we occasionally increase the range
+	{	// we occasionally increase the range
 		int range = 0;
 		double extraRangeProba = Math.random();
 		if(extraRangeProba>0.95)
 			range = 1;
-		
+
+		// drop it
+		boolean result = dropLevelBomb(tile,range);
+		return result;
+	}
+	
+	/**
+	 * Tries to drop a bomb in the level's name.
+	 * If possible, the bomb is dropped in the 
+	 * specified tile and the method returns {@code true}.
+	 * Otherwise, the method just returns {@code false}
+	 * and no bomb is dropped at all.
+	 *  
+	 * @param tile
+	 * 		Targeted tile.
+	 * @param range
+	 * 		Bomb range.
+	 * @return
+	 * 		{@code true} iff a bomb could be dropped.
+	 */
+	protected boolean dropLevelBomb(Tile tile, int range)
+	{	boolean result = false;
+
 		// duration
-		int duration = 3000;
+		int duration = 2500;
 		
 		// drop bomb
 		HollowLevel hollowLevel = round.getHollowLevel();
