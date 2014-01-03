@@ -20,8 +20,8 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Tournoi de Galatasaray VII" type="CUP" />
-	<played matches="0" rounds="0" />
-	<dates start="2014-01-03T11:29:51" save="2014-01-03T11:30:07" />
+	<played matches="9" rounds="9" />
+	<dates start="2014-01-03T14:06:33" save="2014-01-03T15:26:03" />
 	<players>
 		<player name="1314.Akyol+Kaptan+Koçak" />
 		<player name="1314.Acar+Sesyılmaz" />
