@@ -35,10 +35,12 @@
 	</settings>
 	<players>
 		<player file="69306440-cfe9-4136-9494-faa95068c1c3" color="GREY" controls="2" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="0eb14b39-3e11-4871-9535-4587250b926a" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="0f392b59-99e3-41be-8281-75bc6db8e7b1" color="RED" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="e567b7ac-7061-4141-b314-34614d428670" color="GREEN" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 	</players>
 	<levels>
-		<level pack="tournament201314" folder="croix" allowedPlayers="2 3 4 5 6 7 8 9 10" />
+		<level pack="tournament201314" folder="colimacon" allowedPlayers="2 3 4 5 6 7 8" />
 	</levels>
 </gameQuickmatch>
 
