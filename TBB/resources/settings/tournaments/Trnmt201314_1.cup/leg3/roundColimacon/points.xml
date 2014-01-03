@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<match
+<points
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/point.xsd">
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2014 Vincent Labatut 
@@ -22,28 +22,25 @@
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  -->
 	
- 	<notes>
- 		<line value="Rencontre normale, utilisé lors des quarts, demis et classements." />
- 		<line value="Date: 26-12-2013" />
- 	</notes>
- 	
-	<author value="Vincent Labatut" />
+	<notes>
+		<line value="Les points sont donnés directement en fonction du rang des joueurs." />
+		<line value="Ce rang dépend du temps passé en jeu et des nombres de bombage effectués et subis." />
+	</notes>
 
-	<limits>
-		<confrontation>
-			<points local="true" name="points" />
-			<threshold value="7" />			
-		</confrontation>
-	</limits>
- 	
- 	<rounds randomOrder="true" >
-  		<round local="true" name="roundClassic" />
-  		<round local="true" name="roundHorizontal" />
-  		<round local="true" name="roundItems" />
-  		<round local="true" name="roundLimitsiz" />
-  		<round local="true" name="roundCompromis" />
-  		<round local="true" name="roundCroix" />
-  		<round local="true" name="roundPower" />
-  	</rounds>
-	
-</match>
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<scores type="TIME" />
+			<subtraction>
+				<scores type="BOMBINGS"/>
+				<scores type="SELF_BOMBINGS"/>			
+			</subtraction>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
+		
+</points>

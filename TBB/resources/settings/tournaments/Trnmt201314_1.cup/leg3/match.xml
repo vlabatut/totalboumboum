@@ -32,20 +32,20 @@
 	<limits>
 		<confrontation>
 			<points local="true" name="points" />
-			<threshold value="7" />			
+			<threshold value="9" />			
 		</confrontation>
 	</limits>
  	
  	<rounds randomOrder="true" >
-  		<round local="true" name="roundBombfest" />
   		<round local="true" name="roundClassic" />
   		<round local="true" name="roundCroix" />
+  		<round local="true" name="roundBombfest" />
   		<round local="true" name="roundItems" />
+  		<round local="true" name="roundReadysetgo" />
   		<round local="true" name="roundLine" />
   		<round local="true" name="roundPower" />
-  		<round local="true" name="roundReadysetgo" />
-  		
-  		<!-- si plus : averses -->
+  		<round local="true" name="roundColimacon" />
+  		<round local="true" name="roundClassic" />
   	</rounds>
 	
 </match>
