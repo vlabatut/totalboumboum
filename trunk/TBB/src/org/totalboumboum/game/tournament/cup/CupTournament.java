@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -459,7 +460,7 @@ for(ArrayList<Integer> list: permutations)
 	// STATS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void recordStatsAsText() throws FileNotFoundException
+	protected void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException
 	{	// get data
 		Ranks orderedPlayers = getOrderedPlayers();
 		List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
@@ -473,7 +474,7 @@ for(ArrayList<Integer> list: permutations)
 		// open text stream
 		FileOutputStream fileOut = new FileOutputStream(filePath);
 		BufferedOutputStream outBuff = new BufferedOutputStream(fileOut);
-		OutputStreamWriter outSW = new OutputStreamWriter(outBuff);
+		OutputStreamWriter outSW = new OutputStreamWriter(outBuff, "UTF-8");
 		PrintWriter writer = new PrintWriter(outSW);
 			
 		// write general info
@@ -817,6 +818,9 @@ for(ArrayList<Integer> list: permutations)
 				{	recordStatsAsText();
 				}
 				catch (FileNotFoundException e)
+				{	e.printStackTrace();
+				}
+				catch (UnsupportedEncodingException e)
 				{	e.printStackTrace();
 				}
 			}
