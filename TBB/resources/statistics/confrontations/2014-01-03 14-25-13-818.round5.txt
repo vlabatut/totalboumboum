@@ -1,0 +1,11 @@
+Match: Quart-de-finale 2
+Round number: 5
+Level: tournament201314/Gold Rush
+Start: 2014-24-03 02:24:52
+End: 2014-25-03 02:25:13
+Duration: 00'20''821
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Ar?k+Günayd?n+Kochan	GREY	2	0	0	0	1	07''161	8	
+2.	1314.Oral?+Osmano?lu	YELLOW	4	0	1	0	1	07''141	4	
+3.	1314.As?l+?zer+Yüce	WHITE	1	0	1	0	0	05''522	2	

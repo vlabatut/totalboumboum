@@ -1,0 +1,12 @@
+Match: Classement
+Round number: 5
+Level: tournament201314/Compromis
+Start: 2014-47-03 02:47:45
+End: 2014-49-03 02:49:10
+Duration: 01'24''753
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Acar+Sesy?lmaz	ULTRAMARINE	21	2	0	0	0	71''008	8	
+2.	1314.Ar?k+Günayd?n+Kochan	GREY	15	0	0	1	0	70''989	4	
+3.	1314.Sa?lam+Turgut	BLUE	12	7	1	0	0	65''530	2	
+4.	1314.Derin+Koçak+Zorluo?lu	RED	15	10	0	1	0	50''102	1	

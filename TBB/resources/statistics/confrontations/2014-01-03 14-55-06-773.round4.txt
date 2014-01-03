@@ -1,0 +1,12 @@
+Match: Demi-finale 1
+Round number: 4
+Level: tournament201314/Limitsiz
+Start: 2014-54-03 02:54:46
+End: 2014-55-03 02:55:06
+Duration: 00'20''732
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	4	1	0	0	1	06''880	8	
+2.	1314.Engin+Serhan+Tipici	INDIGO	1	1	1	0	0	06''863	4	
+3.	1314.Oral?+Osmano?lu	YELLOW	2	1	0	1	0	06''741	2	
+4.	1314.Akyol+Kaptan+Koçak	BLACK	5	1	0	1	0	05''962	1	

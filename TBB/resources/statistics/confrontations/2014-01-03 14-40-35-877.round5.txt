@@ -1,0 +1,11 @@
+Match: Quart-de-finale 4
+Round number: 5
+Level: tournament201314/Gold Rush
+Start: 2014-40-03 02:40:15
+End: 2014-40-03 02:40:35
+Duration: 00'19''939
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	Simplet	GRASS	3	0	0	0	0	06''260	8	
+2.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	1	0	1	0	0	06''244	3	
+2.	1314.Derin+Koçak+Zorluo?lu	RED	3	0	0	1	1	06''244	3	

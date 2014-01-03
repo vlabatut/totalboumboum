@@ -1,0 +1,13 @@
+Match: Demi-finale
+Round number: 5
+Level: tournament201314neutral/Line Zone
+Start: 2014-41-03 03:41:21
+End: 2014-42-03 03:42:35
+Duration: 01'13''840
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.As?l+?zer+Yüce	WHITE	6	3	0	0	1	60''002	8	
+2.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	11	1	0	0	0	60''002	4	
+3.	1112.Co?kun+Özdemir	BLACK	5	1	0	1	0	17''424	2	
+4.	0910.Doruk+Küpelio?lu	PINK	3	0	0	1	0	09''923	1	
+5.	0809.Eri?ik+Pekta?	ULTRAMARINE	2	0	1	0	0	06''577	0	

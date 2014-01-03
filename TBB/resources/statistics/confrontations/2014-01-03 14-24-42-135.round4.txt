@@ -1,0 +1,11 @@
+Match: Quart-de-finale 2
+Round number: 4
+Level: tournament201314/Averses
+Start: 2014-23-03 02:23:57
+End: 2014-24-03 02:24:42
+Duration: 00'44''851
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Ar?k+Günayd?n+Kochan	GREY	0	8	0	0	0	31''304	8	
+2.	1314.As?l+?zer+Yüce	WHITE	15	17	0	1	0	31''284	4	
+3.	1314.Oral?+Osmano?lu	YELLOW	0	2	1	0	0	04''425	2	

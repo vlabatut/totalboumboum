@@ -1,0 +1,11 @@
+Match: Quart-de-finale 2
+Round number: 3
+Level: tournament201314/Passaj Zone
+Start: 2014-23-03 02:23:16
+End: 2014-23-03 02:23:46
+Duration: 00'29''554
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Oral?+Osmano?lu	YELLOW	5	0	0	0	1	15''985	8	
+2.	1314.As?l+?zer+Yüce	WHITE	1	0	0	1	0	15''961	4	
+3.	1314.Ar?k+Günayd?n+Kochan	GREY	3	0	1	0	0	12''458	2	

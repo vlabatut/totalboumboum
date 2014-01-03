@@ -1,0 +1,12 @@
+Match: Demi-finale 1
+Round number: 1
+Level: tournament201314/Classic Zone
+Start: 2014-52-03 02:52:24
+End: 2014-53-03 02:53:18
+Duration: 00'53''904
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Akyol+Kaptan+Koçak	BLACK	9	4	0	0	1	43''632	8	
+2.	1314.Engin+Serhan+Tipici	INDIGO	9	1	0	1	0	43''617	4	
+3.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	8	0	0	1	0	30''053	2	
+4.	1314.Oral?+Osmano?lu	YELLOW	7	1	1	0	0	13''718	1	

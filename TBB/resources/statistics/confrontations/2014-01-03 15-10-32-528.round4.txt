@@ -1,0 +1,12 @@
+Match: Petite finale
+Round number: 4
+Level: tournament201314/Items Zone
+Start: 2014-09-03 03:09:52
+End: 2014-10-03 03:10:32
+Duration: 00'39''884
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Akyol+Kaptan+Koçak	BLACK	5	22	0	0	1	26''179	8	
+2.	1314.Oral?+Osmano?lu	YELLOW	9	0	0	1	1	26''160	4	
+3.	1314.Dönmez+LabatCamy	GREEN	5	0	1	0	0	14''711	2	
+4.	Simplet	GRASS	2	0	1	0	0	06''394	1	

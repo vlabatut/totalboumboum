@@ -1,0 +1,11 @@
+Match: Quart-de-finale 2
+Round number: 2
+Level: tournament201314/Entrance
+Start: 2014-22-03 02:22:43
+End: 2014-23-03 02:23:05
+Duration: 00'22''153
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.As?l+?zer+Yüce	WHITE	1	0	1	0	0	08''506	6	
+1.	1314.Oral?+Osmano?lu	YELLOW	2	0	0	1	1	08''506	6	
+3.	1314.Ar?k+Günayd?n+Kochan	GREY	2	0	0	1	0	05''122	2	

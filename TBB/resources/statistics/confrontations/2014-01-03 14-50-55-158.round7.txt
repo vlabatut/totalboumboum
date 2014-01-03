@@ -1,0 +1,12 @@
+Match: Classement
+Round number: 7
+Level: tournament201314/Power Zone
+Start: 2014-50-03 02:50:03
+End: 2014-50-03 02:50:55
+Duration: 00'51''725
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Ar?k+Günayd?n+Kochan	GREY	13	0	1	0	0	38''089	6	
+1.	1314.Derin+Koçak+Zorluo?lu	RED	39	0	0	1	1	38''089	6	
+3.	1314.Acar+Sesy?lmaz	ULTRAMARINE	11	0	0	1	0	27''349	2	
+4.	1314.Sa?lam+Turgut	BLUE	2	0	0	1	0	05''225	1	

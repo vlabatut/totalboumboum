@@ -1,0 +1,12 @@
+Match: Demi-finale 2
+Round number: 2
+Level: tournament201314/Horizontal
+Start: 2014-01-03 03:01:33
+End: 2014-02-03 03:02:10
+Duration: 00'36''984
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Saylam+Sönmez	PINK	4	0	0	0	2	23''342	8	
+2.	1314.Dönmez+LabatCamy	GREEN	4	0	1	0	1	23''323	4	
+3.	1314.As?l+?zer+Yüce	WHITE	1	0	1	0	0	15''229	2	
+4.	Simplet	GRASS	1	0	1	0	0	03''124	1	

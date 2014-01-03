@@ -1,0 +1,13 @@
+Match: Finale
+Round number: 1
+Level: tournament201314neutral/Classic Zone
+Start: 2014-44-03 03:44:12
+End: 2014-45-03 03:45:21
+Duration: 01'09''383
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	19	6	0	0	0	58''463	8	
+2.	1213.Oral+Özu?ur	RED	25	2	0	1	1	58''445	4	
+3.	1011.Kesimal+Varol	GREY	16	4	0	1	0	31''758	2	
+4.	1314.As?l+?zer+Yüce	WHITE	3	0	1	0	0	14''698	1	
+5.	0809.Eri?ik+Pekta?	ULTRAMARINE	4	1	0	1	0	11''874	0	

@@ -1,0 +1,11 @@
+Tournament: Tournoi de Galatasaray VII
+Match: Quart-de-finale 1
+Match number: 1
+Start: 2014-14-03 02:14:10
+End: 2014-20-03 02:20:25
+Duration: 06'15''060
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	R1	R2	R3	R4	R5	R6	R7	Total	Points	
+1.	1314.Akyol+Kaptan+Koçak	BLACK	30	20	1	1	1	8	8	4	8	4	8	8	48	8	
+2.	1314.Saylam+Sönmez	PINK	38	14	0	5	2	4	2	8	4	8	2	2	30	4	
+3.	1314.Acar+Sesy?lmaz	ULTRAMARINE	42	22	3	4	0	2	4	2	2	2	4	4	20	2	

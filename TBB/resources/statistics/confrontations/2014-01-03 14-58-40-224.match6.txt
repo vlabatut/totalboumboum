@@ -1,0 +1,12 @@
+Tournament: Tournoi de Galatasaray VII
+Match: Demi-finale 1
+Match number: 6
+Start: 2014-52-03 02:52:11
+End: 2014-58-03 02:58:40
+Duration: 06'28''430
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	R1	R2	R3	R4	R5	R6	R7	Total	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	41	5	1	3	3	2	3	8	8	8	1	2	32	8	
+2.	1314.Engin+Serhan+Tipici	INDIGO	37	2	2	4	2	4	8	2	4	1	4	8	31	4	
+3.	1314.Akyol+Kaptan+Koçak	BLACK	59	5	3	2	3	8	3	1	1	4	8	4	29	2	
+4.	1314.Oral?+Osmano?lu	YELLOW	46	20	3	4	0	1	1	4	2	2	2	1	13	1	

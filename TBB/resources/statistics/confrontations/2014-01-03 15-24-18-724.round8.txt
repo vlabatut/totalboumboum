@@ -1,0 +1,12 @@
+Match: Finale
+Round number: 8
+Level: tournament201314/Colimaçon
+Start: 2014-23-03 03:23:50
+End: 2014-24-03 03:24:18
+Duration: 00'28''152
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	4	0	0	0	0	14''306	8	
+2.	1314.As?l+?zer+Yüce	WHITE	4	1	0	1	0	14''286	4	
+3.	1314.Engin+Serhan+Tipici	INDIGO	2	0	0	1	0	08''103	2	
+4.	1314.Saylam+Sönmez	PINK	1	0	0	1	0	02''906	1	

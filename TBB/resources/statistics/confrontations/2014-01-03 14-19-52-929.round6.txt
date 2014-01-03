@@ -1,0 +1,11 @@
+Match: Quart-de-finale 1
+Round number: 6
+Level: tournament201314/vite
+Start: 2014-18-03 02:18:55
+End: 2014-19-03 02:19:52
+Duration: 00'57''646
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Akyol+Kaptan+Koçak	BLACK	4	0	0	0	0	43''959	8	
+2.	1314.Acar+Sesy?lmaz	ULTRAMARINE	13	0	1	0	0	43''939	4	
+3.	1314.Saylam+Sönmez	PINK	4	0	0	1	0	10''204	2	

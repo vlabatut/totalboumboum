@@ -1,0 +1,11 @@
+Match: Quart-de-finale 3
+Round number: 2
+Level: tournament201314/Entrance
+Start: 2014-29-03 02:29:35
+End: 2014-30-03 02:30:00
+Duration: 00'24''931
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Dönmez+LabatCamy	GREEN	3	0	0	0	2	11''298	8	
+2.	1314.Sa?lam+Turgut	BLUE	3	0	1	0	0	11''276	4	
+3.	1314.Engin+Serhan+Tipici	INDIGO	0	0	1	0	0	06''239	2	
