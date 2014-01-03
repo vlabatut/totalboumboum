@@ -36,7 +36,7 @@
 		</confrontation>
 	</limits>
  	
- 	<rounds randomOrder="true" >
+ 	<rounds randomOrder="false" >
   		<round local="true" name="roundClassic" />
   		<round local="true" name="roundHorizontal" />
   		<round local="true" name="roundItems" />
