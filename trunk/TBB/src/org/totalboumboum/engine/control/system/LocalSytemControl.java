@@ -200,7 +200,16 @@ public class LocalSytemControl extends SystemControl
 			
 			else if(keyCode == KeyEvent.VK_SPACE)
 			{	SystemControlEvent controlEvent;
-				controlEvent = new SystemControlEvent(SystemControlEvent.CUSTOM_SYSTEM_CONTROL);
+				int value;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					if(keysPressed.containsKey(KeyEvent.VK_CONTROL) && keysPressed.get(KeyEvent.VK_CONTROL))
+						value = 2;
+					else
+						value = 1;
+				else
+					value = 0;
+				
+				controlEvent = new SystemControlEvent(SystemControlEvent.CUSTOM_SYSTEM_CONTROL,value);
 				loop.processEvent(controlEvent);
 			}
 		}

@@ -283,21 +283,25 @@ public class RegularLoop extends LocalLoop
 				switchEnginePause();
 		}
 		else if(name.equals(SystemControlEvent.CUSTOM_SYSTEM_CONTROL))
-		{	customSystemControl();
+		{	int index = event.getIndex();
+			customSystemControl(index);
 		}
 	}
 	
 	/**
 	 * Activates some custom functionality, generally
 	 * used for degugging purposes.
+	 * 
+	 * @param index
+	 * 		Numeric parameter related to the custom control.
 	 */
-	private void customSystemControl()
+	private void customSystemControl(int index)
 	{	// here we drop a level bomb on each player
 		for(AbstractPlayer player: players)
 		{	if(!player.isOut())
 			{	Hero sprite = player.getSprite();
 				Tile tile = sprite.getTile();
-				dropLevelBomb(tile);
+				dropLevelBomb(tile, index);
 			}
 		}
 	}
