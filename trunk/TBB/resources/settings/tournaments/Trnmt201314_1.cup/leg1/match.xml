@@ -37,13 +37,13 @@
 	</limits>
  	
  	<rounds randomOrder="true" >
-  		<round local="true" name="roundAverses" />
   		<round local="true" name="roundClassic" />
   		<round local="true" name="roundEntrance" />
-  		<round local="true" name="roundGoldrush" />
-  		<round local="true" name="roundLine" />
   		<round local="true" name="roundPasaj" />
+  		<round local="true" name="roundAverses" />
+  		<round local="true" name="roundGoldrush" />
   		<round local="true" name="roundVite" />
+  		<round local="true" name="roundLine" />
   	</rounds>
 	
 </match>
