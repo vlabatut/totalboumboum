@@ -453,7 +453,7 @@ public class ModeCollecte
 	
 		else 
 		{
-			if (monia.nextMoveBonus.getLength() == 0)
+			if (monia.nextMoveBonus!=null && monia.nextMoveBonus.getLength() == 0)
 				monia.nextMoveBonus = null;
 			else 
 			{

@@ -20,24 +20,24 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="4" rounds="1" />
-	<dates start="2014-01-02T18:46:44" save="2014-01-02T19:05:06" />
+	<played matches="12" rounds="5" />
+	<dates start="2014-01-03T07:16:53" save="2014-01-03T08:03:15" />
 	<players>
-		<player name="1213.Çalışkan+Geçkalan" />
-		<player name="1213.Besnili+Kangal" />
-		<player name="0809.Akkaya+Danacioğlu" />
-		<player name="1112.İlter+Kaya" />
 		<player name="0910.Mançuhan+Pınarer" />
-		<player name="1213.Erdem+Tayyar" />
+		<player name="Suiveur" />
 		<player name="0708.Bingöl+Ketenci" />
-		<player name="Promeneur" />
+		<player name="1112.İlter+Kaya" />
 		<player name="1011.Kantarcı+Taşkın" />
+		<player name="1213.Balyer+Güven" />
+		<player name="0809.Akkaya+Danacioğlu" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="1213.Erdem+Tayyar" />
 		<player name="1112.Bal+Çetin" />
 		<player name="0708.Kurtuluş+Özsoy" />
 		<player name="0809.Adatepe" />
-		<player name="1213.Balyer+Güven" />
-		<player name="Suiveur" />
-		<player name="0708.Çamaş+Demirbaş" />
+		<player name="1213.Çalışkan+Geçkalan" />
+		<player name="1213.Besnili+Kangal" />
+		<player name="Promeneur" />
 		<player name="0708.Keçer+Yaman" />
 	</players>
 </archive>

@@ -19,8 +19,8 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<general name="1314.Güneş+Sağlam+Turgut" />
-	<ai name="gunessaglamturgut" pack="v201314" />
+	<general name="1314.Sağlam+Turgut" />
+	<ai name="saglamturgut" pack="v201314" />
 	<character name="pretty" packname="superbomberman3" color="BLUE" />
 	<network lastHost="9c147a4c-dfb4-4b3c-9a30-144f7e02beff" />
 </profile>
