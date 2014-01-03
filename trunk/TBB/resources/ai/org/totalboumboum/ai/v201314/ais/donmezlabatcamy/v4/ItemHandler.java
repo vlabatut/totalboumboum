@@ -82,11 +82,11 @@ public class ItemHandler extends AiAbstractHandler<Agent> {
 	public boolean usefulItemsAccesibility(AiItem item) {
 		ai.checkInterruption();
 
-		if ( this.usefulItemsExistence() ) {
+//		if ( this.usefulItemsExistence() ) {
 
 			if ( ai.selectTiles.contains(item.getTile()) )
 				return true;
-		}
+//		}
 		return false;
 	}
 
