@@ -1,0 +1,12 @@
+Match: Finale
+Round number: 7
+Level: tournament201314/Power Zone
+Start: 2014-22-03 03:22:53
+End: 2014-23-03 03:23:39
+Duration: 00'45''733
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Saylam+Sönmez	PINK	12	0	0	0	1	32''124	8	
+2.	1314.Engin+Serhan+Tipici	INDIGO	10	0	1	0	0	32''101	4	
+3.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	5	0	0	1	1	04''810	2	
+4.	1314.As?l+?zer+Yüce	WHITE	0	0	1	0	0	04''665	1	

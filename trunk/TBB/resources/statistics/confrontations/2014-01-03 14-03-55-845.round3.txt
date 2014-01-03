@@ -1,0 +1,12 @@
+Match: null
+Round number: 3
+Level: tournament201314/Croix
+Start: 2014-03-03 02:03:29
+End: 2014-03-03 02:03:55
+Duration: 00'26''764
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1213.Erdem+Tayyar	ORANGE	4	0	0	0	0	13''290	8	
+2.	1213.Besnili+Kangal	BLACK	5	0	0	1	1	13''271	4	
+3.	1213.Balyer+Güven	GRASS	6	0	1	0	0	13''251	2	
+4.	1213.Oral+Özu?ur	RED	4	0	0	1	0	08''031	1	

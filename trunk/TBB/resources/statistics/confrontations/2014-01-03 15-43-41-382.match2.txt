@@ -1,0 +1,13 @@
+Tournament: Super-coupe de Galatasaray VI
+Match: Demi-finale
+Match number: 2
+Start: 2014-37-03 03:37:16
+End: 2014-43-03 03:43:41
+Duration: 06'25''343
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	R1	R2	R3	R4	R5	R6	Total	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	79	10	2	0	3	6	1	0,5	6	4	8	25,5	8	
+2.	1314.As?l+?zer+Yüce	WHITE	15	4	3	1	2	2	0	3	6	8	1,5	20,5	4	
+3.	0809.Eri?ik+Pekta?	ULTRAMARINE	39	3	3	2	3	1	4	8	2	0	4	19	2	
+4.	0910.Doruk+Küpelio?lu	PINK	22	0	2	3	1	0	8	3	0	1	1,5	13,5	1	
+5.	1112.Co?kun+Özdemir	BLACK	40	3	1	4	2	6	2	0,5	1	2	0	11,5	0	

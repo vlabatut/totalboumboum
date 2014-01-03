@@ -1,0 +1,12 @@
+Match: Quart-de-finale
+Round number: 1
+Level: tournament201314neutral/Classic Zone
+Start: 2014-30-03 03:30:30
+End: 2014-31-03 03:31:43
+Duration: 01'12''940
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.As?l+?zer+Yüce	WHITE	7	2	0	0	1	60''004	8	
+2.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	25	4	0	0	0	60''004	4	
+3.	1112.Co?kun+Özdemir	BLACK	14	1	1	0	0	42''073	2	
+4.	0708.Bingöl+Ketenci	BLUE	4	2	0	1	0	29''091	1	

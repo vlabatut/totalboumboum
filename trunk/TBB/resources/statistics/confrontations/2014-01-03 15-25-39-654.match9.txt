@@ -1,0 +1,12 @@
+Tournament: Tournoi de Galatasaray VII
+Match: Finale
+Match number: 9
+Start: 2014-16-03 03:16:42
+End: 2014-25-03 03:25:39
+Duration: 08'56''847
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	R1	R2	R3	R4	R5	R6	R7	R8	R9	Total	Points	
+1.	1314.As?l+?zer+Yüce	WHITE	24	19	2	2	9	8	4	8	8	8	8	1	4	4	53	8	
+2.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	101	4	4	2	5	4	8	4	1	2,33	4	2	8	8	41,33	4	
+3.	1314.Saylam+Sönmez	PINK	51	6	5	3	1	2	1	1,5	2	2,33	2	8	1	2	21,83	2	
+4.	1314.Engin+Serhan+Tipici	INDIGO	42	4	5	4	0	1	2	1,5	4	2,33	1	4	2	1	18,83	1	

@@ -1,0 +1,11 @@
+Match: Quart-de-finale 1
+Round number: 4
+Level: tournament201314/Averses
+Start: 2014-17-03 02:17:14
+End: 2014-18-03 02:18:11
+Duration: 00'56''414
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Akyol+Kaptan+Koçak	BLACK	1	14	0	0	0	42''847	8	
+2.	1314.Saylam+Sönmez	PINK	2	8	0	1	0	42''827	4	
+3.	1314.Acar+Sesy?lmaz	ULTRAMARINE	13	18	0	1	0	34''709	2	

@@ -1,0 +1,11 @@
+Match: Quart-de-finale 2
+Round number: 1
+Level: tournament201314/Classic Zone
+Start: 2014-21-03 02:21:48
+End: 2014-22-03 02:22:32
+Duration: 00'43''944
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.As?l+?zer+Yüce	WHITE	8	4	0	0	1	30''151	8	
+2.	1314.Ar?k+Günayd?n+Kochan	GREY	12	3	1	0	0	30''130	4	
+3.	1314.Oral?+Osmano?lu	YELLOW	2	0	0	1	0	06''716	2	

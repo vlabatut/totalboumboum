@@ -1,0 +1,12 @@
+Tournament: Super-coupe de Galatasaray VI
+Match: Quart-de-finale
+Match number: 1
+Start: 2014-30-03 03:30:27
+End: 2014-36-03 03:36:56
+Duration: 06'29''230
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	R1	R2	R3	R4	R5	R6	Total	Points	
+1.	1314.As?l+?zer+Yüce	WHITE	26	10	2	1	2	8	8	4	8	2	4	34	8	
+2.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	87	5	1	2	3	4	1	8	4	8	2	27	4	
+3.	1112.Co?kun+Özdemir	BLACK	51	2	2	3	2	2	2	2	1	4	8	19	2	
+4.	0708.Bingöl+Ketenci	BLUE	28	15	3	3	0	1	4	1	2	1	1	10	1	

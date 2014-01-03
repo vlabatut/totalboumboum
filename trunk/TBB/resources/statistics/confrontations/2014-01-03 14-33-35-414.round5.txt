@@ -1,0 +1,11 @@
+Match: Quart-de-finale 3
+Round number: 5
+Level: tournament201314/Gold Rush
+Start: 2014-32-03 02:32:56
+End: 2014-33-03 02:33:35
+Duration: 00'38''835
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Sa?lam+Turgut	BLUE	7	0	0	0	0	25''179	8	
+2.	1314.Dönmez+LabatCamy	GREEN	9	0	0	1	0	25''158	4	
+3.	1314.Engin+Serhan+Tipici	INDIGO	1	0	0	1	0	06''922	2	

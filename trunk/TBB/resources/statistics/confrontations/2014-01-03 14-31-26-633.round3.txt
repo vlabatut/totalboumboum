@@ -1,0 +1,11 @@
+Match: Quart-de-finale 3
+Round number: 3
+Level: tournament201314/Passaj Zone
+Start: 2014-30-03 02:30:11
+End: 2014-31-03 02:31:26
+Duration: 01'15''310
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Engin+Serhan+Tipici	INDIGO	6	0	0	0	2	61''743	8	
+2.	1314.Dönmez+LabatCamy	GREEN	22	1	1	0	0	61''723	4	
+3.	1314.Sa?lam+Turgut	BLUE	1	0	1	0	0	08''775	2	

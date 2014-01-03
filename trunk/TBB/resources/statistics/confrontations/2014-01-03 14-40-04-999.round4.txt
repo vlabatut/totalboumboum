@@ -1,0 +1,11 @@
+Match: Quart-de-finale 4
+Round number: 4
+Level: tournament201314/Averses
+Start: 2014-38-03 02:38:40
+End: 2014-40-03 02:40:04
+Duration: 01'24''094
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	Simplet	GRASS	18	65	0	0	1	70''556	8	
+2.	1314.Derin+Koçak+Zorluo?lu	RED	0	3	1	0	0	70''538	4	
+3.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	0	9	1	0	0	63''658	2	

@@ -1,0 +1,11 @@
+Match: Quart-de-finale 4
+Round number: 1
+Level: tournament201314/Classic Zone
+Start: 2014-36-03 02:36:07
+End: 2014-37-03 02:37:12
+Duration: 01'05''591
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	Simplet	GRASS	10	4	0	0	0	51''266	8	
+2.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	17	3	1	0	0	51''249	4	
+3.	1314.Derin+Koçak+Zorluo?lu	RED	16	2	0	1	0	33''283	2	

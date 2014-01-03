@@ -1,0 +1,11 @@
+Match: Quart-de-finale 4
+Round number: 6
+Level: tournament201314/vite
+Start: 2014-40-03 02:40:46
+End: 2014-41-03 02:41:28
+Duration: 00'41''855
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	11	0	0	0	2	28''202	8	
+2.	Simplet	GRASS	8	1	1	0	0	28''181	4	
+3.	1314.Derin+Koçak+Zorluo?lu	RED	7	1	1	0	0	10''404	2	

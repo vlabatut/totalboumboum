@@ -1,0 +1,12 @@
+Match: Petite finale
+Round number: 5
+Level: tournament201314/Ready, set, go!
+Start: 2014-10-03 03:10:43
+End: 2014-11-03 03:11:01
+Duration: 00'17''943
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	Simplet	GRASS	0	0	0	0	0	04''245	8	
+2.	1314.Dönmez+LabatCamy	GREEN	1	0	1	0	0	04''227	3	
+2.	1314.Oral?+Osmano?lu	YELLOW	1	0	0	1	1	04''227	3	
+4.	1314.Akyol+Kaptan+Koçak	BLACK	1	0	0	1	0	03''568	1	

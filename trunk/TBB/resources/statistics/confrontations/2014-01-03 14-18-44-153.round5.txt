@@ -1,0 +1,11 @@
+Match: Quart-de-finale 1
+Round number: 5
+Level: tournament201314/Gold Rush
+Start: 2014-18-03 02:18:22
+End: 2014-18-03 02:18:44
+Duration: 00'21''827
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Saylam+Sönmez	PINK	3	0	0	0	1	08''145	8	
+2.	1314.Akyol+Kaptan+Koçak	BLACK	2	1	1	0	0	08''124	4	
+3.	1314.Acar+Sesy?lmaz	ULTRAMARINE	1	0	0	1	0	02''745	2	

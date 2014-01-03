@@ -1,0 +1,12 @@
+Match: null
+Round number: 1
+Level: tournament201314/Carrefour Zone
+Start: 2014-36-03 01:36:24
+End: 2014-36-03 01:36:45
+Duration: 00'20''568
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Ar?k+Günayd?n+Kochan	GREY	2	1	0	0	0	07''331	8	
+2.	0708.Kurtulu?+Özsoy	ULTRAMARINE	3	3	0	1	2	07''304	4	
+3.	0708.Eren+Gökçe	INDIGO	0	0	1	0	0	07''166	2	
+4.	1213.Oral+Özu?ur	RED	1	1	1	0	0	07''038	1	

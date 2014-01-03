@@ -1,0 +1,12 @@
+Match: Finale
+Round number: 9
+Level: tournament201314/Classic Zone
+Start: 2014-24-03 03:24:29
+End: 2014-25-03 03:25:39
+Duration: 01'09''932
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1314.Çiftçi+Kaplano?lu+Köseo?lu	ORANGE	23	2	0	0	3	56''208	8	
+2.	1314.As?l+?zer+Yüce	WHITE	4	2	1	0	0	56''185	4	
+3.	1314.Saylam+Sönmez	PINK	6	2	1	0	0	40''356	2	
+4.	1314.Engin+Serhan+Tipici	INDIGO	12	1	1	0	0	35''324	1	
