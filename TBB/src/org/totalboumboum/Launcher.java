@@ -1757,11 +1757,11 @@ public class Launcher
 
 /*
  * TODO POSTS SITE
- * 		+ enchainement des tournois (montrer l'évolution des stats, du coup?)
- * 		+ anniversaire TBB
- * 		+ nouveau niveau de qualification
- * 		+ nouveaux niveaux du tournoi
- * 		+ format de la super coupe
+ * 		+ enchainement des tournois (joueurs constants) et détection des répétitions
+ * 			exportation des stats
+ * 		+ capture ? + cacher les sprites et le message de pause
+ * 		+ API: représentation des chemins (avec les pauses et tout)
+ * 		+ évènements de mort subite aléatoires
  * 		+ vidéos du tournoi
  */ 
 
