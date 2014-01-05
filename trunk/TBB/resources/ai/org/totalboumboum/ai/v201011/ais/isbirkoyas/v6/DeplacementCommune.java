@@ -83,7 +83,7 @@ public class DeplacementCommune {
 			System.out.println("shortestpath");
 		try {
 			ai.checkInterruption(); // APPEL OBLIGATOIRE
-			if(endPoints!=null)
+			if(endPoints!=null && !endPoints.isEmpty())
 				shortestPath = astar.processShortestPath(startPoint, endPoints);
 		} catch (LimitReachedException e) { // 
 		}
