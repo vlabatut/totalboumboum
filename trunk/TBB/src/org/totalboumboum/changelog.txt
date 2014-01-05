@@ -554,11 +554,10 @@
 		- outil de vérification des agents plus complet : importations, commentaires, etc.
 		- outil de génération de code source (vide) à partir d'un agent générique
 
-+ beta.026
++ beta.026/027
 	- général :
 		- mise à niveau de la date de copyright
 	- ressources : 
-		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
 		- Thème du tournoi 2013/14
 		- Pretty Bomberman de SBM3
 		- Niveaux du tournoi 2013/14
@@ -595,4 +594,8 @@
  	- moteur :
  		- Correction de quelques bugs dans les boucles
  		- Plus de bug graphique quand un sprite passe d'un bord à l'autre 
+ 		
++ beta.028
+	- ressources :
+		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
  	
