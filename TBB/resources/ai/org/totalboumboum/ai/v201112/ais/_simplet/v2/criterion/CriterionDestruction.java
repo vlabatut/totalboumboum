@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet.criterion;
+package org.totalboumboum.ai.v201112.ais._simplet.v2.criterion;
 
 /*
  * Total Boum Boum
@@ -21,24 +21,23 @@ package org.totalboumboum.ai.v201314.ais._simplet.criterion;
  * 
  */
 
+import java.util.Set;
+
+import org.totalboumboum.ai.v201112.ais._simplet.v2.Agent;
+import org.totalboumboum.ai.v201112.ais._simplet.v2.CommonTools;
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-import org.totalboumboum.ai.v201314.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201314.ais._simplet.Agent;
 
 /**
- * Cette classe représente le critère de localité.
- * Il est entier : la valeur représente la distance
- * entre la case et l'agent, plafonnée à {@value #LOCALITY_LIMIT}.
- * La valeur 0 représente une case très éloignée, la valeur
- * {@value #LOCALITY_LIMIT} une case peu éloignée.
+ * Cette classe représente le critère de destruction.
+ * Il est entier : la valeur comprise entre 0 et {@value #DESTRUCTION_LIMIT} représente
+ * le nombre de murs qu'une bombe posée dans la case concernée détruirait.
  * 
  * @author Vincent Labatut
  */
-public class CriterionLocality extends AiCriterionInteger<Agent>
+public class CriterionDestruction extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
-	public static final String NAME = "LOCALITY";
+	public static final String NAME = "DESTRUCTION";
 	
 	/**
 	 * Crée un nouveau critère entier.
@@ -46,31 +45,30 @@ public class CriterionLocality extends AiCriterionInteger<Agent>
 	 * @param ai
 	 * 		L'agent concerné. 
 	 */
-	public CriterionLocality(Agent ai)
+	public CriterionDestruction(Agent ai)
 	{	// init nom
-		super(ai,NAME,0,LOCALITY_LIMIT);
+		super(ai,NAME,0,DESTRUCTION_LIMIT);
 		ai.checkInterruption();
 	}
-	
+
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Valeur maximale pour ce critère */
-	public static final int LOCALITY_LIMIT = 5;
+	public static final int DESTRUCTION_LIMIT = 4;
 
 	@Override
 	public Integer processValue(AiTile tile)
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
-	
-		// grosse approximation : on utilise seulement la distance
-		AiZone zone = ai.getZone();
-		AiTile currentTile = commonTools.currentTile;
-		int distance = zone.getTileDistance(currentTile,tile);
-		if(distance>LOCALITY_LIMIT)
-			distance = LOCALITY_LIMIT;
 		
-		int result = LOCALITY_LIMIT - distance;
+		// on récupère les cases contenant des murs destructibles à portée
+		Set<AiTile> softwalls = commonTools.getThreatenedSoftwallTiles(tile);
+		int result = softwalls.size();
+		// c'est possible de faire plus avec des bombes pénétrantes
+		// mais on choisit d'ignorer ça par simplification
+		if(result>DESTRUCTION_LIMIT)
+			result = DESTRUCTION_LIMIT;
 		
 		return result;
 	}

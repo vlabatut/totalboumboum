@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v2;
 
 /*
  * Total Boum Boum
@@ -26,29 +26,30 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201112.adapter.communication.AiOutput;
-import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
-import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
-import org.totalboumboum.ai.v201112.adapter.data.AiZone;
-import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201112.adapter.path.AiPath;
-import org.totalboumboum.ai.v201112.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201112.adapter.path.cost.ApproximateCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.cost.CostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.cost.TimeCostCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.heuristic.TimeHeuristicCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.search.Astar;
-import org.totalboumboum.ai.v201112.adapter.path.search.Dijkstra;
-import org.totalboumboum.ai.v201112.adapter.path.successor.ApproximateSuccessorCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
-import org.totalboumboum.ai.v201112.adapter.path.successor.TimePartialSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
+import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201314.adapter.data.AiHero;
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
+import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201314.adapter.path.AiPath;
+import org.totalboumboum.ai.v201314.adapter.path.LimitReachedException;
+import org.totalboumboum.ai.v201314.adapter.path.cost.ApproximateCostCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.cost.TimeCostCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.heuristic.TimeHeuristicCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.search.Astar;
+import org.totalboumboum.ai.v201314.adapter.path.search.Dijkstra;
+import org.totalboumboum.ai.v201314.adapter.path.successor.ApproximateSuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.SearchMode;
+import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201314.adapter.path.successor.TimePartialSuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -81,9 +82,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * <b>Attention</b> : cette approche est très mauvaise, et en plus elle
  * ne respecte pas l'algorithme général vu en cours. En effet, elle se
  * permet d'identifier des chemins de fuite qui deviennent prioritaires
- * sur l'objectif déterminé grâce aux valeurs d'utilité. Vous ne devez
+ * sur l'objectif déterminé grâce aux valeurs de préférence. Vous ne devez
  * pas utiliser cette approche, l'essentiel du travail doit se faire
- * lors du calcul d'utilité. Quand votre agent est en danger, il doit
+ * lors du calcul de préférence. Quand votre agent est en danger, il doit
  * bien sûr fuir mais cette fuite doit dépendre complètement de l'objectif.
  * En d'autres termes, le chemin de fuite doit l'amener à l'objectif. Ici,
  * ce n'est pas le cas (et c'est ça le problème) : quand il est en danger,
@@ -92,19 +93,15 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-@SuppressWarnings("deprecation")
-public class MoveHandler extends AiMoveHandler<Simplet>
+public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected MoveHandler(Simplet ai) throws StopRequestException
+	protected MoveHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -115,9 +112,11 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		// astar précis
 		{	CostCalculator costCalculator = new TimeCostCalculator(ai,ownHero);
 			costCalculator.setOpponentCost(1000); // on assimile la traversée d'un adversaire à un détour de 1 seconde
+			costCalculator.setMalusCost(1000); // on assimile la traversée d'un malus à un détour de 1 seconde
 			HeuristicCalculator heuristicCalculator = new TimeHeuristicCalculator(ai,ownHero);
-			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOTREE);
+			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOTREE);
 			astarPrecise = new Astar(ai,ownHero, costCalculator, heuristicCalculator, successorCalculator);
+//			astarPrecise.setVerbose(true);
 		}
 		// astar approximation
 		{	CostCalculator costCalculator = new ApproximateCostCalculator(ai,ownHero);
@@ -128,10 +127,11 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		// dijkstra
 		{	CostCalculator costCalculator = new TimeCostCalculator(ai,ownHero);
 			costCalculator.setOpponentCost(1000); // on assimile la traversée d'un adversaire à un détour de 1 seconde
-			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,TimePartialSuccessorCalculator.MODE_NOBRANCH);
+			SuccessorCalculator successorCalculator = new TimePartialSuccessorCalculator(ai,SearchMode.MODE_NOBRANCH);
 			dijkstra = new Dijkstra(ai,ownHero, costCalculator,successorCalculator);
+//			dijkstra.setVerbose(true);
 		}
-		long after = System.currentTimeMillis();
+		long after = ai.getCurrentTime();
 		long elapsed = after - before;
 		print("    < path-finding objects initialized duration="+elapsed);
 	}
@@ -163,52 +163,20 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	// PROCESSING				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	protected Direction considerMoving() throws StopRequestException
-	{	ai.checkInterruption();
-		
-		// si nécessaire, on change la destination courante
-		{	long before = print("    > entering updateDestination");
-			updateDestination();
-			long after = System.currentTimeMillis();
-			long elapsed = after - before;
-			print("    < exiting updateDestination duration="+elapsed);
-		}
-		
-		// on cherche un chemin vers cette destination
-		{	long before = print("    > entering updatePath");
-			updatePath();
-			long after = System.currentTimeMillis();
-			long elapsed = after - before;
-			print("    < exiting updatePath duration="+elapsed);
-		}
-		
-		// on utilise le chemin pour déterminer la direction de déplacement
-		{	long before = print("    > entering updateDirection");
-			updateDirection();
-			long after = System.currentTimeMillis();
-			long elapsed = after - before;
-			print("    < exiting updateDirection duration="+elapsed);
-		}
-		
-		return currentDirection;
-	}
-
 	/**
 	 * Met à jour la case de destination de l'agent. Là encore,
 	 * c'est très simple et très peu efficace : on garde tout
 	 * le temps le même objectif jusqu'à ce qu'il soit complètement
 	 * obsolète. 
-	 * 
-	 * @throws StopRequestException 
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	private void updateDestination() throws StopRequestException
+	@Override
+	protected AiTile processCurrentDestination()
 	{	ai.checkInterruption();
 		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
 		currentTile = ownHero.getTile();
-		print("      currentTile="+currentTile+" currentDestination="+currentDestination);
+		AiTile currentDestination = getCurrentDestination();
+		print("      currentTile="+currentTile+" currentDestination="+getCurrentDestination());
 		
 		// on détermine si on doit changer/initialiser la destination
 		boolean changeDestination = false;
@@ -224,37 +192,37 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 		}	
 		// destination courante obsolète
 		else
-		{	// on récupère les utilités par case
-			HashMap<AiTile,Float> utilitiesByTile = ai.utilityHandler.getUtilitiesByTile();
-			// on récupère l'utilité de la destination courante
-			Float destinationUtility = utilitiesByTile.get(currentDestination);
+		{	// on récupère les préférences par case
+			Map<AiTile,Integer> preferencesByTile = ai.preferenceHandler.getPreferencesByTile();
+			// on récupère la préférence de la destination courante
+			Integer destinationPreference = preferencesByTile.get(currentDestination);
 			
 			// si la destination est obsolète, il faut la changer
-			if(destinationUtility==null)
+			if(destinationPreference==null)
 			{	changeDestination = true;
-				print("      current destination is obsolete and must be changed: destinationUtility="+destinationUtility);
+				print("      current destination is obsolete and must be changed: destinationPreference="+destinationPreference);
 			}
 		}
 		
 		if(changeDestination)
-		{	// on récupère simplement les utilités classées
-			print("      retrieve utilities");
-			HashMap<Float,List<AiTile>> utilitiesByValue = ai.utilityHandler.getUtilitiesByValue();
-			TreeSet<Float> values = new TreeSet<Float>(utilitiesByValue.keySet());
-			HashMap<AiTile,Boolean> bombTiles = ai.utilityHandler.bombTiles;
+		{	// on récupère simplement les préférences classées
+			print("      retrieve preferences");
+			Map<Integer,List<AiTile>> preferencesByValue = ai.preferenceHandler.getPreferencesByValue();
+			TreeSet<Integer> values = new TreeSet<Integer>(preferencesByValue.keySet());
+			HashMap<AiTile,Boolean> bombTiles = ai.preferenceHandler.bombTiles;
 			
-			// on part de l'utilité maximale et on descend jusqu'à trouver une destination
-			Iterator<Float> it1 = values.descendingIterator();
+			// on part de la préférence maximale et on descend jusqu'à trouver une destination
+			Iterator<Integer> it1 = values.iterator();
 			boolean goOn = true;
 			while(it1.hasNext() && goOn)
 			{	ai.checkInterruption();	
 				
-				// on récupère la valeur d'utilité
-				float utility = it1.next();
-				print("        processing utility="+utility);
+				// on récupère la valeur de préférence
+				int preference = it1.next();
+				print("        processing preference="+preference);
 			
-				// puis les cases qui possèdent cette utilité
-				List<AiTile> tiles = utilitiesByValue.get(utility);
+				// puis les cases qui possèdent cette préférence
+				List<AiTile> tiles = preferencesByValue.get(preference);
 				for(AiTile tile: tiles)
 				{	ai.checkInterruption();
 					
@@ -272,7 +240,10 @@ public class MoveHandler extends AiMoveHandler<Simplet>
 //				}
 if(!tiles.isEmpty())
 {	currentDestination = tiles.get(0);
-	bombDestination = bombTiles.get(currentDestination);
+	Boolean temp = bombTiles.get(currentDestination);
+	if(temp!=null)
+		bombDestination = temp;
+	else bombDestination = false;
 	goOn = false;
 }
 				print("        currentDestination="+currentDestination+" bombDestination="+bombDestination);
@@ -289,6 +260,8 @@ if(!tiles.isEmpty())
 		else
 		{	print("      no need to update the destination");
 		}
+		
+		return currentDestination;
 	}
 	
 	/**
@@ -318,18 +291,18 @@ if(!tiles.isEmpty())
 	 * 					- on cherche un chemin direct vers la case bloquée
 	 * <b>Algorithme non-conforme avec ce qui est demandé dans le projet,
 	 * donc à ne pas utiliser pour vos agents.</b>
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	private void updatePath() throws StopRequestException
+	@Override
+	protected AiPath processCurrentPath()
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		secondaryBombing = false;
 		boolean isThreatened = commonTools.isTileThreatened(currentTile);
+		AiTile currentDestination = getCurrentDestination();
 		// on réinitialise le chemin courant
-		currentPath = null;
-		
+		AiPath currentPath = null;
+if(!zone.getTile(5,2).getBlocks().isEmpty())
+	System.out.print("");
 		// si on est menacé par une bombe
 		// mais qu'il n'y a pas encore de destination sûre >> on en trouve une
 		if(isThreatened && safeDestination==null)
@@ -344,7 +317,7 @@ if(!tiles.isEmpty())
 			catch (LimitReachedException e)
 			{	//e.printStackTrace();
 			}
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			if(currentPath==null || currentPath.isEmpty())
 			{	print("        no safe tile could be found! duration="+elapsed+" currentPath="+currentPath);
@@ -373,12 +346,12 @@ if(!tiles.isEmpty())
 			{	long before = print("        we use astar to find a path from currentTile="+currentTile+" to safeDestination="+safeDestination);
 				AiLocation startLocation = new AiLocation(ownHero);
 				try
-				{	currentPath = astarPrecise.processShortestPath(startLocation,safeDestination);
+				{	currentPath = astarPrecise.startProcess(startLocation,safeDestination);
 				}
 				catch (LimitReachedException e)
 				{	//e.printStackTrace();
 				}
-				long after = System.currentTimeMillis();
+				long after = ai.getCurrentTime();
 				long elapsed = after - before;
 				if(currentPath==null || currentPath.isEmpty())
 				{	print("        no path could be found! duration="+elapsed+" currentPath="+currentPath);
@@ -397,12 +370,12 @@ if(!tiles.isEmpty())
 			// on calcule un chemin direct vers la destination courante
 			long before = print("        we use astar to find a path from startLocation="+startLocation+" to currentDestination="+currentDestination);
 			try
-			{	currentPath = astarPrecise.processShortestPath(startLocation,currentDestination);
+			{	currentPath = astarPrecise.startProcess(startLocation,currentDestination);
 			}
 			catch (LimitReachedException e)
 			{	//e.printStackTrace();
 			}
-			long after = System.currentTimeMillis();
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			
 			// si on a trouvé un chemin direct
@@ -415,18 +388,21 @@ if(!tiles.isEmpty())
 			// sinon : aucun chemin direct n'existe
 			else
 			{	print("        no direct path was found: duration="+elapsed+" currentPath="+currentPath);
-				print("        we need a indirect path");
+				print("        we need an indirect path");
 			
 				// s'il n'y a pas de chemin secondaire, on en trouve un
 				if(indirectPath==null)
 				{	before = print("        no existing indirect path, so using astar to find one from startLocation="+startLocation+" to currentDestination="+currentDestination);
 					try
-					{	indirectPath = astarApproximation.processShortestPath(startLocation,currentDestination);
+					{	indirectPath = astarApproximation.startProcess(startLocation,currentDestination);
 					}
 					catch (LimitReachedException e)
 					{	//e.printStackTrace();
+						indirectPath = new AiPath();
 					}
-					after = System.currentTimeMillis();
+					if(indirectPath==null)
+						indirectPath = new AiPath();
+					after = ai.getCurrentTime();
 					elapsed = after - before;
 					print("          astar finished: duration="+elapsed+" secondaryPath="+indirectPath);
 				}
@@ -454,7 +430,7 @@ if(!tiles.isEmpty())
 				// s'il n'y a pas de case bloquée, alors le bloquage est dû à une explosion, 
 				// et on se contente d'attendre qu'elle disparaisse
 				if(blockedTile==null)
-				{	print("        there actually no blocked tile, so we wait for the end of an explosion");
+				{	print("        there actually is no blocked tile, so we wait for the end of an explosion");
 				}
 				
 				// sinon : on a une case bloquée
@@ -480,12 +456,12 @@ if(!tiles.isEmpty())
 						else
 						{	before = print("        looking for a path using astar: currentTile="+currentTile+" secondaryDestination="+safeDestination);
 							try
-							{	currentPath = astarPrecise.processShortestPath(startLocation,safeDestination);
+							{	currentPath = astarPrecise.startProcess(startLocation,safeDestination);
 							}
 							catch (LimitReachedException e)
 							{	//e.printStackTrace();
 							}
-							after = System.currentTimeMillis();
+							after = ai.getCurrentTime();
 							elapsed = after - before;
 							if(currentPath==null || currentPath.isEmpty())
 								print("        no path could be found! duration="+elapsed);
@@ -496,23 +472,23 @@ if(!tiles.isEmpty())
 				}
 			}
 		}
+		return currentPath;
 	}
 	
 	/**
 	 * Met à jour la direction de déplacement en fonction
 	 * du chemin courant.
-	 * 
-	 * @throws StopRequestException
-	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	private void updateDirection() throws StopRequestException
+	@Override
+	protected Direction processCurrentDirection()
 	{	ai.checkInterruption();
 		
 		// init
-		currentDirection = Direction.NONE;
+		Direction currentDirection = Direction.NONE;
+		AiPath currentPath = getCurrentPath();
 		
 		// si un chemin a été trouvé
-		if(currentPath!=null)
+		if(currentPath!=null && !currentPath.isEmpty())
 		{	print("      processing the path currentPath="+currentPath);
 			
 			// temps d'attente éventuel
@@ -540,13 +516,15 @@ if(!tiles.isEmpty())
 		// si aucun chemin n'a été trouvé
 		else
 			print("      no path, so no direction: currentDirection="+currentDirection);
+		
+		return currentDirection;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void updateOutput() throws StopRequestException
+	public void updateOutput()
 	{	ai.checkInterruption();
 		
 		// d'abord on fait le traitement par défaut

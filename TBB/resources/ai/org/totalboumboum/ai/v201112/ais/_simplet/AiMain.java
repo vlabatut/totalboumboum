@@ -21,16 +21,30 @@ package org.totalboumboum.ai.v201112.ais._simplet;
  * 
  */
 
-import org.totalboumboum.ai.v201112.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
+import japa.parser.ParseException;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.totalboumboum.ai.v201112.ais._simplet.v2.Agent;
+import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.xml.sax.SAXException;
 
 /**
- * classe utilisée par le moteur du jeu pour retrouver les IA
- * (à ne pas modifier)
+ * Classe utilisée par le moteur du jeu pour retrouver les agents.
+ * L'objet créé dans la méthode {@link #instantiateAgent()} 
+ * doit être de la classe principale de l'agent.
+ * <br/>
+ * Les directives {@code import} doivent être modifiées de manière
+ * à utiliser la version la plus appropriée de l'agent : {@code v1},
+ * {@code v2}, {@code v3}, etc. 
  * 
  * @author Vincent Labatut
  */
-@SuppressWarnings("deprecation")
 public class AiMain extends AiManager
 {
 	/////////////////////////////////////////////////////////////////
@@ -38,6 +52,56 @@ public class AiMain extends AiManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public ArtificialIntelligence instantiateAgent()
-	{	return new Simplet();
+	{	return new Agent();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// VERIFICATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * L'exécution de cette méthode permet
+	 * de faire une vérification du code source
+	 * de cet agent.
+	 * <br/>
+	 * Ici, on teste automatiquement certains des 
+	 * points mentionnés dans le manuel de l'API.
+	 * Mais <b>tous ne peuvent pas être testés depuis
+	 * un programme</b> Reportez-vous au manuel pour
+	 * plus d'informations.
+	 * 
+	 * @param args
+	 *		Aucun argument n'est nécessaire. 
+	 *
+	 * @throws IOException
+	 * 		Problème lors de l'accès aux fichiers. 
+	 * @throws ParseException 
+	 * 		Problème lors du parsing du code source.
+	 * @throws IllegalArgumentException 
+	 * 		Problème lors du chargement des critères, catégories ou combinaisons.
+	 * @throws ParserConfigurationException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws SAXException
+	 * 		Problème lors de l'accès au fichier XML.
+	 * @throws IllegalAccessException 
+	 * 		Problème lors du chargement des préférences.
+	 * @throws InvocationTargetException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws InstantiationException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws ClassNotFoundException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws NoSuchMethodException 
+	 * 		Problème lors de l'accès aux classes représentant des critères.
+	 * @throws URISyntaxException 
+	 * 		Problème lors de la localisation du fichier de préférences.
+	 */
+	public static void main(String args[]) throws ParseException, IOException, IllegalArgumentException, NoSuchMethodException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, ParserConfigurationException, SAXException, URISyntaxException
+	{	AiMain aiMain = new AiMain();
+		
+		// on applique le parser
+		aiMain.parseSourceCode();
+		
+		// on vérifie si les préférences se chargent normalement
+		aiMain.loadPreferences();
 	}
 }

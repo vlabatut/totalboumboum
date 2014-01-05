@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v1;
 
 /*
  * Total Boum Boum
@@ -29,9 +29,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201112.ais._simplet.criterion.CriterionDestruction;
-import org.totalboumboum.ai.v201112.ais._simplet.criterion.CriterionLocality;
-import org.totalboumboum.ai.v201112.ais._simplet.criterion.CriterionThreat;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.criterion.CriterionDestruction;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.criterion.CriterionLocality;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.criterion.CriterionThreat;
 import org.totalboumboum.ai.v201112.adapter.agent.AiMode;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCase;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCombination;

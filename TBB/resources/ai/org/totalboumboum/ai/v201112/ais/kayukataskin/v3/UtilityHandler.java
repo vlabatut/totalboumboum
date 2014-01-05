@@ -21,7 +21,7 @@ import org.totalboumboum.ai.v201112.adapter.path.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.search.Dijkstra;
 import org.totalboumboum.ai.v201112.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201112.adapter.path.successor.SuccessorCalculator;
-import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.CommonTools;
 import org.totalboumboum.ai.v201112.ais.kayukataskin.v3.criterion.CriterionFirst;
 import org.totalboumboum.ai.v201112.ais.kayukataskin.v3.criterion.CriterionSecond;
 import org.totalboumboum.ai.v201112.ais.kayukataskin.v3.criterion.CriterionThird;

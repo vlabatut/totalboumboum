@@ -6,7 +6,7 @@ import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
 import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.CommonTools;
 
 /**
  * Classe principale de votre agent, que vous devez compléter.

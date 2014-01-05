@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet.criterion;
+package org.totalboumboum.ai.v201112.ais._simplet.v1.criterion;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,8 @@ package org.totalboumboum.ai.v201112.ais._simplet.criterion;
  * 
  */
 
-import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201112.ais._simplet.Simplet;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.CommonTools;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.Simplet;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionInteger;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
