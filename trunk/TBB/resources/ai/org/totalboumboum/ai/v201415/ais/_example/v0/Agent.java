@@ -1,11 +1,11 @@
-package org.totalboumboum.ai.v201314.ais._example.v0;
+package org.totalboumboum.ai.v201415.ais._example.v0;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
+import org.totalboumboum.ai.v201415.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiPreferenceHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201415.adapter.communication.AiOutput;
 
 /**
  * Classe principale de votre agent, que vous devez compléter.
@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
  *
  * @author Xxxxxx
  * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class Agent extends ArtificialIntelligence
 {

@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._example;
+package org.totalboumboum.ai.v201415.ais._example;
 
 /*
  * Total Boum Boum
@@ -31,9 +31,9 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.ais._example.v0.Agent;
+import org.totalboumboum.ai.v201415.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201415.ais._example.v0.Agent;
 import org.xml.sax.SAXException;
 
 /**

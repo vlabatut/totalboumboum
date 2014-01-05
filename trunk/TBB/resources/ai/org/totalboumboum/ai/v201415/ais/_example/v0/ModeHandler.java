@@ -1,6 +1,6 @@
-package org.totalboumboum.ai.v201314.ais._example.v0;
+package org.totalboumboum.ai.v201415.ais._example.v0;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiModeHandler;
 
 /**
  * Classe gérant le mode courant de l'agent. 
@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
  * 
  * @author Xxxxxx
  * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class ModeHandler extends AiModeHandler<Agent>
 {	
