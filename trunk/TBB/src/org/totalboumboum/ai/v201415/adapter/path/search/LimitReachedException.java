@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201415.adapter.path;
+package org.totalboumboum.ai.v201415.adapter.path.search;
 
 /*
  * Total Boum Boum
@@ -27,6 +27,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
+import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 
 /**
  * Exception levée par un algorithme de recherche de chemin 

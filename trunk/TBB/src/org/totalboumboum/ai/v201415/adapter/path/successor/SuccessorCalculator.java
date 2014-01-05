@@ -38,8 +38,8 @@ import org.totalboumboum.ai.v201415.adapter.data.AiState;
 import org.totalboumboum.ai.v201415.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
-import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.GameData;
 

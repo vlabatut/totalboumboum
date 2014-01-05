@@ -35,9 +35,9 @@ import org.totalboumboum.ai.v201415.adapter.model.partial.AiExplosion;
 import org.totalboumboum.ai.v201415.adapter.model.partial.AiExplosionList;
 import org.totalboumboum.ai.v201415.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.TimeHeuristicCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.successor.ApproximateSuccessorCalculator;
 
 /**

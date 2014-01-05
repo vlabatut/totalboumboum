@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201415.adapter.path;
+package org.totalboumboum.ai.v201415.adapter.path.search;
 
 /*
  * Total Boum Boum
@@ -29,6 +29,8 @@ import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201415.adapter.data.AiHero;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201415.adapter.path.AiPath;
 import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.SuccessorCalculator;

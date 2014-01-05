@@ -27,7 +27,7 @@ import java.util.TreeSet;
 import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
+import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 
 /**
  * Permet de définir une fonction heuristique utilisée par un algorithme

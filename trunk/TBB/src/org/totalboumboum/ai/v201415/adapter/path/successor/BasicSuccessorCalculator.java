@@ -33,13 +33,13 @@ import org.totalboumboum.ai.v201415.adapter.data.AiHero;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.cost.MatrixCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**

@@ -33,8 +33,6 @@ import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiPath;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
-import org.totalboumboum.ai.v201415.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.HeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.ApproximateSuccessorCalculator;
