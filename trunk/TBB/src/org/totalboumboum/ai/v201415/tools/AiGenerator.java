@@ -66,7 +66,8 @@ public class AiGenerator
 		// on définit les noms des auteurs du nouvel agent
 		List<List<String>> newNames = Arrays.asList(
 			Arrays.asList("Prénom1","Nom1"),
-			Arrays.asList("Prénom2","Nom2")
+			Arrays.asList("Prénom2","Nom2"),
+			Arrays.asList("Prénom3","Nom3")
 			
 //			Arrays.asList("Emre","Asıl"),
 //			Arrays.asList("Tülin","İzer"),
