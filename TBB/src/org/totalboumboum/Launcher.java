@@ -1518,15 +1518,16 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
 	 * - source :
-	 * 		- éventuellement mettre à jour la version 
-	 * 		- supprimer zgraphics
-	 * 		- supprimer tous les commentaires TODO et NOTE
-	 * 		- effacer le changelog
-	 * 		- [[virer les classes contenant un main()]]
+	 * 		+ éventuellement mettre à jour la version 
+	 * 		+ supprimer zgraphics
+	 * 		+ supprimer tous les commentaires TODO et NOTE
+	 * 		+ effacer le changelog
+	 * 		+ déconfigurer l'inclusion du projet TBBtemp
+	 * 		+ [[virer les classes contenant un main()]]
 	 * - ressources :
-	 * 		- supprimer restmp
-	 * 		- supprimer les agents de test
-	 * 		- réinitialiser les logstats
+	 * 		+ supprimer restmp
+	 * 		+ supprimer les agents de test
+	 * 		+ réinitialiser les logstats
 	 * 		- recopier les stats (éventuellement)
 	 * 		- recréer les sauvegardes des tournois
 	 * - options :
@@ -1550,6 +1551,8 @@ public class Launcher
 	 * 			- les règles classiques
 	 * 
 	 *  - pour diffusion projet :
+	 *  	- API : 
+	 *  		- désactiver l'affichage des temps dans AiZone et AiPartialModel
 	 * 		- réseau :
 	 * 			- bloquer le bouton "réseau" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
@@ -1576,7 +1579,8 @@ public class Launcher
 	 * 				- 0809.Akkaya+Danacioğlu: 	0d3dfd83-6632-423f-b63e-d7e5743ad998
 	 * 				- 0809.Adatepe: 			26db3658-cf0e-4650-96f4-55080b4720f8
 	 * 				- Joueur Humain 2:			553c0fb4-5418-4e33-b244-d5f399ae40f2
-	 *		 	- virer le thème/perso/niveaux TBB après avoir viré les joueurs utilisant les perso et pré-enregistrès
+	 *		 	- virer le thème/perso/niveaux "TBB" 
+	 *				(après avoir viré les joueurs utilisant les perso et pré-enregistrès)
 	 *			- re-générer le fichier exécutable windows à partir du batch (?)
 	 * 
 	 * promeneur :	af92d497-7975-4dcf-b05d-89e706c3eec3
@@ -1597,17 +1601,17 @@ public class Launcher
 	 * 		- cible des bombes: rien, mur ou IA
 	 * 		- à pondérer avec le nombre de bombes posées par seconde (par ex)
 	 * 
-	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
+	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, 
+	 *   pas quand on entre simplement sur la case
 	 * 
 	 * - prochaines étapes :
-	 * 		- league
 	 * 		- tournante
 	 * 		- instance TBB (>> pixel art)
 	 * 		- sons
 	 * 		- BM'83
 	 * 		- réseau
-	 * 		- revoir GUI (?)
 	 * 		- sortir de bêta
+	 * 		- revoir GUI (?)
 	 * 
 	 *  - tournoi league :
 	 *  	- finir GUI
@@ -1619,7 +1623,8 @@ public class Launcher
 	 *  	- possibilité de définir des matches de classement optionnels (?)
 	 *  
 	 *  - options pour les stats ?
-	 *  	- accélérer la fin des parties où tous les humains ont été éliminés (p-e un popup ? et/ou une option : oui-non-demander)
+	 *  	- accélérer la fin des parties où tous les humains ont été éliminés 
+	 *        (p-e un popup ? et/ou une option : oui-non-demander)
 	 *  	- enregistrer l'évolution des stats (sur plusieurs points temporels)
 	 *  	- forcer la fin de la période (now)
 	 *  
