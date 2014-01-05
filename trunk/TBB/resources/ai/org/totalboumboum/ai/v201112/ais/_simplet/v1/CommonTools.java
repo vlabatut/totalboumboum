@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v1;
 
 /*
  * Total Boum Boum
@@ -26,15 +26,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiAbstractHandler;
-import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
-import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201314.adapter.data.AiFire;
-import org.totalboumboum.ai.v201314.adapter.data.AiHero;
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201314.adapter.path.AiPath;
+import org.totalboumboum.ai.v201112.adapter.agent.AiAbstractHandler;
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiBlock;
+import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201112.adapter.data.AiFire;
+import org.totalboumboum.ai.v201112.adapter.data.AiHero;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201112.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201112.adapter.path.AiPath;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -43,7 +44,8 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
-public class CommonTools extends AiAbstractHandler<Agent>
+@SuppressWarnings("deprecation")
+public class CommonTools extends AiAbstractHandler<Simplet>
 {	
 	/**
 	 * Initialise la classe avec l'IA
@@ -51,8 +53,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	 * 
 	 * @param ai
 	 * 		IA de référence.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected CommonTools(Agent ai)
+	protected CommonTools(Simplet ai) throws StopRequestException
 	{	super(ai);
 		ai.checkInterruption();
 		
@@ -77,8 +82,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * On met à jour quelques variables.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	protected void update()
+	protected void update() throws StopRequestException
 	{	ai.checkInterruption();
 		
 		currentTile = ownHero.getTile();
@@ -99,8 +107,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	 * 		Le personnage à considérer.
 	 * @return 
 	 * 		L'ensemble des cases concernées.
+	 * 
+	 * @throws StopRequestException 
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public Set<AiTile> getTilesForRadius(AiTile center, AiHero hero)
+	public Set<AiTile> getTilesForRadius(AiTile center, AiHero hero) throws StopRequestException
 	{	ai.checkInterruption();
 		// init
 		Set<AiTile> result = new TreeSet<AiTile>();
@@ -138,8 +149,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	 * 		Le centre de l'explosion à envisager.
 	 * @return
 	 * 		L'ensemble des cases contenant des murs touchés par l'explosion.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public Set<AiTile> getThreatenedSoftwallTiles(AiTile center)
+	public Set<AiTile> getThreatenedSoftwallTiles(AiTile center) throws StopRequestException
 	{	ai.checkInterruption();
 		// init
 		Set<AiTile> result = new TreeSet<AiTile>();
@@ -180,8 +194,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	 * 		La case à considérer
 	 * @return
 	 * 		La distance entre la case considérée et la cible courante.
+	 * 
+	 * @throws StopRequestException
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public int getDistanceToTarget(AiTile sourceTile)
+	public int getDistanceToTarget(AiTile sourceTile) throws StopRequestException
 	{	ai.checkInterruption();	
 		int result = Integer.MAX_VALUE;
 		AiHero target = ai.targetHandler.target;
@@ -203,8 +220,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	 * @return
 	 * 		{@code true} ssi il y a une bombe entre la case passée
 	 * 		en paramètre et la cible.
+	 * 
+	 * @throws StopRequestException 
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-	public boolean hasMiddleBomb(AiTile sourceTile)
+	public boolean hasMiddleBomb(AiTile sourceTile) throws StopRequestException
 	{	ai.checkInterruption();	
 		
 		boolean result = false;
@@ -234,8 +254,11 @@ public class CommonTools extends AiAbstractHandler<Agent>
 	 * 		La case à considérer
 	 * @return
 	 * 		{@code true} ssi la case est à portée d'une bombe.
+	 * 
+	 * @throws StopRequestException 
+	 * 		Le moteur du jeu a demandé à l'agent de s'arrêter. 
 	 */
-/*	public boolean isTileThreatened(AiTile tile)
+/*	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	
 		
 		long crossTime = Math.round(1000*tile.getSize()/currentSpeed);
@@ -257,7 +280,7 @@ public class CommonTools extends AiAbstractHandler<Agent>
 		return result;
 	}
 */
-	public boolean isTileThreatened(AiTile tile)
+	public boolean isTileThreatened(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();	
 		
 		// on calcule le temps nécessaire pour se rendre sur la case suivante du chemin
@@ -279,7 +302,7 @@ public class CommonTools extends AiAbstractHandler<Agent>
 		{	ai.checkInterruption();	
 			
 			AiBomb bomb = it.next();
-			long timeRemaining = bomb.getNormalDuration() - bomb.getElapsedTime();
+			long timeRemaining = bomb.getNormalDuration() - bomb.getTime();
 			// on ne traite que les bombes menaçantes : soit pas temporelles, soit
 			// temporelles avec moins de temps restant que pour traverser une case
 			if(!bomb.hasCountdownTrigger() || totalDuration<0 || timeRemaining<totalDuration)

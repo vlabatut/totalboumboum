@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v1;
 
 /*
  * Total Boum Boum
@@ -21,11 +21,12 @@ package org.totalboumboum.ai.v201314.ais._simplet;
  * 
  */
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityHandler;
+import org.totalboumboum.ai.v201112.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 
 /**
@@ -51,51 +52,46 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
  *
  * @author Vincent Labatut
  */
-public class Agent extends ArtificialIntelligence
+@SuppressWarnings("deprecation")
+public class Simplet extends ArtificialIntelligence
 {
-	/**
-	 * Instancie la classe principale de l'agent.
-	 */
-	public Agent()
-	{	verbose = false;
+	@Override
+	protected void init() throws StopRequestException
+	{	checkInterruption();
+		
+		// à modifier si vous voulez afficher les sorties texte de l'agent
+		verbose = false;
+
+		super.init();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void initPercepts()
+	protected void initPercepts() throws StopRequestException
 	{	checkInterruption();
+	
 	}
 	
 	@Override
-	protected void updatePercepts()
+	protected void updatePercepts() throws StopRequestException
 	{	checkInterruption();
 		
 		// on met à jour les gestionnaires non standard,
 		// car ils ne seront pas mis à jour par l'algo général
 		{	long before = print("    > Entering commonTools.update");
 			commonTools.update();
-			long after = getCurrentTime();
+			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			print("    < Exiting commonTools.update: duration="+elapsed+" ms");
 		}
 		{	long before = print("    > Entering targetHandler.update");
 			targetHandler.update();
-			long after = getCurrentTime();
+			long after = System.currentTimeMillis();
 			long elapsed = after - before;
 			print("    < Exiting targetHandler.update: duration="+elapsed+" ms");
 		}
-		
-//PredefinedColor color = getZone().getOwnHero().getColor();
-//if(color==PredefinedColor.GRASS)
-//{	System.out.println("-----------------------------------------------------");
-//	AiSimZone zone = new AiSimZone(getZone());
-//	AiHero hero = zone.getHeroByColor(color);
-//	List<AiItem> items = hero.getContagiousItems();
-//	for(AiItem item: items)
-//		System.out.println(item+" "+item.getElapsedTime()+"/"+item.getNormalDuration());
-//}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -107,15 +103,15 @@ public class Agent extends ArtificialIntelligence
 	protected TargetHandler targetHandler;
 	/** Gestionnaire chargé de calculer le mode de l'agent */
 	protected ModeHandler modeHandler;
-	/** Gestionnaire chargé de calculer les valeurs de préference de l'agent */
-	protected PreferenceHandler preferenceHandler;
+	/** Gestionnaire chargé de calculer les valeurs d'utilité de l'agent */
+	protected UtilityHandler utilityHandler;
 	/** Gestionnaire chargé de décider si l'agent doit poser une bombe ou pas */
 	protected BombHandler bombHandler;
 	/** Gestionnaire chargé de décidé de la direction de déplacement de l'agent */
 	protected MoveHandler moveHandler;
 	
 	@Override
-	protected void initHandlers()
+	protected void initHandlers() throws StopRequestException
 	{	checkInterruption();
 		// la sortie texte de chaque gestionnaire peut être désactivée
 		// individuellement en modifiant les constantes, ou bien tous 
@@ -129,37 +125,37 @@ public class Agent extends ArtificialIntelligence
 		
 		modeHandler = new ModeHandler(this);
 		modeHandler.verbose = verbose && true;
-		
-		preferenceHandler = new PreferenceHandler(this);
-		preferenceHandler.verbose = verbose && true;
-		
+
+		utilityHandler = new UtilityHandler(this);
+		utilityHandler.verbose = verbose && true;
+
 		bombHandler = new BombHandler(this);
 		bombHandler.verbose = verbose && true;
-		
+
 		moveHandler = new MoveHandler(this);
 		moveHandler.verbose = verbose && true;
 	}
 
 	@Override
-	protected AiModeHandler<Agent> getModeHandler()
+	protected AiModeHandler<Simplet> getModeHandler() throws StopRequestException
 	{	checkInterruption();
 		return modeHandler;
 	}
 
 	@Override
-	protected AiPreferenceHandler<Agent> getPreferenceHandler()
+	protected AiUtilityHandler<Simplet> getUtilityHandler() throws StopRequestException
 	{	checkInterruption();
-		return preferenceHandler;
+		return utilityHandler;
 	}
 
 	@Override
-	protected AiBombHandler<Agent> getBombHandler()
+	protected AiBombHandler<Simplet> getBombHandler() throws StopRequestException
 	{	checkInterruption();
 		return bombHandler;
 	}
 
 	@Override
-	protected AiMoveHandler<Agent> getMoveHandler()
+	protected AiMoveHandler<Simplet> getMoveHandler() throws StopRequestException
 	{	checkInterruption();
 		return moveHandler;
 	}
@@ -168,11 +164,11 @@ public class Agent extends ArtificialIntelligence
 	// OUTPUT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void updateOutput()
+	protected void updateOutput() throws StopRequestException
 	{	checkInterruption();
 		
 		targetHandler.updateOutput();
 		moveHandler.updateOutput();
-		preferenceHandler.updateOutput();
+		utilityHandler.updateOutput();
 	}
 }

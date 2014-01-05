@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v2;
 
 /*
  * Total Boum Boum

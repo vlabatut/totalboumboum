@@ -50,7 +50,7 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 			result.addAll(tiles);
 			result.addAll(ai.getTileUtil().getAccessibleTiles());
 		} else {
-			// TODO Mode collecte
+			// Mode collecte
 		}
 
 		return result;

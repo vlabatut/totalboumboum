@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v2;
 
 /*
  * Total Boum Boum
@@ -21,11 +21,10 @@ package org.totalboumboum.ai.v201112.ais._simplet;
  * 
  */
 
-import org.totalboumboum.ai.v201112.adapter.agent.AiBombHandler;
-import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiBomb;
-import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
+import org.totalboumboum.ai.v201314.adapter.data.AiHero;
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent.
@@ -35,19 +34,15 @@ import org.totalboumboum.ai.v201112.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
-@SuppressWarnings("deprecation")
-public class BombHandler extends AiBombHandler<Simplet>
+public class BombHandler extends AiBombHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected BombHandler(Simplet ai) throws StopRequestException
+	protected BombHandler(Agent ai)
     {	super(ai);
     	ai.checkInterruption();
 		
@@ -62,13 +57,13 @@ public class BombHandler extends AiBombHandler<Simplet>
 	private AiHero ownHero;
 	
 	@Override
-	protected boolean considerBombing() throws StopRequestException
+	protected boolean considerBombing()
 	{	ai.checkInterruption();
 		
 		// à noter qu'il est peut-être préférable de tester si on peut poser 
 		// une bombe même quand on n'est pas arrivé à destination (là on se
 		// contente de poser une bombe quand on est sur l'objectif sélectionné
-		// sur les valeurs d'utilité.
+		// sur les valeurs de préférence.
 		
 		boolean result = false;
 		AiTile currentTile = ownHero.getTile();
@@ -114,11 +109,8 @@ public class BombHandler extends AiBombHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Mise à jour de la sortie graphique.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		// rien à afficher ici...

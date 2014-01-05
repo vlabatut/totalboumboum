@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v2;
 
 /*
  * Total Boum Boum
@@ -21,10 +21,9 @@ package org.totalboumboum.ai.v201112.ais._simplet;
  * 
  */
 
-import org.totalboumboum.ai.v201112.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiHero;
-import org.totalboumboum.ai.v201112.adapter.data.AiZone;
+import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201314.adapter.data.AiHero;
+import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 
 /**
  * Cet agent est très simple : sa stratégie d'attaque consiste juste à
@@ -34,19 +33,15 @@ import org.totalboumboum.ai.v201112.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
-@SuppressWarnings("deprecation")
-public class ModeHandler extends AiModeHandler<Simplet>
+public class ModeHandler extends AiModeHandler<Agent>
 {	
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
 	 * 
 	 * @param ai	
 	 * 		l'agent que cette classe doit gérer.
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected ModeHandler(Simplet ai) throws StopRequestException
+	protected ModeHandler(Agent ai)
     {	super(ai);
 		ai.checkInterruption();
 		
@@ -63,7 +58,7 @@ public class ModeHandler extends AiModeHandler<Simplet>
 	private AiHero ownHero;
 	
 	@Override
-	protected boolean hasEnoughItems() throws StopRequestException
+	protected boolean hasEnoughItems()
 	{	ai.checkInterruption();
 		
 		int range = ownHero.getBombRange();
@@ -79,7 +74,7 @@ public class ModeHandler extends AiModeHandler<Simplet>
 	}
 	
 	@Override
-	protected boolean isCollectPossible() throws StopRequestException
+	protected boolean isCollectPossible()
 	{	ai.checkInterruption();
 		
 		// on vérifie s'il reste des items apparents
@@ -98,11 +93,8 @@ public class ModeHandler extends AiModeHandler<Simplet>
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Mise à jour de la sortie graphique.
-	 * 
-	 * @throws StopRequestException 
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	protected void updateOutput() throws StopRequestException
+	protected void updateOutput()
 	{	ai.checkInterruption();
 		
 		// rien de spécial à afficher ici

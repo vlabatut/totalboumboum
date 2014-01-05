@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet.criterion;
+package org.totalboumboum.ai.v201112.ais._simplet.v2.criterion;
 
 /*
  * Total Boum Boum
@@ -21,21 +21,21 @@ package org.totalboumboum.ai.v201112.ais._simplet.criterion;
  * 
  */
 
-import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201112.ais._simplet.Simplet;
-import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionInteger;
-import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
-import org.totalboumboum.ai.v201112.adapter.data.AiTile;
+import org.totalboumboum.ai.v201112.ais._simplet.v2.Agent;
+import org.totalboumboum.ai.v201112.ais._simplet.v2.CommonTools;
+import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
 /**
  * Cette classe représente le critère de menace envers l'adversaire.
  * Il est entier : la valeur comprise entre 1 et {@value #THREAT_LIMIT}
- * représente la distance entre la case et la cible.
+ * représente la distance entre la case et la cible. La valeur 1 représente
+ * une menace faible, alors que {@value #THREAT_LIMIT} correspond à une
+ * menace forte (exercée par notre agent).
  * 
  * @author Vincent Labatut
  */
-@SuppressWarnings("deprecation")
-public class CriterionThreat extends AiUtilityCriterionInteger
+public class CriterionThreat extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "THREAT";
 	
@@ -44,24 +44,12 @@ public class CriterionThreat extends AiUtilityCriterionInteger
 	 * 
 	 * @param ai
 	 * 		L'agent concerné. 
-	 * 
-	 * @throws StopRequestException	
-	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionThreat(Simplet ai) throws StopRequestException
+	public CriterionThreat(Agent ai)
 	{	// init nom
-		super(NAME,1,THREAT_LIMIT);
+		super(ai,NAME,1,THREAT_LIMIT);
 		ai.checkInterruption();
-		
-		// init agent
-		this.ai = ai;
 	}
-
-    /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** L'agent associé au traitement */ 
-	protected Simplet ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
@@ -70,7 +58,7 @@ public class CriterionThreat extends AiUtilityCriterionInteger
 	public static final int THREAT_LIMIT = 4;
 	
 	@Override
-	public Integer processValue(AiTile tile) throws StopRequestException
+	public Integer processValue(AiTile tile)
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		

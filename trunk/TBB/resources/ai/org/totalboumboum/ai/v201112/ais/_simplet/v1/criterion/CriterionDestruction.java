@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet.criterion;
+package org.totalboumboum.ai.v201112.ais._simplet.v1.criterion;
 
 /*
  * Total Boum Boum
@@ -23,10 +23,11 @@ package org.totalboumboum.ai.v201314.ais._simplet.criterion;
 
 import java.util.Set;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201314.ais._simplet.Agent;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.CommonTools;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.Simplet;
+import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionInteger;
+import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
+import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
  * Cette classe représente le critère de destruction.
@@ -35,7 +36,8 @@ import org.totalboumboum.ai.v201314.ais._simplet.Agent;
  * 
  * @author Vincent Labatut
  */
-public class CriterionDestruction extends AiCriterionInteger<Agent>
+@SuppressWarnings("deprecation")
+public class CriterionDestruction extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
 	public static final String NAME = "DESTRUCTION";
 	
@@ -44,12 +46,24 @@ public class CriterionDestruction extends AiCriterionInteger<Agent>
 	 * 
 	 * @param ai
 	 * 		L'agent concerné. 
+	 * 
+	 * @throws StopRequestException	
+	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionDestruction(Agent ai)
+	public CriterionDestruction(Simplet ai) throws StopRequestException
 	{	// init nom
-		super(ai,NAME,0,DESTRUCTION_LIMIT);
+		super(NAME,0,DESTRUCTION_LIMIT);
 		ai.checkInterruption();
+		
+		// init agent
+		this.ai = ai;
 	}
+
+    /////////////////////////////////////////////////////////////////
+	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** L'agent associé au traitement */ 
+	protected Simplet ai;
 
     /////////////////////////////////////////////////////////////////
 	// PROCESS					/////////////////////////////////////
@@ -58,7 +72,7 @@ public class CriterionDestruction extends AiCriterionInteger<Agent>
 	public static final int DESTRUCTION_LIMIT = 4;
 
 	@Override
-	public Integer processValue(AiTile tile)
+	public Integer processValue(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		

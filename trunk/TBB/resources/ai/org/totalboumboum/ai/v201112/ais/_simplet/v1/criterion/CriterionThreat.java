@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201112.ais._simplet.criterion;
+package org.totalboumboum.ai.v201112.ais._simplet.v1.criterion;
 
 /*
  * Total Boum Boum
@@ -21,25 +21,23 @@ package org.totalboumboum.ai.v201112.ais._simplet.criterion;
  * 
  */
 
-import java.util.Set;
-
-import org.totalboumboum.ai.v201112.ais._simplet.CommonTools;
-import org.totalboumboum.ai.v201112.ais._simplet.Simplet;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.CommonTools;
+import org.totalboumboum.ai.v201112.ais._simplet.v1.Simplet;
 import org.totalboumboum.ai.v201112.adapter.agent.AiUtilityCriterionInteger;
 import org.totalboumboum.ai.v201112.adapter.communication.StopRequestException;
 import org.totalboumboum.ai.v201112.adapter.data.AiTile;
 
 /**
- * Cette classe représente le critère de destruction.
- * Il est entier : la valeur comprise entre 0 et {@value #DESTRUCTION_LIMIT} représente
- * le nombre de murs qu'une bombe posée dans la case concernée détruirait.
+ * Cette classe représente le critère de menace envers l'adversaire.
+ * Il est entier : la valeur comprise entre 1 et {@value #THREAT_LIMIT}
+ * représente la distance entre la case et la cible.
  * 
  * @author Vincent Labatut
  */
 @SuppressWarnings("deprecation")
-public class CriterionDestruction extends AiUtilityCriterionInteger
+public class CriterionThreat extends AiUtilityCriterionInteger
 {	/** Nom de ce critère */
-	public static final String NAME = "DESTRUCTION";
+	public static final String NAME = "THREAT";
 	
 	/**
 	 * Crée un nouveau critère entier.
@@ -50,9 +48,9 @@ public class CriterionDestruction extends AiUtilityCriterionInteger
 	 * @throws StopRequestException	
 	 * 		Au cas où le moteur demande la terminaison de l'agent.
 	 */
-	public CriterionDestruction(Simplet ai) throws StopRequestException
+	public CriterionThreat(Simplet ai) throws StopRequestException
 	{	// init nom
-		super(NAME,0,DESTRUCTION_LIMIT);
+		super(NAME,1,THREAT_LIMIT);
 		ai.checkInterruption();
 		
 		// init agent
@@ -69,20 +67,23 @@ public class CriterionDestruction extends AiUtilityCriterionInteger
 	// PROCESS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Valeur maximale pour ce critère */
-	public static final int DESTRUCTION_LIMIT = 4;
-
+	public static final int THREAT_LIMIT = 4;
+	
 	@Override
 	public Integer processValue(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption();
 		CommonTools commonTools = ai.commonTools;
 		
-		// on récupère les cases contenant des murs destructibles à portée
-		Set<AiTile> softwalls = commonTools.getThreatenedSoftwallTiles(tile);
-		int result = softwalls.size();
-		// c'est possible de faire plus avec des bombes pénétrantes
-		// mais on choisit d'ignorer ça par simplification
-		if(result>DESTRUCTION_LIMIT)
-			result = DESTRUCTION_LIMIT;
+		// on récupère la distance à la cible : plus c'est prêt, mieux c'est
+		// (-> très mauvaise stratégie !)
+		int distance = commonTools.getDistanceToTarget(tile);
+		// on ne veut quand même pas être sur le joueur, ça c'est très mauvais 
+		if(distance<1)
+			distance = THREAT_LIMIT;
+		// si on est trop loin, ça ne fait plus de différence
+		else if(distance>THREAT_LIMIT)
+			distance = THREAT_LIMIT;
+		int result = THREAT_LIMIT - distance + 1;
 		
 		return result;
 	}

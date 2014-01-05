@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._simplet;
+package org.totalboumboum.ai.v201112.ais._simplet.v2;
 
 /*
  * Total Boum Boum
@@ -27,6 +27,7 @@ import java.net.URISyntaxException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.ai.v201112.ais._simplet.AiMain;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimTile;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201314.adapter.test.InitData;
