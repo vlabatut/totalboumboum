@@ -1742,12 +1742,6 @@ public class Launcher
  * 		+ à la place, mettre des infos générales sur le tournoi
  * 		+ >> p-ê un split horizontal plutot que vertical ?
  * 
- * TODO compét
- * 		+ FIXER L'ORDRE DES ROUNDS, PLUS DE HASARD >> meilleur controle du suspense !
- * 		+ ajouter le nouveau niveau à coupe (colimaçon)
- * 		+ mesurer le temps pris par coupe, compléter en fonction (plus de rounds ?)
- * 		+ définir version neutre de tous les niveaux, compléter supercoupe
- * 
  * TODO
  * 		+ proposer d'enregistrer les stats d'une confrontation
  * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
@@ -1757,8 +1751,8 @@ public class Launcher
 
 /*
  * TODO POSTS SITE
- * 		+ enchainement des tournois (joueurs constants) et détection des répétitions
- * 			exportation des stats
+ * 		+ enchainement des tournois (joueurs constants)
+ * 		+ exportation des stats
  * 		+ capture ? + cacher les sprites et le message de pause
  * 		+ API: représentation des chemins (avec les pauses et tout)
  * 		+ évènements de mort subite aléatoires

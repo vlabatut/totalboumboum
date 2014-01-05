@@ -1,0 +1,10 @@
+Match: null
+Round number: 1
+Level: tournament201314qualif/Qualif'8
+Start: 2014-58-03 09:58:33
+End: 2014-04-03 10:04:01
+Duration: 05'27''640
+
+Rank	Name	Color	Bombs	Items	Bombeds	Selfies	Bombings	Time	Points	
+1.	1213.Balyer+Güven	GRASS	0	0	0	0	0	00''001	6	
+1.	1213.Besnili+Kangal	BLACK	0	0	0	0	0	00''001	6	
