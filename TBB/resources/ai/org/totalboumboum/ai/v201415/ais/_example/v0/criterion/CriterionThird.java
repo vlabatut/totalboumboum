@@ -1,12 +1,12 @@
-package org.totalboumboum.ai.v201314.ais._example.v0.criterion;
+package org.totalboumboum.ai.v201415.ais._example.v0.criterion;
 
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionString;
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.ais._example.v0.Agent;
+import org.totalboumboum.ai.v201415.adapter.agent.AiCriterionString;
+import org.totalboumboum.ai.v201415.adapter.data.AiTile;
+import org.totalboumboum.ai.v201415.ais._example.v0.Agent;
 
 /**
  * Cette classe est un simple exemple de 
@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201314.ais._example.v0.Agent;
  * 
  * @author Xxxxxx
  * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class CriterionThird extends AiCriterionString<Agent>
 {	/** Nom de ce critère */

@@ -1,24 +1,24 @@
-package org.totalboumboum.ai.v201314.ais._example.v0;
+package org.totalboumboum.ai.v201415.ais._example.v0;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiMoveHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
-import org.totalboumboum.ai.v201314.adapter.data.AiHero;
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201314.adapter.path.AiPath;
-import org.totalboumboum.ai.v201314.adapter.path.LimitReachedException;
-import org.totalboumboum.ai.v201314.adapter.path.cost.CostCalculator;
-import org.totalboumboum.ai.v201314.adapter.path.cost.TileCostCalculator;
-import org.totalboumboum.ai.v201314.adapter.path.heuristic.HeuristicCalculator;
-import org.totalboumboum.ai.v201314.adapter.path.heuristic.TileHeuristicCalculator;
-import org.totalboumboum.ai.v201314.adapter.path.search.Astar;
-import org.totalboumboum.ai.v201314.adapter.path.successor.BasicSuccessorCalculator;
-import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.agent.AiMoveHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiPreferenceHandler;
+import org.totalboumboum.ai.v201415.adapter.data.AiHero;
+import org.totalboumboum.ai.v201415.adapter.data.AiTile;
+import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201415.adapter.path.AiPath;
+import org.totalboumboum.ai.v201415.adapter.path.LimitReachedException;
+import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.cost.TileCostCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.heuristic.HeuristicCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.heuristic.TileHeuristicCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.search.Astar;
+import org.totalboumboum.ai.v201415.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -29,6 +29,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Xxxxxx
  * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class MoveHandler extends AiMoveHandler<Agent>
 {	

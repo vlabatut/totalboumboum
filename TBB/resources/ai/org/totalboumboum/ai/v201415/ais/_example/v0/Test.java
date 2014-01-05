@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._example.v0;
+package org.totalboumboum.ai.v201415.ais._example.v0;
 
 /*
  * Total Boum Boum
@@ -21,11 +21,11 @@ package org.totalboumboum.ai.v201314.ais._example.v0;
  * 
  */
 
-import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-import org.totalboumboum.ai.v201314.adapter.model.full.AiSimTile;
-import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
-import org.totalboumboum.ai.v201314.adapter.test.InitData;
-import org.totalboumboum.ai.v201314.ais._example.AiMain;
+import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.model.full.AiSimTile;
+import org.totalboumboum.ai.v201415.adapter.model.full.AiSimZone;
+import org.totalboumboum.ai.v201415.adapter.test.InitData;
+import org.totalboumboum.ai.v201415.ais._example.AiMain;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -46,7 +46,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * pour ça on a besoin du moteur du jeu, bien sûr. Donc ce genre
  * de test doit passer par le jeu complet, pas seulement l'API.
  *
- * @author Vincent Labatut
+ * @author Xxxxxx
+ * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class Test
 {	/** Agent utilisé lors du test */

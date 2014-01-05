@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais.truc;
+package org.totalboumboum.ai.v201415.ais.truc;
 
 /*
  * Total Boum Boum
@@ -28,9 +28,9 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
-import org.totalboumboum.ai.v201314.ais.truc.v0.Truc;
+import org.totalboumboum.ai.v201415.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201415.ais.truc.v0.Truc;
 import org.xml.sax.SAXException;
 
 /**

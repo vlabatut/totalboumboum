@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.ais._example.v0;
+package org.totalboumboum.ai.v201415.ais._example.v0;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
-import org.totalboumboum.ai.v201314.adapter.agent.AiMode;
-import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
-import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
-import org.totalboumboum.ai.v201314.adapter.data.AiHero;
-import org.totalboumboum.ai.v201314.adapter.data.AiItem;
-import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-import org.totalboumboum.ai.v201314.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.agent.AiCategory;
+import org.totalboumboum.ai.v201415.adapter.agent.AiMode;
+import org.totalboumboum.ai.v201415.adapter.agent.AiModeHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiPreferenceHandler;
+import org.totalboumboum.ai.v201415.adapter.data.AiHero;
+import org.totalboumboum.ai.v201415.adapter.data.AiItem;
+import org.totalboumboum.ai.v201415.adapter.data.AiTile;
+import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 
 /**
  * Classe gérant le calcul des valeurs de préférence de l'agent.
@@ -23,6 +23,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * 
  * @author Xxxxxx
  * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	

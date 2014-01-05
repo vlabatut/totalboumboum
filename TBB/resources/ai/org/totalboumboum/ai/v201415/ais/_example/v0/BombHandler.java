@@ -1,6 +1,6 @@
-package org.totalboumboum.ai.v201314.ais._example.v0;
+package org.totalboumboum.ai.v201415.ais._example.v0;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
+import org.totalboumboum.ai.v201415.adapter.agent.AiBombHandler;
 
 /**
  * Classe gérant l'action de déposer une bombe pour l'agent. 
@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
  * 
  * @author Xxxxxx
  * @author Yyyyyy
+ * @author Zzzzzz
  */
 public class BombHandler extends AiBombHandler<Agent>
 {	
