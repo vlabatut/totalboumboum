@@ -195,9 +195,6 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Switch pour la modification empêchant l'oscillation (ce champ est temporaire) */
-	private boolean oscilModif = true;	// TODO
-	
 	/**
 	 * Renvoie la map correspondant au noeud
 	 * de recherche passé en paramètre. La map
@@ -367,7 +364,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 				//    ça correspond à une oscillation complètement inutile, qui doit être empêchée.
 				//    du type : A -(right)- B -(left)- A
 				//    par contre, on garde les A -(right)- B -(none)- B -(left)- A
-				if(process && oscilModif)
+				if(process)
 				{	AiSearchNode prevNode = node.getParent();
 					if(prevNode!=null)
 					{	AiTile prevTile = prevNode.getLocation().getTile();

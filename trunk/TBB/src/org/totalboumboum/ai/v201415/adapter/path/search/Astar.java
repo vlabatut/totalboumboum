@@ -203,7 +203,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		successorCalculator.init(root);
 		
 		// on lance le traitement
-		AiPath result = startProcess(endTiles);
+		AiPath result = restartProcess(endTiles);
 		return result;
 	}
 	
@@ -232,12 +232,12 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
-	 * TODO à appeler "restart"
 	 */
-	public AiPath startProcess(AiTile endTile) throws LimitReachedException
+	public AiPath restartProcess(AiTile endTile) throws LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
 		endTiles.add(endTile);
-		AiPath result = startProcess(endTiles);
+		
+		AiPath result = restartProcess(endTiles);
 		return result;
 	}
 	
@@ -268,9 +268,8 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 * @throws IllegalArgumentException
 	 * 		Si la liste des cases de destination est vide.
-	 * TODO à appeler "restart"
 	 */
-	public AiPath startProcess(Set<AiTile> endTiles) throws LimitReachedException
+	public AiPath restartProcess(Set<AiTile> endTiles) throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
@@ -291,6 +290,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 		fringeSize = 0;
 		lastSearchNode = null;
 		
+		// on indique qu'on ne recherche pas (ou plus) un cycle
+		searchLoop = false;
+
 		// heuristique
 		Set<AiTile> et = heuristicCalculator.getEndTiles();
 		if(!et.equals(endTiles))
@@ -309,7 +311,11 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	
 	/**
 	 * Calcule le plus court chemin partant de la position {@code startLocation} 
-	 * et retournant à la même case, en utilisant l'algorithme A*. Comme pour les
+	 * et retournant à la même case, en utilisant l'algorithme A*. On cherche donc
+	 * une chemin qui prend la forme d'une <b>boucle</b>, et c'est important de bien
+	 * le comprendre.
+	 * <br/>
+	 * Comme pour les
 	 * autres méthodes, on peut obtenir trois résultats différents : un chemin
 	 * commençant et finissant par la case de départ, la valeur {@code null} si aucun
 	 * chemin n'existe, et enfin la méthode peut lever une {@link LimitReachedException}
@@ -340,7 +346,7 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public AiPath processLoopPath(AiLocation startLocation) throws LimitReachedException
+	public AiPath startProcess(AiLocation startLocation) throws LimitReachedException
 	{	// avertissements possibles
 		SearchMode mode = null;
 		if(successorCalculator instanceof TimeFullSuccessorCalculator)

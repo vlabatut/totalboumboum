@@ -45,6 +45,7 @@ import org.totalboumboum.ai.v201415.adapter.model.full.AiFullModel;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.test.AstarUse;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
@@ -1139,7 +1140,7 @@ public class AiPartialModel
 	 */
 	@Override
 	public String toString()
-	{	boolean details = true; // TODO permet d'afficher les délais d'explosions en plus de la zone elle-même
+	{	boolean details = true && !GameData.PRODUCTION;
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4);
 		nf.setMaximumFractionDigits(0);

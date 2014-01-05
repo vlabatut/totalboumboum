@@ -284,9 +284,6 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Switch pour la modification empêchant l'oscillation (ce champ est temporaire) */
-	private boolean oscilModif = true;	// TODO
-	
 	/** 
 	 * Fonction successeur considérant à la fois les 4 cases 
 	 * voisines de la case courante, comme pour {@link BasicSuccessorCalculator},
@@ -385,7 +382,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 				//    ça correspond à une oscillation complètement inutile, qui doit être empêchée.
 				//    du type : A -(right)- B -(left)- A
 				//    par contre, on garde les A -(right)- B -(none)- B -(left)- A
-				if(process && oscilModif)
+				if(process)
 				{	AiSearchNode prevNode = node.getParent();
 					if(prevNode!=null)
 					{	AiTile prevTile = prevNode.getLocation().getTile();

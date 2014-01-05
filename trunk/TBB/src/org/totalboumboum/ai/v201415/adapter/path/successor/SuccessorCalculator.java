@@ -41,6 +41,7 @@ import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.GameData;
 
 /**
  * Permet de définir une fonction successeur utilisée par un algorithme
@@ -109,11 +110,13 @@ public abstract class SuccessorCalculator
 			remainingDirs.remove(idx);
 		}
 		
-// TODO forcing normal order		
-orderedDirections[0] = Direction.DOWN;
-orderedDirections[1] = Direction.LEFT;
-orderedDirections[2] = Direction.RIGHT;
-orderedDirections[3] = Direction.UP;
+		if(!GameData.PRODUCTION)
+		{	// forcing normal order		
+			orderedDirections[0] = Direction.DOWN;
+			orderedDirections[1] = Direction.LEFT;
+			orderedDirections[2] = Direction.RIGHT;
+			orderedDirections[3] = Direction.UP;
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
