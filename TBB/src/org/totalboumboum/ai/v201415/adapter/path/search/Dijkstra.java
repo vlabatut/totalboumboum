@@ -134,7 +134,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 		costCalculator.init(root);
 		successorCalculator.init(root);
 		
-		Map<AiTile,AiSearchNode> result = startProcess();
+		Map<AiTile,AiSearchNode> result = restartProcess();
 		return result;
 	}
 	
@@ -157,7 +157,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 */
-	public Map<AiTile,AiSearchNode> startProcess() throws LimitReachedException
+	public Map<AiTile,AiSearchNode> restartProcess() throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,
 		// sinon la case de départ n'est pas connue. Dans ce cas, on lève une NullPointerException.
 		if(root==null)
@@ -186,7 +186,7 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	 * de recherche. Au contraire, ici on s'arrête dès qu'on rencontre
 	 * une case sûre (i.e. sans danger).
 	 * <br/>
-	 * La question est de savoir ce qui signifie, pour une case, "être
+	 * La question est de savoir ce que signifie, pour une case, "être
 	 * sans danger". Cette notion est implémentée dans la méthode 
 	 * {@link SuccessorCalculator#isThreatened(AiSearchNode) SuccessorCalculator.isThreatened} 
 	 * de la fonction successeur utilisée par Dijkstra.
@@ -218,7 +218,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 	}
 	
 	/**
-	 * Permet de continuer le traitement commencé par {@link #startProcess(AiLocation) startProcess}.
+	 * Permet de continuer le traitement commencé par {@link #startProcess(AiLocation) startProcess},
+	 * en travaillant sur le même arbre de recherche (qui va éventuellement être
+	 * complété).
+	 * <br/>
 	 * Par exemple, si {@code startProcess} a provoqué une exception 
 	 * de type {@link LimitReachedException}, on peut augmenter la limite
 	 * concernée puis faire appel à cette méthode afin de continuer le traitement

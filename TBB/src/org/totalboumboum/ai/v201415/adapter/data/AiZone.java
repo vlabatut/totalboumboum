@@ -42,6 +42,7 @@ import org.totalboumboum.ai.v201415.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.engine.content.feature.Direction;
+import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.computing.ApproximationTools;
 import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.levels.DeltaTools;
@@ -2238,7 +2239,7 @@ public abstract class AiZone implements Serializable
 	 */
 	@Override
 	public String toString()
-	{	boolean displayBombs = false;	// TODO permet d'activer/désactiver l'affichage des temps des bombes
+	{	boolean details = true && !GameData.PRODUCTION;
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4);
 		nf.setMaximumFractionDigits(0);
@@ -2254,7 +2255,7 @@ public abstract class AiZone implements Serializable
 			{	result.append(" ");
 				result.append(i/10);
 			}
-			if(displayBombs)
+			if(details)
 			{	result.append("\t");
 				for(int i=0;i<10;i++)
 					result.append("      ");
@@ -2270,7 +2271,7 @@ public abstract class AiZone implements Serializable
 		{	result.append(" ");
 			result.append(i%10);
 		}
-		if(displayBombs)
+		if(details)
 		{	result.append("\t");
 			for(int i=0;i<width;i++)
 			{	result.append("     ");
@@ -2284,7 +2285,7 @@ public abstract class AiZone implements Serializable
 		for(int col=0;col<width-1;col++)
 			result.append("─┬");
 		result.append("─┐");
-		if(displayBombs)
+		if(details)
 		{	result.append("\t┌");
 			for(int col=0;col<width-1;col++)
 				result.append("─────┬");
@@ -2331,7 +2332,7 @@ public abstract class AiZone implements Serializable
 					result.append(" ");
 			}
 			result.append("│");
-			if(displayBombs)
+			if(details)
 			{	result.append("\t");
 				for(int col=0;col<width;col++)
 				{	AiTile tile = getTile(row,col);
@@ -2357,7 +2358,7 @@ public abstract class AiZone implements Serializable
 				for(int col=0;col<width-1;col++)
 					result.append("─┼");
 				result.append("─┤");
-				if(displayBombs)
+				if(details)
 				{	result.append("\t├");
 					for(int col=0;col<width-1;col++)
 						result.append("─────┼");
@@ -2372,7 +2373,7 @@ public abstract class AiZone implements Serializable
 		for(int col=0;col<width-1;col++)
 			result.append("─┴");
 		result.append("─┘");
-		if(displayBombs)
+		if(details)
 		{	result.append("\t└");
 			for(int col=0;col<width-1;col++)
 				result.append("─────┴");

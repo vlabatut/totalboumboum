@@ -1486,7 +1486,7 @@ public class AiFullModel
 		// hero is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = hero.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for games in which heroes can be reborn
+			if(time>=burningDuration) //NOTE problem for game modes in which heroes can be reborn
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;

@@ -130,7 +130,7 @@ public final class AstarUse
 		// précédent. Ca permet de gagner (un peu) de temps.
 		endTile = zone.getTile(2,5);
 		try
-		{	AiPath path = astar.startProcess(endTile);
+		{	AiPath path = astar.restartProcess(endTile);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -153,7 +153,7 @@ public final class AstarUse
 		destinations.add(zone.getTile(3,4));
 		destinations.add(zone.getTile(5,3));
 		try
-		{	AiPath path = astar.startProcess(destinations);
+		{	AiPath path = astar.restartProcess(destinations);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -702,7 +702,7 @@ public final class AstarUse
 		AiLocation startLocation = new AiLocation(hero);
 		AiPath path = null;
 		try
-		{	path = astar.processLoopPath(startLocation);
+		{	path = astar.startProcess(startLocation);
 			System.out.println("+++ path="+path);
 		}
 		catch (StopRequestException e)
@@ -718,7 +718,7 @@ public final class AstarUse
 			astar = new Astar(ai,hero,costCalculator,heuristicCalculator,successorCalculator);
 			astar.setVerbose(true);
 			try
-			{	path = astar.processLoopPath(startLocation);
+			{	path = astar.startProcess(startLocation);
 				System.out.println("+++ path="+path);
 			}
 			catch (StopRequestException ex)
