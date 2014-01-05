@@ -95,7 +95,7 @@ final class AiDataBlock extends AiDataSprite<Block> implements AiBlock
 	{	Block sprite = getSprite();
 		SpecificAction specificAction = new SpecificConsume(sprite);
 		destructible = !sprite.isTargetPreventing(specificAction);
-// NOTE workaround pour que les agents ne croient pas que les blocs de mort subite sont sans danger
+
 if(state.getName()==null || state.getName()==AiStateName.FLYING)
 {	this.destructible = false;
 }
@@ -184,7 +184,7 @@ if(state.getName()==null || state.getName()==AiStateName.FLYING)
 				stopFires = AiStopType.NO_STOP;
 		}
 		
-// NOTE workaround pour que les agents ne croient pas que les blocs de mort subite sont sans danger
+
 if(state.getName()==null || state.getName()==AiStateName.FLYING)
 {	this.stopHeroes = AiStopType.STRONG_STOP;
 	this.stopFires = AiStopType.STRONG_STOP;

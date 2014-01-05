@@ -435,7 +435,7 @@ public abstract class AiZone implements Serializable
 		for(AiBomb bomb: getBombs())
 		{	List<AiFire> fires = bomb.getTile().getFires();
 			// delay map & bomb map
-			long delay = Long.MAX_VALUE; //TODO non-time bombs are considered to have an infinite delay, which should be corrected
+			long delay = Long.MAX_VALUE; // non-time bombs are considered to have an infinite delay, which should be corrected
 			// fire-sensitive bomb currently caught in an explosion
 			if(bomb.hasExplosionTrigger() && !fires.isEmpty())
 			{	long fireDuration = 0;
@@ -2238,7 +2238,7 @@ public abstract class AiZone implements Serializable
 	 */
 	@Override
 	public String toString()
-	{	boolean displayBombs = false;	// TODO permet d'activer/désactiver l'affichage des temps des bombes
+	{	boolean displayBombs = false;	// permet d'activer/désactiver l'affichage des temps des bombes
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(4);
 		nf.setMaximumFractionDigits(0);

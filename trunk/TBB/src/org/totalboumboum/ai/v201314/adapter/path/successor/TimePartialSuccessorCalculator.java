@@ -285,7 +285,7 @@ public class TimePartialSuccessorCalculator extends SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Switch pour la modification empêchant l'oscillation (ce champ est temporaire) */
-	private boolean oscilModif = true;	// TODO
+	private boolean oscilModif = true;
 	
 	/** 
 	 * Fonction successeur considérant à la fois les 4 cases 
