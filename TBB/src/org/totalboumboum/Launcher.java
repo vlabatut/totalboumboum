@@ -1517,7 +1517,7 @@ public class Launcher
 // CLEANING PROCEDURE / PROCÉDURE DE NETTOYAGE	//////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**
-	 * - source :
+	 * + source :
 	 * 		+ éventuellement mettre à jour la version 
 	 * 		+ supprimer zgraphics
 	 * 		+ supprimer tous les commentaires TODO et NOTE
@@ -1529,13 +1529,14 @@ public class Launcher
 	 * 		+ supprimer les agents de test
 	 * 		+ réinitialiser les logstats
 	 * 		- recopier les stats (éventuellement)
-	 * 		- recréer les sauvegardes des tournois
-	 * - options :
-	 * 		- virer l'enchainement automatique
-	 * 		- virer le bombage des IA inactives
+	 * 		+ recréer les sauvegardes des tournois
+	 * + options :
+	 * 		+ virer l'enchainement automatique
+	 * 		+ virer le bombage des IA inactives
+	 * 		+ virer le bombage des IA qui bouclent
 	 * - profils :
 	 * 		- supprimer les profils de test
-	 * 		- réinitialiser les stats des joueurs humains ou autres
+	 * 		+ réinitialiser les stats des joueurs humains ou autres
 	 * 
 	 * - pour diffusion publique :
 	 * 		- fichiers :
@@ -1546,42 +1547,42 @@ public class Launcher
 	 * 		- options :
 	 * 			- simulation des matches AI-only
 	 * 		- prérégler la partie rapide sur : 
-	 * 			- les meilleures IA 
-	 * 			- des niveaux compatibles
+	 * 			+ les meilleures IA 
+	 * 			+ des niveaux compatibles
 	 * 			- les règles classiques
 	 * 
-	 *  - pour diffusion projet :
-	 *  	- API : 
-	 *  		- désactiver l'affichage des temps dans AiZone et AiPartialModel
-	 * 		- réseau :
-	 * 			- bloquer le bouton "réseau" dans le menu principal
+	 *  + pour diffusion projet :
+	 *  	+ API : 
+	 *  		+ désactiver l'affichage des temps dans AiZone et AiPartialModel
+	 * 		+ réseau :
+	 * 			+ bloquer le bouton "réseau" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
-	 * 			- bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
+	 * 			+ bloquer le bouton "réseau" dans le menu de config tournoi/partie rapide
 	 * 			  org.totalboumboum.gui.menus.tournament.TournamenuMenu.buttonPublish
 	 * 			  org.totalboumboum.gui.menus.quickmatch.QuickMatchMenu.buttonPublish
 	 * 			>> simplement utiliser PRODUCTION dans la classe org.totalboumboum.tools.GameData
 	 * 			  
-	 * 		- replay :
-	 * 			- bloquer le bouton "replay" dans le menu principal
+	 * 		+ replay :
+	 * 			+ bloquer le bouton "replay" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonReplay
-	 * 			- bloquer le bouton "caméra" dans les menu tournoi/match/round
+	 * 			+ bloquer le bouton "caméra" dans les menu tournoi/match/round
 	 * 			  org.totalboumboum.gui.game.tournament.TournamentMenu.buttonRecord
 	 * 			  org.totalboumboum.gui.game.match.MatchMenu.buttonRecord
 	 *			  org.totalboumboum.gui.game.round.RoundMenu.buttonRecord
-	 * 			- bloquer l'action dans les options avancées
+	 * 			+ bloquer l'action dans les options avancées
 	 * 			  org.totalboumboum.gui.menus.options.advanced.AdvancedData ligne 'case LINE_RECORD_GAMES'
 	 * 			>> simplement utiliser PRODUCTION dans la classe org.totalboumboum.tools.GameData
-	 * 		- options :
-	 * 			- afficher les exceptions
-	 * 			- prérégler la partie rapide 
-	 * 		- ressources :
-	 * 			- redonner les host id corrects pour les étudiants modifiés pour tester le réseau (3d169eaa-303e-4abe-8220-0261dbc79db9)
-	 * 				- 0809.Akkaya+Danacioğlu: 	0d3dfd83-6632-423f-b63e-d7e5743ad998
-	 * 				- 0809.Adatepe: 			26db3658-cf0e-4650-96f4-55080b4720f8
-	 * 				- Joueur Humain 2:			553c0fb4-5418-4e33-b244-d5f399ae40f2
-	 *		 	- virer le thème/perso/niveaux "TBB" 
+	 * 		+ options :
+	 * 			+ afficher les exceptions
+	 * 			+ prérégler la partie rapide 
+	 * 		+ ressources :
+	 * 			+ redonner les host id corrects pour les étudiants modifiés pour tester le réseau (3d169eaa-303e-4abe-8220-0261dbc79db9)
+	 * 				+ 0809.Akkaya+Danacioğlu: 	0d3dfd83-6632-423f-b63e-d7e5743ad998
+	 * 				+ 0809.Adatepe: 			26db3658-cf0e-4650-96f4-55080b4720f8
+	 * 				+ Joueur Humain 2:			553c0fb4-5418-4e33-b244-d5f399ae40f2
+	 *		 	+ virer le thème/perso/niveaux "TBB" 
 	 *				(après avoir viré les joueurs utilisant les perso et pré-enregistrès)
-	 *			- re-générer le fichier exécutable windows à partir du batch (?)
+	 *			+ re-générer le fichier exécutable windows à partir du batch (?)
 	 * 
 	 * promeneur :	af92d497-7975-4dcf-b05d-89e706c3eec3
 	 * simplet : 	227b2e4d-bd7b-4153-962b-699bc909e5e1
