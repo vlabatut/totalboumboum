@@ -24,7 +24,7 @@ package org.totalboumboum.ai.v201415.adapter.path.cost;
 import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201415.adapter.path.AiSearchNode;
+import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
