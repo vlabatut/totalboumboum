@@ -111,7 +111,7 @@ public class AiParser
             // comments must be tested a posteriori
             List<Comment> comments = cu.getComments();
             for(Comment comment: comments)
-            {	// NOTE when there are several comments in a row,
+            {	// when there are several comments in a row,
                 // the parser might not detect them
             	String content = comment.getContent();
         		if(content.contains(ECLIPSE_TAG))

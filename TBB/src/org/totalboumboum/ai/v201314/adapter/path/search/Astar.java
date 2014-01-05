@@ -232,7 +232,6 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * @throws LimitReachedException
 	 * 		L'algorithme a développé un arbre trop grand (il y a
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
-	 * TODO à appeler "restart"
 	 */
 	public AiPath startProcess(AiTile endTile) throws LimitReachedException
 	{	Set<AiTile> endTiles = new TreeSet<AiTile>();
@@ -268,7 +267,6 @@ public final class Astar extends AiAbstractSearchAlgorithm
 	 * 		vraisemblablement un problème dans les paramètres/fonctions utilisés). 
 	 * @throws IllegalArgumentException
 	 * 		Si la liste des cases de destination est vide.
-	 * TODO à appeler "restart"
 	 */
 	public AiPath startProcess(Set<AiTile> endTiles) throws LimitReachedException
 	{	// on teste d'abord si l'algorithme a au moins été appliqué une fois,

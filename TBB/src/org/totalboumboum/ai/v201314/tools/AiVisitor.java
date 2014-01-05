@@ -485,23 +485,23 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 				}
 			}
 		}
-		//NOTE ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
+		//ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
 	}
 
 	@Override
     public void visit(BlockComment comment, Object arg)
-	{	// NOTE ne marche pas (méthode jamais appelée)
+	{	// ne marche pas (méthode jamais appelée)
     }
 	
 	@Override
 	public void visit(JavadocComment comment, Object arg)
-	{	// NOTE fonctionne, mais...
+	{	// fonctionne, mais...
 		// déjà traité dans le parser
     }
 
 	@Override
     public void visit(LineComment comment, Object arg)
-	{	// NOTE ne marche pas (méthode jamais appelée)
+	{	// ne marche pas (méthode jamais appelée)
     }
 	
 	@Override

@@ -109,7 +109,7 @@ public abstract class SuccessorCalculator
 			remainingDirs.remove(idx);
 		}
 		
-// TODO forcing normal order		
+// forcing normal order		
 orderedDirections[0] = Direction.DOWN;
 orderedDirections[1] = Direction.LEFT;
 orderedDirections[2] = Direction.RIGHT;

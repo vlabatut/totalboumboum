@@ -532,7 +532,7 @@ public class AiFullModel
 		{	if(direction==Direction.NONE)
 				result = Long.MAX_VALUE;
 			else
-			{	//NOTE simplification here: we suppose the levels are all grids, 
+			{	// simplification here: we suppose the levels are all grids, 
 				// meaning at least one coordinate is at the center of a tile
 				double speed = sprite.getCurrentSpeed();
 				if(sprite instanceof AiSimHero)
@@ -687,7 +687,7 @@ public class AiFullModel
 	 * 		La durée du pas de simulation.
 	 */
 	private void moveSprite(AiSimSprite sprite, long duration)
-	{	// NOTE same simplification than before: we suppose the levels are all grids, 
+	{	// same simplification than before: we suppose the levels are all grids, 
 		// meaning at least one coordinate is at the center of a tile
 		// plus the sprite moves in a primary direction (DOWN, LEFT, RIGHT, UP: no composite)
 		
@@ -859,7 +859,7 @@ public class AiFullModel
 					mainSprite = sprite;
 				else if(sprite instanceof AiItem && mainSprite==null)
 					mainSprite = sprite;
-				// NOTE other sprite types are just ignored (including floors)
+				// other sprite types are just ignored (including floors)
 				// sprite types with less priority are also ignored. for instance,
 				// if a block and an item fall together, we ignore the item by
 				// simplification. same thing for a block and a bomb, and so on.
@@ -876,7 +876,7 @@ public class AiFullModel
 				List<AiSimFloor> floors = t.getInternalFloors();
 				List<AiSimHero> heroes = t.getInternalHeroes();
 				List<AiSimItem> items = t.getInternalItems();
-// NOTE should we take the state of the (crushed) sprite into account?				
+// should we take the state of the (crushed) sprite into account?				
 				// check the sprite depending on its type
 				if(mainSprite instanceof AiBlock)
 				{	AiSimBlock block = (AiSimBlock)mainSprite;
@@ -890,7 +890,7 @@ public class AiFullModel
 							crushedSprites.addAll(items);
 						}
 						else
-						{	// NOTE cannot appear >> should randomly bounces elsewhere
+						{	// cannot appear >> should randomly bounces elsewhere
 						}
 					}
 					// hardwall falling
@@ -906,7 +906,7 @@ public class AiFullModel
 							crushedSprites.addAll(items);
 						}
 						else
-						{	// NOTE cannot appear >> should randomly bounces elsewhere
+						{	// cannot appear >> should randomly bounces elsewhere
 						}
 					}
 				}
@@ -921,7 +921,7 @@ public class AiFullModel
 						crushedSprites.addAll(heroes);
 					}
 					else
-					{	// NOTE cannot appear >> should randomly bounces elsewhere
+					{	// cannot appear >> should randomly bounces elsewhere
 					}
 				}
 				// item falling
@@ -934,7 +934,7 @@ public class AiFullModel
 						crushedSprites.addAll(floors);
 					}
 					else
-					{	// NOTE cannot appear >> should wait for the tile to be clear
+					{	// cannot appear >> should wait for the tile to be clear
 					}
 				}
 			}
@@ -1019,7 +1019,7 @@ public class AiFullModel
 		// block is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = block.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for future re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) // problem for future re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1033,7 +1033,7 @@ public class AiFullModel
 		
 		// blocks can't move (at least for now)
 		else if(name==AiStateName.FLYING || name==AiStateName.MOVING)
-		{	// NOTE useless for the moment
+		{	// useless for the moment
 			//moveSprite(block);
 		}
 		
@@ -1407,7 +1407,7 @@ public class AiFullModel
 		// floor is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = floor.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for future re-spawning blocks (but it's only an approximation, after all...)
+			if(time>=burningDuration) // problem for future re-spawning blocks (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1486,7 +1486,7 @@ public class AiFullModel
 		// hero is burning
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = hero.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for games in which heroes can be reborn
+			if(time>=burningDuration) // problem for games in which heroes can be reborn
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1732,7 +1732,7 @@ public class AiFullModel
 		{	// nothing to do
 		}
 		else if(type==AiItemType.PUNCH)
-		{	// NOTE to be completed, useless for now
+		{	// to be completed, useless for now
 		}
 		
 		// remove item
@@ -1797,7 +1797,7 @@ public class AiFullModel
 	 */
 	private void releaseItems(AiSimHero hero)
 	{
-		// NOTE items could be released here... (to be completed)
+		// items could be released here... (to be completed)
 	}
 	
 	/**
@@ -1834,7 +1834,7 @@ public class AiFullModel
 		// item is burning (too bad, if it's a bonus!)
 		if(name==AiStateName.BURNING)
 		{	long burningDuration = item.getBurningDuration();
-			if(time>=burningDuration) //NOTE problem for future re-spawning sprites (but it's only an approximation, after all...)
+			if(time>=burningDuration) // problem for future re-spawning sprites (but it's only an approximation, after all...)
 			{	// update state
 				name = AiStateName.ENDED;
 				direction = Direction.NONE;
@@ -1886,7 +1886,7 @@ public class AiFullModel
 				Set<AiSimSprite> crushedSprites = new TreeSet<AiSimSprite>();
 				Set<AiSimSprite> crushingSprites = new TreeSet<AiSimSprite>();
 				processCrush(event,crushedSprites,crushingSprites);
-				// NOTE for now, we suppose there's only a single crushing sprite
+				// for now, we suppose there's only a single crushing sprite
 				{	AiSimSprite crushingSprite = crushingSprites.iterator().next();
 					// affect the existing sprites
 					for(AiSimSprite crushedSprite: crushedSprites)

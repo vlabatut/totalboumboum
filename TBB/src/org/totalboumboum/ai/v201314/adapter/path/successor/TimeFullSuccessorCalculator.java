@@ -196,7 +196,7 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Switch pour la modification empêchant l'oscillation (ce champ est temporaire) */
-	private boolean oscilModif = true;	// TODO
+	private boolean oscilModif = true;
 	
 	/**
 	 * Renvoie la map correspondant au noeud
