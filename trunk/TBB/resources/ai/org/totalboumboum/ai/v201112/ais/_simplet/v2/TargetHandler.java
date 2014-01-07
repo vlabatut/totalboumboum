@@ -38,6 +38,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class TargetHandler extends AiAbstractHandler<Agent>
 {	
 	/**

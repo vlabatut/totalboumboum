@@ -36,6 +36,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class CriterionLocality extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "LOCALITY";
