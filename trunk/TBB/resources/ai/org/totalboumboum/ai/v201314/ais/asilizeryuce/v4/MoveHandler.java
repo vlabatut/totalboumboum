@@ -38,6 +38,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent> {
 
 	/** c'est une case qui est sure */

@@ -13,11 +13,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * Classe gérant les calculs des cases de la zone.
  * 
- * 
  * @author Emre Asıl
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class TileHandler extends AiAbstractHandler<Agent> {
 
 	/**

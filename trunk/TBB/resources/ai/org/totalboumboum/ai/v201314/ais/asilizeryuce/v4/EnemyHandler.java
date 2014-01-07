@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class EnemyHandler extends AiAbstractHandler<Agent> {
 
 	/**

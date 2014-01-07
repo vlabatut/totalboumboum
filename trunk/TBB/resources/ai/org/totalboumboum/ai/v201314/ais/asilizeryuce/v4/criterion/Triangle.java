@@ -1,8 +1,4 @@
-/**
- * 
- */
 package org.totalboumboum.ai.v201314.ais.asilizeryuce.v4.criterion;
-
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
@@ -17,8 +13,8 @@ import org.totalboumboum.ai.v201314.ais.asilizeryuce.v4.Agent;
  * @author Emre Asil
  * @author Tülin İzer
  * @author Miray Yüce
- *
  */
+@SuppressWarnings("deprecation")
 public class Triangle extends AiCriterionInteger<Agent>{
 	/** Nom de ce critère */
 	public static final String NAME = "TRIANGLE";

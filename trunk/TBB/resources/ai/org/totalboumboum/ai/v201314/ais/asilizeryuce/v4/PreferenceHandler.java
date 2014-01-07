@@ -19,6 +19,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

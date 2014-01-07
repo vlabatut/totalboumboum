@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class ItemHandler extends AiAbstractHandler<Agent> {
 	
 	/**

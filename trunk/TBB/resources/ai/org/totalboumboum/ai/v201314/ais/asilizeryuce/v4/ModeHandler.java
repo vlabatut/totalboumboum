@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent> {
 
 	/** cette variable definis combien de bombes qu'on a besoin */
