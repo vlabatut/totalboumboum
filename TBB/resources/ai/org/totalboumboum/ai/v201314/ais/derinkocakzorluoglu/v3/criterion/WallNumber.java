@@ -1,6 +1,7 @@
 package org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.criterion;
 
 import java.util.List;
+
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
@@ -13,6 +14,7 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class WallNumber extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "WallNumber";

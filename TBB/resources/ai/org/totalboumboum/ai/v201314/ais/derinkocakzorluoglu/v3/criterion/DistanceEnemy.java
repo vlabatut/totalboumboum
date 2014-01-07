@@ -9,11 +9,11 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
  * DistanceEnemy
  * Criteria pour calculer la distance Manhattan entre nous et l'ennemie .
  * 
- * 
  * @author Emre Derin
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class DistanceEnemy extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "DistanceEnemy";

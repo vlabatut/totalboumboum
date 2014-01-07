@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
 import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
@@ -13,6 +14,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent>
 {	
 

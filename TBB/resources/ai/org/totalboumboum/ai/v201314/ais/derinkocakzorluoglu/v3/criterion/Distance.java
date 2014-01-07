@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.CalculationHelper
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class Distance extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "Distance";
