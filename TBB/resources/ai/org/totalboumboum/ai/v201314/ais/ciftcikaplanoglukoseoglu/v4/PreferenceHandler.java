@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
 import org.totalboumboum.ai.v201314.adapter.agent.AiMode;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
@@ -26,6 +25,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent> {
 
 	/**

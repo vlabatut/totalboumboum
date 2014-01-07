@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.Agent;
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class DistanceEnemy extends AiCriterionBoolean<Agent> {
 	/** Nom du critère */
 	public static final String NAME = "DISTANCE_ENEMY";

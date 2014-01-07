@@ -20,6 +20,7 @@ import java.util.Map;
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class Threat extends AiCriterionInteger<Agent> {
 	/** on nomme le critère */
 	public static final String NAME = "THREAT";

@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence
 {
 	/**

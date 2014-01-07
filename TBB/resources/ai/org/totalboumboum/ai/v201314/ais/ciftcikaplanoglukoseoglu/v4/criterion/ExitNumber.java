@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.Agent;
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class ExitNumber extends AiCriterionInteger<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "EXIT_NUMBER";
