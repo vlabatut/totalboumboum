@@ -3,13 +3,12 @@ package org.totalboumboum.ai.v201314.ais.cetinozel.v1;
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
 
 /**
-
-
  * C'est la class de notre BombHandler
  * 
  * @author Hakan Çetin
  * @author Yiğit Özel
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent>
 {	
 	/**

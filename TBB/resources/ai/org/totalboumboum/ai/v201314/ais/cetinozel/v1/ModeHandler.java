@@ -8,6 +8,7 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
  * @author Hakan Çetin
  * @author Yiğit Özel
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent>
 {	
 	/**

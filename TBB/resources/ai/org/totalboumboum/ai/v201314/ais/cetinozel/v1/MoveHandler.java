@@ -22,13 +22,12 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
-
- 
  * C'est la class de notre MoveHandler
  * 
  * @author Hakan Çetin
  * @author Yiğit Özel
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	/**
