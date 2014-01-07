@@ -13,6 +13,7 @@ import java.util.Set;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class CanEscape extends AiCriterionBoolean<Agent> {
 	/** Name of the criterion */
 	public static final String NAME = "CAN_ESCAPE";

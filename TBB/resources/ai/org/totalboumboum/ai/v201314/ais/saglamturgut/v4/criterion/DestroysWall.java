@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.saglamturgut.v4.criterion;
 
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiFire;
@@ -16,6 +15,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class DestroysWall extends AiCriterionBoolean<Agent> {
 	/** Name of the criterion */
 	public static final String NAME = "DESTROYS_WALL";

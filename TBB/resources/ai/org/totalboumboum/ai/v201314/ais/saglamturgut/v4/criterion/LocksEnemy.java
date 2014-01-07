@@ -15,6 +15,7 @@ import java.util.Set;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class LocksEnemy extends AiCriterionBoolean<Agent> {
 	/** Name of the criterion */
 	public static final String NAME = "LOCKS_ENEMY";

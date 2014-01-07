@@ -13,6 +13,7 @@ import java.util.LinkedList;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence {
 	/**
 	 * Tile utility object

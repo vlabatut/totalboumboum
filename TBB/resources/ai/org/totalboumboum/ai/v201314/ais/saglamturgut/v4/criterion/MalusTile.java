@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201314.ais.saglamturgut.v4.Agent;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class MalusTile extends AiCriterionBoolean<Agent> {
 	/** Name of the criterion */
 	public static final String NAME = "MALUS_TILE";

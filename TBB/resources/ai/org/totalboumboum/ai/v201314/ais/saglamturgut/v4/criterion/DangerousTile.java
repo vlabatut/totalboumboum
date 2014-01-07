@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.saglamturgut.v4.criterion;
 
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.saglamturgut.v4.Agent;
@@ -13,6 +12,7 @@ import org.totalboumboum.ai.v201314.ais.saglamturgut.v4.Agent;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class DangerousTile extends AiCriterionBoolean<Agent> {
 	/** Name of the criterion */
 	public static final String NAME = "DANGEROUS_TILE";

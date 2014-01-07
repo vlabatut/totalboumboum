@@ -12,6 +12,7 @@ import java.util.LinkedList;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class LimitedQueue<E> extends AiAbstractHandler<Agent> {
 
 	/**

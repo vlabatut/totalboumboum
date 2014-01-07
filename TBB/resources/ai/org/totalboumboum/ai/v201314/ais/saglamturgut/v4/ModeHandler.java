@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent> {
 
 	/** Symbolizes our hero. */
