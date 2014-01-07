@@ -51,7 +51,8 @@ import org.totalboumboum.engine.content.feature.gesture.modulation.TargetModulat
  *
  * @author Vincent Labatut
  */
-public class Agent extends ArtificialIntelligence
+@SuppressWarnings("deprecation")
+ public class Agent extends ArtificialIntelligence
 {
 	/**
 	 * Instancie la classe principale de l'agent.

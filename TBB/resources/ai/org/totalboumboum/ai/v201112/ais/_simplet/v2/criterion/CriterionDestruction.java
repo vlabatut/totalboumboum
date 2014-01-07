@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class CriterionDestruction extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "DESTRUCTION";

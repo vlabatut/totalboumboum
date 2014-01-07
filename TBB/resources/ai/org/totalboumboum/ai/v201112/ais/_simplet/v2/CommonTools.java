@@ -43,6 +43,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class CommonTools extends AiAbstractHandler<Agent>
 {	
 	/**

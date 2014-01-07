@@ -53,6 +53,7 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
  * 
  * @author Vincent Labatut
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	
 	/**
