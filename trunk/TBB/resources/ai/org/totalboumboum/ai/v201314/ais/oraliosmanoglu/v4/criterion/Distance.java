@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201314.ais.oraliosmanoglu.v4.Agent;
  * @author Selen Oralı
  * @author Arman Osmanoğlu
  */
+@SuppressWarnings("deprecation")
 public class Distance extends AiCriterionInteger<Agent> {
 
 	/**

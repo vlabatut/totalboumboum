@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Arman Osmanoğlu
  * 
  */
+@SuppressWarnings("deprecation")
 public class TileHandler extends AiAbstractHandler<Agent>{
 
 	/** la liste pour les cases secure. (ne sont pas blasts,bombes,fires..) */

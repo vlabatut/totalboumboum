@@ -13,6 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Selen Oralı
  * @author Arman Osmanoğlu
  */
+@SuppressWarnings("deprecation")
 public class NumberOfWallDestructible extends AiCriterionInteger<Agent> {
 	/**
 	 * variable de nom cette critere

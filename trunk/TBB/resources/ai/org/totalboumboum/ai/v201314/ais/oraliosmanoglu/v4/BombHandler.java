@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Selen Oralı
  * @author Arman Osmanoğlu
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

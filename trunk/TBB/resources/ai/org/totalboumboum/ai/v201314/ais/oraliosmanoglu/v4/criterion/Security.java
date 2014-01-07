@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
  * @author Selen Oralı
  * @author Arman Osmanoğlu
  */
+@SuppressWarnings("deprecation")
 public class Security extends AiCriterionBoolean<Agent> {
 	/**
 	 * variable de nom cette critere

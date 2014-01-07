@@ -18,6 +18,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItem;
  * @author Selen Oralı
  * @author Arman Osmanoğlu 
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent> {
 	/**
 	 * decider le mode: collect ou attack

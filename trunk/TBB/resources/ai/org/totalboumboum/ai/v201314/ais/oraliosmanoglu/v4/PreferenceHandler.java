@@ -20,6 +20,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Selen Oralı
  * @author Arman Osmanoğlu
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre. Calculer les
