@@ -14,6 +14,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class GoodPotentialTile extends AiCriterionInteger<Agent> {
 	/** Name of the criterion */
 	public static final String NAME = "GP_TILE";

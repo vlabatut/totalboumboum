@@ -14,6 +14,7 @@ import java.util.*;
  * @author Esra Saglam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class TileUtil extends AiAbstractHandler<Agent> {
 
 	/**

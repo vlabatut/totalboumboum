@@ -30,6 +30,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Esra Sağlam
  * @author Siyabend Turgut
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent> {
 	/**
 	 * Constructs the move handler for the given agent.
