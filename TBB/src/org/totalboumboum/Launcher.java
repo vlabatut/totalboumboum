@@ -1524,36 +1524,34 @@ public class Launcher
 	 * 		+ effacer le changelog
 	 * 		+ déconfigurer l'inclusion du projet TBBtemp
 	 * 		+ [[virer les classes contenant un main()]]
-	 * - ressources :
+	 * + ressources :
 	 * 		+ supprimer restmp
 	 * 		+ supprimer les agents de test
 	 * 		+ réinitialiser les logstats
-	 * 		- recopier les stats (éventuellement)
+	 * 		+ recopier les stats (éventuellement)
 	 * 		+ recréer les sauvegardes des tournois
 	 * + options :
 	 * 		+ virer l'enchainement automatique
 	 * 		+ virer le bombage des IA inactives
 	 * 		+ virer le bombage des IA qui bouclent
-	 * - profils :
-	 * 		- supprimer les profils de test
+	 * + profils :
+	 * 		+ supprimer les profils de test
 	 * 		+ réinitialiser les stats des joueurs humains ou autres
 	 * 
 	 * - pour diffusion publique :
 	 * 		- fichiers :
 	 * 			- recompiler le jeu
-	 * 			- virer les fichiers sources
+	 * 			- virer les fichiers source
 	 * 			- virer les IA pas finies (source+profils)
-	 * 			- virer les versions intermédiaires des IA
-	 * 		- options :
-	 * 			- simulation des matches AI-only
-	 * 		- prérégler la partie rapide sur : 
+	 * 			+ [[virer les versions intermédiaires des IA]]
+	 * 		+ options :
+	 * 			+ [[simulation des matches AI-only]]
+	 * 		+ prérégler la partie rapide sur : 
 	 * 			+ les meilleures IA 
 	 * 			+ des niveaux compatibles
-	 * 			- les règles classiques
+	 * 			+ [[les règles classiques]]
 	 * 
 	 *  + pour diffusion projet :
-	 *  	+ API : 
-	 *  		+ désactiver l'affichage des temps dans AiZone et AiPartialModel
 	 * 		+ réseau :
 	 * 			+ bloquer le bouton "réseau" dans le menu principal
 	 * 			  org.totalboumboum.gui.menus.main.MainMenu.buttonNetworkGame
@@ -1730,12 +1728,6 @@ public class Launcher
 
 //TODO écrire un agent très simple, Direct, qui pose une bombe le plus loin possible de l'adversaire
 
-// TODO API 
-// + ça serait plus clean de mettre les méthodes spécifiques de zone (distance, voisins, etc.) dans
-//		des classes dédiées : DistanceTools, NeighborTools, etc. (?)
-// + certaines méthodes de recherche réutilisant l'arbre sont à renommer "restart" (au lieu de "start")
-// + carrément virer costCalculator (penser à màj la doc pr ne plus y en parler)
-
 /*
  * TODO tournoi ligue
  * 		+ afficher quelques infos dans la page principale de la gui (pas besoin de limite à proprement parler)
@@ -1755,10 +1747,13 @@ public class Launcher
  * 		+ tester tournoi ligue
  */
 
+// TODO interface : indiquer match ou round x/y, quand c'est possible
+
 /*
  * TODO POSTS SITE
  * 		+ enchainement des tournois (joueurs constants)
  * 		+ exportation des stats
+ * 		+ capture de mémoire (zone) ?
  * 		+ capture ? + cacher les sprites et le message de pause
  * 		+ API: représentation des chemins (avec les pauses et tout)
  * 		+ évènements de mort subite aléatoires
@@ -1766,3 +1761,19 @@ public class Launcher
  */ 
 
 // TODO A*: insérer un critère primaire permettant de désavantager les chemins passant par certaines cases?
+// TODO corriger simplet (pour les qualifs)
+
+/**
+ * TODO réforme de zone:
+ * 		- en fait, il faudra bien re-créer les outils pour chaque zone,
+ * 		  car certains sont dépendants du contenu de la zone et pas seulement de ses dimensions.
+ * 		- ou alors, on réutilise ceux de la zone originale, et on copie ce qui a besoin de l'être
+ * TODO réforme de A*:
+ * 		- proposer de définir un critère primaire placé avant la distance/temps
+ * 		- virer les options de racroc du type cout supplémentaire pour certains sprites
+ * 		- mais garder la possibilité de les considérer comme des obstacles ?
+ * 		  >> proposer d'écrire une classe qui décide de ce qui est un obstacle ?
+ * 		  >> mais c'est déjà un peu à ça que sert successor...
+ */
+
+// TODO trouver la cause du ralentissement présent à chaque premier round joué
