@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.totalboumboum.ai.v201314.ais.asilizeryuce.v4.criterion;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
@@ -17,6 +14,7 @@ import org.totalboumboum.ai.v201314.ais.asilizeryuce.v4.Agent;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class SituationItem extends AiCriterionInteger<Agent> {
 
 	/** Nom de ce critère */

@@ -23,11 +23,11 @@ import org.totalboumboum.engine.content.feature.Direction;
  * Classe gérant l'action de déposer une bombe pour l'agent. Cf. la
  * documentation de {@link AiBombHandler} pour plus de détails.
  * 
- * 
  * @author Emre Asıl
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent> {
 
 	/**

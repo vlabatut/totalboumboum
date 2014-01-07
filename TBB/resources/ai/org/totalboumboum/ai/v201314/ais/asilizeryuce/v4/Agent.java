@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence {
 
 	/**

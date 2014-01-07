@@ -18,6 +18,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tülin İzer
  * @author Miray Yüce
  */
+@SuppressWarnings("deprecation")
 public class EnemyInDanger extends AiCriterionInteger<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "ENNEMI_EN_DANGER";
