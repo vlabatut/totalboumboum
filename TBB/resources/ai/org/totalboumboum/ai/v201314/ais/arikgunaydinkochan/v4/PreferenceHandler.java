@@ -21,6 +21,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Tuğba Günaydın
  * @author Çağdaş Kochan
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	
 	 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ai xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../schemas/ai.xsd">
 <!-- 
 	Total Boum Boum
@@ -29,7 +29,7 @@
 	<authors>
 		<author name="İsmail Arık"/>
 		<author name="Tuğba Günaydın"/>
-		<author name="Çağdaş Kochan"/>
+		<author name="Çağdaş Koçhan"/>
 	</authors>
 	
 </ai>

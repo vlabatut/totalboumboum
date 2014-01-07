@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.arikgunaydinkochan.v4;
 
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,8 +23,6 @@ import org.totalboumboum.ai.v201314.adapter.model.full.AiSimHero;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
 
-
-
 /**
  * Classe principale de votre agent, que vous devez compléter.
  * Cf. la documentation de {@link ArtificialIntelligence} pour plus de détails.
@@ -34,6 +31,7 @@ import org.totalboumboum.ai.v201314.adapter.path.AiPath;
  * @author Tuğba Günaydın
  * @author Çağdaş Kochan
  */
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence
 {
 	/**
