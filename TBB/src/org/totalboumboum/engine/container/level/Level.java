@@ -38,11 +38,11 @@ import org.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.loop.VisibleLoop;
 import org.totalboumboum.game.round.RoundVariables;
-import org.totalboumboum.tools.levels.DeltaTools;
-import org.totalboumboum.tools.levels.DirectionTools;
-import org.totalboumboum.tools.levels.DistancePixelTools;
-import org.totalboumboum.tools.levels.DistanceTileTools;
-import org.totalboumboum.tools.levels.PositionTools;
+import org.totalboumboum.tools.level.DeltaTools;
+import org.totalboumboum.tools.level.DirectionTools;
+import org.totalboumboum.tools.level.DistancePixelTools;
+import org.totalboumboum.tools.level.DistanceTileTools;
+import org.totalboumboum.tools.level.PositionTools;
 
 /**
  * This class represents the in-game zone.

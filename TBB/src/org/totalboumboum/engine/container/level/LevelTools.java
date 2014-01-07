@@ -52,7 +52,7 @@ import org.totalboumboum.gui.tools.GuiFileTools;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
-import org.totalboumboum.tools.levels.DistanceTileTools;
+import org.totalboumboum.tools.level.DistanceTileTools;
 import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
