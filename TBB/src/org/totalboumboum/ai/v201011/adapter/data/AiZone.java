@@ -28,10 +28,10 @@ import java.util.List;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.computing.ApproximationTools;
 import org.totalboumboum.tools.images.PredefinedColor;
-import org.totalboumboum.tools.levels.DeltaTools;
-import org.totalboumboum.tools.levels.DistancePixelTools;
-import org.totalboumboum.tools.levels.DistanceTileTools;
-import org.totalboumboum.tools.levels.PositionTools;
+import org.totalboumboum.tools.level.DeltaTools;
+import org.totalboumboum.tools.level.DistancePixelTools;
+import org.totalboumboum.tools.level.DistanceTileTools;
+import org.totalboumboum.tools.level.PositionTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.

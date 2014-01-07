@@ -59,6 +59,9 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.BasicSuccessorCalcula
  * retours en arrière. Voir {@link TimeCostCalculator} pour ça.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class PixelCostCalculator extends CostCalculator
 {	

@@ -55,7 +55,7 @@ import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.computing.RankingTools;
 import org.totalboumboum.tools.images.PredefinedColor;
-import org.totalboumboum.tools.levels.PositionTools;
+import org.totalboumboum.tools.level.PositionTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.

@@ -33,6 +33,9 @@ package org.totalboumboum.ai.v201314.adapter.path.successor;
  * mode la plus restrictif.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum SearchMode
 {	/** Toutes les cases sont considérées (lent) */

@@ -31,6 +31,9 @@ import org.totalboumboum.game.round.RoundVariables;
  * Représente une case du jeu, avec tous les sprites qu'elle contient.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiTile implements Comparable<AiTile>, Serializable
 {	/** Id de la classe */

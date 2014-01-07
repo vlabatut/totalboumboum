@@ -44,6 +44,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * différente de ce qui se faisait les années précédentes.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiPath implements Comparable<AiPath>
 {	

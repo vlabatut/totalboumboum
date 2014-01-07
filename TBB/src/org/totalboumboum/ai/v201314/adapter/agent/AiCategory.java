@@ -49,6 +49,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * correspondant. 
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiCategory implements Comparable<AiCategory>
 {	

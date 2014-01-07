@@ -44,6 +44,9 @@ import org.totalboumboum.tools.files.FileNames;
  * en remplaçant les noms originaux par ceux spécifiés.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiGenerator
 {	/** Active/désactive la sortie texte */

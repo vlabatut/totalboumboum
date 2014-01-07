@@ -33,6 +33,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * du type A* ou Dijkstra.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class CostCalculator
 {

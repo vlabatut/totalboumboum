@@ -27,6 +27,9 @@ import java.io.Serializable;
  * Types de blocages de déplacement possibles pour un sprite.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public enum AiStopType implements Serializable
 {

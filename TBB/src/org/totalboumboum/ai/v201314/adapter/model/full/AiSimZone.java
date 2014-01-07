@@ -51,7 +51,7 @@ import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.PredefinedColor;
-import org.totalboumboum.tools.levels.PositionTools;
+import org.totalboumboum.tools.level.PositionTools;
 
 /**
  * Simule la zone de jeu et tous ces constituants : cases et sprites.
@@ -61,6 +61,9 @@ import org.totalboumboum.tools.levels.PositionTools;
  * être modifié que via la classe {@link AiFullModel}.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimZone extends AiZone
 {	/** Id de la classe */

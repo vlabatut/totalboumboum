@@ -68,6 +68,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * </ul>
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class Astar extends AiAbstractSearchAlgorithm
 {	

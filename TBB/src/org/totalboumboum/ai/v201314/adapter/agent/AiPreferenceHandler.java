@@ -79,6 +79,9 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * 		Classe de l'agent.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiPreferenceHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	
