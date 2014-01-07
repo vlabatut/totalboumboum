@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201314.ais.acarsesyilmaz.v4.Agent;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class IsCloseToUs extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "ISCLOSETOUS";

@@ -33,6 +33,7 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.TimePartialSuccessorC
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	/**

@@ -22,6 +22,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class SecurityHandler extends AiAbstractHandler<Agent>{
 
 	/** Création d'une liste global des cases accessibles */

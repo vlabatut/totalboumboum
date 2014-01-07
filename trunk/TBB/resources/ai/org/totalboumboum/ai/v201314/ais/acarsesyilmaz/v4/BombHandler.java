@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201314.adapter.path.AiPath;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent>
 {	
 	/**

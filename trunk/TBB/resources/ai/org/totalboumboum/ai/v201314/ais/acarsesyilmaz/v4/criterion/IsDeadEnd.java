@@ -12,6 +12,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class IsDeadEnd extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "ISDEADEND";

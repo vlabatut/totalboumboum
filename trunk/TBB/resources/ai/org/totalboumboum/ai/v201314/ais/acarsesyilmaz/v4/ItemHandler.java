@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class ItemHandler extends AiAbstractHandler<Agent>{
 
 	/**
