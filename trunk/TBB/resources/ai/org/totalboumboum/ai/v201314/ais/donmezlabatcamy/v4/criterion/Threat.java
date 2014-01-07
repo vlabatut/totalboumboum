@@ -12,6 +12,7 @@ import org.totalboumboum.ai.v201314.ais.donmezlabatcamy.v4.Agent;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class Threat extends AiCriterionInteger<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "THREAT";

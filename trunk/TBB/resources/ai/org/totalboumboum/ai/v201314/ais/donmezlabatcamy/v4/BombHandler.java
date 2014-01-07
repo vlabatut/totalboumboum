@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent> {
 
 	/** */

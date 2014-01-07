@@ -13,6 +13,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class ThreatEnnemy extends AiCriterionBoolean<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "THREATENNEMY";
