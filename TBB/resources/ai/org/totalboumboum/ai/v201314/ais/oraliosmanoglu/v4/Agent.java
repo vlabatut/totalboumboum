@@ -22,7 +22,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Selen Oralı
  * @author Arman Osmanoğlu
  */
-
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence {
 	/**
 	 * Instancie la classe principale de l'agent.
