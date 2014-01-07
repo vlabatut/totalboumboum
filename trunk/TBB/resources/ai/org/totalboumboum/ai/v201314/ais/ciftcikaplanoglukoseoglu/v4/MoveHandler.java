@@ -37,6 +37,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

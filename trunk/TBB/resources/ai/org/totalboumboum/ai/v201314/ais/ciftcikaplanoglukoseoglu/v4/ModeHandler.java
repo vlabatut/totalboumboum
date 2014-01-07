@@ -6,9 +6,7 @@ import java.util.List;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
-
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-
 import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.DistanceEnemy;
 import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.Threat;
 
@@ -20,6 +18,7 @@ import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.Th
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent> {
 	/**
 	 * La vitesse initiale de la zne

@@ -12,7 +12,6 @@ import org.totalboumboum.ai.v201314.adapter.model.full.AiSimBomb;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimHero;
 import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201314.adapter.path.AiPath;
-
 import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.DistanceEnemy;
 import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.ExitNumber;
 import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.Threat;
@@ -25,6 +24,7 @@ import org.totalboumboum.ai.v201314.ais.ciftcikaplanoglukoseoglu.v4.criterion.Th
  * @author Akın Kaplanoğlu
  * @author Erol Köseoğlu
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
