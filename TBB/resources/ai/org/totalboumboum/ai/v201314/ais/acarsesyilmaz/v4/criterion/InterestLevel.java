@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class InterestLevel extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "INTERESTLEVEL";

@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Emre Acar
  * @author Yankı Sesyılmaz
  */
+@SuppressWarnings("deprecation")
 public class PossibleTriangle extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "POSSIBLETRIANGLE";
