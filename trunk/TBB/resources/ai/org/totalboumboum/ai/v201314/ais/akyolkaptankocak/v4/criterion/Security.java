@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201314.ais.akyolkaptankocak.v4.ZoneHandler.TileProp
  * @author Mustafa Kaptan
  * @author Gökberk Koçak
  */
+@SuppressWarnings("deprecation")
 public class Security extends AiCriterionBoolean<Agent>
 {
     /** Name of the criterion */

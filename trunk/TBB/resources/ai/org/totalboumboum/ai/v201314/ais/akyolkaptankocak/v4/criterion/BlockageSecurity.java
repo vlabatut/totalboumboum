@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201314.ais.akyolkaptankocak.v4.Agent;
  * @author Mustafa Kaptan
  * @author Gökberk Koçak
  */
+@SuppressWarnings("deprecation")
 public class BlockageSecurity extends AiCriterionBoolean<Agent>
 {
     /** Name of the criterion */

@@ -34,6 +34,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Kaptan
  * @author Gökberk Koçak
  */
+@SuppressWarnings("deprecation")
 public class PathHandler extends AiAbstractHandler<Agent>
 {
     /** Store current zone */
