@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class DistanceTriangle extends AiCriterionInteger<Agent>
 {	/** Name of the criterion*/
 	public static final String NAME = "DISTANCE_TRIANGLE";

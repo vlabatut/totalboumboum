@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.enginserhantipici.v4;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,11 +31,11 @@ import org.totalboumboum.engine.content.feature.Direction;
 /**
  * This class manages the displacement of the agent 
  * 
- * 
  * @author Gözde Engin
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	

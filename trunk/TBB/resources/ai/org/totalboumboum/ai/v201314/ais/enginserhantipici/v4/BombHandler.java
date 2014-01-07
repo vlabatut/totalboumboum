@@ -2,6 +2,7 @@ package org.totalboumboum.ai.v201314.ais.enginserhantipici.v4;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.totalboumboum.ai.v201314.adapter.agent.AiBombHandler;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
@@ -15,11 +16,11 @@ import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
 /**
  *	Class responsible of the decision to put a bomb
  * 
- * 
  * @author Gözde Engin
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent>
 {	
 	

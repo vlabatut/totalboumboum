@@ -16,6 +16,7 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.TunnelHandler;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class FireField extends AiCriterionInteger<Agent>
 {	/** Name of the criterion */
 	public static final String NAME = "FIRE_FIELD";

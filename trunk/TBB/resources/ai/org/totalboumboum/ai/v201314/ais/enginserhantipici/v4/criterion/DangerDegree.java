@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.criterion;
 
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
@@ -17,6 +16,7 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.TileHandler;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class DangerDegree extends AiCriterionInteger<Agent>
 {	/** Name of the criterion */
 	public static final String NAME = "DANGER_DEGREE";

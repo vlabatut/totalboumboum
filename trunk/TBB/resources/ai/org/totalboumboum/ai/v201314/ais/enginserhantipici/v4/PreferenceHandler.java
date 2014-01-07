@@ -16,7 +16,6 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 
-
 /**
  * This Class is responsible to handle the preferences of the agent 
  * 
@@ -25,8 +24,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Barış Serhan
  * @author Garip Tipici
  */
-
-
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {
 	/**

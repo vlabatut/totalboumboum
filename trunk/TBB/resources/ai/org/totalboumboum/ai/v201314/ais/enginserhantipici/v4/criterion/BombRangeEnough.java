@@ -4,7 +4,6 @@ import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
 
-
 /**
  * This criterion calculates the tile in the current tunnel is reachable for our bombs fire or not.
  * 
@@ -12,6 +11,7 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class BombRangeEnough extends AiCriterionBoolean<Agent>
 {	/** name of the criterion */
 	public static final String NAME = "BOMB_RANGE_ENOUGH";

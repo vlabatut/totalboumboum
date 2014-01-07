@@ -51,6 +51,7 @@ import org.xml.sax.SAXException;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class Test
 {
 	/**

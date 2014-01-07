@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class EmptyNeighbour extends AiCriterionBoolean<Agent>
 {	/** Name of the criterion */
 	public static final String NAME = "EMPTY_NEIGHBOUR";

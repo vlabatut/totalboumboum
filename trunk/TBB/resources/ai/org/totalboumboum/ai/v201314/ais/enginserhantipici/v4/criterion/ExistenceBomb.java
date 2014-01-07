@@ -1,18 +1,18 @@
 package org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.criterion;
 
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
 
 /**
- *this class is a binary criterion
- *It returns true if there is a bomb at current tile, if not returns false
+ * this class is a binary criterion
+ * It returns true if there is a bomb at current tile, if not returns false
  * 
  * @author Gözde Engin
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class ExistenceBomb extends AiCriterionBoolean<Agent>
 {	/** Name of the criterion */
 	public static final String NAME = "EXISTENCE_BOMB";

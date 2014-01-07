@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201314.adapter.path.AiLocation;
 * @author Barış Serhan
 * @author Garip Tipici
 */
+@SuppressWarnings("deprecation")
 public class TileHandler extends AiAbstractHandler<Agent>{
 
 	/**
