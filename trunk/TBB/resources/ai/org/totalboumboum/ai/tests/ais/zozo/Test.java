@@ -21,10 +21,10 @@ package org.totalboumboum.ai.tests.ais.zozo;
  * 
  */
 
-import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-import org.totalboumboum.ai.v201314.adapter.model.full.AiSimTile;
-import org.totalboumboum.ai.v201314.adapter.model.full.AiSimZone;
-import org.totalboumboum.ai.v201314.adapter.test.InitData;
+import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.model.full.AiSimTile;
+import org.totalboumboum.ai.v201415.adapter.model.full.AiSimZone;
+import org.totalboumboum.ai.v201415.adapter.test.InitData;
 import org.totalboumboum.ai.tests.ais.zozo.AiMain;
 import org.totalboumboum.ai.tests.ais.zozo.v1.Agent;
 import org.totalboumboum.tools.images.PredefinedColor;
