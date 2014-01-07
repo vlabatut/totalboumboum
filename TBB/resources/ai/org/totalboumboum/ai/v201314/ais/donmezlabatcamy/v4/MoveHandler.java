@@ -28,6 +28,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent> {
 
 	/** A titre d'exemple, je stocke la zone de jeu, car on en a souvent besoin */

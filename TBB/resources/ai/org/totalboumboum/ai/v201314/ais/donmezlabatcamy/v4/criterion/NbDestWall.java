@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class NbDestWall extends AiCriterionInteger<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "NBDESTWALL";

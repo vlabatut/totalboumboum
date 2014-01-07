@@ -38,6 +38,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class TileHandler extends AiAbstractHandler<Agent> {
 
 	/** */

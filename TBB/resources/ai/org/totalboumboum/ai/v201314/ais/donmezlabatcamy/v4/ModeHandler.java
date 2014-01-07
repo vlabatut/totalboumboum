@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
  * @author Mustafa Dönmez
  * @author Charlotte Labat Camy
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.
