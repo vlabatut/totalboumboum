@@ -23,7 +23,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Mustafa Kaptan
  * @author Gökberk Koçak
  */
-
+@SuppressWarnings("deprecation")
 public class ZoneHandler extends AiAbstractHandler<Agent>
 {
 

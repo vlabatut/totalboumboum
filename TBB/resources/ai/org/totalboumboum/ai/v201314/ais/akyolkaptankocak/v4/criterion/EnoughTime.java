@@ -19,6 +19,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
   * @author Mustafa Kaptan
   * @author Gökberk Koçak
   */
+@SuppressWarnings("deprecation")
 public class EnoughTime extends AiCriterionBoolean<Agent>
 {
     /** Name of the criterion */
