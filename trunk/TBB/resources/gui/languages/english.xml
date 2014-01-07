@@ -619,7 +619,7 @@
 				<text name="Title" value="Load a Game" tooltip="Load a previous game" />
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel and go back to the main menu" />
-					<text name="Load" value="Play" tooltip="Load and play the selected game" />
+					<text name="Confirm" value="Play" tooltip="Load and play the selected game" />
 					<text name="Delete" value="Delete" tooltip="Delete the selected game" />
 					<text name="Statistics" value="Statistics" tooltip="Load the selected game and browse its statistics" />
 				</group>
@@ -1425,7 +1425,7 @@
 		</group>
 
 <!-- TOURNAMENT -->
-		<group name="Tournoi">
+		<group name="Tournament">
 			<text name="Author" value="Author"  tooltip="Author of this tournament" />
 			<text name="Name" value="Name" tooltip="Name of this tournament" />
 			<text name="AllowedPlayers" value="Players" tooltip="Number of players needed for this tournament" />
