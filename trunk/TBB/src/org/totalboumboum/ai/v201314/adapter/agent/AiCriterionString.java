@@ -50,6 +50,9 @@ import java.util.Set;
  * 		Agent de référence.
  *  
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiCriterionString<T extends ArtificialIntelligence> extends AiCriterion<T,String>
 {	

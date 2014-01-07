@@ -35,6 +35,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiStopType;
  * par l'item. Ce type est représentée par une valeur de type AiItemType.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class AiSimItem extends AiSimSprite implements AiItem
 {	/** Id de la classe */

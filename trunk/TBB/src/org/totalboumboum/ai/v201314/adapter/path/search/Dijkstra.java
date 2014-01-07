@@ -59,6 +59,9 @@ import org.totalboumboum.ai.v201314.adapter.path.successor.SuccessorCalculator;
  * en utilisant sa méthode {@link AiSearchNode#processPath()}.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public final class Dijkstra extends AiAbstractSearchAlgorithm
 {	

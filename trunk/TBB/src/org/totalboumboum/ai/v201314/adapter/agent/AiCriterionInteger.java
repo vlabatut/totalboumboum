@@ -48,6 +48,9 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 		Agent de référence.
  *  
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiCriterionInteger<T extends ArtificialIntelligence> extends AiCriterion<T,Integer>
 {	

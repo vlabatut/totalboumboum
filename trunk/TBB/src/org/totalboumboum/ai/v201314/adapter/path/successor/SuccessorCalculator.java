@@ -48,6 +48,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * développer un état.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class SuccessorCalculator
 {	

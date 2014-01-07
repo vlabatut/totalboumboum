@@ -40,6 +40,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * des bombes (pas de feu ni de personnages).
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiSimSuddenDeathEvent extends AiSuddenDeathEvent
 {	/** Id de la classe */

@@ -51,6 +51,9 @@ import org.xml.sax.SAXException;
  * XML contenant les préférences de l'agent.
  *  
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiPreferenceLoader
 {	

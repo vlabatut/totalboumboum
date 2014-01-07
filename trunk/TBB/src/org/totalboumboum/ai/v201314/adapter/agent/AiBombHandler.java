@@ -32,6 +32,9 @@ package org.totalboumboum.ai.v201314.adapter.agent;
  * 		Classe de l'agent concerné.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiBombHandler<T extends ArtificialIntelligence> extends AiAbstractHandler<T>
 {	

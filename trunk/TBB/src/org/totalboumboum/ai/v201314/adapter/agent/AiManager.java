@@ -72,6 +72,9 @@ import org.xml.sax.SAXException;
  * concepteur d'un agent (vous). Elle est réservée au moteur.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiManager extends AiAbstractManager<AiAction,AiZone>
 {	

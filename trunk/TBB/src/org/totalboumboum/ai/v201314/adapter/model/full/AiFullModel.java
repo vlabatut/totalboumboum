@@ -90,7 +90,9 @@ import org.totalboumboum.engine.content.feature.Direction;
  * auxquelles les agents n'ont pas accès.
  * 
  * @author Vincent Labatut
- *
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiFullModel
 {	

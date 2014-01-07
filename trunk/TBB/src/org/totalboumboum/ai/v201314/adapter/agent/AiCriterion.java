@@ -70,6 +70,9 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * 		Classe des objets renvoyés par ce critère.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public abstract class AiCriterion<T extends ArtificialIntelligence, U> implements Comparable<AiCriterion<?,?>>
 {	

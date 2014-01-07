@@ -37,6 +37,9 @@ import org.totalboumboum.ai.v201314.adapter.path.search.Dijkstra;
  * et toutes les fonctions successeurs.
  * 
  * @author Vincent Labatut
+ * 
+ * @deprecated
+ *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class NoHeuristicCalculator extends HeuristicCalculator
 {

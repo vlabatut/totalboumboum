@@ -38,7 +38,7 @@ import org.totalboumboum.ai.v201011.adapter.data.AiTile;
 import org.totalboumboum.ai.v201011.adapter.data.AiZone;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.images.PredefinedColor;
-import org.totalboumboum.tools.levels.PositionTools;
+import org.totalboumboum.tools.level.PositionTools;
 
 /**
  * simule la zone de jeu et tous ces constituants : cases et sprites.
