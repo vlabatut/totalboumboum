@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	
 	/**

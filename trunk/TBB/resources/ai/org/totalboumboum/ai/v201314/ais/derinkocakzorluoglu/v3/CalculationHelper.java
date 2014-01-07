@@ -1,5 +1,3 @@
-
-
 package org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3;
 
 import java.util.ArrayList;
@@ -11,13 +9,12 @@ import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
-
 /**
  * @author Emre Derin
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
- 
+@SuppressWarnings("deprecation")
 public class CalculationHelper {
 
 	/**

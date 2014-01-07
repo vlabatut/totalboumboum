@@ -11,6 +11,7 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class HasItems extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "HasItems";

@@ -21,6 +21,7 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.criterion.Destruc
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent> {
 	/**
 	 * Construit un gestionnaire pour l'agent passé en paramètre.

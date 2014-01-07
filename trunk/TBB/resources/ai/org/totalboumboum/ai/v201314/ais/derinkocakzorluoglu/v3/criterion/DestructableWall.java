@@ -1,6 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.criterion;
 
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionBoolean;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
@@ -13,6 +12,7 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class DestructableWall extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "DestructableWall";

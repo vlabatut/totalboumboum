@@ -1,12 +1,9 @@
 package org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.criterion;
 
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiCriterionInteger;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.Agent;
 import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.CalculationHelper;
-
-
 
 /**
  * Danger
@@ -15,6 +12,7 @@ import org.totalboumboum.ai.v201314.ais.derinkocakzorluoglu.v3.CalculationHelper
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
  */
+@SuppressWarnings("deprecation")
 public class Danger extends AiCriterionInteger<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "Danger";
