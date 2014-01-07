@@ -30,6 +30,7 @@ import org.totalboumboum.ai.v201314.adapter.path.search.Dijkstra;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence
 {
 	/**

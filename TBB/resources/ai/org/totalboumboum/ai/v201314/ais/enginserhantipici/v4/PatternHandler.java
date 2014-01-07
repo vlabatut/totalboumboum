@@ -1,4 +1,5 @@
 package org.totalboumboum.ai.v201314.ais.enginserhantipici.v4;
+
 import java.util.ArrayList;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiAbstractHandler;
@@ -9,8 +10,6 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
 
 /**
  * This class receives Agent Class an enemy tile or it self by it's constructor methods
- * 
- * 		
  * 
  * if an enemy location corresponds to a pattern described in this class,
  * then it returns the coordinates of 3 tiles with tilesXY[] by parameter
@@ -30,14 +29,12 @@ import org.totalboumboum.ai.v201314.ais.enginserhantipici.v4.Agent;
  * 			"tilesXY" should control by "isPatternExist"
  * 					For NOT HAVING NULL values!
  * 				!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- *
  * 
  * @author Gözde Engin
  * @author Barış Serhan
  * @author Garip Tipici
- * 
  */
-
+@SuppressWarnings("deprecation")
 public class PatternHandler extends AiAbstractHandler<Agent>{	
 	
 	/**

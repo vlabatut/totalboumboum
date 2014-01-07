@@ -21,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class TunnelHandler extends AiAbstractHandler<Agent>{
 
 	/**

@@ -6,7 +6,6 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 //import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 
-
 /**
  * Class which manage the displacement of the agent 
  * 
@@ -14,6 +13,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Barış Serhan
  * @author Garip Tipici
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent>
 {	
 	/**
