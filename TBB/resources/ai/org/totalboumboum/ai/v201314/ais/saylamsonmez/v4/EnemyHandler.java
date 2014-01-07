@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class EnemyHandler extends AiAbstractHandler<Agent> {
 	/** our hero */
 	AiHero ourHero;

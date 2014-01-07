@@ -16,6 +16,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class BlockingHandler extends AiAbstractHandler<Agent> {
 	/** our hero */
 	AiHero ourHero;

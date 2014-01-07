@@ -14,6 +14,7 @@ import org.totalboumboum.ai.v201314.ais.saylamsonmez.v4.Agent;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class Distance extends AiCriterionBoolean<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "Distance";

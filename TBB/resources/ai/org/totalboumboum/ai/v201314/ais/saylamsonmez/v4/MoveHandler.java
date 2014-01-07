@@ -32,6 +32,7 @@ import org.totalboumboum.ai.v201314.ais.saylamsonmez.v4.TileCalculationHandler;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent> {
 
 	// ///////////////////////////////////////////////////////////////

@@ -20,6 +20,7 @@ import org.totalboumboum.ai.v201314.ais.saylamsonmez.v4.BlockingHandler;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class Necessity extends AiCriterionBoolean<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "Necessity";

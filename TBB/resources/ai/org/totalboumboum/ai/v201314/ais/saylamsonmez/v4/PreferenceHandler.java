@@ -1,9 +1,9 @@
 package org.totalboumboum.ai.v201314.ais.saylamsonmez.v4;
 
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
@@ -17,13 +17,13 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
 import org.totalboumboum.ai.v201314.ais.saylamsonmez.v4.Agent;
 
-
 /**
  * Classe gérant le calcul des valeurs de préférence de l'agent.
  * 
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	
 
