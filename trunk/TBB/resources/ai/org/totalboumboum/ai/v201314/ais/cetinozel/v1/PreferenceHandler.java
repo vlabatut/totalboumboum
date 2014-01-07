@@ -6,11 +6,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiCategory;
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiPreferenceHandler;
-
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
-
 
 /**
 
@@ -20,6 +17,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiTile;
  * @author Hakan Çetin
  * @author Yiğit Özel
  */
+@SuppressWarnings("deprecation")
 public class PreferenceHandler extends AiPreferenceHandler<Agent>
 {	
 	/**

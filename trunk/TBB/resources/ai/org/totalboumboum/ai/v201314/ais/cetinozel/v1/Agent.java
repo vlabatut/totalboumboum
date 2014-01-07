@@ -8,12 +8,12 @@ import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.v201314.adapter.communication.AiOutput;
 
 /**
-
  * C'est la class de notre agent
  *
  * @author Hakan Çetin
  * @author Yiğit Özel
  */
+@SuppressWarnings("deprecation")
 public class Agent extends ArtificialIntelligence
 {
 	/**
