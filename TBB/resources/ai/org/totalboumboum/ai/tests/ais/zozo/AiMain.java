@@ -31,8 +31,8 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.totalboumboum.ai.v201314.adapter.agent.AiManager;
-import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201415.adapter.agent.AiManager;
+import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.ai.tests.ais.zozo.v1.Agent;
 import org.xml.sax.SAXException;
 
