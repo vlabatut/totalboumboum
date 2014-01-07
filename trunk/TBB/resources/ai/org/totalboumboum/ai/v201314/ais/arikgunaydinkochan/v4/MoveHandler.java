@@ -36,6 +36,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Tuğba Günaydın
  * @author Çağdaş Kochan
  */
+@SuppressWarnings("deprecation")
 public class MoveHandler extends AiMoveHandler<Agent>
 {	
 	/**

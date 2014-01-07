@@ -24,6 +24,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  * @author Tuğba Günaydın
  * @author Çağdaş Kochan
  */
+@SuppressWarnings("deprecation")
 public class BombHandler extends AiBombHandler<Agent>
 {	
 	/**

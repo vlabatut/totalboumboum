@@ -17,6 +17,7 @@ import org.totalboumboum.ai.v201314.ais.arikgunaydinkochan.v4.Agent;
  * @author Tuğba Günaydın
  * @author Çağdaş Kochan
  */
+@SuppressWarnings("deprecation")
 public class Securite extends AiCriterionBoolean<Agent>
 {	/** Nom de ce critère */
 	public static final String NAME = "Securite";
