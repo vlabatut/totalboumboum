@@ -1,13 +1,10 @@
 package org.totalboumboum.ai.v201314.ais.saylamsonmez.v4;
 
-
-
 import org.totalboumboum.ai.v201314.adapter.agent.AiAbstractHandler;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItem;
 import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
-
 
 /**
  * Classe gérant des méthodes liée à la mode collecte.
@@ -15,6 +12,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class CollecteHandler extends AiAbstractHandler<Agent>
 {	
 	/** our hero */

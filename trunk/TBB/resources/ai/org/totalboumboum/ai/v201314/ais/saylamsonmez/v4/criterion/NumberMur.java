@@ -13,6 +13,7 @@ import org.totalboumboum.ai.v201314.ais.saylamsonmez.v4.TileCalculationHandler;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class NumberMur extends AiCriterionInteger<Agent> {
 	/** Nom de ce critère */
 	public static final String NAME = "NumberMur";

@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.ai.v201314.adapter.agent.AiAbstractHandler;
-
 import org.totalboumboum.ai.v201314.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201314.adapter.data.AiBomb;
 import org.totalboumboum.ai.v201314.adapter.data.AiFire;
@@ -22,6 +21,7 @@ import org.totalboumboum.engine.content.feature.Direction;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class TileCalculationHandler extends AiAbstractHandler<Agent> {
 	/** our hero */
 	AiHero ourHero;

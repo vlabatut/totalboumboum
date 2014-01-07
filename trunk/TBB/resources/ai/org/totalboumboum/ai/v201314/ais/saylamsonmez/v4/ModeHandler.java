@@ -15,6 +15,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiZone;
  * @author Berrenur Saylam
  * @author Kübra Sönmez
  */
+@SuppressWarnings("deprecation")
 public class ModeHandler extends AiModeHandler<Agent> {
 	/** our hero */
 	AiHero ourHero;
