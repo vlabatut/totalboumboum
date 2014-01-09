@@ -33,7 +33,6 @@ import org.totalboumboum.ai.v201415.adapter.model.full.AiSimZone;
 import org.totalboumboum.ai.v201415.adapter.model.partial.AiPartialModel;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.path.AiPath;
-import org.totalboumboum.ai.v201415.adapter.path.LimitReachedException;
 import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.cost.TileCostCalculator;
@@ -43,6 +42,7 @@ import org.totalboumboum.ai.v201415.adapter.path.heuristic.PixelHeuristicCalcula
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.TileHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.search.Astar;
+import org.totalboumboum.ai.v201415.adapter.path.search.LimitReachedException;
 import org.totalboumboum.ai.v201415.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.SearchMode;
 import org.totalboumboum.ai.v201415.adapter.path.successor.SuccessorCalculator;

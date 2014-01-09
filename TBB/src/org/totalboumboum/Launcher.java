@@ -1778,7 +1778,7 @@ public class Launcher
 
 // TODO trouver la cause du ralentissement présent à chaque premier round joué
 
-// TODO introduire une mort subite dans tous les niveaux, à cause des agents statiques
+// TODO introduire une mort subite dans tous les niveaux, à cause des agents trop statiques
 
 // TODO mon agent : doit se goinfrer d'items visibles dès que possible
 // (stratégie de famine)
