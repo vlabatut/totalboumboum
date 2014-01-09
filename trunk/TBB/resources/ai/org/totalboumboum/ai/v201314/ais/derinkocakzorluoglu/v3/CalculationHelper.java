@@ -10,6 +10,8 @@ import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 
 /**
+ * Doc manquante !
+ * 
  * @author Emre Derin
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu

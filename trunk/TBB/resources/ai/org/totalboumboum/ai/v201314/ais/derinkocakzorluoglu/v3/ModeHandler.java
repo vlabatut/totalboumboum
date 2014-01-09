@@ -10,6 +10,7 @@ import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
 /**
  * Classe gérant le changement de mode. 
  * Cf. la documentation de {@link AiModeHandler} pour plus de détails.
+ * 
  * @author Emre Derin
  * @author Oktay Koçak
  * @author Emin Can Zorluoğlu
