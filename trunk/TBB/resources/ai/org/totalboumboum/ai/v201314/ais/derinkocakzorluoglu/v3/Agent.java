@@ -84,8 +84,6 @@ public class Agent extends ArtificialIntelligence
 	protected void initPercepts()
 	{	checkInterruption();
 	
-	
-	
 		// cf. la Javadoc dans ArtificialIntelligence pour une description de la méthode
 	}
 	
