@@ -1783,3 +1783,5 @@ public class Launcher
 // TODO mon agent : doit se goinfrer d'items visibles dès que possible
 // (stratégie de famine)
 // et s'il y a assez de temps
+
+// TODO résoudre le bug d'affichage: bombe de portée nulle non-level explose quand même en croix (sprite)
