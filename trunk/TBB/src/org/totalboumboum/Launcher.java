@@ -1764,7 +1764,7 @@ public class Launcher
 // TODO corriger simplet (pour les qualifs)
 
 /**
- * TODO réforme de zone:
+ * TODO réforme de la classe zone:
  * 		- en fait, il faudra bien re-créer les outils pour chaque zone,
  * 		  car certains sont dépendants du contenu de la zone et pas seulement de ses dimensions.
  * 		- ou alors, on réutilise ceux de la zone originale, et on copie ce qui a besoin de l'être
@@ -1777,3 +1777,9 @@ public class Launcher
  */
 
 // TODO trouver la cause du ralentissement présent à chaque premier round joué
+
+// TODO introduire une mort subite dans tous les niveaux, à cause des agents statiques
+
+// TODO mon agent : doit se goinfrer d'items visibles dès que possible
+// (stratégie de famine)
+// et s'il y a assez de temps
