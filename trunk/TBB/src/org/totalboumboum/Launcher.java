@@ -1785,3 +1785,6 @@ public class Launcher
 // et s'il y a assez de temps
 
 // TODO résoudre le bug d'affichage: bombe de portée nulle non-level explose quand même en croix (sprite)
+
+// TODO afficher les stats de confrontation individuelles entre les joueurs participants à un round
+// genre : combien de fois x a battu y, etc.
