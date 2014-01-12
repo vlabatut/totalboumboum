@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201314.tools;
+package org.totalboumboum.ai.v201415.srctools;
 
 /*
  * Total Boum Boum
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.ai.AiPackageTools;
-import org.totalboumboum.ai.v201314.adapter.agent.ArtificialIntelligence;
+import org.totalboumboum.ai.v201415.adapter.agent.ArtificialIntelligence;
 import org.totalboumboum.tools.classes.ClassTools;
 
 import japa.parser.ast.BlockComment;
@@ -82,9 +82,6 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
  * 	- l'appel ne doit pas être placé dans un try-catch qui annulerait son effet
  * 
  * @author Vincent Labatut
- * 
- * @deprecated
- *		Ancienne API d'IA, à ne plus utiliser. 
  */
 public class AiVisitor extends VoidVisitorAdapter<Object>
 {	
@@ -488,23 +485,23 @@ public class AiVisitor extends VoidVisitorAdapter<Object>
 				}
 			}
 		}
-		//ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
+		//NOTE ne traite pas le cas où on a plusieurs membres, e.g. @SuppressWarnings({"javadoc","xxxx"})
 	}
 
 	@Override
     public void visit(BlockComment comment, Object arg)
-	{	// ne marche pas (méthode jamais appelée)
+	{	// NOTE ne marche pas (méthode jamais appelée)
     }
 	
 	@Override
 	public void visit(JavadocComment comment, Object arg)
-	{	// fonctionne, mais...
+	{	// NOTE fonctionne, mais...
 		// déjà traité dans le parser
     }
 
 	@Override
     public void visit(LineComment comment, Object arg)
-	{	// ne marche pas (méthode jamais appelée)
+	{	// NOTE ne marche pas (méthode jamais appelée)
     }
 	
 	@Override

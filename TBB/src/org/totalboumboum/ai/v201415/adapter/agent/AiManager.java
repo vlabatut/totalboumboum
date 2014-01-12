@@ -48,7 +48,7 @@ import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.data.internal.AiDataZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiPath;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
-import org.totalboumboum.ai.v201415.tools.AiParser;
+import org.totalboumboum.ai.v201415.srctools.AiParser;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.engine.content.feature.event.ControlEvent;

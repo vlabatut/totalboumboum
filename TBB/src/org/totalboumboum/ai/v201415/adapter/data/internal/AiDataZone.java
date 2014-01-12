@@ -42,6 +42,14 @@ import org.totalboumboum.ai.v201415.adapter.data.AiItem;
 import org.totalboumboum.ai.v201415.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.tools.AiAbstractTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiBombTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiContactPointTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiDirectionTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelPositionTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiTileDistanceTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiTilePositionTools;
 import org.totalboumboum.engine.container.level.Level;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.hollow.SuddenDeathEvent;
@@ -120,6 +128,46 @@ public final class AiDataZone extends AiZone
 		updateSpriteLists();
 		updateMeta();
 		updateSuddenDeath();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TOOLS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Creates all the tools object required by this zone.
+	 */
+	private void initTools()
+	{	bombTools = new AiBombTools(this);
+		tools.add(bombTools);
+	
+		contactPointTools = new AiContactPointTools(this);
+		tools.add(contactPointTools );
+		
+		directionTools = new AiDirectionTools(this);
+		tools.add(directionTools);
+		
+		pixelDistanceTools = new AiPixelDistanceTools(this);
+		tools.add(pixelDistanceTools);
+		
+		pixelPositionTools = new AiPixelPositionTools(this);
+		tools.add(pixelPositionTools);
+		
+		tileDistanceTools = new AiTileDistanceTools(this);
+		tools.add(pixelPositionTools);
+		
+		tilePositionTools = new AiTilePositionTools(this);
+		tools.add(tilePositionTools);
+	}
+	
+	/**
+	 * Avertit chaque outil qu'une nouvelle itération commence,
+	 * et que les résultats de l'itération précédente doivent
+	 * être invalidés.
+	 */
+	private void resetTools()
+	{	for(AiAbstractTools t: tools)
+			t.reset();
 	}
 	
 	/////////////////////////////////////////////////////////////////

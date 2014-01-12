@@ -36,7 +36,7 @@ import org.totalboumboum.tools.level.PositionTools;
  *  
  * @author Vincent Labatut
  */
-public final class AiTilePositionTools
+public final class AiTilePositionTools extends AiAbstractTools
 {
 	/**
 	 * Constructeur à ne pas utiliser. Réservé à l'API.
@@ -45,7 +45,7 @@ public final class AiTilePositionTools
 	 * 		Zone associée à cet objet.
 	 */
 	public AiTilePositionTools(AiZone zone)
-	{	this.zone = zone;
+	{	super(zone);
 		
 		this.height = zone.getHeight();
 		this.width = zone.getWidth();
@@ -54,9 +54,6 @@ public final class AiTilePositionTools
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Zone utilisant cet objet */
-	@SuppressWarnings("unused")
-	private AiZone zone;
 	/** Hauteur en cases */
 	private int height;
 	/** Largeur en cases */
@@ -116,8 +113,4 @@ public final class AiTilePositionTools
 	public int normalizePositionRow(int row)
 	{	return PositionTools.normalizePositionRow(row,height);
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// POSITION				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 }

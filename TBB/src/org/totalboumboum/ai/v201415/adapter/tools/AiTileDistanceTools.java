@@ -41,7 +41,7 @@ import org.totalboumboum.tools.level.PositionTools;
  *  
  * @author Vincent Labatut
  */
-public final class AiTileDistanceTools
+public final class AiTileDistanceTools extends AiAbstractTools
 {
 	/**
 	 * Constructeur à ne pas utiliser. Réservé à l'API.
@@ -50,7 +50,7 @@ public final class AiTileDistanceTools
 	 * 		Zone associée à cet objet.
 	 */
 	public AiTileDistanceTools(AiZone zone)
-	{	this.zone = zone;
+	{	super(zone);
 	
 		this.height = zone.getHeight();
 		this.width = zone.getWidth();
@@ -59,9 +59,6 @@ public final class AiTileDistanceTools
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Zone utilisant cet objet */
-	@SuppressWarnings("unused")
-	private AiZone zone;
 	/** Hauteur en cases */
 	private int height;
 	/** Largeur en cases */
