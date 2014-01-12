@@ -26,10 +26,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 import org.totalboumboum.ai.v201415.adapter.data.AiBlock;
 import org.totalboumboum.ai.v201415.adapter.data.AiBomb;
@@ -40,6 +38,8 @@ import org.totalboumboum.ai.v201415.adapter.data.AiItem;
 import org.totalboumboum.ai.v201415.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
+import org.totalboumboum.ai.v201415.adapter.tools.AiAbstractTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiBombTools;
 import org.totalboumboum.ai.v201415.adapter.tools.AiContactPointTools;
 import org.totalboumboum.ai.v201415.adapter.tools.AiDirectionTools;
 import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
@@ -69,6 +69,10 @@ public abstract class AiZone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// TOOLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Liste de tous les outils de cette zone */
+	protected final List<AiAbstractTools> tools = new ArrayList<AiAbstractTools>();
+	/** Outils pemettant les calculs relatifs aux bombes et explosions */
+	protected AiBombTools bombTools;
 	/** Outils pemettant le calcul des points de contact */
 	protected AiContactPointTools contactPointTools;
 	/** Outils permettant le calcul des directions */
@@ -82,6 +86,16 @@ public abstract class AiZone implements Serializable
 	/** Outils permettant le calcul des positions en cases */
 	protected AiTilePositionTools tilePositionTools;
 	
+	/**
+	 * Renvoie les outils pemettant les calculs relatifs aux bombes et explosions.
+	 * 
+	 * @return
+	 * 		Outils pemettant les calculs relatifs aux bombes et explosions.
+	 */
+	public AiBombTools getBombTools()
+	{	return bombTools;
+	}
+
 	/**
 	 * Renvoie les outils pemettant le calcul des points de contact.
 	 * 
@@ -141,7 +155,25 @@ public abstract class AiZone implements Serializable
 	public AiTilePositionTools getTilePositionTools()
 	{	return tilePositionTools;
 	}
-
+	
+	/**
+	 * Creates all the tools object required by this zone.
+	 */
+	private void initTools()
+	{	
+		
+	}
+	
+	/**
+	 * Avertit chaque outil qu'une nouvelle itération commence,
+	 * et que les résultats de l'itération précédente doivent
+	 * être invalidés.
+	 */
+	private void resetTools()
+	{	for(AiAbstractTools t: tools)
+			t.reset();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TIME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -185,7 +217,7 @@ public abstract class AiZone implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// META DATA		/////////////////////////////////////////////
+	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Rangs des joueurs pour la manche en cours (ces rangs peuvent évoluer) */
 	protected final Map<AiHero,Integer> roundRanks = new HashMap<AiHero, Integer>();
@@ -394,21 +426,6 @@ public abstract class AiZone implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// BOMBS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Indique si la mise à jour des maps de bombes a été faite à cette itéeation */
-	protected boolean bombmapsUpdated = false;
-	/** Map associant à chaque bombe la liste des bombes qu'elle menace */
-	protected final Map<AiBomb,List<AiBomb>> threatenedBombs = new HashMap<AiBomb, List<AiBomb>>();
-	/** Version immuable de la map associant à chaque bombe la liste des bombes qu'elle menace */
-	protected final Map<AiBomb,List<AiBomb>> externalThreatenedBombs = Collections.unmodifiableMap(threatenedBombs);
-	/** Map associant à chaque bombe le temps avant son explosion */
-	protected final Map<AiBomb,Long> delaysByBombs = new HashMap<AiBomb, Long>();
-	/** Version immuable de la map associant à chaque bombe le temps avant son explosion */
-	protected final Map<AiBomb,Long> externalDelaysByBombs = Collections.unmodifiableMap(delaysByBombs);
-	/** Map associant à chaque temps avant explosion la liste des bombes concernées */
-	protected final Map<Long,List<AiBomb>> bombsByDelays = new HashMap<Long, List<AiBomb>>();
-	/** Version immuable de la map associant à chaque temps avant explosion la liste des bombes concernées */
-	protected final Map<Long,List<AiBomb>> externalBombsByDelays = Collections.unmodifiableMap(bombsByDelays);
-	
 	/** 
 	 * Renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide).
@@ -421,190 +438,6 @@ public abstract class AiZone implements Serializable
 	 * 		Liste de toutes les bombes contenues dans cette zone.
 	 */
 	public abstract List<AiBomb> getBombs();
-	
-	/** 
-	 * Renvoie la liste de bombes de la couleur passée en paramètre.
-	 * la liste est vide si aucune bombe de cette couleur n'existe ou si 
-	 * cette couleur est {@code null}.
-	 * <br/>
-	 * <b>Note :</b> la liste renvoyée est générée à la demande.
-	 * Elle peut être modifiée par l'agent sans problème.
-	 * 
-	 * @param color 
-	 * 		La couleur recherchée.
-	 * @return	
-	 * 		Une liste de bombe de la couleur passée en paramètre.
-	 */
-	public List<AiBomb> getBombsByColor(PredefinedColor color)
-	{	List<AiBomb> result = new LinkedList<AiBomb>();
-		
-		for(AiBomb bomb: getBombs())
-		{	if(bomb.getColor()==color)
-				result.add(bomb);
-		}
-		
-		return result;
-	}
-	
-	/**
-	 * Renvoie les temps d'explosion de chaque bombe
-	 * présente dans la zone, en tenant compte des
-	 * réactions en chaîne. Le résultat prend la forme
-	 * d'une map dont la clé est la bombe et la valeur
-	 * le temps restant avant son explosion.
-	 * <br/>
-	 * <b>Attention :</b> la liste renvoyée par cette méthode 
-	 * ne doit pas être modifiée par l'agent. Toute tentative
-	 * de modification provoquera une {@link UnsupportedOperationException}.
-	 * 
-	 * @return
-	 * 		Une map décrivant les temps d'explosion des bombes.
-	 */
-	public Map<AiBomb,Long> getDelaysByBombs()
-	{	if(!bombmapsUpdated)
-			initBombData();
-		return externalDelaysByBombs;
-	}
-	
-	/**
-	 * Renvoie les temps d'explosion en ms de chaque bombe
-	 * présente dans la zone, en tenant compte des
-	 * réactions en chaîne. Le résultat prend la forme
-	 * d'une map dont la clé est le temps restant avant l'explosion
-	 * et la valeur une liste de bombes associées à ce temps.
-	 * 
-	 * @return
-	 * 		Une map décrivant les temps d'explosion des bombes.
-	 */
-	public Map<Long,List<AiBomb>> getBombsByDelays()
-	{	if(!bombmapsUpdated)
-			initBombData();
-		return externalBombsByDelays;
-	}
-	
-	/**
-	 * Renvoie une map décrivant les bombes menacées
-	 * par d'autres bombe. La clé de cette map est une
-	 * bombe menaçante et la valeur une liste de bombes
-	 * menacées par cette bombe.
-	 * 
-	 * @return
-	 * 		Une map décrivant les bombes menacées.
-	 */
-	public Map<AiBomb,List<AiBomb>> getThreatenedBombs()
-	{	if(!bombmapsUpdated)
-			initBombData();
-		return externalThreatenedBombs;
-	}
-	
-	/**
-	 * Initialise différentes structures 
-	 * contenant des données sur les bombes
-	 * et explosions de cette zone.
-	 */
-	private void initBombData()
-	{	delaysByBombs.clear();
-		bombsByDelays.clear();
-		threatenedBombs.clear();
-		
-		// retrieve necessary info
-		for(AiBomb bomb: getBombs())
-		{	List<AiFire> fires = bomb.getTile().getFires();
-			// delay map & bomb map
-			long delay = Long.MAX_VALUE; //TODO non-time bombs are considered to have an infinite delay, which should be corrected
-			// fire-sensitive bomb currently caught in an explosion
-			if(bomb.hasExplosionTrigger() && !fires.isEmpty())
-			{	long fireDuration = 0;
-				for(AiFire fire: fires)
-				{	long time = fire.getElapsedTime();
-					if(time>fireDuration)
-						fireDuration = time;
-				}
-				delay = Math.max(bomb.getLatencyDuration()-fireDuration,0);
-			}
-			// time bomb
-			if(bomb.hasCountdownTrigger())
-			{	long temp = Math.max(bomb.getNormalDuration()-bomb.getElapsedTime(),0);
-				delay = Math.min(delay,temp);
-			}
-			delaysByBombs.put(bomb,delay);
-			List<AiBomb> tempList = bombsByDelays.get(delay);
-			if(tempList==null)
-			{	tempList = new ArrayList<AiBomb>();
-				bombsByDelays.put(delay,tempList);
-			}
-			tempList.add(bomb);
-			
-			// threatened bombs list
-			List<AiBomb> tempTarget = new ArrayList<AiBomb>();
-			List<AiTile> blast = bomb.getBlast();
-			for(AiTile tile: blast)
-			{	List<AiBomb> tileBombs = tile.getBombs();
-				// we only consider the bombs sensitive to explosions
-				for(AiBomb b: tileBombs)
-				{	if(b.hasExplosionTrigger())
-						tempTarget.addAll(tileBombs);
-				}
-			}
-			if(!tempTarget.isEmpty())
-				threatenedBombs.put(bomb,tempTarget);
-		}
-		
-		// get temporal explosion order
-		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelays.keySet());
-		while(!orderedDelays.isEmpty())
-		{	// get the delay
-			long delay = orderedDelays.first();
-			orderedDelays.remove(delay);
-			if(delay<Integer.MAX_VALUE)	// we ignore non-time bombs
-			{	// get the bombs associated to this delay
-				List<AiBomb> bombList = bombsByDelays.get(delay);
-	
-				// update threatened bomb delays while considering a bomb can detonate 
-				// another one before the regular time 
-				for(AiBomb bomb1: bombList)
-				{	// get the threatened bombs
-					List<AiBomb> bList = threatenedBombs.get(bomb1);
-					// update their delays
-					for(AiBomb bomb2: bList)
-					{	// get the delay 
-						long delay2 = delaysByBombs.get(bomb2);
-						// add latency time
-						long newDelay = delay + bomb2.getLatencyDuration();
-						
-						// if this makes the delay shorter, we update eveywhere needed
-						if(bomb2.hasExplosionTrigger() && newDelay<delay2)
-						{	// in the result map
-							delaysByBombs.put(bomb2,newDelay);
-							
-							// we remove the bomb from the other (inverse) map
-							{	List<AiBomb> tempList = bombsByDelays.get(delay2);
-								tempList.remove(bomb2);
-								// and possibly the delay itself, if no other bomb uses it anymore
-								if(tempList.isEmpty())
-								{	bombsByDelays.remove(delay2);
-									orderedDelays.remove(delay2);
-								}
-							}
-							
-							// and put it again, but at the appropriate place this time
-							{	List<AiBomb> tempList = bombsByDelays.get(newDelay);
-								// on crée éventuellement la liste nécessaire
-								if(tempList==null)
-								{	tempList = new ArrayList<AiBomb>();
-									bombsByDelays.put(newDelay,tempList);
-									orderedDelays.add(newDelay);
-								}
-								tempList.add(bomb2);
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		bombmapsUpdated = true;
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FIRES			/////////////////////////////////////////////

@@ -41,7 +41,7 @@ import org.totalboumboum.tools.level.DeltaTools;
  *  
  * @author Vincent Labatut
  */
-public final class AiDirectionTools
+public final class AiDirectionTools extends AiAbstractTools
 {
 	/**
 	 * Constructeur à ne pas utiliser. Réservé à l'API.
@@ -50,7 +50,7 @@ public final class AiDirectionTools
 	 * 		Zone associée à cet objet.
 	 */
 	public AiDirectionTools(AiZone zone)
-	{	this.zone = zone;
+	{	super(zone);
 	
 		this.tHeight = zone.getHeight();
 		this.tWidth = zone.getWidth();
@@ -63,9 +63,6 @@ public final class AiDirectionTools
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Zone utilisant cet objet */
-	@SuppressWarnings("unused")
-	private AiZone zone;
 	/** Hauteur en cases */
 	private int tHeight;
 	/** Largeur en cases */

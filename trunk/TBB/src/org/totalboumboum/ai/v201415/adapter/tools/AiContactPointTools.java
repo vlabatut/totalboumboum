@@ -44,7 +44,7 @@ import org.totalboumboum.tools.images.PredefinedColor;
  *  
  * @author Vincent Labatut
  */
-public final class AiContactPointTools
+public final class AiContactPointTools extends AiAbstractTools
 {
 	/**
 	 * Constructeur à ne pas utiliser. Réservé à l'API.
@@ -53,7 +53,7 @@ public final class AiContactPointTools
 	 * 		Zone associée à cet objet.
 	 */
 	public AiContactPointTools(AiZone zone)
-	{	this.zone = zone;
+	{	super(zone);
 	
 		this.tileSize = AiTile.getSize();
 		
@@ -67,8 +67,6 @@ public final class AiContactPointTools
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Zone utilisant cet objet */
-	private AiZone zone;
 	/** Couleur du personnage contrôlé */
 	private PredefinedColor ownColor;
 	/** Taille d'une case */

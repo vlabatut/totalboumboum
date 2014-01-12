@@ -46,7 +46,7 @@ import org.totalboumboum.tools.level.PositionTools;
  *  
  * @author Vincent Labatut
  */
-public final class AiPixelDistanceTools
+public final class AiPixelDistanceTools extends AiAbstractTools
 {
 	/**
 	 * Constructeur à ne pas utiliser. Réservé à l'API.
@@ -55,7 +55,7 @@ public final class AiPixelDistanceTools
 	 * 		Zone associée à cet objet.
 	 */
 	public AiPixelDistanceTools(AiZone zone)
-	{	this.zone = zone;
+	{	super(zone);
 	
 		this.leftX = zone.getPixelLeftX();
 		this.topY = zone.getPixelTopY();
@@ -66,8 +66,6 @@ public final class AiPixelDistanceTools
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Zone utilisant cet objet */
-	private AiZone zone;
 	/** Abscisse des pixels du bord gauche */
 	private double leftX;
 	/** Ordonnée des pixels du bord supérieur */
