@@ -42,7 +42,6 @@ import org.totalboumboum.ai.v201415.adapter.data.AiItem;
 import org.totalboumboum.ai.v201415.adapter.data.AiItemType;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
-import org.totalboumboum.ai.v201415.adapter.tools.AiAbstractTools;
 import org.totalboumboum.ai.v201415.adapter.tools.AiBombTools;
 import org.totalboumboum.ai.v201415.adapter.tools.AiContactPointTools;
 import org.totalboumboum.ai.v201415.adapter.tools.AiDirectionTools;
@@ -110,6 +109,8 @@ public final class AiDataZone extends AiZone
 //		updateMatrix();
 		initOwnHero();
 		initSuddenDeath();
+		
+		initTools();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -128,12 +129,13 @@ public final class AiDataZone extends AiZone
 		updateSpriteLists();
 		updateMeta();
 		updateSuddenDeath();
+		
+		resetTools();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TOOLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	/**
 	 * Creates all the tools object required by this zone.
 	 */
@@ -158,16 +160,6 @@ public final class AiDataZone extends AiZone
 		
 		tilePositionTools = new AiTilePositionTools(this);
 		tools.add(tilePositionTools);
-	}
-	
-	/**
-	 * Avertit chaque outil qu'une nouvelle itération commence,
-	 * et que les résultats de l'itération précédente doivent
-	 * être invalidés.
-	 */
-	private void resetTools()
-	{	for(AiAbstractTools t: tools)
-			t.reset();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -458,11 +450,6 @@ public final class AiDataZone extends AiZone
 		{	AiDataBomb bomb = entry.getValue();
 			bombList.add(bomb);
 		}
-		
-		threatenedBombs.clear();
-		delaysByBombs.clear();
-		bombsByDelays.clear();
-		bombmapsUpdated = false;
 	}
 	
 	/**

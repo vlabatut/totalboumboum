@@ -157,19 +157,11 @@ public abstract class AiZone implements Serializable
 	}
 	
 	/**
-	 * Creates all the tools object required by this zone.
-	 */
-	private void initTools()
-	{	
-		
-	}
-	
-	/**
 	 * Avertit chaque outil qu'une nouvelle itération commence,
 	 * et que les résultats de l'itération précédente doivent
 	 * être invalidés.
 	 */
-	private void resetTools()
+	protected void resetTools()
 	{	for(AiAbstractTools t: tools)
 			t.reset();
 	}
@@ -527,6 +519,14 @@ public abstract class AiZone implements Serializable
 	 */
 	public abstract AiHero getHeroByColor(PredefinedColor color);
 
+	/** 
+	 * Renvoie le personnage qui est contrôlé par l'agent.
+	 * 
+	 * @return
+	 * 		Le personnage contrôlé par l'agent.
+	 */
+	public abstract AiHero getOwnHero();
+
 	/////////////////////////////////////////////////////////////////
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -615,17 +615,6 @@ public abstract class AiZone implements Serializable
 		}
 		return result;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// OWN HERO			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** 
-	 * Renvoie le personnage qui est contrôlé par l'agent.
-	 * 
-	 * @return
-	 * 		Le personnage contrôlé par l'agent.
-	 */
-	public abstract AiHero getOwnHero();
 	
 	/////////////////////////////////////////////////////////////////
 	// PIXEL DIMENSIONS			/////////////////////////////////////
