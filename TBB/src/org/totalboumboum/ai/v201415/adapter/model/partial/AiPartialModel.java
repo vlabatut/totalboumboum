@@ -44,6 +44,10 @@ import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.model.full.AiFullModel;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.test.AstarUse;
+import org.totalboumboum.ai.v201415.adapter.tools.AiBombTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiContactPointTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiDirectionTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
 import org.totalboumboum.engine.content.feature.Direction;
 import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.PredefinedColor;
@@ -476,7 +480,8 @@ public class AiPartialModel
 	private void initBombs()
 	{	//Map<AiBomb,List<AiBomb>> threatenedBombs = zone.getThreatenedBombs();
 		//Map<AiBomb,Long> delaysByBombs = zone.getDelaysByBombs();
-		Map<Long,List<AiBomb>> bombsByDelays = zone.getBombsByDelays();
+		AiBombTools bombTools = zone.getBombTools();
+		Map<Long,List<AiBomb>> bombsByDelays = bombTools.getBombsByDelays();
 		
 		// process bombs by order of explosion
 		TreeSet<Long> orderedDelays = new TreeSet<Long>(bombsByDelays.keySet());
@@ -807,7 +812,10 @@ public class AiPartialModel
 	{	// init
 		boolean result = true;
 		double speed = currentHero.getWalkingSpeed();
-		
+		AiDirectionTools dirTools = zone.getDirectionTools();
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
+		AiContactPointTools cpTools = zone.getContactPointTools();
+
 		// on récupère la case de destination
 		double ownX = currentLocation.getPosX();
 		double ownY = currentLocation.getPosY();
@@ -824,17 +832,17 @@ public class AiPartialModel
 		double distance = 0;
 		if(obstacles[destinationRow][destinationCol])
 		{	// si la case d'arrivée contient un obstacle infranchissable, on avance jusqu'à lui seulement
-			Direction effectiveDirection = zone.getDirection(ownX,ownY,sourceX,sourceY); // on teste si on est du bon côté de la case
+			Direction effectiveDirection = dirTools.getDirection(ownX,ownY,sourceX,sourceY); // on teste si on est du bon côté de la case
 			if(direction==effectiveDirection)
-			{	distance = zone.getPixelDistance(ownX,ownY,sourceX,sourceY);
+			{	distance = distTools.getDistance(ownX,ownY,sourceX,sourceY);
 				destinationX = sourceX;
 				destinationY = sourceY;
 			}
 		}
 		else
 		{	// sinon on considère le point le plus proche dans cette case
-			distance = zone.getPixelDistance(currentLocation,destinationTile,direction);
-			double cp[] = zone.getContactPoint(currentLocation,destinationTile,true);
+			distance = distTools.getDistance(currentLocation,destinationTile,direction);
+			double cp[] = cpTools.getContactPoint(currentLocation,destinationTile,true);
 			destinationX = cp[0];
 			destinationY = cp[1];
 		}

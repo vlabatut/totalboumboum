@@ -36,6 +36,7 @@ import org.totalboumboum.ai.v201415.adapter.path.heuristic.TimeHeuristicCalculat
 import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.successor.TimeFullSuccessorCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.TimePartialSuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
 
 /**
  * Dans cette classe de coût, on ne s'intéresse pas à la distance parcourue,
@@ -128,7 +129,8 @@ public class TimeCostCalculator extends CostCalculator
 		AiTile destination = nextLocation.getTile();
 		AiZone zone = currentLocation.getZone();
 		double speed = hero.getWalkingSpeed();
-		double distance = zone.getPixelDistance(currentLocation,nextLocation);
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
+		double distance = distTools.getDistance(currentLocation,nextLocation);
 		double result = Math.round(distance/speed * 1000);
 		
 		// on rajoute le coût supplémentaire si la case contient un adversaire

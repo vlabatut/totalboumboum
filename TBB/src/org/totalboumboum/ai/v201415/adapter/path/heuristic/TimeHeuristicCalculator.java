@@ -31,6 +31,7 @@ import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.path.cost.TimeCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.TimeFullSuccessorCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.TimePartialSuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
 
 /**
  * Heuristique utilisant la distance de Manhattan exprimées en pixels,
@@ -96,6 +97,7 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 	{	// init
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
 		double minH = Integer.MAX_VALUE;
 		AiTile result = null;
 		
@@ -103,7 +105,7 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 		for(AiTile endTile: endTiles)
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
-			double h = zone.getPixelDistance(location,endTile);
+			double h = distTools.getDistance(location,endTile);
 			if(h < minH)
 			{	minH = h;
 				result = endTile;
@@ -138,13 +140,14 @@ public class TimeHeuristicCalculator extends HeuristicCalculator
 		double speed = hero.getWalkingSpeed();
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
 		double minH = Integer.MAX_VALUE;
 		
 		// on calcule la distance de Manhattan en pixels
 		for(AiTile endTile: endTiles)
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
-			double h = zone.getPixelDistance(location,endTile);
+			double h = distTools.getDistance(location,endTile);
 //if(h==0)
 //	System.out.println();
 			if(h < minH)

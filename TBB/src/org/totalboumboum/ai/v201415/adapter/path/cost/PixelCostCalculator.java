@@ -35,6 +35,7 @@ import org.totalboumboum.ai.v201415.adapter.path.heuristic.NoHeuristicCalculator
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.PixelHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
 import org.totalboumboum.ai.v201415.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
 
 /**
  * Classe étendant la classe abstraite {@link CostCalculator} de la manière à déterminer
@@ -95,7 +96,8 @@ public class PixelCostCalculator extends CostCalculator
 		AiLocation currentLocation = currentNode.getLocation();
 		AiTile destination = nextLocation.getTile();
 		AiZone zone = currentLocation.getZone();
-		double result = zone.getPixelDistance(currentLocation,nextLocation);
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
+		double result = distTools.getDistance(currentLocation,nextLocation);
 		
 		// on rajoute le coût supplémentaire si la case contient un adversaire
 		if(opponentCost>0)

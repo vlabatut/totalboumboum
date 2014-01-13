@@ -127,7 +127,7 @@ public final class AiDataZone extends AiZone
 	{	updateTimes(elapsedTime);
 		updateMatrix(elapsedTime);
 		updateSpriteLists();
-		updateMeta();
+		updateRanks();
 		updateSuddenDeath();
 		
 		resetTools();
@@ -197,13 +197,13 @@ public final class AiDataZone extends AiZone
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// META DATA		/////////////////////////////////////////////
+	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * Met à jour des données qui ne sont pas directement reliées
 	 * à l'action en cours, telles que l'évolution du classement des joueurs
 	 */
-	private void updateMeta()
+	private void updateRanks()
 	{	List<AbstractPlayer> players = level.getLoop().getPlayers();
 		// stats
 		statsRanks.clear();
@@ -731,7 +731,7 @@ public final class AiDataZone extends AiZone
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Démarque toutes les représentations de sprites d'une liste determinée en fonction du type
-	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
+	 * {@code T} paramétrant cette méthode. Méthode appelée au début de la mise à jour :
 	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
 	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
 	 * supprimées de cette représentation.
