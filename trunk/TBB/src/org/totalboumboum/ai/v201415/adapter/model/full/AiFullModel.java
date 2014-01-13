@@ -41,6 +41,8 @@ import org.totalboumboum.ai.v201415.adapter.data.AiStateName;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.test.FullModelSimulation;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelPositionTools;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -558,9 +560,11 @@ public class AiFullModel
 					if(direction==Direction.LEFT || direction==Direction.UP)
 						offset++; 
 				}
-				double goalX = current.normalizePositionX(tileX+dir[0]*offset);
-				double goalY = current.normalizePositionY(tileY+dir[1]*offset);
-				double manDist = current.getPixelDistance(posX,posY,goalX,goalY);
+				AiPixelPositionTools posTools = current.getPixelPositionTools();
+				double goalX = posTools.normalizePositionX(tileX+dir[0]*offset);
+				double goalY = posTools.normalizePositionY(tileY+dir[1]*offset);
+				AiPixelDistanceTools distTools = current.getPixelDistanceTools();
+				double manDist = distTools.getDistance(posX,posY,goalX,goalY);
 				double temp = manDist/speed * 1000;
 				if(temp<1)
 					result = 0;
@@ -694,6 +698,7 @@ public class AiFullModel
 		// init misc
 		AiSimState state = sprite.getState();
 		Direction direction = state.getDirection();
+		AiPixelPositionTools posTools = current.getPixelPositionTools();
 		
 		// init location
 		AiSimTile tile = sprite.getTile();
@@ -728,9 +733,10 @@ public class AiFullModel
 //				allowed++;
 			}
 		}
-		double goalX = current.normalizePositionX(tileX0+dir[0]*offset);
-		double goalY = current.normalizePositionY(tileY0+dir[1]*offset);
-		double deltas[] = current.getPixelDeltas(posX,posY,goalX,goalY);
+		double goalX = posTools.normalizePositionX(tileX0+dir[0]*offset);
+		double goalY = posTools.normalizePositionY(tileY0+dir[1]*offset);
+		AiPixelDistanceTools distTools = current.getPixelDistanceTools();
+		double deltas[] = distTools.getDifference(posX,posY,goalX,goalY);
 //		double xSign = Math.signum(goalX - posX);
 //		double ySign = Math.signum(goalY - posY);
 		double xSign = Math.signum(deltas[0]);
@@ -760,8 +766,8 @@ public class AiFullModel
 		}
 		
 		// update tile
-		posX = current.normalizePositionX(posX);
-		posY = current.normalizePositionX(posY);
+		posX = posTools.normalizePositionX(posX);
+		posY = posTools.normalizePositionX(posY);
 		AiSimTile newTile = current.getTile(posX,posY);
 		if(!newTile.equals(tile))
 		{	tile.removeSprite(sprite);

@@ -42,6 +42,7 @@ import org.totalboumboum.ai.v201415.adapter.path.cost.TimeCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.NoHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.heuristic.TimeHeuristicCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.search.AiSearchNode;
+import org.totalboumboum.ai.v201415.adapter.tools.AiBombTools;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -528,7 +529,8 @@ public class TimeFullSuccessorCalculator extends SuccessorCalculator
 		
 		// on s'intéresse ensuite aux menaces provenant des bombes
 		// on considère chaque bombe une par une
-		Map<AiBomb,Long> delays = zone.getDelaysByBombs();
+		AiBombTools bombTools = zone.getBombTools();
+		Map<AiBomb,Long> delays = bombTools.getDelaysByBombs();
 		List<AiBomb> bombs = zone.getBombs();
 		for(AiBomb bomb: bombs)
 		{	List<AiTile> blast = bomb.getBlast();

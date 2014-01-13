@@ -27,6 +27,8 @@ import java.util.List;
 import org.totalboumboum.ai.v201415.adapter.data.AiHero;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
+import org.totalboumboum.ai.v201415.adapter.tools.AiTileDistanceTools;
 
 /**
  * Cette classe représente un chemin qu'un agent peut emprunter
@@ -331,7 +333,8 @@ public class AiPath implements Comparable<AiPath>
 			{	zone = location.getTile().getZone();
 			}
 			else
-			{	int dist = zone.getTileDistance(previous,location);
+			{	AiTileDistanceTools distTools = zone.getTileDistanceTools();
+				int dist = distTools.getDistance(previous,location);
 				result = result + dist;
 			}
 			previous = location;
@@ -357,7 +360,8 @@ public class AiPath implements Comparable<AiPath>
 			}
 			else
 			{	//Direction direction = zone.getDirection(previous,location);
-				double dist = zone.getPixelDistance(previous,location);
+				AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
+				double dist = distTools.getDistance(previous,location);
 				result = result + dist;
 			}
 			previous = location;

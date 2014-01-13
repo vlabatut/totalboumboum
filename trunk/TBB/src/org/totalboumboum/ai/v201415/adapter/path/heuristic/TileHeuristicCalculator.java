@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.path.cost.TileCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.tools.AiTileDistanceTools;
 
 /**
  * Implémentation la plus simple d'une heuristique : 
@@ -79,12 +80,13 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 		AiTile startTile = location.getTile();
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
+		AiTileDistanceTools distTools = zone.getTileDistanceTools();
 		double minH = Integer.MAX_VALUE;
 		AiTile result = null;
 		
 		// process
 		for(AiTile endTile: endTiles)
-		{	int h = zone.getTileDistance(startTile,endTile);
+		{	int h = distTools.getDistance(startTile,endTile);
 			if(h < minH)
 			{	minH = h;
 				result = endTile;
@@ -114,11 +116,12 @@ public class TileHeuristicCalculator extends HeuristicCalculator
 		AiTile startTile = location.getTile();
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
+		AiTileDistanceTools distTools = zone.getTileDistanceTools();
 		double result = Integer.MAX_VALUE;
 		
 		// process
 		for(AiTile endTile: endTiles)
-		{	int h = zone.getTileDistance(startTile,endTile);
+		{	int h = distTools.getDistance(startTile,endTile);
 			if(h < result)
 				result = h;
 		}

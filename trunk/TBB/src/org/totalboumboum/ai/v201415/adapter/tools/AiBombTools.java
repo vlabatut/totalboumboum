@@ -33,17 +33,18 @@ import org.totalboumboum.ai.v201415.adapter.data.AiFire;
 import org.totalboumboum.ai.v201415.adapter.data.AiHero;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.data.internal.AiDataZone;
+import org.totalboumboum.ai.v201415.adapter.model.full.AiSimBlock;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Ensemble de méthodes liées aux calculs portant sur les bombes et explosions.
  * <br/>
  * Cet objet est initialisé automatiquement par l'API et disponible
- * via le champ distances de n'importe quel gestionnaire, ou
- * de la classe {@code Agent} elle-même.
+ * via l'objet zone concerné (que ce soir {@link AiDataZone} ou {@link AiSimBlock}).
  * <br/>
  * <b>Attention :</b> Cette classe ne doit pas être instanciée par le concepteur 
- * de l'agent : récupérez une instance via {@code Agent} ou un gestionnaire.
+ * de l'agent : récupérez une instance existante, grâce à l'objet zone concerné.
  *  
  * @author Vincent Labatut
  */

@@ -1,5 +1,7 @@
 package org.totalboumboum.ai.v201415.adapter.agent;
 
+import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2014 Vincent Labatut 
@@ -45,13 +47,16 @@ public abstract class AiAbstractHandler<T extends ArtificialIntelligence>
 	 */
 	protected AiAbstractHandler(T ai)
     {	this.ai = ai;
+    	this.zone = ai.getZone();
 	}
 	
     /////////////////////////////////////////////////////////////////
-	// ARTIFICIAL INTELLIGENCE	/////////////////////////////////////
+	// DATA			/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** L'agent à traiter */
-	protected T ai;
+	protected final T ai;
+	/** La zone courante */
+	protected final AiZone zone;
 	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////

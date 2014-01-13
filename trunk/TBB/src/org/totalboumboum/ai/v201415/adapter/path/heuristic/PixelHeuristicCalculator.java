@@ -29,6 +29,7 @@ import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.path.cost.PixelCostCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.BasicSuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelDistanceTools;
 
 /**
  * Heuristique utilisant la <a> href="http://fr.wikipedia.org/wiki/Distance_de_Manhattan">distance de Manhattan</a>
@@ -77,11 +78,12 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	{	// init
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
 		double minH = Integer.MAX_VALUE;
 		AiTile result = null;
 		
 		for(AiTile endTile: endTiles)
-		{	double h = zone.getPixelDistance(location,endTile);
+		{	double h = distTools.getDistance(location,endTile);
 			if(h < minH)
 			{	minH = h;
 				result = endTile;
@@ -113,12 +115,13 @@ public class PixelHeuristicCalculator extends HeuristicCalculator
 	{	// init
 		Set<AiTile> endTiles = getEndTiles();
 		AiZone zone = location.getZone();
+		AiPixelDistanceTools distTools = zone.getPixelDistanceTools();
 		double result = Integer.MAX_VALUE;
 		
 		for(AiTile endTile: endTiles)
 		{	//double endX = endTile.getPosX();
 			//double endY = endTile.getPosY();
-			double h = zone.getPixelDistance(location,endTile);
+			double h = distTools.getDistance(location,endTile);
 			if(h < result)
 				result = h;
 		}

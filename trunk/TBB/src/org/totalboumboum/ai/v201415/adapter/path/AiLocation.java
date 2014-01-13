@@ -24,6 +24,7 @@ package org.totalboumboum.ai.v201415.adapter.path;
 import org.totalboumboum.ai.v201415.adapter.data.AiSprite;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
 import org.totalboumboum.ai.v201415.adapter.data.AiZone;
+import org.totalboumboum.ai.v201415.adapter.tools.AiPixelPositionTools;
 
 /**
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
@@ -163,8 +164,10 @@ public final class AiLocation implements Comparable<AiLocation>
 	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o instanceof AiLocation)
-		{	AiLocation location = (AiLocation)o;	
-			result = tile.getZone().hasSamePixelPosition(this,location);
+		{	AiLocation location = (AiLocation)o;
+			AiZone zone = tile.getZone();
+			AiPixelPositionTools posTools = zone.getPixelPositionTools();
+			result = posTools.hasSamePosition(this,location);
 		}
 		return result;
 	}
