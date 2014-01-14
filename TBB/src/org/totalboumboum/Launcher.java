@@ -65,7 +65,7 @@ public class Launcher
 	/**
 	 * Launches the game. Three possible options:
 	 * <ul>
-	 * 		<li>{@code help}: displays a description of the command</li>
+	 * 		<li>{@code help}: displays a description of the command and options</li>
 	 * 		<li>{@code quick}: launches the game in quick mode</li>
 	 * 		<li>{@code window}: force the launch in windowed mode (even if the options are set to fullscreen)</li>
 	 * </ul>
@@ -1783,8 +1783,6 @@ public class Launcher
 // TODO mon agent : doit se goinfrer d'items visibles dès que possible
 // (stratégie de famine)
 // et s'il y a assez de temps
-
-// TODO résoudre le bug d'affichage: bombe de portée nulle non-level explose quand même en croix (sprite)
 
 // TODO afficher les stats de confrontation individuelles entre les joueurs participants à un round
 // genre : combien de fois x a battu y, etc.
