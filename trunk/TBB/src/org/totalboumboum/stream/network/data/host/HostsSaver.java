@@ -24,6 +24,7 @@ package org.totalboumboum.stream.network.data.host;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.jdom.Comment;
 import org.jdom.Element;
@@ -39,7 +40,7 @@ import org.totalboumboum.tools.xml.XmlTools;
  */
 public class HostsSaver
 {	
-	public static void saveHosts(HashMap<String,HostInfo> hosts) throws IOException
+	public static void saveHosts(Map<String,HostInfo> hosts) throws IOException
 	{	// build document
 		Element root = saveHostsElement(hosts);
 		
@@ -50,7 +51,7 @@ public class HostsSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveHostsElement(HashMap<String,HostInfo> hosts)
+	private static Element saveHostsElement(Map<String,HostInfo> hosts)
 	{	Element result = new Element(XmlNames.HOST);
 		
 		// GPL comment

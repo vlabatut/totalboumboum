@@ -35,12 +35,23 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Load the network-related settings from an XML file.
  * 
  * @author Vincent Labatut
- *
  */
 public class ConnectionsConfigurationLoader
 {	
+	/**
+	 * Loads the network settings from the XML file.
+	 * 
+	 * @return
+	 * 		Network settings.
+	 * 
+	 * @throws SAXException
+	 * 		Problem while accessing the AI settings XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the AI settings XML file.
+	 */
 	public static ConnectionsConfiguration loadConnectionsConfiguration() throws SAXException, IOException
 	{	ConnectionsConfiguration result = new ConnectionsConfiguration();
 		String individualFolder = FilePaths.getConfigurationPath();
@@ -52,6 +63,17 @@ public class ConnectionsConfigurationLoader
 		return result;
 	}
 
+	/**
+	 * Loads the root element.
+	 * 
+	 * @param root
+	 * 		Root element.
+	 * @param result
+	 * 		Settings object to be completed.
+	 * 
+	 * @throws UnknownHostException
+	 * 		Problem while reading the settings. 
+	 */
 	private static void loadConnectionsElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
 	{	// central
 		Element centralElement = root.getChild(XmlNames.CENTRAL);
@@ -62,12 +84,34 @@ public class ConnectionsConfigurationLoader
 		loadHostingElement(hostingElement,result);
 	}
 	
+	/**
+	 * Loads central related settings.
+	 * 
+	 * @param root
+	 * 		Main element.
+	 * @param result
+	 * 		Settings object to be completed.
+	 * 
+	 * @throws UnknownHostException
+	 * 		Problem while reading the settings. 
+	 */
 	private static void loadCentralElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
 	{	// ip
 		String centralIp = root.getAttribute(XmlNames.IP).getValue().trim();
 		result.setCentralIp(centralIp);
 	}
 
+	/**
+	 * Loads host related settings.
+	 * 
+	 * @param root
+	 * 		Main element.
+	 * @param result
+	 * 		Settings object to be completed.
+	 * 
+	 * @throws UnknownHostException
+	 * 		Problem while reading the settings. 
+	 */
 	private static void loadHostingElement(Element root, ConnectionsConfiguration result) throws UnknownHostException
 	{	// port
 		String portStr = root.getAttribute(XmlNames.PORT).getValue().trim();

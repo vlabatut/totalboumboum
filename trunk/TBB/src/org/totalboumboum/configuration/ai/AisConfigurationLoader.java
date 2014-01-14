@@ -36,8 +36,7 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * Load the AI-related
- * settings from an XML file.
+ * Load the AI-related settings from an XML file.
  * 
  * @author Vincent Labatut
  */
@@ -68,7 +67,7 @@ public class AisConfigurationLoader
 	}
 
 	/**
-	 * Load the root element.
+	 * Loads the root element.
 	 * 
 	 * @param root
 	 * 		Root element.
