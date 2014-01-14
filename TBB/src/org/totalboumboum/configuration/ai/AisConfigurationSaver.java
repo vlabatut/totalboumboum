@@ -43,7 +43,7 @@ public class AisConfigurationSaver
 {	
 	/**
 	 * Records the AI-related settings
-	 * in an XML file/
+	 * in an XML file.
 	 * 
 	 * @param aisConfiguration
 	 * 		Settings to be recorded.

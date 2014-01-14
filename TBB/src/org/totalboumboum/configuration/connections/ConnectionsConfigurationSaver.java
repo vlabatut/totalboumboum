@@ -36,12 +36,26 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used to record network-related settings.
  * 
  * @author Vincent Labatut
- *
  */
 public class ConnectionsConfigurationSaver
 {	
+	/**
+	 * Records the network-related settings
+	 * in an XML file.
+	 * 
+	 * @param connectionsConfiguration
+	 * 		Settings to be recorded.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the settings XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the settings XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the settings XML file.
+	 */
 	public static void saveConnectionsConfiguration(ConnectionsConfiguration connectionsConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveConnectionsElement(connectionsConfiguration);	
@@ -54,6 +68,15 @@ public class ConnectionsConfigurationSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * network-related settings.
+	 * 
+	 * @param connectionsConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveConnectionsElement(ConnectionsConfiguration connectionsConfiguration)
 	{	Element result = new Element(XmlNames.CONNECTIONS); 
 
@@ -72,6 +95,15 @@ public class ConnectionsConfigurationSaver
 		return result;
 	}
 	
+	/**
+	 * Builds an XML element representing
+	 * central-related settings.
+	 * 
+	 * @param connectionsConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveCentralElement(ConnectionsConfiguration connectionsConfiguration)
 	{	Element result = new Element(XmlNames.CENTRAL);
 		
@@ -82,6 +114,15 @@ public class ConnectionsConfigurationSaver
 		return result;
 	}
 
+	/**
+	 * Builds an XML element representing
+	 * hosts-related settings.
+	 * 
+	 * @param connectionsConfiguration
+	 * 		Settings to be recorded.
+	 * @return
+	 * 		Resulting XML element.
+	 */
 	private static Element saveHostingElement(ConnectionsConfiguration connectionsConfiguration)
 	{	Element result = new Element(XmlNames.HOSTING);
 		

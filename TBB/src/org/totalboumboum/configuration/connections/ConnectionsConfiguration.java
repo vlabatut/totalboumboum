@@ -23,8 +23,8 @@ package org.totalboumboum.configuration.connections;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -73,12 +73,27 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// CENTRAL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Address of the central, i.e. TBB central server */
 	private String centralIp;
 
+	/**
+	 * Changes the address of TBB central sever
+	 * (synchronizes stats and other stuff).
+	 * 
+	 * @param centralIp
+	 * 		Address of the central server.
+	 */
 	public void setCentralIp(String centralIp)
 	{	this.centralIp = centralIp;		
 	}
 	
+	/**
+	 * Returns the address of TBB central sever
+	 * (synchronizes stats and other stuff).
+	 * 
+	 * @return
+	 * 		Address of the central server.
+	 */
 	public String getCentralIp()
 	{	return centralIp;		
 	}
@@ -86,8 +101,15 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// HOSTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,HostInfo> hosts = null;
+	/** Map of known hosts */
+	private Map<String,HostInfo> hosts = null;
 	
+	/**
+	 * Refreshes the info regarding a host.
+	 * 
+	 * @param hostInfo
+	 * 		Updated host info.
+	 */
 	public void synchronizeHost(HostInfo hostInfo)
 	{	// synch host
 		HostInfo hi = hosts.get(hostInfo.getId());
@@ -108,15 +130,33 @@ public class ConnectionsConfiguration
 		}*/
 	}
 	
+	/**
+	 * Records the map of known hosts.
+	 * 
+	 * @throws IOException
+	 * 		Problem while recording the file.
+	 */
 	public void saveHosts() throws IOException
 	{	if(hosts!=null)
 			HostsSaver.saveHosts(hosts);
 	}
 	
-	public HashMap<String,HostInfo> getHosts()
+	/**
+	 * Gets the map of known hosts.
+	 * 
+	 * @return
+	 * 		Map of known hosts.
+	 */
+	public Map<String,HostInfo> getHosts()
 	{	return hosts;	
 	}
 	
+	/**
+	 * Returns the info describing the local host.
+	 * 
+	 * @return
+	 * 		Local host description.
+	 */
 	public HostInfo getLocalHostInfo()
 	{	HostInfo result = new HostInfo();
 		result.setId(hostId);
@@ -127,12 +167,25 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// PORT					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Port used by the local host */
 	private int port;
 	
+	/**
+	 * Returns the port used by the local host.
+	 * 
+	 * @return
+	 * 		Port used by the local host.
+	 */
 	public int getPort()
 	{	return port;
 	}
 
+	/**
+	 * Changes the port used by the local host.
+	 * 
+	 * @param port
+	 * 		New port to be used by the local host.
+	 */
 	public void setPort(int port)
 	{	this.port = port;
 	}
@@ -140,12 +193,25 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// HOST NAME			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name used by the local host */
 	private String hostName;
 	
+	/**
+	 * Returns the name used by the local host.
+	 * 
+	 * @return
+	 * 		Name used by the local host.
+	 */
 	public String getHostName()
 	{	return hostName;
 	}
 
+	/**
+	 * Changes the name used by the local host.
+	 * 
+	 * @param hostName
+	 * 		New name to be used by the local host.
+	 */
 	public void setHostName(String hostName)
 	{	this.hostName = hostName;
 	}
@@ -153,12 +219,25 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// HOST ID				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Unique id used by the local host */
 	private String hostId;
 	
+	/**
+	 * Returns the unique id used by the local host.
+	 * 
+	 * @return
+	 * 		Unique id used by the local host.
+	 */
 	public String getHostId()
 	{	return hostId;
 	}
 
+	/**
+	 * Changes the unique id used by the local host.
+	 * 
+	 * @param hostId
+	 * 		New unique id to be used by the local host.
+	 */
 	public void setHostId(String hostId)
 	{	this.hostId = hostId;
 	}
@@ -166,17 +245,39 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// MAC ADDRESSES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** MAC addresses of the devices used for communication (usually, a single one) */
 	private List<String> macAddresses = new ArrayList<String>();
 	
+	/**
+	 * Whether or not the specified MAC address was previously used
+	 * by the local host.
+	 * 
+	 * @param address
+	 * 		A MAC address.
+	 * @return
+	 * 		{@code true} iff the specified address was previously used.
+	 */
 	public boolean hasMacAddress(String address)
 	{	boolean result = macAddresses.contains(address);
 		return result;
 	}
 	
+	/**
+	 * Changes the list of MAC addresses for the local host.
+	 * 
+	 * @param addresses
+	 * 		Local host MAC addresses.
+	 */
 	public void setMacAddresses(List<String> addresses)
 	{	macAddresses = addresses;
 	}
 	
+	/**
+	 * Returns the list of MAC addresses for the local host.
+	 * 
+	 * @return
+	 * 		A list of MAC addresses.
+	 */
 	public List<String> getMacAddresses()
 	{	return macAddresses;
 	}
@@ -184,12 +285,25 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// SERVER GENERAL CONNECTION	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Connection with the current game server */
 	private ServerGeneralConnection serverConnection;
 	
+	/**
+	 * Returns the connection to the current game server.
+	 * 
+	 * @return
+	 * 		Connection to the game server.
+	 */
 	public ServerGeneralConnection getServerConnection()
 	{	return serverConnection;
 	}
 
+	/**
+	 * Changes the connection to the current game server.
+	 * 
+	 * @param serverConnection
+	 * 		New game servere connection.
+	 */
 	public void setServerConnection(ServerGeneralConnection serverConnection)
 	{	this.serverConnection = serverConnection;
 	}
@@ -197,16 +311,49 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// CLIENT GENERAL CONNECTION	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Current client connection */
 	private ClientGeneralConnection clientConnection;
 	
+	/**
+	 * Returns the current client connection.
+	 * 
+	 * @return
+	 * 		Client connection.
+	 */
 	public ClientGeneralConnection getClientConnection()
 	{	return clientConnection;
 	}
-
+	
+	/**
+	 * Changes the current client connection.
+	 * 
+	 * @param clientConnection
+	 * 		New client connection.
+	 */
 	public void setClientConnection(ClientGeneralConnection clientConnection)
 	{	this.clientConnection = clientConnection;
 	}
 	
+	/**
+	 * Initializes the client connection.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while creating the connection.
+	 * @throws SecurityException
+	 * 		Problem while creating the connection.
+	 * @throws ParserConfigurationException
+	 * 		Problem while creating the connection.
+	 * @throws SAXException
+	 * 		Problem while creating the connection.
+	 * @throws IOException
+	 * 		Problem while creating the connection.
+	 * @throws IllegalAccessException
+	 * 		Problem while creating the connection.
+	 * @throws NoSuchFieldException
+	 * 		Problem while creating the connection.
+	 * @throws ClassNotFoundException
+	 * 		Problem while creating the connection.
+	 */
 	public void initClientConnection() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	if(clientConnection==null)
 		{	hosts = HostsLoader.loadHosts();
@@ -218,6 +365,9 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// GENERAL CONNECTION			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Closes the current connection.
+	 */
 	public void terminateConnection()
 	{	if(clientConnection!=null)
 		{	clientConnection.terminateConnection();
@@ -233,17 +383,37 @@ public class ConnectionsConfiguration
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Objects listening to network configuration changes */
 	private List<UpdateListener> listeners = new ArrayList<UpdateListener>();
 	
+	/**
+	 * Adds a new lister to this configuration object.
+	 * 
+	 * @param listener
+	 * 		New listener.
+	 */
 	public void addListener(UpdateListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);
 	}
 	
+	/**
+	 * Removes the specified lister from this configuration object.
+	 * 
+	 * @param listener
+	 * 		Listener to be removed.
+	 */
 	public void removeListener(UpdateListener listener)
 	{	listeners.remove(listener);
 	}
 	
+	/**
+	 * Fetch an event to all listeners registered
+	 * for this configuration object.
+	 * 
+	 * @param event
+	 * 		Fired event.
+	 */
 	private void fireUpdateEvent(UpdateEvent event)
 	{	for(UpdateListener listener: listeners)
 			listener.updated(event);
