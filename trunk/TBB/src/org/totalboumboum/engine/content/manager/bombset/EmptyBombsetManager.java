@@ -26,12 +26,18 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /**
+ * Shallow version of a bombset manager, used for replay (lighter process).
  * 
  * @author Vincent Labatut
- *
  */
 public class EmptyBombsetManager extends BombsetManager
 {	
+	/**
+	 * Builds a new shallow bombset manager for the specified sprite.
+	 * 
+	 * @param sprite
+	 * 		Sprite possessing the new bombset manager.
+	 */
 	public EmptyBombsetManager(Sprite sprite)
 	{	super(sprite);
 	}

@@ -42,12 +42,18 @@ import org.totalboumboum.statistics.detailed.StatisticAction;
 import org.totalboumboum.statistics.detailed.StatisticEvent;
 
 /**
+ * Regular, functional version of a bombset manager.
  * 
  * @author Vincent Labatut
- *
  */
 public class FullBombsetManager extends BombsetManager
 {	
+	/**
+	 * Builds a new bombset manager for the specified sprite.
+	 * 
+	 * @param sprite
+	 * 		Sprite possessing the new bombset manager.
+	 */
 	public FullBombsetManager(Sprite sprite)
 	{	super(sprite);
 	}
