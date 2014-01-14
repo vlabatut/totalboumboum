@@ -197,6 +197,9 @@ public final class AiSimZone extends AiZone
 		totalTime = zone.getTotalTime();
 		limitTime = zone.getLimitTime();
 		elapsedTime = 0;
+		
+		// tools
+		initTools();
 	}
 
 	/**
@@ -250,6 +253,9 @@ public final class AiSimZone extends AiZone
 		totalTime = 0;
 		elapsedTime = 0;
 		limitTime = 0;
+		
+		// tools
+		initTools();
 	}
 
 	/////////////////////////////////////////////////////////////////

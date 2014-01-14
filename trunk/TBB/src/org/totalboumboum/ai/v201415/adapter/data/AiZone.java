@@ -87,6 +87,32 @@ public abstract class AiZone implements Serializable
 	protected AiTilePositionTools tilePositionTools;
 	
 	/**
+	 * Creates all the tools objects required by this zone.
+	 */
+	protected void initTools()
+	{	bombTools = new AiBombTools(this);
+		tools.add(bombTools);
+	
+		directionTools = new AiDirectionTools(this);
+		tools.add(directionTools);
+		
+		pixelDistanceTools = new AiPixelDistanceTools(this);
+		tools.add(pixelDistanceTools);
+		
+		pixelPositionTools = new AiPixelPositionTools(this);
+		tools.add(pixelPositionTools);
+		
+		tileDistanceTools = new AiTileDistanceTools(this);
+		tools.add(pixelPositionTools);
+		
+		tilePositionTools = new AiTilePositionTools(this);
+		tools.add(tilePositionTools);
+
+		contactPointTools = new AiContactPointTools(this);
+		tools.add(contactPointTools );
+	}
+	
+	/**
 	 * Renvoie les outils pemettant les calculs relatifs aux bombes et explosions.
 	 * 
 	 * @return

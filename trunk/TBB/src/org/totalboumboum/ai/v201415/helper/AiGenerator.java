@@ -1,4 +1,4 @@
-package org.totalboumboum.ai.v201415.srctools;
+package org.totalboumboum.ai.v201415.helper;
 
 /*
  * Total Boum Boum
