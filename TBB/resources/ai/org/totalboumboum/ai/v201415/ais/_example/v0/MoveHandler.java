@@ -8,7 +8,6 @@ import org.totalboumboum.ai.v201415.adapter.agent.AiMoveHandler;
 import org.totalboumboum.ai.v201415.adapter.agent.AiPreferenceHandler;
 import org.totalboumboum.ai.v201415.adapter.data.AiHero;
 import org.totalboumboum.ai.v201415.adapter.data.AiTile;
-import org.totalboumboum.ai.v201415.adapter.data.AiZone;
 import org.totalboumboum.ai.v201415.adapter.path.AiLocation;
 import org.totalboumboum.ai.v201415.adapter.path.AiPath;
 import org.totalboumboum.ai.v201415.adapter.path.cost.CostCalculator;
@@ -19,6 +18,7 @@ import org.totalboumboum.ai.v201415.adapter.path.search.Astar;
 import org.totalboumboum.ai.v201415.adapter.path.search.LimitReachedException;
 import org.totalboumboum.ai.v201415.adapter.path.successor.BasicSuccessorCalculator;
 import org.totalboumboum.ai.v201415.adapter.path.successor.SuccessorCalculator;
+import org.totalboumboum.ai.v201415.adapter.tools.AiDirectionTools;
 import org.totalboumboum.engine.content.feature.Direction;
 
 /**
@@ -53,7 +53,6 @@ public class MoveHandler extends AiMoveHandler<Agent>
 		// à titre d'exemple, on construit ici un objet Astar très simple (pas forcément très efficace)
 		// pour des raisons de rapidité, il est recommandé de créer l'objet Astar une seule fois, 
 		// et non pas à chaque itération. Cela permet aussi d'éviter certains problèmes de mémoire.
-		zone = ai.getZone();
 		ownHero = zone.getOwnHero();
 		CostCalculator costCalculator = new TileCostCalculator(ai);
 		HeuristicCalculator heuristicCalculator = new TileHeuristicCalculator(ai);
@@ -64,8 +63,7 @@ public class MoveHandler extends AiMoveHandler<Agent>
 	/////////////////////////////////////////////////////////////////
 	// DATA						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** A titre d'exemple, je stocke la zone de jeu, car on en a souvent besoin */
-	private AiZone zone = null; 
+	// à noter que l'objet zone de l'agent est directement accessible via AiAbstractHandler
 	/** A titre d'exemple, je stocke le sprite controlé par cet agent, car on en a aussi souvent besoin */
 	private AiHero ownHero = null; 
 	/** Il est nécessaire de stocker l'objet Astar, si on ne veut pas devoir le re-créer à chaque itération */
@@ -158,7 +156,8 @@ public class MoveHandler extends AiMoveHandler<Agent>
 		{	AiLocation nextLocation = path.getLocation(1);		// un chemin est une séquence de AiLocation (position en pixel), chaque AiLocation contient la AiTile correspondant à la position.
 			AiTile nextTile = nextLocation.getTile();
 			AiTile currentTile = ownHero.getTile();
-			result = zone.getDirection(currentTile, nextTile);	// ici, j'utilise une méthode de l'API pour calculer la direction pour aller de la 1ère vers la 2nde case
+			AiDirectionTools dirTools = zone.getDirectionTools();
+			result = dirTools.getDirection(currentTile, nextTile);	// ici, j'utilise une méthode de l'API pour calculer la direction pour aller de la 1ère vers la 2nde case
 		}
 		
 		return result;
