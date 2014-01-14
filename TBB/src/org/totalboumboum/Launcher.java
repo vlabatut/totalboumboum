@@ -1788,3 +1788,8 @@ public class Launcher
 
 // TODO afficher les stats de confrontation individuelles entre les joueurs participants à un round
 // genre : combien de fois x a battu y, etc.
+
+// TODO documentation:
+//	+ distribution des outils dans des classes spécialisées
+//	+ objet zone accessible depuis les gestionnaires
+//	+ tools renommé en helper
