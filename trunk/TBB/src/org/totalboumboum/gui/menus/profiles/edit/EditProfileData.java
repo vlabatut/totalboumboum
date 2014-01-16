@@ -481,6 +481,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		String text = null;
 		String tooltip = null;
 		Color bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		Color fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
 		if(color!=null)
 		{	String colorKey = color.toString();
 			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
@@ -490,9 +491,11 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			Color clr = color.getColor();
 			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			fg = color.getSecondaryColor();
 		}
 		editPanel.setLabelText(LINE_COLOR,1,text,tooltip);
 		editPanel.setLabelBackground(LINE_COLOR,1,bg);
+		editPanel.setLabelForeground(LINE_COLOR,1,fg);
 	}
 	
 	private void refreshName()

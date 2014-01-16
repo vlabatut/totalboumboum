@@ -45,6 +45,7 @@ import org.totalboumboum.gui.tools.GuiStringTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Panel displaying a list of players.
@@ -76,14 +77,29 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of displayed players */
 	private List<Profile> players;
+	/** Strings used to display controls */
 	List<String> controlTexts;
+	/** Tooltips used to display controls */
 	List<String> controlTooltips;
 
+	/**
+	 * Returns the list of players.
+	 * 
+	 * @return
+	 * 		List of profiles.
+	 */
 	public List<Profile> getPlayers()
 	{	return players;	
 	}
 	
+	/**
+	 * Changes the list of players.
+	 * 
+	 * @param players
+	 * 		New list of players.
+	 */
 	public void setPlayers(List<Profile> players)
 	{	if(players==null)
 			players = new ArrayList<Profile>();
@@ -141,10 +157,13 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 			{	int col = 0;
 				Profile profile = i.next();
 				// color
-				Color clr = profile.getSpriteColor().getColor();
+				PredefinedColor color = profile.getSpriteColor();
+				Color clr = color.getColor();
 				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				setLineBackground(line,bg);
+				Color fg = color.getSecondaryColor();
+				setLineForeground(line,fg);
 				// portrait
 				{	BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
 					String tooltip = profile.getSpriteName();
@@ -248,8 +267,15 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether controls should be shown or not */
 	private boolean showControls = true;
 	
+	/**
+	 * Changes the fact controls are shown.
+	 * 
+	 * @param showControls
+	 * 		{@code true} to show controls.
+	 */
 	public void setShowControls(boolean showControls)
 	{	this.showControls = showControls;
 		setPlayers(players);
@@ -261,17 +287,17 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -297,7 +323,6 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
-
 }

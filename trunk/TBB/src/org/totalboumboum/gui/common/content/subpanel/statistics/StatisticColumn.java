@@ -631,7 +631,7 @@ public enum StatisticColumn
 	}
 	
 	/**
-	 * Sort the players depending on this column.
+	 * Sorts the players depending on this column.
 	 * 
 	 * @param container
 	 * 		Panel containing the table.

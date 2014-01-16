@@ -43,6 +43,7 @@ import org.totalboumboum.gui.data.configuration.GuiConfiguration;
 import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Panel displaying a cup tournament part.
@@ -196,20 +197,25 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 		}
 	}
 	/**
-	 * if there is no profiles, then the players are undetermined.
-	 * if there is no rankings, then they're ordered according to CupPlayer,
-	 * else they're ordered according to the rankings 
+	 * If there is no profiles, then the players are undetermined.
+	 * If there is no rankings, then they're ordered according to {@link CupPlayer}.
+	 * Else they're ordered according to the rankings.
+	 * 
 	 * @param line
+	 * 		Line displaying the concerned player.
 	 */
 	private void setPlayerName(int line)
 	{	String text;
 		String tooltip;
 		Color bg;
+		Color fg;
 			
 		Profile profile = getProfileForLine(line);
 		// profile known
 		if(profile!=null)
-		{	Color clr = profile.getSpriteColor().getColor();
+		{	PredefinedColor color = profile.getSpriteColor();
+			fg = color.getSecondaryColor();
+			Color clr = color.getColor();
 			int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 			text = profile.getName();
@@ -217,7 +223,8 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 		}
 		// profile unknown yet
 		else
-		{	bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		{	fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
+			bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			String key = GuiKeys.COMMON_PART_UNDECIDED;
 			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 			CupLeg previousLeg = part.getLeg().getPreviousLeg();
@@ -235,6 +242,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 		// set content
 		setLabelText(line,COL_PLAYER,text,tooltip);
 		setLabelBackground(line,COL_PLAYER,bg);
+		setLabelForeground(line,COL_PLAYER,fg);
 	}
 	
 	/**

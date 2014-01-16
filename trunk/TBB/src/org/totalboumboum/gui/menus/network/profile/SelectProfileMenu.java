@@ -118,7 +118,7 @@ public class SelectProfileMenu extends InnerMenuPanel
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
 					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
 				profile.getSelectedSprite().setColor(selectedColor);
-				// NOTE this would be so much cleaner with an events system...
+				// NOTE this would be so much cleaner with an event-based system...
 				ClientGeneralConnection connection = Configuration.getConnectionsConfiguration().getClientConnection();
 				if(connection==null)
 				{	try

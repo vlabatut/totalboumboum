@@ -35,6 +35,7 @@ import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import org.totalboumboum.statistics.glicko2.jrs.RankingService;
+import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
  * Panel displaying profile information.
@@ -68,12 +69,25 @@ public class ProfileSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// PROFILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Displayed profile */
 	private Profile profile;
 
+	/**
+	 * Returns the profile currently displayed.
+	 * 
+	 * @return
+	 * 		Current profile.
+	 */
 	public Profile getProfile()
 	{	return profile;	
 	}
 	
+	/**
+	 * Changes the currently displayed profile.
+	 * 
+	 * @param profile
+	 * 		New profile.
+	 */
 	public void setProfile(Profile profile)
 	{	this.profile = profile;
 		
@@ -112,14 +126,17 @@ public class ProfileSubPanel extends TableSubPanel
 			if(showHeroPack)
 				values.add(profile.getSpritePack());
 			Color colorBg = null;
+			Color colorFg = null;
 			if(showColor)
 			{	String colorKey = profile.getSpriteColor().toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
 				colorKey = GuiKeys.COMMON_COLOR+colorKey;				 
-				values.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey));			
-				Color clr = profile.getSpriteColor().getColor();
+				values.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey));
+				PredefinedColor color = profile.getSpriteColor();
+				Color clr = color.getColor();
 				int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				colorBg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+				colorFg = color.getSecondaryColor();
 			}
 			if(showRank)
 			{	RankingService rankingService = GameStatistics.getRankingService();
@@ -149,7 +166,9 @@ public class ProfileSubPanel extends TableSubPanel
 					setLabelForeground(line,0,fg);
 					Color bg;
 					if(keys.get(line).equals(GuiKeys.COMMON_PROFILES_COLOR))
-						bg = colorBg;
+					{	bg = colorBg;
+						setLabelForeground(line,colSub,colorFg);
+					}
 					else if(line>0)
 						bg = GuiColorTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
@@ -197,38 +216,94 @@ public class ProfileSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether the profile name should be shown */
 	private boolean showName = true;
+	/** Whether the agent name should be shown */
 	private boolean showAiName = true;
+	/** Whether the agent pack should be shown */
 	private boolean showAiPack = true;
+	/** Whether the sprite name should be shown */
 	private boolean showHeroName = true;
+	/** Whether the sprite pack should be shown */
 	private boolean showHeroPack = true;
+	/** Whether the sprite color should be shown */
 	private boolean showColor = true;
+	/** Whether the profile rank should be shown */
 	private boolean showRank = true;
 
+	/**
+	 * Enables/disables the displaying of 
+	 * the profile name.
+	 * 
+	 * @param showName
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
+	/**
+	 * Enables/disables the displaying of 
+	 * the agent name.
+	 * 
+	 * @param showAiName
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowAiName(boolean showAiName)
 	{	this.showAiName = showAiName;
 	}
 
+	/**
+	 * Enables/disables the displaying of 
+	 * the agent pack.
+	 * 
+	 * @param showAiPack
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowAiPack(boolean showAiPack)
 	{	this.showAiPack = showAiPack;
 	}
 
+	/**
+	 * Enables/disables the displaying of 
+	 * the sprite name.
+	 * 
+	 * @param showHeroName
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowHeroName(boolean showHeroName)
 	{	this.showHeroName = showHeroName;
 	}
 
+	/**
+	 * Enables/disables the displaying of 
+	 * the sprite pack.
+	 * 
+	 * @param showHeroPack
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowHeroPack(boolean showHeroPack)
 	{	this.showHeroPack = showHeroPack;
 	}
 
+	/**
+	 * Enables/disables the displaying of 
+	 * the sprite color.
+	 * 
+	 * @param showColor
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowColor(boolean showColor)
 	{	this.showColor = showColor;
 	}
 	
+	/**
+	 * Enables/disables the displaying of 
+	 * the profile rank.
+	 * 
+	 * @param showRank
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowRank(boolean showRank)
 	{	this.showRank = showRank;
 	}

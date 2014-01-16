@@ -29,19 +29,25 @@ import org.totalboumboum.tools.GameData;
 import org.totalboumboum.tools.images.PredefinedColor;
 
 /**
+ * Handles some of the texts used in the GUI.
  * 
  * @author Vincent Labatut
- *
  */
 public class GuiStringTools
 {
 	/**
-	 * processes the texts and tooltips for all controls,
+	 * Processes the texts and tooltips for all controls,
 	 * and returns the pixel size of the largest one.
+	 * The parameter lists are populated by this method.
+	 * 
 	 * @param fontSize
+	 * 		Size of the font.
 	 * @param controlTexts
+	 * 		Strings used when displaying predefined controls.
 	 * @param controlTooltips
+	 * 		Tooltips used when displaying controls.
 	 * @return
+	 * 		Pixel size of the largest text.
 	 */
 	public static int initControlsTexts(int fontSize, List<String> controlTexts, List<String> controlTooltips)
 	{	int result = 0;
@@ -73,13 +79,20 @@ public class GuiStringTools
 	}
 	
 	/**
-	 * processes the texts and tooltips for all colors,
+	 * Processes the texts and tooltips for all colors,
 	 * and returns the pixel size of the largest one.
+	 * The parameter lists are populated by this method.
+	 * 
 	 * @param fontSize
+	 * 		Size of the font.
 	 * @param colorTexts
+	 * 		Strings used to display colors.
 	 * @param colorTooltips
+	 * 		Tooltips used to display colors.
 	 * @param colorBackgrounds
+	 * 		Background colors.
 	 * @return
+	 * 		Pixel size of the largest text.
 	 */
 	public static int initColorTexts(int fontSize, List<String> colorTexts, List<String> colorTooltips, List<Color> colorBackgrounds)
 	{	int result = 0;
