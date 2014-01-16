@@ -45,6 +45,7 @@ import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticHolder;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -214,7 +215,9 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					profile = players.get(i);
 				int profileIndex = players.indexOf(profile);
 				// color
-				Color clr = profile.getSpriteColor().getColor();
+				PredefinedColor color = profile.getSpriteColor();
+				Color clr = color.getColor();
+				Color fg = color.getSecondaryColor();
 				// rank
 				if(showRank)
 				{	int rank = orderedPlayers.getRankForProfile(profile);
@@ -228,6 +231,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>rankWidth)
 						rankWidth = temp;
@@ -241,6 +245,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					col++;
 				}
 				// name
@@ -251,6 +256,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					col++;
 				}
 				// scores
@@ -326,6 +332,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>totalWidth)
 						totalWidth = temp;
@@ -343,6 +350,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>pointsWidth)
 						pointsWidth = temp;

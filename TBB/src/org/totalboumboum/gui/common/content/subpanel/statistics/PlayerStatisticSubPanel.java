@@ -62,7 +62,7 @@ import org.xml.sax.SAXException;
 
 /**
  * This class displays the overall statistics
- * for all players, including glicko-2 rankings
+ * for all players, including Glicko-2 rankings
  * and more detailed info such as scores or confrontations.
  * 
  * @author Vincent Labatut
@@ -354,12 +354,17 @@ public class PlayerStatisticSubPanel extends EmptySubPanel implements MouseListe
 				if(((type==Type.AI && profile.hasAi()) || (type==Type.HUMAN && !profile.hasAi()) || type==Type.BOTH)
 					&& ((ranks==Ranks.ALL_RANKS && playerRating!=null) || (ranks==Ranks.NO_RANKS && playerRating==null) || ranks==Ranks.ALL))
 				{	// color
-					Color clr = profile.getSpriteColor().getColor();
+					PredefinedColor color = profile.getSpriteColor();
+					Color clr = color.getColor();
+					Color fg = color.getSecondaryColor();
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					if(playerRating==null)
-						alpha = alpha/3;
+					{	alpha = alpha/3;
+						fg = GuiColorTools.COLOR_TABLE_REGULAR_FOREGROUND;
+					}
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					panel.setLineBackground(line,bg);
+					panel.setLineForeground(line,fg);
 					// columns
 					for(int col=0;col<cols;col++)
 					{	StatisticColumn column = columns.get(col);

@@ -39,6 +39,7 @@ import org.totalboumboum.gui.tools.GuiSizeTools;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticTournament;
 import org.totalboumboum.tools.GameData;
+import org.totalboumboum.tools.images.PredefinedColor;
 import org.totalboumboum.tools.time.TimeTools;
 import org.totalboumboum.tools.time.TimeUnit;
 
@@ -178,7 +179,9 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					profile = players.get(i);
 				int profileIndex = players.indexOf(profile);
 				// color
-				Color clr = profile.getSpriteColor().getColor();
+				PredefinedColor color = profile.getSpriteColor();
+				Color clr = color.getColor();
+				Color fg = color.getSecondaryColor();
 				// portrait
 				if(showPortrait)
 				{	BufferedImage image = profile.getPortraits().getOffgamePortrait(Portraits.OUTGAME_HEAD);
@@ -187,6 +190,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					col++;
 				}
 				// name
@@ -197,6 +201,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					col++;
 				}
 				// scores
@@ -270,6 +275,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					setLabelForeground(line,col,fg);			
 					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>totalWidth)
 						totalWidth = temp;

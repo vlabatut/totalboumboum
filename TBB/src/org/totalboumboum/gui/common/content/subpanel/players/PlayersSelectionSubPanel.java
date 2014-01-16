@@ -88,23 +88,55 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of selected players */
 	private List<Profile> players;
+	/** Rank column dimension */
 	private int rankWidth;
+	/** Numbers of allowed players for the current confrontation */
 	private Set<Integer> allowedPlayers;
+	/** Number of columns */
 	private int cols = COLS;
 	
+	/**
+	 * Returns the selected players.
+	 * 
+	 * @return
+	 * 		List of profiles.
+	 */
 	public List<Profile> getPlayers()
 	{	return players;	
 	}
 	
+	/**
+	 * Returns the profile of the specified player.
+	 * 
+	 * @param index
+	 * 		Position of the player.
+	 * @return
+	 * 		Corresponding profile.
+	 */
 	public Profile getPlayer(int index)
 	{	return players.get(index);	
 	}
 	
+	/**
+	 * Returns the allowed numbers of players.
+	 * 
+	 * @return
+	 * 		Possible numbers of players for the current confrontation.
+	 */
 	public Set<Integer> getAllowedPlayers()
 	{	return allowedPlayers;
 	}
 	
+	/**
+	 * Changes the selected players.
+	 * 
+	 * @param players
+	 * 		New selection of players.
+	 * @param allowedPlayers
+	 * 		Allowed numbers of players.
+	 */
 	public void setPlayers(List<Profile> players, Set<Integer> allowedPlayers)
 	{	// init
 		if(players==null)
@@ -200,6 +232,12 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		refresh();
 	}
 
+	/**
+	 * Refresh the specified player.
+	 * 
+	 * @param line
+	 * 		Position of the concerned player.
+	 */
 	public void refreshPlayer(int line)
 	{	int index = line-1;
 		
@@ -209,6 +247,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			Profile profile = players.get(index);
 			PredefinedColor clr = profile.getSpriteColor();
 			Color color = clr.getColor();
+			Color fColor = clr.getSecondaryColor();
 			// delete
 			{	// content
 				setLabelKey(line,COL_DELETE,GuiKeys.COMMON_PLAYERS_SELECTION_DATA_DELETE,true);
@@ -308,6 +347,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
 				setLabelBackground(line,COL_COLOR,bg);
+				setLabelForeground(line,COL_COLOR,fColor);
 				// mouse listener
 				MyLabel lbl = getLabel(line,COL_COLOR);
 				lbl.removeMouseListener(this); //just in case
@@ -381,11 +421,20 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		}
 	}
 	
+	/**
+	 * Refreshes the panel.
+	 */
 	public void refresh()
 	{	for(int line=1;line<LINES;line++)
 			refreshPlayer(line);
 	}
 
+	/**
+	 * Reloads the picture for the specified player.
+	 * 
+	 * @param line
+	 * 		Position of the player.
+	 */
 	private void reloadPortraits(int line)
 	{	int index = line - 1;
 		Profile profile = players.get(index);
@@ -406,6 +455,13 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		}
 	}
 
+	/**
+	 * Changes the allowed numbers of players for
+	 * the current confrontation.
+	 * 
+	 * @param allowedPlayers
+	 * 		Allowed numbers of players.
+	 */
 	public void setAllowedPlayers(Set<Integer> allowedPlayers)
 	{	this.allowedPlayers = allowedPlayers;
 		refresh();
@@ -415,22 +471,36 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	// DISPLAY	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	// ready
+	/** String associated to the ready state */
 	private boolean showReady = false;
 	// controls
+	/** Strings associated to controls */
 	private List<String> controlTexts;
+	/** Tooltips associated to controls */
 	private List<String> controlTooltips;
 	// colors
+	/** Strings associated to colors */
 	private List<String> colorTexts;
+	/** Tooltips associated to colors */
 	private List<String> colorTooltips;
+	/** Colors used for background */
 	private List<Color> colorBackgrounds;
 	// indices
+	/** Index of the "delete" column */
 	private static final int COL_DELETE = 0;
+	/** Index of the "profile" column */
 	private static final int COL_PROFILE = 1;
+	/** Index of the "type" column */
 	private static final int COL_TYPE = 2;
+	/** Index of the "sprite" column */
 	private static final int COL_HERO = 3;
+	/** Index of the "rank" column */
 	private static final int COL_RANK = 4;
+	/** Index of the "color" column */
 	private static final int COL_COLOR = 5;
+	/** Index of the "controls" column */
 	private static final int COL_CONTROLS = 6;
+	/** Index of the "readu state" column */
 	private static final int COL_READY = 7;
 		
 	/////////////////////////////////////////////////////////////////
@@ -438,17 +508,17 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -638,52 +708,110 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** List of objects listening to this panel */
 	private List<PlayersSelectionSubPanelListener> listeners = new ArrayList<PlayersSelectionSubPanelListener>();
 	
+	/**
+	 * Adds a new listener to this panel.
+	 * 
+	 * @param listener
+	 * 		New listener.
+	 */
 	public void addListener(PlayersSelectionSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
+	/**
+	 * Removes an existing listener from this panel.
+	 * 
+	 * @param listener
+	 * 		Listener to remove.
+	 */
 	public void removeListener(PlayersSelectionSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
+	/**
+	 * Indicates to all listeners that a player was removed.
+	 * 
+	 * @param index
+	 * 		Position of the removed player.
+	 */
 	public void firePlayerRemoved(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionPlayerRemoved(index);
 	}
 
+	/**
+	 * Indicates to all listeners that a player was added.
+	 * 
+	 * @param index
+	 * 		Position of the added player.
+	 */
 	public void firePlayerAdded(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionPlayerAdded(index);
 	}
 	
+	/**
+	 * Indicates to all listeners that several players were added.
+	 */
 	public void firePlayersAdded()
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionPlayersAdded();
 	}
 
+	/**
+	 * Indicates to all listeners that a profile was changed.
+	 * 
+	 * @param index
+	 * 		Position of the changed profile.
+	 */
 	public void fireProfileSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionProfileSet(index);
 	}
 
+	/**
+	 * Indicates to all listeners that a hero was changed.
+	 * 
+	 * @param index
+	 * 		Position of the changed player.
+	 */
 	public void fireHeroSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionHeroSet(index);
 	}
 	
+	/**
+	 * Indicates to all listeners that a color was changed.
+	 * 
+	 * @param index
+	 * 		Position of the changed color.
+	 */
 	public void fireColorSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionColorSet(index);
 	}
 	
+	/**
+	 * Indicates to all listeners that some controls were changed.
+	 * 
+	 * @param index
+	 * 		Position of the changed controls.
+	 */
 	public void fireControlsSet(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionControlsSet(index);
 	}
 
+	/**
+	 * Fires a mouse pressed event, transmits it to all listeners.
+	 * 
+	 * @param e
+	 * 		Event to transmit to listeners.
+	 */
 	public void fireMousePressed(MouseEvent e)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.mousePressed(e);

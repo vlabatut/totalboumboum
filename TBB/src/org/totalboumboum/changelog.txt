@@ -554,7 +554,7 @@
 		- outil de vérification des agents plus complet : importations, commentaires, etc.
 		- outil de génération de code source (vide) à partir d'un agent générique
 
-+ beta.026/027
++ beta.026 & 027
 	- général :
 		- mise à niveau de la date de copyright
 	- ressources : 
@@ -598,4 +598,8 @@
 + beta.028
 	- ressources :
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
+ 	- gui :
+ 		- Texte clair sur fond sombre pour plus de lisibilité
+ 	- moteur :
+ 		- correction d'un bug graphique pour les explosions de portée 0
  	
