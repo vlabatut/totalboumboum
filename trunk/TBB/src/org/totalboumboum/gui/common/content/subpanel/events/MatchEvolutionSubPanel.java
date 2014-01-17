@@ -347,7 +347,10 @@ public class MatchEvolutionSubPanel extends ColumnsSubPanel implements MouseList
 			BasicStroke stroke = new BasicStroke(2f);
 			for(int i=0;i<ids.size();i++)
 			{	DataSeries dataSerie = dataSeries.get(i);
-				Color color = colors.get(i).getColor();
+				PredefinedColor clr = colors.get(i);
+				Color color = clr.getColor();
+				if(clr==PredefinedColor.WHITE)
+					color = new Color(190,190,190);
 				
 				// Format rendering of data points
 				PointRenderer pointRenderer = new DefaultPointRenderer2D();

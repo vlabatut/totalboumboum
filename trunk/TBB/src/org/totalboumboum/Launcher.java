@@ -1787,9 +1787,8 @@ public class Launcher
 // TODO afficher les stats de confrontation individuelles entre les joueurs participants à un round
 // genre : combien de fois x a battu y, etc.
 
-// [[TODO texte des agents de couleur sombre à mettre en clair (gris clair par ex)]]
-// TODO inversement, dans les plots, on ne voit pas le blanc >> foncer le fond ?
 // TODO ne pas centrer les noms des joueurs
+// TODO encore ce bug lors de la sélection auto-complete de joueurs d'un tournoi : bouton "suivant" reste désactivé
 
 // TODO documentation:
 //	+ distribution des outils dans des classes spécialisées
