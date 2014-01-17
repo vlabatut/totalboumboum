@@ -600,6 +600,7 @@
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
  	- gui :
  		- Texte clair sur fond sombre pour plus de lisibilité
+ 		- Courbe blanche plus foncée dans les graphiques
  	- moteur :
  		- correction d'un bug graphique pour les explosions de portée 0
  	

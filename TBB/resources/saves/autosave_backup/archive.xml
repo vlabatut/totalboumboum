@@ -20,25 +20,25 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Coupe de test" type="CUP" />
-	<played matches="4" rounds="3" />
-	<dates start="2014-01-05T22:24:06" save="2014-01-05T22:48:01" />
+	<played matches="0" rounds="1" />
+	<dates start="2014-01-17T00:03:09" save="2014-01-17T00:04:04" />
 	<players>
-		<player name="0910.Çalışır+Güner" />
-		<player name="1011.Hacıbektaşoğlu+İlgar" />
-		<player name="0708.Bingöl+Ketenci" />
-		<player name="0708.Demirkol+Doğan" />
-		<player name="1314.Engin+Serhan+Tipici" />
-		<player name="1112.Sakar+Yaşar" />
-		<player name="1112.Arık+Köseoğlu" />
-		<player name="1213.Sağlam+Seven" />
-		<player name="0910.Bektaş+Mazilyah" />
-		<player name="1213.Erdem+Tayyar" />
-		<player name="1011.Göncü+Onat" />
-		<player name="1213.Çetin+İlter" />
-		<player name="1112.Güngör+Kavuz" />
-		<player name="1213.Balyer+Güven" />
-		<player name="1011.Kayuka+Yıldırım" />
-		<player name="0708.Keçer+Yaman" />
+		<player name="1011.Kaya+Yerinde" />
+		<player name="1112.Ünlü+Yıldırım" />
+		<player name="0809.Kökciyan+Mazmanoğlu" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0809.Devecioğlu+Korkmaz" />
+		<player name="1011.Akbulut+Küpelioğlu" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="1011.Avcı+Güngör" />
+		<player name="1213.Alçar+Kaya+Yıldırım" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0708.Kılıç+Pala" />
+		<player name="1213.Güney+Sharef" />
+		<player name="1112.Demirel+Öz" />
+		<player name="0809.Medeni+Uluer" />
+		<player name="0910.Dane+Şatır" />
+		<player name="1213.Kart+Turgut" />
 	</players>
 </archive>
 
