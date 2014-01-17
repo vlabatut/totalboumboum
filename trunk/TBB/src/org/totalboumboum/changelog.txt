@@ -601,6 +601,7 @@
  	- gui :
  		- Texte clair sur fond sombre pour plus de lisibilité
  		- Courbe blanche plus foncée dans les graphiques
+ 		- Correction d'un bug : bouton "suivant" reste désactivé après l'auto-complete de la sélection des joueurs
  	- moteur :
  		- correction d'un bug graphique pour les explosions de portée 0
  	
