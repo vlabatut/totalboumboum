@@ -50,7 +50,7 @@ import org.totalboumboum.stream.network.server.ServerGeneralConnectionListener;
 import org.xml.sax.SAXException;
 
 /**
- * Tihs class allows selecting players
+ * This class allows selecting players
  * for a tournament.
  * 
  * @author Vincent Labatut
@@ -252,6 +252,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		ServerGeneralConnection connection = Configuration.getConnectionsConfiguration().getServerConnection();
 		if(connection!=null)
 			connection.profilesAdded(playersPanel.getPlayers());
+		fireDataPanelSelectionChange(null);
 	}
 
 	@Override

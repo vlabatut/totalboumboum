@@ -1788,7 +1788,6 @@ public class Launcher
 // genre : combien de fois x a battu y, etc.
 
 // TODO ne pas centrer les noms des joueurs
-// TODO encore ce bug lors de la sélection auto-complete de joueurs d'un tournoi : bouton "suivant" reste désactivé
 
 // TODO documentation:
 //	+ distribution des outils dans des classes spécialisées
