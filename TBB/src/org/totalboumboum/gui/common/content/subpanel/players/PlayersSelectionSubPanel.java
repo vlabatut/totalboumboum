@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.swing.SwingConstants;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
@@ -206,6 +207,10 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 				{	setLabelKey(0,col,keys.get(col),true);
 					Color bg = GuiColorTools.COLOR_TABLE_HEADER_BACKGROUND;
 					setLabelBackground(0,col,bg);
+				}
+				if(keys.get(col).equals(GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE))
+				{	setColSubAlignment(col, SwingConstants.LEFT);
+					setLabelAlignment(0, col, SwingConstants.CENTER);
 				}
 			}
 			// delete all listeners (buttons)

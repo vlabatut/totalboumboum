@@ -26,17 +26,20 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+import javax.swing.SwingConstants;
+
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.common.structure.subpanel.content.Line;
 import org.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 
 /**
+ * Panel used to represent a custom table inside another panel.
  * 
  * @author Vincent Labatut
- *
  */
 public class TableSubPanel extends SubPanel<TableContentPanel>
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	public TableSubPanel(int width, int height, Mode mode, int lines, int cols, boolean header)
 	{	this(width,height,mode,lines,1,cols,header);		
@@ -210,6 +213,40 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	getDataPanel().setLabelForeground(line,colGroup,colSub,fg);
 	}
 
+	/**
+	 * Changes the alignments of all labels in the specified
+	 * sub-column.
+	 * 
+	 * @param line
+	 * 		Index of the line.
+	 * @param colGroup
+	 * 		Index of the column group.
+	 * @param colSub
+	 * 		Index of the sub-column.
+	 * @param alignment
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setLabelAlignment(int line, int colGroup, int colSub, int alignment)
+	{	getDataPanel().setLabelAlignment(colGroup,colSub,alignment);
+	}
+	
+	/**
+	 * Changes the alignments of all labels in the specified
+	 * sub-column.
+	 * 
+	 * @param line
+	 * 		Index of the line.
+	 * @param col
+	 * 		Index of the column.
+	 * @param alignment
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setLabelAlignment(int line, int col, int alignment)
+	{	setLabelAlignment(line,0,col,alignment);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -224,6 +261,20 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	}
 	public void setColSubWidth(int colSub, int width, int mode)
 	{	getDataPanel().setColSubWidth(colSub,width,mode);
+	}
+	
+	/**
+	 * Changes the alignments of all labels in the specified
+	 * sub-column.
+	 * 
+	 * @param colSub
+	 * 		Index of the sub-column.
+	 * @param alignment
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setColSubAlignment(int colSub, int alignment)
+	{	getDataPanel().setColSubAlignment(colSub,alignment);
 	}
 	
 	public void unsetColSubMinWidth(int colSub)

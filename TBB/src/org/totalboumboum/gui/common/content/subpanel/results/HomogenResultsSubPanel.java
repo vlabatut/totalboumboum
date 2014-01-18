@@ -28,6 +28,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.SwingConstants;
+
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Portraits;
 import org.totalboumboum.game.profile.Profile;
@@ -81,12 +83,25 @@ public class HomogenResultsSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC HOLDER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object containing the stats to be displayed */
 	private StatisticHolder statisticHolder;
 
+	/**
+	 * Returns the object containing the stats.
+	 * 
+	 * @return
+	 * 		Object containing the stats.
+	 */
 	public StatisticHolder getStatisticHolder()
 	{	return statisticHolder;	
 	}
 	
+	/**
+	 * Changes the object containing the stats.
+	 * 
+	 * @param statisticHolder
+	 * 		New object containing the stats.
+	 */
 	public void setStatisticHolder(StatisticHolder statisticHolder)
 	{	this.statisticHolder = statisticHolder;
 		int cols = COLS;
@@ -149,6 +164,8 @@ public class HomogenResultsSubPanel extends TableSubPanel
 				if(showName)
 				{	String key = headerPrefix+GuiKeys.NAME;
 					setLabelKey(0,col,key,true);
+					setColSubAlignment(col, SwingConstants.LEFT);
+					setLabelAlignment(0, col, SwingConstants.CENTER);
 					col++;
 				}
 				if(showScores)
@@ -431,50 +448,106 @@ public class HomogenResultsSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether player pictures should be displayed */
 	private boolean showPortrait = true;
+	/** Whether player names should be displayed */
 	private boolean showName = true;
+	/** Whether round numbers should be displayed */
 	private boolean showConfrontations = true;
+	/** Whether total points should be displayed */
 	private boolean showTotal = true;
+	/** Whether round points should be displayed */
 	private boolean showPoints = true;
+	/** Whether player ranks should be displayed */
 	private boolean showRank= true;
+	/** Whether scores should be displayed */
 	private boolean showScores = true;
+	/** Whether durations should be displayed */
 	private boolean showTime = true;
 	
+	/**
+	 * Enable/disable the displaying of player pictures.
+	 * 
+	 * @param showPortrait
+	 * 		Whether player pictures should be displayed.
+	 */
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of player names.
+	 * 
+	 * @param showName
+	 * 		Whether player names should be displayed.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of round numbers.
+	 * 
+	 * @param showConfrontations
+	 * 		Whether round numbers should be displayed.
+	 */
 	public void setShowConfrontations(boolean showConfrontations)
 	{	this.showConfrontations = showConfrontations;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of total points.
+	 * 
+	 * @param showTotal
+	 * 		Whether total points should be displayed.
+	 */
 	public void setShowTotal(boolean showTotal)
 	{	this.showTotal = showTotal;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of round points.
+	 * 
+	 * @param showPoints
+	 * 		Whether total round should be displayed.
+	 */
 	public void setShowPoints(boolean showPoints)
 	{	this.showPoints = showPoints;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of player ranks.
+	 * 
+	 * @param showRank
+	 * 		Whether player ranks should be displayed.
+	 */
 	public void setShowRank(boolean showRank)
 	{	this.showRank = showRank;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of scores.
+	 * 
+	 * @param showScores
+	 * 		Whether scores should be displayed.
+	 */
 	public void setShowScores(boolean showScores)
 	{	this.showScores = showScores;
 		setStatisticHolder(statisticHolder);
 	}
 
+	/**
+	 * Enable/disable the displaying of durations.
+	 * 
+	 * @param showTime
+	 * 		Whether durations should be displayed.
+	 */
 	public void setShowTime(boolean showTime)
 	{	this.showTime = showTime;
 		setStatisticHolder(statisticHolder);

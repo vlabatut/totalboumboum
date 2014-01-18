@@ -320,6 +320,20 @@ public class Line extends ContentPanel
 		return result;
 	}
 	
+	/**
+	 * Changes the alignment mode for the specified label.
+	 * 
+	 * @param col
+	 * 		Column containing the label.
+	 * @param align
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setLabelAlignment(int col, int align)
+	{	MyLabel label = getLabel(col);
+		label.setHorizontalAlignment(align);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
