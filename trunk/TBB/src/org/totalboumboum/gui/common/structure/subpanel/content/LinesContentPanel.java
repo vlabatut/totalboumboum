@@ -29,6 +29,7 @@ import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.SwingConstants;
 
 import org.totalboumboum.gui.common.content.MyLabel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -337,6 +338,22 @@ public class LinesContentPanel extends ContentPanel
 		Line l = getLine(line);
 		result = l.getLabelColumn(label);
 		return result;
+	}
+	
+	/**
+	 * Changes the alignment mode for the specified label.
+	 * 
+	 * @param line
+	 * 		Line of the label.
+	 * @param col
+	 * 		Column containing the label.
+	 * @param align
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setLabelAlignment(int line, int col, int align)
+	{	Line l = getLine(line);
+		l.setLabelAlignment(col,align);
 	}
 	
 	public void setLabelMinWidth(int line, int col, int width)

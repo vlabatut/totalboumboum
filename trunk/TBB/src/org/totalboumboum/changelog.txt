@@ -602,6 +602,8 @@
  		- Texte clair sur fond sombre pour plus de lisibilité
  		- Courbe blanche plus foncée dans les graphiques
  		- Correction d'un bug : bouton "suivant" reste désactivé après l'auto-complete de la sélection des joueurs
+ 		- Possibilité de changer l'alignement des labels
+ 		- Noms des joueurs alignés à gauche (et non plus centrés)
  	- moteur :
  		- correction d'un bug graphique pour les explosions de portée 0
  	

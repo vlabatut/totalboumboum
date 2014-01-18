@@ -73,10 +73,15 @@ public class TableContentPanel extends LinesContentPanel
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Minimal width of the column */
 	private List<Integer> minWidths = new ArrayList<Integer>();
+	/** Preferred width of the column */
 	private List<Integer> prefWidths = new ArrayList<Integer>();
+	/** Maximal width of the column */
 	private List<Integer> maxWidths = new ArrayList<Integer>();
+	/** Number of column groups in the table */
 	private int colGroups;
+	/** Number of columns in each group */
 	private int colSubs;
 	
 	public void setColSubMinWidth(int colSub, int width)
@@ -267,6 +272,39 @@ public class TableContentPanel extends LinesContentPanel
 		}
 	}
 
+	/**
+	 * Changes the text alignment for all labels located in the specified
+	 * subcolumn, in all column groups.
+	 * 
+	 * @param subIndex
+	 * 		Index of the subcolumn in a column group.
+	 * @param align
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setColSubAlignment(int subIndex, int align)
+	{	int start = 0;
+	
+		// header
+		if(hasHeader())
+		{	for(int grp=0;grp<colGroups;grp++)
+			{	int index = subIndex+grp*colSubs;
+				MyLabel lbl = getLabel(start,index);
+				lbl.setHorizontalAlignment(align);
+			}
+			start = 1;
+		}
+		
+		//data
+		for(int line=start;line<getLineCount();line++)
+		{	for(int grp=0;grp<colGroups;grp++)
+			{	int index = subIndex+grp*colSubs;
+				MyLabel lbl = getLabel(line,index);
+				lbl.setHorizontalAlignment(align);
+			}
+		}
+	}
+	
 	public void setColumnKeys(int col, List<String> keys, List<Boolean> imageFlags)
 	{	setColumnKeys(0,col,keys,imageFlags);
 	}
@@ -392,6 +430,24 @@ public class TableContentPanel extends LinesContentPanel
 		return result;
 	}
 	
+	/**
+	 * Changes the alignment mode for the specified label.
+	 * 
+	 * @param line
+	 * 		Line of the label.
+	 * @param colGroup
+	 * 		Column group containing the label.
+	 * @param colSub
+	 * 		Subcolumn of the column group containing the label.
+	 * @param align
+	 * 		New align mode (a {@link SwingConstants} value amongst {@link SwingConstants#CENTER},
+	 * 		{@link SwingConstants#LEFT} and {@link SwingConstants#RIGHT}).
+	 */
+	public void setLabelAlignment(int line, int colGroup, int colSub, int align)
+	{	int col = colSub+colGroup*colSubs;
+		setLabelAlignment(line,col,align);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

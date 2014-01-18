@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.SwingConstants;
+
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.profile.Portraits;
 import org.totalboumboum.game.profile.Profile;
@@ -140,6 +142,8 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 			// name
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_NAME;
 				setLabelKey(0,col,key,true);
+				setColSubAlignment(col, SwingConstants.LEFT);
+				setLabelAlignment(0, col, SwingConstants.CENTER);
 				col++;
 			}
 			// rank

@@ -26,6 +26,8 @@ import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.List;
 
+import javax.swing.SwingConstants;
+
 import org.totalboumboum.game.profile.Portraits;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
@@ -75,12 +77,25 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// LEAGUE TOURNAMENT	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tournament to be displayed */
 	private LeagueTournament leagueTournament;
 
+	/**
+	 * Returns the current tournament.
+	 * 
+	 * @return
+	 * 		League tournament.
+	 */
 	public LeagueTournament getLeagueTournament()
 	{	return leagueTournament;	
 	}
 	
+	/**
+	 * Changes the current tournament.
+	 * 
+	 * @param leagueTournament
+	 * 		New league tournament.
+	 */
 	public void setLeagueTournament(LeagueTournament leagueTournament)
 	{	this.leagueTournament = leagueTournament;
 		int cols = COLS;
@@ -122,6 +137,8 @@ public class LeagueResultsSubPanel extends TableSubPanel
 				if(showName)
 				{	String key = headerPrefix+GuiKeys.NAME;
 					setLabelKey(0,col,key,true);
+					setColSubAlignment(col, SwingConstants.LEFT);
+					setLabelAlignment(0, col, SwingConstants.CENTER);
 					col++;
 				}
 				if(showScores)
@@ -342,44 +359,93 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether player pictures should be displayed */
 	private boolean showPortrait = true;
+	/** Whether player names should be displayed */
 	private boolean showName = true;
+	/** Whether round numbers should be displayed */
 	private boolean showConfrontations = true;
+	/** Whether total points should be displayed */
 	private boolean showTotal = true;
+	/** Whether round points should be displayed */
 	private boolean showPoints = true;
+	/** Whether scores should be displayed */
 	private boolean showScores = true;
+	/** Whether durations should be displayed */
 	private boolean showTime = true;
 	
+	/**
+	 * Enable/disable the displaying of player pictures.
+	 * 
+	 * @param showPortrait
+	 * 		Whether player pictures should be displayed.
+	 */
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;
 		setLeagueTournament(leagueTournament);
 	}
 
+	/**
+	 * Enable/disable the displaying of player names.
+	 * 
+	 * @param showName
+	 * 		Whether player names should be displayed.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 		setLeagueTournament(leagueTournament);
 	}
 
+	/**
+	 * Enable/disable the displaying of round numbers.
+	 * 
+	 * @param showConfrontations
+	 * 		Whether round numbers should be displayed.
+	 */
 	public void setShowConfrontations(boolean showConfrontations)
 	{	this.showConfrontations = showConfrontations;
 		setLeagueTournament(leagueTournament);
 	}
 
+	/**
+	 * Enable/disable the displaying of total points.
+	 * 
+	 * @param showTotal
+	 * 		Whether total points should be displayed.
+	 */
 	public void setShowTotal(boolean showTotal)
 	{	this.showTotal = showTotal;
 		setLeagueTournament(leagueTournament);
 	}
 
+	/**
+	 * Enable/disable the displaying of round points.
+	 * 
+	 * @param showPoints
+	 * 		Whether total round should be displayed.
+	 */
 	public void setShowPoints(boolean showPoints)
 	{	this.showPoints = showPoints;
 		setLeagueTournament(leagueTournament);
 	}
 
+	/**
+	 * Enable/disable the displaying of scores.
+	 * 
+	 * @param showScores
+	 * 		Whether scores should be displayed.
+	 */
 	public void setShowScores(boolean showScores)
 	{	this.showScores = showScores;
 		setLeagueTournament(leagueTournament);
 	}
 
+	/**
+	 * Enable/disable the displaying of durations.
+	 * 
+	 * @param showTime
+	 * 		Whether durations should be displayed.
+	 */
 	public void setShowTime(boolean showTime)
 	{	this.showTime = showTime;
 		setLeagueTournament(leagueTournament);
