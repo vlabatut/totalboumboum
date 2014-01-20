@@ -31,25 +31,24 @@ import org.jdom.Element;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
- * represents the role of the actor or the target during an action.
+ * Represents the role of the actor or the target during an action.
  * 
  * @author Vincent Labatut
- *
  */
 public enum Role implements Serializable
-{	/** no object required (likely: no target) */
+{	/** No object required (likely: no target) */
 	NONE ("None"),
-	/** the actor or target is a block sprite */
+	/** The actor or target is a block sprite */
 	BLOCK ("Block"),
-	/** the actor or target is a bomb sprite */
+	/** The actor or target is a bomb sprite */
 	BOMB ("Bomb"),
-	/** the actor or target is a fire sprite */
+	/** The actor or target is a fire sprite */
 	FIRE ("Fire"),
-	/** the actor or target is a floor sprite */
+	/** The actor or target is a floor sprite */
 	FLOOR ("Floor"),
-	/** the actor or target is a hero sprite */
+	/** The actor or target is a hero sprite */
 	HERO ("Hero"),
-	/** the actor or target is an item sprite */
+	/** The actor or target is an item sprite */
 	ITEM ("Item");
 
 	/** String form of the enum value */
