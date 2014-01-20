@@ -33,27 +33,28 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
- * represents the kind of contact between the actor and the target during an action:
- * 
+ * Represents the kind of contact between the actor and the target during an action.
  * 
  * @author Vincent Labatut
- *
  */
 public enum Contact implements Serializable
 {	
-	/** absolutely no contact, or contact undefined (because there's no target) */
+	/** Absolutely no contact, or contact undefined (because there's no target) */
 	NONE,
-	/** the actor and the target are colliding (whichever is moving towards the other) */
+	/** The actor and the target are colliding (whichever is moving towards the other) */
 	COLLISION,
-	/** the actor and the target are currently intersecting */ 
+	/** The actor and the target are currently intersecting */ 
 	INTERSECTION;
 	
 	/**
-	 * returns the contact type, or NONE if the target is null
+	 * Returns the contact type, or {@link #NONE} if the target is {@code null}.
 	 * 
-	 * @param actor	sprite performing the action
-	 * @param target	sprite undergoing the action
-	 * @return	contact of the action
+	 * @param actor	
+	 * 		Sprite performing the action.
+	 * @param target	
+	 * 		Sprite undergoing the action.
+	 * @return	
+	 * 		Contact of the action.
 	 */
 	public static Contact getContact(Sprite actor, Sprite target)
 	{	Contact result;
@@ -66,6 +67,16 @@ public enum Contact implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Returns the contact type for the specified sprite and tile.
+	 * 
+	 * @param actor
+	 * 		Sprite of interest.
+	 * @param tile
+	 * 		Tile of interest.
+	 * @return
+	 * 		Nature of the contact between the sprite and tile.
+	 */
 	public static Contact getContact(Sprite actor, Tile tile)
 	{	Sprite target = tile.getFloors().get(0);
 		Contact result = getContact(actor,target);
@@ -73,9 +84,18 @@ public enum Contact implements Serializable
 	}	
 
 	/**
-	 * load a contact value.
-	 * the XML value SOME represents any contact except NONE. 
-	 * the XML value ANY represents any contact including NONE. 
+	 * Loads a contact value from an XML element.
+	 * <ul>
+	 * 		<li>the XML value SOME represents any contact except NONE.</li> 
+	 * 		<li>the XML value ANY represents any contact including NONE.</li>
+	 * </ul> 
+	 * 
+	 * @param root 
+	 * 		XML element.
+	 * @param attName 
+	 * 		Attribute name.
+	 * @return 
+	 * 		Corresponding list of contact symbols.
 	 */
 	public static List<Contact> loadContactsAttribute(Element root, String attName)
 	{	List<Contact> result = new ArrayList<Contact>();

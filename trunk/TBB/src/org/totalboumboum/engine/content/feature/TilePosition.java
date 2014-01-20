@@ -33,26 +33,32 @@ import org.totalboumboum.engine.content.sprite.Sprite;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
- * relative positions of the actor and the target, expressed in terms of tiles.
+ * Relative positions of the actor and the target, expressed in terms of tiles.
  * 
  * @author Vincent Labatut
- *
  */
 public enum TilePosition implements Serializable
 {	
-	/** no position can be defined: there's no target */
+	/** No position can be defined: there's no target */
 	NONE,
-	/** the actor and target are together in the same tile */
+	/** The actor and target are together in the same tile */
 	SAME,
-	/** the actor and target are in neighbor tiles */
+	/** The actor and target are in neighbor tiles */
 	NEIGHBOR,
-	/** the actor and target are in remote tiles */
+	/** The actor and target are in remote tiles */
 	REMOTE;
 	
 	/**
-	 * returns the relative positions of the actor and target tiles,
-	 * or SAME if the actor has no tile but the target has one,
-	 * or UNDEFINED if there's no target or if it has no tile. 
+	 * Returns the relative positions of the actor and target tiles,
+	 * or {@link #SAME} if the actor has no tile but the target has one,
+	 * or {@link #NONE} if there's no target or if it has no tile. 
+	 * 
+	 * @param actor 
+	 * 		Sprite of interest.
+	 * @param target 
+	 * 		Second sprite of interest.
+	 * @return 
+	 * 		Relative tile position.
 	 */
 	public static TilePosition getTilePosition(Sprite actor, Sprite target)
 	{	TilePosition result;
@@ -77,6 +83,17 @@ public enum TilePosition implements Serializable
 		return result;
 	}	
 	
+	/**
+	 * Returns the relative tile position of the specified sprite
+	 * for the specified tile.
+	 * 
+	 * @param actor
+	 * 		Sprite of interest.
+	 * @param tile
+	 * 		Tile of reference.
+	 * @return 
+	 * 		Relative tile position of the sprite.
+	 */
 	public static TilePosition getTilePosition(Sprite actor, Tile tile)
 	{	Sprite target = tile.getFloors().get(0);
 		TilePosition result = getTilePosition(actor,target);
@@ -84,9 +101,18 @@ public enum TilePosition implements Serializable
 	}	
 
 	/**
-	 * load a tile position value.
-	 * the XML value SOME represents any tile position except NONE. 
-	 * the XML value ANY represents any tile position including NONE. 
+	 * Loads a tile position value from an XML element.
+	 * <ul>
+	 * 		<li>The XML value SOME represents any tile position except NONE.</li> 
+	 * 		<li>The XML value ANY represents any tile position including NONE.</li>
+	 * </ul> 
+	 * 
+	 * @param root 
+	 * 		XML element.
+	 * @param attName 
+	 * 		Attribute name.
+	 * @return 
+	 * 		List of tile positions.
 	 */
 	public static List<TilePosition> loadTilePositionsAttribute(Element root, String attName)
 	{	List<TilePosition> result = new ArrayList<TilePosition>();

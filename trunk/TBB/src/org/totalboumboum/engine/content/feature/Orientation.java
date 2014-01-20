@@ -34,31 +34,34 @@ import org.totalboumboum.game.round.RoundVariables;
 import org.totalboumboum.tools.xml.XmlNames;
 
 /**
- * represents the compared directions of the action and of the target
- * (the levels is closed, so the target direction has to be considered in terms of shortest distance)  
+ * Represents the compared directions of the action and of the target
+ * (the levels is closed, so the target direction has to be considered in terms of shortest distance).
  * 
  * @author Vincent Labatut
  *
  */
 public enum Orientation implements Serializable
-{	/** no target or no action direction */
+{	/** No target or no action direction */
 	NONE,
-	/** the action is performed facing the target, or the action and the target are exactly on the same spot */
+	/** The action is performed facing the target, or the action and the target are exactly on the same spot */
 	FACE,
-	/** the action is performed back to the target */
+	/** The action is performed back to the target */
 	BACK,
-	/** the action is not performed facing nor back to the target */
+	/** The action is not performed facing nor back to the target */
 	OTHER,
-	/** the actor and target are exactly at the same place */
+	/** The actor and target are exactly at the same place */
 	NEUTRAL;
 	
 	/**
-	 * returns the orientation, or UNDEFINED if the target is null or if the action is not directed.
-	 * If the actor and the target are exactly on the same spot, the result is SAME.
+	 * Returns the orientation, or {@link #NONE} if the target is {@code null} or if the action is not directed.
+	 * If the actor and the target are exactly on the same spot, the result is {@link #NEUTRAL}.
 	 * 
-	 * @param actor	sprite performing the action
-	 * @param target	sprite undergoing the action
-	 * @return	orientation of the action
+	 * @param actor	
+	 * 		Sprite performing the action.
+	 * @param target
+	 * 		Sprite undergoing the action.
+	 * @return	
+	 * 		Orientation of the action.
 	 */
 	public static Orientation getOrientation(Sprite actor, Sprite target)
 	{	Orientation result;
@@ -68,15 +71,19 @@ public enum Orientation implements Serializable
 			result = Orientation.NONE;
 		else
 		{	Direction relativeDir = RoundVariables.level.getCompositeFromSprites(actor,target);
+			
 			// actor facing target
 			if(relativeDir.hasCommonComponent(facingDir))
 				result = Orientation.FACE;
+			
 			// actor back to target
 			else if(relativeDir.hasCommonComponent(facingDir.getOpposite()))
 				result = Orientation.BACK;
+			
 			// no direction
 			else if(relativeDir==Direction.NONE)
 				result = Orientation.NEUTRAL;
+			
 			// other directions
 			else
 				result = Orientation.OTHER;
@@ -84,6 +91,17 @@ public enum Orientation implements Serializable
 		return result;
 	}	
 
+	/**
+	 * Returns the orientation of the specified sprite
+	 * relatively to the specified tile.
+	 * 
+	 * @param actor
+	 * 		Sprite of interest.
+	 * @param tile
+	 * 		Tile of interest.
+	 * @return
+	 * 		Relative orientation of the sprite relatively to the tile.
+	 */
 	public static Orientation getOrientation(Sprite actor, Tile tile)
 	{	Sprite target = tile.getFloors().get(0);
 		Orientation result = getOrientation(actor,target);
@@ -91,9 +109,16 @@ public enum Orientation implements Serializable
 	}	
 
 	/**
-	 * load an orientation value.
-	 * the XML value SOME represents any orientation except NONE. 
-	 * the XML value ANY represents any orientation including NONE. 
+	 * Loads an orientation value.
+	 * The XML value {@code SOME} represents any orientation except {@link #NONE}. 
+	 * The XML value {@code ANY} represents any orientation including {@link #NONE}. 
+	 * 
+	 * @param root
+	 * 		XML element. 
+	 * @param attName 
+	 * 		Attribute name.
+	 * @return 
+	 * 		List of orientation objects.
 	 */
 	public static List<Orientation> loadOrientationsAttribute(Element root, String attName)
 	{	List<Orientation> result = new ArrayList<Orientation>();

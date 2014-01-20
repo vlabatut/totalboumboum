@@ -26,14 +26,24 @@ import java.io.Serializable;
 import org.totalboumboum.engine.content.sprite.Sprite;
 
 /**
+ * Symbol representing how much a sprite must be shifted vertically when drawn.
  * 
  * @author Vincent Labatut
- *
  */
 public enum ImageShift implements Serializable
-{
-	DOWN,BOUNDHEIGHT;
+{	/** Regular position (position = down side of the picture) */	
+	DOWN,
+	/** On top (vertically, not in terms of layers) of the bounded sprite */
+	BOUNDHEIGHT;
 	
+	/**
+	 * Returns the pixel value corresponding to this symbol.
+	 * 
+	 * @param boundSprite
+	 * 		Sprite of reference.
+	 * @return
+	 * 		Offset in pixels. 
+	 */
 	public double getValue(Sprite boundSprite)
 	{	double result = 0;
 		switch(this)
