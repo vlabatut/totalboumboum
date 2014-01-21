@@ -51,35 +51,46 @@ public class ClassTools
 
 	/**
 	 * Returns the list of the names of classes located in a package inside a JAR file.
+	 * 
 	 * For instance: {@code getClasseNamesInPackage("C:/j2sdk1.4.1_02/lib/mail.jar", "com.sun.mail.handlers");}.
+	 * NOTE not tested
 	 * 
 	 * @param jarName	
 	 * 		JAR file path.
 	 * @param packageName	
 	 * 		Package qualified name.
+	 * @param recursive	
+	 * 		Whether subpackages should also be processed.
 	 * @return	
 	 * 		Array of classes.
 	 */
-	public static Class<?>[] getClassesInPackageJar(String jarName,String packageName)
+	public static Class<?>[] getClassesInPackageJar(String jarName, String packageName, boolean recursive)
 	{	List<Class<?>> classes = new ArrayList<Class<?>>();
-		packageName = packageName.replaceAll("\\.", "/");
+		String packageFolder = packageName.replaceAll("\\.", "/");
+		
 		try
 		{	JarInputStream jarFile = new JarInputStream(new FileInputStream(jarName));
-			JarEntry jarEntry;
-			while (true)
-			{	jarEntry = jarFile.getNextJarEntry();
-				if (jarEntry == null)
-					break;
-				if((jarEntry.getName().startsWith(packageName)) && (jarEntry.getName().endsWith(".class")))
-				{	String temp = jarEntry.getName().replaceAll("/", "\\.");
-					classes.add(Class.forName(temp.substring(0, temp.length() - 6)));
+			JarEntry jarEntry = jarFile.getNextJarEntry();
+			while(jarEntry!=null)
+			{	String entryName = jarEntry.getName();
+				if((entryName.startsWith(packageFolder)) && entryName.endsWith(FileNames.EXTENSION_CLASS))
+				{	String subPack = entryName.substring(packageFolder.length()+1,entryName.length()-FileNames.EXTENSION_CLASS.length());
+					if(recursive || !subPack.contains("/"))
+					{	String entryPackage = jarEntry.getName().replaceAll("/", "\\.");
+						String qualifName = entryPackage.substring(0, entryPackage.length() - FileNames.EXTENSION_CLASS.length());
+						Class<?> clazz = Class.forName(qualifName);
+						classes.add(clazz);
+					}
 				}
+				jarEntry = jarFile.getNextJarEntry();
 			}
 			jarFile.close();
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
 		}
+		
+		// sets up result
 		Class<?>[] classesA = new Class[classes.size()];
 		classes.toArray(classesA);
 		return classesA;
@@ -90,15 +101,16 @@ public class ClassTools
 	 * 
 	 * @param packageName	
 	 * 		Package qualified name.
+	 * @param recursive	
+	 * 		Whether subpackages should also be processed.
 	 * @return	
 	 * 		Array of classes.
 	 * 
 	 * @throws ClassNotFoundException 
 	 * 		Problem while accessing the specified class.
 	 */
-	public static Class<?>[] getClassesInPackage(String packageName) throws ClassNotFoundException 
-	{	List<Class<?>> classes = new ArrayList<Class<?>>();
-		// Get a File object for the package
+	public static Class<?>[] getClassesInPackage(String packageName, boolean recursive) throws ClassNotFoundException 
+	{	// Get a File object for the package
 		File directory = null;
 		try
 		{	ClassLoader cld = Thread.currentThread().getContextClassLoader();
@@ -113,23 +125,71 @@ public class ClassTools
 		catch (NullPointerException x)
 		{	throw new ClassNotFoundException(packageName + " (" + directory + ") does not appear to be a valid package");
 		}
+		
+		// process the file object corresponding to the package 
+		List<Class<?>> classes = null;
 		if (directory.exists())
-		{	// Get the list of the files contained in the package
-			String[] files = directory.list();
-			for (int i = 0; i < files.length; i++)
+			classes = getClassesInFolder(packageName, directory, recursive);
+		else
+			throw new ClassNotFoundException(packageName + " does not appear to be a valid package");
+		
+		// sets up result
+		Class<?>[] result = new Class[classes.size()];
+		classes.toArray(result);
+		return result;
+	}
+	
+	/**
+	 * Helper method used by {@link #getClassesInPackage(String, boolean)}. 
+	 * Returns the list of the names of classes located in a folder (not inside a JAR).
+	 * 
+	 * @param currentPackage	
+	 * 		Qualified name of the current package.
+	 * @param currentFolder	
+	 * 		Current folder.
+	 * @param recursive	
+	 * 		Whether subpackages should also be processed.
+	 * @return	
+	 * 		List of classes.
+	 * 
+	 * @throws ClassNotFoundException 
+	 * 		Problem while accessing the specified class.
+	 */
+	private static List<Class<?>> getClassesInFolder(String currentPackage, File currentFolder, boolean recursive) throws ClassNotFoundException
+	{	List<Class<?>> result = new ArrayList<Class<?>>();
+	
+		// Get the list of the files contained in the package
+		File[] files = currentFolder.listFiles();
+		
+		// process each one
+		for (int i = 0; i < files.length; i++)
+		{	String fileName = files[i].getName();
+		
+			// if it is a folder: explore recursively
+			if(files[i].isDirectory())
+			{	// (only if required)
+				if(recursive)
+				{	String tempPackage = currentPackage + CLASS_SEPARATOR + fileName;
+					List<Class<?>> temp = getClassesInFolder(tempPackage, files[i], recursive);
+					result.addAll(temp);
+				}
+			}
+			
+			// if it's an actual file
+			else
 			{	// we are only interested in .class files
-				if (files[i].endsWith(".class"))
+				if (fileName.endsWith(FileNames.EXTENSION_CLASS))
 				{	// removes the .class extension
-					classes.add(Class.forName(packageName + '.' + files[i].substring(0, files[i].length() - 6)));
+					String className = currentPackage + CLASS_SEPARATOR + fileName.substring(0, fileName.length() - FileNames.EXTENSION_CLASS.length());
+					// get the class;
+					result.add(Class.forName(className));
 				}
 			}
 		}
-		else
-			throw new ClassNotFoundException(packageName + " does not appear to be a valid package");
-		Class<?>[] classesA = new Class[classes.size()];
-		classes.toArray(classesA);
-		return classesA;
+		
+		return result;
 	}
+	
 	
 	/**
 	 * Returns the list of the names of classes located in a package implementing
@@ -139,15 +199,17 @@ public class ClassTools
 	 * 		Package qualified name.
 	 * @param inter
 	 * 		Interface the classes must implement.
+	 * @param recursive	
+	 * 		Whether subpackages should also be processed.
 	 * @return	
 	 * 		Array of classes.
 	 * 
 	 * @throws ClassNotFoundException 
 	 * 		Problem while accessing the specified class.
 	 */
-	public static Class<?>[] getClassesInPackageImplementing(String packageName, Class<?> inter) throws ClassNotFoundException
+	public static Class<?>[] getClassesInPackageImplementing(String packageName, Class<?> inter, boolean recursive) throws ClassNotFoundException
 	{	List<Class<?>> classes = new ArrayList<Class<?>>();
-		Class<?>[] temp = getClassesInPackage(packageName);
+		Class<?>[] temp = getClassesInPackage(packageName,recursive);
 		for(int i=0;i<temp.length;i++)
 			if(inter.isAssignableFrom(temp[i]) 
 					&& !temp[i].isInterface() 
