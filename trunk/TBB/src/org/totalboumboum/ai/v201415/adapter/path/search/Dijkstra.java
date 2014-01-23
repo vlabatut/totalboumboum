@@ -262,8 +262,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				// on prend le noeud situé en tête de file
 				lastSearchNode = fringe.poll();
 				// verbose : noeud courant
-				print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
-				print("           Visiting : "+lastSearchNode);
+				if(verbose)
+				{	print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
+					print("           Visiting : "+lastSearchNode);
+				}
 				
 				// mise à jour des données décrivant l'arbre
 				//if(lastSearchNode.getDepth()>treeHeight)
@@ -320,25 +322,27 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 			while(!fringe.isEmpty() && !safeStop);
 		}
 		
-		// verbose : temps
-		{	long after = ai.getCurrentTime();
+		if(verbose)
+		{	// temps
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("         Total elapsed time: "+elapsed+" ms");
-		}
-		// verbose résultat
-		{	if(limitReached)
+		
+			// résultat
+			if(limitReached)
 				print("         Limit reached");
 			else
 				print("         Search finished");
-		}
-		// verbose : limites
-		{	print("         height="+treeHeight+" cost="+treeCost+" size="+fringeSize+" src="+root.getLocation());
+		
+			// limites
+			print("         height="+treeHeight+" cost="+treeCost+" size="+fringeSize+" src="+root.getLocation());
 			if(limitReached)
 				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
+		
+			// fin
+			print("      < Dijkstra finished +++++++++++++++++++++");
 		}
-		// verbose : fin
-		print("      < Dijkstra finished +++++++++++++++++++++");
-
+		
 		// exceptions
 		if(limitReached)
 			throw new LimitReachedException(startLocation,null,treeHeight,treeCost,fringeSize,maxCost,maxHeight,maxNodes,fringe);
