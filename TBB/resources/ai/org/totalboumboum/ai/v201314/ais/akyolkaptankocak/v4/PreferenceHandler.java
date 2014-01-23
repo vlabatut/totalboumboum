@@ -156,8 +156,8 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
                     TileProperty ne = ai.zoneHandler.map
                             .get(ai.zoneHandler.nearestEnemyTile);
                     if(ne != null && ne.distance < bombRange + 1)
-                    {
-                        if(ai.zoneHandler.map.get(tile).distance < bombRange + 1)
+                    {	TileProperty tp = ai.zoneHandler.map.get(tile);
+                        if(tp!=null && tp.distance < bombRange + 1)
                         {
                             result = getCategory(CORRIDOR);
                         }
@@ -175,8 +175,8 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
             else
             {
                 if(ai.zoneHandler.nearestEnemy != null)
-                {
-                    if(ai.zoneHandler.map.get(ai.zoneHandler.nearestEnemyTile).distance <= bombRange - 3)
+                { 	TileProperty tp = ai.zoneHandler.map.get(ai.zoneHandler.nearestEnemyTile);
+                    if(tp!=null && tp.distance <= bombRange - 3)
                     {
                         result = getCategory(CORRIDOR);
                     }
@@ -196,9 +196,9 @@ public class PreferenceHandler extends AiPreferenceHandler<Agent>
 
         // Collecting Mode
         else
-        {
+        {	TileProperty tp = ai.zoneHandler.map.get(tile);
             if(ai.zoneHandler.bonusFlag
-                    && ai.zoneHandler.map.get(tile).bonus > 0)
+                    && tp!=null && tp.bonus > 0)
             {
                 result = getCategory(COLLECT);
             }
