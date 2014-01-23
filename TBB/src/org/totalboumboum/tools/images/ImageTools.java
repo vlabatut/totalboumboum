@@ -49,9 +49,9 @@ import javax.imageio.ImageIO;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
 /**
+ * Various image-related methods.
  * 
  * @author Vincent Labatut
- *
  */
 public class ImageTools
 {
@@ -59,6 +59,19 @@ public class ImageTools
 	/////////////////////////////////////////////////////////////////
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Loads the specified image and apply the specified colormap.
+	 * 
+	 * @param path
+	 * 		Path of the image file.
+	 * @param colormap
+	 * 		Colormap used to render the image. 
+	 * @return
+	 * 		Image with the specified colormap.
+	 * 
+	 * @throws IOException
+	 * 		Problem while loading the image file.
+	 */
     public static BufferedImage loadImage(String path, ColorMap colormap) throws IOException
     {	BufferedImage image;
     	FileInputStream in = new FileInputStream(path);
@@ -84,7 +97,9 @@ public class ImageTools
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    /** Current graphical environment */
     private static GraphicsEnvironment ge;
+    /** Current graphical configuration */
     private static GraphicsConfiguration gc;
     // get the graphical environment
 	static 
@@ -92,6 +107,14 @@ public class ImageTools
 		gc = ge.getDefaultScreenDevice().getDefaultConfiguration();		
     }
     
+	/**
+	 * Makes a copy of the specified image.
+	 * 
+	 * @param image
+	 * 		Original image.
+	 * @return
+	 * 		Copy of the original image.
+	 */
     //TODO I guess this should be disabled in favor of getCompatibleImage
     public static BufferedImage copyBufferedImage(BufferedImage image)
 	{	int type = image.getType();
@@ -109,6 +132,15 @@ public class ImageTools
 	  	return copy;
 	}	
 
+    /**
+     * Returns a copy of the specified image, which
+     * is compatible with the current graphical configuration.
+     * 
+     * @param image
+     * 		Original image.
+     * @return
+     * 		A compatible copy of the original image.
+     */
 	public static BufferedImage getCompatibleImage(BufferedImage image)
     {	// get the original color model
 		ColorModel cm = image.getColorModel();			
@@ -126,11 +158,16 @@ public class ImageTools
     }
     
     /**
-     * Resize the specified image using the specified zoom coefficient and smoothing method.
+     * Resizes the specified image using the specified zoom coefficient and smoothing method.
+     * 
      * @param imgOld
+     * 		Original image.
      * @param zoom
+     * 		Zoom factor.
      * @param smooth
+     * 		Smoothing or not.
      * @return
+     * 		Resized copy of the original image.
      */
     public static BufferedImage getResizedImage(BufferedImage imgOld, double zoom, boolean smooth)
     {	// dimensions
@@ -197,7 +234,16 @@ if(xDim<0 || yDim<0)
 	// COLORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /**
-     * Get a neutral image and applies the specified colormap to get a colored image.
+     * Receives a neutral image and applies the specified 
+     * colormap to produce a colored image.
+     * Colors must be indexed in the original image.
+     * 
+     * @param image 
+     * 		Original image.
+     * @param colormap 
+     * 		Colormap to apply to the original image.
+     * @return 
+     * 		Colored image.
      */
     public static BufferedImage getColoredImage(BufferedImage image, ColorMap colormap)
    	{	BufferedImage result = image;
@@ -252,9 +298,12 @@ if(xDim<0 || yDim<0)
 	}
 
     /**
-     * Get the greyscale version of the specified image. 
+     * Gets the greyscale version of the specified image.
+     *  
      * @param image
+     * 		Original image.
      * @return
+     * 		Greyscale version.
      */
     public static BufferedImage getGreyScale(BufferedImage image)
     {	// new greyscaled image
@@ -292,11 +341,15 @@ if(xDim<0 || yDim<0)
     }
 
     /**
-     * Fill the specified image with the specified color.
+     * Fills the specified image with the specified color.
      * Alpha transparency is preserved.
+     * 
      * @param image
+     * 		Original image.
      * @param rgb
+     * 		Color used to fill the image.
      * @return
+     * 		Filled image.
      */
     public static BufferedImage getFilledImage(BufferedImage image, Integer rgb)
    	{	BufferedImage result = getCompatibleImage(image);//copyBufferedImage(image);
@@ -336,8 +389,15 @@ if(xDim<0 || yDim<0)
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     /**
-     * produces an image (red cross) used to replace missing images,
-     * i.e. images which couldn't be found at loading 
+     * Produces an image (red cross) used to replace missing images,
+     * i.e. images which couldn't be found at loading.
+     * 
+     * @param width 
+     * 		Width of the required image.
+     * @param height 
+     * 		Height of the required image.
+     * @return 
+     *  	Red cross image.
      */
     public static BufferedImage getAbsentImage(int width, int height)
     {	BufferedImage result = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);

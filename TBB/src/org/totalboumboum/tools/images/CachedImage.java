@@ -25,17 +25,26 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 
 /**
+ * Image cached by the game.
  * 
  * @author Vincent Labatut
- *
  */
 public class CachedImage
 {
+	/**
+	 * Builds a new cached image.
+	 * 
+	 * @param imageCache
+	 * 		Cache containing the object.
+	 * @param imagePath
+	 * 		File containing the image.
+	 */
 	public CachedImage(ImageCache imageCache, String imagePath)
 	{	this.imageCache = imageCache;
 		this.imagePath = imagePath;
@@ -44,20 +53,27 @@ public class CachedImage
 	/////////////////////////////////////////////////////////////////
 	// IMAGE CACHE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Cache containing the images */
 	private ImageCache imageCache = null;
 		
 	/////////////////////////////////////////////////////////////////
 	// REGULAR IMAGE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** File containing the image */
 	private String imagePath = null;
-	private BufferedImage image = null; 
+	/** The image itself */
+	private BufferedImage image = null;
+	/** Approximate size of the image (in memory) */
 	private double imageSize = 0;
 	
 	/////////////////////////////////////////////////////////////////
 	// COPIES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<ColorMap,BufferedImage> copies = new HashMap<ColorMap, BufferedImage>();
+	/** Copies of the image using various color maps */ 
+	private Map<ColorMap,BufferedImage> copies = new HashMap<ColorMap, BufferedImage>();
+	/** Zoom factor */
 	private double currentZoom = 1;
+	/** Total size (in memory) of the copies */
 	private double copiesTotalSize = 0;
 	
 	/////////////////////////////////////////////////////////////////
@@ -120,6 +136,19 @@ public class CachedImage
 //		return result;
 //	}
 
+	/**
+	 * Retrieves the image with the specified color and zoom factor.
+	 * 
+	 * @param colormap
+	 * 		Colormap used for the image.
+	 * @param zoom
+	 * 		Zoom factor.
+	 * @return
+	 * 		Corresponding image.
+	 * 
+	 * @throws IOException
+	 * 		Problem while loading the image file.
+	 */
 	public BufferedImage getImage(ColorMap colormap, double zoom) throws IOException
 	{	BufferedImage result = null;
 		
@@ -167,6 +196,12 @@ public class CachedImage
 		return result;
 	}
 
+	/**
+	 * Get the memory size for this cached image.
+	 * 
+	 * @return
+	 * 		Approximate memory size.
+	 */
 	public double getTotalSize()
 	{	double result = imageSize + copiesTotalSize;
 		return result;
