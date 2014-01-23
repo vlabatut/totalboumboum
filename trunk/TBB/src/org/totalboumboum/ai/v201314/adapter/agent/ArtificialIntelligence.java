@@ -376,7 +376,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		resetDurations();
 		long before,after,elapsed,afterAll,elapsedAll;
 		long beforeAll = print("> Entering processAction ----------------------");
-		print("\n"+zone.toString());
+		if(verbose) print("\n"+zone.toString());
 		
 		// mises à jour
 		{	// mise à jour des percepts et données communes
@@ -458,6 +458,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 		afterAll = getCurrentTime();
 		elapsedAll = afterAll - beforeAll;
 		print("< Exiting processAction duration="+elapsedAll+" ----------------------");
+//System.out.println(zone.getOwnHero().getColor()+": duration="+elapsedAll);
 		totalDuration = elapsedAll;
 		return result;
 	}
