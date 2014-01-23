@@ -201,9 +201,9 @@ public abstract class AiAbstractManager<V, T extends Serializable>
      * qui permettront au moteur du jeu de déplacer le personnage.
      * 
      * @param aisPause
-     * 		indique si l'agent doit passer en pause
+     * 		Indique si l'agent doit passer en pause.
      * @return
-     * 		vrai si l'agent a effectué une action
+     * 		{@code true} ssi l'agent a effectué une action.
      */
     public final boolean update(boolean aisPause)
     {	boolean result = false;
