@@ -415,8 +415,8 @@ public abstract class AiAbstractSearchAlgorithm
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Permet d'activer/désactiver la sortie texte lors du débogage */
-	private boolean verbose = false;
-
+	protected boolean verbose = false;
+	
 	/**
 	 * Permet d'activer/désactiver la sortie
 	 * texte de cet algorithme (pour le débogage).
