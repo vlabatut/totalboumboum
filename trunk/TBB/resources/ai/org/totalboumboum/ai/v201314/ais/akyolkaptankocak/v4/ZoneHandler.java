@@ -158,8 +158,14 @@ public class ZoneHandler extends AiAbstractHandler<Agent>
 
         /* Our hero's current tile's distance is 0 */
         int distance = 0;
-        map.get(ownTile).distance = distance;
-        map.get(ownTile).bonus = 0;
+        {	TileProperty tp0 = map.get(ownTile);
+        	if(tp0==null)
+        	{	tp0 = new TileProperty();
+        		map.put(ownTile,tp0);
+        	}
+        	tp0.distance = distance;
+        	tp0.bonus = 0;
+        }
 
         /* If we haven't find an enemy yet */
 
@@ -187,102 +193,108 @@ public class ZoneHandler extends AiAbstractHandler<Agent>
             AiTile currentTile = fringe.poll();
 
             /* Reset walls to 0 */
-            map.get(currentTile).walls = 0;
-
-            for(AiTile neighbor : currentTile.getNeighbors())
-            {
-                ai.checkInterruption();
-
-                /* If this neighbor is crossable by our hero */
-                if(neighbor.isCrossableBy(ownHero))
-                {
-                    /* If it doesn't exist in return list, add it to both list */
-                    if(!result.contains(neighbor))
-                    {
-                        result.add(neighbor);
-                        fringe.offer(neighbor);
-
-                        /* Set its distance */
-                        map.get(neighbor).distance = distance;
-
-                        /* Set its bonus */
-                        List<AiItem> items = neighbor.getItems();
-                        if(!items.isEmpty())
-                        {
-                            AiItem item = items.get(0);
-                            boolean bon = item.getType().isBonus();
-
-                            if(bon)
-                            {
-                                map.get(neighbor).bonus = 1;
-                                // bonus type considaration
-                                AiItemType itemType = item.getType();
-                                if(itemType.isBombKind())
-                                    bonusBombFlag = true;
-                                else if(itemType.isFlameKind())
-                                    bonusRangeFlag = true;
-                                else if(itemType.isSpeedKind())
-                                    bonusSpeedFlag = true;
-                            }
-                            else
-                                map.get(neighbor).bonus = -1;
-
-                            /* If we haven't find a bonus yet */
-                            if(!bonusFlag && bon)
-                            {
-                                bonusFlag = true;
-                                nearestBonus = item;
-                            }
-                        }
-                        else
-                        {
-                            map.get(neighbor).bonus = 0;
-                        }
-
-                        /* If we haven't find an enemy yet */
-                        if(!heroFlag)
-                        {
-                            enemys = neighbor.getHeroes();
-                            if(!enemys.isEmpty())
-                            {
-                                nearestEnemy = enemys.get(0);
-                                nearestEnemyTile = nearestEnemy.getTile();
-                                heroFlag = true;
-                            }
-                        }
-                    }
-                }
-                /* If this neighbor is NOT crossable by our hero */
-                else
-                {
-                    if(neighbor.getFires().isEmpty())
-                    {
-                        /* Increase wall number of current tile */
-                        map.get(currentTile).walls++;
-                    }
-                    /* Check if there is not a bomb yet */
-                    if(!bombFlag)
-                    {
-                        if(!neighbor.getBombs().isEmpty()
-                                || !neighbor.getFires().isEmpty())
-                        {
-                            bombFlag = true;
-                        }
-
-                    }
-
-                    /* Check if there is a destructible block */
-                    if(!blockFlag && hasDestructible)
-                    {
-                        List<AiBlock> blocks = neighbor.getBlocks();
-                        if(!blocks.isEmpty() && blocks.get(0).isDestructible())
-                        {
-                            blockFlag = true;
-                        }
-                    }
-                }
-            }
-
+            TileProperty tp0 = map.get(currentTile);
+            if(tp0!=null)
+        	{	tp0.walls = 0;
+	
+	            for(AiTile neighbor : currentTile.getNeighbors())
+	            {
+	                ai.checkInterruption();
+	
+	                /* If this neighbor is crossable by our hero */
+	                if(neighbor.isCrossableBy(ownHero))
+	                {
+	                    /* If it doesn't exist in return list, add it to both list */
+	                    if(!result.contains(neighbor))
+	                    {
+	                        result.add(neighbor);
+	                        fringe.offer(neighbor);
+	
+	                        /* Set its distance */
+	                        TileProperty tp = map.get(neighbor);
+	                        if(tp!=null)
+	                        {	tp.distance = distance;
+		
+		                        /* Set its bonus */
+		                        List<AiItem> items = neighbor.getItems();
+		                        if(!items.isEmpty())
+		                        {
+		                            AiItem item = items.get(0);
+		                            boolean bon = item.getType().isBonus();
+		
+		                            if(bon)
+		                            {
+		                                map.get(neighbor).bonus = 1;
+		                                // bonus type considaration
+		                                AiItemType itemType = item.getType();
+		                                if(itemType.isBombKind())
+		                                    bonusBombFlag = true;
+		                                else if(itemType.isFlameKind())
+		                                    bonusRangeFlag = true;
+		                                else if(itemType.isSpeedKind())
+		                                    bonusSpeedFlag = true;
+		                            }
+		                            else
+		                                map.get(neighbor).bonus = -1;
+		
+		                            /* If we haven't find a bonus yet */
+		                            if(!bonusFlag && bon)
+		                            {
+		                                bonusFlag = true;
+		                                nearestBonus = item;
+		                            }
+		                        }
+		                        else
+		                        {
+		                            map.get(neighbor).bonus = 0;
+		                        }
+	                        }
+	                        
+	                        /* If we haven't find an enemy yet */
+	                        if(!heroFlag)
+	                        {
+	                            enemys = neighbor.getHeroes();
+	                            if(!enemys.isEmpty())
+	                            {
+	                                nearestEnemy = enemys.get(0);
+	                                nearestEnemyTile = nearestEnemy.getTile();
+	                                heroFlag = true;
+	                            }
+	                        }
+	                    }
+	                }
+	                /* If this neighbor is NOT crossable by our hero */
+	                else
+	                {
+	                    if(neighbor.getFires().isEmpty())
+	                    {
+	                        /* Increase wall number of current tile */
+	                        map.get(currentTile).walls++;
+	                    }
+	                    /* Check if there is not a bomb yet */
+	                    if(!bombFlag)
+	                    {
+	                        if(!neighbor.getBombs().isEmpty()
+	                                || !neighbor.getFires().isEmpty())
+	                        {
+	                            bombFlag = true;
+	                        }
+	
+	                    }
+	
+	                    /* Check if there is a destructible block */
+	                    if(!blockFlag && hasDestructible)
+	                    {
+	                        List<AiBlock> blocks = neighbor.getBlocks();
+	                        if(!blocks.isEmpty() && blocks.get(0).isDestructible())
+	                        {
+	                            blockFlag = true;
+	                        }
+	                    }
+	                }
+	            }
+        	}
+            
             /* Check if there is not a bomb yet */
             if(!bombFlag)
             {

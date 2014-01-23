@@ -99,30 +99,36 @@ public class MoveHandler extends AiMoveHandler<Agent>
 
         @Override
         public int compare(AiTile t1, AiTile t2)
-        {
-            ai.checkInterruption();
-
-            TileProperty tp1 = map.get(t1);
-            TileProperty tp2 = map.get(t2);
-
-            int d1 = tp1.distance;
-            int d2 = tp2.distance;
-
-            if(d1 == d2)
-            {
-                int b1 = tp1.bonus;
-                int b2 = tp2.bonus;
-
-                if(b1 == b2)
-                {
-                    int w1 = tp1.walls;
-                    int w2 = tp2.walls;
-
-                    return w1 - w2;
-                }
-                return b2 - b1;
-            }
-            return d1 - d2;
+        {	ai.checkInterruption();
+        	
+        	if(t1!=null && t2!=null)
+        	{	TileProperty tp1 = map.get(t1);
+	            TileProperty tp2 = map.get(t2);
+	
+	            if(tp1!=null && tp2!=null)
+	            {	int d1 = tp1.distance;
+		            int d2 = tp2.distance;
+		
+		            if(d1 == d2)
+		            {
+		                int b1 = tp1.bonus;
+		                int b2 = tp2.bonus;
+		
+		                if(b1 == b2)
+		                {
+		                    int w1 = tp1.walls;
+		                    int w2 = tp2.walls;
+		
+		                    return w1 - w2;
+		                }
+		                return b2 - b1;
+		            }
+		            return d1 - d2;
+	            }
+	            else
+	            	return 0;
+        	}
+        	return 0;
         }
     }
 
@@ -274,11 +280,11 @@ public class MoveHandler extends AiMoveHandler<Agent>
         }
 
         if(result == null)
-        {
+        {	TileProperty tp = ai.zoneHandler.map.get(ai.zoneHandler.nearestEnemyTile);
             /* If there isn't a bonus, go to shortest possible secure tile */
             if((ai.zoneHandler.nearestEnemy == null
                     || zone.getRemainingOpponents().size() == 1
-                    || (ai.zoneHandler.map.get(ai.zoneHandler.nearestEnemyTile).distance > 4) || !ai.bombHandler.securityCriterion
+                    || (tp!=null && tp.distance > 4) || !ai.bombHandler.securityCriterion
                         .fetchValue(ai.zoneHandler.nearestEnemyTile)))
             {
                 /* Try dijkstra */
@@ -385,13 +391,12 @@ public class MoveHandler extends AiMoveHandler<Agent>
                 }
             }
             else if(!ai.zoneHandler.bombFlag)
-            {
+            {	TileProperty tp = ai.zoneHandler.map.get(nextTile);
+        		
                 /* If we have put a bomb, do not put another one */
                 /* If next tile is a destructible block, put a bomb here */
-                if(!nextTile.getBlocks().isEmpty()
-                        || ai.zoneHandler.map.get(nextTile).bonus < 0)
-                {
-                    /* If simulated path can found, we can put a bomb */
+                if(!nextTile.getBlocks().isEmpty() || tp!=null && tp.bonus<0)
+                {	/* If simulated path can found, we can put a bomb */
 
                     // endCollect = ownHero.getTile();
                     ai.bombHandler.consider = true;

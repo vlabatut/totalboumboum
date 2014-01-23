@@ -185,7 +185,9 @@ public class BombHandler extends AiBombHandler<Agent>
                 continue;
 
             /* If enemy is not in a corridor, do not put a bomb */
-            int walls = enemyProperty.walls;
+            int walls = 0;
+            if(enemyProperty != null)
+            	walls = enemyProperty.walls;
             if(walls == 0)
                 continue;
 
@@ -231,26 +233,24 @@ public class BombHandler extends AiBombHandler<Agent>
 
             /* If we haven't found a deadEnd */
             if(deadEnd == null)
-            {
-                int enemyEscape = step
-                        - ai.zoneHandler.map
-                                .get(ai.zoneHandler.nearestEnemyTile).distance
-                        - 2;
-                double enemySpeed = ai.zoneHandler.nearestEnemy
-                        .getWalkingSpeed() / AiTile.getSize();
-
-                double bombDuration = (double) (ownHero.getBombDuration() / 1000.0);
-
-                if(enemyEscape > 0
-                        && (double) (enemyEscape / enemySpeed) >= bombDuration - 0.1)
-                {
-                    if(ai.pathHandler.canReachSafety())
-                    {
-                        ai.pathHandler.timeSuccessor.setConsiderOpponents(true);
-                        return true;
-                    }
+            {	TileProperty tp = ai.zoneHandler.map.get(ai.zoneHandler.nearestEnemyTile);
+            	if(tp!=null)
+                {	int enemyEscape = step - tp.distance - 2;
+	                double enemySpeed = ai.zoneHandler.nearestEnemy
+	                        .getWalkingSpeed() / AiTile.getSize();
+	
+	                double bombDuration = (double) (ownHero.getBombDuration() / 1000.0);
+	
+	                if(enemyEscape > 0
+	                        && (double) (enemyEscape / enemySpeed) >= bombDuration - 0.1)
+	                {
+	                    if(ai.pathHandler.canReachSafety())
+	                    {
+	                        ai.pathHandler.timeSuccessor.setConsiderOpponents(true);
+	                        return true;
+	                    }
+	                }
                 }
-
             }
             else if(bombRange.contains(deadEnd))
             {
