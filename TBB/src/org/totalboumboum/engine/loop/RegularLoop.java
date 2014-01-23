@@ -193,6 +193,21 @@ public class RegularLoop extends LocalLoop
 		// separation event
 		StopReplayEvent event = new StopReplayEvent();
 		RoundVariables.writeEvent(event);
+		
+// debug test		
+//updateAis();
+//try {
+//	System.out.println("AAAAAAAAAAAA");
+//	for(int z=0;z<50;z++)
+//	{	Thread.sleep(100);
+//		updateAis();
+//		System.out.println("BBBBBBBBBBBB");
+//	}
+//	System.out.println("CCCCCCCCCCC");
+//} catch (InterruptedException e) {
+//	// TODO Auto-generated catch block
+//	e.printStackTrace();
+//}
 	}
 	
 	/////////////////////////////////////////////////////////////////
