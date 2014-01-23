@@ -1776,10 +1776,6 @@ public class Launcher
  * 		  >> mais c'est déjà un peu à ça que sert successor...
  */
 
-// TODO trouver la cause du ralentissement présent à chaque premier round joué
-
-// TODO introduire une mort subite dans tous les niveaux, à cause des agents trop statiques
-
 // TODO mon agent : doit se goinfrer d'items visibles dès que possible
 // (stratégie de famine)
 // et s'il y a assez de temps
@@ -1791,3 +1787,8 @@ public class Launcher
 //	+ distribution des outils dans des classes spécialisées
 //	+ objet zone accessible depuis les gestionnaires
 //	+ tools renommé en helper
+
+/***
+ * TODO trouver la cause du ralentissement présent à chaque premier round joué
+ * >> créer des agents bidons et les exécuter genre 10 fois?
+*/
