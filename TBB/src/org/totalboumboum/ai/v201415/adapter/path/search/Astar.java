@@ -423,8 +423,10 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				// on prend le noeud situé en tête de file
 				lastSearchNode = fringe.poll();
 				// verbose : noeud courant
-				print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
-				print("           Visiting : "+lastSearchNode);
+				if(verbose)
+				{	print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
+					print("           Visiting : "+lastSearchNode);
+				}
 				
 				// mise à jour des données décrivant l'arbre
 				//if(lastSearchNode.getDepth()>treeHeight)
@@ -507,13 +509,14 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				result = finalNode.processPath();
 		}
 		
-		// verbose : temps écoulé
-		{	long after = ai.getCurrentTime();
+		if(verbose)
+		{	// temps écoulé
+			long after = ai.getCurrentTime();
 			long elapsed = after - before;
 			print("         Total elapsed time: "+elapsed+" ms");
-		}
-		// verbose : résultat
-		{	msg = "         Path: [";
+		
+			// résultat
+			msg = "         Path: [";
 			if(limitReached)
 				msg = msg + " limit reached";
 			else if(found)
@@ -526,9 +529,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 				msg = msg + " no solution found";
 			msg = msg + " ]";
 			print(msg);
-		}
-		// verbose : limites
-		{	msg = "         height="+treeHeight+" cost="+treeCost+" size="+fringeSize;
+
+			// limites
+			msg = "         height="+treeHeight+" cost="+treeCost+" size="+fringeSize;
 			msg = msg + " src="+root.getLocation();
 			msg = msg + " trgt={";
 			for(AiTile tile: endTiles) 
@@ -537,9 +540,9 @@ public final class Astar extends AiAbstractSearchAlgorithm
 			print(msg);
 			if(limitReached)
 				print("         maxHeight="+maxHeight+" maxCost="+maxCost+" maxSize="+maxNodes);
-		}
-		// verbose : fin
-		{	//if(result!=null) 
+			
+			// fin
+			//if(result!=null) 
 				print("         result="+result);
 			print("      < A* finished +++++++++++++++++++++");
 		}
