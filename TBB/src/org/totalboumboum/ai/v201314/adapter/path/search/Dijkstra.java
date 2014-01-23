@@ -264,8 +264,10 @@ public final class Dijkstra extends AiAbstractSearchAlgorithm
 				// on prend le noeud situé en tête de file
 				lastSearchNode = fringe.poll();
 				// verbose : noeud courant
-				print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
-				print("           Visiting : "+lastSearchNode);
+				if(verbose)
+				{	print("           Zone:\n"+lastSearchNode.getZoneRepresentation());
+					print("           Visiting : "+lastSearchNode);
+				}
 				
 				// mise à jour des données décrivant l'arbre
 				//if(lastSearchNode.getDepth()>treeHeight)
