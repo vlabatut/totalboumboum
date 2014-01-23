@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorFolder;
@@ -33,17 +34,33 @@ import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorMap;
 import org.totalboumboum.engine.content.feature.gesture.anime.color.ColorRule;
 
 /**
+ * This class manages all cached images.
  * 
  * @author Vincent Labatut
- *
  */
 public class ImageCache
 {	
 	/////////////////////////////////////////////////////////////////
 	// CACHED IMAGES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,CachedImage> imageMap = new HashMap<String, CachedImage>();
+	/** Map of all images currently in memory */
+	private Map<String,CachedImage> imageMap = new HashMap<String, CachedImage>();
 
+	/**
+	 * Returns the specified image from the cache, or loads it if necessary.
+	 * 
+	 * @param imagePath
+	 * 		Path of the targeted file.
+	 * @param colorRule
+	 * 		Color of the image.
+	 * @param zoom
+	 * 		Zoom factor.
+	 * @return
+	 * 		The corresponding image.
+	 * 
+	 * @throws IOException
+	 * 		Problem while loading the image.
+	 */
 	public BufferedImage retrieveImage(String imagePath, ColorRule colorRule, double zoom) throws IOException
 	{	BufferedImage result = null;
 		String path = null;
@@ -75,6 +92,14 @@ public class ImageCache
 		return result;
 	}
 
+	/**
+	 * Returns the cached image object for the specified file.
+	 * 
+	 * @param path
+	 * 		Path of the image.
+	 * @return
+	 * 		The corresponding cached image object.
+	 */
 	private CachedImage getImage(String path)
 	{	CachedImage result = imageMap.get(path);
 //System.out.println(path+": "+(result==null));
@@ -92,6 +117,9 @@ public class ImageCache
 		return result;
 	}
 	
+	/**
+	 * Clears the cache.
+	 */
     public void clear()
     {	// erase all images
 		imageMap.clear();
@@ -103,6 +131,9 @@ public class ImageCache
 		rt.gc(); 
     }
     
+    /**
+     * Cleans the cache by removing unused images.
+     */
     public void clean()
     {	// erase unused images
     	while(size>Configuration.getEngineConfiguration().getImageCacheLimit())
@@ -120,17 +151,31 @@ public class ImageCache
 	/////////////////////////////////////////////////////////////////
 	// CACHED NAMES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private LinkedList<String> imageNames = new LinkedList<String>();
+	/** Names of the cached files */
+    private LinkedList<String> imageNames = new LinkedList<String>();
 
 	/////////////////////////////////////////////////////////////////
 	// CACHE SIZE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    /** Approximate current size of the cache */
 	private double size = 0;
 	
+	/**
+	 * Returns the approximate current size of the cache.
+	 * 
+	 * @return
+	 * 		Approximate size of the cache (in terms of memory).
+	 */
 	public double getSize()
 	{	return size;		
 	}
 	
+	/**
+	 * Updates the current size of the cache.
+	 * 
+	 * @param delta
+	 * 		Change in cache size (in terms of memory).
+	 */
 	public void changeSize(double delta)
 	{	size = size + delta;
 	}
