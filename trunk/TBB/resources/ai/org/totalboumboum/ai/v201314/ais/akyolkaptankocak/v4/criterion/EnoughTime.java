@@ -65,11 +65,13 @@ public class EnoughTime extends AiCriterionBoolean<Agent>
 
         if(bombs.isEmpty())
         {
-            if(ai.zoneHandler.nearestEnemy != null)
-            {
-                return ai.zoneHandler.map.get(ai.zoneHandler.nearestBonus
-                        .getTile()).distance * 3 < ai.zoneHandler.map
-                        .get(ai.zoneHandler.nearestEnemy.getTile()).distance;
+            if(ai.zoneHandler.nearestEnemy!=null && ai.zoneHandler.nearestBonus!=null)
+            {	AiTile bTile = ai.zoneHandler.nearestBonus.getTile();
+            	TileProperty bTp = ai.zoneHandler.map.get(bTile);
+            	AiTile eTile = ai.zoneHandler.nearestEnemy.getTile();
+            	TileProperty eTp = ai.zoneHandler.map.get(eTile);
+            	if(bTp!=null && eTp!=null)
+            		return bTp.distance * 3 < eTp.distance;
             }
             return true;
         }
