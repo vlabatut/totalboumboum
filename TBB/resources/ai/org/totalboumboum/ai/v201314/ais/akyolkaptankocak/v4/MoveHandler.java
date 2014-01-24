@@ -377,16 +377,19 @@ public class MoveHandler extends AiMoveHandler<Agent>
                             }
                         }
                     }
-                    else if(ai.zoneHandler.map.get(tile).bonus < 0)
-                    {
-                        if(ownBomb.getBlast().contains(tile))
-                        {
-                            if(ai.pathHandler.canReachSafety())
-                            {
-                                ai.bombHandler.consider = true;
-                                break;
-                            }
-                        }
+                    else 
+                	{	TileProperty tp = ai.zoneHandler.map.get(tile);
+                    	if(tp!=null && tp.bonus < 0)
+	                    {
+	                        if(ownBomb.getBlast().contains(tile))
+	                        {
+	                            if(ai.pathHandler.canReachSafety())
+	                            {
+	                                ai.bombHandler.consider = true;
+	                                break;
+	                            }
+	                        }
+	                    }
                     }
                 }
             }

@@ -5,7 +5,9 @@ import java.util.Map;
 import org.totalboumboum.ai.v201314.adapter.agent.AiModeHandler;
 import org.totalboumboum.ai.v201314.adapter.data.AiHero;
 import org.totalboumboum.ai.v201314.adapter.data.AiItemType;
+import org.totalboumboum.ai.v201314.adapter.data.AiTile;
 import org.totalboumboum.ai.v201314.adapter.data.AiZone;
+import org.totalboumboum.ai.v201314.ais.akyolkaptankocak.v4.ZoneHandler.TileProperty;
 
 /**
  * This class represents choosing and changing agent's mode depending 2
@@ -81,12 +83,15 @@ public class ModeHandler extends AiModeHandler<Agent>
         if(ai.zoneHandler.nearestEnemy == null && ai.zoneHandler.bonusFlag)
             return true;
                 
-        if(ai.zoneHandler.nearestEnemy != null && ai.zoneHandler.bonusFlag)
-        {
-            if(ai.zoneHandler.map.get(ai.zoneHandler.nearestBonus.getTile()).distance
-                    + ai.zoneHandler.nearestEnemy.getBombRange() + 1 < ai.zoneHandler.map
-                        .get(ai.zoneHandler.nearestEnemyTile).distance)
-                return true;
+        if(ai.zoneHandler.nearestEnemy!=null && ai.zoneHandler.nearestBonus!=null && ai.zoneHandler.bonusFlag)
+        {	AiTile bTile = ai.zoneHandler.nearestBonus.getTile();
+        	TileProperty bTp = ai.zoneHandler.map.get(bTile);
+        	AiTile eTile = ai.zoneHandler.nearestEnemyTile;
+        	TileProperty eTp = ai.zoneHandler.map.get(eTile);
+        	if(bTp!=null && eTp!=null)
+        	{	if((bTp.distance + ai.zoneHandler.nearestEnemy.getBombRange() + 1) < eTp.distance)
+                	return true;
+        	}
         }
         
         if( ai.zoneHandler.nearestEnemy != null)

@@ -65,7 +65,7 @@ public class BlockageSecurity extends AiCriterionBoolean<Agent>
                 AiTile enemyTile = enemy.getTile();
 
                 TileProperty tp = ai.zoneHandler.map.get(enemyTile);
-                if(tp.walls == 3)
+                if(tp!=null && tp.walls == 3)
                 {
                     return true;
                 }
