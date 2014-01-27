@@ -190,24 +190,30 @@ public class RegularLoop extends LocalLoop
 			j++;
 		}
 		
+// TODO debug
+//try {
+//	System.out.println("AAAAAAAAAAAAAAA");
+//	initAis();
+//	Thread.sleep(1000);
+//	System.out.println("BBBBBBBBBBBBBBB");
+//	for(int k=0;k<10;k++)
+//	{	for(int z=0;z<players.size();z++)
+//		{	AbstractPlayer player = players.get(z);
+//			if(player instanceof AiPlayer)
+//			{	((AiPlayer)player).updateAi(false);
+//			}
+//		}
+//		System.out.println("CCCCCCCCCCCCCCC");
+//		Thread.sleep(500);
+//	}
+//	System.out.println("DDDDDDDDDDDDDDD");
+//} catch (InterruptedException e) {
+//	e.printStackTrace();
+//}
+		
 		// separation event
 		StopReplayEvent event = new StopReplayEvent();
 		RoundVariables.writeEvent(event);
-		
-// debug test		
-//updateAis();
-//try {
-//	System.out.println("AAAAAAAAAAAA");
-//	for(int z=0;z<50;z++)
-//	{	Thread.sleep(100);
-//		updateAis();
-//		System.out.println("BBBBBBBBBBBB");
-//	}
-//	System.out.println("CCCCCCCCCCC");
-//} catch (InterruptedException e) {
-//	// TODO Auto-generated catch block
-//	e.printStackTrace();
-//}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -233,7 +239,7 @@ public class RegularLoop extends LocalLoop
 			updateEngineStep();
 			updateLogs();
 			updateCelebration();
-			updateEntries();
+			updateEntrances();
 			updateSuddenDeath();
 			level.update();		
 			updateAis();
