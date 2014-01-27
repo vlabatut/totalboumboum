@@ -66,7 +66,7 @@ public class DisplayMessage extends Display
 	 * 		Object used for displaying.
 	 */
 	private static void initMessageDisplayers(VisibleLoop loop)
-	{	String texts[] = loop.getEntryTexts();
+	{	String texts[] = loop.getEntranceTexts();
 		messageDisplayers = new MessageDisplayer[texts.length];
 		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 		double coef = 0.9;
