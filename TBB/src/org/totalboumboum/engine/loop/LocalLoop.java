@@ -220,7 +220,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 			loadStepOver();
 			j++;
 		}
-		
+
 		// separation event
 		StopReplayEvent event = new StopReplayEvent();
 		RoundVariables.writeEvent(event);
@@ -229,7 +229,9 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	@Override
 	protected void startLoopInit()
 	{	super.startLoopInit();
+		
 		initAis();
+//System.out.println("Agents initialized"); // TODO >> bloquer jusqu'à ce que chaque agent ait renvoyé son résultat ?
 		initCycleHistory();
 	}
 	
@@ -347,7 +349,8 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 	 * 		Problem while capturing some agent percepts.
 	 */
 	protected void updateAis() throws IOException
-	{	if(gameStarted) // only after the round has started
+	{	
+//		if(gameStarted) // only after the round has started
 		{	aiTime = aiTime + milliPeriod;
 			boolean active[] = new boolean[players.size()];
 			Arrays.fill(active,false);
