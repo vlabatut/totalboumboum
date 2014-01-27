@@ -35,7 +35,10 @@
 	</settings>
 	<players>
 		<player file="d6aa991b-f803-4074-8259-220e648a8cd5" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="553c0fb4-5418-4e33-b244-d5f399ae40f2" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="d73fcbbf-7efc-423e-86b6-a752228a4372" color="BLACK" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="0eb14b39-3e11-4871-9535-4587250b926a" color="WHITE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="ce2dd151-dc2f-4e9d-a652-c5fdfcb3f5ad" color="PINK" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="ed343446-7b2a-4ce3-a391-5e79cbb638ea" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 	</players>
 	<levels>
 		<level pack="tournament201314" folder="classic" allowedPlayers="2 3 4 5" />
