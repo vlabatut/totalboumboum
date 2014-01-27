@@ -1423,7 +1423,7 @@ public class Level
 	 * @return
 	 * 		Time needed to appear.
 	 */
-	public double getEntryDuration(Role role)
+	public double getEntranceDuration(Role role)
 	{	double result = 0;
 		for(int row=0;row<globalHeight;row++)
 		{	for(int col=0;col<globalWidth;col++)
