@@ -378,7 +378,7 @@ System.out.println(hero+" "+hero.getId());
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
 			updateLogs();
-			updateEntries();
+			updateEntrances();
 			level.update();
 			updateEvents();
 			updateAis();
