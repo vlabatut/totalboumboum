@@ -152,11 +152,11 @@ public abstract class AiAbstractManager<V, T extends Serializable>
 	/////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** Objet implementant le comportement de l'agent */
+    /** Objet implémentant le comportement de l'agent */
 	private Callable<V> ai;
     /** Gestionnaire de threads pour exécuter l'agent */
     private ExecutorService executorAi = null;
-    /** Future utilisé pour récupérer le résultat de l'agent */
+    /** Objet utilisé pour récupérer le résultat de l'agent */
     private Future<V> futureAi = null;
     /** Indique si cet agent était en pause */
     private boolean paused = false;
@@ -183,6 +183,8 @@ public abstract class AiAbstractManager<V, T extends Serializable>
     	
     	// on lance un calcul bidon pour initialiser le thread
     	makeCall();
+    	
+    	// on attend qu'il se termine (?)
     }
     
 	/**
