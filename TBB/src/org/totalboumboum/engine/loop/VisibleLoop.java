@@ -270,7 +270,7 @@ public abstract class VisibleLoop extends Loop
 	 * Stuff to be initialized once the panel is set
 	 */
 	protected void finishLoopInit()
-	{	initEntries();
+	{	initEntrances();
 		initDisplayManager();
 	}
 	
@@ -318,6 +318,27 @@ public abstract class VisibleLoop extends Loop
 			
 			// finish init (stuff requiring the panel)
 			finishLoopInit();
+			
+// debug stuff			
+//try {
+//	System.out.println("AAAAAAAAAAAAAAA");
+//	((RegularLoop)this).initAis();
+//	Thread.sleep(1000);
+//	System.out.println("BBBBBBBBBBBBBBB");
+//	for(int k=0;k<20;k++)
+//	{	for(int z=0;z<players.size();z++)
+//		{	AbstractPlayer player = players.get(z);
+//			if(player instanceof AiPlayer)
+//			{	((AiPlayer)player).updateAi(false);
+//			}
+//		}
+//		System.out.println("CCCCCCCCCCCCCCC");
+//		Thread.sleep(500);
+//	}
+//	System.out.println("DDDDDDDDDDDDDDD");
+//} catch (InterruptedException e) {
+//	e.printStackTrace();
+//}
 			
 			// start the game
 			process();
@@ -1134,81 +1155,88 @@ public abstract class VisibleLoop extends Loop
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ENTRY			/////////////////////////////////////////////
+	// ENTRANCES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Order of the roles for the before-game sprite entry */
-	protected Role[] entryRoles;
+	/** Order of the roles for the before-game sprite entrance */
+	protected Role[] entranceRoles;
 	/** Moment each type of sprite appears at the begining of a round */ 
-	protected Double[] entryDelays;
-	/** Index of the current step in these entries */
-	protected int entryIndex = 0;
+	protected Double[] entranceDelays;
+	/** Index of the current step in these entrances */
+	protected int entranceIndex = 0;
 	/** Text displayed before game starts */
-	protected String[] entryTexts;
+	protected String[] entranceTexts;
 	
 	/**
 	 * Handles how sprites enter the zone.
 	 */
-	protected void initEntries()
-	{	entryIndex = 0;
-		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
-		entryDelays = new Double[]{0d,0d,0d,0d,0d,0d,GameData.READY_TIME,GameData.SET_TIME,GameData.GO_TIME};
-		entryTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
+	protected void initEntrances()
+	{	entranceIndex = 0;
+		entranceRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
+		entranceDelays = new Double[]{0d,0d,0d,0d,0d,0d,GameData.READY_TIME,GameData.SET_TIME,GameData.GO_TIME};
+		entranceTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
 		// set the roles
-		for(int i=0;i<entryRoles.length;i++)
-		{	double duration = level.getEntryDuration(entryRoles[i]);
-//System.out.println(entryRoles[i]+":"+duration);
-			if(i<entryRoles.length-1)
+		for(int i=0;i<entranceRoles.length;i++)
+		{	double duration = level.getEntranceDuration(entranceRoles[i]);
+//System.out.println(entranceRoles[i]+":"+duration);
+			if(i<entranceRoles.length-1)
 				duration = duration/2; //so that sprites appear almost at the same time
-			entryDelays[i+1] = duration/*+Configuration.getEngineConfiguration().getMilliPeriod()*/;// a little more time, just too be sure it goes OK
-			//entryTexts[i] = entryRoles[i].toString(); //actually not used, but hey...
+			entranceDelays[i+1] = duration/*+Configuration.getEngineConfiguration().getMilliPeriod()*/;// a little more time, just too be sure it goes OK
+			//entranceTexts[i] = entranceRoles[i].toString(); //actually not used, but hey...
 		}
 		// unset the messages (for quicklaunch)
-		for(int i=entryRoles.length;i<entryTexts.length;i++)
-		{	if(entryTexts[i]==null)
-				entryDelays[i+1] = 0d;			
+		for(int i=entranceRoles.length;i<entranceTexts.length;i++)
+		{	if(entranceTexts[i]==null)
+				entranceDelays[i+1] = 0d;			
 		}
-//for(int i=0;i<entryDelays.length;i++)
-//	System.out.println("entryDelays["+i+"]="+entryDelays[i]);
+		
+// TODO debug
+//for(int i=0;i<entranceDelays.length;i++)
+//	System.out.println("entranceDelays["+i+"]="+entranceDelays[i]);
+		
+//for(int i=0;i<entranceRoles.length;i++)
+//	entranceDelays[i] = entranceDelays[i] + 500;
+		
+entranceDelays[1] = entranceDelays[1] + 5000;
 	}
 
 	/**
 	 * Display the appropriate sprites/messages
 	 * before the actual beginning of the round.
 	 */
-	protected void updateEntries()
+	protected void updateEntrances()
 	{	// general case
-		if(entryIndex<entryDelays.length)
+		if(entranceIndex<entranceDelays.length)
 		{	boolean done = false;
 			while(!done)
-			{	if(entryDelays[entryIndex]>0)
-				{	entryDelays[entryIndex] = entryDelays[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			{	if(entranceDelays[entranceIndex]>0)
+				{	entranceDelays[entranceIndex] = entranceDelays[entranceIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 					done = true;
 				}
 				else
 				{	// show next sprites
-					if(entryIndex<entryRoles.length)
+					if(entranceIndex<entranceRoles.length)
 					{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
-//System.out.println(totalTime+": "+entryRoles[entryIndex]);		
+//System.out.println(totalEngineTime+": "+entranceRoles[entranceIndex]);		
 						event.setDirection(Direction.NONE);
-						level.spreadEvent(event,entryRoles[entryIndex]);
+						level.spreadEvent(event,entranceRoles[entranceIndex]);
 					}
 					// show ready-set-go
-					if(entryIndex<entryDelays.length-1)
+					if(entranceIndex<entranceDelays.length-1)
 					{	SystemControlEvent event = new SystemControlEvent(SystemControlEvent.REQUIRE_NEXT_MESSAGE);
 						processEvent(event);
-//System.out.println(totalTime+": message");				
+//System.out.println(totalEngineTime+": message");				
 					}
 					// start the game
-					if(entryIndex==entryDelays.length-1) 
+					if(entranceIndex==entranceDelays.length-1) 
 					{	SystemControlEvent controlEvent = new SystemControlEvent(SystemControlEvent.REQUIRE_NEXT_MESSAGE);
 						processEvent(controlEvent);
-//System.out.println(totalTime+": start");				
+System.out.println(totalEngineTime+": start");				
 						EngineEvent engineEvent = new EngineEvent(EngineEvent.ROUND_START);
 						level.spreadEvent(engineEvent);
 						gameStarted = true;
 						done = true;
 					}
-					entryIndex++;
+					entranceIndex++;
 				}
 			}
 		}
@@ -1221,8 +1249,8 @@ public abstract class VisibleLoop extends Loop
 	 * @return
 	 * 		Texts displayed at the very begining of a round.
 	 */
-	public String[] getEntryTexts()
-	{	return entryTexts;
+	public String[] getEntranceTexts()
+	{	return entranceTexts;
 	}
 	
 	/////////////////////////////////////////////////////////////////
