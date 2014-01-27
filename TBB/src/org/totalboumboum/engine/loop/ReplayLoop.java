@@ -198,7 +198,7 @@ public class ReplayLoop extends VisibleLoop implements ReplayedLoop
 	protected void update()
 	{	if(!getEnginePause() || getEngineStep())
 		{	updateCancel();
-			updateEntries();
+			updateEntrances();
 			level.update();
 			updateEvents();
 			updateStats();
