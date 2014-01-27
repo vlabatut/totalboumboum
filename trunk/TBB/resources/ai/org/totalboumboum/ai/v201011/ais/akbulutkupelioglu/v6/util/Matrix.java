@@ -255,29 +255,35 @@ public class Matrix implements Cloneable
 	 * 		description manquante !
 	 */
 	public List<Coordinate> getMax(int count, DistanceMatrix dm) throws StopRequestException
-	{
-		monIa.checkInterruption();
-		ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
-		HashMap<Coordinate, Integer> distanceMap = new HashMap<Coordinate, Integer>();
-		for(int i=0; i<height; i++)
-		{
-			monIa.checkInterruption();
-			for(int j=0; j<width; j++)
+	{	monIa.checkInterruption();
+		
+		if(dm!=null)
+		{	ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
+			HashMap<Coordinate, Integer> distanceMap = new HashMap<Coordinate, Integer>();
+			for(int i=0; i<height; i++)
 			{
 				monIa.checkInterruption();
-				if(matrix[i][j]>=0)
+				for(int j=0; j<width; j++)
 				{
-					Coordinate c =new Coordinate(i,j, matrix[i][j], monIa); 
-					coords.add(c);
-					distanceMap.put(c, dm.getElement(c.x, c.y));
+					monIa.checkInterruption();
+					if(matrix[i][j]>=0)
+					{
+						Coordinate c = new Coordinate(i,j, matrix[i][j], monIa); 
+						coords.add(c);
+						int elt = dm.getElement(c.x, c.y);
+						distanceMap.put(c, elt);
+					}
 				}
 			}
+			
+			
+			Collections.sort(coords, new CoordinateComparator(monIa,null));
+			Collections.reverse(coords);
+			return coords.subList(0, Math.min(count, coords.size()));
 		}
 		
-		
-		Collections.sort(coords, new CoordinateComparator(monIa,null));
-		Collections.reverse(coords);
-		return coords.subList(0, Math.min(count, coords.size()));
+		else
+			return new ArrayList<Coordinate>();
 	}
 	/**
 	 * Gets all the positive elements.
