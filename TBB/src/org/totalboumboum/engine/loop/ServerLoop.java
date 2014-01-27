@@ -269,7 +269,7 @@ public class ServerLoop extends LocalLoop
 		{	updateCancel();
 			updateLogs();
 			updateCelebration();
-			updateEntries();
+			updateEntrances();
 			updateSuddenDeath();
 			remoteControls.update();
 			level.update();		
