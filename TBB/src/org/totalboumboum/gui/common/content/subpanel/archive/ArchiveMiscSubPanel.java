@@ -66,12 +66,25 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object displayed by this panel */
 	private GameArchive gameArchive;
-
+	
+	/**
+	 * Returns the object displayed by this panel.
+	 * 
+	 * @return
+	 * 		Object displayed by this panel.
+	 */
 	public GameArchive getGameArchive()
 	{	return gameArchive;	
 	}
 	
+	/**
+	 * Changes the object displayed by this panel.
+	 * 
+	 * @param gameArchive
+	 * 		Object displayed by this panel.
+	 */
 	public void setGameArchive(GameArchive gameArchive)
 	{	this.gameArchive = gameArchive;
 		
@@ -114,9 +127,23 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
 			}
 			if(showConfrontations)
-			{	String matches = Integer.toString(gameArchive.getPlayedMatches());
-				String rounds = Integer.toString(gameArchive.getPlayedRounds());
-				String text = matches+" : "+rounds;
+			{	String text = "";
+				int playedMatches = gameArchive.getPlayedMatches();
+				String playedMatchesStr = Integer.toString(playedMatches);
+				text = text + playedMatchesStr;
+				Integer totalMatches = gameArchive.getTotalMatches();
+				if(totalMatches!=null)
+				{	String totalMatchesStr = Integer.toString(totalMatches);
+					text = text + "/" + totalMatchesStr;
+				}
+				int playedRounds = gameArchive.getPlayedRounds();
+				String playedRoundsStr = Integer.toString(playedRounds);
+				text = text + " : " + playedRoundsStr;
+				Integer totalRounds = gameArchive.getTotalRounds();
+				if(totalRounds!=null)
+				{	String totalRoundsStr = Integer.toString(totalRounds);
+					text = text + "/" + totalRoundsStr;
+				}
 				textValues.add(text);
 				tooltipValues.add(text);
 			}
@@ -197,30 +224,69 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether to show the tournament name */
 	private boolean showName = true;
+	/** Whether to show the tournament type */
 	private boolean showType = true;
+	/** Whether to show the confrontation summary */
 	private boolean showConfrontations = true;
+	/** Whether to show the tournament start date */
 	private boolean showStart = true;
+	/** Whether to show the tournament end date */
 	private boolean showSave = true;
 
+	/**
+	 * Enables/disables the displaying of the
+	 * tournament name.
+	 * 
+	 * @param showName
+	 * 		Whether to show the tournament name.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
+	/**
+	 * Enables/disables the displaying of the
+	 * tournament type.
+	 * 
+	 * @param showType
+	 * 		Whether to show the tournament type.
+	 */
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
 	}
 
+	/**
+	 * Enables/disables the displaying of the
+	 * confrontation summary.
+	 * 
+	 * @param showConfrontations
+	 * 		Whether to show the confrontation summary.
+	 */
 	public void setShowConfrontations(boolean showConfrontations)
 	{	this.showConfrontations = showConfrontations;
 	}
 
+	/**
+	 * Enables/disables the displaying of the
+	 * tournament start date.
+	 * 
+	 * @param showStart
+	 * 		Whether to show the tournament start date.
+	 */
 	public void setShowStart(boolean showStart)
 	{	this.showStart = showStart;
 	}
 
+	/**
+	 * Enables/disables the displaying of the
+	 * tournament end date.
+	 * 
+	 * @param showSave
+	 * 		Whether to show the tournament end date.
+	 */
 	public void setShowSave(boolean showSave)
 	{	this.showSave = showSave;
 	}
-
 }

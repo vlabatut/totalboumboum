@@ -62,12 +62,25 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Object displayed in this panel */
 	private GameArchive gameArchive;
-
+	
+	/**
+	 * Returns the object displayed by this panel.
+	 * 
+	 * @return
+	 * 		Object displayed by this panel.
+	 */
 	public GameArchive getGameArchive()
 	{	return gameArchive;	
 	}
 	
+	/**
+	 * Changes the object displayed by this panel.
+	 * 
+	 * @param gameArchive
+	 * 		Object displayed by this panel.
+	 */
 	public void setGameArchive(GameArchive gameArchive)
 	{	this.gameArchive = gameArchive;
 		
