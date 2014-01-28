@@ -1678,8 +1678,6 @@ public class Launcher
  * TODO >> individual vs. collectif (pr les courbes) 
  */
 
-// TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
-
 // TODO affichage ingame API : temps détaillés >> afficher un agent à la fois
 // 		>> comment (ergonomie) ? 
 //			combi avec les touches numériques ? >> pas pratique). 
@@ -1691,11 +1689,6 @@ public class Launcher
 
 // TODO faire apparaitre graphiquement les résultats d'un round en surimpression sur la zone de jeu
 // TODO insérer une animation optionnelle de présentation des participants au round
-
-//TODO JProfiler:
-//	- voir ce qui prend du temps à l'ouverture des stats
-//	- voir ce qui cause inéluctablement des ralentissements lors du premier round
-
 
 // TODO auto-advance: 
 //	- faire dessiner systématiquement un dessin en surimpression
@@ -1744,10 +1737,11 @@ public class Launcher
  * 		+ proposer d'enregistrer les stats d'une confrontation
  * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
  * 		+ capture d'écran des graphiques ? dessiner directement dans un panel puis sauver. à voir pour la couleur du fond ?
- * 		+ tester tournoi ligue
  */
 
-// TODO interface : indiquer match ou round x/y, quand c'est possible
+// TODO tournoi IA: limiter le nombre de points plutot que le nombre de manches
+// 		>> ça permet d'allonger les matches serrés et de réduire les matches dominés
+//		>> on peut faire une large sélection de niveaux, histoire d'éviter les répétitions
 
 /*
  * TODO POSTS SITE
@@ -1788,7 +1782,13 @@ public class Launcher
 //	+ objet zone accessible depuis les gestionnaires
 //	+ tools renommé en helper
 
-/***
- * TODO trouver la cause du ralentissement présent à chaque premier round joué
- * >> créer des agents bidons et les exécuter genre 10 fois?
-*/
+//TODO JProfiler:
+//- voir ce qui prend du temps à l'ouverture des stats
+//- voir ce qui cause inéluctablement des ralentissements lors du premier round
+
+//TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
+
+//TODO tester 
+// 	+ interface : indiquer match ou round x/y, quand c'est possible
+//  + corriger tournoi ligue
+//  + tester tournoi ligue

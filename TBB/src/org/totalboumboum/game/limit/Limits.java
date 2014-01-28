@@ -163,6 +163,24 @@ public class Limits<T extends Limit> implements Serializable
 		return result;
 	}
 	
+	/**
+	 * Returns the confrontation-related limit contained
+	 * in this object (if there's one).
+	 * 
+	 * @return
+	 * 		A confrontation limit object.
+	 */
+	public LimitConfrontation getConfrontationLimit()
+	{	LimitConfrontation result = null;
+		Iterator<T> it = limits.iterator();
+		while(it.hasNext() && result==null)
+		{	T limit = it.next();
+			if(limit instanceof LimitConfrontation)
+				result = (LimitConfrontation)limit;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

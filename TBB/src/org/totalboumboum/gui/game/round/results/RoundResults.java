@@ -21,6 +21,10 @@ package org.totalboumboum.gui.game.round.results;
  * 
  */
 
+import org.totalboumboum.game.limit.LimitConfrontation;
+import org.totalboumboum.game.limit.Limits;
+import org.totalboumboum.game.limit.MatchLimit;
+import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -79,15 +83,29 @@ public class RoundResults extends EntitledDataPanel
 	{	this.round = round;
 		resultsPanel.setStatisticHolder(round);
 		
-		// title
+		// original title
 		this.number = number;
 		String key = GuiKeys.GAME_ROUND_RESULTS_TITLE;
 		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		
+		// possibly replace by number
 		if(number!=null)
-		{	text = text + " " + number;
+		{	// round number
+			text = text + " " + number;
 			tooltip = tooltip + " " + number;
+			// total number of rounds
+			Match match = round.getMatch();
+			Limits<MatchLimit> matchLimits = match.getLimits();
+			LimitConfrontation confLim = matchLimits.getConfrontationLimit();
+			if(confLim!=null && matchLimits.size()==1)
+			{	int max = confLim.getThreshold();
+				text = text + "/" + max;
+				tooltip = tooltip + "/" + max;
+			}
 		}
+		
+		// update title
 		setTitleText(text,tooltip);
 	}
 	
