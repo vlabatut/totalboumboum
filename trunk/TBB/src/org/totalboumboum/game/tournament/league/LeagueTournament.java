@@ -292,7 +292,7 @@ public class LeagueTournament extends AbstractTournament
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	// we use the maximal value of the
 		// minimal allowed numbers over matches
-		int max = Integer.MAX_VALUE;
+		int max = 0;
 		for(Match match: matches)
 		{	Set<Integer> temp = match.getAllowedPlayerNumbers();
 			int min = Collections.min(temp);

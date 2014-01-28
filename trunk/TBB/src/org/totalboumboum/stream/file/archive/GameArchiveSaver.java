@@ -95,6 +95,10 @@ public class GameArchiveSaver
 		Element playedElement = savePlayedElement(gameArchive);
 		result.addContent(playedElement);
 	
+		// total
+		Element totalElement = saveTotalElement(gameArchive);
+		result.addContent(totalElement);
+	
 		// dates
 		Element datesElement = saveDatesElement(gameArchive);
 		result.addContent(datesElement);
@@ -146,6 +150,28 @@ public class GameArchiveSaver
 
 		// rounds
 		String rounds = Integer.toString(gameArchive.getPlayedRounds());
+		result.setAttribute(XmlNames.ROUNDS,rounds);
+		
+		return result;
+	}
+
+	/**
+	 * Processes the played confrontations-related element of the produced XML file.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
+	private static Element saveTotalElement(GameArchive gameArchive)
+	{	Element result = new Element(XmlNames.TOTAL);
+		
+		// matches
+		String matches = Integer.toString(gameArchive.getTotalMatches());
+		result.setAttribute(XmlNames.MATCHES,matches);
+
+		// rounds
+		String rounds = Integer.toString(gameArchive.getTotalRounds());
 		result.setAttribute(XmlNames.ROUNDS,rounds);
 		
 		return result;
