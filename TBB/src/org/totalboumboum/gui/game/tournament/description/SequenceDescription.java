@@ -141,9 +141,11 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	public void setTournament(SequenceTournament tournament)
 	{	// init
 		this.tournament = tournament;
+		
 		// players
 		List<Profile> players = tournament.getProfiles();
 		playersPanel.setPlayers(players);
+		
 		// limits
 		limitsPanel.setLimits(tournament.getLimits());		
 	}

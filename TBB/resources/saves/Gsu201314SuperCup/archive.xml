@@ -21,6 +21,7 @@
 -->
 	<tournament name="Super-coupe de Galatasaray VI" type="CUP" />
 	<played matches="0" rounds="0" />
+	<total matches="99" rounds="99" />
 	<dates start="2014-01-04T10:19:18" save="2014-01-04T10:19:25" />
 	<players>
 		<player name="1314.Asıl+İzer+Yüce" />

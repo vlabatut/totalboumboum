@@ -39,12 +39,26 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * This class is used to record {@link GameArchive} objects
+ * under the form of XML files.
  * 
  * @author Vincent Labatut
- *
  */
 public class GameArchiveSaver
 {	
+	/**
+	 * Creates an XML file representing the specified {@link GameArchive} object.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accesing the files.
+	 * @throws SAXException
+	 * 		Problem while accesing the files.
+	 * @throws IOException
+	 * 		Problem while accesing the files.
+	 */
 	public static void saveGameArchive(GameArchive gameArchive) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveArchiveElement(gameArchive);
@@ -58,6 +72,14 @@ public class GameArchiveSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Processes the main element of the produced XML file.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element saveArchiveElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.ARCHIVE);
 		
@@ -84,6 +106,14 @@ public class GameArchiveSaver
 		return result;
 	}
 
+	/**
+	 * Processes the tournament-related element of the produced XML file.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element saveTournamentElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.TOURNAMENT);
 		
@@ -99,6 +129,14 @@ public class GameArchiveSaver
 		return result;
 	}
 
+	/**
+	 * Processes the played confrontations-related element of the produced XML file.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element savePlayedElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.PLAYED);
 		
@@ -113,6 +151,14 @@ public class GameArchiveSaver
 		return result;
 	}
 
+	/**
+	 * Processes the dates-related element of the produced XML file.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element saveDatesElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.DATES);
 		
@@ -129,6 +175,14 @@ public class GameArchiveSaver
 		return result;
 	}
 
+	/**
+	 * Processes the players-related element of the produced XML file.
+	 * 
+	 * @param gameArchive
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element savePlayersElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlNames.PLAYERS);
 		List<String> players = gameArchive.getPlayers();
@@ -139,6 +193,14 @@ public class GameArchiveSaver
 		return result;
 	}
 	
+	/**
+	 * Processes the player-related element of the produced XML file.
+	 * 
+	 * @param player
+	 * 		Object to record.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element savePlayerElement(String player)
 	{	Element result = new Element(XmlNames.PLAYER);
 		

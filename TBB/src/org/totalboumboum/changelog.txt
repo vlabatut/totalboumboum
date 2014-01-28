@@ -604,6 +604,9 @@
  		- Correction d'un bug : bouton "suivant" reste désactivé après l'auto-complete de la sélection des joueurs
  		- Possibilité de changer l'alignement des labels
  		- Noms des joueurs alignés à gauche (et non plus centrés)
+ 		- Affichage du n° confrontation / nombre total confrontations pendant la partie et dans les sauvegardes
  	- moteur :
  		- correction d'un bug graphique pour les explosions de portée 0
+ 		- réforme des tournois de type ligue
+ 		
  	

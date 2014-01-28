@@ -21,6 +21,7 @@
 -->
 	<tournament name="Tournoi de Galatasaray VII" type="CUP" />
 	<played matches="9" rounds="9" />
+	<total matches="99" rounds="99" />
 	<dates start="2014-01-03T14:06:33" save="2014-01-03T15:26:03" />
 	<players>
 		<player name="1314.Akyol+Kaptan+Koçak" />

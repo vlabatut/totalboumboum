@@ -21,6 +21,7 @@
 -->
 	<tournament name="Super-coupe de Galatasaray V" type="CUP" />
 	<played matches="0" rounds="0" />
+	<total matches="99" rounds="99" />
 	<dates start="2014-01-05T11:40:01" save="2014-01-05T11:40:15" />
 	<players>
 		<player name="1213.Oral+Özuğur" />

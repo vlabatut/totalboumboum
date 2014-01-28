@@ -21,6 +21,7 @@
 -->
 	<tournament name="Tournoi de Galatasaray IV" type="CUP" />
 	<played matches="0" rounds="0" />
+	<total matches="99" rounds="99" />
 	<dates start="2014-01-05T11:32:27" save="2014-01-05T11:32:35" />
 	<players>
 		<player name="1011.Kesimal+Varol" />

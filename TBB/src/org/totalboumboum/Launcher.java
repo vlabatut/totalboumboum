@@ -1652,12 +1652,10 @@ public class Launcher
 	
 	
 	
-	// TODO toutes Loops >> effacer tous les objets inutiles dans finish()
 	
 	
 	
 	// TODO tester les confs de tournois/partie rapide sans l'option "utiliser les réglages précédents"
-	
 	
 	/**
 	 * TODO bug d'animation quand on accélère le temps, pour les blocs rebondissant
@@ -1669,7 +1667,9 @@ public class Launcher
 	 */
 
 // TODO ajouter un bouton "position" (rang) dans les plots d'évolution (particulièrement pertinent pour le tournoi championat ou tournante)
+
 // TODO les scores obtenus lors des tie breaks sont-ils comptés dans les stats du tournoi?
+//		>> il ne faudrait pas (ou alors optionnel)
 
 /* TODO
  * graphiques intéressant :
@@ -1699,18 +1699,6 @@ public class Launcher
 //		>> comment savoir quand on lieu les màj glicko-2 ?
 // TODO stats >> cumuler les victoires/nul/défaites dans un même plot? pareil pour tueur/tué ?
 
-// TODO agent
-//	- on pourrait blacklister certaines cases temporairement
-//		ex: case dans un tunnel peut permettre d'éliminer adversaire 1
-//		mais adversaire 2 est en embuscade derrière
-//		>> vaut mieux se retourner contre lui
-// 	- stratégie d'attaque :
-//		poser plein de bombes à la file, comme joey
-//		ex: cul de sac, on bloque l'adversaire
-//		on va se faire sauter en s'enfuyant du cul de sac (trop long)
-//		en posant une série de bombes, on ralentit l'explosion suffisament pour gagner
-//		(s'il ne reste qu'un seul adversaire)
-
 // TODO situation
 //	faut garder le cache avec les bombes, car leur blast sera important plusieurs fois
 //	et ils coutent cher à calculer dans le sens où il faut un modèle
@@ -1719,15 +1707,13 @@ public class Launcher
 // aller, et donc elle n'exploserait p-ê pas si vite. donc en terme de recherche de chemin,
 // ça peut être la galère... ou pas. peut être qu'il faut simplifier, à ce niveau si prospectif.
 
-//TODO écrire un agent très simple, Direct, qui pose une bombe le plus loin possible de l'adversaire
-
 /*
  * TODO tournoi ligue
  * 		+ afficher quelques infos dans la page principale de la gui (pas besoin de limite à proprement parler)
  * 			+ split horizontal
  * 			+ un côté général + un côté match courant (nombre et taille des confrontations)
  * 		+ permettre de contraindre les nombres de joueurs dans matches et rounds (XML)
- * 		+ permettre des nombres de confrontations différents en fonction du match (on recalcule à chaque fois, quoi)
+ * 
  * TODO tournoi coupe
  * 		+ remplacer l'affichage des matchs, car déjà dispo dans partie résultats
  * 		+ à la place, mettre des infos générales sur le tournoi
@@ -1752,27 +1738,44 @@ public class Launcher
  * 		+ API: représentation des chemins (avec les pauses et tout)
  * 		+ évènements de mort subite aléatoires
  * 		+ vidéos du tournoi
+ * 		+ tournoi ligue (l'histoire du nombre de matches inférieur au nombre de combis)
  */ 
 
-// TODO A*: insérer un critère primaire permettant de désavantager les chemins passant par certaines cases?
-// TODO corriger simplet (pour les qualifs)
-
 /**
- * TODO réforme de la classe zone:
- * 		- en fait, il faudra bien re-créer les outils pour chaque zone,
- * 		  car certains sont dépendants du contenu de la zone et pas seulement de ses dimensions.
- * 		- ou alors, on réutilise ceux de la zone originale, et on copie ce qui a besoin de l'être
  * TODO réforme de A*:
- * 		- proposer de définir un critère primaire placé avant la distance/temps
- * 		- virer les options de racroc du type cout supplémentaire pour certains sprites
+ * 		- proposer de définir un critère primaire placé avant la distance/temps*
+ * 		  but : désavantager les chemins passant par certaines cases
+ * 			>> ça doit rester additif pour pouvoir classer ces chemins par préférence
+ * 		- virer les options de racroc du type coût supplémentaire pour certains sprites
  * 		- mais garder la possibilité de les considérer comme des obstacles ?
  * 		  >> proposer d'écrire une classe qui décide de ce qui est un obstacle ?
  * 		  >> mais c'est déjà un peu à ça que sert successor...
  */
 
-// TODO mon agent : doit se goinfrer d'items visibles dès que possible
-// (stratégie de famine)
-// et s'il y a assez de temps
+// TODO MES AGENTS 
+//		+ le bon: 
+//			- doit se goinfrer d'items visibles dès que possible (stratégie de famine)
+// 			  et s'il reste assez de temps.
+//			- on pourrait blacklister certaines cases temporairement
+//				ex: case dans un tunnel peut permettre d'éliminer adversaire 1
+//				mais adversaire 2 est en embuscade derrière
+//				donc, vaut mieux se retourner contre lui
+//			- stratégie d'attaque :
+//				poser plein de bombes à la file, comme joey
+//				ex1: cul de sac, on bloque l'adversaire
+//				on va se faire sauter en s'enfuyant du cul de sac (trop long)
+//				en posant une série de bombes, on ralentit l'explosion suffisament pour gagner
+//				(s'il ne reste qu'un seul adversaire)
+//				ex2: niveau "hurry"
+//		+ simplet:
+//			- corriger le problème apparaissant dans certaines qualifs
+//			  ne poser une bombe que si pas de menace directe et bloquante
+//		+ direct:
+//			- agent très simple posant une bombe le plus loin possible de l'adversaire
+//		+ piégeur:
+//			- attend que l'adversaire pose une bombe et avance vers lui, et alors le bloque
+//			  en posant lui-même une bombe.
+
 
 // TODO afficher les stats de confrontations individuelles entre les joueurs participants à un round
 // genre : combien de fois x a battu y, etc.
@@ -1786,9 +1789,11 @@ public class Launcher
 //- voir ce qui prend du temps à l'ouverture des stats
 //- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
-//TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
+//TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, 
+// 		il faudrait plutot mettre les points.
+//		>> voir aussi la consistance avec le point processor, s'il y en a 1.
 
 //TODO tester 
 // 	[[+ interface : indiquer match ou round x/y, quand c'est possible]]
-//  + corriger tournoi ligue
-//  + tester tournoi ligue
+//  [[+ tester tournoi ligue]]
+//  [[+ rajouter le "/total" dans les xml d'enregistrement de partie]]
