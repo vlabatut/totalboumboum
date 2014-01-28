@@ -63,7 +63,7 @@ import org.totalboumboum.tools.time.TimeUnit;
 /**
  * In this tournament, all selected
  * players play a series of matches.
- * kind of like a league, but all players
+ * Kind of like a league, but all players
  * play all matches.
  * 
  * @author Vincent Labatut

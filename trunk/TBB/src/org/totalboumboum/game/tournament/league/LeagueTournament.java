@@ -163,6 +163,8 @@ public class LeagueTournament extends AbstractTournament
 		
 		// check limits
 		if(currentIndex>=matches.size())
+//TODO matches not necessarily matches the total number of matches in the tournament
+//TODO must decide if several prototypical matches are allowed for a given league tournament			
 		{	float[] points;
 			if(pointsProcessor!=null)
 				points = pointsProcessor.process(this);
@@ -643,6 +645,19 @@ public class LeagueTournament extends AbstractTournament
 	{	matches.add(match);
 	}
 
+	/**
+	 * Returns the total number of matches to be played
+	 * in this tournament.
+	 * 
+	 * @return
+	 * 		Total number of matches played during this tournament.
+	 */
+	public int getTotalMatchCount()
+	{	int result;
+		x
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CONFRONTATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

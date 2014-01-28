@@ -27,7 +27,7 @@ import org.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
  * This limit is based on the number of confrontations during a tournament or match.
- * for example, a match can be limited to 10 rounds, or a sequence tournament to 5 matches.
+ * For example, a match can be limited to 10 rounds, or a sequence tournament to 5 matches.
  * 
  * @author Vincent Labatut
  */
