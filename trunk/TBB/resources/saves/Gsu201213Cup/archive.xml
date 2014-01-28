@@ -21,6 +21,7 @@
 -->
 	<tournament name="Tournoi de Galatasaray VI" type="CUP" />
 	<played matches="0" rounds="0" />
+	<total matches="99" rounds="99" />
 	<dates start="2014-01-05T11:38:08" save="2014-01-05T11:38:24" />
 	<players>
 		<player name="1213.Cınar+Yalçın" />

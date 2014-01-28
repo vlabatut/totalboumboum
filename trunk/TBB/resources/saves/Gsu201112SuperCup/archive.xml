@@ -21,6 +21,7 @@
 -->
 	<tournament name="Super-coupe de Galatasaray IV" type="SINGLE" />
 	<played matches="0" rounds="0" />
+	<total matches="99" rounds="99" />
 	<dates start="2014-01-05T11:36:22" save="2014-01-05T11:36:34" />
 	<players>
 		<player name="0708.Bingöl+Ketenci" />

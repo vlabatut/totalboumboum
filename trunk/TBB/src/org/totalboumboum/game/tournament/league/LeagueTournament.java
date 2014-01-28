@@ -82,13 +82,13 @@ import org.xml.sax.SAXException;
  * <br/>
  * Concerning the number of confrontations, i.e. the number of
  * times the same match is repeated, it can be either the total
- * number of possible combinations of k (players in on match)
+ * number of possible combinations of k (players in one match)
  * amongst n (total number of players for the whole tournament).
  * Sometimes, it is possible to use less than all these combinations,
  * though. For example, if we consider n=6 and k=3 (6 players in
  * the tournament, 3 in each match), then the number of combinations
  * is 20, but we can have all players play against all others in
- * only 10 confrontations.
+ * only 10 matches.
  * 
  * @author Vincent Labatut
  */
@@ -98,20 +98,20 @@ public class LeagueTournament extends AbstractTournament
 
 	/**
 	 * Builds a new league tournament object.
-	 * Possible reads the confrontation maps from
+	 * Possible reads the repetition maps from
 	 * a file, if needed.
 	 * 
 	 * @throws IOException
-	 * 		Problem while loading the confrontation maps. 
+	 * 		Problem while loading the repetition maps. 
 	 * @throws SAXException 
-	 * 		Problem while loading the confrontation maps. 
+	 * 		Problem while loading the repetition maps. 
 	 */
 	public LeagueTournament() throws SAXException, IOException
-	{	loadConfrontationMaps();
+	{	loadRepetitionMaps();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// GAME				/////////////////////////////////////////////
+	// GAME		/////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void init()
@@ -121,7 +121,7 @@ public class LeagueTournament extends AbstractTournament
 		if(randomizePlayers)
 			Collections.shuffle(profiles);
 	
-		// matches
+		// matches and tbeir repetitions
 		initMatches();
 		
 		// stats
@@ -132,15 +132,16 @@ public class LeagueTournament extends AbstractTournament
 	@Override
 	public void progress()
 	{	if(!isOver())
-		{	// get players for next match
-			Set<Integer> players = confrontations.get(confCount);
+		{	// get players for next repetition (effective match)
+			List<Set<Integer>> seq = repetitions.get(currentIndex);
+			Set<Integer> players = seq.get(confCount);
 			List<Profile> prof = new ArrayList<Profile>();
 			for(Integer idx: players)
 			{	Profile profile = profiles.get(idx);
 				prof.add(profile);
 			}
 			
-			// set up next match
+			// set up next repetition (effective match)
 			Match match = matches.get(currentIndex);
 			currentMatch = match.copy();
 			currentMatch.init(prof);
@@ -148,13 +149,15 @@ public class LeagueTournament extends AbstractTournament
 			
 			// update match/conf counts
 			confCount++;
-			if(confCount==confrontations.size())
+			if(confCount==seq.size())
 			{	confCount = 0;
 				currentIndex++;
 			}
 		}
 	}
 
+// TODO la manière employée dans les panels pour la coupe est elle compatible ?
+	
 	@Override
 	public void matchOver()
 	{	// update stats
@@ -163,8 +166,6 @@ public class LeagueTournament extends AbstractTournament
 		
 		// check limits
 		if(currentIndex>=matches.size())
-//TODO matches not necessarily matches the total number of matches in the tournament
-//TODO must decide if several prototypical matches are allowed for a given league tournament			
 		{	float[] points;
 			if(pointsProcessor!=null)
 				points = pointsProcessor.process(this);
@@ -267,34 +268,40 @@ public class LeagueTournament extends AbstractTournament
 	{	this.randomizePlayers = randomizePlayers;
 	}
 
-	/**
-	 * Returns the allowed numbers of players
-	 * for the matches of this tournament.
-	 * 
-	 * @return
-	 * 		Set of allowed number of players.
-	 */
-	public Set<Integer> getMatchesAllowedPlayerNumbers()
-	{	Set<Integer> result = new TreeSet<Integer>();
-		
-		for(int i=2;i<=GameData.MAX_PROFILES_COUNT;i++)
-			result.add(i);
-		for(Match m:matches)
-		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
-			result.retainAll(temp);			
-		}
-		
-		return result;			
-	}
+//	/**
+//	 * Returns the allowed numbers of players
+//	 * for the matches of this tournament.
+//	 * 
+//	 * @return
+//	 * 		Set of allowed number of players.
+//	 */
+//	public Set<Integer> getMatchesAllowedPlayerNumbers()
+//	{	Set<Integer> result = new TreeSet<Integer>();
+//		
+//		for(int i=2;i<=GameData.MAX_PROFILES_COUNT;i++)
+//			result.add(i);
+//		for(Match m:matches)
+//		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
+//			result.retainAll(temp);			
+//		}
+//		
+//		return result;			
+//	}
 
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
-	{	Set<Integer> result = getMatchesAllowedPlayerNumbers();
+	{	// we use the maximal value of the
+		// minimal allowed numbers over matches
+		int max = Integer.MAX_VALUE;
+		for(Match match: matches)
+		{	Set<Integer> temp = match.getAllowedPlayerNumbers();
+			int min = Collections.min(temp);
+			max = Math.max(max,min);
+		}
 		
-		int min = Collections.min(result);
-		min = Math.max(min,2);
-		result = new TreeSet<Integer>();
-		for(int i=min;i<=GameData.MAX_PROFILES_COUNT;i++)
+		// anything larger is fine, since it can be broken down into smaller numbers
+		Set<Integer> result = new TreeSet<Integer>();
+		for(int i=max;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		
 		return result;			
@@ -576,62 +583,31 @@ public class LeagueTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	/** Prototype matches for this tournament */ 
 	private List<Match> matches = new ArrayList<Match>();
-	/** Number of confrontations played for the current match */
+	/** Number of times the current match was played (with different players) */
 	private int confCount;
 
 	/**
 	 * Initializes the matches of this tournament.
+	 * It also processes the repetitions of these matches and their order.
 	 */
 	private void initMatches()
-	{	// matches
+	{	// resets matches
 		if(randomizeMatches)
 			randomizeMatches();
 		currentIndex = 0;
 		playedMatches.clear();
 		
-		// confrontations
-		int n = profiles.size();
-		List<Integer> ks = new ArrayList<Integer>(getMatchesAllowedPlayerNumbers());
-		confrontations = null;
-		// try to minimize the number of matches
-		if(minimizeConfrontations)
-		{	int matchNbr = Integer.MAX_VALUE;
-			Map<Integer,List<Set<Integer>>> trnmt = confrontationMaps.get(n);
-			for(Integer k: ks)
-			{	List<Set<Integer>> matches = trnmt.get(k);
-				int tempMatchNbr = matches.size();
-				if(tempMatchNbr<matchNbr)
-				{	matchNbr = tempMatchNbr;
-					confrontations = matches;
-				}
-			}
-		}
-		// or choose all possible combinations (might be quite a long tournament !)
-		else
-		{	int matchNbr = Integer.MAX_VALUE;
-			int combis[][] = null;
-			for(Integer k: ks)
-			{	int tempCombis[][] = CombinatoricsTools.getCombinations(k, n);
-				int tempMatchNbr = tempCombis.length;
-				if(tempMatchNbr<matchNbr)
-				{	matchNbr = tempMatchNbr;
-					combis = tempCombis;
-				}
-			}
-			List<Set<Integer>> matches = new ArrayList<Set<Integer>>();
-			for(int i=0;i<combis.length;i++)
-			{	Set<Integer> match = new TreeSet<Integer>();
-				for(int j=0;j<combis[i].length;j++)
-					match.add(combis[i][j]);
-				matches.add(match);
-			}
-		}
-		if(confrontationOrder==ConfrontationOrder.RANDOM)
-			randomizeConfrontations();
-		else if(confrontationOrder==ConfrontationOrder.HOMOGENEOUS)
-			homogenizeConfrontations();
-		else if(confrontationOrder==ConfrontationOrder.HETEROGENEOUS)
-			heterogenizeConfrontations();
+		// repetitions
+		repetitions = processRepetitions();
+		
+		// repetitions order
+		if(repetitionOrder==RepetitionOrder.RANDOM)
+			randomizeRepetitions();
+		else if(repetitionOrder==RepetitionOrder.HOMOGENEOUS)
+			homogenizeRepetitions();
+		else if(repetitionOrder==RepetitionOrder.HETEROGENEOUS)
+			heterogenizeRepetitions();
+		
 		confCount = 0;
 	}
 
@@ -646,48 +622,79 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	/**
-	 * Returns the total number of matches to be played
-	 * in this tournament.
+	 * Returns the total number of matches (i.e. effective matches, called repetitions,
+	 * and not prototypical matches, which are repeated as many times as needed), to be 
+	 * played in this tournament.
 	 * 
 	 * @return
 	 * 		Total number of matches played during this tournament.
 	 */
 	public int getTotalMatchCount()
-	{	int result;
-		x
+	{	List<List<Set<Integer>>> rep = repetitions;
+		if(rep == null)
+			rep = processRepetitions();
+		int result = 0;
+		for(List<Set<Integer>> m: rep)
+		{	int tmp = m.size();
+			result = result + tmp;
+		}
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CONFRONTATIONS	/////////////////////////////////////////////
+	// REPETITIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** How player confrontations affect match order */
-	private ConfrontationOrder confrontationOrder;
+	/** How match repetitions should be ordered */
+	private RepetitionOrder repetitionOrder;
 	/** Whether we should try to minimize the number of times two players meet */
-	private boolean minimizeConfrontations;
-	/** List of confrontations */
-	private List<Set<Integer>> confrontations;
-
+	private boolean minimizeRepetitions;
+	/** List of repetitions (which players play each repetition of a match) */
+	private List<List<Set<Integer>>> repetitions;
+	
 	/**
-	 * Returns the way confrontations
-	 * affect match order.
+	 * Processes the repetition sequences for the whole tournament.
 	 * 
 	 * @return
-	 * 		Confrontation ordering type.
+	 * 		List of repetition sequences.
 	 */
-	public ConfrontationOrder getConfrontationOrder()
-	{	return confrontationOrder;
+	private List<List<Set<Integer>>> processRepetitions()
+	{	List<List<Set<Integer>>> result = new ArrayList<List<Set<Integer>>>();
+		int n = profiles.size();
+		for(Match match: matches)
+		{	Set<Integer> ks = match.getAllowedPlayerNumbers();
+			// try to minimize the number of matches
+			if(minimizeRepetitions)
+			{	List<Set<Integer>> temp = minimizeRepetitions(n,ks);
+				result.add(temp);
+			}
+			
+			// or choose all possible combinations (might be quite a long tournament !)
+			else
+			{	List<Set<Integer>> temp = combiRepetitions(n,ks);
+				result.add(temp);
+			}
+		}
+		return result;
 	}
 	
 	/**
-	 * Changes the way confrontations
-	 * affect match order.
+	 * Returns the way repetitions are ordered.
 	 * 
-	 * @param confrontationOrder
-	 * 		New confrontation ordering type.
+	 * @return
+	 * 		Repetition ordering type.
 	 */
-	public void setConfrontationOrder(ConfrontationOrder confrontationOrder)
-	{	this.confrontationOrder = confrontationOrder;
+	public RepetitionOrder getRepetitionOrder()
+	{	return repetitionOrder;
+	}
+	
+	/**
+	 * Changes the way repetitions are ordered.
+	 * 
+	 * @param repetitionOrder
+	 * 		New repetition ordering type.
+	 */
+	public void setRepetitionOrder(RepetitionOrder repetitionOrder)
+	{	this.repetitionOrder = repetitionOrder;
 	}
 
 	/**
@@ -697,81 +704,162 @@ public class LeagueTournament extends AbstractTournament
 	 * @return
 	 * 		{@code true} iff the minization flag is on.
 	 */
-	public boolean getMinimizeConfrontations()
-	{	return minimizeConfrontations;
+	public boolean getMinimizeRepetitions()
+	{	return minimizeRepetitions;
 	}
 	
 	/**
 	 * Changes the flag indicating whether we should try to minimize 
 	 * the number of times two players meet.
 	 * 
-	 * @param minimizeConfrontations
+	 * @param minimizeRepetitions
 	 * 		New minimization flag value.
 	 */
-	public void setMinimizeConfrontations(boolean minimizeConfrontations)
-	{	this.minimizeConfrontations = minimizeConfrontations;
+	public void setMinimizeRepetitions(boolean minimizeRepetitions)
+	{	this.minimizeRepetitions = minimizeRepetitions;
 	}
-
+	
 	/**
-	 * Makes confrontations randomly distributed
+	 * Processes the repetition sequence of a given match,
+	 * such that the number of repetitions (i.e. match played)
+	 * is minimal. In the worst case, this corresponds to what
+	 * is returned by method {@link #combiRepetitions(int, Set)}.
+	 * 
+	 * @param n
+	 * 		Number of players in the tournament.
+	 * @param ks
+	 * 		Allowed numbers of players for the considered match.
+	 * @return
+	 * 		Repetition sequence with the minimal number of repetitions.
+	 */
+	private List<Set<Integer>> minimizeRepetitions(int n, Set<Integer> ks)
+	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		int matchNbr = Integer.MAX_VALUE;
+		Map<Integer,List<Set<Integer>>> trnmt = repetitionMaps.get(n);
+		for(Integer k: ks)
+		{	List<Set<Integer>> matches = trnmt.get(k);
+			int tempMatchNbr = matches.size();
+			if(tempMatchNbr<matchNbr)
+			{	matchNbr = tempMatchNbr;
+				result = matches;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Returns the repetition sequence for all possible combinations
+	 * of k players amongst n.
+	 * 
+	 * @param n
+	 * 		Total number of players in the tournament.
+	 * @param k
+	 * 		Number of players in the match.
+	 * @return
+	 * 		Corresponding sequence of repetitions.
+	 */
+	private List<Set<Integer>> combiRepetitions(int n, int k)
+	{	// retrieval all the combinations
+		int combis[][] = CombinatoricsTools.getCombinations(k, n);
+		
+		// put them under the appropriate form
+		List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		for(int i=0;i<combis.length;i++)
+		{	Set<Integer> match = new TreeSet<Integer>();
+			for(int j=0;j<combis[i].length;j++)
+				match.add(combis[i][j]);
+			result.add(match);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns the repetition sequence for all possible combinations.
+	 * We consider every k in ks and return the sequence containing
+	 * the smallest number of repetitions.
+	 * 
+	 * @param n
+	 * 		Total number of players in the tournament.
+	 * @param ks
+	 * 		Allowed numbers of players for the match of interest.
+	 * @return
+	 * 		Smallest sequence of repetitions.
+	 */
+	private List<Set<Integer>> combiRepetitions(int n, Set<Integer> ks)
+	{	List<Set<Integer>> result = new ArrayList<Set<Integer>>();
+		// we check each possible k and keep that with the smallest number of repetitions
+		int matchNbr = Integer.MAX_VALUE;
+		for(Integer k: ks)
+		{	List<Set<Integer>> temp = combiRepetitions(n, k);
+			if(temp.size()<matchNbr)
+			{	matchNbr = temp.size();
+				result = temp;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Makes repetitions randomly distributed
 	 * (consecutive match may or may not involve
 	 * the same players).
 	 */
-	private void randomizeConfrontations()
-	{	Collections.shuffle(confrontations);
+	private void randomizeRepetitions()
+	{	Collections.shuffle(repetitions);
 	}
 
 	/**
-	 * Makes confrontations distributed
+	 * Makes repetitions distributed
 	 * in an heterogeneous way (consecutive
 	 * matches do not involve the same players).
 	 */
-	private void heterogenizeConfrontations()
+	private void heterogenizeRepetitions()
 	{	// TODO	not implemenented yet
 	}
 	
 	/**
-	 * Makes confrontations distributed
+	 * Makes repetitions distributed
 	 * in an homogeneous way (consecutive
 	 * matches involve roughly the same players).
 	 */
-	private void homogenizeConfrontations()
+	private void homogenizeRepetitions()
 	{	// TODO	not implemenented yet
 	}
 	
 	/**
-	 * Represents the order of the confrontations.
+	 * Represents the order of the repetitions.
 	 * 
 	 * @author Vincent Labatut
 	 */
-	public enum ConfrontationOrder
+	public enum RepetitionOrder
 	{	/** Keeps the order as defined by the designer */
 		UNCHANGED,
 		/** Randomizes the order */
 		RANDOM,
-		/** (Tries to) distribute confrontations homogeneously over matches */
+		/** (Tries to) distribute repetitions homogeneously over matches */
 		HOMOGENEOUS,
-		/** (Tries to) distribute confrontations heterogeneously over matches */
+		/** (Tries to) distribute repetitions heterogeneously over matches */
 		HETEROGENEOUS;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CONFRONTATIONS	/////////////////////////////////////////////
+	// REPETITION MAP	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** Map of preprocessed confrontations (takes too long to process on demand) */
-	private Map<Integer,Map<Integer,List<Set<Integer>>>> confrontationMaps = null;
+	/** Map of preprocessed repetitions (takes too long to process on demand) */
+	private Map<Integer,Map<Integer,List<Set<Integer>>>> repetitionMaps = null;
 	
 	/**
-	 * Loads the pre-processed confrontation map, only if needed.
+	 * Loads the pre-processed repetition map, only if needed.
 	 * 
 	 * @throws SAXException
-	 * 		Problem while loading the confrontation maps. 
+	 * 		Problem while loading the repetition maps. 
 	 * @throws IOException
-	 * 		Problem while loading the confrontation maps. 
+	 * 		Problem while loading the repetition maps. 
 	 */
-	private void loadConfrontationMaps() throws SAXException, IOException
-	{	if(confrontationMaps==null)
-		{	confrontationMaps = new HashMap<Integer, Map<Integer,List<Set<Integer>>>>();
+	private void loadRepetitionMaps() throws SAXException, IOException
+	{	if(repetitionMaps==null)
+		{	repetitionMaps = new HashMap<Integer, Map<Integer,List<Set<Integer>>>>();
 			
 			// open files
 			String individualFolder = FilePaths.getMiscPath();
@@ -785,23 +873,16 @@ public class LeagueTournament extends AbstractTournament
 			
 			// complete with missing settings, using all possible combinations
 			for(int n=2;n<=GameData.MAX_PROFILES_COUNT;n++)
-			{	Map<Integer, List<Set<Integer>>> trnmt = confrontationMaps.get(n);
+			{	Map<Integer, List<Set<Integer>>> trnmt = repetitionMaps.get(n);
 				if(trnmt==null)
 				{	trnmt = new HashMap<Integer, List<Set<Integer>>>();
-					confrontationMaps.put(n, trnmt);
+					repetitionMaps.put(n, trnmt);
 				}
-				for(int k=2;k<=n;k++)
+				for(int k=2;k<n;k++)
 				{	List<Set<Integer>> matches = trnmt.get(k);
 					if(matches==null)
-					{	matches = new ArrayList<Set<Integer>>();
+					{	matches = combiRepetitions(n, k);
 						trnmt.put(k, matches);
-					}
-					int combis[][] = CombinatoricsTools.getCombinations(k, n);
-					for(int i=0;i<combis.length;i++)
-					{	Set<Integer> match = new TreeSet<Integer>();
-						for(int j=0;j<combis[i].length;j++)
-							match.add(combis[i][j]);
-						matches.add(match);
 					}
 				}
 			}
@@ -809,7 +890,7 @@ public class LeagueTournament extends AbstractTournament
 	}
 	
 	/**
-	 * Processes the XML content of the confrontation maps file.
+	 * Processes the XML content of the repetition maps file.
 	 * 
 	 * @param root
 	 * 		Root of the XML document.
@@ -835,7 +916,7 @@ public class LeagueTournament extends AbstractTournament
 		String playersStr = root.getAttributeValue(XmlNames.PLAYERS);
 		int players = Integer.parseInt(playersStr);
 		Map<Integer,List<Set<Integer>>> result = new HashMap<Integer, List<Set<Integer>>>();
-		confrontationMaps.put(players, result);
+		repetitionMaps.put(players, result);
 		
 		// process each sub-element
 		List<Element> matchesElts = root.getChildren(XmlNames.MATCHES);

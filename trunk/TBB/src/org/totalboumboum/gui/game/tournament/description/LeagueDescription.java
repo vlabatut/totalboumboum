@@ -141,9 +141,11 @@ public class LeagueDescription extends TournamentDescription<LeagueTournament> i
 	public void setTournament(LeagueTournament tournament)
 	{	// init
 		this.tournament = tournament;
+		
 		// players
 		List<Profile> players = tournament.getProfiles();
 		playersPanel.setPlayers(players);
+		
 		// limits
 //		limitsPanel.setLimits(tournament.getLimits());		
 	}

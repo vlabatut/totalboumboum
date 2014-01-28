@@ -112,9 +112,11 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 	public void setTournament(CupTournament tournament)
 	{	// init
 		this.tournament = tournament;
+		
 		// players
 		List<Profile> players = tournament.getProfiles();
 		playersPanel.setPlayers(players);
+		
 		// legs
 		List<CupLeg> legs = tournament.getLegs();
 		legsPanel.setLeg(legs.get(0),LEGS_PER_PAGE);		

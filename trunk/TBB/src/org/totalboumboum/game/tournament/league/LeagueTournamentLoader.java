@@ -32,7 +32,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.points.PointsProcessorLoader;
 import org.totalboumboum.game.tournament.TournamentLoader;
-import org.totalboumboum.game.tournament.league.LeagueTournament.ConfrontationOrder;
+import org.totalboumboum.game.tournament.league.LeagueTournament.RepetitionOrder;
 import org.totalboumboum.tools.xml.XmlNames;
 import org.xml.sax.SAXException;
 
@@ -75,12 +75,12 @@ public class LeagueTournamentLoader
     	// minimize confrontations
 		String minimizeConfrontationsStr = root.getAttribute(XmlNames.MINIMIZE_CONFRONTATIONS).getValue().trim();
 		boolean minimizeConfrontations = Boolean.parseBoolean(minimizeConfrontationsStr);
-    	result.setMinimizeConfrontations(minimizeConfrontations);
+    	result.setMinimizeRepetitions(minimizeConfrontations);
     	
     	// confrontations Order
 		String confrontationOrderStr = root.getAttribute(XmlNames.CONFRONTATIONS_ORDER).getValue().trim();
-		ConfrontationOrder confrontationOrder = ConfrontationOrder.valueOf(confrontationOrderStr);
-    	result.setConfrontationOrder(confrontationOrder);
+		RepetitionOrder confrontationOrder = RepetitionOrder.valueOf(confrontationOrderStr);
+    	result.setRepetitionOrder(confrontationOrder);
     	
     	
 		// point processor

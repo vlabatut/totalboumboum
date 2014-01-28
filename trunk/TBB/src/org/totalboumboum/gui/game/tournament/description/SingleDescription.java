@@ -145,9 +145,11 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 		if(match!=null)
 		{	limits = match.getLimits();
 		}
+		
 		// players
 		List<Profile> players = match.getProfiles();
 		playersPanel.setPlayers(players);
+		
 		// limits & points
 		limitsPanel.setLimits(limits);
 	}

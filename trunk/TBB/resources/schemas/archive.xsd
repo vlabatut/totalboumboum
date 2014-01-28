@@ -27,7 +27,7 @@
 		<xsd:attribute name="type" type="tTournamentType" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tPlayed">
+	<xsd:complexType name="tConfrontations">
 		<xsd:attribute name="matches" type="xsd:integer" use="required" />
 		<xsd:attribute name="rounds" type="xsd:integer" use="required" />
 	</xsd:complexType>
@@ -50,7 +50,8 @@
 	<xsd:complexType name="tArchive">
 		<xsd:sequence>
 			<xsd:element name="tournament" type="tTournament" />
-			<xsd:element name="played" type="tPlayed" />
+			<xsd:element name="played" type="tConfrontations" />
+			<xsd:element name="total" type="tConfrontations" />
 			<xsd:element name="dates" type="tDates" />
 			<xsd:element name="players" type="tPlayers" />
 		</xsd:sequence>

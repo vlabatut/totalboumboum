@@ -45,12 +45,22 @@ import org.totalboumboum.tools.files.FilePaths;
 import org.xml.sax.SAXException;
 
 /**
+ * Represents  a game recorded in a file.
  * 
  * @author Vincent Labatut
- *
  */
 public class GameArchive
 {
+	/**
+	 * Builds the game archive object for the specified tournament.
+	 * 
+	 * @param tournament
+	 * 		Tournament saved. 
+	 * @param folder
+	 * 		Folder containing the files.
+	 * @return
+	 * 		Corresponding game archive object.
+	 */
 	public static GameArchive getArchive(AbstractTournament tournament, String folder)
 	{	GameArchive result = new GameArchive();
 		
@@ -62,14 +72,14 @@ public class GameArchive
 		result.type = TournamentType.getType(tournament);
 		
 		// played
-		result.matches = 0;
+		result.matchesPlayed = 0;
 		if(tournament.getStats()!=null)
-			result.matches = tournament.getStats().getConfrontationCount();
+			result.matchesPlayed = tournament.getStats().getConfrontationCount();
 		Match match = tournament.getCurrentMatch();
 		if(match==null || match.getStats()==null)
-			result.rounds = 0;
+			result.roundsPlayed = 0;
 		else
-			result.rounds = match.getStats().getConfrontationCount();
+			result.roundsPlayed = match.getStats().getConfrontationCount();
 		
 		// dates
 		result.start = tournament.getStats().getStartDate();
@@ -84,7 +94,22 @@ public class GameArchive
 		
 		return result;
 	}
-
+	
+	/**
+	 * Records the specified tournament in the specified folder.
+	 * 
+	 * @param folder
+	 * 		Folder to contain the save.
+	 * @param tournament
+	 * 		Tournament to save.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the files.
+	 * @throws SAXException
+	 * 		Problem while accessing the files.
+	 * @throws IOException
+	 * 		Problem while accessing the files.
+	 */
 	public static void saveGame(String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
 	{	String path = FilePaths.getSavesPath()+File.separator+folder;
 		// folder
@@ -104,6 +129,23 @@ public class GameArchive
 		oOut.close();
 	}
 	
+	/**
+	 * Loads the save directly located in the specified folder.
+	 * 
+	 * @param folder
+	 * 		Folder containing the savE.
+	 * @return
+	 * 		Loaded tournament.
+	 * 
+	 * @throws IOException
+	 * 		Problem while accessing the existing files.
+	 * @throws ClassNotFoundException
+	 * 		Problem while accessing the existing files.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the existing files.
+	 * @throws SAXException
+	 * 		Problem while accessing the existing files.
+	 */
 	public static AbstractTournament loadGame(String folder) throws IOException, ClassNotFoundException, ParserConfigurationException, SAXException
 	{	String path = FilePaths.getSavesPath()+File.separator+folder;
 		String fileName = FileNames.FILE_ARCHIVE+FileNames.EXTENSION_DATA;
@@ -120,11 +162,25 @@ public class GameArchive
 	/////////////////////////////////////////////////////////////////
 	// FOLDER				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Folder containing the save */
 	private String folder;
 	
+	/**
+	 * Changes the folder containing the save.
+	 * 
+	 * @param folder
+	 * 		Folder containing the save.
+	 */
 	public void setFolder(String folder)
 	{	this.folder = folder;
 	}
+	
+	/**
+	 * Returns the folder containing the save.
+	 * 
+	 * @return
+	 * 		Folder containing the save.
+	 */
 	public String getFolder()
 	{	return folder;
 	}
@@ -132,59 +188,191 @@ public class GameArchive
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Name of the tournament */
 	private String name;
+	/** Type of the tournament (cup, league, etc.) */
 	private TournamentType type;
 	
+	/**
+	 * Changes the name of the tournament.
+	 * 
+	 * @param name
+	 * 		Name of the tournament.
+	 */
 	public void setName(String name)
 	{	this.name = name;
 	}
+	
+	/**
+	 * Returns the name of the tournament.
+	 * 
+	 * @return
+	 * 		Name of the tournament.
+	 */
 	public String getName()
 	{	return name;
 	}
 	
+	/**
+	 * Changes the type of the tournament (cup, league, etc.).
+	 * 
+	 * @param type
+	 * 		Type of the tournament.
+	 */
 	public void setType(TournamentType type)
 	{	this.type = type;
 	}
+	
+	/**
+	 * Returns the type of the tournament (cup, league, etc.).
+	 * 
+	 * @return
+	 * 		Type of the tournament.
+	 */
 	public TournamentType getType()
 	{	return type;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYED				/////////////////////////////////////////
+	// PLAYED CONFRONTATIONS	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int matches;
-	private int rounds;
+	/** Number of matches played until now */
+	private int matchesPlayed;
+	/** Number of rounds played until now */
+	private int roundsPlayed;
 	
-	public void setPlayedMatches(int matches)
-	{	this.matches = matches;
+	/**
+	 * Changes the number of matches played until now.
+	 * 
+	 * @param matchesPlayed
+	 * 		Number of matches played until now.
+	 */
+	public void setPlayedMatches(int matchesPlayed)
+	{	this.matchesPlayed = matchesPlayed;
 	}
+	
+	/**
+	 * Returns the number of matches played until now.
+	 * 
+	 * @return
+	 * 		Number of matches played until now.
+	 */
 	public int getPlayedMatches()
-	{	return matches;
+	{	return matchesPlayed;
 	}
 	
-	public void setPlayedRounds(int rounds)
-	{	this.rounds = rounds;
+	/**
+	 * Changes the number of rounds played until now.
+	 * 
+	 * @param roundsPlayed
+	 * 		Number of rounds played until now.
+	 */
+	public void setPlayedRounds(int roundsPlayed)
+	{	this.roundsPlayed = roundsPlayed;
 	}
+	
+	/**
+	 * Returns the number of rounds played until now.
+	 * 
+	 * @return
+	 * 		Number of rounds played until now.
+	 */
 	public int getPlayedRounds()
-	{	return rounds;
+	{	return roundsPlayed;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TOTAL CONFRONTATIONS		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Total number of matches */
+	private int matchesTotal;
+	/** Total number of rounds */
+	private int roundsTotal;
+	
+	/**
+	 * Changes the total number of matches.
+	 * 
+	 * @param matchesTotal
+	 * 		Total number of matches.
+	 */
+	public void setTotalMatches(int matchesTotal)
+	{	this.matchesTotal = matchesTotal;
+	}
+	
+	/**
+	 * Returns the total number of matches.
+	 * 
+	 * @return
+	 * 		Total number of matches.
+	 */
+	public int getTotalMatches()
+	{	return matchesTotal;
+	}
+	
+	/**
+	 * Changes the total number of rounds.
+	 * 
+	 * @param roundsTotal
+	 * 		Total number of rounds.
+	 */
+	public void setTotalRounds(int roundsTotal)
+	{	this.roundsTotal = roundsTotal;
+	}
+	
+	/**
+	 * Returns the Total number of rounds.
+	 * 
+	 * @return
+	 * 		Total number of rounds.
+	 */
+	public int getTotalRounds()
+	{	return roundsTotal;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// DATES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Date the tournament was started */
 	private Date start;
+	/** Date the tournament was saved */
 	private Date save;
 	
+	/**
+	 * Changes the date the tournament was started.
+	 * 
+	 * @param start
+	 * 		Date the tournament was started.
+	 */
 	public void setStartDate(Date start)
 	{	this.start = start;
 	}
+	
+	/**
+	 * Returns the date the tournament was started.
+	 * 
+	 * @return
+	 * 		Date the tournament was started.
+	 */
 	public Date getStartDate()
 	{	return start;
 	}
 	
+	/**
+	 * Changes the date the tournament was saved.
+	 * 
+	 * @param save
+	 * 		Date the tournament was saved.
+	 */
 	public void setSaveDate(Date save)
 	{	this.save = save;
 	}
+	
+	/**
+	 * Returns the date the tournament was saved.
+	 * 
+	 * @return
+	 * 		Date the tournament was saved.
+	 */
 	public Date getSaveDate()
 	{	return save;
 	}
@@ -192,11 +380,27 @@ public class GameArchive
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Players involved in the tournament */
 	private final List<String> players = new ArrayList<String>();
 	
+	/**
+	 * Adds a player to the list of those involved in
+	 * this tournament.
+	 * 
+	 * @param player
+	 * 		Player to add to the list.
+	 */
 	public void addPlayer(String player)
 	{	players.add(player);
 	}
+
+	/**
+	 * Returns the list of players involved in
+	 * this tournament.
+	 * 
+	 * @return
+	 * 		Players involved in this tournement.
+	 */
 	public List<String> getPlayers()
 	{	return players;
 	}
