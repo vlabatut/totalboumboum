@@ -1782,7 +1782,7 @@ public class Launcher
 //	+ objet zone accessible depuis les gestionnaires
 //	+ tools renommé en helper
 
-//TODO JProfiler:
+//TODO JProfiler: (utiliser v7 sans itégration eclipse ?)
 //- voir ce qui prend du temps à l'ouverture des stats
 //- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
