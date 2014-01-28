@@ -1774,7 +1774,7 @@ public class Launcher
 // (stratégie de famine)
 // et s'il y a assez de temps
 
-// TODO afficher les stats de confrontation individuelles entre les joueurs participants à un round
+// TODO afficher les stats de confrontations individuelles entre les joueurs participants à un round
 // genre : combien de fois x a battu y, etc.
 
 // TODO documentation:
@@ -1789,6 +1789,6 @@ public class Launcher
 //TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, il faudrait plutot mettre les points
 
 //TODO tester 
-// 	+ interface : indiquer match ou round x/y, quand c'est possible
+// 	[[+ interface : indiquer match ou round x/y, quand c'est possible]]
 //  + corriger tournoi ligue
 //  + tester tournoi ligue
