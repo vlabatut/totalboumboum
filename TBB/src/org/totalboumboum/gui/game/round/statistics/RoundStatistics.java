@@ -23,9 +23,6 @@ package org.totalboumboum.gui.game.round.statistics;
 
 import java.awt.event.MouseEvent;
 
-import org.totalboumboum.game.limit.LimitConfrontation;
-import org.totalboumboum.game.limit.Limits;
-import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.gui.common.content.subpanel.events.EvolutionSubPanelListener;
@@ -103,11 +100,9 @@ public class RoundStatistics extends EntitledDataPanel implements EvolutionSubPa
 			tooltip = tooltip + " " + number;
 			// total number of rounds
 			Match match = round.getMatch();
-			Limits<MatchLimit> matchLimits = match.getLimits();
-			LimitConfrontation confLim = matchLimits.getConfrontationLimit();
-			if(confLim!=null && matchLimits.size()==1)
-			{	int max = confLim.getThreshold();
-				text = text + "/" + max;
+			Integer max = match.getTotalRoundNumber();
+			if(max!=null)
+			{	text = text + "/" + max;
 				tooltip = tooltip + "/" + max;
 			}
 		}

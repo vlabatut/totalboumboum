@@ -128,24 +128,41 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 			}
 			if(showConfrontations)
 			{	String text = "";
-				int playedMatches = gameArchive.getPlayedMatches();
-				String playedMatchesStr = Integer.toString(playedMatches);
-				text = text + playedMatchesStr;
-				Integer totalMatches = gameArchive.getTotalMatches();
-				if(totalMatches!=null)
-				{	String totalMatchesStr = Integer.toString(totalMatches);
-					text = text + "/" + totalMatchesStr;
+				String toolTip = "";
+				// matches
+				{	String full = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_ARCHIVE_MATCH);
+					toolTip = toolTip + full + ":";
+					String letter = full.substring(0,1);
+					text = text + letter + ":";
+					int playedMatches = gameArchive.getPlayedMatches();
+					String playedMatchesStr = Integer.toString(playedMatches);
+					toolTip = toolTip + playedMatchesStr;
+					text = text + playedMatchesStr;
+					Integer totalMatches = gameArchive.getTotalMatches();
+					if(totalMatches!=null)
+					{	String totalMatchesStr = Integer.toString(totalMatches);
+						toolTip = toolTip + "/" + totalMatchesStr;
+						text = text + "/" + totalMatchesStr;
+					}
 				}
-				int playedRounds = gameArchive.getPlayedRounds();
-				String playedRoundsStr = Integer.toString(playedRounds);
-				text = text + " : " + playedRoundsStr;
-				Integer totalRounds = gameArchive.getTotalRounds();
-				if(totalRounds!=null)
-				{	String totalRoundsStr = Integer.toString(totalRounds);
-					text = text + "/" + totalRoundsStr;
+				// rounds
+				{	String full = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_ARCHIVE_ROUND);
+					toolTip = toolTip + " - " + full + ":";
+					String letter = full.substring(0,1);
+					text = text + " - " + letter + ":";
+					int playedRounds = gameArchive.getPlayedRounds();
+					String playedRoundsStr = Integer.toString(playedRounds);
+					toolTip = toolTip + playedRoundsStr;
+					text = text + playedRoundsStr;
+					Integer totalRounds = gameArchive.getTotalRounds();
+					if(totalRounds!=null)
+					{	String totalRoundsStr = Integer.toString(totalRounds);
+						toolTip = toolTip + "/" + totalRoundsStr;
+						text = text + "/" + totalRoundsStr;
+					}
 				}
 				textValues.add(text);
-				tooltipValues.add(text);
+				tooltipValues.add(toolTip);
 			}
 			if(showStart)
 			{	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

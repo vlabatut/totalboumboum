@@ -37,6 +37,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -222,7 +223,7 @@ public class CupTournament extends AbstractTournament
 		int playerCount = profiles.size();
 		
 		// get all possible distributions
-		HashMap<Integer,List<List<Integer>>> distris = processPlayerDistribution(playerCount);
+		Map<Integer,List<List<Integer>>> distris = processPlayerDistribution(playerCount);
 		
 		// retrieve the best ones
 		highestEmptyRank = Collections.max(distris.keySet());
@@ -281,7 +282,7 @@ public class CupTournament extends AbstractTournament
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
 		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
-		{	HashMap<Integer,List<List<Integer>>> distri = processPlayerDistribution(i);
+		{	Map<Integer,List<List<Integer>>> distri = processPlayerDistribution(i);
 			if(distri.size()>0)
 				result.add(i);
 		}
@@ -303,7 +304,7 @@ public class CupTournament extends AbstractTournament
 	 * 		the highest empty rank. Several distributions might be associated
 	 * 		to the same rank, hence the list of lists.
 	 */
-	private HashMap<Integer,List<List<Integer>>> processPlayerDistribution(int playerCount)
+	private Map<Integer,List<List<Integer>>> processPlayerDistribution(int playerCount)
 	{	// get the number of entry matches
 		int matches = countEntryMatches();
 		
@@ -838,5 +839,11 @@ for(ArrayList<Integer> list: permutations)
 	@Override
 	public void roundOver()
 	{	panel.roundOver();
+	}
+
+	@Override
+	public Integer getTotalMatchNumber()
+	{	int result = getTotalPartCount();//TODO to be tested and confirmed
+		return result;
 	}
 }

@@ -42,6 +42,7 @@ import java.util.TreeSet;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
+import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.match.Match;
@@ -248,6 +249,17 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void roundOver()
 	{	panel.roundOver();
+	}
+
+	@Override
+	public Integer getTotalMatchNumber()
+	{	Integer result = null;
+		
+		LimitConfrontation confLim = limits.getConfrontationLimit();
+		if(confLim!=null && limits.size()==1)
+			result = confLim.getThreshold();
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

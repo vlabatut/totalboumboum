@@ -36,9 +36,7 @@ import org.totalboumboum.engine.container.level.info.LevelInfo;
 import org.totalboumboum.engine.container.level.preview.LevelPreview;
 import org.totalboumboum.engine.container.level.preview.LevelPreviewLoader;
 import org.totalboumboum.game.limit.Limit;
-import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;
-import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.limit.RoundLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.AbstractPointsProcessor;
@@ -260,11 +258,9 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 				tooltip = tooltip + " " + number;
 				// total number of rounds
 				Match match = round.getMatch();
-				Limits<MatchLimit> matchLimits = match.getLimits();
-				LimitConfrontation confLim = matchLimits.getConfrontationLimit();
-				if(confLim!=null && matchLimits.size()==1)
-				{	int max = confLim.getThreshold();
-					text = text + "/" + max;
+				Integer max = match.getTotalRoundNumber();
+				if(max!=null)
+				{	text = text + "/" + max;
 					tooltip = tooltip + "/" + max;
 				}
 			}

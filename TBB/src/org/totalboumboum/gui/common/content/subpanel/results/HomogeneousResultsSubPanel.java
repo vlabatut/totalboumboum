@@ -53,10 +53,12 @@ import org.totalboumboum.tools.time.TimeUnit;
 
 /**
  * Panel used to display various game results (as a table).
+ * All players are concerned by all columns (hence the "homogeneous"
+ * in the class name). Otherwise, use the {@link LeagueResultsSubPanel}.
  * 
  * @author Vincent Labatut
  */
-public class HomogenResultsSubPanel extends TableSubPanel
+public class HomogeneousResultsSubPanel extends TableSubPanel
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 	/** Number of lines */
@@ -74,7 +76,7 @@ public class HomogenResultsSubPanel extends TableSubPanel
 	 * @param height
 	 * 		Height of the panel.
 	 */
-	public HomogenResultsSubPanel(int width, int height)
+	public HomogeneousResultsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,true);
 		
 		setStatisticHolder(null);

@@ -47,6 +47,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.configuration.ai.AisConfiguration;
+import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.profile.Profile;
@@ -428,6 +429,26 @@ public class Match implements StatisticHolder, Serializable
 	 */
 	public List<Round> getPlayedRounds()
 	{	return playedRounds;
+	}
+	
+	/**
+	 * Returns the number of rounds to be played
+	 * during this match. If there is no limit on
+	 * the number of rounds, then {@code null} is
+	 * returned.
+	 * 
+	 * @return
+	 * 		The number of rounds to be played in this
+	 * 		match, or {@code null} for no limit.
+	 */
+	public Integer getTotalRoundNumber()
+	{	Integer result = null;
+		
+		LimitConfrontation confLim = limits.getConfrontationLimit();
+		if(confLim!=null && limits.size()==1)
+			result = confLim.getThreshold();
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

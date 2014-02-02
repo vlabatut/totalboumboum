@@ -31,7 +31,7 @@ import org.totalboumboum.game.tournament.cup.CupLeg;
 import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
-import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.results.HomogeneousResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
@@ -67,7 +67,7 @@ public class CupResults extends TournamentResults<CupTournament> implements LegS
 			infoPanel.setOpaque(false);
 	
 			// players panel
-			{	resultsPanel = new HomogenResultsSubPanel(leftWidth,dataHeight);
+			{	resultsPanel = new HomogeneousResultsSubPanel(leftWidth,dataHeight);
 				resultsPanel.setShowTime(false);
 				resultsPanel.setShowConfrontations(false);
 				resultsPanel.setShowPoints(false);
@@ -96,7 +96,7 @@ public class CupResults extends TournamentResults<CupTournament> implements LegS
 	/** Number of legs displayed by page */
 	private static final int LEGS_PER_PAGE = 2;
 	/** Panel displaying the results */
-	private HomogenResultsSubPanel resultsPanel;
+	private HomogeneousResultsSubPanel resultsPanel;
 	/** Panel used to display legs */
 	private LegSubPanel legsPanel;
 
