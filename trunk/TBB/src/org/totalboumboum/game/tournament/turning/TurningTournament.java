@@ -113,4 +113,13 @@ public class TurningTournament extends AbstractTournament
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Integer getTotalMatchNumber()
+	{	Integer result = null;
+		
+		// TODO Auto-generated method stub
+		
+		return result;
+	}
 }

@@ -29,18 +29,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import org.totalboumboum.game.limit.Limit;
-import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
-import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.game.tournament.cup.CupTournament;
-import org.totalboumboum.game.tournament.league.LeagueTournament;
-import org.totalboumboum.game.tournament.sequence.SequenceTournament;
-import org.totalboumboum.game.tournament.single.SingleTournament;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
@@ -170,28 +164,8 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 				text = text + " " + number;
 				tooltip = tooltip + " " + number;
 				// total number of matches
-				Integer max = null;
 				AbstractTournament tournament = match.getTournament();
-				if(tournament instanceof CupTournament)
-				{	CupTournament cupTourn = (CupTournament) tournament;
-					max = cupTourn.getTotalPartCount();//TODO to be tested and confirmed
-				}
-				else if(tournament instanceof LeagueTournament)
-				{	LeagueTournament leagueTourn = (LeagueTournament) tournament;
-					max = leagueTourn.getTotalMatchCount();
-				}
-				if(tournament instanceof SequenceTournament)
-				{	SequenceTournament seqTourn = (SequenceTournament) tournament;
-					Limits<TournamentLimit> tournLimits = seqTourn.getLimits();
-					LimitConfrontation confLim = tournLimits.getConfrontationLimit();
-					if(confLim!=null && tournLimits.size()==1)
-					{	max = confLim.getThreshold();
-					}
-				}
-				else if(tournament instanceof SingleTournament)
-				{	//SingleTournament singleTourn = (SingleTournament) tournament;
-					max = 1;
-				}
+				Integer max = tournament.getTotalMatchNumber();
 				if(max!=null)
 				{	text = text + "/" + max;
 					tooltip = tooltip + "/" + max;

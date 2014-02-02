@@ -1071,10 +1071,12 @@ public class GuiKeys
 			
 	/** ARCHIVE */
 	public static final String COMMON_ARCHIVE = COMMON+ARCHIVE;
+	public static final String COMMON_ARCHIVE_MATCH = COMMON_ARCHIVE+MATCH;			
 	public static final String COMMON_ARCHIVE_NAME = COMMON_ARCHIVE+NAME;
 	public static final String COMMON_ARCHIVE_TYPE = COMMON_ARCHIVE+TYPE;			
 	public static final String COMMON_ARCHIVE_CONFRONTATIONS = COMMON_ARCHIVE+CONFRONTATIONS;
 	public static final String COMMON_ARCHIVE_PLAYERS = COMMON_ARCHIVE+PLAYERS;
+	public static final String COMMON_ARCHIVE_ROUND = COMMON_ARCHIVE+ROUND;			
 	public static final String COMMON_ARCHIVE_START = COMMON_ARCHIVE+START;			
 	public static final String COMMON_ARCHIVE_SAVE = COMMON_ARCHIVE+SAVE;
 		/** TYPES */

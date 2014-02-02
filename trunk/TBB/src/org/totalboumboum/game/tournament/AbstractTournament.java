@@ -240,6 +240,16 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	{	return playedMatches;
 	}
 	
+	/**
+	 * Returns the total number of matches to be played in this tournament,
+	 * or {@code null} if this number cannot be determined in advance (for
+	 * instance for a league with point limits).
+	 * 
+	 * @return
+	 * 		Number of total matches in this tournament, or {@code null} if N/A.
+	 */
+	public abstract Integer getTotalMatchNumber();
+	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

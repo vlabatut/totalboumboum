@@ -621,15 +621,8 @@ public class LeagueTournament extends AbstractTournament
 	{	matches.add(match);
 	}
 
-	/**
-	 * Returns the total number of matches (i.e. effective matches, called repetitions,
-	 * and not prototypical matches, which are repeated as many times as needed), to be 
-	 * played in this tournament.
-	 * 
-	 * @return
-	 * 		Total number of matches played during this tournament.
-	 */
-	public int getTotalMatchCount()
+	@Override
+	public Integer getTotalMatchNumber()
 	{	List<List<Set<Integer>>> rep = repetitions;
 		if(rep == null)
 			rep = processRepetitions();

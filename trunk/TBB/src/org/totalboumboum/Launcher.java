@@ -1794,6 +1794,5 @@ public class Launcher
 //		>> voir aussi la consistance avec le point processor, s'il y en a 1.
 
 //TODO tester 
+//	[[+ tester tournoi ligue]]
 // 	[[+ interface : indiquer match ou round x/y, quand c'est possible]]
-//  [[+ tester tournoi ligue]]
-//  [[+ rajouter le "/total" dans les xml d'enregistrement de partie]]

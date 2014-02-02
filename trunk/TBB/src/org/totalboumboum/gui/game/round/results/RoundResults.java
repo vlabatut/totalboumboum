@@ -21,12 +21,9 @@ package org.totalboumboum.gui.game.round.results;
  * 
  */
 
-import org.totalboumboum.game.limit.LimitConfrontation;
-import org.totalboumboum.game.limit.Limits;
-import org.totalboumboum.game.limit.MatchLimit;
 import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.results.HomogeneousResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -56,7 +53,7 @@ public class RoundResults extends EntitledDataPanel
 		setTitleKey(key);
 		
 		// data
-		{	resultsPanel = new HomogenResultsSubPanel(dataWidth,dataHeight);
+		{	resultsPanel = new HomogeneousResultsSubPanel(dataWidth,dataHeight);
 			resultsPanel.setShowConfrontations(false);
 			resultsPanel.setShowTotal(false);
 			setDataPart(resultsPanel);
@@ -96,11 +93,9 @@ public class RoundResults extends EntitledDataPanel
 			tooltip = tooltip + " " + number;
 			// total number of rounds
 			Match match = round.getMatch();
-			Limits<MatchLimit> matchLimits = match.getLimits();
-			LimitConfrontation confLim = matchLimits.getConfrontationLimit();
-			if(confLim!=null && matchLimits.size()==1)
-			{	int max = confLim.getThreshold();
-				text = text + "/" + max;
+			Integer max = match.getTotalRoundNumber();
+			if(max!=null)
+			{	text = text + "/" + max;
 				tooltip = tooltip + "/" + max;
 			}
 		}
@@ -124,7 +119,7 @@ public class RoundResults extends EntitledDataPanel
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Panel displaying the results */
-	private HomogenResultsSubPanel resultsPanel;
+	private HomogeneousResultsSubPanel resultsPanel;
 	
 	@Override
 	public void refresh()

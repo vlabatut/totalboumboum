@@ -71,14 +71,16 @@ public class GameArchiveLoader
 	 * 		Problem while loading the file.
 	 */
 	public static GameArchive loadGameArchive(String folderName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	GameArchive result = new GameArchive();
-		String individualFolder = FilePaths.getSavesPath()+File.separator+folderName;
+	{	String individualFolder = FilePaths.getSavesPath()+File.separator+folderName;
 		File dataFile = new File(individualFolder+File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_XML);
 		String schemaFolder = FilePaths.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileNames.FILE_ARCHIVE+FileNames.EXTENSION_SCHEMA);
+		
+		GameArchive result = new GameArchive();
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadArchiveElement(root,result);
 		result.setFolder(folderName);
+		
 		return result;
 	}
 	
@@ -179,8 +181,10 @@ public class GameArchiveLoader
 	private static void loadTotalConfrontationsElement(Element root, GameArchive result)
 	{	// matches
 		String matchesStr = root.getAttributeValue(XmlNames.MATCHES);
-		int matches = Integer.parseInt(matchesStr);
-		result.setTotalMatches(matches);
+		if(matchesStr!=null)
+		{	int matches = Integer.parseInt(matchesStr);
+			result.setTotalMatches(matches);
+		}
 		
 		// rounds
 		String roundsStr = root.getAttributeValue(XmlNames.ROUNDS);

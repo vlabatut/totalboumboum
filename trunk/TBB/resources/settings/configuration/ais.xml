@@ -21,7 +21,7 @@
 -->
 	<ups value="50" />
 	<autoAdvance value="NONE" delay="3000" tournament="CONFRONTATIONS" pack="v201314" />
-	<hideAllAis value="false" />
+	<hideAllAis value="true" />
 	<bombUselessAis value="0" />
 	<bombCyclingAis value="true" />
 	<displayExceptions value="true" />

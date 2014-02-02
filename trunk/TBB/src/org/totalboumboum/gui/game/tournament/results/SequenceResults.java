@@ -22,7 +22,7 @@ package org.totalboumboum.gui.game.tournament.results;
  */
 
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
-import org.totalboumboum.gui.common.content.subpanel.results.HomogenResultsSubPanel;
+import org.totalboumboum.gui.common.content.subpanel.results.HomogeneousResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
 /**
@@ -45,7 +45,7 @@ public class SequenceResults extends TournamentResults<SequenceTournament>
 	{	super(container);
 		
 		// data
-		{	resultsPanel = new HomogenResultsSubPanel(dataWidth,dataHeight);
+		{	resultsPanel = new HomogeneousResultsSubPanel(dataWidth,dataHeight);
 			resultsPanel.setShowTime(false);
 			setDataPart(resultsPanel);
 		}
@@ -64,7 +64,7 @@ public class SequenceResults extends TournamentResults<SequenceTournament>
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/** Panel displaying the results */
-	private HomogenResultsSubPanel resultsPanel;
+	private HomogeneousResultsSubPanel resultsPanel;
 
 	@Override
 	public void refresh()

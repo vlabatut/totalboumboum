@@ -167,8 +167,11 @@ public class GameArchiveSaver
 	{	Element result = new Element(XmlNames.TOTAL);
 		
 		// matches
-		String matches = Integer.toString(gameArchive.getTotalMatches());
-		result.setAttribute(XmlNames.MATCHES,matches);
+		Integer value = gameArchive.getTotalMatches();
+		if(value!=null)
+		{	String matches = Integer.toString(value);
+			result.setAttribute(XmlNames.MATCHES,matches);
+		}
 
 		// rounds
 		String rounds = Integer.toString(gameArchive.getTotalRounds());

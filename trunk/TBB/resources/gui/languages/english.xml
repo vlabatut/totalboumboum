@@ -812,10 +812,12 @@
 	
 <!-- ARCHIVE -->
 		<group name="Archive">
+			<text name="Match" value="Matches" tooltip="Matches played/total" />
 			<text name="Name" value="Name" tooltip="Tournament name" />
 			<text name="Type" value="Type" tooltip="Tournament type" />
-			<text name="Confrontations" value="Confrontations" tooltip="Number of played matches:rounds" />
+			<text name="Confrontations" value="Confrontations" tooltip="Numbers of played/total matches/rounds" />
 			<text name="Players" value="Players" tooltip="Players involved" />
+			<text name="Round" value="Rounds" tooltip="Rounds played/total" />
 			<text name="Start" value="Start" tooltip="Begining date" />
 			<text name="Save" value="Save" tooltip="Last save date" />
 			<group name="Types">

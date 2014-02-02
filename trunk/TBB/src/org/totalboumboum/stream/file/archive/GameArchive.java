@@ -81,6 +81,10 @@ public class GameArchive
 		else
 			result.roundsPlayed = match.getStats().getConfrontationCount();
 		
+		// total
+		result.matchesTotal = tournament.getTotalMatchNumber();
+		result.roundsTotal = match.getTotalRoundNumber();
+		
 		// dates
 		result.start = tournament.getStats().getStartDate();
 		result.save = GregorianCalendar.getInstance().getTime();
