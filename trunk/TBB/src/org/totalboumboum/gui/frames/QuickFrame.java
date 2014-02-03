@@ -307,6 +307,11 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	}
 
 	@Override
+	public void simulationOver()
+	{	//useless here
+	}
+
+	@Override
 	public void roundOver()
 	{	remove(canvas);
 		Container contentPane = getContentPane();

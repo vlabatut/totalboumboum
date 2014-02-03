@@ -137,7 +137,7 @@ public class StatisticTournament extends StatisticBase
 		for(int i=0;i<matchRanks.length;i++)
 			if(matchRanks[i]==1)
 				count++;
-		boolean draw = count==1;
+		boolean draw = count>1;
 		for(int i=0;i<matchRanks.length;i++)
 		{	String playerId = match.getPlayersIds().get(i);
 			int index = getPlayersIds().indexOf(playerId);

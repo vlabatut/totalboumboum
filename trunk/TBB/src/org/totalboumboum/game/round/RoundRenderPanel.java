@@ -44,4 +44,10 @@ public interface RoundRenderPanel
 	 * during the round simulation.
 	 */
 	public void simulationStepOver();
+	
+	/**
+	 * Method called when the round simulation
+	 * is completely finished.
+	 */
+	public void simulationOver();
 }
