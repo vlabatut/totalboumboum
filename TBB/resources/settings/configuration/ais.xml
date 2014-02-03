@@ -20,7 +20,7 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<ups value="50" />
-	<autoAdvance value="NONE" delay="3000" tournament="CONFRONTATIONS" pack="v201314" />
+	<autoAdvance value="SIMPLE" delay="3000" tournament="CONFRONTATIONS" pack="v201314" />
 	<hideAllAis value="true" />
 	<bombUselessAis value="0" />
 	<bombCyclingAis value="true" />

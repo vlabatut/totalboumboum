@@ -149,6 +149,15 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	/**
+	 * Called when a simulation is completely
+	 * finished.
+	 */
+	public void simulationOver()
+	{	loopOver();
+		panel.simulationOver();
+	}
+	
+	/**
 	 * Initializes this round.
 	 * Sprites are not loaded yet, though.
 	 * 

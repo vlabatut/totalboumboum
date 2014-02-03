@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -655,6 +656,12 @@ public class LeagueTournament extends AbstractTournament
 		int n = profiles.size();
 		for(Match match: matches)
 		{	Set<Integer> ks = match.getAllowedPlayerNumbers();
+			Iterator<Integer> it = ks.iterator();
+			while(it.hasNext())
+			{	int k = it.next();
+				if(k>n)
+					it.remove();
+			}
 			// try to minimize the number of matches
 			if(minimizeRepetitions)
 			{	List<Set<Integer>> temp = minimizeRepetitions(n,ks);
@@ -871,7 +878,7 @@ public class LeagueTournament extends AbstractTournament
 				{	trnmt = new HashMap<Integer, List<Set<Integer>>>();
 					repetitionMaps.put(n, trnmt);
 				}
-				for(int k=2;k<n;k++)
+				for(int k=2;k<=n;k++)
 				{	List<Set<Integer>> matches = trnmt.get(k);
 					if(matches==null)
 					{	matches = combiRepetitions(n, k);

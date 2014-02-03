@@ -35,7 +35,7 @@
 	<league randomizePlayers="false" minimizeConfrontations="true" confrontationsOrder="UNCHANGED" >
 		<points local="true" name="points" />
 		
-		<matches randomOrder="true">
+		<matches randomOrder="false">
 			<match local="true" name="match1" />
 			<match local="true" name="match2" />
 		</matches>

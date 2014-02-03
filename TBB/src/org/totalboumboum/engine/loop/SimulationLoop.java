@@ -26,9 +26,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.SwingUtilities;
+
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
+import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticAction;
@@ -73,7 +76,7 @@ public class SimulationLoop extends Loop
 		Map<String,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 		List<Profile> currentPlayers = new ArrayList<Profile>(profiles);
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		HashMap<String,HashMap<Score,Long>> currentScores = new HashMap<String, HashMap<Score,Long>>();
+		Map<String,HashMap<Score,Long>> currentScores = new HashMap<String, HashMap<Score,Long>>();
 		
 		// process probabilities and estimate duration
 		long theoreticalDuration = 0;
@@ -194,9 +197,10 @@ public class SimulationLoop extends Loop
 			// update round time
 			round.updateTime(currentTime);
 		}
-		round.loopOver();
-	}
 		
+		round.simulationOver();
+	}
+	
 /*	
 	public void run()
 	{	List<Profile> profiles = round.getProfiles();

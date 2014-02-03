@@ -338,4 +338,9 @@ buttonStatistics.setEnabled(false);
 		val++;
 		progressBar.setValue(val);
 	}
+	
+	@Override
+	public void simulationOver()
+	{	// useless here
+	}
 }
