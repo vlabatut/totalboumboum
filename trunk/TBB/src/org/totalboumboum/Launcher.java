@@ -1739,6 +1739,7 @@ public class Launcher
  * 		+ évènements de mort subite aléatoires
  * 		+ vidéos du tournoi
  * 		+ tournoi ligue (l'histoire du nombre de matches inférieur au nombre de combis)
+ * 			et aussi la possibilité de limiter le nombre de joueurs
  */ 
 
 /**
@@ -1783,7 +1784,7 @@ public class Launcher
 // TODO documentation:
 //	+ distribution des outils dans des classes spécialisées
 //	+ objet zone accessible depuis les gestionnaires
-//	+ tools renommé en helper
+//	+ tools renommé en "helper"
 
 //TODO JProfiler: (utiliser v7 sans itégration eclipse ?)
 //- voir ce qui prend du temps à l'ouverture des stats
