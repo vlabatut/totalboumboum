@@ -131,7 +131,7 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 	private AbstractPointsProcessor pointProcessor;
 	
 	@Override
-	public AbstractPointsProcessor getPointProcessor()
+	public AbstractPointsProcessor getPointsProcessor()
 	{	return pointProcessor;
 	}
 

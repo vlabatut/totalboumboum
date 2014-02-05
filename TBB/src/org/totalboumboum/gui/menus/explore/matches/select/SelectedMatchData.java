@@ -191,7 +191,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
-			pointsProcessor = limit.getPointProcessor();
+			pointsProcessor = limit.getPointsProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
 	}
 	

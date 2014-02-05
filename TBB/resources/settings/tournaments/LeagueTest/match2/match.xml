@@ -40,4 +40,5 @@
   		<round local="true" name="round" />
   	</rounds>
 	
+	<players forbidPlayerNumbers="1-3,7-16" />
 </match>

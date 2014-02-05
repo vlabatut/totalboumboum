@@ -136,7 +136,7 @@ public class LimitLastStanding implements RoundLimit
 	private AbstractPointsProcessor pointProcessor;
 	
 	@Override
-	public AbstractPointsProcessor getPointProcessor()
+	public AbstractPointsProcessor getPointsProcessor()
 	{	return pointProcessor;
 	}
 

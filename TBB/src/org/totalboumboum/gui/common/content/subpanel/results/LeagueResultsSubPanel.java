@@ -109,8 +109,12 @@ public class LeagueResultsSubPanel extends TableSubPanel
 				cols = cols+5;
 			if(showTime) 
 				cols++;
+			if(showRanks || showConfrontations)
+				cols++;
 			if(showConfrontations)
-				cols = cols+4;
+				cols = cols+3;
+			if(showRanks)
+				cols = cols+5;
 			if(showTotal)
 				cols++;
 			if(showPoints) 
@@ -123,7 +127,9 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			int nameWidth = headerHeight;
 			int scoresWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight,headerHeight};
 			int timeWidth = headerHeight;
-			int confrontationsWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight};
+			int playedWidth = headerHeight;
+			int confrontationsWidth[] = {headerHeight,headerHeight,headerHeight};
+			int ranksWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight,headerHeight};
 			int totalWidth = headerHeight;
 			
 			// headers
@@ -158,15 +164,31 @@ public class LeagueResultsSubPanel extends TableSubPanel
 					setLabelKey(0,col,key,true);
 					col++;
 				}
+				if(showConfrontations || showRanks)
+				{	String key = headerPrefix+GuiKeys.PLAYED;
+					setLabelKey(0,col,key,true);
+					col++;
+				}
 				if(showConfrontations)
 				{	String keys[] = 
-					{	headerPrefix+GuiKeys.PLAYED,
-						headerPrefix+GuiKeys.WON,
+					{	headerPrefix+GuiKeys.WON,
 						headerPrefix+GuiKeys.DRAWN,
 						headerPrefix+GuiKeys.LOST
 					};
 					for(int c=0;c<keys.length;c++)
 						setLabelKey(0,col+c,keys[c],true);
+					col = col+keys.length;
+				}
+				if(showRanks)
+				{	String keys[] = 
+					{	headerPrefix+GuiKeys.RANKS+GuiKeys.FIRST,
+						headerPrefix+GuiKeys.RANKS+GuiKeys.SECOND,
+						headerPrefix+GuiKeys.RANKS+GuiKeys.THIRD,
+						headerPrefix+GuiKeys.RANKS+GuiKeys.FOURTH,
+						headerPrefix+GuiKeys.RANKS+GuiKeys.MORE
+					};
+					for(int c=0;c<keys.length;c++)
+						setLabelKey(0,col+c,keys[c],false);
 					col = col+keys.length;
 				}
 				if(showTotal)
@@ -183,6 +205,9 @@ public class LeagueResultsSubPanel extends TableSubPanel
 			Ranks orderedPlayers = leagueTournament.getOrderedPlayers();
 			List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
 			float[] total = stats.getTotal();
+			int[] played = stats.getPlayedCounts();
+			int[][] confs = stats.getConfrontationCounts();
+			int[][] ranks = stats.getRankCounts();
 	
 			// display the ranking
 			col = 0;
@@ -259,17 +284,29 @@ public class LeagueResultsSubPanel extends TableSubPanel
 						timeWidth = temp;
 					col++;
 				}
+				// played
+				if(showConfrontations || showRanks)
+				{	String text = Integer.toString(played[profileIndex]);
+					String tooltip = text;
+					setLabelText(line,col,text,tooltip);
+					int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+					setLabelBackground(line,col,bg);			
+					int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
+					if(temp>playedWidth)
+						playedWidth = temp;
+					col++;
+				}
 				// confrontations
 				if(showConfrontations)
-				{	String[] confs = 
-					{	Integer.toString(stats.getPlayed()[profileIndex]),
-						Integer.toString(stats.getWon()[profileIndex]),
-						Integer.toString(stats.getDrawn()[profileIndex]),
-						Integer.toString(stats.getLost()[profileIndex]),
+				{	String[] vals = 
+					{	Integer.toString(confs[profileIndex][0]),
+						Integer.toString(confs[profileIndex][1]),
+						Integer.toString(confs[profileIndex][2])
 					};
-					for(int j=0;j<confs.length;j++)
-					{	String text = confs[j];
-						String tooltip = confs[j];
+					for(int j=0;j<vals.length;j++)
+					{	String text = vals[j];
+						String tooltip = vals[j];
 						setLabelText(line,col,text,tooltip);
 						int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
@@ -277,6 +314,28 @@ public class LeagueResultsSubPanel extends TableSubPanel
 						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
 						if(temp>confrontationsWidth[j])
 							confrontationsWidth[j] = temp;
+						col++;
+					}
+				}			
+				// ranks
+				if(showRanks)
+				{	String[] vals = 
+					{	Integer.toString(ranks[profileIndex][0]),
+						Integer.toString(ranks[profileIndex][1]),
+						Integer.toString(ranks[profileIndex][2]),
+						Integer.toString(ranks[profileIndex][3]),
+						Integer.toString(ranks[profileIndex][4])
+					};
+					for(int j=0;j<vals.length;j++)
+					{	String text = vals[j];
+						String tooltip = vals[j];
+						setLabelText(line,col,text,tooltip);
+						int alpha = GuiColorTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+						setLabelBackground(line,col,bg);
+						int temp = GuiFontTools.getPixelWidth(getLineFontSize(),text);
+						if(temp>ranksWidth[j])
+							ranksWidth[j] = temp;
 						col++;
 					}
 				}			
@@ -329,12 +388,28 @@ public class LeagueResultsSubPanel extends TableSubPanel
 				nameWidth = nameWidth - timeWidth;
 				col++;
 			}
+			if(showConfrontations || showRanks) 
+			{	setColSubMinWidth(col,playedWidth);
+				setColSubPrefWidth(col,playedWidth);
+				setColSubMaxWidth(col,playedWidth);
+				nameWidth = nameWidth - playedWidth;
+				col++;
+			}
 			if(showConfrontations)
 			{	for(int i=0;i<confrontationsWidth.length;i++)
 				{	setColSubMinWidth(col,confrontationsWidth[i]);
 					setColSubPrefWidth(col,confrontationsWidth[i]);
 					setColSubMaxWidth(col,confrontationsWidth[i]);
 					nameWidth = nameWidth - confrontationsWidth[i];
+					col++;
+				}
+			}
+			if(showRanks)
+			{	for(int i=0;i<ranksWidth.length;i++)
+				{	setColSubMinWidth(col,ranksWidth[i]);
+					setColSubPrefWidth(col,ranksWidth[i]);
+					setColSubMaxWidth(col,ranksWidth[i]);
+					nameWidth = nameWidth - ranksWidth[i];
 					col++;
 				}
 			}
@@ -363,8 +438,10 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	private boolean showPortrait = true;
 	/** Whether player names should be displayed */
 	private boolean showName = true;
-	/** Whether round numbers should be displayed */
-	private boolean showConfrontations = true;
+	/** Whether confrontation numbers should be displayed */
+	private boolean showConfrontations = false;
+	/** Whether confrontation ranks should be displayed */
+	private boolean showRanks = true;
 	/** Whether total points should be displayed */
 	private boolean showTotal = true;
 	/** Whether round points should be displayed */
@@ -397,13 +474,26 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	}
 
 	/**
-	 * Enable/disable the displaying of round numbers.
+	 * Enable/disable the displaying of confrontation numbers
+	 * (played, won, drawn, lost).
 	 * 
 	 * @param showConfrontations
-	 * 		Whether round numbers should be displayed.
+	 * 		Whether confrontation numbers should be displayed.
 	 */
 	public void setShowConfrontations(boolean showConfrontations)
 	{	this.showConfrontations = showConfrontations;
+		setLeagueTournament(leagueTournament);
+	}
+
+	/**
+	 * Enable/disable the displaying of confrontation ranks
+	 * (played, 1st, 2nd, ...5th or more).
+	 * 
+	 * @param showRanks
+	 * 		Whether confrontation ranks should be displayed.
+	 */
+	public void setShowRanks(boolean showRanks)
+	{	this.showRanks = showRanks;
 		setLeagueTournament(leagueTournament);
 	}
 

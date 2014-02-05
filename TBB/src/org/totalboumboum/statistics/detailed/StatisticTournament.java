@@ -22,7 +22,6 @@ package org.totalboumboum.statistics.detailed;
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.totalboumboum.game.tournament.AbstractTournament;
@@ -46,15 +45,6 @@ public class StatisticTournament extends StatisticBase
 	 */
 	public StatisticTournament(AbstractTournament tournament)
 	{	super(tournament);
-		// confrontations
-		played = new int[getPlayersIds().size()];
-		Arrays.fill(played,0);
-		won = new int[getPlayersIds().size()];
-		Arrays.fill(won,0);
-		drawn = new int[getPlayersIds().size()];
-		Arrays.fill(drawn,0);
-		lost = new int[getPlayersIds().size()];
-		Arrays.fill(lost,0);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -62,55 +52,91 @@ public class StatisticTournament extends StatisticBase
 	/////////////////////////////////////////////////////////////////
 	/** List of match stats */
 	private final List<StatisticMatch> matches = new ArrayList<StatisticMatch>();
-	/** Number of rounds played */
-	private int played[];
-	/** Number of rounds won */
-	private int won[];
-	/** Number of rounds drawn*/
-	private int drawn[];
-	/** Number of rounds lost*/
-	private int lost[];
-		
+	
 	/**
-	 * Returns the numbers of rounds played.
+	 * Returns the number of played confrontations for each player of the tournament.
 	 * 
 	 * @return
-	 * 		Numbers of rounds played.
+	 * 		Confrontation counts.
 	 */
-	public int[] getPlayed()
-	{	return played;
+	public int[] getPlayedCounts()
+	{	int size = getPlayersIds().size();
+		int[] result = new int[size];
+		
+		for(StatisticMatch match: matches)
+		{	int[] matchRanks = RankingTools.getRanks(match.getPoints());
+			for(int i=0;i<matchRanks.length;i++)
+			{	String playerId = match.getPlayersIds().get(i);
+				int index = getPlayersIds().indexOf(playerId);
+				result[index]++;
+			}
+		}
+		
+		return result;
+	}
+
+	/**
+	 * Returns the number of confrontations for each player of the tournament.
+	 * Each row corresponds to a different player, the columns are (in this order)
+	 * the numbers of: won, drawn and lost matches.
+	 * 
+	 * @return
+	 * 		Confrontation counts.
+	 */
+	public int[][] getConfrontationCounts()
+	{	int size = getPlayersIds().size();
+		int[][] result = new int[size][3];
+		
+		for(StatisticMatch match: matches)
+		{	int[] matchRanks = RankingTools.getRanks(match.getPoints());
+			int count = 0;
+			for(int i=0;i<matchRanks.length;i++)
+				if(matchRanks[i]==1)
+					count++;
+			boolean draw = count>1;
+			for(int i=0;i<matchRanks.length;i++)
+			{	String playerId = match.getPlayersIds().get(i);
+				int index = getPlayersIds().indexOf(playerId);
+				// lost
+				if(matchRanks[i]>1)
+					result[index][2]++;
+				// drawn
+				else if(draw)
+					result[index][1]++;
+				// won
+				else
+					result[index][0]++;
+			}
+		}
+		
+		return result;
 	}
 	
 	/**
-	 * Returns the numbers of rounds won.
+	 * Returns the number of ranks for each player of the tournament.
+	 * Each row corresponds to a different player, the columns are (in this order)
+	 * the numbers of: 1st, 2nd, 3rd, 4th and 5th (or more).
 	 * 
 	 * @return
-	 * 		Numbers of rounds won.
+	 * 		Confrontation counts.
 	 */
-	public int[] getWon()
-	{	return won;
+	public int[][] getRankCounts()
+	{	int size = getPlayersIds().size();
+		int[][] result = new int[size][5];
+		
+		for(StatisticMatch match: matches)
+		{	int[] matchRanks = RankingTools.getRanks(match.getPoints());
+			for(int i=0;i<matchRanks.length;i++)
+			{	String playerId = match.getPlayersIds().get(i);
+				int index = getPlayersIds().indexOf(playerId);
+				int rank = Math.min(matchRanks[i],5);
+				result[index][rank-1]++;
+			}
+		}
+		
+		return result;
 	}
-
-	/**
-	 * Returns the numbers of rounds drawn.
-	 * 
-	 * @return
-	 * 		Numbers of rounds drawn.
-	 */
-	public int[] getDrawn()
-	{	return drawn;
-	}
-
-	/**
-	 * Returns the numbers of rounds lost.
-	 * 
-	 * @return
-	 * 		Numbers of rounds lost.
-	 */
-	public int[] getLost()
-	{	return lost;
-	}
-
+	
 	/**
 	 * Returns the list of match stats.
 	 * 
@@ -130,25 +156,6 @@ public class StatisticTournament extends StatisticBase
 	public void addStatisticMatch(StatisticMatch match)
 	{	// matches stats
 		matches.add(match);
-		
-		// confrontations
-		int[] matchRanks = RankingTools.getRanks(match.getPoints());
-		int count = 0;
-		for(int i=0;i<matchRanks.length;i++)
-			if(matchRanks[i]==1)
-				count++;
-		boolean draw = count>1;
-		for(int i=0;i<matchRanks.length;i++)
-		{	String playerId = match.getPlayersIds().get(i);
-			int index = getPlayersIds().indexOf(playerId);
-			played[index]++;
-			if(matchRanks[i]>1)
-				lost[index]++;
-			else if(draw)
-				drawn[index]++;
-			else
-				won[index]++;
-		}
 		
 		// scores
 		for (Score score : Score.values())

@@ -1797,3 +1797,4 @@ public class Launcher
 //		- joués/gagnés/nuls/perdus (déjà fait)
 //		- nombre de fois 1er, 2ème, 3, 4, 5+
 //		>> p-ê qu'on peut détecter ça auto à partir du pointProcessor ?
+//	faire un switch pour basculer vers les moyennes ?

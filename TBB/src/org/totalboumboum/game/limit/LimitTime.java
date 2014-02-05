@@ -134,7 +134,7 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 	private AbstractPointsProcessor pointProcessor;
 	
 	@Override
-	public AbstractPointsProcessor getPointProcessor()
+	public AbstractPointsProcessor getPointsProcessor()
 	{	return pointProcessor;
 	}
 

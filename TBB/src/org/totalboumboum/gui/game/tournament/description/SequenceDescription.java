@@ -166,7 +166,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
-			pointsProcessor = limit.getPointProcessor();
+			pointsProcessor = limit.getPointsProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
 	}
 

@@ -1305,6 +1305,13 @@
 					<text name="Won" value="Won"  tooltip="Total number of matches won" />
 					<text name="Drawn" value="Drawn"  tooltip="Total number of matches drawn" />
 					<text name="Lost" value="Lost"  tooltip="Total number of matches lost" />
+					<group name="Ranks">
+						<text name="First" value="#1"  tooltip="Number of times first" />
+						<text name="Second" value="#2"  tooltip="Number of times second" />
+						<text name="Third" value="#3"  tooltip="Number of times third" />
+						<text name="Fourth" value="#4"  tooltip="Number of times fourth" />
+						<text name="More" value="#5+"  tooltip="Number of times fifth or more" />
+					</group>
 				</group>
 				<group name="Data">
 					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
