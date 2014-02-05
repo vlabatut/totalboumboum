@@ -1789,12 +1789,3 @@ public class Launcher
 //TODO JProfiler: (utiliser v7 sans itégration eclipse ?)
 //- voir ce qui prend du temps à l'ouverture des stats
 //- voir ce qui cause inéluctablement des ralentissements lors du premier round
-
-//TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, 
-// 		il faudrait plutot mettre les points.
-//		>> voir aussi la consistance avec le point processor, s'il y en a 1.
-//	Considérer 2 affichages différents :
-//		- joués/gagnés/nuls/perdus (déjà fait)
-//		- nombre de fois 1er, 2ème, 3, 4, 5+
-//		>> p-ê qu'on peut détecter ça auto à partir du pointProcessor ?
-//	faire un switch pour basculer vers les moyennes ?
