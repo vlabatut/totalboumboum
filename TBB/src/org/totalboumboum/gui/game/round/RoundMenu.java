@@ -360,7 +360,9 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 			}
 			// go back to match
 			else if(buttonMatch.isEnabled())
-			{	thread = new Thread("TBB.autoadvance")
+			{	
+//System.out.println("creating thread");
+				thread = new Thread("TBB.autoadvance")
 				{	@Override
 					public void run()
 					{	try
@@ -369,6 +371,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 							{	@Override
 								public void run()
 								{	buttonMatch.doClick();
+//System.out.println("clicking buttonMatch");
 								}
 							});				
 						}
@@ -666,7 +669,16 @@ round.clean();
 
 	@Override
 	public void simulationOver()
-	{	((RoundSplitPanel)container).autoAdvance();
+	{	
+//System.out.println("RoundMenu.simulationOver");
+
+		SwingUtilities.invokeLater(new Runnable()
+		{	@Override
+			public void run()
+			{	container.refresh();
+				((RoundSplitPanel)container).autoAdvance();
+			}
+		});
 	}
 
 	/////////////////////////////////////////////////////////////////

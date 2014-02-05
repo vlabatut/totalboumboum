@@ -1792,7 +1792,7 @@ public class Launcher
 //TODO l'affichage des resultats du tournoi-ligue est bizarre : on affiche matchs gagnes/perdus, 
 // 		il faudrait plutot mettre les points.
 //		>> voir aussi la consistance avec le point processor, s'il y en a 1.
-
-//TODO tester 
-//	[[+ tester tournoi ligue]]
-// 	[[+ interface : indiquer match ou round x/y, quand c'est possible]]
+//	Considérer 2 affichages différents :
+//		- joués/gagnés/nuls/perdus (déjà fait)
+//		- nombre de fois 1er, 2ème, 3, 4, 5+
+//		>> p-ê qu'on peut détecter ça auto à partir du pointProcessor ?

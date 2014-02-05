@@ -35,10 +35,10 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
 
@@ -171,7 +171,7 @@ public abstract class LocalLoop extends VisibleLoop implements InteractiveLoop
 		}
 		
 		// create sprites and stuff
-		HashMap<String,Integer> items = plyrs.getInitialItems();
+		Map<String,Integer> items = plyrs.getInitialItems();
 		Itemset itemset = instance.getItemset();
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;

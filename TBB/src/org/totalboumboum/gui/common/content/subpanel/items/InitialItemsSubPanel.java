@@ -24,8 +24,8 @@ package org.totalboumboum.gui.common.content.subpanel.items;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.totalboumboum.engine.container.itemset.ItemsetPreview;
@@ -96,7 +96,7 @@ public class InitialItemsSubPanel extends TableSubPanel
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumFractionDigits(0);
 			ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
-			HashMap<String,Integer> initialItems = levelPreview.getInitialItems();
+			Map<String,Integer> initialItems = levelPreview.getInitialItems();
 			Iterator<Entry<String,Integer>> i = initialItems.entrySet().iterator();
 			int line = 0;
 			int colGroup = 0;

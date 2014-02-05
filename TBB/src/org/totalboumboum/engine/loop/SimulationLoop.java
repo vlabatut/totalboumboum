@@ -26,12 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.SwingUtilities;
-
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.round.Round;
-import org.totalboumboum.gui.game.round.RoundSplitPanel;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticAction;

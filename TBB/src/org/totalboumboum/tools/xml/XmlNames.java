@@ -136,6 +136,7 @@ public class XmlNames
 	public static final String FLOORS = "floors";
 	public static final String FOLDER = "folder";
 	public static final String FONT = "font";
+	public static final String FORBID_PLAYER_NUMBERS = "forbidPlayerNumbers";
 	public static final String FORCE_ALL = "forceAll";
 	public static final String FORCE_POSITION = "forcePosition";
 	public static final String FPS = "fps";

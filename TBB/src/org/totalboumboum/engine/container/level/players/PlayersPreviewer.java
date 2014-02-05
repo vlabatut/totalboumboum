@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -40,14 +41,30 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
- * 
+ * Class used to preview player-related info from a level.
+ * It loads only the relevent parts of the XML file, for speed matters.
+ *  
  * @author Vincent Labatut
- *
  */
 public class PlayersPreviewer
-{	
+{	/** Class id */
 	private static boolean onlyAllowedPlayers;
 	
+	/**
+	 * Normally loads all the player-related data.
+	 * 
+	 * @param folder
+	 * 		XML file folder.
+	 * @param result
+	 * 		Loaded object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the file.
+	 * @throws SAXException
+	 * 		Problem while accessing the file.
+	 * @throws IOException
+	 * 		Problem while accessing the file.
+	 */
     public static void loadPlayers(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
 	{	// parameters
     	onlyAllowedPlayers = false;
@@ -55,13 +72,43 @@ public class PlayersPreviewer
 		loadPlayersCommon(folder,result);
     }
 
-    public static void loadPlayersAllowed(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
+	/**
+	 * Only loads the allowed player numbers.
+	 * 
+	 * @param folder
+	 * 		XML file folder.
+	 * @param result
+	 * 		Loaded object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the file.
+	 * @throws SAXException
+	 * 		Problem while accessing the file.
+	 * @throws IOException
+	 * 		Problem while accessing the file.
+	 */
+   public static void loadPlayersAllowed(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
 	{	// parameters
     	onlyAllowedPlayers = true;
     	// load
 		loadPlayersCommon(folder,result);
     }
 
+   /**
+    * Loads player-related data.
+    * 
+	 * @param folder
+	 * 		XML file folder.
+	 * @param result
+	 * 		Loaded object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the file.
+	 * @throws SAXException
+	 * 		Problem while accessing the file.
+	 * @throws IOException
+	 * 		Problem while accessing the file.
+    */
     private static void loadPlayersCommon(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		Element root;
@@ -75,7 +122,15 @@ public class PlayersPreviewer
 		// reading
 		loadPlayersElement(root,result);
     }
-
+    
+    /**
+     * Process the players XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     private static void loadPlayersElement(Element root, LevelPreview result)
     {	// init
     	Element element;
@@ -89,6 +144,14 @@ public class PlayersPreviewer
     	}
     }
     
+    /**
+     * Process the locations XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     @SuppressWarnings("unchecked")
 	private static void loadLocationsElement(Element root, LevelPreview result)
     {	Set<Integer> allowedPlayersNumber = new TreeSet<Integer>();
@@ -103,9 +166,17 @@ public class PlayersPreviewer
 		result.setAllowedPlayerNumbers(allowedPlayersNumber);
 	}
     
+    /**
+     * Process the items XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, LevelPreview result)
-    {	HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
+    {	Map<String,Integer> initialItems = new HashMap<String, Integer>();
     	List<Element> elements = root.getChildren(XmlNames.ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())

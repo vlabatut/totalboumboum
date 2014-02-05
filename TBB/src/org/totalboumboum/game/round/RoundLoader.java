@@ -25,12 +25,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.totalboumboum.engine.container.level.hollow.HollowLevel;
 import org.totalboumboum.engine.container.level.hollow.HollowLevelLoader;
+import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.limit.LimitLoader;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.RoundLimit;
@@ -188,6 +190,14 @@ public class RoundLoader
     	// load
     	HollowLevel hollowLevel = HollowLevelLoader.loadHollowLevel(packname,name); 
     	result.setHollowLevel(hollowLevel);
+    	
+    	// forbidden player numbers
+    	String forbidPlayerNumbers = root.getAttributeValue(XmlNames.FORBID_PLAYER_NUMBERS);
+    	if(forbidPlayerNumbers!=null)
+    	{	Set<Integer> set = XmlTools.parseMultipleInteger(forbidPlayerNumbers);
+    		Players players = hollowLevel.getPlayers();
+    		players.forbidPlayers(set);
+    	}
     }
     
 	/**

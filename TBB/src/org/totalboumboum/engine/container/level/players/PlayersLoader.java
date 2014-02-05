@@ -37,12 +37,27 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used to load Players objects from XML files.
  * 
  * @author Vincent Labatut
- *
  */
 public class PlayersLoader
-{	
+{
+	/**
+	 * Loads the player data contained in the specified folder.
+	 * 
+	 * @param folder
+	 * 		Location of the XML file.
+	 * @return
+	 * 		Loaded object.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file.
+	 */
     public static Players loadPlayers(String folder) throws ParserConfigurationException, SAXException, IOException
 	{	
     	/* 
@@ -53,7 +68,7 @@ public class PlayersLoader
 		 */
 
 		/*
-		 * si le level ne supporte pas explicitement le nbre n de joueurs voulu,
+		 * TODO si le level ne supporte pas explicitement le nbre n de joueurs voulu,
 		 * on prend la config pour la taille au dessus, et on utilise les n premières
 		 * positions définies
 		 */
@@ -74,6 +89,14 @@ public class PlayersLoader
 		return result;
     }
     
+    /**
+     * Processes the players XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @return
+     * 		Loaded Players object.
+     */
     private static Players loadPlayersElement(Element root)
     {	// init
     	Players result = new Players();
@@ -90,6 +113,14 @@ public class PlayersLoader
     	return result;
     }
     
+    /**
+     * Processes the locations XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     @SuppressWarnings("unchecked")
 	private static void loadLocationsElement(Element root, Players result)
     {	List<Element> elements = root.getChildren(XmlNames.CASE);
@@ -100,6 +131,14 @@ public class PlayersLoader
 		}
     }
     
+    /**
+     * Processes the case XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     @SuppressWarnings("unchecked")
     private static void loadCaseElement(Element root, Players result)
     {	// player count
@@ -120,7 +159,15 @@ public class PlayersLoader
 		}
 		result.addLocation(locations);
     }
-    	
+    
+    /**
+     * Processes the location XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     private static void loadLocationElement(Element root, PlayerLocation result)
     {	// player number
     	String str = root.getAttribute(XmlNames.PLAYER).getValue().trim();
@@ -138,6 +185,14 @@ public class PlayersLoader
 		result.setRow(row);
     }
     
+    /**
+     * Processes the items XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, Players result)
     {	List<Element> elements = root.getChildren(XmlNames.ITEM);
@@ -148,6 +203,14 @@ public class PlayersLoader
 		}
     }
     
+    /**
+     * Processes the item XML element.
+     * 
+     * @param root
+     * 		XML element.
+     * @param result
+     * 		Object to complete.
+     */
     private static void loadItemElement(Element root, Players result)
     {	// name
     	String str = root.getAttribute(XmlNames.NAME).getValue().trim();
