@@ -24,7 +24,7 @@ package org.totalboumboum.engine.container.level.players;
 import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,12 +39,36 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class able to record a {@link Players} object
+ * under the form of an XML file.
  * 
  * @author Vincent Labatut
- *
  */
 public class PlayersSaver
 {	
+	/**
+	 * Records the specified object as an XML file.
+	 * 
+	 * @param folder
+	 * 		Folder to contain the XML file.
+	 * @param players
+	 * 		Players object to record.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 		Problem while accessing the XML file.
+	 * @throws SecurityException
+	 * 		Problem while accessing the XML file.
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file.
+	 * @throws IllegalAccessException
+	 * 		Problem while accessing the XML file.
+	 * @throws NoSuchFieldException
+	 * 		Problem while accessing the XML file.
+	 */
 	public static void savePlayers(String folder, Players players) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// build document
 		Element root = savePlayersElement(players);	
@@ -57,6 +81,14 @@ public class PlayersSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
+	/**
+	 * Generates the players XML element.
+	 * 
+	 * @param players
+	 * 		Original object.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element savePlayersElement(Players players)
 	{	Element result = new Element(XmlNames.PLAYERS);
 		
@@ -65,19 +97,27 @@ public class PlayersSaver
 		result.addContent(gplComment);
 
 		// locations
-		HashMap<Integer,PlayerLocation[]> locations = players.getLocations();
+		Map<Integer,PlayerLocation[]> locations = players.getLocations();
 		Element locationsElement = saveLocationsElement(locations);
 		result.addContent(locationsElement);
 
 		// items
-		HashMap<String,Integer> items = players.getInitialItems();
+		Map<String,Integer> items = players.getInitialItems();
 		Element itemsElement = saveItemsElement(items);
 		result.addContent(itemsElement);
 	
 		return result;
 	}
  
-	private static Element saveLocationsElement(HashMap<Integer,PlayerLocation[]> locations)
+	/**
+	 * Generates the locations XML element.
+	 * 
+	 * @param locations
+	 * 		Original object.
+	 * @return
+	 * 		XML element.
+	 */
+	private static Element saveLocationsElement(Map<Integer,PlayerLocation[]> locations)
 	{	Element result = new Element(XmlNames.LOCATIONS);
 		
 		for(PlayerLocation[] playerLocation: locations.values())
@@ -88,6 +128,14 @@ public class PlayersSaver
 		return result;
 	}
     
+	/**
+	 * Generates the player location XML element.
+	 * 
+	 * @param playerLocation
+	 * 		Original object.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element saveCaseElement(PlayerLocation[] playerLocation)
 	{	Element result = new Element(XmlNames.CASE);
 		
@@ -104,6 +152,14 @@ public class PlayersSaver
 		return result;
 	}
     
+	/**
+	 * Generates the location XML element.
+	 * 
+	 * @param location
+	 * 		Original object.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element saveLocationElement(PlayerLocation location)
 	{	Element result = new Element(XmlNames.LOCATION);
 		NumberFormat nf = NumberFormat.getInstance();
@@ -124,7 +180,15 @@ public class PlayersSaver
 		return result;
 	}
 
-	private static Element saveItemsElement(HashMap<String,Integer> items)
+	/**
+	 * Generates the items XML element.
+	 * 
+	 * @param items
+	 * 		Original object.
+	 * @return
+	 * 		XML element.
+	 */
+	private static Element saveItemsElement(Map<String,Integer> items)
 	{	Element result = new Element(XmlNames.ITEMS);
 		
 		for(Entry<String,Integer> entry: items.entrySet())
@@ -137,6 +201,16 @@ public class PlayersSaver
 		return result;
 	}
     
+	/**
+	 * Generates the item XML element.
+	 * 
+	 * @param item
+	 * 		Item name.
+	 * @param nbr
+	 * 		Number of items.
+	 * @return
+	 * 		XML element.
+	 */
 	private static Element saveItemElement(String item, int nbr)
 	{	Element result = new Element(XmlNames.ITEM);
 		

@@ -598,6 +598,7 @@
 + beta.028
 	- ressources :
 		- TODO nettoyage des thèmes (moins d'images à charger, mutualisation/normalisation des fichiers xml)
+		- Possibilité de limiter le nombre de joueurs depuis le tournoi, pour rounds/matches/tournois
  	- gui :
  		- Texte clair sur fond sombre pour plus de lisibilité
  		- Courbe blanche plus foncée dans les graphiques

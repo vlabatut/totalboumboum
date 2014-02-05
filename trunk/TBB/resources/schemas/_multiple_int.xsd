@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<round
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
 <!-- 
 	Total Boum Boum
 	Copyright 2008-2014 Vincent Labatut 
@@ -20,26 +19,12 @@
 	
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
- -->
+-->
+
+	<xsd:simpleType name="tMultipleInt">
+	    <xsd:restriction base="xsd:token">
+	        <xsd:pattern value="(\d+(\-\d+)?,)*\d+(\-\d+)?"/>
+	    </xsd:restriction>
+	</xsd:simpleType>
 	
- 	<notes>
- 		<line value="Manche classique" />
- 		<line value="Date: 06-01-2009" />
- 	</notes>
-
-	<author value="Vincent Labatut" />
-
-	<limits>
-		<lastStanding>
-			<points local="true" name="points" />
-			<threshold value="1" comparator="LESSEQ"/>
-		</lastStanding>
-		<time>
-			<points local="true" name="points" />
- 			<threshold value="60000" />
-		</time>
-	</limits>
-	
-	<level packname="tournament201213" name="croix" randomLocation="true" forbidPlayerNumbers="1-3,7-16" />
-
-</round>
+</xsd:schema>

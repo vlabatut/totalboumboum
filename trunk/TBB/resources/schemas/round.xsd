@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_limit.xsd"/>
+<xsd:include schemaLocation="_multiple_int.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
 
 <!-- 
@@ -31,6 +32,7 @@
 		<xsd:attribute name="packname" type="xsd:string" use="required" />
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="randomLocation" type="xsd:boolean" use="optional" default="false"/>
+		<xsd:attribute name="forbidPlayerNumbers" type="tMultipleInt" use="optional" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tRound">

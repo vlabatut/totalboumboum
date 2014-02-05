@@ -24,6 +24,7 @@ package org.totalboumboum.engine.container.level.preview;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.totalboumboum.engine.container.itemset.ItemsetPreview;
@@ -78,12 +79,12 @@ public class LevelPreview implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// INITIAL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Integer> initialItems;
+	private Map<String,Integer> initialItems;
 
-	public HashMap<String, Integer> getInitialItems()
+	public Map<String, Integer> getInitialItems()
 	{	return initialItems;
 	}
-	public void setInitialItems(HashMap<String, Integer> initialItems)
+	public void setInitialItems(Map<String, Integer> initialItems)
 	{	this.initialItems = initialItems;
 	}
 

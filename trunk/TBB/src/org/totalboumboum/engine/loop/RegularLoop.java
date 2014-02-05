@@ -29,9 +29,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
 
@@ -140,7 +140,7 @@ public class RegularLoop extends LocalLoop
 		}
 		
 		// create sprites and stuff
-		HashMap<String,Integer> items = plyrs.getInitialItems();
+		Map<String,Integer> items = plyrs.getInitialItems();
 		Itemset itemset = instance.getItemset();
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;

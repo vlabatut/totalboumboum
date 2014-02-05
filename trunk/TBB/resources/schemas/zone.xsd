@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_multiple_int.xsd"/>
 
 <!-- 
 	Total Boum Boum
@@ -95,12 +96,6 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:simpleType name="tMultipleInt">
-	    <xsd:restriction base="xsd:token">
-	        <xsd:pattern value="(\d+(\-\d+)?,)*\d+(\-\d+)?"/>
-	    </xsd:restriction>
-	</xsd:simpleType>
-	
 	<xsd:complexType name="tEvtTile">
 		<xsd:sequence>
 			<xsd:group ref="gBasicTile" />

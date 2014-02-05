@@ -24,32 +24,58 @@ package org.totalboumboum.engine.container.level.players;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.totalboumboum.engine.player.PlayerLocation;
 import org.totalboumboum.tools.GameData;
 
 /**
+ * Represents the players-related description of a level.
  * 
  * @author Vincent Labatut
- *
  */
 public class Players implements Serializable
-{	private static final long serialVersionUID = 1L;
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// LOCATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
+	/** List of player locations allowed for this level */ 
+	private Map<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
 
+	/**
+	 * Adds a new player location to the allowed ones.
+	 * 
+	 * @param loc
+	 * 		New location.
+	 */
 	public void addLocation(PlayerLocation[] loc)
 	{	locations.put(loc.length,loc);		
 	}
 
-	public HashMap<Integer, PlayerLocation[]> getLocations()
+	/**
+	 * Returns the map of all allowed locations for
+	 * this level.
+	 * 
+	 * @return
+	 * 		Map of all locations.
+	 */
+	public Map<Integer, PlayerLocation[]> getLocations()
 	{	return locations;	
 	}
 	
+	/**
+	 * Checks if the specified tile is used as a location.
+	 * 
+	 * @param row
+	 * 		Tile row.
+	 * @param col
+	 * 		Tile column.
+	 * @return
+	 * 		{@code true} iff the tile is used as a player starting location.
+	 */
 	public boolean isOccupied(int row, int col)
 	{	boolean result = false;
 		Iterator<PlayerLocation[]> it = locations.values().iterator();
@@ -64,12 +90,34 @@ public class Players implements Serializable
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Removes all locations corresponding to the specified
+	 * numbers of players. This allows forbidding certain
+	 * player numbers from a tournament/match/round. This overrides
+	 * the original locations defined in the level itself. 
+	 * 
+	 * @param numbers
+	 * 		Forbidden numbers of players.
+	 */
+	public void forbidPlayers(Set<Integer> numbers)
+	{	for(int n: numbers)
+			locations.remove(n);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// INITIAL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,Integer> initialItems = new HashMap<String,Integer>();
+	/** Map of items given to players at startup */
+	private Map<String,Integer> initialItems = new HashMap<String,Integer>();
 		
+	/**
+	 * Adds a new item to the current map 
+	 * of startup item.
+	 * 
+	 * @param item
+	 * 		New item.
+	 */
 	public void addInitialItem(String item)
 	{	Integer nbr = initialItems.get(item);
 		if(nbr==null)
@@ -79,13 +127,28 @@ public class Players implements Serializable
 		initialItems.put(item,nbr);		
 	}
 
-	public HashMap<String,Integer> getInitialItems()
+	/**
+	 * Returns the map of allowed items,
+	 * with the associated occurrence numbers.
+	 * 
+	 * @return
+	 * 		Map of initial items.
+	 */
+	public Map<String,Integer> getInitialItems()
 	{	return initialItems;	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FORMAT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Formats the numbers of allowed number as a String.
+	 * 
+	 * @param playerNumbers
+	 * 		Set of allowed player numbers.
+	 * @return
+	 * 		String representation of this set.
+	 */
 	public static String formatAllowedPlayerNumbers(Set<Integer> playerNumbers)
 	{	StringBuffer temp = new StringBuffer();
 		if(playerNumbers.size()>0)

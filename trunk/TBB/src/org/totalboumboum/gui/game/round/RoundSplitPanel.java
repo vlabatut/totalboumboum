@@ -87,7 +87,9 @@ public class RoundSplitPanel extends SplitMenuPanel
 	 * while evaluating agents.
 	 */
 	public void autoAdvance()
-	{	((RoundMenu)menuPart).autoAdvance();
+	{	
+//System.out.println("RoundSplitPannel.autoAdvance");
+		((RoundMenu)menuPart).autoAdvance();
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -30,6 +30,7 @@
 		<player file="ed343446-7b2a-4ce3-a391-5e79cbb638ea" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 		<player file="bc8b7b98-7456-486a-a5b0-9cc9715d6e45" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="69306440-cfe9-4136-9494-faa95068c1c3" color="YELLOW" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
+		<player file="430cf1b5-4831-4d94-b3b4-a5d0a6780462" color="INDIGO" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 	</players>
 	<autoAdvance index="0" />
 </gameTournament>

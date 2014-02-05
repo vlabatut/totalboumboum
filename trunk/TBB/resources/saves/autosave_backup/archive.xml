@@ -20,9 +20,9 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Tournoi ligue de test" type="LEAGUE" />
-	<played matches="14" rounds="1" />
-	<total matches="15" rounds="3" />
-	<dates start="2014-02-03T22:18:46" save="2014-02-03T23:23:04" />
+	<played matches="23" rounds="2" />
+	<total matches="24" rounds="3" />
+	<dates start="2014-02-04T23:31:58" save="2014-02-04T23:47:38" />
 	<players>
 		<player name="1314.Akyol+Kaptan+Koçak" />
 		<player name="0910.Çalışır+Güner" />
@@ -32,6 +32,7 @@
 		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
 		<player name="0809.Altay+Basaranoğlu" />
 		<player name="1314.Arık+Günaydın+Kochan" />
+		<player name="1314.Engin+Serhan+Tipici" />
 	</players>
 </archive>
 
