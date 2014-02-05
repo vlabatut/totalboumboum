@@ -456,6 +456,8 @@ public class Match implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	/** List of profiles participating in this match */
 	private final List<Profile> profiles = new ArrayList<Profile>();
+	/** Number of players artificially forbidden, even if the rounds allow them */
+	private final Set<Integer> forbiddenPlayerNumbers = new TreeSet<Integer>();
 	
 	/**
 	 * Adds a new player to this match.
@@ -481,13 +483,20 @@ public class Match implements StatisticHolder, Serializable
 	 * 		A set of integer values, each one representing an allowed number of players.
 	 */
 	public Set<Integer> getAllowedPlayerNumbers()
-	{	TreeSet<Integer> result = new TreeSet<Integer>();
+	{	// put all possible numbers
+		TreeSet<Integer> result = new TreeSet<Integer>();
 		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
+		
+		// retain only those allowed by the rounds
 		for(Round r:rounds)
 		{	Set<Integer> temp = r.getAllowedPlayerNumbers();
 			result.retainAll(temp);
 		}
+		
+		// remove the forbidden ones
+		result.removeAll(forbiddenPlayerNumbers);
+		
 		return result;			
 	}
 	
@@ -512,6 +521,29 @@ public class Match implements StatisticHolder, Serializable
 			result = profile.hasAi();
 		}
 		return result;
+	}
+	
+	/**
+	 * Changes the forbidden player numbers.
+	 * 
+	 * @param set
+	 * 		New forbidden player numbers.
+	 */
+	public void setForbiddenPlayerNumbers(Set<Integer> set)
+	{	forbiddenPlayerNumbers.clear();
+		forbiddenPlayerNumbers.addAll(set);
+	}
+	
+	/**
+	 * Returns the forbidden player numbers.
+	 * Those restrict the number of players in
+	 * this match, even if its rounds allow them.
+	 * 
+	 * @return
+	 * 		Set of forbidden player numbers.
+	 */
+	public Set<Integer> getForbiddenPlayerNumbers()
+	{	return forbiddenPlayerNumbers;
 	}
 	
 	/////////////////////////////////////////////////////////////////

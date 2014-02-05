@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -158,6 +159,11 @@ public class MatchLoader
 		// rounds
 		element = root.getChild(XmlNames.ROUNDS);
 		loadRoundsElement(element,folderPath,result);
+		
+		// players
+		element = root.getChild(XmlNames.PLAYERS);
+		if(element!=null)
+			loadPlayersElement(element,result);
 	}		
 		
     /**
@@ -288,4 +294,22 @@ public class MatchLoader
 		
 		return result;
 	}
+
+
+	/**
+	 * Loads the {@code players} element.
+	 * 
+	 * @param root
+	 * 		Root element.
+	 * @param result
+	 * 		Loaded match. 
+	 */
+    private static void loadPlayersElement(Element root, Match result)
+    {	// forbidden player numbers
+    	String forbidPlayerNumbers = root.getAttributeValue(XmlNames.FORBID_PLAYER_NUMBERS);
+    	if(forbidPlayerNumbers!=null)
+    	{	Set<Integer> set = XmlTools.parseMultipleInteger(forbidPlayerNumbers);
+    		result.setForbiddenPlayerNumbers(set);
+    	}
+     }
 }
