@@ -50,6 +50,8 @@ import org.totalboumboum.configuration.ai.AisConfiguration;
 import org.totalboumboum.game.limit.LimitConfrontation;
 import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.MatchLimit;
+import org.totalboumboum.game.points.AbstractPointsProcessor;
+import org.totalboumboum.game.points.PointsProcessorRankpoints;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
@@ -299,7 +301,32 @@ public class Match implements StatisticHolder, Serializable
 	public void setLimits(Limits<MatchLimit> limits)
 	{	this.limits = limits;
 	}
-			
+	
+	/**
+	 * Checks if this match is "old-school", in the sense the points scored
+	 * are on a all-or-nothing basis: the winner scores one point, the others
+	 * score nothing. If at least one match is not like this, then the match
+	 * is not considered old-school.
+	 * 
+	 * @return
+	 * 		{@code true} iff all matches are old-school.
+	 */
+	public boolean isOldSchool()
+	{	boolean result = true;
+		Iterator<MatchLimit> it = limits.iterator();
+		while(result && it.hasNext())
+		{	result = false;
+			MatchLimit limit = it.next();
+			AbstractPointsProcessor pp = limit.getPointsProcessor();
+			if(pp instanceof PointsProcessorRankpoints)
+			{	PointsProcessorRankpoints ppr = (PointsProcessorRankpoints)pp;
+				float values[] = ppr.getValues();
+				result = values[1]==0;
+			}
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ROUND ORDER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

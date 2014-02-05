@@ -21,6 +21,7 @@ package org.totalboumboum.gui.game.tournament.results;
  * 
  */
 
+import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.gui.common.content.subpanel.results.LeagueResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -57,6 +58,14 @@ public class LeagueResults extends TournamentResults<LeagueTournament>
 	@Override
 	public void setTournament(LeagueTournament tournament)
 	{	this.tournament = tournament;
+		if(tournament.isOldSchool())
+		{	resultsPanel.setShowConfrontations(true);
+			resultsPanel.setShowRanks(false);
+		}
+		else
+		{	resultsPanel.setShowConfrontations(false);
+			resultsPanel.setShowRanks(true);
+		}
 		resultsPanel.setLeagueTournament(tournament);
 	}
 	

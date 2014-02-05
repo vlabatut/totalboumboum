@@ -66,5 +66,5 @@ public interface Limit extends Serializable
 	 * @return
 	 * 		A point processor.
 	 */
-	public AbstractPointsProcessor getPointProcessor();
+	public AbstractPointsProcessor getPointsProcessor();
 }

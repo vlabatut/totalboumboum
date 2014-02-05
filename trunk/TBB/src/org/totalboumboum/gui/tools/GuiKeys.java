@@ -133,10 +133,12 @@ public class GuiKeys
 	public static final String FINISH = "Finish";
 	public static final String FINISHED = "Finished";
 	public static final String FIRESETMAP = "Firesetmap";
+	public static final String FIRST = "First";
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
 	public static final String FONT = "Font";
 	public static final String FORWARD = "Forward";
+	public static final String FOURTH = "Fourth";
 	public static final String FPS = "Fps";
 	public static final String FULL = "Full";
 	public static final String GAME = "Game";
@@ -190,6 +192,7 @@ public class GuiKeys
 	public static final String MINUS = "Minus";
 	public static final String MODE = "Mode";
 	public static final String MODIFY = "Modify";
+	public static final String MORE = "More";
 	public static final String NAME = "Name";
 	public static final String NETWORK = "Network";
 	public static final String NEW = "New";
@@ -264,6 +267,7 @@ public class GuiKeys
 	public static final String SCORE = "Score";
 	public static final String SCORES = "Scores";
 	public static final String SCREEN = "Screen";
+	public static final String SECOND = "Second";
 	public static final String SELECT = "Select";
 	public static final String SELECTION = "Selection";
 	public static final String SELF = "Self";
@@ -290,6 +294,7 @@ public class GuiKeys
 	public static final String TABLE = "Table";
 	public static final String TEXT = "Text";
 	public static final String THEME = "Theme";
+	public static final String THIRD = "Third";
 	public static final String TIME = "Time";
 	public static final String TITLE = "Title";
 	public static final String TOOLTIP = "Tooltip";
@@ -1508,6 +1513,13 @@ public class GuiKeys
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_WON = COMMON_RESULTS_TOURNAMENT_HEADER+WON;
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_DRAWN = COMMON_RESULTS_TOURNAMENT_HEADER+DRAWN;
 			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_LOST = COMMON_RESULTS_TOURNAMENT_HEADER+LOST;
+				/** RANKS */
+				public static final String COMMON_RESULTS_TOURNAMENT_HEADER_RANKS = COMMON_RESULTS_TOURNAMENT_HEADER+RANKS;
+				public static final String COMMON_RESULTS_TOURNAMENT_HEADER_RANKS_FIRST = COMMON_RESULTS_TOURNAMENT_HEADER_RANKS+FIRST;
+				public static final String COMMON_RESULTS_TOURNAMENT_HEADER_RANKS_SECOND = COMMON_RESULTS_TOURNAMENT_HEADER_RANKS+SECOND;
+				public static final String COMMON_RESULTS_TOURNAMENT_HEADER_RANKS_THIRD = COMMON_RESULTS_TOURNAMENT_HEADER_RANKS+THIRD;
+				public static final String COMMON_RESULTS_TOURNAMENT_HEADER_RANKS_FOURTH = COMMON_RESULTS_TOURNAMENT_HEADER_RANKS+FOURTH;
+				public static final String COMMON_RESULTS_TOURNAMENT_HEADER_RANKS_MORE = COMMON_RESULTS_TOURNAMENT_HEADER_RANKS+MORE;
 			/** DATA */
 			public static final String COMMON_RESULTS_TOURNAMENT_DATA = COMMON_RESULTS_TOURNAMENT+DATA;
 			public static final String COMMON_RESULTS_TOURNAMENT_DATA_COMPUTER = COMMON_RESULTS_TOURNAMENT_DATA+COMPUTER;

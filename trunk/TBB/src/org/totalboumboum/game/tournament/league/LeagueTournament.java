@@ -240,6 +240,25 @@ public class LeagueTournament extends AbstractTournament
 	public void setPointsProcessor(AbstractPointsProcessor pointsProcessor)
 	{	this.pointsProcessor = pointsProcessor;
 	}
+	
+	/**
+	 * Checks if this tournament is "old-school", in the sense the matches
+	 * are on a all-or-nothing basis: the winner scores one point, the others
+	 * score nothing. If at least one match is not like this, then the tournament
+	 * is not considered old-school.
+	 * 
+	 * @return
+	 * 		{@code true} iff all matches are old-school.
+	 */
+	public boolean isOldSchool()
+	{	boolean result = true;
+		Iterator<Match> it = matches.iterator();
+		while(result && it.hasNext())
+		{	Match match = it.next();
+			result = match.isOldSchool();
+		}
+		return result;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
@@ -431,15 +450,23 @@ public class LeagueTournament extends AbstractTournament
 		writer.print("Selfies\t");
 		writer.print("Bombings\t");
 		writer.print("Played\t");
-		writer.print("Lost\t");
-		writer.print("Drawn\t");
 		writer.print("Won\t");
+		writer.print("Drawn\t");
+		writer.print("Lost\t");
+		writer.print("1st\t");
+		writer.print("2nd\t");
+		writer.print("3rd\t");
+		writer.print("4th\t");
+		writer.print("+5th\t");
 		writer.print("Points\t");
 		for(int i=0;i<confNbr;i++)
 			writer.print("M"+(i+1)+"\t");
 		writer.println();
 
 		// write data
+		int played[] = stats.getPlayedCounts();
+		int[][] confs = stats.getConfrontationCounts();
+		int[][] ranks = stats.getRankCounts();
 		for(int i=0;i<points.length;i++)
 		{	// set profile stuff
 			Profile profile = absoluteList.get(i);
@@ -496,23 +523,48 @@ public class LeagueTournament extends AbstractTournament
 			}
 			
 			// played
-			{	int played = stats.getPlayed()[profileIndex];
-				writer.print(played+"\t");
-			}
-			
-			// lost
-			{	int lost = stats.getLost()[profileIndex];
-				writer.print(lost+"\t");
-			}
-			
-			// drawn
-			{	int drawn = stats.getDrawn()[profileIndex];
-				writer.print(drawn+"\t");
+			{	int pld = played[profileIndex];
+				writer.print(pld+"\t");
 			}
 			
 			// won
-			{	int won = stats.getWon()[profileIndex];
+			{	int won = confs[profileIndex][0];
 				writer.print(won+"\t");
+			}
+			
+			// drawn
+			{	int drawn = confs[profileIndex][1];
+				writer.print(drawn+"\t");
+			}
+			
+			// lost
+			{	int lost = confs[profileIndex][2];
+				writer.print(lost+"\t");
+			}
+			
+			// first
+			{	int first = ranks[profileIndex][0];
+				writer.print(first+"\t");
+			}
+			
+			// second
+			{	int second = ranks[profileIndex][1];
+				writer.print(second+"\t");
+			}
+			
+			// third
+			{	int third = ranks[profileIndex][2];
+				writer.print(third+"\t");
+			}
+			
+			// fourth
+			{	int fourth = ranks[profileIndex][3];
+				writer.print(fourth+"\t");
+			}
+			
+			// fifth or more
+			{	int more = ranks[profileIndex][4];
+				writer.print(more+"\t");
 			}
 			
 			// points

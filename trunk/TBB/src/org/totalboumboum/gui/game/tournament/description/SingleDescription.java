@@ -170,7 +170,7 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		AbstractPointsProcessor pointsProcessor = null;
 		if(limit!=null)
-			pointsProcessor = limit.getPointProcessor();
+			pointsProcessor = limit.getPointsProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
 	}
 
