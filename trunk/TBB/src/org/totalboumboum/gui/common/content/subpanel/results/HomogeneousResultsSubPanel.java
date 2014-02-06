@@ -62,7 +62,7 @@ public class HomogeneousResultsSubPanel extends TableSubPanel
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 	/** Number of lines */
-	private static final int LINES = GameData.STANDARD_TILE_DIMENSION+1;
+	private static final int LINES = GameData.MAX_PROFILES_COUNT+1;
 	/** Number of columns */
 	private static final int COLS = 0;
 	/** Gui key prefix */
