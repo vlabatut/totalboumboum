@@ -1733,8 +1733,6 @@ public class Launcher
  * TODO POSTS SITE
  * 		+ enchainement des tournois (joueurs constants)
  * 		+ exportation des stats
- * 		+ capture de mémoire (zone) ?
- * 		+ capture ? + cacher les sprites et le message de pause
  * 		+ API: représentation des chemins (avec les pauses et tout)
  * 		+ évènements de mort subite aléatoires
  * 		+ vidéos du tournoi
