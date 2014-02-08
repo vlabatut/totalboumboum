@@ -1787,3 +1787,4 @@ public class Launcher
 //- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
 //TODO mettre en place le tournoi de type tournante
+//TODO gérer le cas particulier où un match ne contient qu'un seul round
