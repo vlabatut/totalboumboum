@@ -108,7 +108,7 @@ public class TurningTournament extends AbstractTournament
 	}
 
 	@Override
-	protected void recordStatsAsText() throws FileNotFoundException
+	public void recordStatsAsText() throws FileNotFoundException
 	{
 		// TODO Auto-generated method stub
 		

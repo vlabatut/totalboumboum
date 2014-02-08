@@ -695,6 +695,7 @@
 				<text name="Confirm" value="Confirm" tooltip="Save and go back to the tournament" />
 				<text name="Delete" value="Delete" tooltip="Delete the selected slot" />
 				<text name="New" value="New" tooltip="Create a new slot" />
+				<text name="Statistics" value="Statistics" tooltip="Export the current game stats as a text file" />
 			</group>
 			<group name="Write over">
 				<text name="Question" value="Do you really want to write over this save slot?" tooltip="Do you really want to write over this save slot?" />

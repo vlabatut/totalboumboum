@@ -1720,8 +1720,6 @@ public class Launcher
  * 		+ >> p-ê un split horizontal plutot que vertical ?
  * 
  * TODO
- * 		+ proposer d'enregistrer les stats d'une confrontation
- * 			>> nouvelle ligne dans la table des résultats, contenant un bouton d'exportation
  * 		+ capture d'écran des graphiques ? dessiner directement dans un panel puis sauver. à voir pour la couleur du fond ?
  */
 
@@ -1787,3 +1785,5 @@ public class Launcher
 //TODO JProfiler: (utiliser v7 sans itégration eclipse ?)
 //- voir ce qui prend du temps à l'ouverture des stats
 //- voir ce qui cause inéluctablement des ralentissements lors du premier round
+
+//TODO mettre en place le tournoi de type tournante

@@ -696,6 +696,7 @@
 				<text name="Confirm" value="Confirmer" tooltip="Enregistrer et revenir au tournoi" />
 				<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
 				<text name="New" value="Créer" tooltip="Créer un nouvel enregistrement" />
+				<text name="Statistics" value="Statistiques" tooltip="Exporte les stats de la partie sous forme de fichier texte" />
 			</group>
 			<group name="Confirm">
 				<text name="Question" value="Êtes-vous sûr de vouloir écraser cette sauvegarde ?" tooltip="Êtes-vous sûr de vouloir écraser cette sauvegarde ?" />
