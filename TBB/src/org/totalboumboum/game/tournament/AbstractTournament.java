@@ -393,7 +393,7 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	 * @throws UnsupportedEncodingException 
 	 * 		Problem while accessing the stats file.
 	 */
-	protected abstract void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException;
+	public abstract void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException;
 	
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////

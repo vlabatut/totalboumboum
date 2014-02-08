@@ -25,7 +25,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +36,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.totalboumboum.game.match.Match;
+import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
@@ -54,7 +58,7 @@ import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 /**
- * Menu used to save a game.
+ * Menu used to save a game, or related data.
  * 
  * @author Vincent Labatut
  */
@@ -90,6 +94,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 		add(Box.createVerticalGlue());
 		buttonNew = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_NEW,buttonWidth,buttonHeight,fontSize,this);
 		buttonDelete = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		buttonStats = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
 		buttonConfirm = GuiButtonTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiSizeTools.buttonVerticalSpace)));
@@ -122,6 +127,9 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/** Button used to create a new file */
 	@SuppressWarnings("unused")
 	private JButton buttonNew;
+	/** Button used to record tournament stats as text */
+	@SuppressWarnings("unused")
+	private JButton buttonStats;
 	
 	/**
 	 * Update the buttons depending on 
@@ -183,6 +191,29 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener, Modal
 			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
 			questionModalDelete.addListener(this);
 			getFrame().setModalDialog(questionModalDelete);
+	    }
+		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_STATISTICS))
+		{	try
+			{	// process each match
+				List<Match> matches = tournament.getPlayedMatches();
+				for(Match match: matches)
+				{	// process each round
+					List<Round> rounds = match.getPlayedRounds();
+					for(Round round: rounds)
+						round.recordStatsAsText();
+					// record the match stats
+					match.recordStatsAsText();
+				}
+				// record the tournament stats
+				tournament.recordStatsAsText();
+			}
+			catch (FileNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (UnsupportedEncodingException e1)
+			{	e1.printStackTrace();
+			}
+			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	String key = GuiKeys.GAME_SAVE_CONFIRM_TITLE;

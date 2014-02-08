@@ -281,7 +281,7 @@ public class SequenceTournament extends AbstractTournament
 	// STATS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException
+	public void recordStatsAsText() throws FileNotFoundException, UnsupportedEncodingException
 	{	// get data
 		Ranks orderedPlayers = getOrderedPlayers();
 		List<Profile> absoluteList = orderedPlayers.getAbsoluteOrderList();
@@ -304,8 +304,15 @@ public class SequenceTournament extends AbstractTournament
 		Date startDate = stats.getStartDate();
 		writer.println("Start: "+sdf.format(startDate));
 		Date endDate = stats.getEndDate();
-		writer.println("End: "+sdf.format(endDate));
-		long duration = endDate.getTime() - startDate.getTime();
+		long duration;
+		if(endDate==null)
+		{	writer.println("End: N/A");
+			duration = System.currentTimeMillis() - startDate.getTime();
+		}
+		else
+		{	writer.println("End: "+sdf.format(endDate));
+			duration = endDate.getTime() - startDate.getTime();
+		}
 		String durationStr = TimeTools.formatTime(duration, TimeUnit.MINUTE, TimeUnit.MILLISECOND, false);
 		writer.println("Duration: "+durationStr);
 		writer.println();

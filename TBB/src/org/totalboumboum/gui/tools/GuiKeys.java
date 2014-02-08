@@ -963,6 +963,7 @@ public class GuiKeys
 			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
 			public static final String GAME_SAVE_BUTTON_DELETE = GAME_SAVE_BUTTON+DELETE;
 			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+NEW;
+			public static final String GAME_SAVE_BUTTON_STATISTICS = GAME_SAVE_BUTTON+STATISTICS;
 			/** CONFIRM */
 			public static final String GAME_SAVE_CONFIRM = GAME_SAVE+CONFIRM;
 			public static final String GAME_SAVE_CONFIRM_QUESTION = GAME_SAVE_CONFIRM+QUESTION;
