@@ -1788,3 +1788,6 @@ public class Launcher
 
 //TODO mettre en place le tournoi de type tournante
 //TODO gérer le cas particulier où un match ne contient qu'un seul round
+
+//TODO rajouter une ligne de menu aux résultats, pour permettre de basculer sur les moyennes + enregistrer stats
+//TODO aussi permettre de classer les résultats en cliquant sur les colonnes 
