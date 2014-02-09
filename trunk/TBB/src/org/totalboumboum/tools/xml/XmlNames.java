@@ -226,6 +226,8 @@ public class XmlNames
 	public static final String NONE = "none";
 	public static final String NOTES = "notes";
 	public static final String NUMBER = "number";
+	public static final String NUMBER_ACTIVE = "numberActive";
+	public static final String NUMBER_KEPT = "numberKept";
 	public static final String ON = "on";
 	public static final String OFF = "off";
 	public static final String OPTIONS = "options";
@@ -262,6 +264,7 @@ public class XmlNames
 	public static final String RANDOM_LOCATION = "randomLocation";
 	public static final String RANDOM_ORDER = "randomOrder";
 	public static final String RANDOMIZE_LEGS = "randomizeLegs";
+	public static final String RANDOMIZE_MATCHES = "randomizeMatches";
 	public static final String RANDOMIZE_PARTS = "randomizeParts";
 	public static final String RANDOMIZE_PLAYERS = "randomizePlayers";
 	public static final String RANGE = "range";

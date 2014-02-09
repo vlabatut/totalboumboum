@@ -158,54 +158,6 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 // TODO la manière employée dans les panels pour la coupe est elle compatible ?
-	
-	@Override
-	public void matchOver()
-	{	// update stats
-		StatisticMatch statsMatch = currentMatch.getStats();
-		stats.addStatisticMatch(statsMatch);
-		
-		// check limits
-		if(currentIndex>=matches.size())
-		{	float[] points;
-			if(pointsProcessor!=null)
-				points = pointsProcessor.process(this);
-			else
-				points = stats.getTotal();
-			stats.setPoints(points);
-			setOver(true);
-			panel.tournamentOver();
-			stats.initEndDate();
-			
-			// possibly record stats as text file
-			if(hasAi())
-			{	AisConfiguration config = Configuration.getAisConfiguration();
-				if(config.getRecordStats())
-				try
-				{	recordStatsAsText();
-				}
-				catch (FileNotFoundException e)
-				{	e.printStackTrace();
-				}
-				catch (UnsupportedEncodingException e)
-				{	e.printStackTrace();
-				}
-			}
-
-			// server connection
-			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
-			if(serverConnection!=null)
-				serverConnection.updateHostState(HostState.FINISHED);
-		}
-		else
-		{	panel.matchOver();		
-		}
-	}
-	
-	@Override
-	public void roundOver()
-	{	panel.roundOver();
-	}
 
 	@Override
 	public void finish()
@@ -325,85 +277,6 @@ public class LeagueTournament extends AbstractTournament
 			result.add(i);
 		
 		return result;			
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// RESULTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/**
-	 * Returns the ranks for this tournament.
-	 * 
-	 * @param pts
-	 * 		Points scored by the players.
-	 * @return
-	 * 		Corresponding player ranks.
-	 */
-	private int[] getRanks(float[] pts)
-	{	int[] result = new int[getProfiles().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 1;
-
-		for(int i=0;i<result.length-1;i++)
-		{	for(int j=i+1;j<result.length;j++)
-			{	if(pts[i]<pts[j])
-					result[i] = result[i] + 1;
-				else if(pts[i]>pts[j])
-					result[j] = result[j] + 1;
-			}
-		}	
-
-		return result;
-	}
-
-	@Override
-	public Ranks getOrderedPlayers()
-	{	Ranks result = new Ranks();
-		// points
-		float[] points = stats.getPoints();
-		float[] total = stats.getTotal();
-		// ranks
-		int ranks[];
-		int ranks2[];
-		if(isOver())
-		{	ranks = getRanks(points);
-			ranks2 = getRanks(total);
-		}
-		else
-		{	ranks = getRanks(total);
-			ranks2 = new int[ranks.length];
-			Arrays.fill(ranks2,0);
-		}
-		// result
-		for(int i=0;i<ranks.length;i++)
-		{	int rank = ranks[i];
-			int rank2 = ranks2[i];
-			Profile profile = getProfiles().get(i);
-			List<Profile> list = result.getProfilesFromRank(rank);
-			int index = -1;
-			// if no list yet : regular insertion
-			if(list==null)
-			{	result.addProfile(rank,profile);
-				index = 0;
-			}
-			// if list : insert at right place considering total points
-			else
-			{	int j = 0;
-				while(j<list.size() && index==-1)
-				{	Profile profileB = list.get(j);
-					int plrIdx = getProfiles().indexOf(profileB);
-					int rank2B = ranks2[plrIdx];
-					if(rank2<rank2B)
-						index = j;
-					else
-						j++;
-				}				
-				if(index==-1)
-					index = j;
-				list.add(index,profile);
-			}			
-		}
-			
-		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -609,6 +482,87 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// RESULTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Returns the ranks for this tournament.
+	 * 
+	 * @param pts
+	 * 		Points scored by the players.
+	 * @return
+	 * 		Corresponding player ranks.
+	 */
+	private int[] getRanks(float[] pts)
+	{	int[] result = new int[getProfiles().size()];
+		for(int i=0;i<result.length;i++)
+			result[i] = 1;
+
+		for(int i=0;i<result.length-1;i++)
+		{	for(int j=i+1;j<result.length;j++)
+			{	if(pts[i]<pts[j])
+					result[i] = result[i] + 1;
+				else if(pts[i]>pts[j])
+					result[j] = result[j] + 1;
+			}
+		}	
+
+		return result;
+	}
+
+	@Override
+	public Ranks getOrderedPlayers()
+	{	Ranks result = new Ranks();
+		
+		// points
+		float[] points = stats.getPoints();
+		float[] total = stats.getTotal();
+		
+		// ranks
+		int ranks[];
+		int ranks2[];
+		if(isOver())
+		{	ranks = getRanks(points);
+			ranks2 = getRanks(total);
+		}
+		else
+		{	ranks = getRanks(total);
+			ranks2 = new int[ranks.length];
+			Arrays.fill(ranks2,0);
+		}
+		
+		// result
+		for(int i=0;i<ranks.length;i++)
+		{	int rank = ranks[i];
+			int rank2 = ranks2[i];
+			Profile profile = getProfiles().get(i);
+			List<Profile> list = result.getProfilesFromRank(rank);
+			int index = -1;
+			// if no list yet : regular insertion
+			if(list==null)
+			{	result.addProfile(rank,profile);
+				index = 0;
+			}
+			// if list : insert at right place considering total points
+			else
+			{	int j = 0;
+				while(j<list.size() && index==-1)
+				{	Profile profileB = list.get(j);
+					int plrIdx = getProfiles().indexOf(profileB);
+					int rank2B = ranks2[plrIdx];
+					if(rank2<rank2B)
+						index = j;
+					else
+						j++;
+				}				
+				if(index==-1)
+					index = j;
+				list.add(index,profile);
+			}			
+		}
+			
+		return result;
+	}
+	/////////////////////////////////////////////////////////////////
 	// MATCH ORDER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Whether the matches should be played in a random order */ 
@@ -699,6 +653,55 @@ public class LeagueTournament extends AbstractTournament
 		return result;
 	}
 	
+	
+	@Override
+	public void matchOver()
+	{	// update stats
+		StatisticMatch statsMatch = currentMatch.getStats();
+		stats.addStatisticMatch(statsMatch);
+		
+		// check limits
+		if(currentIndex>=matches.size())
+		{	float[] points;
+			if(pointsProcessor!=null)
+				points = pointsProcessor.process(this);
+			else
+				points = stats.getTotal();
+			stats.setPoints(points);
+			setOver(true);
+			panel.tournamentOver();
+			stats.initEndDate();
+			
+			// possibly record stats as text file
+			if(hasAi())
+			{	AisConfiguration config = Configuration.getAisConfiguration();
+				if(config.getRecordStats())
+				try
+				{	recordStatsAsText();
+				}
+				catch (FileNotFoundException e)
+				{	e.printStackTrace();
+				}
+				catch (UnsupportedEncodingException e)
+				{	e.printStackTrace();
+				}
+			}
+
+			// server connection
+			ServerGeneralConnection serverConnection = Configuration.getConnectionsConfiguration().getServerConnection();
+			if(serverConnection!=null)
+				serverConnection.updateHostState(HostState.FINISHED);
+		}
+		else
+		{	panel.matchOver();		
+		}
+	}
+	
+	@Override
+	public void roundOver()
+	{	panel.roundOver();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// REPETITIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

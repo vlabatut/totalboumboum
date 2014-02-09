@@ -113,6 +113,18 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
+<!-- TURNING -->
+	<xsd:complexType name="tTurning">
+		<xsd:sequence>
+			<xsd:element name="limits" type="tTournamentLimits"  />
+			<xsd:element name="matches" type="tMatches" />
+		</xsd:sequence>
+		<xsd:attribute name="randomizeMatches" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="sortPlayers" type="tSortTypes" use="optional" default="RANDOM" />
+		<xsd:attribute name="numberActive" type="xsd:integer" use="required" />
+		<xsd:attribute name="numberKept" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
 <!-- COMMON -->
 	<xsd:complexType name="tMatch">
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
@@ -136,6 +148,7 @@
 			<xsd:element name="league" type="tLeague" />
 			<xsd:element name="sequence" type="tSequence" />
 			<xsd:element name="single" type="tSingle" />
+			<xsd:element name="turning" type="tTurning" />
 		</xsd:choice>
 	</xsd:group>
 

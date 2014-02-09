@@ -74,13 +74,21 @@ public class CupTournament extends AbstractTournament
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard tournament.
+	 */
+	public CupTournament()
+	{	//
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void init()
 	{	begun = true;
-	
+		
+		// matches
 		playedMatches.clear();
 	
 		// players distribution
@@ -93,6 +101,7 @@ public class CupTournament extends AbstractTournament
 		currentIndex = 0;
 		currentLeg = null;
 		
+		// stats
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}

@@ -73,6 +73,13 @@ public class SequenceTournament extends AbstractTournament
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Builds a standard tournament.
+	 */
+	public SequenceTournament()
+	{	//
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -458,9 +465,11 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
+		
 		// points
 		float[] points = stats.getPoints();
 		float[] total = stats.getTotal();
+		
 		// ranks
 		int ranks[];
 		int ranks2[];
@@ -473,6 +482,7 @@ public class SequenceTournament extends AbstractTournament
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}
+		
 		// result
 		for(int i=0;i<ranks.length;i++)
 		{	int rank = ranks[i];
