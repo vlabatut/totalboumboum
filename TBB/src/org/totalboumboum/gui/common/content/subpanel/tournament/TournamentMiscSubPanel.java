@@ -71,13 +71,27 @@ public class TournamentMiscSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Tournament currently displayed */
 	private AbstractTournament tournament;
+	/** Position of the line displaying the allowed numbers of players */
 	private int allowedPlayersLine;
-
+	
+	/**
+	 * Returns the currently displayed tournament.
+	 * 
+	 * @return
+	 * 		Current tournament.
+	 */
 	public AbstractTournament getTournament()
 	{	return tournament;	
 	}
 	
+	/**
+	 * Changes the displayed tournament.
+	 * 
+	 * @param tournament
+	 * 		New tournament to display.
+	 */
 	public void setTournament(AbstractTournament tournament)
 	{	this.tournament = tournament;
 		
@@ -193,6 +207,12 @@ public class TournamentMiscSubPanel extends TableSubPanel
 		setColSubMaxWidth(1,maxWidth);
 	}
 	
+	/**
+	 * Puts specific colors on the allowed numbers of players.
+	 * 
+	 * @param flag
+	 * 		Wheter or not to show the allowed numbers of players.
+	 */
 	public void selectAllowedPlayers(boolean flag)
 	{	Color hbg,dbg;
 		if(showAllowedPlayerNumbers && flag)
@@ -210,23 +230,51 @@ public class TournamentMiscSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether or not to show the tournament name */
 	private boolean showName = true;
+	/** Whether or not to show the tournament author */
 	private boolean showAuthor = true;
+	/** Whether or not to show the tournament type */
 	private boolean showType = true;
+	/** Whether or not to show the allowed numbers of players */
 	private boolean showAllowedPlayerNumbers = true;
-
+	
+	/**
+	 * Enables/disables the displaying of the tournament name.
+	 * 
+	 * @param showName
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
+	/**
+	 * Enables/disables the displaying of the tournament author.
+	 * 
+	 * @param showAuthor
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowAuthor(boolean showAuthor)
 	{	this.showAuthor = showAuthor;
 	}
 
+	/**
+	 * Enables/disables the displaying of the tournament type.
+	 * 
+	 * @param showType
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
 	}
 
+	/**
+	 * Enables/disables the displaying of the allowed numbers of players.
+	 * 
+	 * @param showAllowedPlayerNumbers
+	 * 		{@code true} to enable display.
+	 */
 	public void setShowAllowedPlayerNumbers(boolean showAllowedPlayerNumbers)
 	{	this.showAllowedPlayerNumbers = showAllowedPlayerNumbers;
 	}
