@@ -1733,9 +1733,8 @@ public class Launcher
  * 		+ exportation des stats
  * 		+ API: représentation des chemins (avec les pauses et tout)
  * 		+ évènements de mort subite aléatoires
- * 		+ vidéos du tournoi
- * 		+ tournoi ligue (l'histoire du nombre de matches inférieur au nombre de combis)
- * 			et aussi la possibilité de limiter le nombre de joueurs
+ * 		+ possibilité de restreindre le nombre de joueurs dans un round/match (lié à ligue)
+ * 		+ nouveau type de tournoi "tournante"
  */ 
 
 /**
@@ -1786,7 +1785,6 @@ public class Launcher
 //- voir ce qui prend du temps à l'ouverture des stats
 //- voir ce qui cause inéluctablement des ralentissements lors du premier round
 
-//TODO mettre en place le tournoi de type tournante
 //TODO gérer le cas particulier où un match ne contient qu'un seul round
 
 //TODO rajouter une ligne de menu aux résultats, pour permettre de basculer sur les moyennes + enregistrer stats

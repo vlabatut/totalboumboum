@@ -61,9 +61,14 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Selected line on the left side */
 	private int lineLeft;
+	/** Selected line on the right side */
 	private int lineRight;
 	
+	/**
+	 * Intializes the panel.
+	 */
 	public void init()
 	{	// sizes
 		int lines = 0;
@@ -120,24 +125,54 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether to show the left part */
 	private boolean showLeft = true;
+	/** Whether to show the right part */
 	private boolean showRight = true;
+	/** Whether to allow using the left part */
 	private boolean enabledLeft = true;
+	/** Whether to allow using left part */
 	private boolean enabledRight = true;
-
+	
+	/**
+	 * Disable/enable the display of the left part.
+	 * 
+	 * @param showLeft
+	 * 		{@code true} to show the left part.
+	 */
 	public void setShowLeft(boolean showLeft)
 	{	this.showLeft = showLeft;
 		init();
 	}
+	
+	/**
+	 * Disable/enable the use of the left part.
+	 * 
+	 * @param enabled
+	 * 		{@code true} to use the left part.
+	 */
 	public void setEnabledLeft(boolean enabled)
 	{	enabledLeft = enabled;
 		init();
 	}
 
+	/**
+	 * Disable/enable the display of the right part.
+	 * 
+	 * @param showRight
+	 * 		{@code true} to show the right part.
+	 */
 	public void setShowRight(boolean showRight)
 	{	this.showRight = showRight;
 		init();
 	}
+	
+	/**
+	 * Disable/enable the use of the right part.
+	 * 
+	 * @param enabled
+	 * 		{@code true} to use the right part.
+	 */
 	public void setEnabledRight(boolean enabled)
 	{	enabledRight = enabled;
 		init();
@@ -148,17 +183,17 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
@@ -178,28 +213,49 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Listeners registered for this panel */
 	private List<TransferSubPanelListener> listeners = new ArrayList<TransferSubPanelListener>();
 	
+	/**
+	 * Adds a new listener to this panel.
+	 * 
+	 * @param listener
+	 * 		New listener.
+	 */
 	public void addListener(TransferSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
+	/**
+	 * Removes an existing listener from this panel.
+	 * 
+	 * @param listener
+	 * 		Listener to remove.
+	 */
 	public void removeListener(TransferSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
+	/**
+	 * Indicates to all listeners that the left
+	 * button was clicked.
+	 */
 	private void fireTransferLeft()
 	{	for(TransferSubPanelListener listener: listeners)
 			listener.transferLeftClicked();
 	}
 
+	/**
+	 * Indicates to all listeners that the right
+	 * button was clicked.
+	 */
 	private void fireTransferRight()
 	{	for(TransferSubPanelListener listener: listeners)
 			listener.transferRightClicked();
