@@ -1443,6 +1443,7 @@
 				<text name="League" value="Ligue"  tooltip="Tournoi à classement dans lequel tous les joueurs se rencontrent au cours de plusieurs rencontres" />
 				<text name="Sequence" value="Séquence"  tooltip="Tournoi composé d'une séquence de plusieurs rencontres confrontant les mêmes joueurs" />
 				<text name="Single" value="Simple"  tooltip="Tournoi comportant une seule rencontre" />
+				<text name="Turning" value="Tournante"  tooltip="Tournoi lors duquel les joueurs jouent tant qu'ils gagnent" />
 			</group>
 		</group>
 
