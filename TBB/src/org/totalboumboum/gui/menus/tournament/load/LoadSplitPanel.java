@@ -33,15 +33,23 @@ import org.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import org.totalboumboum.gui.tools.GuiSizeTools;
 
 /**
+ * Split panel containing the file-related tournament
+ * menu and data.
  * 
  * @author Vincent Labatut
- *
  */
 public class LoadSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L; 
+{	/** Class id */
+	private static final long serialVersionUID = 1L; 
 
-	private BufferedImage image;
-
+	/**
+	 * Builds a new split panel.
+	 * 
+	 * @param container
+	 * 		Container panel.
+	 * @param parent
+	 * 		Parent menu.
+	 */
 	public LoadSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiSizeTools.VERTICAL_SPLIT_RATIO);
 	
@@ -56,6 +64,12 @@ public class LoadSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT CONTAINER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * Sets the container.
+	 * 
+	 * @param tournamentPanel
+	 * 		Container.
+	 */
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
 	{	((LoadMenu)menuPart).setTournamentPanel(tournamentPanel);
 	}
@@ -63,6 +77,9 @@ public class LoadSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// PAINT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Background image */
+	private BufferedImage image;
+
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

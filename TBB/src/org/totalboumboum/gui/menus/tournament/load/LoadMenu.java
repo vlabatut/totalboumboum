@@ -36,7 +36,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.configuration.Configuration;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
 import org.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import org.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -51,20 +50,29 @@ import org.totalboumboum.gui.tools.GuiColorTools;
 import org.totalboumboum.gui.tools.GuiFontTools;
 import org.totalboumboum.gui.tools.GuiKeys;
 import org.totalboumboum.gui.tools.GuiSizeTools;
-import org.totalboumboum.gui.tools.GuiImageTools;
 import org.totalboumboum.stream.file.archive.GameArchive;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.files.FileTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Panel containing the menu associated to the file-related
+ * tournament actions.
  * 
  * @author Vincent Labatut
- *
  */
 public class LoadMenu extends InnerMenuPanel implements DataPanelListener, ModalDialogPanelListener
-{	private static final long serialVersionUID = 1L;
-
+{	/** Class id */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Builds a new menu.
+	 * 
+	 * @param container
+	 * 		Container panel.
+	 * @param parent
+	 * 		Parent menu.
+	 */
 	public LoadMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
@@ -102,17 +110,23 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel used to save tournament data */
 	private SaveData levelData;
 
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Button used to confirm the choice */
 	private JButton buttonConfirm;
+	/** Button used to load only stats */
 	private JButton buttonStats;
+	/** Button used to cancel */
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
+	/** Button used to delete an existing tournament */
 	private JButton buttonDelete;
 
+	@SuppressWarnings("javadoc")
 	private void refreshButtons()
 	{	GameArchive gameArchive = levelData.getSelectedGameArchive();
 		if(gameArchive==null)
@@ -130,9 +144,17 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT CONTAINER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Panel displaying the tournament */
 	private TournamentSplitPanel tournamentPanel;
+	/** Folder containing all tournaments */
 	private String baseFolder = FilePaths.getSavesPath();
 	
+	/**
+	 * Changes the panel displaying the tournament.
+	 * 
+	 * @param tournamentPanel
+	 * 		Panel displaying the tournament.
+	 */
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
 	{	this.tournamentPanel = tournamentPanel;
 	}
@@ -140,6 +162,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -199,8 +222,9 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void refresh()
-	{	
+	{	//
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -219,6 +243,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener, Modal
 	/////////////////////////////////////////////////////////////////
 	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Modal question for the deletion of a tournament */
 	private QuestionModalDialogPanel questionModalDelete = null;
 	
 	@Override
