@@ -34,6 +34,7 @@ import org.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import org.totalboumboum.game.tournament.league.LeagueTournamentLoader;
 import org.totalboumboum.game.tournament.sequence.SequenceTournamentLoader;
 import org.totalboumboum.game.tournament.single.SingleTournamentLoader;
+import org.totalboumboum.game.tournament.turning.TurningTournamentLoader;
 import org.totalboumboum.tools.files.FileNames;
 import org.totalboumboum.tools.files.FilePaths;
 import org.totalboumboum.tools.xml.XmlNames;
@@ -56,6 +57,8 @@ public class TournamentLoader
 	private static final String SEQUENCE = "sequence";
 	/** Tournament of type Single */
 	private static final String SINGLE = "single";
+	/** Tournament of type Turning */
+	private static final String TURNING = "turning";
 	
 	/**
 	 * Opens the file and load the corresponding tournament.
@@ -152,6 +155,8 @@ public class TournamentLoader
 			result = SequenceTournamentLoader.loadTournamentElement(path,element);
 		else if(type.equalsIgnoreCase(SINGLE))
 			result = SingleTournamentLoader.loadTournamentElement(path,element);
+		else if(type.equalsIgnoreCase(TURNING))
+			result = TurningTournamentLoader.loadTournamentElement(path,element);
 		
 		// notes
 		element = root.getChild(XmlNames.NOTES);

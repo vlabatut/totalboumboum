@@ -179,8 +179,13 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
+		
+		// matches
 		playedMatches.clear();
+		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		
+		// stats
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
@@ -450,9 +455,11 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
+		
 		// points
 		float[] points = stats.getPoints();
 		float[] total = stats.getTotal();
+		
 		// ranks
 		int ranks[];
 		int ranks2[];
@@ -465,6 +472,7 @@ public class SingleTournament extends AbstractTournament
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}
+		
 		// result
 		for(int i=0;i<ranks.length;i++)
 		{	int rank = ranks[i];
