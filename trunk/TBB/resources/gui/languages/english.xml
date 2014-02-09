@@ -826,6 +826,7 @@
 				<text name="League" value="League" tooltip="Championship tournament" />
 				<text name="Sequence" value="Sequence" tooltip="The same players play several games" />
 				<text name="Single" value="Single" tooltip="Only one game is played" />
+				<text name="Turning" value="Turning"  tooltip="Players keep playing, as long as they win" />
 			</group>
 		</group>
 	

@@ -21,12 +21,6 @@ package org.totalboumboum.game.tournament;
  * 
  */
 
-import org.totalboumboum.game.tournament.cup.CupTournament;
-import org.totalboumboum.game.tournament.league.LeagueTournament;
-import org.totalboumboum.game.tournament.sequence.SequenceTournament;
-import org.totalboumboum.game.tournament.single.SingleTournament;
-import org.totalboumboum.game.tournament.turning.TurningTournament;
-
 /**
  * This type represents the various types of tournaments.
  * 
@@ -45,27 +39,22 @@ public enum TournamentType
 	/** Around the table tournament (players alternatively play and wait) */ 
 	TURNING;
 	
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
-	 * Returns the appropriate value depending
-	 * on the class of the specified tournament.
+	 * Express this enum value as a string.
+	 * The initial is uppercase, the rest is lowercase.
 	 * 
-	 * @param tournament
-	 * 		Considered tournament.
 	 * @return
-	 * 		Corresponding enum type.
+	 * 		A string representation of this score.
 	 */
-	public static TournamentType getType(AbstractTournament tournament)
-	{	TournamentType result = null;
-		if(tournament instanceof CupTournament)
-			result = CUP;
-		else if(tournament instanceof LeagueTournament)
-			result = LEAGUE;
-		else if(tournament instanceof SequenceTournament)
-			result = SEQUENCE;
-		else if(tournament instanceof SingleTournament)
-			result = SINGLE;
-		else if(tournament instanceof TurningTournament)
-			result = TURNING;
-		return result;
+	public String stringFormat()
+	{	StringBuffer result = new StringBuffer();
+		String raw = this.toString(); 
+		result.append(raw.substring(0,1));
+		raw = raw.toLowerCase();
+		result.append(raw.substring(1,raw.length()));
+		return result.toString();
 	}
 }
