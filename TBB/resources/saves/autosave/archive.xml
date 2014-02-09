@@ -19,20 +19,20 @@
 	You should have received a copy of the GNU General Public License
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
-	<tournament name="Tournoi ligue de test" type="LEAGUE" />
-	<played matches="9" rounds="2" />
-	<total matches="24" rounds="3" />
-	<dates start="2014-02-08T10:37:12" save="2014-02-08T10:43:34" />
+	<tournament name="Tournoi tournante de test" type="TURNING" />
+	<played matches="3" rounds="3" />
+	<total matches="10" rounds="3" />
+	<dates start="2014-02-09T21:59:51" save="2014-02-09T22:01:37" />
 	<players>
-		<player name="1314.Akyol+Kaptan+Koçak" />
-		<player name="0910.Çalışır+Güner" />
+		<player name="1314.Engin+Serhan+Tipici" />
+		<player name="1314.Arık+Günaydın+Kochan" />
+		<player name="0809.Altay+Basaranoğlu" />
+		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
+		<player name="1314.Dönmez+LabatCamy" />
 		<player name="1011.Kesimal+Varol" />
 		<player name="0809.Erişik+Pektaş" />
-		<player name="1314.Dönmez+LabatCamy" />
-		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
-		<player name="0809.Altay+Basaranoğlu" />
-		<player name="1314.Arık+Günaydın+Kochan" />
-		<player name="1314.Engin+Serhan+Tipici" />
+		<player name="0910.Çalışır+Güner" />
+		<player name="1314.Akyol+Kaptan+Koçak" />
 	</players>
 </archive>
 

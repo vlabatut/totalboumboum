@@ -27,6 +27,7 @@
 			<xsd:enumeration value="LEAGUE" />
 			<xsd:enumeration value="SEQUENCE" />
 			<xsd:enumeration value="SINGLE" />
+			<xsd:enumeration value="TURNING" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

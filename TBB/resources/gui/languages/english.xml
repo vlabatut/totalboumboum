@@ -1445,6 +1445,7 @@
 				<text name="League" value="League"  tooltip="Ranked round-robin tournament" />
 				<text name="Sequence" value="Sequence"  tooltip="Tournament made up of several matches involving the same players" />
 				<text name="Single" value="Single"  tooltip="One match tournament" />
+				<text name="Turning" value="Turning"  tooltip="Players keep playing, as long as they win" />
 			</group>
 		</group>
 
