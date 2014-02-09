@@ -111,7 +111,7 @@ public class TurningTournamentLoader
 		}
 		if(!temp.contains(numberActive))
 			throw new IllegalArgumentException("The number of active players specified in the \""+folder+"\" tournament is not compatible with its matches (allowed numbers are "+Arrays.toString(temp.toArray())+")");
-		if(numberKept<numberActive)
+		if(numberKept>=numberActive)
 			throw new IllegalArgumentException("The number of players kept ("+numberKept+") must be strictly smaller than the number of active players ("+numberActive+") in a turning tournament such as \""+folder+"\".");
 		return result;
 	}

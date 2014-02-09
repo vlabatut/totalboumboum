@@ -31,7 +31,7 @@ import javax.swing.SwingConstants;
 import org.totalboumboum.game.profile.Portraits;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
-import org.totalboumboum.game.tournament.league.LeagueTournament;
+import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.tools.GuiColorTools;
@@ -50,7 +50,7 @@ import org.totalboumboum.tools.time.TimeUnit;
  * 
  * @author Vincent Labatut
  */
-public class LeagueResultsSubPanel extends TableSubPanel
+public class HeterogeneousResultsSubPanel extends TableSubPanel
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 	/** Number of lines */
@@ -68,17 +68,17 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 * @param height
 	 * 		Height of the panel.
 	 */
-	public LeagueResultsSubPanel(int width, int height)
+	public HeterogeneousResultsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,true);
 		
-		setLeagueTournament(null);
+		setTournament(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// LEAGUE TOURNAMENT	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** Tournament to be displayed */
-	private LeagueTournament leagueTournament;
+	private AbstractTournament leagueTournament;
 
 	/**
 	 * Returns the current tournament.
@@ -86,7 +86,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 * @return
 	 * 		League tournament.
 	 */
-	public LeagueTournament getLeagueTournament()
+	public AbstractTournament getTournament()
 	{	return leagueTournament;	
 	}
 	
@@ -96,7 +96,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 * @param leagueTournament
 	 * 		New league tournament.
 	 */
-	public void setLeagueTournament(LeagueTournament leagueTournament)
+	public void setTournament(AbstractTournament leagueTournament)
 	{	this.leagueTournament = leagueTournament;
 		int cols = COLS;
 	
@@ -459,7 +459,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -470,7 +470,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -482,7 +482,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowConfrontations(boolean showConfrontations)
 	{	this.showConfrontations = showConfrontations;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -494,7 +494,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowRanks(boolean showRanks)
 	{	this.showRanks = showRanks;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -505,7 +505,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowTotal(boolean showTotal)
 	{	this.showTotal = showTotal;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -516,7 +516,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowPoints(boolean showPoints)
 	{	this.showPoints = showPoints;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -527,7 +527,7 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowScores(boolean showScores)
 	{	this.showScores = showScores;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 
 	/**
@@ -538,6 +538,6 @@ public class LeagueResultsSubPanel extends TableSubPanel
 	 */
 	public void setShowTime(boolean showTime)
 	{	this.showTime = showTime;
-		setLeagueTournament(leagueTournament);
+		setTournament(leagueTournament);
 	}
 }

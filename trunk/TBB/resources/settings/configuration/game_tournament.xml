@@ -20,17 +20,12 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="LeagueTest" />
+	<tournament name="SequenceLong" />
 	<players>
 		<player file="d73fcbbf-7efc-423e-86b6-a752228a4372" color="CYAN" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 		<player file="27a298f3-ea71-4e96-8e5f-2b50862d4798" color="GREY" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
 		<player file="8f39d53f-f420-405f-a60d-4dda037b1239" color="PURPLE" controls="0" spritePack="superbomberman2" spriteFolder="shirobon" />
 		<player file="d8eecd8c-dda2-4e94-b1a8-87e0675d5b10" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="e567b7ac-7061-4141-b314-34614d428670" color="GREEN" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="ed343446-7b2a-4ce3-a391-5e79cbb638ea" color="ORANGE" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="bc8b7b98-7456-486a-a5b0-9cc9715d6e45" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="69306440-cfe9-4136-9494-faa95068c1c3" color="YELLOW" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
-		<player file="430cf1b5-4831-4d94-b3b4-a5d0a6780462" color="INDIGO" controls="0" spritePack="superbomberman3" spriteFolder="pretty" />
 	</players>
 	<autoAdvance index="0" />
 </gameTournament>

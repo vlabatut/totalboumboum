@@ -54,7 +54,7 @@ import org.totalboumboum.tools.time.TimeUnit;
 /**
  * Panel used to display various game results (as a table).
  * All players are concerned by all columns (hence the "homogeneous"
- * in the class name). Otherwise, use the {@link LeagueResultsSubPanel}.
+ * in the class name). Otherwise, use the {@link HeterogeneousResultsSubPanel}.
  * 
  * @author Vincent Labatut
  */
