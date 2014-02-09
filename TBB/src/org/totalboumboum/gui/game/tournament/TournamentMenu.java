@@ -47,6 +47,7 @@ import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.game.tournament.single.SingleTournament;
+import org.totalboumboum.game.tournament.turning.TurningTournament;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import org.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import org.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -59,11 +60,13 @@ import org.totalboumboum.gui.game.tournament.description.LeagueDescription;
 import org.totalboumboum.gui.game.tournament.description.SequenceDescription;
 import org.totalboumboum.gui.game.tournament.description.SingleDescription;
 import org.totalboumboum.gui.game.tournament.description.TournamentDescription;
+import org.totalboumboum.gui.game.tournament.description.TurningDescription;
 import org.totalboumboum.gui.game.tournament.results.CupResults;
 import org.totalboumboum.gui.game.tournament.results.LeagueResults;
 import org.totalboumboum.gui.game.tournament.results.SequenceResults;
 import org.totalboumboum.gui.game.tournament.results.SingleResults;
 import org.totalboumboum.gui.game.tournament.results.TournamentResults;
+import org.totalboumboum.gui.game.tournament.results.TurningResults;
 import org.totalboumboum.gui.game.tournament.statistics.OthersStatistics;
 import org.totalboumboum.gui.game.tournament.statistics.SingleStatistics;
 import org.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
@@ -177,25 +180,7 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 		else
 		{	// panels
 			tournamentDescription = null;
-			if(tournament instanceof SequenceTournament)
-			{	SequenceTournament trnmt = (SequenceTournament) tournament;
-				// create
-				SequenceDescription trnmtDescription = new SequenceDescription(container);
-				tournamentDescription = trnmtDescription;
-				tournamentDescription.addListener(this);
-				container.setDataPart(tournamentDescription);
-				SequenceResults trnmtResults = new SequenceResults(container);
-				tournamentResults = trnmtResults;
-				tournamentResults.addListener(this);
-				OthersStatistics ts = new OthersStatistics(container);
-				tournamentStatistics = ts;
-				tournamentStatistics.addListener(this);
-				// set tournament
-				trnmtDescription.setTournament(trnmt);
-				trnmtResults.setTournament(trnmt);
-				ts.setTournament(trnmt);	
-			}
-			else if(tournament instanceof CupTournament)
+			if(tournament instanceof CupTournament)
 			{	CupTournament trnmt = (CupTournament) tournament;
 				// create
 				CupDescription trnmtDescription = new CupDescription(container);
@@ -231,6 +216,24 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				trnmtResults.setTournament(trnmt);
 				ts.setTournament(trnmt);	
 			}
+			else if(tournament instanceof SequenceTournament)
+			{	SequenceTournament trnmt = (SequenceTournament) tournament;
+				// create
+				SequenceDescription trnmtDescription = new SequenceDescription(container);
+				tournamentDescription = trnmtDescription;
+				tournamentDescription.addListener(this);
+				container.setDataPart(tournamentDescription);
+				SequenceResults trnmtResults = new SequenceResults(container);
+				tournamentResults = trnmtResults;
+				tournamentResults.addListener(this);
+				OthersStatistics ts = new OthersStatistics(container);
+				tournamentStatistics = ts;
+				tournamentStatistics.addListener(this);
+				// set tournament
+				trnmtDescription.setTournament(trnmt);
+				trnmtResults.setTournament(trnmt);
+				ts.setTournament(trnmt);	
+			}
 			else if(tournament instanceof SingleTournament)
 			{	if(!browseOnly)
 					tournament.progress();//TODO progressStats for browseOnly?
@@ -252,6 +255,24 @@ buttonRecord.setEnabled(!GameData.PRODUCTION);
 				ts.setTournament(trnmt);
 				// change button
 				GuiButtonTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND,buttonMatch);
+			}
+			else if(tournament instanceof TurningTournament)
+			{	TurningTournament trnmt = (TurningTournament) tournament;
+				// create
+				TurningDescription trnmtDescription = new TurningDescription(container);
+				tournamentDescription = trnmtDescription;
+				tournamentDescription.addListener(this);
+				container.setDataPart(tournamentDescription);
+				TurningResults trnmtResults = new TurningResults(container);
+				tournamentResults = trnmtResults;
+				tournamentResults.addListener(this);
+				OthersStatistics ts = new OthersStatistics(container);
+				tournamentStatistics = ts;
+				tournamentStatistics.addListener(this);
+				// set tournament
+				trnmtDescription.setTournament(trnmt);
+				trnmtResults.setTournament(trnmt);
+				ts.setTournament(trnmt);	
 			}
 			tournament.setPanel(this);
 		}

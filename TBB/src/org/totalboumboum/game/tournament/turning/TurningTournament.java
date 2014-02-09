@@ -115,6 +115,25 @@ public class TurningTournament extends AbstractTournament
 	{	this.limits = limits;
 	}
 
+	/**
+	 * Checks if this tournament is "old-school", in the sense the matches
+	 * are on a all-or-nothing basis: the winner scores one point, the others
+	 * score nothing. If at least one match is not like this, then the tournament
+	 * is not considered old-school.
+	 * 
+	 * @return
+	 * 		{@code true} iff all matches are old-school.
+	 */
+	public boolean isOldSchool()
+	{	boolean result = true;
+		Iterator<Match> it = matches.iterator();
+		while(result && it.hasNext())
+		{	Match match = it.next();
+			result = match.isOldSchool();
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

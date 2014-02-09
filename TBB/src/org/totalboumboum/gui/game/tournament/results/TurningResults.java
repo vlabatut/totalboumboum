@@ -21,17 +21,17 @@ package org.totalboumboum.gui.game.tournament.results;
  * 
  */
 
-import org.totalboumboum.game.tournament.league.LeagueTournament;
+import org.totalboumboum.game.tournament.turning.TurningTournament;
 import org.totalboumboum.gui.common.content.subpanel.results.HeterogeneousResultsSubPanel;
 import org.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
 /**
  * This class handles the display of the
- * result of a league, during a game.
+ * result of a turning tournament, during a game.
  * 
  * @author Vincent Labatut
  */
-public class LeagueResults extends TournamentResults<LeagueTournament>
+public class TurningResults extends TournamentResults<TurningTournament>
 {	/** Class id */
 	private static final long serialVersionUID = 1L;
 	
@@ -41,7 +41,7 @@ public class LeagueResults extends TournamentResults<LeagueTournament>
 	 * @param container
 	 * 		Container of the panel.
 	 */
-	public LeagueResults(SplitMenuPanel container)
+	public TurningResults(SplitMenuPanel container)
 	{	super(container);
 		
 		// data
@@ -55,7 +55,7 @@ public class LeagueResults extends TournamentResults<LeagueTournament>
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void setTournament(LeagueTournament tournament)
+	public void setTournament(TurningTournament tournament)
 	{	this.tournament = tournament;
 		if(tournament.isOldSchool())
 		{	resultsPanel.setShowConfrontations(true);
