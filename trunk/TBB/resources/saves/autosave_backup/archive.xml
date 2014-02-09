@@ -20,9 +20,9 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Tournoi tournante de test" type="TURNING" />
-	<played matches="2" rounds="2" />
+	<played matches="9" rounds="2" />
 	<total matches="10" rounds="3" />
-	<dates start="2014-02-09T21:59:51" save="2014-02-09T22:01:26" />
+	<dates start="2014-02-09T21:59:51" save="2014-02-09T22:20:32" />
 	<players>
 		<player name="1314.Engin+Serhan+Tipici" />
 		<player name="1314.Arık+Günaydın+Kochan" />
