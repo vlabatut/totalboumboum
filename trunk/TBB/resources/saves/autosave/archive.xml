@@ -20,19 +20,22 @@
 	along with Total Boum Boum.  If not, see http://www.gnu.org/licenses.
 -->
 	<tournament name="Tournoi tournante de test" type="TURNING" />
-	<played matches="10" rounds="3" />
-	<total matches="10" rounds="3" />
-	<dates start="2014-02-09T21:59:51" save="2014-02-09T22:20:44" />
+	<played matches="20" rounds="1" />
+	<total matches="20" rounds="1" />
+	<dates start="2014-02-09T23:02:51" save="2014-02-09T23:18:28" />
 	<players>
+		<player name="1314.Sağlam+Turgut" />
+		<player name="1314.Oralı+Osmanoğlu" />
+		<player name="1314.Derin+Koçak+Zorluoğlu" />
+		<player name="1314.Saylam+Sönmez" />
+		<player name="1314.Acar+Sesyılmaz" />
+		<player name="1314.Asıl+İzer+Yüce" />
 		<player name="1314.Engin+Serhan+Tipici" />
 		<player name="1314.Arık+Günaydın+Kochan" />
-		<player name="0809.Altay+Basaranoğlu" />
 		<player name="1314.Çiftçi+Kaplanoğlu+Köseoğlu" />
 		<player name="1314.Dönmez+LabatCamy" />
-		<player name="1011.Kesimal+Varol" />
-		<player name="0809.Erişik+Pektaş" />
-		<player name="0910.Çalışır+Güner" />
 		<player name="1314.Akyol+Kaptan+Koçak" />
+		<player name="Joueur humain" />
 	</players>
 </archive>
 
