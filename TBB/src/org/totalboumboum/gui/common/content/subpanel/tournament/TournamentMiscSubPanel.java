@@ -127,7 +127,7 @@ public class TournamentMiscSubPanel extends TableSubPanel
 			}
 			if(showType)
 			{	TournamentType type = tournament.getType();
-				String key = GuiKeys.COMMON_TOURNAMENT_TYPES_SINGLE+type.stringFormat();
+				String key = GuiKeys.COMMON_TOURNAMENT_TYPES+type.stringFormat();
 				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
 				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
 			}
