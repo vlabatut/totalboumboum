@@ -57,6 +57,7 @@ import org.totalboumboum.game.profile.ProfileLoader;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.round.Round;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
@@ -171,6 +172,14 @@ public class SingleTournament extends AbstractTournament
 	    progress();
 	    match = getCurrentMatch();
 	    match.progress();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TYPE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public TournamentType getType()
+	{	return TournamentType.SINGLE;
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -50,6 +50,7 @@ import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
 import org.totalboumboum.statistics.detailed.StatisticMatch;
@@ -109,6 +110,14 @@ public class LeagueTournament extends AbstractTournament
 	 */
 	public LeagueTournament() throws SAXException, IOException
 	{	loadRepetitionMaps();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TYPE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public TournamentType getType()
+	{	return TournamentType.LEAGUE;
 	}
 	
 	/////////////////////////////////////////////////////////////////

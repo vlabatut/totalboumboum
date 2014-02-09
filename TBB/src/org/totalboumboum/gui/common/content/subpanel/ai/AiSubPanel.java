@@ -65,12 +65,25 @@ public class AiSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** AI preview currently displayed */
 	private AiPreview aiPreview;
 
+	/**
+	 * Returns the AI preview currently displayed.
+	 * 
+	 * @return
+	 * 		AI preview currently displayed.
+	 */
 	public AiPreview getAiPreview()
 	{	return aiPreview;	
 	}
 	
+	/**
+	 * Changes the AI preview currently displayed.
+	 * 
+	 * @param selectedAi
+	 * 		New AI preview.
+	 */
 	public void setAiPreview(AiPreview selectedAi)
 	{	this.aiPreview = selectedAi;
 		
@@ -167,19 +180,40 @@ public class AiSubPanel extends TableSubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Whether to show the AI name */
 	private boolean showName = true;
+	/** Whether to show the AI pack */
 	private boolean showPack = true;
+	/** Whether to show the AI author */
 	private boolean showAuthor = true;
 
+	/**
+	 * Enable/disable the display of the AI name.
+	 * 
+	 * @param showName
+	 * 		{@code true} to show the AI name.
+	 */
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
 	}
 
+	/**
+	 * Enable/disable the display of the AI author.
+	 * 
+	 * @param showAuthor
+	 * 		{@code true} to show the AI author.
+	 */
 	public void setShowAuthor(boolean showAuthor)
 	{	this.showAuthor = showAuthor;
 	}
 
-	public void setShowPack(boolean showLevelPack)
-	{	this.showPack = showLevelPack;
+	/**
+	 * Enable/disable the display of the AI pack.
+	 * 
+	 * @param showPack
+	 * 		{@code true} to show the AI name.
+	 */
+	public void setShowPack(boolean showPack)
+	{	this.showPack = showPack;
 	}
 }

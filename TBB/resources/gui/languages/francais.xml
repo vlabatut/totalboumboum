@@ -832,6 +832,7 @@
 				<text name="League" value="Ligue" tooltip="Tournoi de type championnat" />
 				<text name="Sequence" value="Séquence" tooltip="Séquence de plusieurs rencontres confrontant les mêmes joueurs" />
 				<text name="Single" value="Simple" tooltip="Tournoi composé d'une seule rencontre" />
+				<text name="Turning" value="Tournante"  tooltip="Tournoi lors duquel les joueurs jouent tant qu'ils gagnent" />
 			</group>
 		</group>
 	

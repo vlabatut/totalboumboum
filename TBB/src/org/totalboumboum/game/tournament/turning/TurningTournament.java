@@ -54,6 +54,7 @@ import org.totalboumboum.game.match.Match;
 import org.totalboumboum.game.profile.Profile;
 import org.totalboumboum.game.rank.Ranks;
 import org.totalboumboum.game.tournament.AbstractTournament;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.statistics.GameStatistics;
 import org.totalboumboum.statistics.detailed.Score;
 import org.totalboumboum.statistics.detailed.StatisticBase;
@@ -89,6 +90,14 @@ public class TurningTournament extends AbstractTournament
 	{	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TYPE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public TournamentType getType()
+	{	return TournamentType.TURNING;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -141,7 +150,7 @@ public class TurningTournament extends AbstractTournament
 	public void init()
 	{	begun = true;
 		
-		// matches and tbeir repetitions
+		// matches and their repetitions
 		initMatches();
 		playedMatches.clear();
 		
@@ -423,30 +432,39 @@ public class TurningTournament extends AbstractTournament
 	 * benched players.
 	 */
 	private void updateCurrentPlayers()
-	{	Ranks ranks = currentMatch.getOrderedPlayers();
-	
-		// remove newly benched players
-		Map<Integer,List<Profile>> all = ranks.getRanks();
-		TreeSet<Integer> rankVals = new TreeSet<Integer>(all.keySet());
-		Iterator<Integer> it =  rankVals.descendingIterator();
-		int c = 0;
-		while(it.hasNext() && c<numberActive-numberKept)
-		{	int r = it.next();
-			List<Profile> p = new ArrayList<Profile>(all.get(r));
-			Collections.shuffle(p);
-			Iterator<Profile> it2 = p.iterator();
-			while(it.hasNext() && c<numberActive-numberKept)
-			{	Profile pr = it2.next();
-				activePlayers.remove(pr);
-				benchedPlayers.offer(pr);
-				c++;
-			}
+	{	// very first match
+		if(currentMatch==null)
+		{	
+//			activePlayers.addAll(profiles.subList(0, numberActive)); //already done in the init function
 		}
 		
-		// add previously benched players
-		for(c=0;c<numberActive-numberKept;c++)
-		{	Profile p = benchedPlayers.poll();
-			activePlayers.add(p);
+		// other matches
+		else
+		{	Ranks ranks = currentMatch.getOrderedPlayers();
+		
+			// remove newly benched players
+			Map<Integer,List<Profile>> all = ranks.getRanks();
+			TreeSet<Integer> rankVals = new TreeSet<Integer>(all.keySet());
+			Iterator<Integer> it =  rankVals.descendingIterator();
+			int c = 0;
+			while(it.hasNext() && c<numberActive-numberKept)
+			{	int r = it.next();
+				List<Profile> p = new ArrayList<Profile>(all.get(r));
+				Collections.shuffle(p);
+				Iterator<Profile> it2 = p.iterator();
+				while(it2.hasNext() && c<numberActive-numberKept)
+				{	Profile pr = it2.next();
+					activePlayers.remove(pr);
+					benchedPlayers.offer(pr);
+					c++;
+				}
+			}
+			
+			// add previously benched players
+			for(c=0;c<numberActive-numberKept;c++)
+			{	Profile p = benchedPlayers.poll();
+				activePlayers.add(p);
+			}
 		}
 	}
 	

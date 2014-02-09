@@ -31,11 +31,13 @@ import javax.swing.BoxLayout;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.totalboumboum.game.limit.Limit;
+import org.totalboumboum.game.limit.Limits;
 import org.totalboumboum.game.limit.TournamentLimit;
 import org.totalboumboum.game.points.AbstractPointsProcessor;
 import org.totalboumboum.game.tournament.AbstractTournament;
 import org.totalboumboum.game.tournament.TournamentLoader;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
+import org.totalboumboum.game.tournament.turning.TurningTournament;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanel;
 import org.totalboumboum.gui.common.content.subpanel.file.FolderBrowserSubPanelListener;
 import org.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
@@ -137,15 +139,29 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 			
 		}
 	}
-		
+	
 	private void refreshLimits()
-	{	if(selectedTournament==null || !(selectedTournament instanceof SequenceTournament))
+	{	// no tournament at all
+		if(selectedTournament==null)
 			limitsPanel.setLimits(null);
-		else
-		{	SequenceTournament seq = (SequenceTournament)selectedTournament;
-			limitsPanel.setLimits(seq.getLimits());
 		
+		// sequence tournament
+		else if(selectedTournament instanceof SequenceTournament)
+		{	SequenceTournament seq = (SequenceTournament)selectedTournament;
+			Limits<TournamentLimit> limits = seq.getLimits();
+			limitsPanel.setLimits(limits);
 		}
+		
+		// turning tournament
+		else if(selectedTournament instanceof TurningTournament)
+		{	TurningTournament turn = (TurningTournament)selectedTournament;
+			Limits<TournamentLimit> limits = turn.getLimits();
+			limitsPanel.setLimits(limits);
+		}
+		
+		// other tournaments
+		else
+			limitsPanel.setLimits(null);
 	}
 	
 	@Override

@@ -69,7 +69,7 @@ public class GameArchive
 		
 		// tournament
 		result.name = tournament.getName();
-		result.type = TournamentType.getType(tournament);
+		result.type = tournament.getType();
 		
 		// played
 		result.matchesPlayed = 0;

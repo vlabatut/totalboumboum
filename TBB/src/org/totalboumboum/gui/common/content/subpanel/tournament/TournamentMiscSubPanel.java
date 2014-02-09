@@ -28,11 +28,7 @@ import java.util.Set;
 
 import org.totalboumboum.engine.container.level.players.Players;
 import org.totalboumboum.game.tournament.AbstractTournament;
-import org.totalboumboum.game.tournament.cup.CupTournament;
-import org.totalboumboum.game.tournament.league.LeagueTournament;
-import org.totalboumboum.game.tournament.sequence.SequenceTournament;
-import org.totalboumboum.game.tournament.single.SingleTournament;
-import org.totalboumboum.game.tournament.turning.TurningTournament;
+import org.totalboumboum.game.tournament.TournamentType;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -130,17 +126,8 @@ public class TournamentMiscSubPanel extends TableSubPanel
 				tooltipValues.add(tournament.getAuthor());
 			}
 			if(showType)
-			{	String key = "";
-				if(tournament instanceof CupTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_CUP;
-				else if(tournament instanceof LeagueTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_LEAGUE;
-				else if(tournament instanceof SequenceTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SEQUENCE;
-				else if(tournament instanceof SingleTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SINGLE;
-				else if(tournament instanceof TurningTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_TURNING;
+			{	TournamentType type = tournament.getType();
+				String key = GuiKeys.COMMON_TOURNAMENT_TYPES_SINGLE+type.stringFormat();
 				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
 				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
 			}

@@ -113,16 +113,8 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 				tooltipValues.add(gameArchive.getName());
 			}
 			if(showType)
-			{	String key = "";
-				TournamentType type = gameArchive.getType();
-				if(type==TournamentType.CUP)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_CUP;
-				else if(type==TournamentType.LEAGUE)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_LEAGUE;
-				else if(type==TournamentType.SEQUENCE)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_SEQUENCE;
-				else if(type==TournamentType.SINGLE)
-					key = GuiKeys.COMMON_ARCHIVE_TYPES_SINGLE;
+			{	TournamentType type = gameArchive.getType();
+				String key = GuiKeys.COMMON_ARCHIVE_TYPES+type.stringFormat();
 				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
 				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
 			}

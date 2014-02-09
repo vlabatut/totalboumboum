@@ -467,7 +467,7 @@ buttonPublish.setEnabled(!GameData.PRODUCTION);
 			//AbstractTournament tournament = quickMatchConfiguration.getTournament();
 			Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
 			String tournamentName = tournament.getName();
-			TournamentType tournamentType = TournamentType.getType(tournament);
+			TournamentType tournamentType = tournament.getType();
 			List<Profile> playerProfiles = playersData.getSelectedProfiles();
 			List<Double> playersScores = new ArrayList<Double>();
 			RankingService glicko2 = GameStatistics.getRankingService();
