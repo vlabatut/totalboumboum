@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
+<!-- 
+	Total Boum Boum
+	Copyright 2008-2014 Vincent Labatut 
+	
+	This file is part of Total Boum Boum.
+	
+	Total Boum Boum is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 2 of the License, or
+	(at your option) any later version.
+	
+	Total Boum Boum is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License
+	along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ -->
+	
+	<general name="Tournoi tournante de test"/>
+
+ 	<notes>
+ 		<line value="Tournante longue" />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 09-02-2014" />
+ 	</notes>
+ 	
+	<author value="Vincent Labatut" />
+
+	<turning randomizeMatches="false" sortPlayers="SEEDS" numberActive="4" numberKept="2" >
+ 		<limits>
+			<confrontation>
+				<points local="true" name="points" />
+				<threshold value="20" />
+			</confrontation>
+ 		</limits>
+		
+		<matches randomOrder="true">
+			<match local="true" name="matchAverses" />
+			<match local="true" name="matchBombfest" />
+			<match local="true" name="matchCarrefour" />
+			<match local="true" name="matchClassic" />
+			<match local="true" name="matchColimacon" />
+			<match local="true" name="matchCompromis" />
+			<match local="true" name="matchCroix" />
+			<match local="true" name="matchEntrance" />
+			<match local="true" name="matchGoldrush" />
+			<match local="true" name="matchHorizontal" />
+			<match local="true" name="matchHurry" />
+			<match local="true" name="matchItems" />
+			<match local="true" name="matchLimitsiz" />
+			<match local="true" name="matchLine" />
+			<match local="true" name="matchPasaj" />
+			<match local="true" name="matchPower" />
+			<match local="true" name="matchReadysetgo" />
+			<match local="true" name="matchVite" />
+		</matches>
+	</turning>		
+		
+</tournament>
