@@ -32,6 +32,7 @@ import org.totalboumboum.game.tournament.cup.CupTournament;
 import org.totalboumboum.game.tournament.league.LeagueTournament;
 import org.totalboumboum.game.tournament.sequence.SequenceTournament;
 import org.totalboumboum.game.tournament.single.SingleTournament;
+import org.totalboumboum.game.tournament.turning.TurningTournament;
 import org.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import org.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import org.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -138,6 +139,8 @@ public class TournamentMiscSubPanel extends TableSubPanel
 					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SEQUENCE;
 				else if(tournament instanceof SingleTournament)
 					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SINGLE;
+				else if(tournament instanceof TurningTournament)
+					key = GuiKeys.COMMON_TOURNAMENT_TYPES_TURNING;
 				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
 				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
 			}
