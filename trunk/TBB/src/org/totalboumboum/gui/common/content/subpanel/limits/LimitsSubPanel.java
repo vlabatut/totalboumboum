@@ -48,6 +48,9 @@ import org.totalboumboum.tools.time.TimeUnit;
 /**
  * Panel displaying limits details.
  * 
+ * @param <T>
+ * 		Type of concerned limit.
+ *  
  * @author Vincent Labatut
  */
 public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements MouseListener
@@ -89,13 +92,27 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	/////////////////////////////////////////////////////////////////
 	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Limits displayed */
 	private Limits<T> limits;
+	/** Row currently selected */
 	private int selectedRow;
 	
+	/**
+	 * Returns the currently displayed limits.
+	 * 
+	 * @return
+	 * 		Limits currently displayed.
+	 */
 	public Limits<T> getLimits()
 	{	return limits;	
 	}
 	
+	/**
+	 * Changes the limits currently displayed.
+	 * 
+	 * @param limits
+	 * 		New limits to display.
+	 */
 	public void setLimits(Limits<T> limits)
 	{	this.limits = limits;
 		selectedRow = -1;
@@ -231,8 +248,14 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 		setColSubMinWidth(1,textWidth);
 		setColSubPrefWidth(1,textWidth);
 		setColSubMaxWidth(1,textWidth);
-}
+	}
 
+	/**
+	 * Changes limit selection.
+	 * 
+	 * @param row
+	 * 		New selection.
+	 */
 	private void selectLimit(int row)
 	{	// paint line
 		selectedRow = row;
@@ -242,6 +265,12 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 		fireLimitSelectionChange();
 	}
 	
+	/**
+	 * Returns the currently selected limit.
+	 * 
+	 * @return
+	 * 		Currently selected limit.
+	 */
 	public Limit getSelectedLimit()
 	{	Limit result = null;
 		if(selectedRow>-1 && limits!=null)
@@ -254,17 +283,17 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void mouseClicked(MouseEvent e)
-	{	
+	{	//
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e)
-	{	
+	{	//
 	}
 	
 	@Override
 	public void mouseExited(MouseEvent e)
-	{	
+	{	//
 	}
 
 	@Override
@@ -292,22 +321,44 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** Objects currently listening to this panel */
 	private List<LimitsSubPanelListener> listeners = new ArrayList<LimitsSubPanelListener>();
 	
+	/**
+	 * Registers a new listener to this object.
+	 * 
+	 * @param listener
+	 * 		New listener.
+	 */
 	public void addListener(LimitsSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
+	/**
+	 * Unregister an existing listener from this object.
+	 * 
+	 * @param listener
+	 * 		Listener to unregister.
+	 */
 	public void removeListener(LimitsSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
+	/**
+	 * Spread the fact the selection changed.
+	 */
 	private void fireLimitSelectionChange()
 	{	for(LimitsSubPanelListener listener: listeners)
 			listener.limitSelectionChanged();
 	}
 
+	/**
+	 * Spread the fact the mouse was pressed.
+	 * 
+	 * @param e
+	 * 		Corresponding mouse event.
+	 */
 	private void fireMousePressed(MouseEvent e)
 	{	for(LimitsSubPanelListener listener: listeners)
 			listener.mousePressed(e);
