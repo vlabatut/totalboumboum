@@ -1196,7 +1196,7 @@ public abstract class VisibleLoop extends Loop
 //for(int i=0;i<entranceRoles.length;i++)
 //	entranceDelays[i] = entranceDelays[i] + 500;
 		
-entranceDelays[1] = entranceDelays[1] + 5000;
+//entranceDelays[1] = entranceDelays[1] + 5000;
 	}
 
 	/**
