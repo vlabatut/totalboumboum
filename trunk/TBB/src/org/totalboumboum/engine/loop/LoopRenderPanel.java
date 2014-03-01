@@ -40,7 +40,8 @@ public interface LoopRenderPanel
 	 */
 	public void paintScreen();
 	/**
-	 * Perform a screen capture while playing.
+	 * Perform a screen capture while playing
+	 * (optionnal).
 	 */
 	public void captureScreen();
 	

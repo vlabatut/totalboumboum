@@ -1730,11 +1730,11 @@ public class Launcher
 /*
  * TODO POSTS SITE
  * 		+ enchainement des tournois (joueurs constants)
- * 		+ exportation des stats
+ * 		+ possibilité de restreindre le nombre de joueurs dans un round/match (lié à ligue)
  * 		+ API: représentation des chemins (avec les pauses et tout)
  * 		+ évènements de mort subite aléatoires
- * 		+ possibilité de restreindre le nombre de joueurs dans un round/match (lié à ligue)
  * 		+ nouveau type de tournoi "tournante"
+ * 		+ exportation des stats (attendre d'avoir implémenté la ligne supplémentaire dans les tables de résultats)
  */ 
 
 /**
