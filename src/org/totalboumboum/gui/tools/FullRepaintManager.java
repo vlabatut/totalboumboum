@@ -2,6 +2,7 @@ package org.totalboumboum.gui.tools;
 
 import javax.swing.RepaintManager; 
 import javax.swing.JComponent; 
+
 import java.awt.Container;
 
 /**
@@ -17,7 +18,9 @@ import java.awt.Container;
  * @author Chris Adamson
  * @author Joshua Marinacci
  */
+@SuppressWarnings("javadoc")
 public class FullRepaintManager extends RepaintManager { 
+	@Override
 	public void addDirtyRegion(JComponent comp, int x, int y, int w,
 					int h) {
 		super.addDirtyRegion(comp,x,y,w,h);

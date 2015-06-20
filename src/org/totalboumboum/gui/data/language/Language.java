@@ -26,26 +26,64 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 /**
+ * Represents all the GUI text for a given language.
  * 
  * @author Vincent Labatut
- *
  */
 public class Language
-{	
-	private final HashMap<String, String> texts = new HashMap<String,String>();
+{		
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Language name */
 	private String name;
 	
+	/**
+	 * Change the language name.
+	 * 
+	 * @param name
+	 * 		New language name.
+	 */
 	public void setName(String name)
 	{	this.name = name;	
 	}
+	
+	/**
+	 * Returns the language name.
+	 * 
+	 * @return
+	 * 		Current language name.
+	 */
 	public String getName()
 	{	return name;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** Texts associated to GUI components */
+	private final HashMap<String, String> texts = new HashMap<String,String>();
+
+	/**
+	 * Adds a new text to this object.
+	 * 
+	 * @param key
+	 * 		Key associated to the text, used to retrieve the text later.
+	 * @param value
+	 * 		Text itself.
+	 */
 	public void addText(String key, String value)
 	{	texts.put(key, value);		
 	}
 	
+	/**
+	 * Returns the text associated to the specified key.
+	 * 
+	 * @param key
+	 * 		Key of the text.
+	 * @return
+	 * 		Text associated to that key.
+	 */
 	public String getText(String key)
 	{	String result = texts.get(key);
 		if(result==null)
@@ -53,10 +91,25 @@ public class Language
 		return result;
 	}
 	
+	/**
+	 * Returns the map containing all texts.
+	 * 
+	 * @return
+	 * 		A maps of texts.
+	 */
 	public HashMap<String, String> getTexts()
 	{	return texts;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Makes a full copy of this object.
+	 *  
+	 * @return
+	 * 		A clone of this object.
+	 */
 	public Language copy()
 	{	Language result = new Language();
 		result.setName(name);

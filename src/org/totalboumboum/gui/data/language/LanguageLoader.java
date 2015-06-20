@@ -39,12 +39,28 @@ import org.totalboumboum.tools.xml.XmlTools;
 import org.xml.sax.SAXException;
 
 /**
+ * Class used to load the language-dependent text
+ * put in the GUI components.
  * 
  * @author Vincent Labatut
- *
  */
 public class LanguageLoader
 {	
+	/**
+	 * Main method to load a language XML file.
+	 * 
+	 * @param name
+	 * 		Name of the language to load.
+	 * @return
+	 * 		{@code Language} object resulting from the loading.
+	 * 
+	 * @throws ParserConfigurationException
+	 * 		Problem while accessing the XML file or its schema.
+	 * @throws SAXException
+	 * 		Problem while accessing the XML file or its schema.
+	 * @throws IOException
+	 * 		Problem while accessing the XML file or its schema.
+	 */
 	public static Language loadLanguage(String name) throws ParserConfigurationException, SAXException, IOException
 	{	Language result = new Language();
 		String individualFolder = GuiFileTools.getLanguagesPath();
@@ -56,6 +72,14 @@ public class LanguageLoader
 		return result;
 	}
 
+	/**
+	 * Process a language element.
+	 * 
+	 * @param root
+	 * 		The language element to process.
+	 * @param result
+	 * 		The resulting object which is updated.
+	 */
 	@SuppressWarnings("unchecked")
 	private static void loadLanguageElement(Element root, Language result)
 	{	List<Element> elements = root.getChildren(GuiXmlTools.ELT_GROUP);
@@ -66,6 +90,16 @@ public class LanguageLoader
 		}
 	}
 
+	/**
+	 * Process a group element.
+	 * 
+	 * @param root
+	 * 		The group element to process.
+	 * @param name
+	 * 		Name of the current group.
+	 * @param result
+	 * 		The resulting object which is updated.
+	 */
 	@SuppressWarnings("unchecked")
 	private static void loadGroupElement(Element root, String name, Language result)
 	{	String key = root.getAttribute(GuiXmlTools.ATT_NAME).getValue().trim();
@@ -88,6 +122,16 @@ public class LanguageLoader
 		}
 	}
 
+	/**
+	 * Process a text element.
+	 * 
+	 * @param root
+	 * 		The text element to process.
+	 * @param name
+	 * 		Name of the current group.
+	 * @param result
+	 * 		The resulting object which is updated.
+	 */
 	private static void loadTextElement(Element root, String name, Language result)
 	{	String key = root.getAttribute(GuiXmlTools.ATT_NAME).getValue().trim();
 		String newName = name+key;
